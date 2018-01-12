@@ -2,7 +2,7 @@
 
 # Jaeger Documentation
 
-This directory contains documentation hosted by [readthedocs][project] for Jaeger Distributed Tracing project.
+This directory contains documentation hosted by [readthedocs][project] for [Jaeger Distributed Tracing][jaeger] project.
 
 ## Building
 
@@ -20,3 +20,4 @@ Raise a pull request. Once the PR is approved and merged, [readthedocs][project]
 [project]: https://readthedocs.org/projects/jaeger/
 [ci-img]: https://travis-ci.org/jaegertracing/documentation.svg?branch=master
 [ci]: https://travis-ci.org/jaegertracing/documentation
+[jaeger]: https://jaegertracing.io/
