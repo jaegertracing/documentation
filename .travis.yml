@@ -22,4 +22,4 @@ script:
   - make build
 
 after_success:
-  - echo TODO trigger the build on readthedocs
+  - echo success
