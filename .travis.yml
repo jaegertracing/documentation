@@ -1,0 +1,25 @@
+sudo: required
+
+dist: trusty
+
+language: python
+
+matrix:
+  include:
+  - python: '2.7'
+
+services:
+  - docker
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::8}
+
+install:
+  - make bootstrap
+
+script:
+  - make build
+
+after_success:
+  - echo TODO trigger the build on readthedocs
