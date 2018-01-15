@@ -9,7 +9,7 @@ If you can't find what you are looking for, or have an issue not covered here, w
 ## About
 Jaeger, inspired by [Dapper][dapper] and [OpenZipkin](http://zipkin.io),
 is a distributed tracing system released as open source by [Uber Technologies][ubeross].
-It can be used for monitoring microservice-based architectures:
+It can be used for monitoring microservices-based distributed systems:
 
 * Distributed context propagation
 * Distributed transaction monitoring
@@ -17,8 +17,7 @@ It can be used for monitoring microservice-based architectures:
 * Service dependency analysis
 * Performance / latency optimization
 
-We published a blog post, [Evolving Distributed Tracing at Uber](https://eng.uber.com/distributed-tracing/), where we explain the history and reasons
-for the architectural choices made in Jaeger.
+We published a blog post, [Evolving Distributed Tracing at Uber](https://eng.uber.com/distributed-tracing/), where we explain the history and reasons for the architectural choices made in Jaeger.
 
 ## Features
 
@@ -29,6 +28,8 @@ for the architectural choices made in Jaeger.
   * Multiple storage backends: Cassandra, Elasticsearch, memory.
   * Adaptive sampling (coming soon)
   * Post-collection data processing pipeline (coming soon)
+
+See [Features](./features/) page for more details.
 
 ## Technical Specs
 

@@ -25,6 +25,7 @@ google_analytics:
 pages: 
   - 'Introduction': 'index.md'
   - 'Getting Started' : 'getting_started.md'
+  - 'Features' : 'features.md'
   - 'Client Libraries' : 'client_libraries.md'
   - 'Architecture' : 'architecture.md'
   - 'Deployment' : 'deployment.md'
