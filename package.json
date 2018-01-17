@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "concurrently": "^3.5.1",
+    "write-good": "^0.11.3"
+  }
+}

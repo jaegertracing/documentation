@@ -1,0 +1,28 @@
+baseURL: /
+title: Jaeger, a distributed tracing system
+languageCode: en-us
+pygmentsCodeFences: true
+pygmentsUseClasses: true
+#taxonomies:
+#  tag: tags
+disableKinds:
+- taxonomy
+- taxonomyTerm
+
+params:
+  description: |
+    Jaeger, inspired by [Dapper](https://research.google.com/pubs/pub36356.html) and [OpenZipkin](https://zipkin.io/), is a distributed tracing system released as open source by Uber Technologies. It can be used for monitoring microservice-based architectures.
+  navbar:
+    links:
+    - title: Docs
+      url: /docs
+    - title: Download
+      url: /download
+    #- title: Community
+    #  url: /community
+    #- title: Blog
+    #  url: /blog
+  githubRepo: jaegertracing/jaeger
+  twitterHandle: JaegerTracing
+  mediumHandle: jaegertracing
+  gitterHandle: jaegertracing

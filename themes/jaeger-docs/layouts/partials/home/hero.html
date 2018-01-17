@@ -1,0 +1,40 @@
+<section class="hero hero--home is-info is-medium">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns">
+        <div class="column has-text-centered">
+          <h1 class="title has-text-weight-bold is-size-1 is-size-3-mobile is-spaced">
+            {{ .Site.Title }}
+          </h1>
+
+          <p class="subtitle hero--subtitle is-size-4 is-size-5-mobile">
+            {{ .Site.Params.description | markdownify }}
+          </p>
+
+          <div class="container">
+            <div class="buttons is-centered">
+              <a href="/docs/getting-started" class="button is-medium is-primary is-uppercase is-outlined has-text-weight-bold">
+                <span class="icon">
+                  <i class="fas fa-play-circle"></i>
+                </span>
+                <span>
+                  Get started
+                </span>
+              </a>
+              <!--
+              <a href="/download" class="button is-medium is-success is-uppercase is-outlined has-text-weight-bold">
+                <span class="icon">
+                  <i class="fas fa-cloud-download-alt"></i>
+                </span>
+                <span>
+                  Download
+                </span>
+              </a>
+              -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

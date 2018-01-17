@@ -1,0 +1,38 @@
+/* Rules for the main "article" sections of page domains (docs, download, taxonomies, etc.) */
+@import "variables"
+
+.article
+  &.article--terms
+    .content
+      li a
+        font-size: 1.5rem
+
+  &.article--docs, &.article--download, &.article--terms
+    .is-size-1
+      line-height: 125%
+
+    +touch
+      padding: 0 7%
+
+    margin-top: 2rem
+
+    .content
+      ul, ul li
+        list-style-type: square
+
+
+  &.article--docs, &.article--download
+    .content
+      p code
+        color: $syntax-magenta
+
+      code
+        background-color: $white-ter
+
+    img
+      display: block
+      margin: 0 auto
+      width: 80%
+
+  &.article--docs, &.article--download
+    margin: 3rem 0 10rem 0

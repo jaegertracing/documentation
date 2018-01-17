@@ -1,0 +1,26 @@
+{{- $pageType := cond (eq .Kind "home") "home" .Section }}
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top" lang="{{ .Site.LanguageCode }}">
+  <head>
+    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    {{ partial "css.html" . }}
+    <link rel="shortcut icon" href="/favicon.ico">
+  </head>
+  <body class="page page--{{ $pageType }}">
+    <main class="main">
+      {{ partial "navbar.html" . }}
+
+      {{ block "main" . }}
+      {{ end }}
+    </main>
+
+    {{ partial "footer.html" . }}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script defer src="/js/anchor.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+    {{- $jsFilename := index .Site.Data.assetHashes "app.js" }}
+    <script defer src="/js/{{ $jsFilename }}"></script>
+  </body>
+</html>

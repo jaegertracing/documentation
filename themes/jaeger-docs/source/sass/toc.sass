@@ -1,0 +1,43 @@
+@import "variables"
+
+.toc
+  z-index: 1
+  padding-left: 1rem
+  width: inherit
+  position: fixed
+
+  #TableOfContents
+    border-left: 3px solid $jaeger-beige
+    padding-left: 1rem
+    $font-size-root: 1.2rem
+    $padding-root: 1.25rem
+    color: $black
+    max-width: 80%
+    line-height: 140%
+
+    a
+      color: $black
+
+    li a:hover
+      color: $jaeger-beige
+      font-weight: 700
+
+    ul
+      li
+        ul
+          li
+            & + li
+              margin-top: .75rem
+            font-size: $font-size-root
+            ul
+              margin-top: .5rem
+
+              li
+                & + li
+                  margin-top: .25rem
+                font-size: $font-size-root * .9
+                padding-left: $padding-root
+                ul
+                  li
+                    font-size: $font-size-root * .8
+                    padding-left: $padding-root
