@@ -1,5 +1,9 @@
 # Getting Started
 
+## Instrumentation
+
+Your applications must be instrumented before they can send tracing data to Jaeger backend. Check the [Client Libraries](./client_libraries) section for information about how to use the OpenTracing API and how to initialize and configure Jaeger tracers.
+
 ## All in one Docker image
 
 This image, designed for quick local testing, launches the Jaeger UI, collector, query, and agent, with an in memory storage component.
@@ -26,6 +30,7 @@ Port | Protocol | Component | Function
 
 
 ## Kubernetes and OpenShift
+
 Kubernetes and OpenShift templates can be found in the [Jaegertracing](https://github.com/jaegertracing/) organization on
 Github.
 
