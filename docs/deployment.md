@@ -157,7 +157,7 @@ usercert = ~/.cassandra/client-cert
 
 ### ElasticSearch
 
-Supported versons: 5.x, 6.x
+Supported versions: 5.x
 
 ElasticSearch does not require initialization other than
 [installing and running ElasticSearch](https://www.elastic.co/downloads/elasticsearch).
