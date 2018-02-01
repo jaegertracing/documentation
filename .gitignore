@@ -1,2 +1,3 @@
 .mkdocs-virtual-env/
+node_modules/
 site/
