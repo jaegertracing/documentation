@@ -29,5 +29,6 @@ pages:
   - 'Client Libraries' : 'client_libraries.md'
   - 'Architecture' : 'architecture.md'
   - 'Deployment' : 'deployment.md'
+  - 'Monitoring' : 'monitoring.md'
   - 'Roadmap' : 'roadmap.md'
   - 'News' : 'news.md'
