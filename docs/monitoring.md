@@ -9,7 +9,7 @@ By default Jaeger microservices expose metrics in Prometheus format. It is contr
 * `--metrics-backend` controls how the measurements are exposed. The default value is `prometheus`, another option is `expvar`, the Go standard mechanism for exposing process level statistics.
 * `--metrics-http-route` specifies the name of the HTTP endpoint used to scrape the metrics (`/metrics` by default).
 
-Each Jaeger components exposes the metrics scraping endpoint on one of the HTTP ports they already serve:
+Each Jaeger component exposes the metrics scraping endpoint on one of the HTTP ports they already serve:
 
 Component             | Port
 --------------------- | ---
