@@ -1,5 +1,6 @@
 site_name: Jaeger Documentation
-edit_uri: edit/master/docs/
+# Don't show edit links
+# edit_uri: edit/master/docs/
 theme_dir: docs/theme
 markdown_extensions:
   - admonition
@@ -15,8 +16,8 @@ markdown_extensions:
   - pymdownx.tasklist(custom_checkbox=true)
   - pymdownx.tilde
 site_favicon: 'images/favicon.ico'
-repo_name: 'jaegertracing/documentation'
-repo_url: 'https://github.com/jaegertracing/documentation'
+repo_name: 'jaegertracing/jaeger'
+repo_url: 'https://github.com/jaegertracing/jaeger'
 extra:
   logo: 'images/jaeger-logo.png'
 google_analytics:
