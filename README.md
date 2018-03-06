@@ -11,9 +11,9 @@ You need to have [virtualenv](https://virtualenv.pypa.io/en/stable/) installed.
 
 Then simply run `make serve`.
 
-## Deploying
+## Contributing
 
-Raise a pull request. Once the PR is approved and merged, [readthedocs][project] will automatically rebuild the docs.
+Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 [doc-img]: https://readthedocs.org/projects/jaeger/badge/?version=latest
 [doc]: http://jaeger.readthedocs.org/en/latest/
@@ -21,3 +21,6 @@ Raise a pull request. Once the PR is approved and merged, [readthedocs][project]
 [ci-img]: https://travis-ci.org/jaegertracing/documentation.svg?branch=master
 [ci]: https://travis-ci.org/jaegertracing/documentation
 [jaeger]: https://jaegertracing.io/
+
+
+
