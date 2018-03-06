@@ -17,4 +17,4 @@ build: $(MKDOCS_VIRTUAL_ENV)
 
 $(MKDOCS_VIRTUAL_ENV):
 	virtualenv $(MKDOCS_VIRTUAL_ENV)
-	bash -c 'source $(MKDOCS_VIRTUAL_ENV)/bin/activate; pip install -r requirements.txt'
+	bash -c 'source $(MKDOCS_VIRTUAL_ENV)/bin/activate; pip install -r requirements.txt; pip install pyOpenSSL ndg-httpsclient pyasn1'
