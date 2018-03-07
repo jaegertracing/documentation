@@ -28,6 +28,9 @@ pull request is most likely to be accepted if it:
 
 * Has a [good commit
   message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
+* Uses the active voice (vs. [passive voice](https://www.grammarly.com/blog/a-scary-easy-way-to-help-you-find-passive-voice/)) to make it clear when the user has to perform an action and when actions happen automatically.
+* Has been spellchecked and uses proper [grammar](https://www.grammarly.com/).
+* Has been written in plain language and avoids jargon. Remember, the people reading the documentation know much less about the project than you do.
 * Each commit must be signed by the author ([see below](#sign-your-work)).
 
 Once the PR is approved and merged, [readthedocs][project] will automatically rebuild the docs.
