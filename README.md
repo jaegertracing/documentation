@@ -6,8 +6,7 @@ This directory contains documentation hosted by [readthedocs][project] for [Jaeg
 
 ## Building
 
-The documentation is built with [MkDocs](http://www.mkdocs.org/).
-You need to have [virtualenv](https://virtualenv.pypa.io/en/stable/) installed.
+The documentation is built with [MkDocs](http://www.mkdocs.org/). You need to have [virtualenv](https://virtualenv.pypa.io/en/stable/) installed.
 
 Then simply run `make serve`.
 
