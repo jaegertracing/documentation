@@ -41,7 +41,7 @@ Github.
 
 This is a demo application that consists of several microservices and
 illustrates the use of the [OpenTracing API](http://opentracing.io).
-A tutorial / walkthough is available in the blog post:
+A tutorial / walkthrough is available in the blog post:
 [Take OpenTracing for a HotROD ride][hotrod-tutorial].
 
 It can be run standalone, but requires Jaeger backend to view the
@@ -103,7 +103,7 @@ go run ./cmd/agent/main.go
 
 Collector service exposes Zipkin compatible REST API `/api/v1/spans` and `/api/v2/spans` for both
 JSON and thrift encoding.
-By default it's disabled. It can be enabled with `--collector.zipkin.http-port=9411`. 
+By default it's disabled. It can be enabled with `--collector.zipkin.http-port=9411`.
 
 Zipkin Thrift IDL file can be found in [jaegertracing/jaeger-idl](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift).
 It's compatible with [openzipkin/zipkin-api](https://github.com/openzipkin/zipkin-api/blob/master/thrift/zipkinCore.thrift)
