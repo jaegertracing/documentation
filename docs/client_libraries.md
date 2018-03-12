@@ -53,7 +53,7 @@ Jaeger tracers use **reporters** to process finished spans. Typically Jaeger lib
 * **NullReporter** does nothing with the span. It can be useful in unit tests.
 * **LoggingReporter** simply logs the fact that a span was finished, usually by printing the trace and span ID and the operation name.
 * **CompositeReporter** takes a list of other reporters and invokes them one by one.
-* **RemoteReporter** (default) buffers a certain number of finished spans in memory and uses a **sender** to submit a batch of spans out of process to Jaeger backend. The sender is responsible for serializing the span to the wire format (e.g. Thrift of JSON) and communicating with the backend components (e.e. over UDP or HTTP).
+* **RemoteReporter** (default) buffers a certain number of finished spans in memory and uses a **sender** to submit a batch of spans out of process to Jaeger backend. The sender is responsible for serializing the span to the wire format (e.g. Thrift or JSON) and communicating with the backend components (e.g. over UDP or HTTP).
 
 #### EMSGSIZE and UDP buffer limits
 
