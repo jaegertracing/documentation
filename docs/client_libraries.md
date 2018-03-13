@@ -57,7 +57,7 @@ Jaeger tracers use **reporters** to process finished spans. Typically Jaeger lib
 
 #### EMSGSIZE and UDP buffer limits
 
-By default Jaeger libraries use a UDP sender to report finished spans to `jaeger-agent` sidecar.
+By default Jaeger libraries use a UDP sender to report finished spans to `jaeger-agent` daemon.
 The default max packet size is 65,000 bytes, which can be transmitted without segmentation when
 connecting to the agent via loopback interface. However, some OSs (in particular, MacOS), limit
 the max buffer size for UDP packets, as raised in [this GitHub issue](https://github.com/uber/jaeger-client-node/issues/124).
