@@ -22,5 +22,8 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 [ci]: https://travis-ci.org/jaegertracing/documentation
 [jaeger]: http://jaegertracing.io
 
+## License
+
+[Apache 2.0 License](./LICENSE).
 
 
