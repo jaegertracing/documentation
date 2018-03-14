@@ -20,7 +20,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 [project]: https://readthedocs.org/projects/jaeger/
 [ci-img]: https://travis-ci.org/jaegertracing/documentation.svg?branch=master
 [ci]: https://travis-ci.org/jaegertracing/documentation
-[jaeger]: http://jaeger.readthedocs.io/en/latest/
+[jaeger]: http://jaegertracing.io
 
 
 
