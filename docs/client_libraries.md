@@ -46,6 +46,15 @@ When using configuration object to instantiate the tracer, the type of sampling 
 * **Rate Limiting** (`sampler.type=ratelimiting`) sampler uses a leaky bucket rate limiter to ensure that traces are sampled with a certain constant rate. For example, when `sampler.param=2.0` it will sample requests with the rate of 2 traces per second.
 * **Remote** (`sampler.type=remote`, which is also the default) sampler consults Jaeger agent for the appropriate sampling strategy to use in the current service. This allows controlling the sampling strategies in the services from a central configuration in Jaeger backend, or even dynamically (see [Adaptive Sampling](https://github.com/jaegertracing/jaeger/issues/365)).
 
+#### Adaptive Sampler
+
+Adaptive sampler is a composite sampler that combines two functions:
+
+  * It makes sampling decisions on a per-operation basis, i.e. based on span operation name. This is especially useful in the API services whose endpoints may have very different traffic volumes and using a single probabilistic sampler for the whole service might starve (never sample) some of the low QPS endpoints.
+  * It supports a minimum guaranteed rate of sampling, such as always allowing up to N traces per seconds and then sampling anything above that with a certain probability (everything is per-operation, not per-service).
+
+Per-operation parameters can be configured statically or pulled periodically from Jaeger backend with the help of Remote sampler. Adaptive sampler is designed to work with the upcoming [Adaptive Sampling](https://github.com/jaegertracing/jaeger/issues/365) feature of the Jaeger backend.
+
 ### Reporters
 
 Jaeger tracers use **reporters** to process finished spans. Typically Jaeger libraries ship with the following reporters:
