@@ -15,6 +15,11 @@ Then simply run `make serve`.
 
 Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## License
+
+[Apache 2.0 License](./LICENSE).
+
+
 [doc-img]: https://readthedocs.org/projects/jaeger/badge/?version=latest
 [doc]: http://jaeger.readthedocs.org/en/latest/
 [project]: https://readthedocs.org/projects/jaeger/
@@ -22,8 +27,5 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 [ci]: https://travis-ci.org/jaegertracing/documentation
 [jaeger]: http://jaegertracing.io
 
-## License
-
-[Apache 2.0 License](./LICENSE).
 
 
