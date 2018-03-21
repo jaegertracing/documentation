@@ -35,7 +35,7 @@ See [Features](./features/) page for more details.
 
   * Backend components implemented in Go 1.9
   * React/Javascript UI
-  * Supported storage backends
+  * Supported storage backends:
     * [Cassandra 3.4+](./deployment/#cassandra)
     * [ElasticSearch 5.x, 6.x](./deployment/#elasticsearch)
     * memory storage
