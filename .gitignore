@@ -3,4 +3,3 @@ public/
 .DS_Store
 .bundle/
 vendor/bundle/
-firebase-debug.log
