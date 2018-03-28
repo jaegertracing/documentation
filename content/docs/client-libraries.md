@@ -38,7 +38,7 @@ simpler parameterization of the Tracer, such as changing the default sampler or 
 
 ## Tracer Internals
 
-See [here](sampling.md#client-sampling-configuration).
+See [here](../sampling#client-sampling-configuration).
 
 ### Reporters
 
