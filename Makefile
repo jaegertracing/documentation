@@ -1,4 +1,4 @@
-HUGO_VERSION = 0.36.1
+HUGO_VERSION = 0.37.1
 HTMLPROOFER  = bundle exec htmlproofer
 NODE_BIN     = node_modules/.bin
 HUGO_THEME   = jaeger-docs
