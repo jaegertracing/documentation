@@ -1,0 +1,16 @@
+<header>
+  <h1 class="is-size-1{{ if .Params.description }} is-spaced{{ end }}">{{ .Title }}</h1>
+  {{- with .Params.description }}<h4 class="subtitle is-size-4">{{ . }}</h4>{{ end }}
+  <!--
+  {{- with .Params.tags }}
+  <div class="tags">
+    {{- range . }}
+    <span class="tag is-medium is-primary">
+      <a href="/tags/{{ . }}">{{ . }}</a>
+    </span>
+    {{- end }}
+  </div>
+  {{- end }}
+  -->
+  <hr class="hr" />
+</header>

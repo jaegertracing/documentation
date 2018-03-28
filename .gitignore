@@ -1,2 +1,5 @@
-.mkdocs-virtual-env/
-site/
+node_modules/
+public/
+.DS_Store
+.bundle/
+vendor/bundle/

@@ -1,0 +1,27 @@
+baseURL: /
+title: "Jaeger: open source, end-to-end distributed tracing"
+languageCode: en-us
+pygmentsCodeFences: true
+pygmentsUseClasses: true
+#taxonomies:
+#  tag: tags
+disableKinds:
+- taxonomy
+- taxonomyTerm
+
+params:
+  tagline: Monitor and troubleshoot transactions in complex distributed systems
+  navbar:
+    links:
+    - title: Docs
+      url: /docs
+    - title: Download
+      url: /download
+    #- title: Community
+    #  url: /community
+    #- title: Blog
+    #  url: /blog
+  githubRepo: jaegertracing/jaeger
+  twitterHandle: JaegerTracing
+  mediumHandle: jaegertracing
+  gitterHandle: jaegertracing

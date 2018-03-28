@@ -1,0 +1,57 @@
+{{- $githubRepo := .Site.Params.githubRepo }}
+{{- $twitterHandle := .Site.Params.twitterHandle }}
+<nav class="navbar is-fixed-top">
+  <div class="container is-fluid">
+    <div class="navbar-brand">
+
+      <a class="navbar-item" href="/">
+        <img src="/img/jaeger-logo.png" alt="Jaeger project logo">
+      </a>
+
+      <div class="navbar-burger burger" data-target="topNav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <div id="topNav" class="navbar-menu">
+      <div class="navbar-end">
+        <!--
+        <a class="navbar-item" href="/download">
+          Download
+        </a>
+        -->
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link" href="/docs">
+            Docs
+          </a>
+          <div class="navbar-dropdown is-boxed">
+            {{- range (where .Site.Pages "Section" "docs").ByParam "rank" }}
+            <a class="navbar-item" href="{{ .Permalink }}">
+              {{ cond (isset .Params "navtitle") (.Params.navtitle) .Title }}
+            </a>
+            {{- end }}
+          </div>
+        </div>
+        <a class="navbar-item" href="https://medium.com/jaegertracing">
+          Blog
+        </div>
+        {{- with $githubRepo }}
+        <a class="navbar-item" href="https://github.com/{{ . }}" target="_blank">
+          <span class="icon">
+            <i class="fab fa-github" style="color: #333;"></i>
+          </span>
+        </a>
+        {{- end }}
+        {{- with $twitterHandle }}
+        <a class="navbar-item" href="https://twitter.com/{{ . }}" target="_blank">
+          <span class="icon" style="color: #55acee;">
+            <i class="fab fa-twitter"></i>
+          </span>
+        </a>
+        {{- end }}
+      </div>
+    </div>
+  </div>
+</nav>

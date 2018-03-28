@@ -1,0 +1,37 @@
+@import "variables"
+
+hr.hr
+  height: 3px
+  color: $white-ter
+
+.hero
+  &.hero--home, &.hero--docs
+    background-image: url("/img/hero-background.jpg")
+    background-repeat: no-repeat
+    background-size: cover
+    background-position: center
+
+  &.hero--home
+    .hero--subtitle a
+      color: $link !important
+
+.section
+  &.section--cncf, &.section--why
+    background-color: $white-ter
+
+    +mobile
+      img
+        width: 70%
+
+    +touch
+      img
+        width: 60%
+
+    +desktop
+      img
+        width: 40%
+
+  &.section--features
+    +desktop
+      .columns
+        margin-top: 2rem

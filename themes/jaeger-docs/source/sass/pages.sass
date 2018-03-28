@@ -1,0 +1,48 @@
+/* Basic rules for all pages as well as specific page domains (home, docs, etc.) */
+
+@import "variables"
+
+.page
+  display: flex
+  min-height: 100vh
+  flex-direction: column
+
+  main.main
+    flex: 1
+
+  &--404
+    img.logo
+      margin-bottom: 2%
+
+    ul
+      margin-top: 1rem
+
+      li
+        font-size: 1.5rem
+
+  /* Documentation pages */
+  &--docs
+    /* Left-hand documentation nav */
+    .nav
+      position: fixed
+      overflow-x: auto
+      //padding-right: 3rem
+
+      h4.nav-link
+        & + .nav-link
+          margin-top: .25rem
+
+        a
+          color: black
+
+          +touch
+            color: red
+
+          &:hover
+            color: $jaeger-beige
+            font-weight: 700
+
+        &.is-active
+          a
+            color: $primary
+            font-weight: 700

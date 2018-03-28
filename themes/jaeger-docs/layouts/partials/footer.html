@@ -1,0 +1,77 @@
+{{- $githubRepo    := .Site.Params.githubRepo }}
+{{- $twitterHandle := .Site.Params.twitterHandle }}
+{{- $gitterHandle  := .Site.Params.gitterHandle }}
+{{- $mediumHandle  := .Site.Params.mediumHandle }}
+<footer class="footer">
+  <div class="container">
+    <div class="columns">
+      <div class="column has-text-centered">
+        <img src="/img/jaeger-icon-reverse-color.svg" width="30%">
+      </div>
+      <div class="column">
+        <h4 class="is-size-4 is-size-3-mobile">
+          Docs
+        </h4>
+        <ul>
+          {{- range (where .Site.Pages "Section" "docs").ByParam "rank" }}
+          <li><i class="fas fa-caret-right"></i><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+          {{- end }}
+        </ul>
+      </div>
+      <!--
+      <div class="column">
+        <h4 class="is-size-4 is-size-3-mobile">
+          Downloads
+        </h4>
+        <ul>
+          <li>
+            <i class="fas fa-caret-right"></i>
+            <a>macOS</a>
+          </li>
+          <li>
+            <i class="fas fa-caret-right"></i>
+            <a>Ubuntu</a>
+          </li>
+          <li>
+            <i class="fas fa-caret-right"></i>
+            <a>CentOS</a>
+          </li>
+        </ul>
+      </div>
+      -->
+      <div class="column">
+        <h4 class="is-size-4 is-size-3-mobile">
+          Community
+        </h4>
+        {{- with $githubRepo }}
+        <a href="https://github.com/{{ . }}">
+          <span class="icon has-text-light">
+            <i class="fab fa-lg fa-github"></i>
+          </span>
+        </a>
+        {{- end }}
+        {{- with $twitterHandle }}
+        <a href="https://twitter.com/{{ . }}">
+          <span class="icon" style="color: #55acee;">
+            <i class="fab fa-lg fa-twitter"></i>
+          </span>
+        </a>
+        {{- end }}
+        {{- with $gitterHandle }}
+        <a href="https://gitter.im/{{ . }}">
+          <span class="icon" style="color: #e03464;">
+            <i class="fab fa-gitter"></i>
+          </span>
+        </a>
+        {{- end }}
+        {{- with $mediumHandle }}
+        <a href="https://medium.com/{{ . }}">
+          <span class="icon has-text-light">
+            <i class="fab fa-lg fa-medium"></i>
+          </span>
+        </a>
+        {{- end }}
+      </div>
+    </div>
+  </div>
+</footer>
