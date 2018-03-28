@@ -1,7 +1,7 @@
 ---
 title: Jaeger news
 navtitle: News
-rank: 8
+rank: 9
 ---
 
 ## Announcing Jaeger v1.0
