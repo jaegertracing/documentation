@@ -1,5 +1,5 @@
 baseURL: /
-title: "Jaeger: end-to-end distributed tracing"
+title: "Jaeger: open source, end-to-end distributed tracing"
 languageCode: en-us
 pygmentsCodeFences: true
 pygmentsUseClasses: true
@@ -10,7 +10,7 @@ disableKinds:
 - taxonomyTerm
 
 params:
-  tagline: Monitor and troubleshoot transactions in distributed systems
+  tagline: Monitor and troubleshoot transactions in complex distributed systems
   navbar:
     links:
     - title: Docs
