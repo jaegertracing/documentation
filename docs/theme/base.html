@@ -58,6 +58,18 @@
       <link rel="stylesheet" href="{{ path }}">
     {% endfor %}
     {% block extrahead %}{% endblock %}
+    <script type="text/javascript">
+        function to_netlify(redirect) {
+            var current = String(window.location);
+            var hash = current.indexOf('#');
+            if (hash != -1) {
+                var anchor = current.substr(hash+1);
+                redirect = redirect + '#' + anchor;
+            }
+            window.console.log('redirecting to ' + redirect);
+            window.location.replace(redirect);
+        }
+    </script>        
   </head>
   {% set palette = config.extra.get("palette", {}) %}
   {% set primary = palette.primary | replace(" ", "-") | lower %}
