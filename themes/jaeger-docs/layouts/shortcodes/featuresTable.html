@@ -1,0 +1,16 @@
+<table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{- range .Site.Data.clients.features }}
+      <tr>
+        <td id="{{ .name | urlize }}">{{ .name }}</td>
+        <td>{{ .description | markdownify }}</td>
+      </tr>
+      {{- end }}
+    </tbody>
+  </table>

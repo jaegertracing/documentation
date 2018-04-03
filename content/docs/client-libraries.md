@@ -3,6 +3,10 @@ title: Client libraries
 rank: 4
 ---
 
+{{< featuresTable >}}
+
+{{< clientsTable >}}
+
 ## Introduction
 
 All Jaeger client libraries support the [OpenTracing standard](http://opentracing.io). The following resources provide more information about instrumenting your application with the OpenTracing APIs:

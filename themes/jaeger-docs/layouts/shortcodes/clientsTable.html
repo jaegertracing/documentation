@@ -1,0 +1,29 @@
+
+{{- $clients := .Site.Data.clients.clients }}
+{{- $features := .Site.Data.clients.features }}
+<table>
+  <thead>
+    <tr>
+      <th>Language</th>
+      <th>GitHub Repo</th>
+      {{- range $features }}
+      <th><a href="#{{ .name | urlize }}">{{ .name }}</a></th>
+      {{- end }}
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $clients }}
+    {{- $client := . }}
+    <tr>
+      <td>{{ .language }}</td>
+      <td>
+        <a href="https://github.com/{{ .repo }}">{{ .repo }}</a>
+      </td>
+      {{- range $features }}
+      {{- $supported := index $client.features .name }}
+      <td>{{ $supported }}</td>
+      {{- end }}
+    </tr>
+    {{- end }}
+  </tbody>
+</table>
