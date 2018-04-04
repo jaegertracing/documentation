@@ -8,7 +8,7 @@ CONCURRENTLY := $(NODE_BIN)/concurrently
 WRITE_GOOD   := $(NODE_BIN)/write-good
 
 macos-setup:
-	brew switch hugo $(HUGO_VERSION) && brew link --overwrite hugo
+	scripts/install-hugo.sh $(HUGO_VERSION) macOS
 	npm install
 	(cd $(THEME_DIR) && npm install)
 
