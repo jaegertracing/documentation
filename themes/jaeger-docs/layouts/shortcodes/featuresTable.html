@@ -1,15 +1,29 @@
+{{- $clients := .Site.Data.clients.clients }}
+{{- $features := .Site.Data.clients.features }}
 <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Description</th>
+        <th>Feature</th>
+        {{- range $clients }}
+        <th>{{ .language }}</th>
+        {{- end }}
       </tr>
     </thead>
     <tbody>
-      {{- range .Site.Data.clients.features }}
+      {{- range $features }}
+      {{- $featureName := .name }}
       <tr>
-        <td id="{{ .name | urlize }}">{{ .name }}</td>
         <td>{{ .description | markdownify }}</td>
+        {{- range $clients }}
+        {{- $supported := index .features $featureName }}
+        {{- if eq $supported true }}
+        <td>{{ emojify ":white_check_mark:" }}</td>
+        {{- else if eq $supported false }}
+        <td>{{ emojify ":x:" }}</td>
+        {{- else }}
+        <td>{{ default "" $supported }}</td>
+        {{- end }}
+        {{- end }}
       </tr>
       {{- end }}
     </tbody>

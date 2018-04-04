@@ -6,29 +6,16 @@
     <tr>
       <th>Language</th>
       <th>GitHub Repo</th>
-      {{- range $features }}
-      <th><a href="#{{ .name | urlize }}">{{ .name }}</a></th>
-      {{- end }}
+
     </tr>
   </thead>
   <tbody>
     {{- range $clients }}
-    {{- $client := . }}
     <tr>
       <td>{{ .language }}</td>
       <td>
         <a href="https://github.com/{{ .repo }}">{{ .repo }}</a>
       </td>
-      {{- range $features }}
-      {{- $supported := index $client.features .name }}
-      {{- if eq $supported true }}
-      <td>{{ emojify ":white_check_mark:" }}</td>
-      {{- else if eq $supported false }}
-      <td>{{ emojify ":x:" }}</td>
-      {{- else }}
-      <td>{{ $supported }}</td>
-      {{- end }}
-      {{- end }}
     </tr>
     {{- end }}
   </tbody>

@@ -14,11 +14,11 @@ The rest of this page contains information about configuring and instantiating a
 
 ## Terminology
 
-We use the term *client library*, *instrumentation library*, and *tracer* interchangeably in this document.
+We use the terms *client library*, *instrumentation library*, and *tracer* interchangeably in this document.
 
 ## Client library features
 
-The table below lists possible features supported by client libraries:
+The table below provides a feature matrix for the existing client libraries:
 
 {{< featuresTable >}}
 
