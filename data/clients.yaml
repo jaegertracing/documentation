@@ -1,17 +1,23 @@
 features:
   - name: udp_jaeger_thrift
-    description: Report spans in `jaeger.thrift` format over UDP
+    description: Report spans in [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift) format over UDP
   - name: propagation_b3
-    description: Support Zipkin's B3 headers as wire format for span context
+    description: Support Zipkin's [B3 headers](https://zipkin.io/pages/instrumenting) as the wire format for span context
 
 clients:
   - language: Go
     repo: jaegertracing/jaeger-client-go
     features:
-      udp_jaeger_thrift: true
+      udp_jaeger_thrift: yes
       propagation_b3: partial
   - language: Java
     repo: jaegertracing/jaeger-client-java
     features:
-      udp_jaeger_thrift: true
-      propagation_b3: false
+      udp_jaeger_thrift: yes
+      propagation_b3: no
+  #- language: Node.js
+  #  repo: jaegertracing/jaeger-client-node
+  #- language: Python
+  #  repo: jaegertracing/jaeger-client-python
+  #- language: C++
+  #  repo: jaegertracing/cpp-client

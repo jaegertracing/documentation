@@ -21,7 +21,13 @@
       </td>
       {{- range $features }}
       {{- $supported := index $client.features .name }}
+      {{- if eq $supported true }}
+      <td>{{ emojify ":white_check_mark:" }}</td>
+      {{- else if eq $supported false }}
+      <td>{{ emojify ":x:" }}</td>
+      {{- else }}
       <td>{{ $supported }}</td>
+      {{- end }}
       {{- end }}
     </tr>
     {{- end }}
