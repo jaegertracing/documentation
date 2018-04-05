@@ -3,7 +3,8 @@ title              = "Jaeger: open source, end-to-end distributed tracing"
 languageCode       = "en"
 pygmentsCodeFences = true
 pygmentsUseClasses = true
-disableKinds = ["taxonomy", "taxonomyTerm"]
+disableKinds       = ["taxonomy", "taxonomyTerm"]
+canonifyURLs       = true
 
 # Disable content taxonomies for now (until there is significantly more content)
 #[taxonomies]
