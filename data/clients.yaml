@@ -11,11 +11,15 @@ featureGroups:
   - description: Inter-process propagation wire format (headers)
     features:
     - name: propagation_uber
-      description: Uber's [original headers](#propagation-format)
+      description: "[Uber's original headers](#propagation-format)"
     - name: propagation_b3
       description: Zipkin's [B3 headers](https://github.com/openzipkin/b3-propagation)
     - name: propagation_w3c
-      description: W3C [Trace Context headers](https://github.com/w3c/distributed-tracing)
+      description: "[W3C Trace Context headers](https://github.com/w3c/distributed-tracing)"
+    - name: jaeger_debug_id
+      description: Support inbound `jaeger-debug-id` header
+    - name: jaeger_baggage
+      description: Accept baggage from `jaeger-baggage` headers
 
   - description: Metrics
     features:
@@ -92,6 +96,8 @@ clients:
       propagation_uber: yes
       propagation_b3: yes
       propagation_w3c: coming
+      jaeger_debug_id: when there is no trace
+      jaeger_baggage: when there is no trace
       standard_tracer_metrics: yes
       standard_rpc_metrics: yes
       prometheus_metrics: yes
@@ -130,6 +136,8 @@ clients:
       propagation_uber: yes
       propagation_b3: yes
       propagation_w3c: coming
+      jaeger_debug_id:
+      jaeger_baggage:
       standard_tracer_metrics: yes
       standard_rpc_metrics: no
       prometheus_metrics: yes
@@ -168,6 +176,8 @@ clients:
       propagation_uber: yes
       propagation_b3: yes
       propagation_w3c: coming
+      jaeger_debug_id:
+      jaeger_baggage:
       standard_tracer_metrics: yes
       standard_rpc_metrics: no
       prometheus_metrics: no
@@ -206,6 +216,8 @@ clients:
       propagation_uber: yes
       propagation_b3: yes
       propagation_w3c: coming
+      jaeger_debug_id:
+      jaeger_baggage:
       standard_tracer_metrics: yes
       standard_rpc_metrics: no
       prometheus_metrics: yes
@@ -244,6 +256,8 @@ clients:
       propagation_uber: yes
       propagation_b3: no
       propagation_w3c: coming
+      jaeger_debug_id:
+      jaeger_baggage:
       standard_tracer_metrics:
       standard_rpc_metrics: no
       prometheus_metrics:
@@ -282,6 +296,8 @@ clients:
       propagation_uber: yes
       propagation_b3: no
       propagation_w3c: coming
+      jaeger_debug_id:
+      jaeger_baggage:
       standard_tracer_metrics:
       standard_rpc_metrics: no
       prometheus_metrics:

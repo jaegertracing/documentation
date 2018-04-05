@@ -26,7 +26,7 @@ Libraries in other languages are currently under development, please see [issue 
 
 ## Features
 
-The table below provides a feature matrix for the existing client libraries:
+The table below provides a feature matrix for the existing client libraries. Cells marked with `?` indicate that it's not known if the given client supports the given feature and additional research & documentation update is required.
 
 {{< featuresTable >}}
 
