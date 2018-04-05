@@ -248,7 +248,7 @@ clients:
       env_JAEGER_DISABLE_GLOBAL_TRACER: no
 
   - language: C++
-    repo: jaegertracing/cpp-client
+    repo: jaegertracing/jaeger-client-cpp
     features:
       report_jaeger_thrift_udp: yes
       report_jaeger_thrift_http:
