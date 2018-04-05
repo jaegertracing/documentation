@@ -1,6 +1,6 @@
 baseURL            = "/"
 title              = "Jaeger: open source, end-to-end distributed tracing"
-languageCode       = "en-us"
+languageCode       = "en"
 pygmentsCodeFences = true
 pygmentsUseClasses = true
 disableKinds = ["taxonomy", "taxonomyTerm"]

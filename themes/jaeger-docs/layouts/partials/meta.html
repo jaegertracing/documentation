@@ -1,0 +1,26 @@
+{{- $isHome := eq .Kind "home" }}
+{{- $title := cond $isHome .Site.Title .Title }}
+{{- $description := cond $isHome .Site.Params.description .Params.description }}
+{{- $isDoc := eq .Section "docs" }}
+{{- $type := cond $isHome "website" "article" }}
+{{- $twitterHandle := .Site.Params.twitterHandle }}
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+
+<!-- OpenGraph metadata -->
+<meta property="og:title" content="{{ $title }}" />
+{{- if $isDoc }}<meta property="og:type" content="documentation" />{{- end }}
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:locale" content="en_US" />
+{{- if not $isHome }}<meta property="og:site_name" content="{{ .Site.Title }}" />{{- end }}
+{{- with $description }}<meta property="og:description" content="{{ $description }}" />{{- end }}
+<meta property="og:type" content="{{ $type }}" />
+<meta property="og:image" content="/img/jaeger-logo.png" />
+<meta property="og:image:alt" content="Jaeger tracing project logo" />
+<meta property="og:iamge:type" content="image/png" />
+<meta property="og:iamge:width" content="1801" />
+<meta property="og:iamge:height" content="587" />
+
+<!-- Twitter Card metadata -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="{{ $twitterHandle }}" />
+<meta name="twitter:creator" content="{{ $twitterHandle }}" />
