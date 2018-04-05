@@ -3,32 +3,32 @@ title: Client libraries
 rank: 4
 ---
 
-## Introduction
-
-All Jaeger client libraries support the [OpenTracing standard](http://opentracing.io). The following resources provide more information about instrumenting your application with the OpenTracing APIs:
+All Jaeger client libraries support the [OpenTracing APIs](http://opentracing.io). The following resources provide more information about instrumenting your application with OpenTracing:
 
 * [OpenTracing tutorials](https://github.com/yurishkuro/opentracing-tutorial) for Java, Go, Python, and Node.js
 * A deep dive blog post [Tracing HTTP request latency in Go][http-latency-medium]
 * The official OpenTracing documentation and other materials at [opentracing.io](http://opentracing.io)
-* The `opentracing-contrib` [org on GitHub](https://github.com/opentracing-contrib) contains many repositories with off-the-shelf instrumentation for many popular frameworks, including JAXRS & Dropwizard (Java), Flask & Django (Python), Go std library, etc.
+* The [`opentracing-contrib` org on GitHub](https://github.com/opentracing-contrib) contains many repositories with off-the-shelf instrumentation for many popular frameworks, including JAXRS & Dropwizard (Java), Flask & Django (Python), Go std library, etc.
 
 The rest of this page contains information about configuring and instantiating a Jaeger tracer in an application that is already instrumented with OpenTracing API.
 
 ## Terminology
 
-We use the term *client library*, *instrumentation library*, and *tracer* interchangeably in this document.
+We use the terms *client library*, *instrumentation library*, and *tracer* interchangeably in this document.
 
-## Official libraries
+## Supported libraries
 
-| Language | Library                                                      |
-| ---------|--------------------------------------------------------------|
-| go       | [jaeger-client-go](https://github.com/uber/jaeger-client-go)        |
-| java     | [jaeger-client-java](https://github.com/uber/jaeger-client-java)    |
-| node     | [jaeger-client-node](https://github.com/uber/jaeger-client-node)    |
-| python   | [jaeger-client-python](https://github.com/uber/jaeger-client-python)|
-| C++      | [cpp-client](https://github.com/jaegertracing/cpp-client)           |
+The following client libraries are officially supported:
+
+{{< clientsTable >}}
 
 Libraries in other languages are currently under development, please see [issue #366](https://github.com/jaegertracing/jaeger/issues/366).
+
+## Features
+
+The table below provides a feature matrix for the existing client libraries. Cells marked with `?` indicate that it's not known if the given client supports the given feature and additional research & documentation update is required.
+
+{{< featuresTable >}}
 
 ## Initializing Jaeger Tracer
 
