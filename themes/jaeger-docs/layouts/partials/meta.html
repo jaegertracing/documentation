@@ -5,7 +5,11 @@
 {{- $type := cond $isHome "website" "article" }}
 {{- $twitterHandle := .Site.Params.twitterHandle }}
 {{- $imageUrl := printf "%s/%s" .Site.BaseURL .Site.Params.openGraphImage }}
+<meta charset="utf-8" />
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+{{- with $description }}<meta nam="description" content="{{ . }}" />{{- end }}
+<link rel="canonical" content="{{ .Permalink }}" />
+{{ .Hugo.Generator }}
 
 <!-- OpenGraph metadata -->
 <meta property="og:title" content="{{ $title }}" />

@@ -4,8 +4,8 @@
   <head>
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
     {{ partial "meta.html" . }}
-    {{ partial "css.html" . }}
     <link rel="shortcut icon" href="/favicon.ico">
+    {{ partial "css.html" . }}
   </head>
   <body class="page page--{{ $pageType }}">
     <main class="main">
