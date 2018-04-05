@@ -43,7 +43,7 @@ featureGroups:
     - name: baggage_restriction
       description: Remotely configurable baggage restrictions
 
-  - description: Tracer configurarion via environment variables
+  - description: Tracer configuration via environment variables
     features:
     - name: env_JAEGER_SERVICE_NAME
       description: "`JAEGER_SERVICE_NAME`"

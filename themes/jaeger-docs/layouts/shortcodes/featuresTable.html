@@ -1,17 +1,17 @@
 {{- $clients := .Site.Data.clients.clients }}
 {{- $featureGroups := .Site.Data.clients.featureGroups }}
-{{- range $featureGroups }}
-<h3>{{ .description }}</h3>
 <table>
-  <thead>
+  <tbody>
+    {{- range $featureGroups }}
+    <tr>
+      <th class="feature-table-header">{{ .description | markdownify }}</th>
+    </tr>
     <tr>
       <th>Feature</th>
       {{- range $clients }}
       <th>{{ .language }}</th>
       {{- end }}
     </tr>
-  </thead>
-  <tbody>
     {{- range .features }}
     {{- $featureName := .name }}
     <tr>
@@ -28,8 +28,8 @@
       <td>{{ $supported | markdownify }}</td>
       {{- end }}
       {{- end }}
-      </tr>
+    </tr>
+    {{- end }}
     {{- end }}
   </tbody>
-</table>
-{{- end }}
+  </table>
