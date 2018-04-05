@@ -11,6 +11,7 @@ function install {
         sudo tar -xvzf hugo_${HUGO_VERSION}_${OS}-64bit.tar.gz \
           --no-same-permissions
     )
+    exit 0
 }
 
 if command -v hugo &> /dev/null; then
@@ -29,5 +30,3 @@ else
     echo "Hugo not installed. Installing version ${HUGO_VERSION}..."
     install
 fi
-
-exit 0
