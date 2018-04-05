@@ -13,7 +13,7 @@
 <meta property="og:url" content="{{ .Permalink }}" />
 <meta property="og:locale" content="en_US" />
 {{- if not $isHome }}<meta property="og:site_name" content="{{ .Site.Title }}" />{{- end }}
-{{- with $description }}<meta property="og:description" content="{{ $description }}" />{{- end }}
+{{- with $description }}<meta property="og:description" content="{{ . }}" />{{- end }}
 <meta property="og:type" content="{{ $type }}" />
 <meta property="og:image" content="{{ $imageUrl }}" />
 <meta property="og:image:alt" content="Jaeger tracing project logo" />
