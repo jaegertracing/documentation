@@ -1,7 +1,6 @@
 ---
 title: Client libraries
 rank: 4
-widescreen: true
 ---
 
 All Jaeger client libraries support the [OpenTracing APIs](http://opentracing.io). The following resources provide more information about instrumenting your application with OpenTracing:
@@ -27,9 +26,7 @@ Libraries in other languages are currently under development, please see [issue 
 
 ## Features
 
-The table below provides a feature matrix for the existing client libraries. Cells marked with `?` indicate that it's not known if the given client supports the given feature and additional research & documentation update is required.
-
-{{< featuresTable >}}
+A feature matrix for the existing client libraries is [available here](../client-features/).
 
 ## Initializing Jaeger Tracer
 

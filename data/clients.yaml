@@ -11,7 +11,7 @@ featureGroups:
   - description: Inter-process propagation wire format (headers)
     features:
     - name: propagation_uber
-      description: "[Uber's original headers](#propagation-format)"
+      description: "[Uber's original headers](../client-libraries/#propagation-format)"
     - name: propagation_b3
       description: Zipkin's [B3 headers](https://github.com/openzipkin/b3-propagation)
     - name: propagation_w3c
