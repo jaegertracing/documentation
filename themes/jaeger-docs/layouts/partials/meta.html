@@ -1,6 +1,6 @@
 {{- $isHome := eq .Kind "home" }}
 {{- $title := cond $isHome .Site.Title .Title }}
-{{- $description := cond $isHome .Site.Params.description .Params.description }}
+{{- $description := cond $isHome .Site.Params.tagline .Params.description }}
 {{- $isDoc := eq .Section "docs" }}
 {{- $type := cond $isHome "website" "article" }}
 {{- $twitterHandle := .Site.Params.twitterHandle }}
