@@ -12,10 +12,11 @@ canonifyURLs       = true
 
 [params]
   tagline = "Monitor and troubleshoot transactions in complex distributed systems"
-  githubRepo    = "jaegertracing/jaeger"
-  twitterHandle = "JaegerTracing"
-  mediumHandle  = "jaegertracing"
-  gitterHandle  = "jaegertracing"
+  githubRepo     = "jaegertracing/jaeger"
+  twitterHandle  = "JaegerTracing"
+  mediumHandle   = "jaegertracing"
+  gitterHandle   = "jaegertracing"
+  openGraphImage = "img/jaeger-icon-color.png"
 
   [navbar]
     [[links]]
