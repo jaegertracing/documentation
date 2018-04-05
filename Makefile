@@ -6,11 +6,17 @@ THEME_DIR    := themes/$(HUGO_THEME)
 GULP         := $(NODE_BIN)/gulp
 CONCURRENTLY := $(NODE_BIN)/concurrently
 WRITE_GOOD   := $(NODE_BIN)/write-good
+NODE_VER     := $(shell node -v | cut -c2- | cut -c1)
+GOOD_NODE     := $(shell if [ $(NODE_VER) -ge 4 ]; then echo true; else echo false; fi)
 
-macos-setup:
+macos-setup: check-node
 	scripts/install-hugo.sh $(HUGO_VERSION) macOS
 	npm install
 	(cd $(THEME_DIR) && npm install)
+
+.PHONY: check-node
+check-node:
+	@echo Build requires Node 4.x or higher && $(GOOD_NODE)
 
 netlify-setup:
 	(cd $(THEME_DIR) && npm install)
@@ -29,7 +35,7 @@ build: clean build-assets build-content
 
 netlify-build: netlify-setup build
 
-dev:
+dev: check-node
 	$(CONCURRENTLY) "make develop-content" "make develop-assets"
 
 develop-content: build-assets
