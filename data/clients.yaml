@@ -1,34 +1,86 @@
-features:
-  - name: report_jaeger_thrift_udp
-    description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift) over UDP
-  - name: report_jaeger_thrift_http
-    description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift) over HTTP
-  - name: report_zipkin_thrift_http
-    description: Report Zipkin Thrift over HTTP
-  - name: propagation_uber
-    description: Span context wire format - [Uber's original headers](#propagation-format)
-  - name: propagation_b3
-    description: Span context wire format -  Zipkin's [B3 headers](https://github.com/openzipkin/b3-propagation)
-  - name: propagation_w3c
-    description: Span context wire format - [W3C Trace Context headers](https://github.com/w3c/distributed-tracing)
-  - name: standard_tracer_metrics
-    description: Support standard tracer metrics
-  - name: standard_rpc_metrics
-    description: Support standard RPC metrics
-  - name: prometheus_metrics
-    description: Metrics in [Prometheus](http://prometheus.io/) format
-  - name: configuration
-    description: Support declarative tracer configuration
-  - name: config_tracer_tags
-    description: Allow configuring tracer tags, aka process tags
-  - name: remote_sampler
-    description: Allow remote configuration of samplers
-  - name: adaptive_sampler
-    description: Remotely configurable [adaptive sampler](../sampling)
-  - name: baggage_restriction
-    description: Remotely configurable baggage restrictions
-  - name: env_tracer_tags
-    description: Env var `JAEGER_TAGS` - tracer/process tags
+featureGroups:
+  - description: Data format and transport for reporting spans to Jaeger backend
+    features:
+    - name: report_jaeger_thrift_udp
+      description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift) over UDP
+    - name: report_jaeger_thrift_http
+      description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift) over HTTP
+    - name: report_zipkin_thrift_http
+      description: Report Zipkin Thrift over HTTP
+
+  - description: Inter-process propagation wire format (headers)
+    features:
+    - name: propagation_uber
+      description: Uber's [original headers](#propagation-format)
+    - name: propagation_b3
+      description: Zipkin's [B3 headers](https://github.com/openzipkin/b3-propagation)
+    - name: propagation_w3c
+      description: W3C [Trace Context headers](https://github.com/w3c/distributed-tracing)
+
+  - description: Metrics
+    features:
+    - name: standard_tracer_metrics
+      description: Support standard tracer metrics (number of spans started, finished, reported, etc.)
+    - name: standard_rpc_metrics
+      description: Support standard RPC metrics
+    - name: prometheus_metrics
+      description: Metrics in [Prometheus](http://prometheus.io/) format
+
+  - description: Tracer configuration
+    features:
+    - name: configuration
+      description: Support declarative tracer configuration
+    - name: config_tracer_tags
+      description: Allow configuring tracer tags, aka process tags
+    - name: remote_sampler
+      description: Allow remote configuration of samplers
+    - name: adaptive_sampler
+      description: Remotely configurable [adaptive sampler](../sampling)
+    - name: baggage_restriction
+      description: Remotely configurable baggage restrictions
+
+  - description: Tracer configurarion via environment variables
+    features:
+    - name: env_JAEGER_SERVICE_NAME
+      description: "`JAEGER_SERVICE_NAME`"
+    - name: env_JAEGER_AGENT_HOST
+      description: "`JAEGER_AGENT_HOST`"
+    - name: env_JAEGER_AGENT_PORT
+      description: "`JAEGER_AGENT_PORT`"
+    - name: env_JAEGER_REPORTER_LOG_SPANS
+      description: "`JAEGER_REPORTER_LOG_SPANS` - log finished span IDs"
+    - name: env_JAEGER_REPORTER_MAX_QUEUE_SIZE
+      description: "`JAEGER_REPORTER_MAX_QUEUE_SIZE`"
+    - name: env_JAEGER_REPORTER_FLUSH_INTERVAL
+      description: "`JAEGER_REPORTER_FLUSH_INTERVAL`"
+    - name: env_JAEGER_SAMPLER_TYPE
+      description: "`JAEGER_SAMPLER_TYPE` - default type of sampler, e.g. `probabilistic`"
+    - name: env_JAEGER_SAMPLER_PARAM
+      description: "`JAEGER_SAMPLER_PARAM` - default sampler config, e.g. probability 0.001"
+    - name: env_JAEGER_SAMPLER_MANAGER_HOST_PORT
+      description: "`JAEGER_SAMPLER_MANAGER_HOST_PORT`"
+    - name: env_TRACER_TAGS
+      description: "`JAEGER_TAGS` - tracer/process tags"
+    - name: env_JAEGER_DISABLED
+      description: "`JAEGER_DISABLED`"
+    - name: env_JAEGER_RPC_METRICS
+      description: "`JAEGER_RPC_METRICS`"
+    - name: env_JAEGER_SAMPLER_MAX_OPERATIONS
+      description: "`JAEGER_SAMPLER_MAX_OPERATIONS`"
+    - name: env_JAEGER_SAMPLER_REFRESH_INTERVAL
+      description: "`JAEGER_SAMPLER_REFRESH_INTERVAL`"
+    - name: env_JAEGER_ENDPOINT
+      description: "`JAEGER_ENDPOINT`"
+    - name: env_JAEGER_AUTH_TOKEN
+      description: "`JAEGER_AUTH_TOKEN`"
+    - name: env_JAEGER_USER
+      description: "`JAEGER_USER`"
+    - name: env_JAEGER_PASSWORD
+      description: "`JAEGER_PASSWORD`"
+    - name: env_JAEGER_PROPAGATION
+      description: "`JAEGER_PROPAGATION`"
+    - name: env_JAEGER_DISABLE_GLOBAL_TRACER
+      description: "`JAEGER_DISABLE_GLOBAL_TRACER`"
 
 clients:
   - language: Go
@@ -48,7 +100,26 @@ clients:
       remote_sampler: yes
       adaptive_sampler: yes
       baggage_restriction: yes
-      env_tracer_tags: yes
+      env_JAEGER_SERVICE_NAME: yes
+      env_JAEGER_AGENT_HOST: yes
+      env_JAEGER_AGENT_PORT: yes
+      env_JAEGER_REPORTER_LOG_SPANS: yes
+      env_JAEGER_REPORTER_MAX_QUEUE_SIZE: yes
+      env_JAEGER_REPORTER_FLUSH_INTERVAL: yes
+      env_JAEGER_SAMPLER_TYPE: yes
+      env_JAEGER_SAMPLER_PARAM: yes
+      env_JAEGER_SAMPLER_MANAGER_HOST_PORT: yes
+      env_TRACER_TAGS: yes
+      env_JAEGER_DISABLED: yes
+      env_JAEGER_RPC_METRICS: yes
+      env_JAEGER_SAMPLER_MAX_OPERATIONS: yes
+      env_JAEGER_SAMPLER_REFRESH_INTERVAL: yes
+      env_JAEGER_ENDPOINT: no
+      env_JAEGER_AUTH_TOKEN: no
+      env_JAEGER_USER: no
+      env_JAEGER_PASSWORD: no
+      env_JAEGER_PROPAGATION: no
+      env_JAEGER_DISABLE_GLOBAL_TRACER: no
 
   - language: Java
     repo: jaegertracing/jaeger-client-java
@@ -67,7 +138,26 @@ clients:
       remote_sampler: yes
       adaptive_sampler: yes
       baggage_restriction: coming
-      env_tracer_tags: yes
+      env_JAEGER_SERVICE_NAME: yes
+      env_JAEGER_AGENT_HOST: yes
+      env_JAEGER_AGENT_PORT: yes
+      env_JAEGER_REPORTER_LOG_SPANS: yes
+      env_JAEGER_REPORTER_MAX_QUEUE_SIZE: yes
+      env_JAEGER_REPORTER_FLUSH_INTERVAL: yes
+      env_JAEGER_SAMPLER_TYPE: yes
+      env_JAEGER_SAMPLER_PARAM: yes
+      env_JAEGER_SAMPLER_MANAGER_HOST_PORT: yes
+      env_TRACER_TAGS: yes
+      env_JAEGER_DISABLED: no
+      env_JAEGER_RPC_METRICS: no
+      env_JAEGER_SAMPLER_MAX_OPERATIONS: no
+      env_JAEGER_SAMPLER_REFRESH_INTERVAL: no
+      env_JAEGER_ENDPOINT: yes
+      env_JAEGER_AUTH_TOKEN: yes
+      env_JAEGER_USER: yes
+      env_JAEGER_PASSWORD: yes
+      env_JAEGER_PROPAGATION: yes
+      env_JAEGER_DISABLE_GLOBAL_TRACER: yes
 
   - language: Node.js
     repo: jaegertracing/jaeger-client-node
@@ -86,7 +176,26 @@ clients:
       remote_sampler: yes
       adaptive_sampler: yes
       baggage_restriction: coming
-      env_tracer_tags: no
+      env_JAEGER_SERVICE_NAME: no
+      env_JAEGER_AGENT_HOST: no
+      env_JAEGER_AGENT_PORT: no
+      env_JAEGER_REPORTER_LOG_SPANS: no
+      env_JAEGER_REPORTER_MAX_QUEUE_SIZE: no
+      env_JAEGER_REPORTER_FLUSH_INTERVAL: no
+      env_JAEGER_SAMPLER_TYPE: no
+      env_JAEGER_SAMPLER_PARAM: no
+      env_JAEGER_SAMPLER_MANAGER_HOST_PORT: no
+      env_TRACER_TAGS: no
+      env_JAEGER_DISABLED: no
+      env_JAEGER_RPC_METRICS: no
+      env_JAEGER_SAMPLER_MAX_OPERATIONS: no
+      env_JAEGER_SAMPLER_REFRESH_INTERVAL: no
+      env_JAEGER_ENDPOINT: no
+      env_JAEGER_AUTH_TOKEN: no
+      env_JAEGER_USER: no
+      env_JAEGER_PASSWORD: no
+      env_JAEGER_PROPAGATION: no
+      env_JAEGER_DISABLE_GLOBAL_TRACER: no
 
   - language: Python
     repo: jaegertracing/jaeger-client-python
@@ -105,42 +214,99 @@ clients:
       remote_sampler: yes
       adaptive_sampler: yes
       baggage_restriction: coming
-      env_tracer_tags: no
+      env_JAEGER_SERVICE_NAME: no
+      env_JAEGER_AGENT_HOST: no
+      env_JAEGER_AGENT_PORT: no
+      env_JAEGER_REPORTER_LOG_SPANS: no
+      env_JAEGER_REPORTER_MAX_QUEUE_SIZE: no
+      env_JAEGER_REPORTER_FLUSH_INTERVAL: no
+      env_JAEGER_SAMPLER_TYPE: no
+      env_JAEGER_SAMPLER_PARAM: no
+      env_JAEGER_SAMPLER_MANAGER_HOST_PORT: no
+      env_TRACER_TAGS: no
+      env_JAEGER_DISABLED: no
+      env_JAEGER_RPC_METRICS: no
+      env_JAEGER_SAMPLER_MAX_OPERATIONS: no
+      env_JAEGER_SAMPLER_REFRESH_INTERVAL: no
+      env_JAEGER_ENDPOINT: no
+      env_JAEGER_AUTH_TOKEN: no
+      env_JAEGER_USER: no
+      env_JAEGER_PASSWORD: no
+      env_JAEGER_PROPAGATION: no
+      env_JAEGER_DISABLE_GLOBAL_TRACER: no
 
   - language: C++
     repo: jaegertracing/cpp-client
     features:
       report_jaeger_thrift_udp: yes
-      report_jaeger_thrift_http: "?"
+      report_jaeger_thrift_http:
       report_zipkin_thrift_http: no
       propagation_uber: yes
       propagation_b3: no
       propagation_w3c: coming
-      standard_tracer_metrics: yes
-      standard_rpc_metrics:
+      standard_tracer_metrics:
+      standard_rpc_metrics: no
       prometheus_metrics:
       configuration:
       config_tracer_tags:
       remote_sampler: yes
       adaptive_sampler: yes
       baggage_restriction: no
-      env_tracer_tags:
+      env_JAEGER_SERVICE_NAME: no
+      env_JAEGER_AGENT_HOST: no
+      env_JAEGER_AGENT_PORT: no
+      env_JAEGER_REPORTER_LOG_SPANS: no
+      env_JAEGER_REPORTER_MAX_QUEUE_SIZE: no
+      env_JAEGER_REPORTER_FLUSH_INTERVAL: no
+      env_JAEGER_SAMPLER_TYPE: no
+      env_JAEGER_SAMPLER_PARAM: no
+      env_JAEGER_SAMPLER_MANAGER_HOST_PORT: no
+      env_TRACER_TAGS: no
+      env_JAEGER_DISABLED: no
+      env_JAEGER_RPC_METRICS: no
+      env_JAEGER_SAMPLER_MAX_OPERATIONS: no
+      env_JAEGER_SAMPLER_REFRESH_INTERVAL: no
+      env_JAEGER_ENDPOINT: no
+      env_JAEGER_AUTH_TOKEN: no
+      env_JAEGER_USER: no
+      env_JAEGER_PASSWORD: no
+      env_JAEGER_PROPAGATION: no
+      env_JAEGER_DISABLE_GLOBAL_TRACER: no
 
   - language: C#
     repo: jaegertracing/jaeger-client-csharp
     features:
       report_jaeger_thrift_udp: yes
-      report_jaeger_thrift_http: "?"
+      report_jaeger_thrift_http:
       report_zipkin_thrift_http: no
       propagation_uber: yes
       propagation_b3: no
       propagation_w3c: coming
-      standard_tracer_metrics: yes
-      standard_rpc_metrics:
+      standard_tracer_metrics:
+      standard_rpc_metrics: no
       prometheus_metrics:
       configuration:
       config_tracer_tags:
       remote_sampler:
       adaptive_sampler:
       baggage_restriction:
-      env_tracer_tags:
+      env_JAEGER_SERVICE_NAME: no
+      env_JAEGER_AGENT_HOST: no
+      env_JAEGER_AGENT_PORT: no
+      env_JAEGER_REPORTER_LOG_SPANS: no
+      env_JAEGER_REPORTER_MAX_QUEUE_SIZE: no
+      env_JAEGER_REPORTER_FLUSH_INTERVAL: no
+      env_JAEGER_SAMPLER_TYPE: no
+      env_JAEGER_SAMPLER_PARAM: no
+      env_JAEGER_SAMPLER_MANAGER_HOST_PORT: no
+      env_TRACER_TAGS: no
+      env_JAEGER_DISABLED: no
+      env_JAEGER_RPC_METRICS: no
+      env_JAEGER_SAMPLER_MAX_OPERATIONS: no
+      env_JAEGER_SAMPLER_REFRESH_INTERVAL: no
+      env_JAEGER_ENDPOINT: no
+      env_JAEGER_AUTH_TOKEN: no
+      env_JAEGER_USER: no
+      env_JAEGER_PASSWORD: no
+      env_JAEGER_PROPAGATION: no
+      env_JAEGER_DISABLE_GLOBAL_TRACER: no

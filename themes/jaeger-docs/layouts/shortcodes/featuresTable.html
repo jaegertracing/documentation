@@ -1,19 +1,24 @@
 {{- $clients := .Site.Data.clients.clients }}
-{{- $features := .Site.Data.clients.features }}
+{{- $featureGroups := .Site.Data.clients.featureGroups }}
 <table>
     <thead>
+    </thead>
+    <tbody>
+      {{- range $featureGroups}}
+      <tr>
+        <th colspan="7">{{ .description | markdownify }}</th>
+      </tr>
       <tr>
         <th>Feature</th>
         {{- range $clients }}
         <th>{{ .language }}</th>
         {{- end }}
       </tr>
-    </thead>
-    <tbody>
-      {{- range $features }}
+      {{- range .features }}
       {{- $featureName := .name }}
       <tr>
-        <td>{{ .description | markdownify }}</td>
+        {{- $description := default .name .description }}
+        <td>{{ $description | markdownify }}</td>
         {{- range $clients }}
         {{- $supported := index .features $featureName }}
         {{- if eq $supported true }}
@@ -26,6 +31,7 @@
         {{- end }}
         {{- end }}
       </tr>
+      {{- end }}
       {{- end }}
     </tbody>
   </table>
