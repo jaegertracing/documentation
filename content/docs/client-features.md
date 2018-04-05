@@ -1,5 +1,5 @@
 ---
-title: Client Features
+title: Client features
 widescreen: true
 weight: 5
 ---
