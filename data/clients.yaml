@@ -1,23 +1,146 @@
 features:
-  - name: udp_jaeger_thrift
-    description: Report spans in [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift) format over UDP
+  - name: report_jaeger_thrift_udp
+    description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift) over UDP
+  - name: report_jaeger_thrift_http
+    description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift) over HTTP
+  - name: report_zipkin_thrift_http
+    description: Report Zipkin Thrift over HTTP
+  - name: propagation_uber
+    description: Span context wire format - [Uber's original headers](#propagation-format)
   - name: propagation_b3
-    description: Support Zipkin's [B3 headers](https://zipkin.io/pages/instrumenting) as the wire format for span context
+    description: Span context wire format -  Zipkin's [B3 headers](https://github.com/openzipkin/b3-propagation)
+  - name: propagation_w3c
+    description: Span context wire format - [W3C Trace Context headers](https://github.com/w3c/distributed-tracing)
+  - name: standard_tracer_metrics
+    description: Support standard tracer metrics
+  - name: standard_rpc_metrics
+    description: Support standard RPC metrics
+  - name: prometheus_metrics
+    description: Metrics in [Prometheus](http://prometheus.io/) format
+  - name: configuration
+    description: Support declarative tracer configuration
+  - name: config_tracer_tags
+    description: Allow configuring tracer tags, aka process tags
+  - name: remote_sampler
+    description: Allow remote configuration of samplers
+  - name: adaptive_sampler
+    description: Remotely configurable [adaptive sampler](../sampling)
+  - name: baggage_restriction
+    description: Remotely configurable baggage restrictions
+  - name: env_tracer_tags
+    description: Env var `JAEGER_TAGS` - tracer/process tags
 
 clients:
   - language: Go
     repo: jaegertracing/jaeger-client-go
     features:
-      udp_jaeger_thrift: yes
-      propagation_b3: partial
+      report_jaeger_thrift_udp: yes
+      report_jaeger_thrift_http: no
+      report_zipkin_thrift_http: yes
+      propagation_uber: yes
+      propagation_b3: yes
+      propagation_w3c: coming
+      standard_tracer_metrics: yes
+      standard_rpc_metrics: yes
+      prometheus_metrics: yes
+      configuration: yes
+      config_tracer_tags: yes
+      remote_sampler: yes
+      adaptive_sampler: yes
+      baggage_restriction: yes
+      env_tracer_tags: yes
+
   - language: Java
     repo: jaegertracing/jaeger-client-java
     features:
-      udp_jaeger_thrift: yes
+      report_jaeger_thrift_udp: yes
+      report_jaeger_thrift_http: yes
+      report_zipkin_thrift_http: no
+      propagation_uber: yes
+      propagation_b3: yes
+      propagation_w3c: coming
+      standard_tracer_metrics: yes
+      standard_rpc_metrics: no
+      prometheus_metrics: yes
+      configuration: yes
+      config_tracer_tags: yes
+      remote_sampler: yes
+      adaptive_sampler: yes
+      baggage_restriction: coming
+      env_tracer_tags: yes
+
+  - language: Node.js
+    repo: jaegertracing/jaeger-client-node
+    features:
+      report_jaeger_thrift_udp: yes
+      report_jaeger_thrift_http: no
+      report_zipkin_thrift_http: no
+      propagation_uber: yes
+      propagation_b3: yes
+      propagation_w3c: coming
+      standard_tracer_metrics: yes
+      standard_rpc_metrics: no
+      prometheus_metrics: no
+      configuration: yes
+      config_tracer_tags: yes
+      remote_sampler: yes
+      adaptive_sampler: yes
+      baggage_restriction: coming
+      env_tracer_tags: no
+
+  - language: Python
+    repo: jaegertracing/jaeger-client-python
+    features:
+      report_jaeger_thrift_udp: yes
+      report_jaeger_thrift_http: no
+      report_zipkin_thrift_http: no
+      propagation_uber: yes
+      propagation_b3: yes
+      propagation_w3c: coming
+      standard_tracer_metrics: yes
+      standard_rpc_metrics: no
+      prometheus_metrics: yes
+      configuration: yes
+      config_tracer_tags: yes
+      remote_sampler: yes
+      adaptive_sampler: yes
+      baggage_restriction: coming
+      env_tracer_tags: no
+
+  - language: C++
+    repo: jaegertracing/cpp-client
+    features:
+      report_jaeger_thrift_udp: yes
+      report_jaeger_thrift_http: "?"
+      report_zipkin_thrift_http: no
+      propagation_uber: yes
       propagation_b3: no
-  #- language: Node.js
-  #  repo: jaegertracing/jaeger-client-node
-  #- language: Python
-  #  repo: jaegertracing/jaeger-client-python
-  #- language: C++
-  #  repo: jaegertracing/cpp-client
+      propagation_w3c: coming
+      standard_tracer_metrics: yes
+      standard_rpc_metrics:
+      prometheus_metrics:
+      configuration:
+      config_tracer_tags:
+      remote_sampler: yes
+      adaptive_sampler: yes
+      baggage_restriction: no
+      env_tracer_tags:
+
+  - language: C#
+    repo: jaegertracing/jaeger-client-csharp
+    features:
+      report_jaeger_thrift_udp: yes
+      report_jaeger_thrift_http: "?"
+      report_zipkin_thrift_http: no
+      propagation_uber: yes
+      propagation_b3: no
+      propagation_w3c: coming
+      standard_tracer_metrics: yes
+      standard_rpc_metrics:
+      prometheus_metrics:
+      configuration:
+      config_tracer_tags:
+      remote_sampler:
+      adaptive_sampler:
+      baggage_restriction:
+      env_tracer_tags:

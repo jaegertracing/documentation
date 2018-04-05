@@ -21,7 +21,8 @@
         {{- else if eq $supported false }}
         <td>{{ emojify ":x:" }}</td>
         {{- else }}
-        <td>{{ default "" $supported }}</td>
+        {{- $supported := default "?" $supported }}
+        <td>{{ $supported | markdownify }}</td>
         {{- end }}
         {{- end }}
       </tr>
