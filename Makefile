@@ -1,13 +1,12 @@
 HUGO_VERSION = 0.37.1
 HTMLPROOFER  = bundle exec htmlproofer
-NODE_BIN        = node_modules/.bin
-HUGO_THEME      = jaeger-docs
-NETLIFY_PROJECT = jaegertracing
-THEME_DIR       := themes/$(HUGO_THEME)
-GULP            := $(NODE_BIN)/gulp
-CONCURRENTLY    := $(NODE_BIN)/concurrently
-WRITE_GOOD      := $(NODE_BIN)/write-good
-BASE_URL        := https://$(NETLIFY_PROJECT).netlify.com
+NODE_BIN     = node_modules/.bin
+HUGO_THEME   = jaeger-docs
+BASE_URL     = https://jaegertracing.io
+THEME_DIR    := themes/$(HUGO_THEME)
+GULP         := $(NODE_BIN)/gulp
+CONCURRENTLY := $(NODE_BIN)/concurrently
+WRITE_GOOD   := $(NODE_BIN)/write-good
 
 macos-setup:
 	brew switch hugo $(HUGO_VERSION) && brew link --overwrite hugo
