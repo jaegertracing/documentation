@@ -1,7 +1,7 @@
 ---
 title: Getting started
 description: Get up and running with Jaeger in your local environment
-rank: 2
+weight: 2
 ---
 
 ## Instrumentation
