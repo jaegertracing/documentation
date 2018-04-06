@@ -1,0 +1,31 @@
+{{- $isHome := eq .Kind "home" }}
+{{- $title := cond $isHome .Site.Title .Title }}
+{{- $description := cond $isHome .Site.Params.tagline .Params.description }}
+{{- $isDoc := eq .Section "docs" }}
+{{- $type := cond $isHome "website" "article" }}
+{{- $twitterHandle := .Site.Params.twitterHandle }}
+{{- $imageUrl := printf "%s/%s" .Site.BaseURL .Site.Params.openGraphImage }}
+<meta charset="utf-8" />
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+{{- with $description }}<meta nam="description" content="{{ . }}" />{{- end }}
+<link rel="canonical" content="{{ .Permalink }}" />
+{{ .Hugo.Generator }}
+
+<!-- OpenGraph metadata -->
+<meta property="og:title" content="{{ $title }}" />
+{{- if $isDoc }}<meta property="og:type" content="documentation" />{{- end }}
+<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:locale" content="en_US" />
+{{- if not $isHome }}<meta property="og:site_name" content="{{ .Site.Title }}" />{{- end }}
+{{- with $description }}<meta property="og:description" content="{{ . }}" />{{- end }}
+<meta property="og:type" content="{{ $type }}" />
+<meta property="og:image" content="{{ $imageUrl }}" />
+<meta property="og:image:alt" content="Jaeger tracing project logo" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1801" />
+<meta property="og:image:height" content="587" />
+
+<!-- Twitter Card metadata -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="{{ $twitterHandle }}" />
+<meta name="twitter:creator" content="{{ $twitterHandle }}" />

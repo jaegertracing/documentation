@@ -2,6 +2,7 @@ HUGO_VERSION = 0.38
 HTMLPROOFER  = bundle exec htmlproofer
 NODE_BIN     = node_modules/.bin
 HUGO_THEME   = jaeger-docs
+BASE_URL     = https://jaegertracing.netlify.com
 THEME_DIR    := themes/$(HUGO_THEME)
 GULP         := $(NODE_BIN)/gulp
 CONCURRENTLY := $(NODE_BIN)/concurrently
@@ -26,7 +27,8 @@ clean:
 
 build-content:
 	hugo -v \
-		--theme $(HUGO_THEME)
+		--theme $(HUGO_THEME) \
+		--baseURL $(BASE_URL)
 
 build-assets:
 	(cd $(THEME_DIR) && $(GULP) build)

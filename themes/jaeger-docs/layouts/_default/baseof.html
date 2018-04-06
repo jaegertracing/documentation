@@ -1,11 +1,11 @@
 {{- $pageType := cond (eq .Kind "home") "home" .Section }}
 <!DOCTYPE html>
-<html class="has-navbar-fixed-top" lang="{{ .Site.LanguageCode }}">
+<html class="has-navbar-fixed-top" lang="{{ .Site.LanguageCode }}" prefix="og: http://ogp.me/ns#">
   <head>
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    {{ partial "css.html" . }}
+    {{ partial "meta.html" . }}
     <link rel="shortcut icon" href="/favicon.ico">
+    {{ partial "css.html" . }}
   </head>
   <body class="page page--{{ $pageType }}">
     <main class="main">
