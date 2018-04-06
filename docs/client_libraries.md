@@ -1,7 +1,7 @@
 # Client Libraries
 
-This page has moved to https://jaegertracing.netlify.com/docs/client-libraries/.
+This page has moved to https://www.jaegertracing.io/docs/client-libraries/.
 
 <script type="text/javascript">
-    to_netlify('https://jaegertracing.netlify.com/docs/client-libraries/');
+    to_netlify('https://www.jaegertracing.io/docs/client-libraries/');
 </script>

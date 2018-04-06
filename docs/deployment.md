@@ -1,7 +1,7 @@
 # Deployment
 
-This page has moved to https://jaegertracing.netlify.com/docs/deployment/.
+This page has moved to https://www.jaegertracing.io/docs/deployment/.
 
 <script type="text/javascript">
-    to_netlify('https://jaegertracing.netlify.com/docs/deployment/');
+    to_netlify('https://www.jaegertracing.io/docs/deployment/');
 </script>
