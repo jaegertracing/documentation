@@ -1,6 +1,6 @@
-{{- $hasTwoParams := eq (len .Params) 2 -}}
-{{- $wordToDisplay := .Get 0 -}}
-{{- $term := cond $hasTwoParams (.Get 1) $wordToDisplay -}}
+{{- $hasTwoParams := gt (len .Params) 1 -}}
+{{- $word := .Get 0 -}}
+{{- $term := cond $hasTwoParams (.Get 1) $word -}}
 {{- $definition := index .Site.Data.definitions (urlize $term) | markdownify -}}
-{{- $multiline := gt (len $definition) 40 -}}
-<span class="tooltip{{ if $multiline }} is-tooltip-multiline{{ end }}" data-tooltip="{{ $definition }}">{{- $wordToDisplay -}}</span>
+{{- $longDefinition := gt (len $definition) 40 -}}
+<span class="tooltip{{ if $longDefinition }} is-tooltip-multiline{{ end }}" data-tooltip="{{ $definition }}">{{- $word -}}</span>
