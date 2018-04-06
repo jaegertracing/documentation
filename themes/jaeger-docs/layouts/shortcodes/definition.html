@@ -1,0 +1,3 @@
+{{- $term := .Get 0 }}
+{{- $definition := index .Site.Data.definitions $term }}
+<p>{{ $definition | markdownify }}</p>
