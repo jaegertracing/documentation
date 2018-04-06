@@ -1,4 +1,4 @@
-HUGO_VERSION = 0.37.1
+HUGO_VERSION = 0.38
 HTMLPROOFER  = bundle exec htmlproofer
 NODE_BIN     = node_modules/.bin
 HUGO_THEME   = jaeger-docs
@@ -10,7 +10,7 @@ NODE_VER     := $(shell node -v | cut -c2- | cut -c1)
 GOOD_NODE     := $(shell if [ $(NODE_VER) -ge 4 ]; then echo true; else echo false; fi)
 
 macos-setup: check-node
-	brew switch hugo $(HUGO_VERSION) && brew link --overwrite hugo
+	scripts/install-hugo.sh $(HUGO_VERSION) macOS
 	npm install
 	(cd $(THEME_DIR) && npm install)
 
