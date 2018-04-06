@@ -7,7 +7,7 @@
 [ci]: https://travis-ci.org/jaegertracing/documentation
 [jaeger]: https://jaegertracing.io/
 
-This repo houses all the assets used to build the Jaeger website, available at https://jaegertracing.io.
+This repo houses all the assets used to build the Jaeger website, available at [https://jaegertracing.io](https://jaegertracing.netlify.com/).
 
 The site is built and hosted by [Netlify](https://www.netlify.com/).
 

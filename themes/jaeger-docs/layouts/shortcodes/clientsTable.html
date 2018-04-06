@@ -1,0 +1,20 @@
+{{- $clients := .Site.Data.clients.clients }}
+{{- $features := .Site.Data.clients.features }}
+<table>
+  <thead>
+    <tr>
+      <th>Language</th>
+      <th>GitHub Repo</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $clients }}
+    <tr>
+      <td>{{ .language }}</td>
+      <td>
+        <a href="https://github.com/{{ .repo }}">{{ .repo }}</a>
+      </td>
+    </tr>
+    {{- end }}
+  </tbody>
+</table>
