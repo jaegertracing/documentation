@@ -68,6 +68,7 @@ $(function () {
     selectors: 'h2,h3,h4',
     smoothScroll: true,
     theme: 'jqueryui',
+    showAndHideOnScroll: false,
     scrollTo: $('.navbar').height()
   }
 
