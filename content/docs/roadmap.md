@@ -1,6 +1,7 @@
 ---
 title: Roadmap
 weight: 10
+menu: docs
 ---
 
 The following is only a selection of some of the major features we plan to implement in the near future (6-12 months).

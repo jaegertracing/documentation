@@ -1,3 +1,4 @@
+<!--
 <aside class="nav">
   {{- range (where .Site.Pages "Section" "docs").ByWeight }}
   {{- $isCurrentPage := eq .Title $.Title }}
@@ -5,5 +6,28 @@
   <h4 class="nav-link is-size-4{{ if $isCurrentPage }} is-active{{ end }}">
     <a href="{{ .Permalink }}">{{ $title }}</a>
   </h4>
+  {{- end }}
+</aside>
+-->
+{{- $currentPage := . -}}
+<aside class="nav">
+  {{- range .Site.Menus.docs -}}
+  {{- if .HasChildren -}}
+  <h4 class="nav-link is-size-4">
+    {{ .Name }}
+  </h4>
+  <ul>
+    {{- range .Children -}}
+    <li>
+      <a href="{{ .URL }}" class="is-size-5">{{ .Title }}</a>
+    </li>
+    {{- end -}}
+  </ul>
+  {{- else -}}
+  {{- $title := cond (isset $currentPage.Params "navtitle") (index $currentPage.Params "navtitle") .Title }}
+  <h4 class="nav-link is-size-4">
+    <a href="{{ .URL }}">{{ $title }}</a>
+  </h4>
+  {{- end -}}
   {{- end }}
 </aside>

@@ -5,10 +5,16 @@ pygmentsCodeFences = true
 pygmentsUseClasses = true
 disableKinds       = ["taxonomy", "taxonomyTerm"]
 canonifyURLs       = true
+sectionPagesMenu   = "docs"
 
 # Disable content taxonomies for now (until there is significantly more content)
 #[taxonomies]
 #  tag = "tags"
+
+[menu]
+  [[menu.docs]]
+    name = "Clients"
+    weight     = 4
 
 [params]
   tagline = "Monitor and troubleshoot transactions in complex distributed systems"

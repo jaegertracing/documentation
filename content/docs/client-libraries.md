@@ -1,6 +1,9 @@
 ---
 title: Client libraries
-weight: 4
+menu:
+  docs:
+    parent: Clients
+    weight: 2
 ---
 
 All Jaeger client libraries support the [OpenTracing APIs](http://opentracing.io). The following resources provide more information about instrumenting your application with OpenTracing:
