@@ -57,7 +57,7 @@ A tutorial / walkthrough is available in the blog post:
 [Take OpenTracing for a HotROD ride][hotrod-tutorial].
 
 It can be run standalone, but requires Jaeger backend to view the
-traces.
+{{< tip "traces" "trace" >}}.
 
 #### Running
 
@@ -92,7 +92,7 @@ Then navigate to `http://localhost:8080`.
 #### Prerequisites
 
 -   You need Go 1.9 or higher installed on your machine.
--   Requires a [running Jaeger backend](#all-in-one-docker-image) to view the traces.
+-   Requires a [running Jaeger backend](#all-in-one-docker-image) to view the {{< tip "traces" "trace" >}}.
 
 ## Client Libraries
 
