@@ -53,9 +53,24 @@ function controlModals() {
   });
 }
 
+function tableOfContents(tocifyOptions) {
+  $("#toc").tocify(tocifyOptions);
+}
+
 $(function () {
   scrollOffset();
   addLinkAnchors();
   navbarToggle();
   controlModals();
+
+  var tocifyOptions = {
+    context: '.content--docs',
+    selectors: 'h2,h3,h4',
+    smoothScroll: true,
+    theme: 'jqueryui',
+    showAndHideOnScroll: false,
+    scrollTo: $('.navbar').height()
+  }
+
+  tableOfContents(tocifyOptions);
 });
