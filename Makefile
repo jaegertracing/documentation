@@ -30,12 +30,20 @@ build-content:
 		--theme $(HUGO_THEME) \
 		--baseURL $(BASE_URL)
 
+build-content-preview:
+	hugo -v \
+		--theme $(HUGO_THEME)
+
 build-assets:
 	(cd $(THEME_DIR) && $(GULP) build)
 
 build: clean build-assets build-content
 
+build-preview: clean build-assets build-content-preview
+
 netlify-build: netlify-setup build
+
+netlify-build-preview: netlify-setup build-preview
 
 dev: check-node
 	$(CONCURRENTLY) "make develop-content" "make develop-assets"

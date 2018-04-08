@@ -136,8 +136,8 @@ clients:
       propagation_uber: yes
       propagation_b3: yes
       propagation_w3c: coming
-      jaeger_debug_id:
-      jaeger_baggage:
+      jaeger_debug_id: when there is no trace
+      jaeger_baggage: no
       standard_tracer_metrics: yes
       standard_rpc_metrics: no
       prometheus_metrics: yes
