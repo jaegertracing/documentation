@@ -1,7 +1,7 @@
 ---
 title: Monitoring Jaeger
 navtitle: Monitoring
-weight: 8
+weight: 7
 menu: docs
 ---
 

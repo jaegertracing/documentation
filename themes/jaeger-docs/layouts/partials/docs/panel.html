@@ -12,20 +12,23 @@
 {{- $currentPage := . -}}
 <aside class="nav">
   {{- range .Site.Menus.docs -}}
+  {{- $isCurrentPage := eq $currentPage.Title .Title }}
   {{- if .HasChildren -}}
   <h4 class="nav-link is-size-4">
     {{ .Name }}
   </h4>
   <ul>
     {{- range .Children -}}
+    {{- $title := cond (isset .Page.Params "navtitle") (index .Page.Params "navtitle") .Title }}
+    {{- $isCurrentPage := eq $currentPage.Title .Title }}
     <li>
-      <a href="{{ .URL }}" class="is-size-5">{{ .Title }}</a>
+      <a href="{{ .URL }}" class="is-size-5{{ if $isCurrentPage }} is-active{{ end }}">{{ $title }}</a>
     </li>
     {{- end -}}
   </ul>
   {{- else -}}
-  {{- $title := cond (isset $currentPage.Params "navtitle") (index $currentPage.Params "navtitle") .Title }}
-  <h4 class="nav-link is-size-4">
+  {{- $title := cond (isset .Page.Params "navtitle") (index .Page.Params "navtitle") .Title }}
+  <h4 class="nav-link is-size-4{{ if $isCurrentPage }} is-active{{ end }}">
     <a href="{{ .URL }}">{{ $title }}</a>
   </h4>
   {{- end -}}

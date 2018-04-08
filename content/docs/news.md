@@ -1,7 +1,7 @@
 ---
 title: Jaeger news
 navtitle: News
-weight: 11
+weight: 10
 menu: docs
 ---
 

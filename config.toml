@@ -5,7 +5,6 @@ pygmentsCodeFences = true
 pygmentsUseClasses = true
 disableKinds       = ["taxonomy", "taxonomyTerm"]
 canonifyURLs       = true
-sectionPagesMenu   = "docs"
 
 # Disable content taxonomies for now (until there is significantly more content)
 #[taxonomies]

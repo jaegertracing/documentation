@@ -1,6 +1,6 @@
 ---
 title: Deployment
-weight: 7
+weight: 6
 menu: docs
 ---
 
