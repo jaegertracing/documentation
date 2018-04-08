@@ -34,6 +34,10 @@ build-content-preview:
 	hugo -v \
 		--theme $(HUGO_THEME)
 
+build-content-preview:
+	hugo -v \
+		--theme $(HUGO_THEME)
+
 build-assets:
 	(cd $(THEME_DIR) && $(GULP) build)
 
