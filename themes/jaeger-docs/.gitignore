@@ -1,3 +1,4 @@
 data/
 node_modules/
-static/
+static/css/style-*.css
+static/js/app-*.js
