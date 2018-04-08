@@ -28,7 +28,11 @@ clean:
 build-content:
 	hugo -v \
 		--theme $(HUGO_THEME) \
-		--baseURL $(BASE_URL)
+        --baseURL $(BASE_URL)
+
+build-content-preview:
+	hugo -v \
+		--theme $(HUGO_THEME)
 
 build-content-preview:
 	hugo -v \
