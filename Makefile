@@ -23,7 +23,11 @@ netlify-setup:
 	(cd $(THEME_DIR) && npm install)
 
 clean:
-	rm -rf public $(THEME_DIR)/data/assetHashes.json $(THEME_DIR)/static
+	rm -rf \
+		public \
+		$(THEME_DIR)/data/assetHashes.json \
+		$(THEME_DIR)/static/css/style-*.css \
+		$(THEME_DIR)/static/js/app-*.js
 
 build-content:
 	hugo -v \
