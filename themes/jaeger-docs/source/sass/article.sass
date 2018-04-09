@@ -26,8 +26,14 @@
 
   &.article--docs, &.article--download
     .content
-      p code
-        color: $syntax-magenta
+      // Styling for code samples inside normal text
+      p, h1, h2, h3, h4 ,h5, h6, li, a
+        code
+          background: #f5f5f5
+          color: black
+          border: 1px solid #e8e8e8
+          border-bottom: 1px solid #e0e0e0
+          padding: 0.2em
 
       code
         background-color: $white-ter
