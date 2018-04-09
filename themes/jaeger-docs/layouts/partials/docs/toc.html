@@ -1,13 +1,4 @@
-{{- $githubUrl := (printf "https://github.com/%s/tree/master/content/%s" .Site.Params.githubRepo .File.Path) -}}
 <div class="toc">
   <h4 class="title is-size-4 toc--title">{{ .Title }}</h4>
-  {{ .TableOfContents }}
-  <!--
-  <a href="{{ $githubUrl }}" class="button is-medium is-shadowless">
-    <span class="icon is-medium">
-      <i class="fab fa-github"></i>
-    </span>
-    <span>Edit this page</span>
-  </a>
-  -->
+  <div id="toc"></div>
 </div>
