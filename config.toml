@@ -10,11 +10,6 @@ canonifyURLs       = true
 #[taxonomies]
 #  tag = "tags"
 
-[menu]
-  [[menu.docs]]
-    name = "Clients"
-    weight     = 4
-
 [params]
   tagline = "Monitor and troubleshoot transactions in complex distributed systems"
   githubRepo     = "jaegertracing/jaeger"
