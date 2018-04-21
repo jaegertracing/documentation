@@ -1,3 +1,4 @@
+{{- $menuPages     := .Site.Menus.docs }}
 {{- $githubRepo    := .Site.Params.githubRepo }}
 {{- $twitterHandle := .Site.Params.twitterHandle }}
 {{- $gitterHandle  := .Site.Params.gitterHandle }}
@@ -13,8 +14,13 @@
           Docs
         </h4>
         <ul>
-          {{- range (where .Site.Pages "Section" "docs").ByParam "rank" }}
-          <li><i class="fas fa-caret-right"></i><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+          {{- range $menuPages }}
+          <li>
+            <i class="fas fa-caret-right"></i>
+            <a href="{{ .URL }}">
+              {{ cond (isset .Page.Params "navtitle") (.Page.Params.navtitle) .Title }}
+            </a>
+          </li>
           {{- end }}
         </ul>
       </div>
