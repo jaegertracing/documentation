@@ -1,4 +1,5 @@
-{{- $githubRepo := .Site.Params.githubRepo }}
+{{- $menuPages     := .Site.Menus.docs }}
+{{- $githubRepo    := .Site.Params.githubRepo }}
 {{- $twitterHandle := .Site.Params.twitterHandle }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
@@ -27,9 +28,9 @@
             Docs
           </a>
           <div class="navbar-dropdown is-boxed">
-            {{- range (where .Site.Pages "Section" "docs").ByParam "rank" }}
-            <a class="navbar-item" href="{{ .Permalink }}">
-              {{ cond (isset .Params "navtitle") (.Params.navtitle) .Title }}
+            {{- range $menuPages }}
+            <a class="navbar-item" href="{{ .URL }}">
+              {{ cond (isset .Page.Params "navtitle") (.Page.Params.navtitle) .Title }}
             </a>
             {{- end }}
           </div>
