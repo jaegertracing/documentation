@@ -26,8 +26,14 @@ changes ahead of time will make the contribution process smooth for everyone.
 Once we've discussed your changes and you've made your updates, then open your PR. Your
 pull request is most likely to be accepted if it:
 
-* Has a [good commit
-  message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
+* Has a [good commit message](https://chris.beams.io/posts/git-commit/):
+    * Separate subject from body with a blank line
+    * Limit the subject line to 50 characters
+    * Capitalize the subject line
+    * Do not end the subject line with a period
+    * Use the imperative mood in the subject line
+    * Wrap the body at 72 characters
+    * Use the body to explain _what_ and _why_ instead of _how_
 * Uses the active voice (vs. [passive voice](https://www.grammarly.com/blog/a-scary-easy-way-to-help-you-find-passive-voice/)) to make it clear when the user has to perform an action and when actions happen automatically.
 * Has been spellchecked and uses proper [grammar](https://www.grammarly.com/).
 * Has been written in plain language and avoids jargon. Remember, the people reading the documentation know much less about the project than you do.
