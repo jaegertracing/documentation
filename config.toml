@@ -6,8 +6,9 @@ pygmentsUseClasses = true
 disableKinds       = ["taxonomy", "taxonomyTerm"]
 canonifyURLs       = true
 
-# Output HTML and JSON (for the search index)
 [outputs]
+  page = ["HTML"]
+  # Output HTML and JSON (for the search index)
   home = ["HTML", "JSON"]
 
 # Disable content taxonomies for now (until there is significantly more content)
