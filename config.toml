@@ -6,17 +6,21 @@ pygmentsUseClasses = true
 disableKinds       = ["taxonomy", "taxonomyTerm"]
 canonifyURLs       = true
 
+# Output HTML and JSON (for the search index)
+[outputs]
+  home = ["HTML", "JSON"]
+
 # Disable content taxonomies for now (until there is significantly more content)
 #[taxonomies]
 #  tag = "tags"
 
 [params]
-  tagline = "Monitor and troubleshoot transactions in complex distributed systems"
-  githubRepo     = "jaegertracing/jaeger"
-  twitterHandle  = "JaegerTracing"
-  mediumHandle   = "jaegertracing"
-  gitterHandle   = "jaegertracing"
-  openGraphImage = "img/jaeger-icon-color.png"
+  tagline         = "Monitor and troubleshoot transactions in complex distributed systems"
+  githubRepo      = "jaegertracing/jaeger"
+  twitterHandle   = "JaegerTracing"
+  mediumHandle    = "jaegertracing"
+  gitterHandle    = "jaegertracing"
+  openGraphImage  = "img/jaeger-icon-color.png"
   newsletterTitle = "April 2018 project update"
   newsletterURL   = "https://medium.com/jaegertracing/april-2018-newsletter-bad00a68080e"
 
