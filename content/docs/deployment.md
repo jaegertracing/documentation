@@ -96,6 +96,14 @@ Collectors require a persistent storage backend. Cassandra and ElasticSearch are
 
 The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, and `memory` (only for all-in-one binary).
 
+### Memory
+
+The in-memory storage is not intended for production workloads. It's intended as a simple solution to get started quickly and
+data will be lost once the process is gone.
+
+By default, there's no limit in the amount of traces stored in memory but a limit can be established by passing an
+integer value via `--memory.max-traces`.
+
 ### Cassandra
 
 Supported versions: 3.4+
