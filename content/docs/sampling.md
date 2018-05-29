@@ -35,7 +35,19 @@ Example `strategies.json`
     {
       "service": "foo",
       "type": "probabilistic",
-      "param": 0.8
+      "param": 0.8,
+      "operation_strategies": [
+        {
+          "operation": "op1",
+          "type": "probabilistic",
+          "param": 0.2
+        },
+        {
+          "operation": "op2",
+          "type": "probabilstic",
+          "param": 0.4
+        }
+      ]
     },
     {
       "service": "bar",
@@ -50,4 +62,6 @@ Example `strategies.json`
 }
 ```
 
-`service_strategies` defines service specific sampling strategies. There are 2 types of strategies possible: `probabilistic` and `ratelimiting` which are described [above](#client-sampling-configuration). `default_strategy` defines the catch-all sampling strategy that is propagated if the service is not included as part of `service_strategies`.
+`service_strategies` defines service specific sampling strategies and `operation_strategies` defines operation specific sampling strategies. There are 2 types of strategies possible: `probabilistic` and `ratelimiting` which are described [above](#client-sampling-configuration) (NOTE: `ratelimiting` is not supported for `operation_strategies`). `default_strategy` defines the catch-all sampling strategy that is propagated if the service is not included as part of `service_strategies`.
+
+In the above example, all service `foo` operations are sampled probabilistically with a probability of 0.8 except `op1` and `op2` which are probabilistically sampled with a probability of 0.2 and 0.4 respectively. All operations for service `bar` are ratelimited at 5 traces per second. Any other service is probabilistically sampled with a probability of 0.5.

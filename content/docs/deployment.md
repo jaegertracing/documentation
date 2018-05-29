@@ -167,7 +167,7 @@ ElasticSearch does not require initialization other than
 [installing and running ElasticSearch](https://www.elastic.co/downloads/elasticsearch).
 Once it is running, pass the correct configuration values to the Jaeger collector and query service.
 
-See the [README](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/es) for an in-depth overview of how Jaeger uses ElasticSearch for storage.
+See the [README](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/es/README.md) for an in-depth overview of how Jaeger uses ElasticSearch for storage.
 
 #### Shards and Replicas for ElasticSearch indices
 
