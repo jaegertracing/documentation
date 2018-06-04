@@ -291,38 +291,38 @@ clients:
     repo: jaegertracing/jaeger-client-csharp
     features:
       report_jaeger_thrift_udp: yes
-      report_jaeger_thrift_http:
+      report_jaeger_thrift_http: yes
       report_zipkin_thrift_http: no
       propagation_uber: yes
-      propagation_b3: no
+      propagation_b3: yes
       propagation_w3c: coming
-      jaeger_debug_id:
-      jaeger_baggage:
-      standard_tracer_metrics:
+      jaeger_debug_id: when there is no trace
+      jaeger_baggage: no
+      standard_tracer_metrics: yes
       standard_rpc_metrics: no
       prometheus_metrics:
-      configuration:
-      config_tracer_tags:
-      remote_sampler:
-      adaptive_sampler:
-      baggage_restriction:
-      env_JAEGER_SERVICE_NAME: no
-      env_JAEGER_AGENT_HOST: no
-      env_JAEGER_AGENT_PORT: no
-      env_JAEGER_REPORTER_LOG_SPANS: no
-      env_JAEGER_REPORTER_MAX_QUEUE_SIZE: no
-      env_JAEGER_REPORTER_FLUSH_INTERVAL: no
-      env_JAEGER_SAMPLER_TYPE: no
-      env_JAEGER_SAMPLER_PARAM: no
-      env_JAEGER_SAMPLER_MANAGER_HOST_PORT: no
-      env_TRACER_TAGS: no
+      configuration: yes
+      config_tracer_tags: yes
+      remote_sampler: yes
+      adaptive_sampler: yes
+      baggage_restriction: coming
+      env_JAEGER_SERVICE_NAME: yes
+      env_JAEGER_AGENT_HOST: yes
+      env_JAEGER_AGENT_PORT: yes
+      env_JAEGER_REPORTER_LOG_SPANS: yes
+      env_JAEGER_REPORTER_MAX_QUEUE_SIZE: yes
+      env_JAEGER_REPORTER_FLUSH_INTERVAL: yes
+      env_JAEGER_SAMPLER_TYPE: yes
+      env_JAEGER_SAMPLER_PARAM: yes
+      env_JAEGER_SAMPLER_MANAGER_HOST_PORT: yes
+      env_TRACER_TAGS: yes
       env_JAEGER_DISABLED: no
       env_JAEGER_RPC_METRICS: no
       env_JAEGER_SAMPLER_MAX_OPERATIONS: no
       env_JAEGER_SAMPLER_REFRESH_INTERVAL: no
-      env_JAEGER_ENDPOINT: no
-      env_JAEGER_AUTH_TOKEN: no
-      env_JAEGER_USER: no
-      env_JAEGER_PASSWORD: no
-      env_JAEGER_PROPAGATION: no
+      env_JAEGER_ENDPOINT: yes
+      env_JAEGER_AUTH_TOKEN: yes
+      env_JAEGER_USER: yes
+      env_JAEGER_PASSWORD: yes
+      env_JAEGER_PROPAGATION: yes
       env_JAEGER_DISABLE_GLOBAL_TRACER: no
