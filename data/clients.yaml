@@ -84,7 +84,6 @@ featureGroups:
     - name: env_JAEGER_PROPAGATION
       description: "`JAEGER_PROPAGATION`"
 
-
 clients:
   - language: Go
     repo: jaegertracing/jaeger-client-go
@@ -125,7 +124,6 @@ clients:
       env_JAEGER_PASSWORD: no
       env_JAEGER_PROPAGATION: no
 
-
   - language: Java
     repo: jaegertracing/jaeger-client-java
     features:
@@ -164,7 +162,6 @@ clients:
       env_JAEGER_USER: yes
       env_JAEGER_PASSWORD: yes
       env_JAEGER_PROPAGATION: yes
-
 
   - language: Node.js
     repo: jaegertracing/jaeger-client-node
@@ -205,7 +202,6 @@ clients:
       env_JAEGER_PASSWORD: no
       env_JAEGER_PROPAGATION: no
 
-
   - language: Python
     repo: jaegertracing/jaeger-client-python
     features:
@@ -245,7 +241,6 @@ clients:
       env_JAEGER_PASSWORD: no
       env_JAEGER_PROPAGATION: no
 
-
   - language: C++
     repo: jaegertracing/jaeger-client-cpp
     features:
@@ -284,7 +279,6 @@ clients:
       env_JAEGER_USER: no
       env_JAEGER_PASSWORD: no
       env_JAEGER_PROPAGATION: no
-
 
   - language: C#
     repo: jaegertracing/jaeger-client-csharp
