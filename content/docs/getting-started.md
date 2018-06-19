@@ -62,6 +62,17 @@ It can be run standalone, but requires Jaeger backend to view the
 
 #### Running
 
+###### From Source
+```bash
+mkdir -p $GOPATH/src/github.com/jaegertracing
+cd $GOPATH/src/github.com/jaegertracing
+git clone git@github.com:jaegertracing/jaeger.git jaeger
+cd jaeger
+make install
+cd examples/hotrod
+go run ./main.go all
+```
+##### From docker
 ```bash
 $ docker run --rm -it \
   --link jaeger \
