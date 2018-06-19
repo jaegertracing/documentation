@@ -62,6 +62,7 @@ It can be run standalone, but requires Jaeger backend to view the
 
 #### Running
 
+##### From Source
 ```bash
 mkdir -p $GOPATH/src/github.com/jaegertracing
 cd $GOPATH/src/github.com/jaegertracing
@@ -70,6 +71,14 @@ cd jaeger
 make install
 cd examples/hotrod
 go run ./main.go all
+```
+##### From docker
+```bash
+$ docker run --rm -it \
+  --link jaeger \
+  -p8080-8083:8080-8083 \
+  jaegertracing/example-hotrod:latest \
+  --jaeger-agent.host-port=jaeger:6831
 ```
 
 Then navigate to `http://localhost:8080`.
