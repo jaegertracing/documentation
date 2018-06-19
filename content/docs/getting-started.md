@@ -62,7 +62,7 @@ It can be run standalone, but requires Jaeger backend to view the
 
 #### Running
 
-###### From Source
+##### From Source
 ```bash
 mkdir -p $GOPATH/src/github.com/jaegertracing
 cd $GOPATH/src/github.com/jaegertracing
