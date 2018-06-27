@@ -16,7 +16,7 @@ This image, designed for quick local testing, launches the Jaeger UI, collector,
 The simplest way to start the all in one docker image is to use the pre-built image published to DockerHub (a single command line).
 
 ```bash
-$ docker run -d -e \
+$ docker run -d -e --name jaeger \
   COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
   -p 5775:5775/udp \
   -p 6831:6831/udp \
