@@ -7,8 +7,8 @@ THEME_DIR    := themes/$(HUGO_THEME)
 GULP         := $(NODE_BIN)/gulp
 CONCURRENTLY := $(NODE_BIN)/concurrently
 WRITE_GOOD   := $(NODE_BIN)/write-good
-NODE_VER     := $(shell node -v | cut -c2- | cut -c1)
-GOOD_NODE     := $(shell if [ $(NODE_VER) -ge 4 ]; then echo true; else echo false; fi)
+NODE_VER     := $(shell node -v | cut -c2- | cut -d. -f1)
+GOOD_NODE    := $(shell if [ $(NODE_VER) -ge 4 ]; then echo true; else echo false; fi)
 
 macos-setup: check-node
 	scripts/install-hugo.sh $(HUGO_VERSION) macOS
@@ -38,7 +38,7 @@ build-content-preview:
 	hugo -v \
 		--theme $(HUGO_THEME)
 
-build-assets:
+build-assets: check-node
 	(cd $(THEME_DIR) && $(GULP) build)
 
 build: clean build-assets build-content
@@ -49,7 +49,7 @@ netlify-build: netlify-setup build
 
 netlify-build-preview: netlify-setup build-preview
 
-dev: check-node
+dev:
 	$(CONCURRENTLY) "make develop-content" "make develop-assets"
 
 develop-content: build-assets
