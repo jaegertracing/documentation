@@ -17,6 +17,30 @@ There are orchestration templates for running Jaeger with:
   * Kubernetes: [github.com/jaegertracing/jaeger-kubernetes](https://github.com/jaegertracing/jaeger-kubernetes),
   * OpenShift: [github.com/jaegertracing/jaeger-openshift](https://github.com/jaegertracing/jaeger-openshift).
 
+## Configuration Options
+
+Jaeger binaries can be configured in a number of ways (in the order of decreasing priority):
+
+  * command line arguments,
+  * environment variables,
+  * configuration files in JSON, TOML, YAML, HCL, or Java properties formats.
+
+To see the complete list of options, run the binary with `help` command. Options that are specific to a certain storage backend are only listed if the storage type is selected. For example, to see all available options in the Collector with Cassandra storage:
+
+```
+$ docker run --rm \
+    -e SPAN_STORAGE_TYPE=cassandra \
+    jaegertracing/jaeger-collector \
+    /go/bin/collector-linux help
+```
+
+In order to provide configuration parameters via environment variables, find the respective command line option and convert its name to UPPER_SNAKE_CASE, for example:
+
+Command line option                | Environment variable
+-----------------------------------|-------------------------------
+`--cassandra.connections-per-host` | `CASSANDRA_CONNECTIONS_PER_HOST`
+`--metrics-backend`                | `METRICS_BACKEND`
+
 ## Agent
 
 Jaeger client libraries expect **jaeger-agent** process to run locally on each host.
