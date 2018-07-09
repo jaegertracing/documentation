@@ -17,6 +17,30 @@ There are orchestration templates for running Jaeger with:
   * Kubernetes: [github.com/jaegertracing/jaeger-kubernetes](https://github.com/jaegertracing/jaeger-kubernetes),
   * OpenShift: [github.com/jaegertracing/jaeger-openshift](https://github.com/jaegertracing/jaeger-openshift).
 
+## Configuration Options
+
+Jaeger binaries can be configured in a number of ways (in the order of decreasing priority):
+
+  * command line arguments,
+  * environment variables,
+  * configuration files in JSON, TOML, YAML, HCL, or Java properties formats.
+
+To see the complete list of options, run the binary with `help` command. Options that are specific to a certain storage backend are only listed if the storage type is selected. For example, to see all available options in the Collector with Cassandra storage:
+
+```
+$ docker run --rm \
+    -e SPAN_STORAGE_TYPE=cassandra \
+    jaegertracing/jaeger-collector \
+    /go/bin/collector-linux help
+```
+
+In order to provide configuration parameters via environment variables, find the respective command line option and convert its name to UPPER_SNAKE_CASE, for example:
+
+Command line option                | Environment variable
+-----------------------------------|-------------------------------
+`--cassandra.connections-per-host` | `CASSANDRA_CONNECTIONS_PER_HOST`
+`--metrics-backend`                | `METRICS_BACKEND`
+
 ## Agent
 
 Jaeger client libraries expect **jaeger-agent** process to run locally on each host.
@@ -86,7 +110,7 @@ At default settings the collector exposes the following ports:
 Port  | Protocol | Function
 ----- | -------  | ---
 14267 | TChannel | used by **jaeger-agent** to send spans in jaeger.thrift format
-14268 | HTTP     | can accept spans directly from clients in jaeger.thrift format
+14268 | HTTP     | can accept spans directly from clients in jaeger.thrift format over binary thrift protocol
 9411  | HTTP     | can accept Zipkin spans in JSON or Thrift (disabled by default)
 
 
@@ -95,6 +119,14 @@ Port  | Protocol | Function
 Collectors require a persistent storage backend. Cassandra and ElasticSearch are the primary supported storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
 The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, and `memory` (only for all-in-one binary).
+
+### Memory
+
+The in-memory storage is not intended for production workloads. It's intended as a simple solution to get started quickly and
+data will be lost once the process is gone.
+
+By default, there's no limit in the amount of traces stored in memory but a limit can be established by passing an
+integer value via `--memory.max-traces`.
 
 ### Cassandra
 

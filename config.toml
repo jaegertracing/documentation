@@ -17,8 +17,8 @@ canonifyURLs       = true
   mediumHandle   = "jaegertracing"
   gitterHandle   = "jaegertracing"
   openGraphImage = "img/jaeger-icon-color.png"
-  newsletterTitle = "April 2018 project update"
-  newsletterURL   = "https://medium.com/jaegertracing/april-2018-newsletter-bad00a68080e"
+  newsletterTitle = "June 2018 project update"
+  newsletterURL   = "https://medium.com/jaegertracing/june-2018-newsletter-429ee7c5f4b"
 
   [navbar]
     [[links]]

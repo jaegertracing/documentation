@@ -16,8 +16,8 @@ This image, designed for quick local testing, launches the Jaeger UI, collector,
 The simplest way to start the all in one docker image is to use the pre-built image published to DockerHub (a single command line).
 
 ```bash
-$ docker run -d -e \
-  COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
+$ docker run -d --name jaeger \
+  -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
   -p 5775:5775/udp \
   -p 6831:6831/udp \
   -p 6832:6832/udp \
@@ -62,6 +62,7 @@ It can be run standalone, but requires Jaeger backend to view the
 
 #### Running
 
+##### From Source
 ```bash
 mkdir -p $GOPATH/src/github.com/jaegertracing
 cd $GOPATH/src/github.com/jaegertracing
@@ -70,6 +71,14 @@ cd jaeger
 make install
 cd examples/hotrod
 go run ./main.go all
+```
+##### From docker
+```bash
+$ docker run --rm -it \
+  --link jaeger \
+  -p8080-8083:8080-8083 \
+  jaegertracing/example-hotrod:latest \
+  --jaeger-agent.host-port=jaeger:6831
 ```
 
 Then navigate to `http://localhost:8080`.
