@@ -31,7 +31,7 @@ To see the complete list of options, run the binary with `help` command. Options
 $ docker run --rm \
     -e SPAN_STORAGE_TYPE=cassandra \
     jaegertracing/jaeger-collector \
-    /go/bin/collector-linux help
+    help
 ```
 
 In order to provide configuration parameters via environment variables, find the respective command line option and convert its name to UPPER_SNAKE_CASE, for example:
