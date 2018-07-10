@@ -31,7 +31,7 @@ To see the complete list of options, run the binary with `help` command. Options
 $ docker run --rm \
     -e SPAN_STORAGE_TYPE=cassandra \
     jaegertracing/jaeger-collector \
-    /go/bin/collector-linux help
+    help
 ```
 
 In order to provide configuration parameters via environment variables, find the respective command line option and convert its name to UPPER_SNAKE_CASE, for example:
@@ -82,7 +82,7 @@ docker run \
   -p6832:6832/udp \
   -p5778:5778/tcp \
   jaegertracing/jaeger-agent \
-  /go/bin/agent-linux --collector.host-port=jaeger-collector.jaeger-infra.svc:14267
+  --collector.host-port=jaeger-collector.jaeger-infra.svc:14267
 ```
 
 In the future we will support different service discovery systems to dynamically load balance
@@ -102,7 +102,7 @@ go run ./cmd/collector/main.go -h
 or, if you don't have the source code
 
 ```
-docker run -it --rm jaegertracing/jaeger-collector /go/bin/collector-linux -h
+docker run -it --rm jaegertracing/jaeger-collector -h
 ```
 
 At default settings the collector exposes the following ports:
