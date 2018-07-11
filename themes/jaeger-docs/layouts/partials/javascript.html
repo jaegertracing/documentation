@@ -1,7 +1,7 @@
-{{- $jsFilename := index .Site.Data.assetHashes "app.js" }}
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script defer src="/js/jquery-ui-1.9.1.custom.min.js"></script>
-<script defer src="/js/anchor.min.js"></script>
-<script defer src="/js/jquery.tocify.min.js"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-<script defer src="/js/{{ $jsFilename }}"></script>
+{{- $jsFiles := (slice "jquery-ui-1.9.1.custom.min.js" "anchor.min.js" "jquery.tocify.min.js" "app.js") }}
+{{- range $jsFiles }}
+{{- $js := resources.Get (printf "js/%s" .) | minify | fingerprint }}
+<script defer src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+{{- end }}
