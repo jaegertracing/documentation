@@ -31,42 +31,13 @@
                 </span>
               </a>
               -->
-              <script type="text/javascript">
-                  function get_latest_post(){
-                    fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/jaegertracing')
-                     .then((res) => res.json())
-                     .then((data) => {
-                        const res = data.items
-                        var link = ""
-                        var title = ""
 
-                        for(var item of res){
-                          if(item.title.includes("Newsletter")){
-                            console.log(item.title)
-                            title = item.title
-                            link = item.link
-                            break
-                          }
-                        }
-                        if(title === ""){
-                          title = (new Date()).getFullYear() + " Newsletter"
-                          link = "https://medium.com/jaegertracing"
-                        }
-                        title = title.replace("Newsletter", "Project Update")
-                        // console.log(link)
-                        document.getElementById("newsletter-title").innerHTML = title
-                        var a = document.getElementById("newsletter-link")
-                        a.href = link
-                      })
-                  }
-                  get_latest_post();
-              </script>
-              <a id = "newsletter-link" href="" target="_blank" class="button is-medium is-success is-uppercase is-outlined has-text-weight-bold">
+              <a id = "newsletter-link" href="{{ .Site.Params.newsletterURL }}" target="_blank" class="button is-medium is-success is-uppercase is-outlined has-text-weight-bold">
                 <span class="icon">
                   <i class="fas fa-bullhorn"></i>
                 </span>
                 <span id = "newsletter-title">
-                    <!-- {{ .Site.Params.newsletterTitle }} -->
+                    {{ .Site.Params.newsletterTitle }}
                 </span>
               </a>
             </div>

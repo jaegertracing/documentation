@@ -1,0 +1,130 @@
+<section class="section section-news-stand">
+  <style scoped>
+  .section-news-stand{
+      background-color: #f5f5f5;
+  }
+  .center{
+    text-align: center;
+  }
+
+  .container_blog {
+    width: 100%;
+    overflow-x: auto;
+}
+  .blog__slider {
+      list-style: none;
+      padding: 0;
+      display: inline-flex;
+  }
+  .blog__post{
+    background-color: #fff;
+    margin: 3rem 1rem;
+    -webkit-box-shadow: 9px 9px 20px 0px rgba(0,0,0, .4);
+    -moz-box-shadow: 9px 9px 20px 0px rgba(0,0,0, .4);
+    box-shadow: 9px 9px 20px 0px rgba(0,0,0, .4);
+    padding: 14px;
+
+    width: 300px;
+    height: 500px;
+    flex-shrink: 0;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &.blog__post:not(:last-of-type) {
+      margin-right: 12px;
+    }
+  }
+
+  .blog__topImg{
+    padding:10px;
+    max-width: 200px;
+    max-height:150px;
+    display: block;
+    margin: 0 auto;
+  }
+  .blog__content{
+      color:black;
+      padding: .8rem;
+   }
+   .blog__preview{
+      font-size: .95rem;
+      font-weight: 300;
+   }
+   .blog__title{
+      margin-top: 0;
+      font-size: 1.4rem;
+   }
+   .blog__intro{
+      line-height: 1.5;
+   }
+   .blog__info{
+      font-weight: 300;
+   }
+   .blog__author{
+      font-size: .9rem;
+   }
+   .blog__date{
+      font-size: .85rem;
+   }
+
+</style>
+  <div class="blog">
+    <script type="text/javascript">
+        function get_latest_post(){
+          fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/jaegertracing')
+           .then((res) => res.json())
+           .then((data) => {
+              const res = data.items
+              const posts = res.filter(item => item.categories.length > 0)
+              // Functions to create a short text out of whole blog's content
+              function toText(node) {
+                 let tag = document.createElement('div')
+                 tag.innerHTML = node
+                 node = tag.innerText
+                 return node
+              }
+              function shortenText(text,startingPoint ,maxLength) {
+                 return text.length > maxLength?
+                 text.slice(startingPoint, maxLength):
+                 text
+              }
+
+              // Put things in right spots of markup
+              let output = '';
+              for(var i = 0; i<posts.length; i++){
+                console.log(posts[i].link)
+                 output += `
+                 <li class="blog__post">
+                    <a href="${posts[i].link}">
+                       <img style="max-width: 100%;" src="${posts[i].thumbnail}" class="blog__topImg"></img>
+                       <div class="blog__content">
+                          <div class="blog_preview">
+                             <h2 class="blog__title">${shortenText(posts[i].title, 0, 30)+ '...'}</h2>
+                             <p class="blog__intro">${'...' + shortenText(toText(posts[i].content),60, 300)+ '...'}</p>
+                          </div>
+                          <hr>
+                          <div class="blog__info">
+                             <span class="blog__author">${posts[i].author}</span>
+                             <span class="blog__date">${shortenText(posts[i].pubDate,0 ,10)}</span>
+                          </div>
+                       </div>
+                    <a/>
+                 </li>`
+
+                }
+                document.querySelector('.blog__slider').innerHTML = output
+          })
+        }
+        get_latest_post();
+    </script>
+
+    <h1 class="title is-spaced center">Latest News on Jaeger</h1>
+    <div class="container_blog">
+      <ul class="blog__slider">
+        Posts go here
+      </ul>
+    </div>
+  </div>
+</section>

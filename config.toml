@@ -18,8 +18,8 @@ theme              = "jaeger-docs"
   mediumHandle   = "jaegertracing"
   gitterHandle   = "jaegertracing"
   openGraphImage = "img/jaeger-icon-color.png"
-  # newsletterTitle = "June 2018 project update"
-  # newsletterURL   = "https://medium.com/jaegertracing/june-2018-newsletter-429ee7c5f4b"
+  newsletterTitle = "June 2018 project update"
+  newsletterURL   = "https://medium.com/jaegertracing/june-2018-newsletter-429ee7c5f4b"
 
   [navbar]
     [[links]]
