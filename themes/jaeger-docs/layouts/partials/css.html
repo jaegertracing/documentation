@@ -1,4 +1,4 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-{{- $cssOpts := (dict "targetPath" "css/style.css" "enableSourceMaps" true) }}
+{{- $cssOpts := cond (.Site.IsServer) (dict "targetPath" "css/style.css") (dict "targetPath" "css/style.css" "outputStyle" "compressed" "enableSourceMaps" true) }}
 {{- $css := resources.Get "sass/style.sass" | toCSS $cssOpts | minify | fingerprint }}
 <link rel="stylesheet" media="screen" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}">

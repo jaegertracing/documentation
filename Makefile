@@ -13,12 +13,24 @@ clean:
 
 build-content:
 	hugo -v \
+<<<<<<< HEAD
 	--theme $(HUGO_THEME) \
         --baseURL $(BASE_URL)
 
 build-content-preview:
 	hugo -v \
 	--theme $(HUGO_THEME)
+=======
+        --baseURL $(BASE_URL)
+
+build-content-preview:
+	hugo -v
+
+build-assets: check-node
+	(cd $(THEME_DIR) && $(GULP) build)
+
+build: clean build-assets build-content
+>>>>>>> 60cc1b7... Fix broken build (#106)
 
 build: clean build-content
 
@@ -26,7 +38,10 @@ build-preview: clean build-content-preview
 
 develop:
 	hugo server \
+<<<<<<< HEAD
 	--theme $(HUGO_THEME) \
+=======
+>>>>>>> 60cc1b7... Fix broken build (#106)
         --buildDrafts \
         --buildFuture \
         --disableFastRender \

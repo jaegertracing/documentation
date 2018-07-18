@@ -1,6 +1,5 @@
 node_modules/
 public/
-resources/
 .DS_Store
 .bundle/
 vendor/bundle/
