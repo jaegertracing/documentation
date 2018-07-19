@@ -1,76 +1,35 @@
-HUGO_VERSION = 0.38
+HUGO_VERSION = 0.43
 HTMLPROOFER  = bundle exec htmlproofer
-NODE_BIN     = node_modules/.bin
 HUGO_THEME   = jaeger-docs
 BASE_URL     = https://www.jaegertracing.io
 THEME_DIR    := themes/$(HUGO_THEME)
-GULP         := $(NODE_BIN)/gulp
-CONCURRENTLY := $(NODE_BIN)/concurrently
-WRITE_GOOD   := $(NODE_BIN)/write-good
-NODE_VER     := $(shell node -v | cut -c2- | cut -d. -f1)
-GOOD_NODE    := $(shell if [ $(NODE_VER) -ge 4 ]; then echo true; else echo false; fi)
 
-macos-setup: check-node
+macos-setup:
 	scripts/install-hugo.sh $(HUGO_VERSION) macOS
-	npm install
-	(cd $(THEME_DIR) && npm install)
-
-.PHONY: check-node
-check-node:
-	@echo Build requires Node 4.x or higher && $(GOOD_NODE)
-
-netlify-setup:
-	(cd $(THEME_DIR) && npm install)
 
 clean:
-	rm -rf \
-		public \
-		$(THEME_DIR)/data/assetHashes.json \
-		$(THEME_DIR)/static/css/style-*.css \
-		$(THEME_DIR)/static/js/app-*.js
+	rm -rf public
 
 build-content:
-	hugo -v \
-        --baseURL $(BASE_URL)
+	hugo -v --baseURL $(BASE_URL)
 
-build-content-preview:
-	hugo -v
+build: clean build-content
 
-build-assets: check-node
-	(cd $(THEME_DIR) && $(GULP) build)
-
-build: clean build-assets build-content
-
-build-preview: clean build-assets build-content-preview
-
-netlify-build: netlify-setup build
-
-netlify-build-preview: netlify-setup build-preview
-
-dev:
-	$(CONCURRENTLY) "make develop-content" "make develop-assets"
-
-develop-content: build-assets
+develop:
 	hugo server \
         --buildDrafts \
         --buildFuture \
         --disableFastRender \
         --ignoreCache
 
-develop-assets:
-	(cd $(THEME_DIR) && $(GULP) dev)
-
 htmlproofer-setup:
 	gem install bundler \
         --no-rdoc \
         --no-ri
 	NOKOGIRI_USE_SYSTEM_LIBRARIES=true bundle install \
-		--path vendor/bundle
+	--path vendor/bundle
 
 htmlproofer: build
 	$(HTMLPROOFER) \
         --empty-alt-ignore \
         public
-
-write-good:
-	$(WRITE_GOOD) content/**/*.md
