@@ -1,10 +1,10 @@
 [build]
 publish = "public"
-command = "make build"
+command = "hugo"
 
 [context.deploy-preview]
 publish = "public"
-command = "make build-preview"
+command = "hugo --baseURL $DEPLOY_PRIME_URL"
 
 [context.production.environment]
 HUGO_VERSION = "0.44"

@@ -13,12 +13,7 @@ clean:
 build-content:
 	hugo -v --baseURL $(BASE_URL)
 
-build-content-preview:
-	hugo -v --baseURL $(DEPLOY_PRIME_URL)
-
 build: clean build-content
-
-build-preview: clean build-content-preview
 
 develop:
 	hugo server \
