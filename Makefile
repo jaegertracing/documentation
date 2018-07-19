@@ -31,12 +31,10 @@ clean:
 
 build-content:
 	hugo -v \
-		--theme $(HUGO_THEME) \
         --baseURL $(BASE_URL)
 
 build-content-preview:
-	hugo -v \
-		--theme $(HUGO_THEME)
+	hugo -v
 
 build-assets: check-node
 	(cd $(THEME_DIR) && $(GULP) build)
@@ -54,7 +52,6 @@ dev:
 
 develop-content: build-assets
 	hugo server \
-		--theme $(HUGO_THEME) \
         --buildDrafts \
         --buildFuture \
         --disableFastRender \
