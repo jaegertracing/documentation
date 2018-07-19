@@ -18,8 +18,6 @@ build-content-preview:
 
 build: clean build-content
 
-build: clean build-content
-
 build-preview: clean build-content-preview
 
 develop:
