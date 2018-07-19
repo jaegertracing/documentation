@@ -4,12 +4,6 @@ This repo houses all the assets used to build the Jaeger website, available at h
 
 The site is built and hosted by [Netlify](https://www.netlify.com/).
 
-## Requirements
-
-In order to develop the Jaeger site locally, you'll need to have the following installed:
-
-* [Node.js](https://nodejs.org/en/)
-
 ## Setup
 
 ### macOS
@@ -17,10 +11,10 @@ In order to develop the Jaeger site locally, you'll need to have the following i
 To develop the website on macOS, you'll first need to have [Homebrew](https://brew.sh) installed. Once you have Homebrew:
 
 ```bash
-$ make macos-setup
+$ brew install hugo
 ```
 
-This will install [Hugo](https://gohugo.io), the site's static site generator, and all necessary Node.js assets.
+This will install [Hugo](https://gohugo.io), the site's static site generator.
 
 ### Linux
 
