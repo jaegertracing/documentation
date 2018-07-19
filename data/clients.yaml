@@ -21,7 +21,7 @@ featureGroups:
     - name: jaeger_baggage
       description: Accept baggage from `jaeger-baggage` headers
     - name: 128bit_trace_id
-      description: 128bit Trace ID
+      description: Support for 128bit Trace ID
 
   - description: Metrics
     features:
