@@ -20,6 +20,8 @@ featureGroups:
       description: Support inbound `jaeger-debug-id` header
     - name: jaeger_baggage
       description: Accept baggage from `jaeger-baggage` headers
+    - name: 128bit_trace_id
+      description: 128bit Trace ID
 
   - description: Metrics
     features:
@@ -83,6 +85,8 @@ featureGroups:
       description: "`JAEGER_PASSWORD`"
     - name: env_JAEGER_PROPAGATION
       description: "`JAEGER_PROPAGATION`"
+    - name: JAEGER_TRACEID_128BIT
+      description: "`JAEGER_TRACEID_128BIT`"
 
 clients:
   - language: Go
@@ -123,6 +127,8 @@ clients:
       env_JAEGER_USER: no
       env_JAEGER_PASSWORD: no
       env_JAEGER_PROPAGATION: no
+      128bit_trace_id: yes
+      JAEGER_TRACEID_128BIT: no
 
   - language: Java
     repo: jaegertracing/jaeger-client-java
@@ -162,6 +168,8 @@ clients:
       env_JAEGER_USER: yes
       env_JAEGER_PASSWORD: yes
       env_JAEGER_PROPAGATION: yes
+      128bit_trace_id: no
+      JAEGER_TRACEID_128BIT: no
 
   - language: Node.js
     repo: jaegertracing/jaeger-client-node
@@ -201,6 +209,8 @@ clients:
       env_JAEGER_USER: no
       env_JAEGER_PASSWORD: no
       env_JAEGER_PROPAGATION: no
+      128bit_trace_id: no
+      JAEGER_TRACEID_128BIT: no
 
   - language: Python
     repo: jaegertracing/jaeger-client-python
@@ -240,6 +250,8 @@ clients:
       env_JAEGER_USER: no
       env_JAEGER_PASSWORD: no
       env_JAEGER_PROPAGATION: no
+      128bit_trace_id: no
+      JAEGER_TRACEID_128BIT: no
 
   - language: C++
     repo: jaegertracing/jaeger-client-cpp
@@ -279,6 +291,8 @@ clients:
       env_JAEGER_USER: no
       env_JAEGER_PASSWORD: no
       env_JAEGER_PROPAGATION: no
+      128bit_trace_id: yes
+      JAEGER_TRACEID_128BIT: no
 
   - language: C#
     repo: jaegertracing/jaeger-client-csharp
@@ -317,4 +331,6 @@ clients:
       env_JAEGER_AUTH_TOKEN: yes
       env_JAEGER_USER: yes
       env_JAEGER_PASSWORD: yes
-      env_JAEGER_PROPAGATION: yes      
+      env_JAEGER_PROPAGATION: yes
+      128bit_trace_id: yes
+      JAEGER_TRACEID_128BIT: yes
