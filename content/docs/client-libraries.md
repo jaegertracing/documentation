@@ -8,7 +8,7 @@ children:
 
 All Jaeger client libraries support the [OpenTracing APIs](http://opentracing.io). The following resources provide more information about instrumenting your application with OpenTracing:
 
-* [OpenTracing tutorials](https://github.com/yurishkuro/opentracing-tutorial) for Java, Go, Python, and Node.js
+* [OpenTracing tutorials](https://github.com/yurishkuro/opentracing-tutorial) for Java, Go, Python, Node.js and C#
 * A deep dive blog post [Tracing HTTP request latency in Go][http-latency-medium]
 * The official OpenTracing documentation and other materials at [opentracing.io](http://opentracing.io)
 * The [`opentracing-contrib` org on GitHub](https://github.com/opentracing-contrib) contains many repositories with off-the-shelf instrumentation for many popular frameworks, including JAXRS & Dropwizard (Java), Flask & Django (Python), Go std library, etc.
@@ -118,5 +118,5 @@ e.g. `my-baggage-key-1`.
 
 
 
-[HttpSender]: https://github.com/uber/jaeger-client-java/blob/master/jaeger-core/src/main/java/com/uber/jaeger/senders/HttpSender.java
+[HttpSender]: https://github.com/jaegertracing/jaeger-client-java/blob/master/jaeger-thrift/src/main/java/io/jaegertracing/thrift/senders/HttpSender.java
 [http-latency-medium]: https://medium.com/@YuriShkuro/tracing-http-request-latency-in-go-with-opentracing-7cc1282a100a
