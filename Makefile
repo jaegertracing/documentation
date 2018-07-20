@@ -1,7 +1,6 @@
 HUGO_VERSION = 0.43
 HTMLPROOFER  = bundle exec htmlproofer
 HUGO_THEME   = jaeger-docs
-BASE_URL     = https://www.jaegertracing.io
 THEME_DIR    := themes/$(HUGO_THEME)
 
 macos-setup:
@@ -11,7 +10,7 @@ clean:
 	rm -rf public
 
 build-content:
-	hugo -v --baseURL $(BASE_URL)
+	hugo -v
 
 build: clean build-content
 
