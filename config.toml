@@ -1,4 +1,4 @@
-baseURL            = "https://jaegertracing.io"
+baseURL            = "https://www.jaegertracing.io"
 title              = "Jaeger: open source, end-to-end distributed tracing"
 languageCode       = "en"
 pygmentsCodeFences = true
