@@ -8,6 +8,10 @@ The following is only a selection of some of the major features we plan to imple
 To get a more complete overview of planned features and current work, see the issue trackers for the various repositories,
 for example, the [Jaeger backend](https://github.com/jaegertracing/jaeger/issues/).
 
+## Protobuf Model and gRPC for Internal Communications
+
+For description and status, see [issue #773](https://github.com/jaegertracing/jaeger/issues/773).
+
 ## Adaptive Sampling
 
 The most common way of using Jaeger client libraries is with probabilistic sampling which makes a determination

@@ -1,3 +1,4 @@
-{{- $cssFilename := index .Site.Data.assetHashes "style.css" }}
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" href="/css/{{ $cssFilename }}">
+{{- $cssOpts := cond (.Site.IsServer) (dict "targetPath" "css/style.css") (dict "targetPath" "css/style.css" "outputStyle" "compressed" "enableSourceMaps" true) }}
+{{- $css := resources.Get "sass/style.sass" | toCSS $cssOpts | minify | fingerprint }}
+<link rel="stylesheet" media="screen" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
