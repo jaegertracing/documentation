@@ -112,6 +112,7 @@ Port  | Protocol | Function
 14267 | TChannel | used by **jaeger-agent** to send spans in jaeger.thrift format
 14268 | HTTP     | can accept spans directly from clients in jaeger.thrift format over binary thrift protocol
 9411  | HTTP     | can accept Zipkin spans in JSON or Thrift (disabled by default)
+14269 | HTTP     | Health check at **/**
 
 
 ## Storage Backend
@@ -217,6 +218,7 @@ At default settings the query service exposes the following port(s):
 Port  | Protocol | Function
 ----- | -------  | ---
 16686 | HTTP     | **/api/*** endpoints and Jaeger UI at **/**
+16687 | HTTP     | Health check at **/**
 
 ### UI Base Path
 
