@@ -7,7 +7,7 @@ menu: docs
 
 ## Instrumentation
 
-Your applications must be instrumented before they can send tracing data to Jaeger backend. Check the [Client Libraries](../client-libraries) section for information about how to use the OpenTracing API and how to initialize and configure Jaeger tracers.
+Your applications must be instrumented before they can send tracing data to Jaeger backend. Check the [Client Libraries](../docs/client-libraries.md) section for information about how to use the OpenTracing API and how to initialize and configure Jaeger tracers.
 
 ## All in one Docker image
 
@@ -106,7 +106,7 @@ Then navigate to `http://localhost:8080`.
 
 ## Client Libraries
 
-Look [here](../client-libraries).
+Look [here](../docs/client-libraries.md).
 
 ## Running Individual Jaeger Components
 Individual Jaeger backend components can be run from source.
