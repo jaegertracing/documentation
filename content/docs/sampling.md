@@ -44,7 +44,7 @@ Example `strategies.json`
         },
         {
           "operation": "op2",
-          "type": "probabilstic",
+          "type": "probabilistic",
           "param": 0.4
         }
       ]
