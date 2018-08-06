@@ -160,7 +160,7 @@ configure the collector and query like so:
 ```
 docker run \
   -e CASSANDRA_SERVERS=<...> \
-  -e CASSAMDRA_TLS=true \
+  -e CASSANDRA_TLS=true \
   -e CASSANDRA_TLS_SERVER_NAME="CN-in-certificate" \
   -e CASSANDRA_TLS_KEY=<path to client key file> \
   -e CASSANDRA_TLS_CERT=<path to client cert file> \
