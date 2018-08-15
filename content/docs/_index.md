@@ -36,7 +36,7 @@ See [Features](./features/) page for more details.
 
 ## Technical Specs
 
-  * Backend components implemented in Go 1.9
+  * Backend components implemented in Go
   * React/Javascript UI
   * Supported storage backends:
     * [Cassandra 3.4+](./deployment/#cassandra)
