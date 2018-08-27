@@ -115,11 +115,13 @@ Port  | Protocol | Function
 14269 | HTTP     | Health check at **/**
 
 
-## Storage Backend
+## Storage Backends
 
 Collectors require a persistent storage backend. Cassandra and ElasticSearch are the primary supported storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
-The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, and `memory` (only for all-in-one binary).
+The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` and `memory` (only for all-in-one binary).
+As of version 1.6.0, it's possible to use multiple storage types at the same time by providing a comma-separated list of valid types to the `SPAN_STORAGE_TYPE` environment variable.
+It's important to node that all listed storage types are used for writing, but only the first type in the list will be used for reading and archiving.
 
 ### Memory
 
@@ -130,11 +132,25 @@ By default, there's no limit in the amount of traces stored in memory but a limi
 integer value via `--memory.max-traces`.
 
 ### Cassandra
-
 Supported versions: 3.4+
 
 Deploying Cassandra itself is out of scope for our documentation. One good
 source of documentation is the [Apache Cassandra Docs](https://cassandra.apache.org/doc/latest/).
+
+#### Configuration
+##### Minimal
+```sh
+docker run \
+  -e SPAN_STORAGE_TYPE=cassandra \
+  -e CASSANDRA_SERVERS=<...> \
+  jaegertracing/jaeger-collector
+```
+
+##### All options
+To view the full list of configuration options, you can run the following command:
+```sh
+docker run -e SPAN_STORAGE_TYPE=cassandra jaegertracing/jaeger-collector:1.6 --help
+```
 
 #### Schema script
 
@@ -193,12 +209,27 @@ usercert = ~/.cassandra/client-cert
 ```
 
 ### ElasticSearch
-
-Supported versions: 5.x, 6.x
+Supported in Jaeger since 0.6.0  
+Supported versions: 5.x, 6.x  
 
 ElasticSearch does not require initialization other than
 [installing and running ElasticSearch](https://www.elastic.co/downloads/elasticsearch).
 Once it is running, pass the correct configuration values to the Jaeger collector and query service.
+
+#### Configuration
+##### Minimal
+```sh
+docker run \
+  -e SPAN_STORAGE_TYPE=elasticsearch \
+  -e ES_SERVER_URLS=<...> \
+  jaegertracing/jaeger-collector
+```
+
+##### All options
+To view the full list of configuration options, you can run the following command:
+```sh
+docker run -e SPAN_STORAGE_TYPE=elasticsearch jaegertracing/jaeger-collector:1.6 --help
+```
 
 See the [README](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/es/README.md) for an in-depth overview of how Jaeger uses ElasticSearch for storage.
 
@@ -207,6 +238,37 @@ See the [README](https://github.com/jaegertracing/jaeger/tree/master/plugin/stor
 Shards and replicas are some configuration values to take special attention to, because this is decided upon
 index creation. [This article](https://qbox.io/blog/optimizing-elasticsearch-how-many-shards-per-index) goes into
 more information about choosing how many shards should be chosen for optimization.
+
+### Kafka
+Supported in Jaeger since 1.6.0  
+Supported Kafka versions: 0.8+  
+
+In version 1.6.0, the Kafka storage backend implementation only supports writing data, this means you will need to use another one (with the multiple storage types feature) to be able to view the traces in the Query component.
+
+Starting from version 1.7.0, a new component (Ingester) will added to support reading from Kafka and storing it in another storage backend (Elasticsearch or Cassandra).
+
+Writing to Kafka is particularly useful for building post-processing data pipelines.
+
+#### Configuration
+##### Minimal
+```sh
+docker run \
+  -e SPAN_STORAGE_TYPE=kafka \
+  -e KAFKA_BROKERS=<...> \
+  -e KAFKA_TOPIC=<...> \
+  jaegertracing/jaeger-collector
+```
+
+##### All options
+To view the full list of configuration options, you can run the following command:
+```sh
+docker run -e SPAN_STORAGE_TYPE=kafka jaegertracing/jaeger-collector:1.6 --help
+```
+
+#### Topic & partitions
+Unless your Kafka cluster is configured to automatically create topics, you will need to create it ahead of time. You can refer to [the Kafka quickstart documentation](https://kafka.apache.org/documentation/#quickstart_createtopic) to learn how.
+
+You can find more information about topics and partitions in general in the [official documentation](https://kafka.apache.org/documentation/#intro_topics). [This article](https://www.confluent.io/blog/how-to-choose-the-number-of-topicspartitions-in-a-kafka-cluster/) provide more details about how to choose the number of partitions.
 
 ## Query Service & UI
 
