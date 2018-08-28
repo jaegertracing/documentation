@@ -14,7 +14,7 @@
   {{- range .Site.Menus.docs -}}
   {{- $isCurrentPage := eq $currentPage.Title .Title }}
   {{- $title := cond (isset .Page.Params "navtitle") (index .Page.Params "navtitle") .Title }}
-  <h4 class="nav-link is-size-4{{ if $isCurrentPage }} is-active{{ end }}">
+  <h4 class="nav-link{{ if $isCurrentPage }} is-active{{ end }}">
     <a href="{{ .URL }}">{{ $title }}</a>
   </h4>
   {{- with .Page.Params.children -}}

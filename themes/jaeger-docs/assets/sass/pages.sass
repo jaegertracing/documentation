@@ -26,8 +26,8 @@
     .nav
       position: fixed
       width: inherit
-      overflow-x: auto
-      //padding-right: 3rem
+      max-width: 9rem
+      line-height: 150%
 
       ul
         padding: 0 0 0 1rem
@@ -35,7 +35,7 @@
 
         li a
           color: black
-          font-size: 1.25rem
+          font-size: 1.1rem
 
           &.is-active
             color: $link
@@ -47,9 +47,10 @@
 
       h4.nav-link
         color: black
+        font-size: 1.3rem
 
         & + .nav-link
-          margin-top: .25rem
+          margin-top: .75rem
 
         a
           color: black
