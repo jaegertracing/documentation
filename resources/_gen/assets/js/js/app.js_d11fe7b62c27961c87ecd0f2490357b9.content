@@ -3,5 +3,5 @@ function addLinkAnchors(){anchors.options={icon:'#'};anchors.add('.content--docs
 function navbarToggle(){var $navbarBurgers=Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'),0);if($navbarBurgers.length>0){$navbarBurgers.forEach(function($el){$el.addEventListener('click',function(e){e.preventDefault();var target=$el.dataset.target;var $target=document.getElementById(target);$el.classList.toggle('is-active');$target.classList.toggle('is-active');});});}}
 function controlModals(){$('.popup-term').click(function(){var term=this.dataset.modalId;var html=$('html');var modal=$('.modal');modal.addClass('is-active');html.addClass('is-clipped');modal.click(function(){modal.removeClass('is-active');html.removeClass('is-clipped');});});}
 function tableOfContents(tocifyOptions){$("#toc").tocify(tocifyOptions);}
-$(function(){scrollOffset();addLinkAnchors();navbarToggle();controlModals();var tocifyOptions={context:'.content--docs',selectors:'h2,h3,h4',smoothScroll:true,theme:'jqueryui',showAndHideOnScroll:false,scrollTo:$('.navbar').height()}
+$(function(){scrollOffset();addLinkAnchors();navbarToggle();controlModals();var tocifyOptions={context:'.content--docs',selectors:'h2,h3,h4',showAndHide:false,smoothScroll:true,theme:'jqueryui',scrollTo:$('.navbar').height()}
 tableOfContents(tocifyOptions);});

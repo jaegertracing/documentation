@@ -66,9 +66,9 @@ $(function () {
   var tocifyOptions = {
     context: '.content--docs',
     selectors: 'h2,h3,h4',
+    showAndHide: false,
     smoothScroll: true,
     theme: 'jqueryui',
-    showAndHideOnScroll: false,
     scrollTo: $('.navbar').height()
   }
 
