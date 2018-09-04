@@ -6,7 +6,7 @@ command = "hugo"
 HUGO_VERSION = "0.46"
 
 [context.deploy-preview]
-command = "hugo --baseURL $DEPLOY_PRIME_URL"
+command = "hugo --buildDrafts --buildFuture --baseURL $DEPLOY_PRIME_URL"
 
 [context.branch-deploy]
-command = "hugo --baseURL $DEPLOY_PRIME_URL"
+command = "hugo --buildDrafts --buildFuture --baseURL $DEPLOY_PRIME_URL"
