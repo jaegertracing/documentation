@@ -25,8 +25,10 @@ $ docker run -d --name jaeger \
   -p 16686:16686 \
   -p 14268:14268 \
   -p 9411:9411 \
-  jaegertracing/all-in-one:latest
+  jaegertracing/all-in-one:1.6
 ```
+
+Make sure to replace "1.6" with the [latest version](https://github.com/jaegertracing/jaeger/releases).
 
 You can then navigate to `http://localhost:16686` to access the Jaeger UI.
 
@@ -77,9 +79,11 @@ go run ./main.go all
 $ docker run --rm -it \
   --link jaeger \
   -p8080-8083:8080-8083 \
-  jaegertracing/example-hotrod:latest \
+  jaegertracing/example-hotrod:1.6 \
   --jaeger-agent.host-port=jaeger:6831
 ```
+
+Make sure to replace "1.6" with the [latest version](https://github.com/jaegertracing/jaeger/releases).
 
 Then navigate to `http://localhost:8080`.
 
