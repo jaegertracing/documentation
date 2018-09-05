@@ -29,40 +29,20 @@
       max-width: 9rem
       line-height: 150%
 
-      ul
-        padding: 0 0 0 1rem
-        margin: .25rem 0
-
-        li a
+      .nav-link
+        a
+          line-height: 110%
           color: black
-          font-size: 1.1rem
 
           &.is-active
             color: $link
-            font-weight: $link-font-weight
 
-          &:hover
-            color: $jaeger-beige
-            font-weight: 700
+          &.nav-sublink
+            font-size: 1.1rem
+            margin-left: 1rem
 
-      h4.nav-link
         color: black
-        font-size: 1.3rem
+        font-size: 1.4rem
 
         & + .nav-link
           margin-top: .75rem
-
-        a
-          color: black
-
-          +touch
-            color: red
-
-          &:hover
-            color: $jaeger-beige
-            font-weight: 700
-
-        &.is-active
-          a
-            color: $link
-            font-weight: $link-font-weight

@@ -1,5 +1,28 @@
 {{- $currentVersion := index (split .File.Path "/") 1 }}
 {{- $versionDocsPath := printf "content/docs/%s" $currentVersion }}
+{{- $url := .URL }}
 <aside class="nav">
-  <h1>{{ $versionDocsPath }}</h1>
+  {{- range .Site.Pages }}
+  {{- $docVersion := index (split .File.Path "/") 1 }}
+  {{- if and (eq $docVersion $currentVersion) (not .Params.hasParent) }}
+  {{- $isCurrentPage := eq $url .URL }}
+  {{- $hasParent := .Params.hasparent }}
+  <div class="nav-link">
+    <a href="{{ .URL }}"{{ if $isCurrentPage }} class="is-active"{{ end }}>
+      {{ .Title }}
+    </a>
+
+    {{- with .Params.children }}
+    {{- range . }}
+    {{- $url := printf "/docs/%s/%s/" $currentVersion .url }}
+    {{- $isCurrentPage := eq $url $.URL }}
+    <br />
+    <a class="nav-sublink{{ if $isCurrentPage }} is-active{{ end }}" href="{{ $url }}">
+      {{ .title }}
+    </a>
+    {{- end }}
+    {{- end }}
+  </div>
+  {{- end }}
+  {{- end }}
 </aside>

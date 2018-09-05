@@ -29,7 +29,7 @@
             Versions
           </a>
           <div class="navbar-dropdown">
-            {{- range (readDir "content/docs") }}
+            {{- range sort (readDir "content/docs") "Name" "desc" }}
             {{- $version := .Name }}
             <a class="navbar-item" href="/docs/{{ $version }}">
               {{ $version }}{{ if eq $version $latest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end }}
