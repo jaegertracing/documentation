@@ -3,17 +3,16 @@
 {{- $isLatest  := eq $version $latest }}
 {{- $latestUrl := .URL | replaceRE $version $latest }}
 <header>
-  <h1 class="is-size-1{{ if .Params.description }} is-spaced{{ end }}">{{ .Title }}</h1>
-  {{- with .Params.description }}<h4 class="subtitle is-size-4">{{ . }}</h4>{{ end }}
+  <p class="title is-1">{{ .Title }}</p>
+  {{- with .Params.description }}<p class="subtitle is-3">{{ . }}</p>{{ end }}
   <div class="buttons has-addons">
-    <span class="button is-medium">
+    <span class="button">
       Version&nbsp;&nbsp;<strong>{{ $version }}</strong>
     </span>
     {{- if $isLatest }}
-    <span class="button is-medium is-success">Latest</span>
+    <span class="button is-success">Latest</span>
     {{- else }}
-    <a class="button is-medium is-warning" href="{{ $latestUrl }}">Click here for the latest version</a>
+    <a class="button is-warning" href="{{ $latestUrl }}">Click here for the latest version</a>
     {{- end }}
   </div>
-  <hr class="hr" />
 </header>
