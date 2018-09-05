@@ -1,7 +1,6 @@
 ---
 title: Architecture
 weight: 5
-menu: docs
 ---
 
 Jaeger's clients adhere to the data model described in the OpenTracing standard. Reading the [specification](https://github.com/opentracing/specification/blob/master/specification.md) will help you understand this section better.

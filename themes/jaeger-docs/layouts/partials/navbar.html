@@ -1,6 +1,7 @@
 {{- $menuPages     := .Site.Menus.docs }}
 {{- $githubRepo    := .Site.Params.githubRepo }}
 {{- $twitterHandle := .Site.Params.twitterHandle }}
+{{- $latest        := .Site.Params.versions.latest }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
     <div class="navbar-brand">
@@ -18,23 +19,25 @@
 
     <div id="topNav" class="navbar-menu">
       <div class="navbar-end">
-        <!--
-        <a class="navbar-item" href="/download">
-          Download
+        {{- if .IsHome }}
+        <a class="navbar-item" href="/docs/{{ $latest }}">
+          Docs
         </a>
-        -->
+        {{- else }}
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="/docs">
-            Docs
+          <a class="navbar-link">
+            Versions
           </a>
-          <div class="navbar-dropdown is-boxed">
-            {{- range $menuPages }}
-            <a class="navbar-item" href="{{ .URL }}">
-              {{ cond (isset .Page.Params "navtitle") (.Page.Params.navtitle) .Title }}
+          <div class="navbar-dropdown">
+            {{- range (readDir "content/docs") }}
+            {{- $version := .Name }}
+            <a class="navbar-item" href="/docs/{{ $version }}">
+              {{ $version }}{{ if eq $version $latest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end }}
             </a>
             {{- end }}
           </div>
         </div>
+        {{- end }}
         <a class="navbar-item" href="https://medium.com/jaegertracing" target="_blank">
           Blog
         </a>

@@ -1,7 +1,6 @@
 ---
 title: Deployment
 weight: 6
-menu: docs
 ---
 
 The main Jaeger backend components are released as Docker images on Docker Hub:
@@ -209,8 +208,8 @@ usercert = ~/.cassandra/client-cert
 ```
 
 ### ElasticSearch
-Supported in Jaeger since 0.6.0  
-Supported versions: 5.x, 6.x  
+Supported in Jaeger since 0.6.0
+Supported versions: 5.x, 6.x
 
 ElasticSearch does not require initialization other than
 [installing and running ElasticSearch](https://www.elastic.co/downloads/elasticsearch).
@@ -240,8 +239,8 @@ index creation. [This article](https://qbox.io/blog/optimizing-elasticsearch-how
 more information about choosing how many shards should be chosen for optimization.
 
 ### Kafka
-Supported in Jaeger since 1.6.0  
-Supported Kafka versions: 0.8+  
+Supported in Jaeger since 1.6.0
+Supported Kafka versions: 0.8+
 
 In version 1.6.0, the Kafka storage backend implementation only supports writing data, this means you will need to use another one (with the multiple storage types feature) to be able to view the traces in the Query component.
 

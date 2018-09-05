@@ -1,34 +1,5 @@
-<!--
+{{- $currentVersion := index (split .File.Path "/") 1 }}
+{{- $versionDocsPath := printf "content/docs/%s" $currentVersion }}
 <aside class="nav">
-  {{- range (where .Site.Pages "Section" "docs").ByWeight }}
-  {{- $isCurrentPage := eq .Title $.Title }}
-  {{- $title := cond (isset .Params "navtitle") (index .Params "navtitle") .Title }}
-  <h4 class="nav-link is-size-4{{ if $isCurrentPage }} is-active{{ end }}">
-    <a href="{{ .Permalink }}">{{ $title }}</a>
-  </h4>
-  {{- end }}
-</aside>
--->
-{{- $currentPage := . -}}
-<aside class="nav">
-  {{- range .Site.Menus.docs -}}
-  {{- $isCurrentPage := eq $currentPage.Title .Title }}
-  {{- $title := cond (isset .Page.Params "navtitle") (index .Page.Params "navtitle") .Title }}
-  <h4 class="nav-link{{ if $isCurrentPage }} is-active{{ end }}">
-    <a href="{{ .URL }}">{{ $title }}</a>
-  </h4>
-  {{- with .Page.Params.children -}}
-  <ul>
-    {{- range . -}}
-    {{- $title := . }}
-    {{- range where $.Site.Pages "Title" "=" $title -}}
-    {{- $isCurrentPage := eq $.Title $title }}
-    <li>
-      <a href="{{ .URL }}"{{ if $isCurrentPage }} class="is-active"{{ end }}>{{ .Title }}</a>
-    </li>
-    {{- end -}}
-    {{- end -}}
-  </ul>
-  {{- end -}}
-  {{- end -}}
+  <h1>{{ $versionDocsPath }}</h1>
 </aside>

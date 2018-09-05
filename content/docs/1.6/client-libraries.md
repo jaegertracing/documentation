@@ -1,6 +1,5 @@
 ---
 title: Client libraries
-menu: docs
 weight: 4
 children:
 - Client features

@@ -7,9 +7,15 @@ disableKinds       = ["taxonomy", "taxonomyTerm"]
 canonifyURLs       = true
 theme              = "jaeger-docs"
 
-# Disable content taxonomies for now (until there is significantly more content)
-#[taxonomies]
-#  tag = "tags"
+[mediaTypes."text/netlify"]
+delimiter = ""
+
+[outputFormats.REDIRECTS]
+mediaType = "text/netlify"
+baseName = "_redirects"
+
+[outputs]
+home = [ "HTML", "REDIRECTS" ]
 
 [params]
   tagline = "Monitor and troubleshoot transactions in complex distributed systems"
@@ -25,3 +31,6 @@ theme              = "jaeger-docs"
     [[links]]
       title = "Docs"
       url = "/docs"
+
+[params.versions]
+latest = "1.6"

@@ -1,7 +1,6 @@
 ---
 title: Download
 weight: 13
-menu: docs
 ---
 
 ## Binaries

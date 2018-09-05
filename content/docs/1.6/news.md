@@ -2,7 +2,6 @@
 title: Jaeger news
 navtitle: News
 weight: 10
-menu: docs
 ---
 
 ## Announcing Jaeger v1.0

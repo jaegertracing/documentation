@@ -1,7 +1,6 @@
 ---
 title: Get in touch
 weight: 11
-menu: docs
 ---
 
 ## Via chat
