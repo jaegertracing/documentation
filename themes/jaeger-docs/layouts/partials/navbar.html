@@ -19,11 +19,6 @@
 
     <div id="topNav" class="navbar-menu">
       <div class="navbar-end">
-        {{- if ne .Section "download" }}
-        <a class="navbar-item" href="/download">
-          Download
-        </a>
-        {{- end }}
         {{- if .IsHome }}
         <a class="navbar-item" href="/docs/{{ $latest }}">
           Docs
@@ -43,9 +38,38 @@
           </div>
         </div>
         {{- end }}
+
+        <a class="navbar-item" href="/download">
+          Download
+        </a>
         <a class="navbar-item" href="https://medium.com/jaegertracing" target="_blank">
           Blog
         </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Project
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/get-in-touch">
+              Get in touch
+            </a>
+
+            <a class="navbar-item" href="/news">
+              News
+            </a>
+
+            <a class="navbar-item" href="/roadmap">
+              Roadmap
+            </a>
+
+            <a class="navbar-item" href="/report-security-issue">
+              Report security issue
+            </a>
+          </div>
+        </div>
+
         {{- with $githubRepo }}
         <a class="navbar-item" href="https://github.com/{{ . }}" target="_blank">
           <span class="icon">

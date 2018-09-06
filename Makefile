@@ -29,6 +29,7 @@ htmlproofer-setup:
 	--path vendor/bundle
 
 htmlproofer:
+	rm -rf public
 	hugo --baseURL "/"
 	$(HTMLPROOFER) \
         --empty-alt-ignore \

@@ -1,6 +1,5 @@
 ---
 title: Roadmap
-weight: 9
 ---
 
 The following is only a selection of some of the major features we plan to implement in the near future (6-12 months).
@@ -60,7 +59,7 @@ path-based dependency diagrams with the following features:
   * Interactive, for example using `cli_user2` as a filter grays out the paths in the graph
     that are not relevant to requests passing through both `cli_user2` and `postmaster`.
 
-<img src="/img/path-dependency.svg">
+![Path dependency](/img/path-dependency.svg)
 
 ## Latency Histograms
 
@@ -71,7 +70,7 @@ request paths from upstream services. In the screenshot below we see how selecti
 a portion of the histogram reveals the breakdowns of the endpoints and upstream callers
 that are responsible for the long tail.
 
-<img src="/img/latency-histogram.png">
+![Latency histogram](/img/latency-histogram.png)
 
 ## Trace Quality Metrics
 
