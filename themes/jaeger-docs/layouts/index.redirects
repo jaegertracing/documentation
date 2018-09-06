@@ -11,3 +11,7 @@
 /docs/latest     /docs/{{ $latest }}
 /docs/latest/*     /docs/{{ $latest }}/:splat
 /docs/download     /download
+/docs/get-in-touch     /get-in-touch
+/docs/roadmap     /roadmap
+/docs/news     /news
+/docs/report-security-issue     /report-security-issue
