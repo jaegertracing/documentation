@@ -28,7 +28,8 @@ htmlproofer-setup:
 	NOKOGIRI_USE_SYSTEM_LIBRARIES=true bundle install \
 	--path vendor/bundle
 
-htmlproofer: build
+htmlproofer:
+	hugo --baseURL "/"
 	$(HTMLPROOFER) \
         --empty-alt-ignore \
         public

@@ -10,3 +10,4 @@
 {{- end }}
 /docs/latest     /docs/{{ $latest }}
 /docs/latest/*     /docs/{{ $latest }}/:splat
+/docs/download     /download

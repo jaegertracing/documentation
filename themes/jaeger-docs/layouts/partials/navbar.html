@@ -19,6 +19,11 @@
 
     <div id="topNav" class="navbar-menu">
       <div class="navbar-end">
+        {{- if ne .Section "download" }}
+        <a class="navbar-item" href="/download">
+          Download
+        </a>
+        {{- end }}
         {{- if .IsHome }}
         <a class="navbar-item" href="/docs/{{ $latest }}">
           Docs
