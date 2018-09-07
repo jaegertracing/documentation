@@ -1,0 +1,55 @@
+{{- $binaries := .Site.Data.download.binaries }}
+{{- $fullReleaseVersions    := index $binaries "fullReleaseVersions" }}
+{{- $partialReleaseVersions := index $binaries "partialReleaseVersions" }}
+{{- $platforms              := index $binaries "platforms" }}
+<table>
+  <thead>
+    <tr>
+      <th>
+        Version
+      </th>
+      <th>
+        Assets
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range sort $fullReleaseVersions "value" "desc" }}
+    {{- $version := . }}
+    {{- $zipUrl := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $version }}
+    {{- $tarUrl := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $version }}
+    <tr>
+      <td>
+        <strong>
+          {{ $version }}
+        </strong>
+      </td>
+      <td>
+        {{- range $platforms }}
+        {{- $asset := printf "jaeger-%s-%s-amd64.tar.gz" $version . }}
+        {{- $url   := printf "https://github.com/jaegertracing/jaeger/releases/download/v%s/%s" $version $asset }}
+        <a href="{{ $url }}">{{ $asset }}</a><br />
+        {{- end }}
+        <a href="{{ $zipUrl }}">Source code (zip)</a><br />
+        <a href="{{ $tarUrl }}">Source code (tar.gz)</a>
+      </td>
+    </tr>
+    {{- end }}
+    {{- range sort $partialReleaseVersions "value" "desc" }}
+    {{- $version := . }}
+    {{- $zipUrl := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $version }}
+    {{- $tarUrl := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $version }}
+    <tr>
+      <td>
+        <strong>
+          {{ $version }}
+        </strong>
+      </td>
+      <td>
+        <a href="{{ $zipUrl }}">Source code (zip)</a><br />
+        <a href="{{ $tarUrl }}">Source code (tar.gz)</a>
+      </td>
+    </tr>
+    {{- end }}
+  </tbody>
+</table>
