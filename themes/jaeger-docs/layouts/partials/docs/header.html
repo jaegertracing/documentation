@@ -5,14 +5,14 @@
 <header>
   <p class="title is-1">{{ .Title }}</p>
   {{- with .Params.description }}<p class="subtitle is-3">{{ . }}</p>{{ end }}
-  <div class="buttons has-addons">
-    <span class="button">
+  <div class="tags has-addons">
+    <span class="tag is-medium">
       Version&nbsp;&nbsp;<strong>{{ $version }}</strong>
     </span>
     {{- if $isLatest }}
-    <span class="button is-success">Latest</span>
+    <span class="tag is-medium is-success">Latest</span>
     {{- else }}
-    <a class="button is-warning" href="{{ $latestUrl }}">Click here for the latest version</a>
+    <a class="tag is-medium is-warning" href="{{ $latestUrl }}">Click here for the latest version</a>
     {{- end }}
   </div>
 
