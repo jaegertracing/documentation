@@ -1,7 +1,6 @@
 ---
 title: Introduction
 weight: 1
-foo: bar
 ---
 
 Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.

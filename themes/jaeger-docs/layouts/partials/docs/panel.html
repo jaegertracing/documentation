@@ -8,8 +8,8 @@
   {{- $isCurrentPage := eq $url .URL }}
   {{- $hasParent := .Params.hasparent }}
   <div class="nav-link">
-    <a href="{{ .URL }}"{{ if $isCurrentPage }} class="is-active"{{ end }}>
-      {{ .Title }}
+    <a href="{{ .Permalink }}"{{ if $isCurrentPage }} class="is-active"{{ end }}>
+      {{ if .Params.navtitle }}{{ .Params.navtitle }}{{ else }}{{ .Title }}{{ end }}
     </a>
 
     {{- with .Params.children }}

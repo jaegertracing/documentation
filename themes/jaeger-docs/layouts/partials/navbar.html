@@ -2,6 +2,7 @@
 {{- $githubRepo    := .Site.Params.githubRepo }}
 {{- $twitterHandle := .Site.Params.twitterHandle }}
 {{- $latest        := .Site.Params.versions.latest }}
+{{- $versions      := sort (readDir "content/docs") "Name" "desc" }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
     <div class="navbar-brand">
@@ -19,29 +20,44 @@
 
     <div id="topNav" class="navbar-menu">
       <div class="navbar-end">
-        {{- if .IsHome }}
-        <a class="navbar-item" href="/docs/{{ $latest }}">
-          Docs
+        <a class="navbar-item" href="/download">
+          Download
         </a>
+
+        {{- if .IsHome }}
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Docs
+          </a>
+          <div class="navbar-dropdown">
+            {{- range .Site.Pages }}
+            {{- $docVersion := index (split .File.Path "/") 1 }}
+            {{- $isLatest := eq $docVersion $latest }}
+            {{- if $isLatest }}
+            <a class="navbar-item" href="{{ .Permalink }}">
+              {{ .Title }}
+            </a>
+            {{- end }}
+            {{- end }}
+          </div>
+        </div>
         {{- else }}
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             Versions
           </a>
           <div class="navbar-dropdown">
-            {{- range sort (readDir "content/docs") "Name" "desc" }}
+            {{- range $versions }}
             {{- $version := .Name }}
+            {{- $isLatest := eq $version $latest }}
             <a class="navbar-item" href="/docs/{{ $version }}">
-              {{ $version }}{{ if eq $version $latest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end }}
+              {{ $version }}{{ if $isLatest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end }}
             </a>
             {{- end }}
           </div>
         </div>
         {{- end }}
 
-        <a class="navbar-item" href="/download">
-          Download
-        </a>
         <a class="navbar-item" href="https://medium.com/jaegertracing" target="_blank">
           Blog
         </a>

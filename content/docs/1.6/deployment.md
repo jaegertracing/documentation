@@ -1,6 +1,6 @@
 ---
 title: Deployment
-weight: 6
+weight: 7
 ---
 
 The main Jaeger backend components are released as Docker images on Docker Hub:

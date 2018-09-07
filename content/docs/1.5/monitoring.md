@@ -1,7 +1,7 @@
 ---
 title: Monitoring Jaeger
 navtitle: Monitoring
-weight: 7
+weight: 8
 ---
 
 Jaeger itself is a distributed, microservices based system. If you run it in production, you will likely want to setup adequate monitoring for different components, e.g. to ensure that the backend is not saturated by too much tracing data.

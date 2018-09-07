@@ -1,6 +1,6 @@
 ---
 title: Client libraries
-weight: 4
+weight: 5
 children:
 - title: Client features
   url: client-features
