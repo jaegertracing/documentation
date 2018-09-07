@@ -1,7 +1,5 @@
 ---
 title: Get in touch
-weight: 11
-menu: docs
 ---
 
 ## Via chat
@@ -18,4 +16,4 @@ Our GitHub org has many different repos, please make sure to pick the one approp
 
 * For general backend features or issues use the backend repo [github.com/jaegertracing/jaeger](https://github.com/jaegertracing/jaeger).
 * For frontend features or issues use [github.com/jaegertracing/jaeger-ui](https://github.com/jaegertracing/jaeger-ui).
-* For features or issues with client libraries, pick the [corresponding repository](/docs/client-libraries/#supported-libraries).
+* For features or issues with client libraries, pick the [corresponding repository](/docs/latest/client-libraries/#supported-libraries).

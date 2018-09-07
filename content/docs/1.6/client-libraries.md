@@ -1,9 +1,9 @@
 ---
 title: Client libraries
-menu: docs
-weight: 4
+weight: 5
 children:
-- Client features
+- title: Client features
+  url: client-features
 ---
 
 All Jaeger client libraries support the [OpenTracing APIs](http://opentracing.io). The following resources provide more information about instrumenting your application with OpenTracing:
@@ -118,5 +118,5 @@ e.g. `my-baggage-key-1`.
 
 
 
-[HttpSender]: https://github.com/jaegertracing/jaeger-client-java/blob/master/jaeger-thrift/src/main/java/io/jaegertracing/thrift/senders/HttpSender.java
+[HttpSender]: https://github.com/jaegertracing/jaeger-client-java/blob/master/jaeger-thrift/src/main/java/io/jaegertracing/thrift/internal/senders/HttpSender.java
 [http-latency-medium]: https://medium.com/@YuriShkuro/tracing-http-request-latency-in-go-with-opentracing-7cc1282a100a

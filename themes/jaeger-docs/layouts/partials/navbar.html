@@ -1,6 +1,9 @@
 {{- $menuPages     := .Site.Menus.docs }}
 {{- $githubRepo    := .Site.Params.githubRepo }}
 {{- $twitterHandle := .Site.Params.twitterHandle }}
+{{- $latest        := .Site.Params.versions.latest }}
+{{- $versions      := sort (readDir "content/docs") "Name" "desc" }}
+{{- $isDocsPage    := eq .Section "docs" }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
     <div class="navbar-brand">
@@ -18,26 +21,72 @@
 
     <div id="topNav" class="navbar-menu">
       <div class="navbar-end">
-        <!--
         <a class="navbar-item" href="/download">
           Download
         </a>
-        -->
+
+        {{- if $isDocsPage }}
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link" href="/docs">
-            Docs
+          <a class="navbar-link">
+            Versions
           </a>
-          <div class="navbar-dropdown is-boxed">
-            {{- range $menuPages }}
-            <a class="navbar-item" href="{{ .URL }}">
-              {{ cond (isset .Page.Params "navtitle") (.Page.Params.navtitle) .Title }}
+          <div class="navbar-dropdown">
+            {{- range $versions }}
+            {{- $version := .Name }}
+            {{- $isLatest := eq $version $latest }}
+            <a class="navbar-item" href="/docs/{{ $version }}">
+              {{ $version }}{{ if $isLatest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end }}
             </a>
             {{- end }}
           </div>
         </div>
+        {{- else }}
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Docs
+          </a>
+          <div class="navbar-dropdown">
+            {{- range .Site.Pages }}
+            {{- $docVersion := index (split .File.Path "/") 1 }}
+            {{- $isLatest := eq $docVersion $latest }}
+            {{- if $isLatest }}
+            <a class="navbar-item" href="{{ .Permalink }}">
+              {{ .Title }}
+            </a>
+            {{- end }}
+            {{- end }}
+          </div>
+        </div>
+        {{- end }}
+
         <a class="navbar-item" href="https://medium.com/jaegertracing" target="_blank">
           Blog
         </a>
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Project
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="/get-in-touch">
+              Get in touch
+            </a>
+
+            <a class="navbar-item" href="/news">
+              News
+            </a>
+
+            <a class="navbar-item" href="/roadmap">
+              Roadmap
+            </a>
+
+            <a class="navbar-item" href="/report-security-issue">
+              Report security issue
+            </a>
+          </div>
+        </div>
+
         {{- with $githubRepo }}
         <a class="navbar-item" href="https://github.com/{{ . }}" target="_blank">
           <span class="icon">

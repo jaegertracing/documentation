@@ -1,0 +1,17 @@
+{{- $latest := .Site.Params.versions.latest }}
+{{- $originalDocs := readDir "content/docs/1.6" -}}
+{{- range $originalDocs }}
+{{- if ne .Name "_index.md" }}
+{{- $endpoint := .Name | replaceRE ".md" "" }}
+{{- $originalUrl := printf "/docs/%s" $endpoint }}
+{{- $latestUrl   := printf "/docs/%s/%s" $latest $endpoint }}
+{{ $originalUrl }}     {{ $latestUrl }}
+{{- end }}
+{{- end }}
+/docs/latest     /docs/{{ $latest }}
+/docs/latest/*     /docs/{{ $latest }}/:splat
+/docs/download     /download
+/docs/get-in-touch     /get-in-touch
+/docs/roadmap     /roadmap
+/docs/news     /news
+/docs/report-security-issue     /report-security-issue
