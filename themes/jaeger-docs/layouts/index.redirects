@@ -8,6 +8,7 @@
 {{ $originalUrl }}     {{ $latestUrl }}
 {{- end }}
 {{- end }}
+/docs    /docs/{{ $latest }}
 /docs/latest     /docs/{{ $latest }}
 /docs/latest/*     /docs/{{ $latest }}/:splat
 /docs/download     /download
