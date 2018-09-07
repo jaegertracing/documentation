@@ -2,6 +2,7 @@
 {{- $fullReleaseVersions    := index $binaries "fullReleaseVersions" }}
 {{- $partialReleaseVersions := index $binaries "partialReleaseVersions" }}
 {{- $platforms              := index $binaries "platforms" }}
+{{- $platformInfo           := index $binaries "platformInfo" }}
 <table>
   <thead>
     <tr>
@@ -25,13 +26,41 @@
         </strong>
       </td>
       <td>
-        {{- range $platforms }}
-        {{- $asset := printf "jaeger-%s-%s-amd64.tar.gz" $version . }}
-        {{- $url   := printf "https://github.com/jaegertracing/jaeger/releases/download/v%s/%s" $version $asset }}
-        <a href="{{ $url }}">{{ $asset }}</a><br />
-        {{- end }}
-        <a href="{{ $zipUrl }}">Source code (zip)</a><br />
-        <a href="{{ $tarUrl }}">Source code (tar.gz)</a>
+        <p class="buttons">
+          {{- range $platforms }}
+          {{- $info := index $platformInfo . }}
+          {{- $name := index $info "name" }}
+          {{- $icon := index $info "icon" }}
+          {{- $asset := printf "jaeger-%s-%s-amd64.tar.gz" $version . }}
+          {{- $url   := printf "https://github.com/jaegertracing/jaeger/releases/download/v%s/%s" $version $asset }}
+          {{- $zipUrl := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $version }}
+          {{- $tarUrl := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $version }}
+          <a class="button is-info is-medium">
+            <span class="icon">
+              <i class="fab {{ $icon }}"></i>
+            </span>
+            <span>
+              {{ $name }}
+            </span>
+          </a>
+          {{- end }}
+          <a class="button is-info is-medium" href="{{ $zipUrl }}">
+            <span class="icon">
+              <i class="fas fa-file-archive"></i>
+            </span>
+            <span>
+              Source code (zip)
+            </span>
+          </a>
+          <a class="button is-info is-medium" href="{{ $tarUrl }}">
+            <span class="icon">
+              <i class="fas fa-file-archive"></i>
+            </span>
+            <span>
+              Source code (tar.gz)
+            </span>
+          </a>
+        </p>
       </td>
     </tr>
     {{- end }}
@@ -46,8 +75,22 @@
         </strong>
       </td>
       <td>
-        <a href="{{ $zipUrl }}">Source code (zip)</a><br />
-        <a href="{{ $tarUrl }}">Source code (tar.gz)</a>
+        <a class="button is-info is-medium" href="{{ $zipUrl }}">
+          <span class="icon">
+            <i class="fas fa-file-archive"></i>
+          </span>
+          <span>
+            Source code (zip)
+          </span>
+        </a>
+        <a class="button is-info is-medium" href="{{ $tarUrl }}">
+          <span class="icon">
+            <i class="fas fa-file-archive"></i>
+          </span>
+          <span>
+            Source code (tar.gz)
+          </span>
+        </a>
       </td>
     </tr>
     {{- end }}

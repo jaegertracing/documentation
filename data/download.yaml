@@ -4,6 +4,16 @@ binaries:
   - darwin
   - linux
   - windows
+  platformInfo:
+    darwin:
+      name: macOS
+      icon: fa-apple
+    linux:
+      name: Linux
+      icon: fa-linux
+    windows:
+      name: Windows
+      icon: fa-windows
   fullReleaseVersions:
   - "1.4.1"
   - "1.5.0"
