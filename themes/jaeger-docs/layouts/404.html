@@ -1,3 +1,4 @@
+{{- $latest := .Site.Params.versions.latest }}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
   <head>
@@ -18,7 +19,7 @@
           <ul class="site-list-404">
             <li><a href="/">Home</a></li>
             <li><a href="/docs">Documentation</a></li>
-            <li><a href="/docs/getting-started">Getting started</a></li>
+            <li><a href="/docs/{{ $latest }}/getting-started">Getting started</a></li>
           </ul>
         </div>
       </div>
