@@ -3,6 +3,7 @@
 {{- $twitterHandle := .Site.Params.twitterHandle }}
 {{- $latest        := .Site.Params.versions.latest }}
 {{- $versions      := sort (readDir "content/docs") "Name" "desc" }}
+{{- $isDocsPage    := eq .Section "docs" }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
     <div class="navbar-brand">
@@ -24,7 +25,22 @@
           Download
         </a>
 
-        {{- if .IsHome }}
+        {{- if $isDocsPage }}
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Versions
+          </a>
+          <div class="navbar-dropdown">
+            {{- range $versions }}
+            {{- $version := .Name }}
+            {{- $isLatest := eq $version $latest }}
+            <a class="navbar-item" href="/docs/{{ $version }}">
+              {{ $version }}{{ if $isLatest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end }}
+            </a>
+            {{- end }}
+          </div>
+        </div>
+        {{- else }}
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             Docs
@@ -38,21 +54,6 @@
               {{ .Title }}
             </a>
             {{- end }}
-            {{- end }}
-          </div>
-        </div>
-        {{- else }}
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Versions
-          </a>
-          <div class="navbar-dropdown">
-            {{- range $versions }}
-            {{- $version := .Name }}
-            {{- $isLatest := eq $version $latest }}
-            <a class="navbar-item" href="/docs/{{ $version }}">
-              {{ $version }}{{ if $isLatest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end }}
-            </a>
             {{- end }}
           </div>
         </div>
