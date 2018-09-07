@@ -1,5 +1,16 @@
+{{- $inServerMode := .Site.IsServer }}
+{{- $sass         := "sass/style.sass" }}
+{{- $target       := "css/style.css" }}
+{{- $includePaths := (slice "node_modules") }}
+{{- $cssDevOpts   := (dict "targetPath" $target "includePaths" $includePaths "enableSourceMap" true) }}
+{{- $cssProdOpts  := (dict "targetPath" $target "includePaths" $includePaths "outputStyle" "compressed") }}
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-{{- $cssOpts := cond (.Site.IsServer) (dict "targetPath" "css/style.css") (dict "targetPath" "css/style.css" "outputStyle" "compressed" "enableSourceMaps" true) }}
-{{- $css := resources.Get "sass/style.sass" | toCSS $cssOpts | minify | fingerprint }}
-<link rel="stylesheet" media="screen" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- $cssOpts := cond ($inServerMode) $cssDevOpts $cssProdOpts }}
+{{- $css := resources.Get "sass/style.sass" | toCSS $cssOpts }}
+{{- if $inServerMode }}
+<link rel="stylesheet" media="screen" href="{{ $css.RelPermalink }}">
+{{- else }}
+{{- $prodCss := $css | fingerprint }}
+<link rel="stylesheet" media="screen" href="{{ $prodCss.RelPermalink }}" integrity="{{ $prodCss.Data.Integrity }}">
+{{- end }}
 <link rel="stylesheet" href="/css/st-latest-articles.css">
