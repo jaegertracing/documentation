@@ -32,10 +32,10 @@
           {{- $name := index $info "name" }}
           {{- $icon := index $info "icon" }}
           {{- $asset := printf "jaeger-%s-%s-amd64.tar.gz" $version . }}
-          {{- $url   := printf "https://github.com/jaegertracing/jaeger/releases/download/v%s/%s" $version $asset }}
-          {{- $zipUrl := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $version }}
-          {{- $tarUrl := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $version }}
-          <a class="button is-info is-medium">
+          {{- $downloadUrl := printf "https://github.com/jaegertracing/jaeger/releases/download/v%s/%s" $version $asset }}
+          {{- $zipUrl      := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $version }}
+          {{- $tarUrl      := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $version }}
+          <a class="button is-info is-medium" href="{{ $downloadUrl }}" download>
             <span class="icon">
               <i class="fab {{ $icon }}"></i>
             </span>
@@ -44,7 +44,7 @@
             </span>
           </a>
           {{- end }}
-          <a class="button is-info is-medium" href="{{ $zipUrl }}">
+          <a class="button is-info is-medium" href="{{ $zipUrl }}" download>
             <span class="icon">
               <i class="fas fa-file-archive"></i>
             </span>
@@ -52,7 +52,7 @@
               Source code (zip)
             </span>
           </a>
-          <a class="button is-info is-medium" href="{{ $tarUrl }}">
+          <a class="button is-info is-medium" href="{{ $tarUrl }}" download>
             <span class="icon">
               <i class="fas fa-file-archive"></i>
             </span>
@@ -75,7 +75,7 @@
         </strong>
       </td>
       <td>
-        <a class="button is-info is-medium" href="{{ $zipUrl }}">
+        <a class="button is-info is-medium" href="{{ $zipUrl }}" download>
           <span class="icon">
             <i class="fas fa-file-archive"></i>
           </span>
@@ -83,7 +83,7 @@
             Source code (zip)
           </span>
         </a>
-        <a class="button is-info is-medium" href="{{ $tarUrl }}">
+        <a class="button is-info is-medium" href="{{ $tarUrl }}" download>
           <span class="icon">
             <i class="fas fa-file-archive"></i>
           </span>
