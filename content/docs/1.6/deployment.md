@@ -29,7 +29,7 @@ To see the complete list of options, run the binary with `help` command. Options
 ```
 $ docker run --rm \
     -e SPAN_STORAGE_TYPE=cassandra \
-    jaegertracing/jaeger-collector \
+    jaegertracing/jaeger-collector:{{< currentVersion >}} \
     help
 ```
 
@@ -62,7 +62,7 @@ docker run \
   -p6831:6831/udp \
   -p6832:6832/udp \
   -p5778:5778/tcp \
-  jaegertracing/jaeger-agent
+  jaegertracing/jaeger-agent:{{< currentVersion >}}
 ```
 
 ### Discovery System Integration
@@ -80,7 +80,7 @@ docker run \
   -p6831:6831/udp \
   -p6832:6832/udp \
   -p5778:5778/tcp \
-  jaegertracing/jaeger-agent \
+  jaegertracing/jaeger-agent:{{< currentVersion >}} \
   --collector.host-port=jaeger-collector.jaeger-infra.svc:14267
 ```
 
@@ -101,7 +101,7 @@ go run ./cmd/collector/main.go -h
 or, if you don't have the source code
 
 ```
-docker run -it --rm jaegertracing/jaeger-collector -h
+docker run -it --rm jaegertracing/jaeger-collector:{{< currentVersion >}} -h
 ```
 
 At default settings the collector exposes the following ports:
@@ -142,13 +142,16 @@ source of documentation is the [Apache Cassandra Docs](https://cassandra.apache.
 docker run \
   -e SPAN_STORAGE_TYPE=cassandra \
   -e CASSANDRA_SERVERS=<...> \
-  jaegertracing/jaeger-collector
+  jaegertracing/jaeger-collector:{{< currentVersion >}}
 ```
 
 ##### All options
 To view the full list of configuration options, you can run the following command:
 ```sh
-docker run -e SPAN_STORAGE_TYPE=cassandra jaegertracing/jaeger-collector:1.6 --help
+docker run \
+  -e SPAN_STORAGE_TYPE=cassandra  \
+  jaegertracing/jaeger-collector:{{< currentVersion >}} \
+  --help
 ```
 
 #### Schema script
@@ -180,7 +183,7 @@ docker run \
   -e CASSANDRA_TLS_KEY=<path to client key file> \
   -e CASSANDRA_TLS_CERT=<path to client cert file> \
   -e CASSANDRA_TLS_CA=<path to your CA cert file> \
-  jaegertracing/jaeger-collector
+  jaegertracing/jaeger-collector:{{< currentVersion >}}
 ```
 
 The schema tool also supports TLS. You need to make a custom cqlshrc file like
@@ -221,13 +224,16 @@ Once it is running, pass the correct configuration values to the Jaeger collecto
 docker run \
   -e SPAN_STORAGE_TYPE=elasticsearch \
   -e ES_SERVER_URLS=<...> \
-  jaegertracing/jaeger-collector
+  jaegertracing/jaeger-collector:{{< currentVersion >}}
 ```
 
 ##### All options
 To view the full list of configuration options, you can run the following command:
 ```sh
-docker run -e SPAN_STORAGE_TYPE=elasticsearch jaegertracing/jaeger-collector:1.6 --help
+docker run \
+  -e SPAN_STORAGE_TYPE=elasticsearch \
+  jaegertracing/jaeger-collector:{{< currentVersion >}} \
+  --help
 ```
 
 See the [README](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/es/README.md) for an in-depth overview of how Jaeger uses ElasticSearch for storage.
@@ -244,7 +250,7 @@ Supported Kafka versions: 0.8+
 
 In version 1.6.0, the Kafka storage backend implementation only supports writing data, this means you will need to use another one (with the multiple storage types feature) to be able to view the traces in the Query component.
 
-Starting from version 1.7.0, a new component (Ingester) will added to support reading from Kafka and storing it in another storage backend (Elasticsearch or Cassandra).
+Starting from version 1.7.0, a new component (Ingester) will be added to support reading from Kafka and storing it in another storage backend (Elasticsearch or Cassandra).
 
 Writing to Kafka is particularly useful for building post-processing data pipelines.
 
@@ -255,13 +261,16 @@ docker run \
   -e SPAN_STORAGE_TYPE=kafka \
   -e KAFKA_BROKERS=<...> \
   -e KAFKA_TOPIC=<...> \
-  jaegertracing/jaeger-collector
+  jaegertracing/jaeger-collector:{{< currentVersion >}}
 ```
 
 ##### All options
 To view the full list of configuration options, you can run the following command:
 ```sh
-docker run -e SPAN_STORAGE_TYPE=kafka jaegertracing/jaeger-collector:1.6 --help
+docker run \
+  -e SPAN_STORAGE_TYPE=kafka \
+  jaegertracing/jaeger-collector:{{< currentVersion >}} \
+  --help
 ```
 
 #### Topic & partitions
