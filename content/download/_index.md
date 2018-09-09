@@ -1,11 +1,12 @@
 ---
 title: Download Jaeger
+draft: true
 ---
 
-Jaeger can be downloaded in two ways:
+Jaeger components can be downloaded in two ways:
 
-* As a [static binary](#binaries)
-* As a [Docker image](#docker-images)
+* As [executable binaries](#binaries)
+* As [Docker images](#docker-images)
 
 ## Binaries
 

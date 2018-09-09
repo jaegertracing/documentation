@@ -67,37 +67,5 @@
       </td>
     </tr>
     {{- end }}
-    {{- range sort $partialReleaseVersions "value" "desc" }}
-    {{- $version := . }}
-    {{- $zipUrl := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $version }}
-    {{- $tarUrl := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $version }}
-    <tr>
-      <td>
-        <strong>
-          <span class="is-size-4">
-            {{ $version }}
-          </span>
-        </strong>
-      </td>
-      <td>
-        <a class="button is-large is-zip" href="{{ $zipUrl }}" download>
-          <span class="icon">
-            <i class="fas fa-file-archive"></i>
-          </span>
-          <span>
-            ZIP
-          </span>
-        </a>
-        <a class="button is-large is-tar" href="{{ $tarUrl }}" download>
-          <span class="icon">
-            <i class="fas fa-file-archive"></i>
-          </span>
-          <span>
-            TAR
-          </span>
-        </a>
-      </td>
-    </tr>
-    {{- end }}
   </tbody>
 </table>
