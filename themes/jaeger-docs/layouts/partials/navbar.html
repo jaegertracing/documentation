@@ -49,7 +49,7 @@
             {{- range .Site.Pages }}
             {{- $docVersion := index (split .File.Path "/") 1 }}
             {{- $isLatest := eq $docVersion $latest }}
-            {{- if $isLatest }}
+            {{- if and $isLatest (not .Params.hasparent) }}
             <a class="navbar-item" href="{{ .Permalink }}">
               {{ .Title }}
             </a>
