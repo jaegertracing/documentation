@@ -1,0 +1,29 @@
+
+binaries:
+  platforms:
+  - darwin
+  - linux
+  - windows
+  platformInfo:
+    darwin:
+      name: macOS
+      icon: fa-apple
+    linux:
+      name: Linux
+      icon: fa-linux
+    windows:
+      name: Windows
+      icon: fa-windows
+  fullReleaseVersions:
+  - "1.4.1"
+  - "1.5.0"
+  - "1.6.0"
+docker:
+- name: all-in-one
+  description: This image is designed for quick local testing. It launches the Jaeger UI, collector, query, and agent, with an in-memory storage component.
+- name: jaeger-collector
+  description: The Jaeger collector
+- name: jaeger-query
+  description: The Jaeger query image
+- name: jaeger-agent
+  description: The Jaeger agent

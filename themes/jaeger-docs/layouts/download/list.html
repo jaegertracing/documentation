@@ -1,9 +1,11 @@
 {{- define "title" }}
-Jaeger &ndash; Download
+Jaeger &ndash; {{ .Title }}
 {{- end }}
 
 {{ define "main" }}
-<article class="article article--docs">
+{{- $binaries     := .Site.Data.download.binaries }}
+{{- $dockerImages := .Site.Data.download.docker }}
+<article class="article article--download">
   <div class="container">
     <header>
       <p class="title is-1">

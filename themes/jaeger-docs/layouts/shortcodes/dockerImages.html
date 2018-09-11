@@ -1,0 +1,32 @@
+{{- $dockerImages := .Site.Data.download.docker }}
+<table>
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Description</th>
+      <th>Pull command</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $dockerImages }}
+    {{- $image := printf "jaegertracing/%s" .name }}
+    {{- $link  := printf "https://hub.docker.com/r/%s" $image }}
+    {{- $description := .description | markdownify }}
+    <tr>
+      <td>
+        <a href="{{ $link }}">
+          {{ $image }}
+        </a>
+      </td>
+      <td>
+        {{ $description }}
+      </td>
+      <td>
+        <code>
+          docker pull {{ $image }}
+        </code>
+      </td>
+    </tr>
+    {{- end }}
+  </tbody>
+</table>

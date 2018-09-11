@@ -20,6 +20,31 @@
       li
         font-size: 1.5rem
 
+  &--download
+    .button
+      border: none
+
+      .icon
+        color: white
+
+      span
+        color: white
+
+      &.is-darwin
+        background-color: $black
+
+      &.is-linux
+        background-color: #ffcc00
+
+      &.is-windows
+        background-color: #00adef
+
+      &.is-zip
+        background-color: $danger
+
+      &.is-tar
+        background-color: $success
+
   /* Documentation pages */
   &--docs
     /* Left-hand documentation nav */
