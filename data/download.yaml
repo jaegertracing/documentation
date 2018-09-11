@@ -42,5 +42,4 @@ docker:
 - name: jaeger-es-index-cleaner
   since: 1.3
 - name: jaeger-operator
-  latest: 1.6
 

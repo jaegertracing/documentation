@@ -14,7 +14,7 @@
     {{- $link        := printf "https://hub.docker.com/r/jaegertracing/%s" $image }}
     {{- $description := .description | markdownify }}
     {{- $since       := .since }}
-    {{- $latest      := .latest | default $.Site.Params.versions.dockerImageLatest }}
+    {{- $latest      := .latest | default $.Site.Params.versions.latest }}
     <tr>
       <td>
         <a href="{{ $link }}">

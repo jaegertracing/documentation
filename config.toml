@@ -34,4 +34,3 @@ home = [ "HTML", "REDIRECTS" ]
 
 [params.versions]
 latest = "1.6"
-dockerImageLatest = "1.6.0"
