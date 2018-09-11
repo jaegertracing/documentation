@@ -10,8 +10,10 @@
   </thead>
   <tbody>
     {{- range $dockerImages }}
-    {{- $image       := .name }}
-    {{- $link        := printf "https://hub.docker.com/r/jaegertracing/%s" $image }}
+    {{- $org         := "jaegertracing" }}
+    {{- $image       := .image }}
+    {{- $fullImage   := printf "%s/%s" $org $image }}
+    {{- $link        := printf "https://hub.docker.com/r/$s/%s" $org $image }}
     {{- $description := .description | markdownify }}
     {{- $since       := .since }}
     {{- $latest      := .latest | default $.Site.Params.versions.latest }}
@@ -25,7 +27,7 @@
         {{ $description }}
       </td>
       <td>
-        <code>docker pull {{ $image }}:{{ $latest }}</code>
+        <code>docker pull {{ $fullImage }}:{{ $latest }}</code>
       </td>
       <td>
         {{ $since }}
