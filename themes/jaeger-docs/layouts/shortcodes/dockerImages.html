@@ -5,13 +5,16 @@
       <th>Image</th>
       <th>Description</th>
       <th>Pull command</th>
+      <th>Since version</th>
     </tr>
   </thead>
   <tbody>
     {{- range $dockerImages }}
-    {{- $image := printf "jaegertracing/%s" .name }}
-    {{- $link  := printf "https://hub.docker.com/r/%s" $image }}
+    {{- $image       := .name }}
+    {{- $link        := printf "https://hub.docker.com/r/jaegertracing/%s" $image }}
     {{- $description := .description | markdownify }}
+    {{- $since       := .since }}
+    {{- $latest      := .latest | default $.Site.Params.versions.dockerImageLatest }}
     <tr>
       <td>
         <a href="{{ $link }}">
@@ -22,9 +25,10 @@
         {{ $description }}
       </td>
       <td>
-        <code>
-          docker pull {{ $image }}
-        </code>
+        <code>docker pull {{ $image }}:{{ $latest }}</code>
+      </td>
+      <td>
+        {{ $since }}
       </td>
     </tr>
     {{- end }}
