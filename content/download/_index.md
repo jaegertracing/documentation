@@ -1,6 +1,5 @@
 ---
 title: Download Jaeger
-draft: true
 ---
 
 Jaeger components can be downloaded in two ways:
