@@ -1,12 +1,22 @@
 @import "variables"
 
+=syntax
+  color: $dark
+  background-color: $white-ter
+
+.is-dollar
+  color: $primary
+
+table td code
+  +syntax
+  padding: .5rem
+
 .content .highlight
   .chroma
     /* General Chroma syntax highlighting settings */
 
     /* Basics */
-    color: $dark
-    background-color: $white-ter
+    +syntax
     border-radius: .5rem
 
     /* Error */
