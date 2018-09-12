@@ -4,7 +4,6 @@
     <tr>
       <th>Image</th>
       <th>Description</th>
-      <th>Pull command</th>
       <th>Since version</th>
     </tr>
   </thead>
@@ -25,9 +24,9 @@
       </td>
       <td>
         {{ $description }}
-      </td>
-      <td>
-        <code>docker pull {{ $fullImage }}:{{ $latest }}</code>
+        <div>
+            <code>docker pull {{ $fullImage }}:{{ $latest }}</code>
+        </div>
       </td>
       <td>
         {{ $since }}
