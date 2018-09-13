@@ -16,6 +16,7 @@
     {{- $description := .description | markdownify }}
     {{- $since       := .since }}
     {{- $latest      := .latest | default $.Site.Params.versions.latest }}
+    {{- $pullCmd     := printf "<code><span class=\"is-dollar\">$</span> docker pull %s:%s</code>" $fullImage $latest | safeHTML }}
     <tr>
       <td>
         <a href="{{ $link }}">
@@ -23,9 +24,13 @@
         </a>
       </td>
       <td>
-        {{ $description }}
+        {{- with $description }}
+        <p>
+          {{ . }}
+        </p>
+        {{- end }}
         <div>
-            <code>docker pull {{ $fullImage }}:{{ $latest }}</code>
+          {{ $pullCmd }}
         </div>
       </td>
       <td>
