@@ -1,13 +1,14 @@
-{{- $binaries := .Site.Data.download.binaries }}
-{{- $fullReleaseVersions    := $binaries.fullReleaseVersions }}
-{{- $partialReleaseVersions := $binaries.partialReleaseVersions }}
-{{- $platforms              := $binaries.platforms }}
-{{- $platformInfo           := $binaries.platformInfo }}
+{{- $binaries      := .Site.Data.download.binaries }}
+{{- $latest        := $binaries.latest }}
+{{- $releaseUrl    := printf "https://github.com/jaegertracing/jaeger/releases/tag/v%s" $latest }}
+{{- $zipUrl        := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $latest }}
+{{- $tarUrl        := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $latest }}
+{{- $platforms     := $binaries.platforms }}
 <table class="table is-striped">
   <thead>
     <tr>
       <th>
-        Version
+        Latest version
       </th>
       <th>
         Assets
@@ -15,33 +16,26 @@
     </tr>
   </thead>
   <tbody>
-    {{- range sort $fullReleaseVersions "value" "desc" }}
-    {{- $version    := . }}
-    {{- $releaseUrl := printf "https://github.com/jaegertracing/jaeger/releases/tag/v%s" $version }}
-    {{- $zipUrl     := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $version }}
-    {{- $tarUrl     := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $version }}
     <tr>
       <td>
         <strong>
-          <span class="is-size-4">
+          <span class="is-size-3">
             <a href="{{ $releaseUrl }}">
-              {{ $version }}
+              {{ $latest }}
             </a>
           </span>
         </strong>
       </td>
       <td>
         <p class="buttons">
-          {{- range $platforms }}
-          {{- $platform    := . }}
-          {{- $info        := index $platformInfo $platform }}
-          {{- $name        := $info.name }}
-          {{- $icon        := $info.icon }}
-          {{- $asset       := printf "jaeger-%s-%s-amd64.tar.gz" $version $platform }}
-          {{- $downloadUrl := printf "https://github.com/jaegertracing/jaeger/releases/download/v%s/%s" $version $asset }}
-          {{- $zipUrl      := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $version }}
-          {{- $tarUrl      := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $version }}
-          <a class="button is-large is-{{ $platform }}" href="{{ $downloadUrl }}" download>
+          {{- range $key, $platform := $platforms }}
+          {{- $name        := $platform.name }}
+          {{- $icon        := $platform.icon }}
+          {{- $asset       := printf "jaeger-%s-%s-amd64.tar.gz" $latest $key }}
+          {{- $downloadUrl := printf "https://github.com/jaegertracing/jaeger/releases/download/v%s/%s" $latest $asset }}
+          {{- $zipUrl      := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $latest }}
+          {{- $tarUrl      := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $latest }}
+          <a class="button is-medium is-{{ $key }}" href="{{ $downloadUrl }}" download>
             <span class="icon">
               <i class="fab {{ $icon }}"></i>
             </span>
@@ -50,7 +44,7 @@
             </span>
           </a>
           {{- end }}
-          <a class="button is-large is-zip" href="{{ $zipUrl }}" download>
+          <a class="button is-medium is-zip" href="{{ $zipUrl }}" download>
             <span class="icon">
               <i class="fas fa-file-archive"></i>
             </span>
@@ -58,7 +52,7 @@
               Source (.zip)
             </span>
           </a>
-          <a class="button is-large is-tar" href="{{ $tarUrl }}" download>
+          <a class="button is-medium is-tar" href="{{ $tarUrl }}" download>
             <span class="icon">
               <i class="fas fa-file-archive"></i>
             </span>
@@ -69,6 +63,5 @@
         </p>
       </td>
     </tr>
-    {{- end }}
   </tbody>
 </table>

@@ -1,0 +1,16 @@
+{{- $binaries    := .Site.Data.download.binaries }}
+{{- $latest      := $binaries.latest }}
+{{- $allVersions := $binaries.allVersions }}
+<ul>
+  {{- range $allVersions }}
+  {{- $version := . }}
+  {{- if ne $version $latest }}
+  {{- $url := printf "https://github.com/jaegertracing/jaeger/releases/tag/v%s" $version }}
+  <li>
+    <a href="{{ $url }}">
+      {{ . }}
+    </a>
+  </li>
+  {{- end }}
+  {{- end }}
+</ul>
