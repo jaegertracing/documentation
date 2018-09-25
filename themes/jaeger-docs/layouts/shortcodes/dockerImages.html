@@ -1,4 +1,6 @@
 {{- $dockerImages := .Site.Data.download.docker }}
+{{- $versions     := sort (readDir "content/docs") "Name" "desc" }}
+{{- $latest       := (index ($versions) 0).Name }}
 <table>
   <thead>
     <tr>
@@ -15,8 +17,8 @@
     {{- $link        := printf "https://hub.docker.com/r/$s/%s" $org $image }}
     {{- $description := .description | markdownify }}
     {{- $since       := .since }}
-    {{- $latest      := .latest | default $.Site.Params.versions.latest }}
-    {{- $pullCmd     := printf "<code><span class=\"is-dollar\">$</span> docker pull %s:%s</code>" $fullImage $latest | safeHTML }}
+    {{- $latestImg   := .latest | default $latest }}
+    {{- $pullCmd     := printf "<code><span class=\"is-dollar\">$</span> docker pull %s:%s</code>" $fullImage $latestImg | safeHTML }}
     <tr>
       <td>
         <a href="{{ $link }}">

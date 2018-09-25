@@ -1,8 +1,8 @@
 {{- $menuPages     := .Site.Menus.docs }}
 {{- $githubRepo    := .Site.Params.githubRepo }}
 {{- $twitterHandle := .Site.Params.twitterHandle }}
-{{- $latest        := .Site.Params.versions.latest }}
 {{- $versions      := sort (readDir "content/docs") "Name" "desc" }}
+{{- $latest        := (index ($versions) 0).Name }}
 {{- $isDocsPage    := eq .Section "docs" }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
