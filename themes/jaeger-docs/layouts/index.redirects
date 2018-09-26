@@ -1,4 +1,5 @@
-{{- $latest := .Site.Params.versions.latest }}
+{{- $versions     := sort (readDir "content/docs") "Name" "desc" }}
+{{- $latest       := (index ($versions) 0).Name }}
 {{- $originalDocs := readDir "content/docs/1.6" -}}
 {{- range $originalDocs }}
 {{- if ne .Name "_index.md" }}

@@ -31,6 +31,3 @@ home = [ "HTML", "REDIRECTS" ]
     [[links]]
       title = "Docs"
       url = "/docs"
-
-[params.versions]
-latest = "1.6"

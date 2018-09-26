@@ -1,5 +1,6 @@
+{{- $versions  := sort (readDir "content/docs") "Name" "desc" }}
+{{- $latest    := (index ($versions) 0).Name }}
 {{- $version   := index (split .File.Path "/") 1 }}
-{{- $latest    := .Site.Params.versions.latest }}
 {{- $isLatest  := eq $version $latest }}
 {{- $latestUrl := .URL | replaceRE $version $latest }}
 <header>
