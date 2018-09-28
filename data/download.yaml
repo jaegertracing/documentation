@@ -1,6 +1,7 @@
 binaries:
-  latest: 1.6.0
+  latest: 1.7.0
   allVersions:
+  - 1.7.0
   - 1.6.0
   - 1.5.0
   - 1.4.1
@@ -39,4 +40,4 @@ docker:
 - image: jaeger-es-index-cleaner
   since: 1.3
 - image: jaeger-operator
-
+  since: 1.6
