@@ -168,8 +168,8 @@ clients:
       env_JAEGER_USER: yes
       env_JAEGER_PASSWORD: yes
       env_JAEGER_PROPAGATION: yes
-      128bit_trace_id: no
-      JAEGER_TRACEID_128BIT: no
+      128bit_trace_id: yes
+      JAEGER_TRACEID_128BIT: yes
 
   - language: Node.js
     repo: jaegertracing/jaeger-client-node
