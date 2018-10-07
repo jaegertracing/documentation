@@ -26,7 +26,7 @@ function get_latest_post(){
                <img src="${posts[i].thumbnail}" class="blog__topImg"></img>
                <div class="blog__content">
                   <div class="blog_preview">
-                     <h2 class="blog__title">${shortenText(posts[i].title, 0, 30)}</h2>
+                     <h2 class="blog__title">${shortenText(posts[i].title, 0, 50)}</h2>
 
                      <p class="blog__intro">${shortenText(toText(posts[i].content),0, 200)}</p>
                   </div>
