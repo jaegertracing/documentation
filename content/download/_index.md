@@ -13,9 +13,7 @@ Jaeger binaries are available for macOS, Linux, and Windows. The table below lis
 
 {{< binaries >}}
 
-You can find the binaries for previous versions on the GitHub releases page:
-
-{{< priorBinaries >}}
+You can find the binaries for previous versions on the [GitHub releases page](https://github.com/jaegertracing/jaeger/releases/).
 
 ## Docker images
 

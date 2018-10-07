@@ -14,7 +14,7 @@
     {{- $org         := "jaegertracing" }}
     {{- $image       := .image }}
     {{- $fullImage   := printf "%s/%s" $org $image }}
-    {{- $link        := printf "https://hub.docker.com/r/$s/%s" $org $image }}
+    {{- $link        := printf "https://hub.docker.com/r/%s/%s" $org $image }}
     {{- $description := .description | markdownify }}
     {{- $since       := .since }}
     {{- $latestImg   := .latest | default $latest }}
