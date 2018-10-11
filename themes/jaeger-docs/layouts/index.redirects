@@ -1,14 +1,5 @@
 {{- $versions     := .Site.Params.versions }}
 {{- $latest       := .Site.Params.latest }}
-{{- $originalDocs := readDir "content/docs/1.6" -}}
-{{- range $originalDocs }}
-{{- if ne .Name "_index.md" }}
-{{- $endpoint := .Name | replaceRE ".md" "" }}
-{{- $originalUrl := printf "/docs/%s" $endpoint }}
-{{- $latestUrl   := printf "/docs/%s/%s" $latest $endpoint }}
-{{ $originalUrl }}     {{ $latestUrl }}
-{{- end }}
-{{- end }}
 /docs    /docs/{{ $latest }}
 /docs/latest     /docs/{{ $latest }}
 /docs/latest/*     /docs/{{ $latest }}/:splat
@@ -17,3 +8,12 @@
 /docs/roadmap     /roadmap
 /docs/news     /news
 /docs/report-security-issue     /report-security-issue
+/docs/architecture     /docs/{{ $latest  }}/architecture
+/docs/client-features     /docs/{{ $latest }}/client-features
+/docs/client-libraries     /docs/{{ $latest }}/client-libraries
+/docs/deployment     /docs/{{ $latest }}/deployment
+/docs/features     /docs/{{ $latest }}/features
+/docs/getting-started     /docs/{{ $latest }}/getting-started
+/docs/monitoring     /docs/{{ $latest }}/monitoring
+/docs/sampling     /docs/{{ $latest }}/sampling
+/docs/troubleshooting     /docs/{{ $latest }}/troubleshooting
