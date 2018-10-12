@@ -27,6 +27,10 @@ home = [ "HTML", "REDIRECTS" ]
   newsletterTitle = "September 2018 project update"
   newsletterURL   = "https://medium.com/jaegertracing/september-2018-newsletter-26ae7e8c3f00"
 
+  latest         = "1.7"
+  binariesLatest = "1.7.0"
+  versions       = ["1.6", "1.7"]
+
   [navbar]
     [[links]]
       title = "Docs"

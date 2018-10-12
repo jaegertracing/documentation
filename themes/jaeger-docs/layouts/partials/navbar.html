@@ -1,8 +1,9 @@
 {{- $menuPages     := .Site.Menus.docs }}
 {{- $githubRepo    := .Site.Params.githubRepo }}
 {{- $twitterHandle := .Site.Params.twitterHandle }}
-{{- $versions      := sort (readDir "content/docs") "Name" "desc" }}
-{{- $latest        := (index ($versions) 0).Name }}
+{{- $versions      := .Site.Params.versions }}
+{{- $latest        := .Site.Params.latest }}
+{{- $docs          := where .Site.Pages "Section" "docs" }}
 {{- $isDocsPage    := eq .Section "docs" }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
@@ -32,7 +33,7 @@
           </a>
           <div class="navbar-dropdown">
             {{- range $versions }}
-            {{- $version := .Name }}
+            {{- $version := . }}
             {{- $isLatest := eq $version $latest }}
             <a class="navbar-item" href="/docs/{{ $version }}">
               {{ $version }}{{ if $isLatest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end }}
@@ -46,11 +47,10 @@
             Docs
           </a>
           <div class="navbar-dropdown">
-            {{- range .Site.Pages }}
+            {{- range $docs }}
             {{- $docVersion := index (split .File.Path "/") 1 }}
-            {{- $isLatest := eq $docVersion $latest }}
-            {{- if and $isLatest (not .Params.hasparent) }}
-            <a class="navbar-item" href="{{ .Permalink }}">
+            {{- if eq $docVersion $latest }}
+            <a class="navbar-item" href="{{ .URL }}">
               {{ .Title }}
             </a>
             {{- end }}
