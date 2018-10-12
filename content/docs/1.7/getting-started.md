@@ -8,11 +8,11 @@ weight: 2
 
 Your applications must be instrumented before they can send tracing data to Jaeger backend. Check the [Client Libraries](../client-libraries) section for information about how to use the OpenTracing API and how to initialize and configure Jaeger tracers.
 
-## All in one Docker image
+## All in One
 
-This image, designed for quick local testing, launches the Jaeger UI, collector, query, and agent, with an in memory storage component.
+All-in-one is an executable designed for quick local testing, launches the Jaeger UI, collector, query, and agent, with an in memory storage component.
 
-The simplest way to start the all in one docker image is to use the pre-built image published to DockerHub (a single command line).
+The simplest way to start the all-in-one is to use the pre-built image published to DockerHub (a single command line).
 
 ```bash
 $ docker run -d --name jaeger \
@@ -27,25 +27,32 @@ $ docker run -d --name jaeger \
   jaegertracing/all-in-one:{{< currentVersion >}}
 ```
 
+Or run the `jaeger-all-in-one(.exe)` executable from the [binary distribution archives][download]:
+
+```bash
+$ jaeger-all-in-one --collector.zipkin.http-port=9411
+```
+
 You can then navigate to `http://localhost:16686` to access the Jaeger UI.
 
 The container exposes the following ports:
 
-Port | Protocol | Component | Function
----- | -------  | --------- | ---
-5775 | UDP      | agent     | accept zipkin.thrift over compact thrift protocol
-6831 | UDP      | agent     | accept jaeger.thrift over compact thrift protocol
-6832 | UDP      | agent     | accept jaeger.thrift over binary thrift protocol
-5778 | HTTP     | agent     | serve configs
-16686| HTTP     | query     | serve frontend
-14268 | HTTP     | collector | accept jaeger.thrift directly from clients
-9411 | HTTP     | collector | Zipkin compatible endpoint
+Port  | Protocol | Component | Function
+----- | -------  | --------- | ---
+5775  | UDP      | agent     | accept `zipkin.thrift` over compact thrift protocol (deprecated, used by legacy clients only)
+6831  | UDP      | agent     | accept `jaeger.thrift` over compact thrift protocol
+6832  | UDP      | agent     | accept `jaeger.thrift` over binary thrift protocol
+5778  | HTTP     | agent     | serve configs
+16686 | HTTP     | query     | serve frontend
+14268 | HTTP     | collector | accept `jaeger.thrift` directly from clients
+9411  | HTTP     | collector | Zipkin compatible endpoint (optional)
 
 
 ## Kubernetes and OpenShift
 
-Kubernetes and OpenShift templates can be found in the [Jaegertracing](https://github.com/jaegertracing/) organization on
-Github.
+* Kubernetes templates: https://github.com/jaegertracing/jaeger-kubernetes
+* Kubernetes Operator: https://github.com/jaegertracing/jaeger-operator
+* OpenShift templates: https://github.com/jaegertracing/jaeger-openshift
 
 ## Sample Application
 
@@ -68,8 +75,7 @@ cd $GOPATH/src/github.com/jaegertracing
 git clone git@github.com:jaegertracing/jaeger.git jaeger
 cd jaeger
 make install
-cd examples/hotrod
-go run ./main.go all
+go run ./examples/hotrod/main.go all
 ```
 ##### From docker
 ```bash
@@ -79,6 +85,12 @@ $ docker run --rm -it \
   jaegertracing/example-hotrod:{{< currentVersion >}} \
   --jaeger-agent.host-port=jaeger:6831 \
   all
+```
+
+##### From binary distribution
+Run `example-hotrod(.exe)` executable from the [binary distribution archives][download]:
+```bash
+$ example-hotrod all
 ```
 
 Then navigate to `http://localhost:8080`.
@@ -101,8 +113,8 @@ Then navigate to `http://localhost:8080`.
 
 #### Prerequisites
 
--   You need Go 1.9 or higher installed on your machine.
--   Requires a [running Jaeger backend](#all-in-one-docker-image) to view the {{< tip "traces" "trace" >}}.
+-   You need Go 1.11 or higher installed on your machine to run from source.
+-   Requires a [running Jaeger backend](#all-in-one-docker-image) to view the traces.
 
 ## Client Libraries
 
@@ -131,3 +143,4 @@ Zipkin Thrift IDL file can be found in [jaegertracing/jaeger-idl](https://github
 It's compatible with [openzipkin/zipkin-api](https://github.com/openzipkin/zipkin-api/blob/master/thrift/zipkinCore.thrift)
 
 [hotrod-tutorial]: https://medium.com/@YuriShkuro/take-opentracing-for-a-hotrod-ride-f6e3141f7941
+[download]: ../../../download/
