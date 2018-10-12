@@ -105,7 +105,7 @@ When `SpanContext` is encoded on the wire as part of the request to another serv
         * 0 means the trace is not sampled and all downstream services are advised to respect that
             * We’re considering a new feature that allows downstream services to upsample if they find their tracing level is too low
     * Bit 2 is “debug” flag
-        * Debug flag implies sampled flag
+        * Debug flag should only be set when the sampled flag is set
         * Instructs the backend to try really hard not to drop this trace
     * Other bits are unused
 
