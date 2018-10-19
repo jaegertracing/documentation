@@ -49,7 +49,7 @@
           <div class="navbar-dropdown">
             {{- range $docs }}
             {{- $docVersion := index (split .File.Path "/") 1 }}
-            {{- if eq $docVersion $latest }}
+            {{- if and (eq $docVersion $latest) (not .Params.hasparent) }}
             <a class="navbar-item" href="{{ .URL }}">
               {{ .Title }}
             </a>
