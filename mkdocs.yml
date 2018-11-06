@@ -5,7 +5,6 @@ theme_dir: docs/theme
 markdown_extensions:
   - admonition
   - codehilite
-  - toc(permalink=true)
   - pymdownx.betterem(smart_enable=all)
   - pymdownx.caret
   - pymdownx.critic
