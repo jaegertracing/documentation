@@ -5,15 +5,6 @@ theme_dir: docs/theme
 markdown_extensions:
   - admonition
   - codehilite
-  - pymdownx.betterem(smart_enable=all)
-  - pymdownx.caret
-  - pymdownx.critic
-  - pymdownx.inlinehilite
-  - pymdownx.mark
-  - pymdownx.smartsymbols
-  - pymdownx.superfences
-  - pymdownx.tasklist(custom_checkbox=true)
-  - pymdownx.tilde
 site_favicon: 'images/favicon.ico'
 repo_name: 'jaegertracing/jaeger'
 repo_url: 'https://github.com/jaegertracing/jaeger'
