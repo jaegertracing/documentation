@@ -120,7 +120,7 @@ Collectors require a persistent storage backend. Cassandra and ElasticSearch are
 
 The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` and `memory` (only for all-in-one binary).
 As of version 1.6.0, it's possible to use multiple storage types at the same time by providing a comma-separated list of valid types to the `SPAN_STORAGE_TYPE` environment variable.
-It's important to node that all listed storage types are used for writing, but only the first type in the list will be used for reading and archiving.
+It's important to note that all listed storage types are used for writing, but only the first type in the list will be used for reading and archiving.
 
 ### Memory
 
