@@ -1,5 +1,6 @@
-{{- $json  := getJSON "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/jaegertracing" }}
-{{- $posts := $json.items }}
+{{- $maxBlogPosts := .Site.Params.maxBlogPosts }}
+{{- $json         := getJSON "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/jaegertracing" }}
+{{- $posts        := first $maxBlogPosts $json.items }}
 <section class="section section-news-stand">
   <div class="blog" id="blog">
     <h1 class="title is-spaced">Latest articles from our blog</h1>
