@@ -1,25 +1,18 @@
-{{- $versions := sort (readDir "content/docs") "Name" "desc" }}
-{{- $latest   := (index ($versions) 0).Name }}
-{{- $json     := getJSON "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/jaegertracing" }}
-{{- $posts    := $json.items }}
-{{- $newsletters := (slice) }}
-{{- range $posts }}
-{{- if in .categories "newsletter" }}
-{{- $newsletters = $newsletters | append . }}
-{{- end }}
-{{- end }}
-{{- $newestNewsletter := index $newsletters 0 }}
+{{- $versions        := sort (readDir "content/docs") "Name" "desc" }}
+{{- $latest          := (index ($versions) 0).Name }}
+{{- $newsletterLink  := .newestNewsletter.link }}
+{{- $newsletterTitle := .newestNewsletter.title }}
 <section class="hero hero--home is-info is-medium">
   <div class="hero-body">
     <div class="container">
       <div class="columns">
         <div class="column has-text-centered">
           <h1 class="title has-text-weight-bold is-size-1 is-size-2-mobile is-spaced">
-            {{ .Site.Title }}
+            {{ .title }}
           </h1>
 
           <p class="subtitle hero--subtitle is-size-3 is-size-4-mobile">
-            {{ .Site.Params.tagline | markdownify }}
+            {{ .tagline | markdownify }}
           </p>
 
           <div class="container">
@@ -42,12 +35,12 @@
                 </span>
               </a>
 
-              <a href="{{ $newestNewsletter.link }}" target="_blank" class="button is-medium is-success is-uppercase is-outlined has-text-weight-bold">
+              <a href="{{ $newsletterLink }}" target="_blank" class="button is-medium is-success is-uppercase is-outlined has-text-weight-bold">
                 <span class="icon">
                   <i class="fas fa-bullhorn"></i>
                 </span>
                 <span>
-                    {{ $newestNewsletter.title }}
+                    {{ $newsletterTitle }}
                 </span>
               </a>
             </div>
