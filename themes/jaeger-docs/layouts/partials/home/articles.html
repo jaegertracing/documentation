@@ -1,9 +1,11 @@
 {{- $maxBlogPosts := .Site.Params.maxBlogPosts }}
 {{- $json         := getJSON "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/jaegertracing" }}
 {{- $posts        := first $maxBlogPosts $json.items }}
+{{- $mostRecent   := index $json.items 0 }}
 <section class="section section-news-stand">
   <div class="blog" id="blog">
     <h1 class="title is-spaced">Latest articles from our blog</h1>
+
     <div class="blog__container">
       <ul class="blog__slider">
         {{- range $posts }}
