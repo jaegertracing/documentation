@@ -13,4 +13,3 @@
 {{- $prodCss := $css | fingerprint }}
 <link rel="stylesheet" media="screen" href="{{ $prodCss.RelPermalink }}" integrity="{{ $prodCss.Data.Integrity }}">
 {{- end }}
-<link rel="stylesheet" href="/css/st-latest-articles.css">

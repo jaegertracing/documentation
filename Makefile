@@ -18,8 +18,7 @@ develop:
 	hugo server \
         --buildDrafts \
         --buildFuture \
-        --disableFastRender \
-        --ignoreCache
+        --disableFastRender
 
 htmlproofer-setup:
 	gem install bundler \
