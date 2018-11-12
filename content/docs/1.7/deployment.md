@@ -248,9 +248,9 @@ more information about choosing how many shards should be chosen for optimizatio
 Supported in Jaeger since 1.6.0
 Supported Kafka versions: 0.8+
 
-In version 1.7.0, the Kafka storage backend implementation only supports writing data, this means you will need to use another one (with the multiple storage types feature) to be able to view the traces in the Query component.
+In version 1.6.0, the Kafka storage backend implementation only supports writing data, this means you will need to use another one (with the multiple storage types feature) to be able to view the traces in the Query component.
 
-Starting from version 1.7.0, a new component (Ingester) was be added to support reading from Kafka and storing it in another storage backend (Elasticsearch or Cassandra).
+Starting from version 1.7.0, a new component (Ingester) has been added to support reading from Kafka and storing it in another storage backend (Elasticsearch or Cassandra).
 
 Writing to Kafka is particularly useful for building post-processing data pipelines.
 
