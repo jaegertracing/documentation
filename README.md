@@ -6,19 +6,9 @@ The site is built and hosted by [Netlify](https://www.netlify.com/).
 
 ## Setup
 
-### macOS
-
-To develop the website on macOS, you'll first need to have [Homebrew](https://brew.sh) installed. Once you have Homebrew:
-
-```bash
-$ brew install hugo
-```
-
-This will install [Hugo](https://gohugo.io), the site's static site generator.
-
-### Linux
-
-Coming soon.
+Install the extended hugo binary from [hugo/releases]https://github.com/gohugoio/hugo/releases or
+use package manager if it is available for your operating system.
+The currently used version of hugo is defined in `netifly.toml` configuration file.
 
 ## Running the site locally
 

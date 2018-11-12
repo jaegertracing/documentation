@@ -10,6 +10,7 @@ Component             | Repository
 **jaeger-agent**      | [hub.docker.com/r/jaegertracing/jaeger-agent/](https://hub.docker.com/r/jaegertracing/jaeger-agent/)
 **jaeger-collector**  | [hub.docker.com/r/jaegertracing/jaeger-collector/](https://hub.docker.com/r/jaegertracing/jaeger-collector/)
 **jaeger-query**      | [hub.docker.com/r/jaegertracing/jaeger-query/](https://hub.docker.com/r/jaegertracing/jaeger-query/)
+**jaeger-ingester**   | [hub.docker.com/r/jaegertracing/jaeger-ingester/](https://hub.docker.com/r/jaegertracing/jaeger-ingester/)
 
 There are orchestration templates for running Jaeger with:
 
@@ -26,7 +27,7 @@ Jaeger binaries can be configured in a number of ways (in the order of decreasin
 
 To see the complete list of options, run the binary with `help` command. Options that are specific to a certain storage backend are only listed if the storage type is selected. For example, to see all available options in the Collector with Cassandra storage:
 
-```
+```sh
 $ docker run --rm \
     -e SPAN_STORAGE_TYPE=cassandra \
     jaegertracing/jaeger-collector:{{< currentVersion >}} \
@@ -54,7 +55,7 @@ Port | Protocol | Function
 
 It can be executed directly on the host or via Docker, as follows:
 
-```bash
+```sh
 ## make sure to expose only the ports you use in your deployment scenario!
 docker run \
   --rm \
@@ -73,7 +74,7 @@ The agent can also be configured with a static list of collector addresses.
 
 On Docker, a command like the following can be used:
 
-```bash
+```sh
 docker run \
   --rm \
   -p5775:5775/udp \
@@ -81,7 +82,7 @@ docker run \
   -p6832:6832/udp \
   -p5778:5778/tcp \
   jaegertracing/jaeger-agent:{{< currentVersion >}} \
-  --collector.host-port=jaeger-collector.jaeger-infra.svc:14267
+  --reporter.tchannel.collector.host-port=jaeger-collector.jaeger-infra.svc:14267
 ```
 
 In the future we will support different service discovery systems to dynamically load balance
@@ -94,13 +95,13 @@ Collectors require almost no configuration, except for the location of Cassandra
 via `--cassandra.keyspace` and `--cassandra.servers` options, or the location of Elasticsearch cluster, via
 `--es.server-urls`, depending on which storage is specified. To see all command line options run
 
-```
+```sh
 go run ./cmd/collector/main.go -h
 ```
 
 or, if you don't have the source code
 
-```
+```sh
 docker run -it --rm jaegertracing/jaeger-collector:{{< currentVersion >}} -h
 ```
 
@@ -120,7 +121,7 @@ Collectors require a persistent storage backend. Cassandra and Elasticsearch are
 
 The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` and `memory` (only for all-in-one binary).
 As of version 1.6.0, it's possible to use multiple storage types at the same time by providing a comma-separated list of valid types to the `SPAN_STORAGE_TYPE` environment variable.
-It's important to node that all listed storage types are used for writing, but only the first type in the list will be used for reading and archiving.
+It's important to note that all listed storage types are used for writing, but only the first type in the list will be used for reading and archiving.
 
 ### Memory
 
@@ -175,7 +176,7 @@ Jaeger supports TLS client to node connections as long as you've configured
 your Cassandra cluster correctly. After verifying with e.g. `cqlsh`, you can
 configure the collector and query like so:
 
-```
+```sh
 docker run \
   -e CASSANDRA_SERVERS=<...> \
   -e CASSANDRA_TLS=true \
@@ -248,9 +249,7 @@ more information about choosing how many shards should be chosen for optimizatio
 Supported in Jaeger since 1.6.0
 Supported Kafka versions: 0.8+
 
-In version 1.6.0, the Kafka storage backend implementation only supports writing data, this means you will need to use another one (with the multiple storage types feature) to be able to view the traces in the Query component.
-
-Starting from version 1.7.0, a new component (Ingester) will be added to support reading from Kafka and storing it in another storage backend (Elasticsearch or Cassandra).
+Starting from version 1.7.0, a new component [Ingester](#ingester) was added to support reading from Kafka and storing it in another storage backend (Elasticsearch or Cassandra).
 
 Writing to Kafka is particularly useful for building post-processing data pipelines.
 
@@ -277,6 +276,22 @@ docker run \
 Unless your Kafka cluster is configured to automatically create topics, you will need to create it ahead of time. You can refer to [the Kafka quickstart documentation](https://kafka.apache.org/documentation/#quickstart_createtopic) to learn how.
 
 You can find more information about topics and partitions in general in the [official documentation](https://kafka.apache.org/documentation/#intro_topics). [This article](https://www.confluent.io/blog/how-to-choose-the-number-of-topicspartitions-in-a-kafka-cluster/) provide more details about how to choose the number of partitions.
+
+## Ingester
+**jaeger-ingester** is a service which reads span data from Kafka topic and writes it to another storage backend (Elasticsearch or Cassandra).
+
+Port  | Protocol | Function
+----- | -------  | ---
+14270 | HTTP     | Health check at **/**
+14271 | HTTP     | Metrics endpoint
+
+To view all exposed configuration options run the following command:
+```sh
+docker run \
+  -e SPAN_STORAGE_TYPE=cassandra \
+  jaegertracing/jaeger-ingester:{{< currentVersion >}} 
+  --help \
+```
 
 ## Query Service & UI
 

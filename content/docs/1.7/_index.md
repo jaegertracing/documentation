@@ -39,7 +39,7 @@ See [Features](./features/) page for more details.
   * React/Javascript UI
   * Supported storage backends:
     * [Cassandra 3.4+](./deployment/#cassandra)
-    * [ElasticSearch 5.x, 6.x](./deployment/#elasticsearch)
+    * [Elasticsearch 5.x, 6.x](./deployment/#elasticsearch)
     * memory storage
 
 ## Quick Start
