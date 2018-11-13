@@ -6,7 +6,7 @@ The site is built and hosted by [Netlify](https://www.netlify.com/).
 
 ## Setup
 
-Install the extended hugo binary from [hugo/releases]https://github.com/gohugoio/hugo/releases or
+Install the extended hugo binary from [hugo/releases](https://github.com/gohugoio/hugo/releases) or
 use package manager if it is available for your operating system.
 The currently used version of hugo is defined in [netifly.toml](./netifly.toml) configuration file.
 
