@@ -28,6 +28,21 @@ The site is published automatically by [Netlify](https://www.netlify.com/) whene
 
 We strongly encourage you to contribute to this site! For more information, see the [contributing](CONTRIBUTING.md) guide.
 
+### Publishing new Jaeger version
+
+Each Jaeger version is documented in a separate directory e.g. [content/docs/1.8](./content/docs//1.8).
+
+When submitting changes for the new version please split commits with changes
+and files copy of the previous documentation files. The following steps shows
+a possible workflow:
+
+1. copy files from old version to a new directory
+2. add the new version to [comfig.toml](./config.toml)
+3. commit the copied files
+4. make documentation changes for the new version
+5. commit the changes related to the new version
+6. submit a pull request and do not squash commits
+
 ## License
 
 [Apache 2.0 License](./LICENSE).
