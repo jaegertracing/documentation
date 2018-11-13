@@ -21,13 +21,13 @@ Jaeger's clients adhere to the data model described in the OpenTracing standard.
 
 ![Architecture](/img/architecture.png)
 
-This section details the constituents of Jaeger and how they relate to each other. It is arranged by the order in which spans from your application interact with them.
+This section details the constituent parts of Jaeger and how they relate to each other. It is arranged by the order in which spans from your application interact with them.
 
 ### Jaeger client libraries
 
 Jaeger clients are language specific implementations of the [OpenTracing API](http://opentracing.io). They can be used to instrument applications for distributed tracing either manually or with a variety of existing open source frameworks, such as Flask, Dropwizard, gRPC, and many more, that are already integrated with OpenTracing.
 
-An instrumented service creates {{< tip "spans" "span" >}} when receiving new requests and attaches context information ({{< tip "trace" >}} id, span id, and baggage) to outgoing requests. Only ids and baggage are propagated with requests; all other information that compose a span like operation name, logs, etc. is not propagated. Instead sampled spans are transmitted out of process asynchronously, in the background, to Jaeger Agents.
+An instrumented service creates {{< tip "spans" "span" >}} when receiving new requests and attaches context information ({{< tip "trace" >}} id, span id, and baggage) to outgoing requests. Only ids and baggage are propagated with requests; all other information that compose a span like operation name, logs, etc. are not propagated. Instead sampled spans are transmitted out of process asynchronously, in the background, to Jaeger Agents.
 
 The instrumentation has very little overhead, and is designed to be always enabled in production.
 

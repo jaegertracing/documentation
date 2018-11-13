@@ -82,7 +82,7 @@ docker run \
   -p6832:6832/udp \
   -p5778:5778/tcp \
   jaegertracing/jaeger-agent:{{< currentVersion >}} \
-  --reporter.tchannel.collector.host-port=jaeger-collector.jaeger-infra.svc:14267
+  --reporter.tchannel.host-port=jaeger-collector.jaeger-infra.svc:14267
 ```
 
 In the future we will support different service discovery systems to dynamically load balance
