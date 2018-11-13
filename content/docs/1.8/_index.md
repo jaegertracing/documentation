@@ -40,6 +40,7 @@ See [Features](./features/) page for more details.
   * Supported storage backends:
     * [Cassandra 3.4+](./deployment/#cassandra)
     * [Elasticsearch 5.x, 6.x](./deployment/#elasticsearch)
+    * [Kafka](./deployment/#kafka)
     * memory storage
 
 ## Quick Start

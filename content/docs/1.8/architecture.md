@@ -48,3 +48,7 @@ By default, Jaeger client samples 0.1% of traces (1 in 1000), and has the abilit
 ### Query
 
 {{< definition "query" >}}
+
+### Ingester
+
+{{< definition "ingester" >}}

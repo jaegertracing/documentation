@@ -91,7 +91,7 @@ across several collectors ([issue 213](https://github.com/jaegertracing/jaeger/i
 
 The collectors are stateless and thus many instances of **jaeger-collector** can be run in parallel.
 Collectors require almost no configuration, except for the location of Cassandra cluster,
-via `--cassandra.keyspace` and `--cassandra.servers` options, or the location of ElasticSearch cluster, via
+via `--cassandra.keyspace` and `--cassandra.servers` options, or the location of Elasticsearch cluster, via
 `--es.server-urls`, depending on which storage is specified. To see all command line options run
 
 ```
@@ -116,7 +116,7 @@ Port  | Protocol | Function
 
 ## Storage Backends
 
-Collectors require a persistent storage backend. Cassandra and ElasticSearch are the primary supported storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
+Collectors require a persistent storage backend. Cassandra and Elasticsearch are the primary supported storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
 The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` and `memory` (only for all-in-one binary).
 As of version 1.6.0, it's possible to use multiple storage types at the same time by providing a comma-separated list of valid types to the `SPAN_STORAGE_TYPE` environment variable.
@@ -210,12 +210,12 @@ usercert = ~/.cassandra/client-cert
 # validate = false
 ```
 
-### ElasticSearch
+### Elasticsearch
 Supported in Jaeger since 0.6.0
 Supported versions: 5.x, 6.x
 
-ElasticSearch does not require initialization other than
-[installing and running ElasticSearch](https://www.elastic.co/downloads/elasticsearch).
+Elasticsearch does not require initialization other than
+[installing and running Elasticsearch](https://www.elastic.co/downloads/elasticsearch).
 Once it is running, pass the correct configuration values to the Jaeger collector and query service.
 
 #### Configuration
@@ -236,9 +236,9 @@ docker run \
   --help
 ```
 
-See the [README](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/es/README.md) for an in-depth overview of how Jaeger uses ElasticSearch for storage.
+See the [README](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/es/README.md) for an in-depth overview of how Jaeger uses Elasticsearch for storage.
 
-#### Shards and Replicas for ElasticSearch indices
+#### Shards and Replicas for Elasticsearch indices
 
 Shards and replicas are some configuration values to take special attention to, because this is decided upon
 index creation. [This article](https://qbox.io/blog/optimizing-elasticsearch-how-many-shards-per-index) goes into
