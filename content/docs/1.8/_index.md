@@ -19,7 +19,7 @@ It is used for monitoring and troubleshooting microservices-based distributed sy
 * Service dependency analysis
 * Performance / latency optimization
 
-We published a blog post, [Evolving Distributed Tracing at Uber](https://eng.uber.com/distributed-tracing/), where we explain the history and reasons for the architectural choices made in Jaeger.
+Uber published a blog post, [Evolving Distributed Tracing at Uber](https://eng.uber.com/distributed-tracing/), where they explain the history and reasons for the architectural choices made in Jaeger.
 
 ## Features
 
