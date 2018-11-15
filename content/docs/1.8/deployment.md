@@ -329,6 +329,7 @@ An example configuration file:
     "dagMaxNumServices": 200,
     "menuEnabled": true
   },
+  "archiveEnabled": true,
   "tracking": {
     "gaID": "UA-000000-2",
     "trackErrors": true
@@ -354,6 +355,8 @@ An example configuration file:
 `dependencies.dagMaxNumServices` defines the maximum number of services allowed before the DAG dependency view is disabled. Default: `200`.
 
 `dependencies.menuEnabled` enables (`true`) or disables (`false`) the dependencies menu button. Default: `true`.
+
+`archiveEnabled` enables (`true`) or disables (`false`) the archive traces button. Default: `false`. It requires a configuration of an archive storage in Query service.
 
 `tracking.gaID` defines the Google Analytics tracking ID. This is required for Google Analytics tracking, and setting it to a non-`null` value enables Google Analytics tracking. Default: `null`.
 
