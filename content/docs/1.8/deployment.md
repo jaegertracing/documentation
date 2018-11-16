@@ -356,7 +356,7 @@ An example configuration file:
 
 `dependencies.menuEnabled` enables (`true`) or disables (`false`) the dependencies menu button. Default: `true`.
 
-`archiveEnabled` enables (`true`) or disables (`false`) the archive traces button. Default: `false`. It requires a configuration of an archive storage in Query service.
+`archiveEnabled` enables (`true`) or disables (`false`) the archive traces button. Default: `false`. It requires a configuration of an archive storage in Query service. Archived traces are only accessible directly by ID, they are not searchable.
 
 `tracking.gaID` defines the Google Analytics tracking ID. This is required for Google Analytics tracking, and setting it to a non-`null` value enables Google Analytics tracking. Default: `null`.
 
