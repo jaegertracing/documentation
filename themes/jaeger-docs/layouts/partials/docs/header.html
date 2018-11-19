@@ -1,9 +1,9 @@
-{{- $versions  := .Site.Params.versions }}
-{{- $latest    := .Site.Params.latest }}
-{{- $version   := index (split .File.Path "/") 1 }}
-{{- $isLatest  := eq $version $latest }}
-{{- $isRelease := eq $version "next-release" }}
-{{- $latestUrl := .URL | replaceRE $version $latest }}
+{{- $versions      := .Site.Params.versions }}
+{{- $latest        := .Site.Params.latest }}
+{{- $version       := index (split .File.Path "/") 1 }}
+{{- $isLatest      := eq $version $latest }}
+{{- $isNextRelease := eq $version "next-release" }}
+{{- $latestUrl     := .URL | replaceRE $version $latest }}
 <header>
   <p class="title is-1">{{ .Title }}</p>
   {{- with .Params.description }}<p class="subtitle is-3">{{ . }}</p>{{ end }}
@@ -13,7 +13,7 @@
     </span>
     {{- if $isLatest }}
     <span class="tag is-medium is-success">Latest</span>
-    {{- else if $isRelease }}
+    {{- else if $isNextRelease }}
     <a class="tag is-medium is-info">
       Preview
     </a>
