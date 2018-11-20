@@ -24,7 +24,6 @@ home = [ "HTML", "REDIRECTS" ]
   mediumHandle   = "jaegertracing"
   gitterHandle   = "jaegertracing"
   openGraphImage = "img/jaeger-icon-color.png"
-  newsletterTitle = "October 2018 project update"
   maxBlogPosts   = 100
 
   latest         = "1.8"
