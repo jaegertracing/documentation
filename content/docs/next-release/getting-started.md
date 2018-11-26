@@ -45,6 +45,7 @@ Port  | Protocol | Component | Function
 5778  | HTTP     | agent     | serve configs
 16686 | HTTP     | query     | serve frontend
 14268 | HTTP     | collector | accept `jaeger.thrift` directly from clients
+14250 | HTTP     | collector | accept `model.proto`
 9411  | HTTP     | collector | Zipkin compatible endpoint (optional)
 
 
