@@ -85,11 +85,12 @@ docker run \
   --reporter.tchannel.host-port=jaeger-collector.jaeger-infra.svc:14267
 ```
 
+Or add `--reporter.type=grpc` and `--reporter.grpc.host-port=jaeger-collector.jaeger-infra.svc:14250` to use gRPC
+communication with the collector. Then the `tchannel` option can be removed.
+
 In the future we will support different service discovery systems to dynamically load balance
 across several collectors ([issue 213](https://github.com/jaegertracing/jaeger/issues/213)).
 
-Or add `--reporter.type=grpc` and `--reporter.grpc.host-port=jaeger-collector.jaeger-infra.svc:14250` to use gRPC
-communication with the collector.
 
 ## Collectors
 
