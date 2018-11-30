@@ -8,7 +8,7 @@ The site is built and hosted by [Netlify](https://www.netlify.com/).
 
 Install the extended hugo binary from [hugo/releases](https://github.com/gohugoio/hugo/releases) or
 use package manager if it is available for your operating system.
-The currently used version of hugo is defined in [netifly.toml](./netifly.toml) configuration file.
+The currently used version of hugo is defined in [netlify.toml](./netlify.toml) configuration file.
 
 ## Running the site locally
 
@@ -18,7 +18,7 @@ If you want to develop the site locally, you can run a single command (assuming 
 $ make develop
 ```
 
-This will start up a local server on localhost port 1313. When you make changes to either the content of the website (in [`content`](content)) *or* to the Sass and JavaScript assets of the page (in [`themes/jaeger-docs/source`](themes/jaeger-docs/source)), the browser will automatically update to reflect those changes (usually in under one second).
+This will start up a local server on localhost port 1313. When you make changes to either the content of the website (in [`content`](content)) *or* to the Sass and JavaScript assets of the page (in [`themes/jaeger-docs/assets`](themes/jaeger-docs/assets)), the browser will automatically update to reflect those changes (usually in under one second).
 
 ## Publishing the site
 
