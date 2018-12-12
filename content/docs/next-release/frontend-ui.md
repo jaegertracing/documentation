@@ -1,5 +1,5 @@
 ---
-title: Interface
+title: Frontend/UI
 weight: 10
 ---
 
@@ -33,9 +33,9 @@ For example:
     uiEmbed=v0
 ```
 
-![Embed Search Traces](/img/interface/embed-search-traces.png)
+![Embed Search Traces](/img/frontend-ui/embed-search-traces.png)
 
-We have a button in this kind of view that redirect us to the search traces page in the Jaeger Site <img src="/img/interface/embed-open-icon.png" style="width: 20px; height:20px; display:inline;" alt="Embed open window">.  
+We have a button in this kind of view that redirect us to the search traces page in the Jaeger Site <img src="/img/frontend-ui/embed-open-icon.png" style="width: 20px; height:20px; display:inline;" alt="Embed open window">.  
 
 ##### Optionally
 
@@ -55,7 +55,7 @@ We can use an extra options in the embed mode :
     uiSearchHideGraph=1s
 ```
 
-![Embed Search Traces without Graph](/img/interface/embed-search-traces-hide-graph.png)
+![Embed Search Traces without Graph](/img/frontend-ui/embed-search-traces-hide-graph.png)
 
 #### Trace Page
 
@@ -68,11 +68,11 @@ For example:
 <JAEGER UI URL>/trace/<TRACE ID>?
     uiEmbed=v0
 ```
-![Embed Trace view](/img/interface/embed-trace-view.png)
+![Embed Trace view](/img/frontend-ui/embed-trace-view.png)
 
 If we have navigated to this view from the search traces page we'll have a button to go back to the results page.
 
-![Embed Trace view](/img/interface/embed-trace-view-with-back-button.png)
+![Embed Trace view](/img/frontend-ui/embed-trace-view-with-back-button.png)
 
 We have a new button in this kind of view that redirect us to the trace page in the Jaeger Site <img src="/img/interface/embed-open-icon.png" style="width: 20px; height:20px; display:inline;" alt="Embed open window">.
 
@@ -86,7 +86,7 @@ We can use an extra options in the embed mode :
     uiEmbed=v0&
     uiTimelineShowMap=1
 ```
-![Embed Trace view](/img/interface/embed-trace-view-with-minimap.png)
+![Embed Trace view](/img/frontend-ui/embed-trace-view-with-minimap.png)
 
 * uiTimelineShowDetails = 1 `Show the details of the trace`
 
@@ -95,7 +95,7 @@ We can use an extra options in the embed mode :
     uiEmbed=v0&
     uiTimelineShowDetails=1
 ```
-![Embed Trace view](/img/interface/embed-trace-view-with-details.png)
+![Embed Trace view](/img/frontend-ui/embed-trace-view-with-details.png)
 
 
 We can also combine the options
@@ -105,4 +105,4 @@ We can also combine the options
     uiTimelineShowDetails=1&
     uiTimelineShowMap=1
 ```
-![Embed Trace view](/img/interface/embed-trace-view-with-details-and-minimap.png)
+![Embed Trace view](/img/frontend-ui/embed-trace-view-with-details-and-minimap.png)
