@@ -252,7 +252,7 @@ more information about choosing how many shards should be chosen for optimizatio
 
 ### Kafka
 Supported in Jaeger since 1.6.0
-Supported Kafka versions: 0.8+
+Supported Kafka versions: 0.9+
 
 Starting from version 1.7.0, a new component [Ingester](#ingester) was added to support reading from Kafka and storing it in another storage backend (Elasticsearch or Cassandra).
 

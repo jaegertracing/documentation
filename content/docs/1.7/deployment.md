@@ -246,7 +246,7 @@ more information about choosing how many shards should be chosen for optimizatio
 
 ### Kafka
 Supported in Jaeger since 1.6.0
-Supported Kafka versions: 0.8+
+Supported Kafka versions: 0.9+
 
 In version 1.6.0, the Kafka storage backend implementation only supports writing data, this means you will need to use another one (with the multiple storage types feature) to be able to view the traces in the Query component.
 
