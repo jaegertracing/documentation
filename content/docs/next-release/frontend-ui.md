@@ -3,12 +3,23 @@ title: Frontend/UI
 weight: 10
 ---
 
-Jaeger Web UI is implemented in Javascript using popular open source frameworks like React. Several performance improvements have been released in v1.0 to allow the UI to efficiently deal with large volumes of data, and to display traces with tens of thousands of spans (e.g. we tried a trace with 80,000 spans).
+Jaeger Web UI is implemented in JavaScript using popular open source frameworks like React.
 
 ## Embed Mode
 
-Enhancement to embed mode in Jaeger UI for some components allowing us to integrate it into other applications.
-For use this feature we need to pass in the query params the param **uiEmbed** with the value **vN**, where **N** represents the version.
+Starting with version **[TODO]**, Jaeger UI provides an "embedded" layout mode which is intended to support integrating Jaeger UI into other applications. Currently (as of `v0`), the approach taken is to remove various UI elements from the page to make the UI better suited for space-constrained layouts.
+
+The embedded mode is induced and configured via URL query parameters.
+
+To enter embedded mode, the `uiEmbed=v0` query parameter and value must be added to the URL. For example, the following URL will show the trace with ID `abc123` in embedded mode:
+
+```
+https://example.com/trace/abc123?uiEmbed=v0
+```
+
+`uiEmbed=v0` is required.
+
+Further, each page supported has an <img src="/img/frontend-ui/embed-open-icon.png" style="width: 20px; height:20px;display:inline;" alt="Embed open window"> button added that will open the non-embedded page in a new tab.
 
 
 ### Embedded Components
@@ -35,13 +46,12 @@ For example:
 
 ![Embed Search Traces](/img/frontend-ui/embed-search-traces.png)
 
-We have a button in this kind of view that redirect us to the search traces page in the Jaeger Site <img src="/img/frontend-ui/embed-open-icon.png" style="width: 20px; height:20px; display:inline;" alt="Embed open window">.  
+##### Configuration options
 
-##### Optionally
+The following query parameter can be used to configure the layout of the search page :
 
-We can use an extra options in the embed mode :
-
-* uiSearchHideGraph=1   `Hide the ScatterPlot Graph of Search Traces`
+* uiSearchHideGraph=1   
+  * Do not display the scatter plot above the search results
 
 ```sh
 <JAEGER UI URL>/search?
@@ -52,7 +62,7 @@ We can use an extra options in the embed mode :
     service=jaeger-query&
     start=1543917759557000&
     uiEmbed=v0&
-    uiSearchHideGraph=1s
+    uiSearchHideGraph=1
 ```
 
 ![Embed Search Traces without Graph](/img/frontend-ui/embed-search-traces-hide-graph.png)
@@ -74,35 +84,46 @@ If we have navigated to this view from the search traces page we'll have a butto
 
 ![Embed Trace view](/img/frontend-ui/embed-trace-view-with-back-button.png)
 
-We have a new button in this kind of view that redirect us to the trace page in the Jaeger Site <img src="/img/interface/embed-open-icon.png" style="width: 20px; height:20px; display:inline;" alt="Embed open window">.
+##### Configuration options
 
-##### Optionally
+The following query parameters can be used to configure the layout of the trace page :
 
-We can use an extra options in the embed mode :
-
-* uiTimelineShowMap = 1 `Show the mini map of the trace`
+* uiTimelineCollapseTitle=1 
+  * The trace header starts out collapsed, which hides the summary and minimap
+  
 ```sh
 <JAEGER UI URL>/trace/<TRACE ID>?
     uiEmbed=v0&
-    uiTimelineShowMap=1
+    uiTimelineCollapseTitle=1
 ```
-![Embed Trace view](/img/frontend-ui/embed-trace-view-with-minimap.png)
+![Embed Trace view](/img/frontend-ui/embed-trace-view-with-collapse.png)
 
-* uiTimelineShowDetails = 1 `Show the details of the trace`
+* uiTimelineHideMinimap=1
+  * Removes the minimap, entirely, regardless of whether the trace header is expanded or not
 
 ```sh
 <JAEGER UI URL>/trace/<TRACE ID>?
     uiEmbed=v0&
-    uiTimelineShowDetails=1
+    uiTimelineHideMinimap=1
 ```
-![Embed Trace view](/img/frontend-ui/embed-trace-view-with-details.png)
+![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-minimap.png)
 
+* uiTimelineHideSummary=1
+ * Removes the trace summary information (number of services, etc.), entirely, regardless of whether the trace header is expanded or not
+
+```sh
+<JAEGER UI URL>/trace/<TRACE ID>?
+    uiEmbed=v0&
+    uiTimelineHideSummary=1
+    
+```  
+![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-summary.png)
 
 We can also combine the options
 ```sh
 <JAEGER UI URL>/trace/<TRACE ID>?
     uiEmbed=v0&
-    uiTimelineShowDetails=1&
-    uiTimelineShowMap=1
+    uiTimelineHideMinimap=1&
+    uiTimelineHideSummary=1
 ```
-![Embed Trace view](/img/frontend-ui/embed-trace-view-with-details-and-minimap.png)
+![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-details-and-hide-minimap.png)
