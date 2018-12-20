@@ -53,24 +53,27 @@ function controlModals() {
   });
 }
 
-function tableOfContents(tocifyOptions) {
-  $("#toc").tocify(tocifyOptions);
-}
-
 $(function () {
   scrollOffset();
   addLinkAnchors();
   navbarToggle();
   controlModals();
 
-  var tocifyOptions = {
-    context: '.content--docs',
-    selectors: 'h2,h3,h4',
-    showAndHide: false,
-    smoothScroll: true,
-    theme: 'jqueryui',
-    scrollTo: $('.navbar').height()
-  }
-
-  tableOfContents(tocifyOptions);
+  // https://tscanlin.github.io/tocbot/#api
+  tocbot.init({
+    // Where to render the table of contents.
+    tocSelector: '.toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: '.content--docs',
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: 'h1, h2, h3',
+    headingsOffset: 110,
+    // expand all
+    collapseDepth: Number.MAX_SAFE_INTEGER,
+    // Don't override styles on tocbot's CSS classes (except activeLinkClass
+    // which doesn't have an extraActiveLinkClasses)
+    extraLinkClasses: 'jaeger-toc-page-link',
+    extraListClasses: 'jaeger-toc-page-list',
+    listItemClass: 'jaeger-toc-page-item',
+  });
 });
