@@ -55,19 +55,16 @@ Port  | Protocol | Component | Function
 * Kubernetes Operator: https://github.com/jaegertracing/jaeger-operator
 * OpenShift templates: https://github.com/jaegertracing/jaeger-openshift
 
-## Sample Application
+## Sample App: HotROD
 
-### HotROD (Rides on Demand)
-
-This is a demo application that consists of several microservices and
+HotROD (Rides on Demand)  is a demo application that consists of several microservices and
 illustrates the use of the [OpenTracing API](http://opentracing.io).
 A tutorial / walkthrough is available in the blog post:
 [Take OpenTracing for a HotROD ride][hotrod-tutorial].
 
-It can be run standalone, but requires Jaeger backend to view the
-{{< tip "traces" "trace" >}}.
+It can be run standalone, but requires Jaeger backend to view the traces.
 
-#### Features
+### Features
 
 -   Discover architecture of the whole system via data-driven dependency
     diagram.
@@ -82,14 +79,15 @@ It can be run standalone, but requires Jaeger backend to view the
 -   Use open source libraries with OpenTracing integration to get
     vendor-neutral instrumentation for free.
 
-#### Prerequisites
+### Prerequisites
 
 -   You need Go 1.11 or higher installed on your machine to run from source.
 -   Requires a [running Jaeger backend](#all-in-one-docker-image) to view the traces.
 
-#### Running
+### Running
 
-##### From Source
+#### From Source
+
 ```bash
 mkdir -p $GOPATH/src/github.com/jaegertracing
 cd $GOPATH/src/github.com/jaegertracing
@@ -98,7 +96,8 @@ cd jaeger
 make install
 go run ./examples/hotrod/main.go all
 ```
-##### From docker
+#### From docker
+
 ```bash
 $ docker run --rm -it \
   --link jaeger \
@@ -108,7 +107,8 @@ $ docker run --rm -it \
   all
 ```
 
-##### From binary distribution
+#### From binary distribution
+
 Run `example-hotrod(.exe)` executable from the [binary distribution archives][download]:
 ```bash
 $ example-hotrod all
