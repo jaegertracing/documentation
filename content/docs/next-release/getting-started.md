@@ -67,6 +67,26 @@ A tutorial / walkthrough is available in the blog post:
 It can be run standalone, but requires Jaeger backend to view the
 {{< tip "traces" "trace" >}}.
 
+#### Features
+
+-   Discover architecture of the whole system via data-driven dependency
+    diagram.
+-   View request timeline and errors; understand how the app works.
+-   Find sources of latency and lack of concurrency.
+-   Highly contextualized logging.
+-   Use baggage propagation to:
+
+    -   Diagnose inter-request contention (queueing).
+    -   Attribute time spent in a service.
+
+-   Use open source libraries with OpenTracing integration to get
+    vendor-neutral instrumentation for free.
+
+#### Prerequisites
+
+-   You need Go 1.11 or higher installed on your machine to run from source.
+-   Requires a [running Jaeger backend](#all-in-one-docker-image) to view the traces.
+
 #### Running
 
 ##### From Source
@@ -96,43 +116,6 @@ $ example-hotrod all
 
 Then navigate to `http://localhost:8080`.
 
-
-#### Features
-
--   Discover architecture of the whole system via data-driven dependency
-    diagram.
--   View request timeline and errors; understand how the app works.
--   Find sources of latency and lack of concurrency.
--   Highly contextualized logging.
--   Use baggage propagation to:
-
-    -   Diagnose inter-request contention (queueing).
-    -   Attribute time spent in a service.
-
--   Use open source libraries with OpenTracing integration to get
-    vendor-neutral instrumentation for free.
-
-#### Prerequisites
-
--   You need Go 1.11 or higher installed on your machine to run from source.
--   Requires a [running Jaeger backend](#all-in-one-docker-image) to view the traces.
-
-## Client Libraries
-
-Look [here](../client-libraries).
-
-## Running Individual Jaeger Components
-Individual Jaeger backend components can be run from source.
-They all have their `main.go` in the `cmd` folder. For example, to run the `jaeger-agent`:
-
-```bash
-mkdir -p $GOPATH/src/github.com/jaegertracing
-cd $GOPATH/src/github.com/jaegertracing
-git clone git@github.com:jaegertracing/jaeger.git jaeger
-cd jaeger
-make install
-go run ./cmd/agent/main.go
-```
 
 ## Migrating from Zipkin
 
