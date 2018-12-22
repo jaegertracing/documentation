@@ -4,9 +4,9 @@ title: Get in touch
 
 ## Via chat or email
 
-Join our open chat room on Gitter: [gitter.im/jaegertracing/Lobby](https://gitter.im/jaegertracing/Lobby) or email [jaeger-tracing@googlegroups.com](https://groups.google.com/forum/#!forum/jaeger-tracing).
+Join our open chat room [gitter.im/jaegertracing/Lobby](https://gitter.im/jaegertracing/Lobby) or email [jaeger-tracing@googlegroups.com](https://groups.google.com/forum/#!forum/jaeger-tracing).
 
-## Bi-weekly project meeting
+## Bi-weekly project meetings
 
 The Jaeger maintainers meet on a video call bi-weekly, and everyone is welcome to join and participate, discuss their issues, present case studies. [Agenda and meeting details here][bi-weekly-call].
 
