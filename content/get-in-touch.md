@@ -2,13 +2,13 @@
 title: Get in touch
 ---
 
-## Via chat
+## Via chat or email
 
-Join our open chat room on Gitter: [gitter.im/jaegertracing/Lobby](https://gitter.im/jaegertracing/Lobby).
+Join our open chat room on Gitter: [gitter.im/jaegertracing/Lobby](https://gitter.im/jaegertracing/Lobby) or email [jaeger-tracing@googlegroups.com](https://groups.google.com/forum/#!forum/jaeger-tracing).
 
-## Via email
+## Bi-weekly project meeting
 
-[jaeger-tracing@googlegroups.com](https://groups.google.com/forum/#!forum/jaeger-tracing)
+The Jaeger maintainers meet on a video call bi-weekly, and everyone is welcome to join and participate, discuss their issues, present case studies. [Agenda and meeting details here][bi-weekly-call].
 
 ## Report issues on GitHub
 
@@ -17,3 +17,5 @@ Our GitHub org has many different repos, please make sure to pick the one approp
 * For general backend features or issues use the backend repo [github.com/jaegertracing/jaeger](https://github.com/jaegertracing/jaeger).
 * For frontend features or issues use [github.com/jaegertracing/jaeger-ui](https://github.com/jaegertracing/jaeger-ui).
 * For features or issues with client libraries, pick the [corresponding repository](/docs/latest/client-libraries/#supported-libraries).
+
+[bi-weekly-call]: https://docs.google.com/document/d/1ZuBAwTJvQN7xkWVvEFXj5WU9_JmS5TPiNbxCJSvPqX0/
