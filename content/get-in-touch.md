@@ -8,7 +8,7 @@ Join our open chat room [gitter.im/jaegertracing/Lobby](https://gitter.im/jaeger
 
 ## Bi-weekly project meetings
 
-The Jaeger maintainers meet on a video call bi-weekly, and everyone is welcome to join and participate, discuss their issues, present case studies. [Agenda and meeting details here][bi-weekly-call].
+The Jaeger maintainers meet on a video call every other week, and everyone is welcome to join and participate, discuss their issues, present case studies. [Agenda and meeting details here][bi-weekly-call].
 
 ## Report issues on GitHub
 
