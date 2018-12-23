@@ -55,49 +55,16 @@ Port  | Protocol | Component | Function
 * Kubernetes Operator: https://github.com/jaegertracing/jaeger-operator
 * OpenShift templates: https://github.com/jaegertracing/jaeger-openshift
 
-## Sample Application
+## Sample App: HotROD
 
-### HotROD (Rides on Demand)
-
-This is a demo application that consists of several microservices and
+HotROD (Rides on Demand)  is a demo application that consists of several microservices and
 illustrates the use of the [OpenTracing API](http://opentracing.io).
 A tutorial / walkthrough is available in the blog post:
 [Take OpenTracing for a HotROD ride][hotrod-tutorial].
 
-It can be run standalone, but requires Jaeger backend to view the
-{{< tip "traces" "trace" >}}.
+It can be run standalone, but requires Jaeger backend to view the traces.
 
-#### Running
-
-##### From Source
-```bash
-mkdir -p $GOPATH/src/github.com/jaegertracing
-cd $GOPATH/src/github.com/jaegertracing
-git clone git@github.com:jaegertracing/jaeger.git jaeger
-cd jaeger
-make install
-go run ./examples/hotrod/main.go all
-```
-##### From docker
-```bash
-$ docker run --rm -it \
-  --link jaeger \
-  -p8080-8083:8080-8083 \
-  jaegertracing/example-hotrod:{{< currentVersion >}} \
-  --jaeger-agent.host-port=jaeger:6831 \
-  all
-```
-
-##### From binary distribution
-Run `example-hotrod(.exe)` executable from the [binary distribution archives][download]:
-```bash
-$ example-hotrod all
-```
-
-Then navigate to `http://localhost:8080`.
-
-
-#### Features
+### Features
 
 -   Discover architecture of the whole system via data-driven dependency
     diagram.
@@ -112,18 +79,14 @@ Then navigate to `http://localhost:8080`.
 -   Use open source libraries with OpenTracing integration to get
     vendor-neutral instrumentation for free.
 
-#### Prerequisites
+### Prerequisites
 
 -   You need Go 1.11 or higher installed on your machine to run from source.
 -   Requires a [running Jaeger backend](#all-in-one-docker-image) to view the traces.
 
-## Client Libraries
+### Running
 
-Look [here](../client-libraries).
-
-## Running Individual Jaeger Components
-Individual Jaeger backend components can be run from source.
-They all have their `main.go` in the `cmd` folder. For example, to run the `jaeger-agent`:
+#### From Source
 
 ```bash
 mkdir -p $GOPATH/src/github.com/jaegertracing
@@ -131,8 +94,28 @@ cd $GOPATH/src/github.com/jaegertracing
 git clone git@github.com:jaegertracing/jaeger.git jaeger
 cd jaeger
 make install
-go run ./cmd/agent/main.go
+go run ./examples/hotrod/main.go all
 ```
+#### From docker
+
+```bash
+$ docker run --rm -it \
+  --link jaeger \
+  -p8080-8083:8080-8083 \
+  jaegertracing/example-hotrod:{{< currentVersion >}} \
+  --jaeger-agent.host-port=jaeger:6831 \
+  all
+```
+
+#### From binary distribution
+
+Run `example-hotrod(.exe)` executable from the [binary distribution archives][download]:
+```bash
+$ example-hotrod all
+```
+
+Then navigate to `http://localhost:8080`.
+
 
 ## Migrating from Zipkin
 
