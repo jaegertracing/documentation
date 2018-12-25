@@ -52,12 +52,12 @@ featureGroups:
         `JAEGER_SERVICE_NAME` defines service name that will be associated with the emitted spans.
     - name: env_TRACER_TAGS
       description: >
-        `JAEGER_TAGS` defines a comma-separated list of static tags
-        (e.g. `hostname=blah-blah,my.app.version=1.2.3`)
-        that will be added as the `Process` tags to each span. Also known as "tracer tags".
+        `JAEGER_TAGS` defines a comma-separated list of static tags, aka "tracer tags",
+        e.g. `hostname=foobar,my.app.version=1.2.3`.
+        These tags are added as the `Process` tags to each span.
     - name: env_JAEGER_DISABLED
       description: >
-        `JAEGER_DISABLED` (_not recommended_) when set to true, the Configuration returns
+        `JAEGER_DISABLED` (_not recommended_) when set to true, instructs the Configuration to return
         a no-op tracer. Neither trace/span IDs nor baggage will be propagated with a no-op tracer.
         Instead of disabling the tracer completely, use `const` sampler with `0` param,
         which will minimize the overhead but keep the propagation going.
@@ -114,12 +114,12 @@ featureGroups:
         for updates to the samling strategies.
     - name: env_JAEGER_SAMPLER_MAX_OPERATIONS
       description: >
-        `JAEGER_SAMPLER_MAX_OPERATIONS` used with adaptive sampler to limit how many distinct
+        `JAEGER_SAMPLER_MAX_OPERATIONS` instructs the adaptive sampler to limit how many distinct
         operation names the sampler will track, to avoid unbound memory usage.
     - name: env_JAEGER_PROPAGATION
       description: >
-        `JAEGER_PROPAGATION` allows configuring the propagation format used by Jaeger client.
-        Supported values are `jaeger` (defined [here](client-libraries/#propagation-format))
+        `JAEGER_PROPAGATION` defines the propagation format used by the tracer.
+        Supported values are `jaeger` (defined [here](../client-libraries/#propagation-format))
         and `b3` (defined [here](https://github.com/openzipkin/b3-propagation)).
     - name: JAEGER_TRACEID_128BIT
       description: >
@@ -128,7 +128,7 @@ featureGroups:
     - name: env_JAEGER_RPC_METRICS
       description: >
         `JAEGER_RPC_METRICS` when true, enables additional generation of RPC metrics
-        from tracing instrumentation. This is an experimental feature in the Go client.
+        from the tracing instrumentation. This is an experimental feature in the Go client.
 
 clients:
   - language: Go
