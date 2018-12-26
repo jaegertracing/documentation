@@ -129,6 +129,7 @@ featureGroups:
       description: >
         `JAEGER_RPC_METRICS` when true, enables additional generation of RPC metrics
         from the tracing instrumentation. This is an experimental feature in the Go client.
+        See also https://github.com/opentracing-contrib/java-metrics.
 
 clients:
   - language: Go
