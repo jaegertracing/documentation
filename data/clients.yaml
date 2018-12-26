@@ -48,45 +48,88 @@ featureGroups:
   - description: Tracer configuration via environment variables
     features:
     - name: env_JAEGER_SERVICE_NAME
-      description: "`JAEGER_SERVICE_NAME`"
-    - name: env_JAEGER_AGENT_HOST
-      description: "`JAEGER_AGENT_HOST`"
-    - name: env_JAEGER_AGENT_PORT
-      description: "`JAEGER_AGENT_PORT`"
-    - name: env_JAEGER_REPORTER_LOG_SPANS
-      description: "`JAEGER_REPORTER_LOG_SPANS` - log finished span IDs"
-    - name: env_JAEGER_REPORTER_MAX_QUEUE_SIZE
-      description: "`JAEGER_REPORTER_MAX_QUEUE_SIZE`"
-    - name: env_JAEGER_REPORTER_FLUSH_INTERVAL
-      description: "`JAEGER_REPORTER_FLUSH_INTERVAL`"
-    - name: env_JAEGER_SAMPLER_TYPE
-      description: "`JAEGER_SAMPLER_TYPE` - default type of sampler, e.g. `probabilistic`"
-    - name: env_JAEGER_SAMPLER_PARAM
-      description: "`JAEGER_SAMPLER_PARAM` - default sampler config, e.g. probability 0.001"
-    - name: env_JAEGER_SAMPLER_MANAGER_HOST_PORT
-      description: "`JAEGER_SAMPLER_MANAGER_HOST_PORT`"
+      description: >
+        `JAEGER_SERVICE_NAME` defines service name that will be associated with the emitted spans.
     - name: env_TRACER_TAGS
-      description: "`JAEGER_TAGS` - tracer/process tags"
+      description: >
+        `JAEGER_TAGS` defines a comma-separated list of static tags, aka "tracer tags",
+        e.g. `hostname=foobar,my.app.version=1.2.3`.
+        These tags are added as the `Process` tags to each span.
     - name: env_JAEGER_DISABLED
-      description: "`JAEGER_DISABLED`"
-    - name: env_JAEGER_RPC_METRICS
-      description: "`JAEGER_RPC_METRICS`"
-    - name: env_JAEGER_SAMPLER_MAX_OPERATIONS
-      description: "`JAEGER_SAMPLER_MAX_OPERATIONS`"
-    - name: env_JAEGER_SAMPLER_REFRESH_INTERVAL
-      description: "`JAEGER_SAMPLER_REFRESH_INTERVAL`"
+      description: >
+        `JAEGER_DISABLED` (_not recommended_) when set to true, instructs the Configuration to return
+        a no-op tracer. Neither trace/span IDs nor baggage will be propagated with a no-op tracer.
+        Instead of disabling the tracer completely, use `const` sampler with `0` param,
+        which will minimize the overhead but keep the propagation going.
+    - name: env_JAEGER_AGENT_HOST
+      description: >
+        `JAEGER_AGENT_HOST` defines hostname for reporting spans over UDP/Thrift.
+        To avoid packet loss, the agent is expected to run on the same machine as the application.
+        This var is useful when there are multiple networking namespaces on the host.
+    - name: env_JAEGER_AGENT_PORT
+      description: >
+        `JAEGER_AGENT_PORT` defines port for reporting spans over UDP/Thrift.
     - name: env_JAEGER_ENDPOINT
-      description: "`JAEGER_ENDPOINT`"
+      description: >
+        `JAEGER_ENDPOINT` defines the URL for reporting spans via HTTP/Thrift.
+        This setting allows for a deployment mode where spans are submitted directly to the collector.
     - name: env_JAEGER_AUTH_TOKEN
-      description: "`JAEGER_AUTH_TOKEN`"
+      description: >
+        `JAEGER_AUTH_TOKEN` defines an optional auth token when reporting over HTTP.
     - name: env_JAEGER_USER
-      description: "`JAEGER_USER`"
+      description: >
+        `JAEGER_USER` can be used for basic authentication when reporting over HTTP.
     - name: env_JAEGER_PASSWORD
-      description: "`JAEGER_PASSWORD`"
+      description: >
+        `JAEGER_PASSWORD` can be used for basic authentication when using reporting over HTTP.
+    - name: env_JAEGER_REPORTER_LOG_SPANS
+      description: >
+        `JAEGER_REPORTER_LOG_SPANS` instructs the [Reporter](../client-libraries/#reporters)
+        to log finished span IDs. The reporter may need to be given a Logger for this option to take effect.
+    - name: env_JAEGER_REPORTER_MAX_QUEUE_SIZE
+      description: >
+        `JAEGER_REPORTER_MAX_QUEUE_SIZE` defines the max size of the in-memory buffer
+        used to keep spans before they are sent out.
+    - name: env_JAEGER_REPORTER_FLUSH_INTERVAL
+      description: >
+        `JAEGER_REPORTER_FLUSH_INTERVAL` defines how frequently the report flushes span batches.
+        Reporter can also flush the batch if the batch size reaches the maximum UDP packet size (~64Kb).
+    - name: env_JAEGER_SAMPLER_TYPE
+      description: >
+        `JAEGER_SAMPLER_TYPE` defines the type of sampler to use, e.g. `probabilistic`, or `const`
+        (see [Sampling](../client-libraries/#sampling)).
+    - name: env_JAEGER_SAMPLER_PARAM
+      description: >
+        `JAEGER_SAMPLER_PARAM` provides configuration value to the sampler, e.g. `probability=0.001`
+        (see [Sampling](../client-libraries/#sampling)).
+    - name: env_JAEGER_SAMPLER_MANAGER_HOST_PORT
+      description: >
+        `JAEGER_SAMPLER_MANAGER_HOST_PORT` defines the address of HTTP server that services client
+        configuration, such as sampling strategies, baggage restrictions, throttling config, etc.
+        The variable name is a legacy misnomer from the time when the server only provided the sampling
+        strategies. At the moment only `jaeger-agent` implements this REST API.
+    - name: env_JAEGER_SAMPLER_REFRESH_INTERVAL
+      description: >
+        `JAEGER_SAMPLER_REFRESH_INTERVAL` defines how often the sampler polls the config server
+        for updates to the samling strategies.
+    - name: env_JAEGER_SAMPLER_MAX_OPERATIONS
+      description: >
+        `JAEGER_SAMPLER_MAX_OPERATIONS` instructs the adaptive sampler to limit how many distinct
+        operation names the sampler will track, to avoid unbound memory usage.
     - name: env_JAEGER_PROPAGATION
-      description: "`JAEGER_PROPAGATION`"
+      description: >
+        `JAEGER_PROPAGATION` defines the propagation format used by the tracer.
+        Supported values are `jaeger` (defined [here](../client-libraries/#propagation-format))
+        and `b3` (defined [here](https://github.com/openzipkin/b3-propagation)).
     - name: JAEGER_TRACEID_128BIT
-      description: "`JAEGER_TRACEID_128BIT`"
+      description: >
+        `JAEGER_TRACEID_128BIT` if true, instructs the tracer to generate 128bit trace IDs
+        instead of the default 64bit. In the future 128bit will become the default.
+    - name: env_JAEGER_RPC_METRICS
+      description: >
+        `JAEGER_RPC_METRICS` when true, enables additional generation of RPC metrics
+        from the tracing instrumentation. This is an experimental feature in the Go client.
+        See also https://github.com/opentracing-contrib/java-metrics.
 
 clients:
   - language: Go
