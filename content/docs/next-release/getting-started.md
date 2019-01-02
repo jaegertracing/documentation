@@ -102,8 +102,8 @@ go run ./examples/hotrod/main.go all
 $ docker run --rm -it \
   --link jaeger \
   -p8080-8083:8080-8083 \
+  -e JAEGER_AGENT_HOST="jaeger" \
   jaegertracing/example-hotrod:{{< currentVersion >}} \
-  --jaeger-agent.host-port=jaeger:6831 \
   all
 ```
 
