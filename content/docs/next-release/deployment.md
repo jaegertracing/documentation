@@ -1,6 +1,9 @@
 ---
 title: Deployment
 weight: 7
+children:
+- title: Frontend/UI
+  url: frontend-ui
 ---
 
 The main Jaeger backend components are released as Docker images on Docker Hub:
@@ -298,98 +301,8 @@ docker run \
   --help \
 ```
 
-## Query Service & UI
-
-**jaeger-query** serves the API endpoints and a React/Javascript UI.
-The service is stateless and is typically run behind a load balancer, e.g. nginx.
-
-At default settings the query service exposes the following port(s):
-
-Port  | Protocol | Function
------ | -------  | ---
-16686 | HTTP     | **/api/*** endpoints and Jaeger UI at **/**
-16687 | HTTP     | Health check at **/**
-
-### UI Base Path
-
-The base path for all **jaeger-query** HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running **jaeger-query** behind a reverse proxy.
-
-The base path can be configured via the `--query.base-path` command line parameter or the `QUERY_BASE_PATH` environment variable.
-
-### UI Configuration
-
-Several aspects of the UI can be configured:
-
-  * The Dependencies section can be enabled / configured
-  * Google Analytics tracking can be enabled / configured
-  * Additional menu options can be added to the global nav
-
-These options can be configured by a JSON configuration file. The `--query.ui-config` command line parameter of the query service must then be set to the path to the JSON file when the query service is started.
-
-An example configuration file:
-
-```json
-{
-  "dependencies": {
-    "dagMaxNumServices": 200,
-    "menuEnabled": true
-  },
-  "archiveEnabled": true,
-  "tracking": {
-    "gaID": "UA-000000-2",
-    "trackErrors": true
-  },
-  "menu": [
-    {
-      "label": "About Jaeger",
-      "items": [
-        {
-          "label": "GitHub",
-          "url": "https://github.com/jaegertracing/jaeger"
-        },
-        {
-          "label": "Docs",
-          "url": "http://jaeger.readthedocs.io/en/latest/"
-        }
-      ]
-    }
-  ]
-}
-```
-
-`dependencies.dagMaxNumServices` defines the maximum number of services allowed before the DAG dependency view is disabled. Default: `200`.
-
-`dependencies.menuEnabled` enables (`true`) or disables (`false`) the dependencies menu button. Default: `true`.
-
-`archiveEnabled` enables (`true`) or disables (`false`) the archive traces button. Default: `false`. It requires a configuration of an archive storage in Query service. Archived traces are only accessible directly by ID, they are not searchable.
-
-`tracking.gaID` defines the Google Analytics tracking ID. This is required for Google Analytics tracking, and setting it to a non-`null` value enables Google Analytics tracking. Default: `null`.
-
-`tracking.trackErrors` enables (`true`) or disables (`false`) error tracking via Google Analytics. Errors can only be tracked if a valid Google Analytics ID is provided. For additional details on error tracking via Google Analytics see the [tracking README](https://github.com/jaegertracing/jaeger-ui/blob/c622330546afc1be59a42f874bcc1c2fadf7e69a/src/utils/tracking/README.md) in the UI repo. Default: `true`.
-
-`menu` allows additional links to be added to the global nav. The additional links are right-aligned.
-
-In the sample JSON config above, the configured menu will have a dropdown labeled "About Jaeger" with sub-options for "GitHub" and "Docs". The format for a link in the top right menu is as follows:
-
-```json
-{
-  "label": "Some text here",
-  "url": "https://example.com"
-}
-```
-
-Links can either be members of the `menu` Array, directly, or they can be grouped into a dropdown menu option. The format for a group of links is:
-
-```json
-{
-  "label": "Dropdown button",
-  "items": [ ]
-}
-```
-
-The `items` Array should contain one or more link configurations.
-
-TODO: Swagger and GraphQL API ([issue 158](https://github.com/jaegertracing/jaeger/issues/158)).
+## Frontend UI
+The documentation about the UI is [available here](../frontend-ui/)
 
 ## Aggregation Jobs for Service Dependencies
 
