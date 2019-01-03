@@ -301,8 +301,8 @@ docker run \
   --help \
 ```
 
-## Frontend UI
-The documentation about the UI is [available here](../frontend-ui/)
+## Query Service & UI
+The documentation about the Query Service & UI is [available here](../frontend-ui/)
 
 ## Aggregation Jobs for Service Dependencies
 
