@@ -3,6 +3,7 @@ HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
 
 develop:
+	HUGO_PREVIEW=true \
 	hugo server \
         --buildDrafts \
         --buildFuture \
