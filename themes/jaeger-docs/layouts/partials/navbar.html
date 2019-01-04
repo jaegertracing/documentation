@@ -5,6 +5,8 @@
 {{- $latest        := .Site.Params.latest }}
 {{- $docs          := where .Site.Pages "Section" "docs" }}
 {{- $isDocsPage    := eq .Section "docs" }}
+{{- $preview       := getenv "HUGO_PREVIEW" }}
+{{- $isPreview     := eq $preview "true" }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
     <div class="navbar-brand">
@@ -38,6 +40,11 @@
             <a class="navbar-item" href="/docs/{{ $version }}">
               {{ $version }}{{ if $isLatest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end }}
             </a>
+            {{- end }}
+            {{- if $isPreview }}
+              <a class="navbar-item" href="/docs/next-release">
+                next-release&nbsp;&nbsp;(preview)
+              </a>
             {{- end }}
           </div>
         </div>
