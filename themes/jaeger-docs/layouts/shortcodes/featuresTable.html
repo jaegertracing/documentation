@@ -3,13 +3,13 @@
 <table>
   <tbody>
     {{- range $featureGroups }}
-    <tr>
+    <tr class="feature-table-sticky-row">
       <th class="feature-table-header" colspan="7">{{ .description | markdownify }}</th>
     </tr>
-    <tr>
-      <th>Feature</th>
+    <tr class="feature-table-sticky-row">
+      <th class="feature-table-sub-header">Feature</th>
       {{- range $clients }}
-      <th>{{ .language }}</th>
+      <th class="feature-table-sub-header">{{ .language }}</th>
       {{- end }}
     </tr>
     {{- range .features }}
