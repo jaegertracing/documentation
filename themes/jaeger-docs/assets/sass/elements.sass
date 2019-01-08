@@ -6,15 +6,27 @@
   &::before
     font-size: $tooltip-font-size !important
 
-.feature-table-header
-  font-size: 1.5rem
-  max-width: 100%
-  padding-left: .75rem !important
-  padding-top: 2rem !important
-  border-bottom: none !important
+.feature-table-sticky-row
 
-  &:hover
-    background-color: white !important
+  & > .feature-table-header
+    background: #fafafa
+    border-bottom: none
+    box-shadow: 0 1px 0px #e6e6e6, 0 -1px 0px #e6e6e6
+    font-size: 1.5rem
+    line-height: 5rem
+    max-width: 100%
+    padding-bottom: 0
+    padding-left: .75rem
+    padding-top: 0
+    position: sticky
+    top: 97px
+    z-index: 1
+
+  & > .feature-table-sub-header
+    background: #f4f4f4
+    box-shadow: 0 2px 0px #ccc
+    position: sticky
+    top: calc(97px + 5rem)
 
 hr.hr
   height: 3px
