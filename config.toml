@@ -26,9 +26,9 @@ home = [ "HTML", "REDIRECTS" ]
   openGraphImage = "img/jaeger-icon-color.png"
   maxBlogPosts   = 100
 
-  latest         = "1.8"
-  binariesLatest = "1.8.0"
-  versions       = ["1.8", "1.7", "1.6"]
+  latest         = "1.9"
+  binariesLatest = "1.9.0"
+  versions       = ["1.9", "1.8", "1.7", "1.6"]
 
   [navbar]
     [[links]]
