@@ -1,5 +1,3 @@
-{{- $versions        := sort (readDir "content/docs") "Name" "desc" }}
-{{- $latest          := (index ($versions) 0).Name }}
 {{- $newsletterLink  := .newestNewsletter.link }}
 {{- $newsletterTitle := .newestNewsletter.title }}
 <section class="hero hero--home is-info is-medium">
@@ -17,7 +15,7 @@
 
           <div class="container">
             <div class="buttons is-centered">
-              <a href="/docs/{{ $latest }}/getting-started" class="button is-medium is-primary is-uppercase is-outlined has-text-weight-bold">
+              <a href="/docs/{{ .latestVersion }}/getting-started" class="button is-medium is-primary is-uppercase is-outlined has-text-weight-bold">
                 <span class="icon">
                   <i class="fas fa-play-circle"></i>
                 </span>

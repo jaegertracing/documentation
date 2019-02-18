@@ -11,7 +11,7 @@
 {{- end }}
 {{- $newestNewsletter := index $newsletters 0 }}
 
-{{ partial "home/hero.html" (dict "newestNewsletter" $newestNewsletter "posts" $posts "title" .Site.Title "tagline" .Site.Params.tagline) }}
+{{ partial "home/hero.html" (dict "newestNewsletter" $newestNewsletter "posts" $posts "title" .Site.Title "tagline" .Site.Params.tagline "latestVersion" .Site.Params.latest) }}
 {{ partial "home/why.html" . }}
 {{ partial "home/features.html" . }}
 {{ partial "home/articles.html" (dict "posts" $posts) }}
