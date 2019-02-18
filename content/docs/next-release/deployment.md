@@ -319,6 +319,16 @@ Port  | Protocol | Function
 16686 | HTTP     | **/api/*** endpoints and Jaeger UI at **/**
 16687 | HTTP     | Health check at **/**
 
+### Minimal deployment example (Elasticsearch backend):
+```sh
+docker run -d --rm \
+  -p 16686:16686 \
+  -p 16687:16687 \
+  -e SPAN_STORAGE_TYPE=elasticsearch \
+  -e ES_SERVER_URLS=http://<ES_SERVER_IP>:<ES_SERVER_PORT> \
+  jaegertracing/jaeger-query:{{< currentVersion >}}
+```
+
 ### UI Base Path
 
 The base path for all **jaeger-query** HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running **jaeger-query** behind a reverse proxy.
