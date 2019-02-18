@@ -119,7 +119,7 @@ Then navigate to `http://localhost:8080`.
 
 ## Migrating from Zipkin
 
-Collector service exposes Zipkin compatible REST API `/api/v1/spans` which accepts Thrift and JSON and also `/api/v2/spans` for JSON only.
+Collector service exposes Zipkin compatible REST API `/api/v1/spans` and `/api/v2/spans` for both JSON and thrift encoding.
 By default it's disabled. It can be enabled with `--collector.zipkin.http-port=9411`.
 
 Zipkin Thrift IDL file can be found in [jaegertracing/jaeger-idl](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift).
