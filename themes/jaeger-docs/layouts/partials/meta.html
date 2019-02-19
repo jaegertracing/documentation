@@ -8,13 +8,21 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 {{- with $description }}<meta nam="description" content="{{ . }}" />{{- end }}
-<link rel="canonical" content="{{ .Permalink }}" />
 {{ .Hugo.Generator }}
 
 <!-- OpenGraph metadata -->
 <meta property="og:title" content="{{ $title }}" />
-{{- if $isDoc }}<meta property="og:type" content="documentation" />{{- end }}
+{{- if $isDoc }}
+{{- $version := index (split .File.Path "/") 1 }}
+{{- $latest := .Site.Params.latest }}
+{{- $url := replace .Permalink $version "latest" }}
+<meta property="og:type" content="documentation" />
+<meta property="og:url" content="{{ $url }}" />
+<link rel="canonical" content="{{ $url }}" />
+{{- else }}
 <meta property="og:url" content="{{ .Permalink }}" />
+<link rel="canonical" content="{{ .Permalink }}" />
+{{- end }}
 <meta property="og:locale" content="en_US" />
 {{- if not $isHome }}<meta property="og:site_name" content="{{ .Site.Title }}" />{{- end }}
 {{- with $description }}<meta property="og:description" content="{{ . }}" />{{- end }}
