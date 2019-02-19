@@ -1,5 +1,5 @@
 {{ define "main" }}
-{{- $maxBlogPosts := .Site.Params.maxBlogPosts }}
+{{- $maxBlogPosts := site.Params.maxBlogPosts }}
 {{- $json         := getJSON "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/jaegertracing" }}
 {{- $posts        := first $maxBlogPosts $json.items }}
 {{- $newsletters  := (slice) }}
@@ -11,7 +11,7 @@
 {{- end }}
 {{- $newestNewsletter := index $newsletters 0 }}
 
-{{ partial "home/hero.html" (dict "newestNewsletter" $newestNewsletter "posts" $posts "title" .Site.Title "tagline" .Site.Params.tagline "latestVersion" .Site.Params.latest) }}
+{{ partial "home/hero.html" (dict "newestNewsletter" $newestNewsletter "posts" $posts "title" site.Title "tagline" site.Params.tagline "latestVersion" site.Params.latest) }}
 {{ partial "home/why.html" . }}
 {{ partial "home/features.html" . }}
 {{ partial "home/articles.html" (dict "posts" $posts) }}

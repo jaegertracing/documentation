@@ -3,8 +3,8 @@ Jaeger &ndash; {{ .Title }}
 {{- end }}
 
 {{ define "main" }}
-{{- $binaries     := .Site.Data.download.binaries }}
-{{- $dockerImages := .Site.Data.download.docker }}
+{{- $binaries     := site.Data.download.binaries }}
+{{- $dockerImages := site.Data.download.docker }}
 <article class="article article--download">
   <div class="container">
     <header>
