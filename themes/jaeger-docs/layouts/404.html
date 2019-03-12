@@ -1,5 +1,4 @@
-{{- $versions := sort (readDir "content/docs") "Name" "desc" }}
-{{- $latest   := (index ($versions) 0).Name }}
+{{- $latest   := .Site.Params.latest }}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
   <head>

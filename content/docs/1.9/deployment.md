@@ -85,17 +85,14 @@ docker run \
   -p6832:6832/udp \
   -p5778:5778/tcp \
   jaegertracing/jaeger-agent:{{< currentVersion >}} \
-  --reporter.grpc.host-port=jaeger-collector.jaeger-infra.svc:14250
+  --reporter.tchannel.host-port=jaeger-collector.jaeger-infra.svc:14267
 ```
 
-Or use `--reporter.tchannel.host-port=jaeger-collector.jaeger-infra.svc:14267` to use
-legacy tchannel reporter.
+Or add `--reporter.type=grpc` and `--reporter.grpc.host-port=jaeger-collector.jaeger-infra.svc:14250` to use gRPC
+communication with the collector. Then the `tchannel` option can be removed.
 
-When using gRPC, you have several options for load balancing and name resolution:
-
-* Single connection and no load balancing. This is the default if you specify a single `host:port`. (example: `--reporter.grpc.host-port=jaeger-collector.jaeger-infra.svc:14250`)
-* Static list of hostnames and round-robin load balancing. This is what you get with a comma-separated list of addresses. (example: `reporter.grpc.host-port=jaeger-collector1:14250,jaeger-collector2:14250,jaeger-collector3:14250`)
-* Dynamic DNS resolution and round-robin load balancing. To get this behaviour, prefix the address with `dns:///` and gRPC will attempt to resolve the hostname using SRV records (for [external load balancing](https://github.com/grpc/grpc/blob/master/doc/load-balancing.md)), TXT records (for [service configs](https://github.com/grpc/grpc/blob/master/doc/service_config.md)), and A records. Refer to the [gRPC Name Resolution docs](https://github.com/grpc/grpc/blob/master/doc/naming.md) and the [dns_resolver.go implementation](https://github.com/grpc/grpc-go/blob/master/resolver/dns/dns_resolver.go) for more info. (example: `--reporter.grpc.host-port=dns:///jaeger-collector.jaeger-infra.svc:14250`)
+In the future we will support different service discovery systems to dynamically load balance
+across several collectors ([issue 213](https://github.com/jaegertracing/jaeger/issues/213)).
 
 
 ## Collectors
@@ -300,7 +297,7 @@ To view all exposed configuration options run the following command:
 ```sh
 docker run \
   -e SPAN_STORAGE_TYPE=cassandra \
-  jaegertracing/jaeger-ingester:{{< currentVersion >}}
+  jaegertracing/jaeger-ingester:{{< currentVersion >}} 
   --help \
 ```
 
@@ -323,7 +320,7 @@ docker run -d --rm \
   -p 16687:16687 \
   -e SPAN_STORAGE_TYPE=elasticsearch \
   -e ES_SERVER_URLS=http://<ES_SERVER_IP>:<ES_SERVER_PORT> \
-  jaegertracing/jaeger-query:{{< currentVersion >}}
+  jaegertracing/jaeger-query:1.9
 ```
 
 ### UI Base Path

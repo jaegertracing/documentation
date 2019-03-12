@@ -1,6 +1,5 @@
 {{- $dockerImages := .Site.Data.download.docker }}
-{{- $versions     := sort (readDir "content/docs") "Name" "desc" }}
-{{- $latest       := (index ($versions) 0).Name }}
+{{- $latest       := .Site.Params.latest }}
 <table>
   <thead>
     <tr>
