@@ -19,9 +19,7 @@ build: clean build-content
 
 
 htmlproofer-setup:
-	gem install bundler \
-        --no-rdoc \
-        --no-ri
+	gem install bundler
 	NOKOGIRI_USE_SYSTEM_LIBRARIES=true bundle install \
 	--path vendor/bundle
 
