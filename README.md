@@ -6,9 +6,12 @@ The site is built and hosted by [Netlify](https://www.netlify.com/).
 
 ## Setup
 
-Install the extended hugo binary from [hugo/releases](https://github.com/gohugoio/hugo/releases) or
-use package manager if it is available for your operating system.
-The currently used version of hugo is defined in [netlify.toml](./netlify.toml) configuration file.
+Install the "extended" Hugo binary from [hugo/releases](https://github.com/gohugoio/hugo/releases) (use one of the `hugo_extended_*` binaries) or
+use a package manager if it is available for your operating system.
+
+>  The "extended" version of Hugo supports [Sass](https://sass-lang.org), which is necessary to build the site locally.
+
+The currently used version of Hugo is defined in the [`netlify.toml`](./netlify.toml) configuration file.
 
 ## Running the site locally
 
