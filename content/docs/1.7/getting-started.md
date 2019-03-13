@@ -114,7 +114,7 @@ Then navigate to `http://localhost:8080`.
 #### Prerequisites
 
 -   You need Go 1.11 or higher installed on your machine to run from source.
--   Requires a [running Jaeger backend](#all-in-one-docker-image) to view the traces.
+-   Requires a [running Jaeger backend](#all-in-one) to view the traces.
 
 ## Client Libraries
 

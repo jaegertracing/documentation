@@ -43,7 +43,7 @@ See [Features](./features/) page for more details.
     * memory storage
 
 ## Quick Start
-See [running a docker all in one image](getting-started#all-in-one-docker-image).
+See [running a docker all in one image](getting-started#all-in-one).
 
 ## Screenshots
 
