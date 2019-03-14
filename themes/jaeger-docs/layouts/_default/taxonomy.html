@@ -14,7 +14,7 @@
       </ul>
       <h3 class="is-size-3">Other {{ $taxonomyNamePlural }}</h3>
       <ul>
-        {{- range $name, $value := .Site.Taxonomies.tags }}
+        {{- range $name, $value := site.Taxonomies.tags }}
         {{- if ne $name $term }}
         <li>
           <a href="/{{ $taxonomyNamePlural }}/{{ $name }}">{{ $name }}</a>

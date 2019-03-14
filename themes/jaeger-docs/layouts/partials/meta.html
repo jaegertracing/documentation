@@ -1,14 +1,15 @@
 {{- $isHome := eq .Kind "home" }}
-{{- $title := cond $isHome .Site.Title .Title }}
-{{- $description := cond $isHome .Site.Params.tagline .Params.description }}
+{{- $title := cond $isHome site.Title .Title }}
+{{- $description := cond $isHome site.Params.tagline .Params.description }}
 {{- $isDoc := eq .Section "docs" }}
 {{- $type := cond $isHome "website" "article" }}
-{{- $twitterHandle := .Site.Params.twitterHandle }}
-{{- $imageUrl := printf "%s/%s" .Site.BaseURL .Site.Params.openGraphImage }}
+{{- $twitterHandle := site.Params.twitterHandle }}
+{{- $imageUrl := printf "%s/%s" site.BaseURL site.Params.openGraphImage }}
 <meta charset="utf-8" />
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 {{- with $description }}<meta nam="description" content="{{ . }}" />{{- end }}
-{{ .Hugo.Generator }}
+<link rel="canonical" content="{{ .Permalink }}" />
+{{ hugo.Generator }}
 
 <!-- OpenGraph metadata -->
 <meta property="og:title" content="{{ $title }}" />
@@ -24,7 +25,7 @@
 <link rel="canonical" content="{{ .Permalink }}" />
 {{- end }}
 <meta property="og:locale" content="en_US" />
-{{- if not $isHome }}<meta property="og:site_name" content="{{ .Site.Title }}" />{{- end }}
+{{- if not $isHome }}<meta property="og:site_name" content="{{ site.Title }}" />{{- end }}
 {{- with $description }}<meta property="og:description" content="{{ . }}" />{{- end }}
 <meta name="og:type" content="{{ $type }}" />
 <meta name="og:image" content="{{ $imageUrl }}" />

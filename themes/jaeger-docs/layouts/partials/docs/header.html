@@ -1,5 +1,5 @@
-{{- $versions      := .Site.Params.versions }}
-{{- $latest        := .Site.Params.latest }}
+{{- $versions      := site.Params.versions }}
+{{- $latest        := site.Params.latest }}
 {{- $version       := index (split .File.Path "/") 1 }}
 {{- $isLatest      := eq $version $latest }}
 {{- $isNextRelease := eq $version "next-release" }}

@@ -5,6 +5,6 @@
 {{- .Scratch.Set "word" (.Get 0) -}}
 {{- .Scratch.Set "term" (.Get 0) -}}
 {{- end -}}
-{{- $definition := index .Site.Data.definitions (urlize (.Scratch.Get "term")) | markdownify -}}
+{{- $definition := index site.Data.definitions (urlize (.Scratch.Get "term")) | markdownify -}}
 {{- $longDefinition := gt (len $definition) 40 -}}
 <span class="tooltip{{ if $longDefinition }} is-tooltip-multiline{{ end }}" data-tooltip="{{ $definition }}">{{- .Scratch.Get "word" -}}</span>

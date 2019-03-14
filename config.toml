@@ -24,7 +24,6 @@ home = [ "HTML", "REDIRECTS" ]
   mediumHandle   = "jaegertracing"
   gitterHandle   = "jaegertracing"
   openGraphImage = "img/jaeger-icon-color.png"
-  maxBlogPosts   = 100
 
   latest         = "1.10"
   binariesLatest = "1.10.0"
