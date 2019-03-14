@@ -1,9 +1,9 @@
-{{- $menuPages     := .Site.Menus.docs }}
-{{- $githubRepo    := .Site.Params.githubRepo }}
-{{- $twitterHandle := .Site.Params.twitterHandle }}
-{{- $versions      := .Site.Params.versions }}
-{{- $latest        := .Site.Params.latest }}
-{{- $docs          := where .Site.Pages "Section" "docs" }}
+{{- $menuPages     := site.Menus.docs }}
+{{- $githubRepo    := site.Params.githubRepo }}
+{{- $twitterHandle := site.Params.twitterHandle }}
+{{- $versions      := site.Params.versions }}
+{{- $latest        := site.Params.latest }}
+{{- $docs          := where site.Pages "Section" "docs" }}
 {{- $isDocsPage    := eq .Section "docs" }}
 {{- $preview       := getenv "HUGO_PREVIEW" }}
 {{- $isPreview     := eq $preview "true" }}

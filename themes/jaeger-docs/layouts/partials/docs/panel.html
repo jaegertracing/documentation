@@ -2,7 +2,7 @@
 {{- $versionDocsPath := printf "content/docs/%s" $currentVersion }}
 {{- $url := .URL }}
 <aside class="nav">
-  {{- range .Site.Pages }}
+  {{- range site.Pages }}
   {{- $docVersion := index (split .File.Path "/") 1 }}
   {{- if and (eq $docVersion $currentVersion) (not .Params.hasParent) }}
   {{- $isCurrentPage := eq $url .URL }}
