@@ -4,6 +4,8 @@ This repo houses all the assets used to build the Jaeger website, available at h
 
 The site is built and hosted by [Netlify](https://www.netlify.com/).
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d2b1a1ea-f454-4ba8-990c-cc469c959556/deploy-status)](https://app.netlify.com/sites/jaegertracing/deploys)
+
 ## Setup
 
 Install the "extended" Hugo binary from [hugo/releases](https://github.com/gohugoio/hugo/releases) (use one of the `hugo_extended_*` binaries) or
