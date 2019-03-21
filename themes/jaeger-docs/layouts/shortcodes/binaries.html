@@ -1,5 +1,5 @@
-{{- $latest        := site.Params.binariesLatest }}
-{{- $binaries      := site.Data.download.binaries }}
+{{- $latest        := .Site.Params.binariesLatest }}
+{{- $binaries      := .Site.Data.download.binaries }}
 {{- $releaseUrl    := printf "https://github.com/jaegertracing/jaeger/releases/tag/v%s" $latest }}
 {{- $zipUrl        := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $latest }}
 {{- $tarUrl        := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $latest }}
