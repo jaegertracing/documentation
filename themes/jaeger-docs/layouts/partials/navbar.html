@@ -28,6 +28,22 @@
           Download
         </a>
 
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Docs
+          </a>
+          <div class="navbar-dropdown">
+            {{- range $docs }}
+            {{- $docVersion := index (split .File.Path "/") 1 }}
+            {{- if and (eq $docVersion $latest) (not .Params.hasparent) }}
+            <a class="navbar-item" href="{{ .URL }}">
+              {{ .Title }}
+            </a>
+            {{- end }}
+            {{- end }}
+          </div>
+        </div>
+
         {{- if $isDocsPage }}
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
@@ -45,22 +61,6 @@
               <a class="navbar-item" href="/docs/next-release">
                 next-release&nbsp;&nbsp;(preview)
               </a>
-            {{- end }}
-          </div>
-        </div>
-        {{- else }}
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Docs
-          </a>
-          <div class="navbar-dropdown">
-            {{- range $docs }}
-            {{- $docVersion := index (split .File.Path "/") 1 }}
-            {{- if and (eq $docVersion $latest) (not .Params.hasparent) }}
-            <a class="navbar-item" href="{{ .URL }}">
-              {{ .Title }}
-            </a>
-            {{- end }}
             {{- end }}
           </div>
         </div>
@@ -90,6 +90,14 @@
 
             <a class="navbar-item" href="/report-security-issue">
               Report security issue
+            </a>
+
+            <a class="navbar-item" href="https://github.com/jaegertracing/jaeger">
+              Main GitHub repo
+            </a>
+
+            <a class="navbar-item" href="https://github.com/jaegertracing/documentation">
+              Docs GitHub repo
             </a>
           </div>
         </div>
