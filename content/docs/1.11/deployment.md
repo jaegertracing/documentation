@@ -97,6 +97,10 @@ When using gRPC, you have several options for load balancing and name resolution
 * Static list of hostnames and round-robin load balancing. This is what you get with a comma-separated list of addresses. (example: `reporter.grpc.host-port=jaeger-collector1:14250,jaeger-collector2:14250,jaeger-collector3:14250`)
 * Dynamic DNS resolution and round-robin load balancing. To get this behaviour, prefix the address with `dns:///` and gRPC will attempt to resolve the hostname using SRV records (for [external load balancing](https://github.com/grpc/grpc/blob/master/doc/load-balancing.md)), TXT records (for [service configs](https://github.com/grpc/grpc/blob/master/doc/service_config.md)), and A records. Refer to the [gRPC Name Resolution docs](https://github.com/grpc/grpc/blob/master/doc/naming.md) and the [dns_resolver.go implementation](https://github.com/grpc/grpc-go/blob/master/resolver/dns/dns_resolver.go) for more info. (example: `--reporter.grpc.host-port=dns:///jaeger-collector.jaeger-infra.svc:14250`)
 
+### Agent level tags
+
+Jaeger supports agent level tags, that can be added to the process tags of all spans passing through the agent. This is supported through the command line flag `--jaeger.tags=key=value`. Tags can also be set through an environment flag like so - `--jaeger-tags=key=${envFlag:defaultValue}` - The tag value will be set to the value of the `envFlag` environment key and `defaultValue` if not set.
+
 
 ## Collectors
 
