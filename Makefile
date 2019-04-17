@@ -9,11 +9,20 @@ develop:
         --buildFuture \
         --disableFastRender
 
+develop-verbose:
+	HUGO_PREVIEW=true \
+	hugo server \
+	--buildDrafts \
+	--buildFuture \
+	--disableFastRender \
+	--verbose \
+	--verboseLog
+
 clean:
 	rm -rf public
 
 build-content:
-	hugo -v
+	hugo -v --minify
 
 build: clean build-content
 
