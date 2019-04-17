@@ -13,9 +13,7 @@
 <!-- OpenGraph metadata -->
 <meta property="og:title" content="{{ $title }}" />
 {{ if $isDoc }}
-{{ $version := index (split .File.Path "/") 1 }}
-{{ $latest := site.Params.latest }}
-{{ $url := replace .Permalink $version "latest" }}
+{{ $url := printf "%sdocs/%s" site.BaseURL .File.BaseFileName }}
 <meta property="og:type" content="documentation" />
 <meta property="og:url" content="{{ $url }}" />
 <link rel="canonical" content="{{ $url }}" />
