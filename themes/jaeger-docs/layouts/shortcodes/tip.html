@@ -1,10 +1,10 @@
-{{- if eq (len .Params) 2 -}}
-{{- .Scratch.Set "word" (.Get 0) -}}
-{{- .Scratch.Set "term" (.Get 1) }}
-{{- else -}}
-{{- .Scratch.Set "word" (.Get 0) -}}
-{{- .Scratch.Set "term" (.Get 0) -}}
-{{- end -}}
-{{- $definition := index site.Data.definitions (urlize (.Scratch.Get "term")) | markdownify -}}
-{{- $longDefinition := gt (len $definition) 40 -}}
-<span class="tooltip{{ if $longDefinition }} is-tooltip-multiline{{ end }}" data-tooltip="{{ $definition }}">{{- .Scratch.Get "word" -}}</span>
+{{ if eq (len .Params) 2 }}
+{{ .Scratch.Set "word" (.Get 0) }}
+{{ .Scratch.Set "term" (.Get 1) }}
+{{ else -}}
+{{ .Scratch.Set "word" (.Get 0) }}
+{{ .Scratch.Set "term" (.Get 0) }}
+{{ end }}
+{{ $definition := index site.Data.definitions (urlize (.Scratch.Get "term")) | markdownify }}
+{{ $longDefinition := gt (len $definition) 40 }}
+<span class="tooltip{{ if $longDefinition }} is-tooltip-multiline{{ end }}" data-tooltip="{{ $definition }}">{{ .Scratch.Get "word" -}}</span>

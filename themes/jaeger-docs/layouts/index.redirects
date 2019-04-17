@@ -1,5 +1,5 @@
-{{- $versions     := site.Params.versions }}
-{{- $latest       := site.Params.latest }}
+{{- $versions     := site.Params.versions -}}
+{{- $latest       := site.Params.latest -}}
 /docs    /docs/{{ $latest }}
 /docs/latest     /docs/{{ $latest }}
 /docs/latest/*     /docs/{{ $latest }}/:splat

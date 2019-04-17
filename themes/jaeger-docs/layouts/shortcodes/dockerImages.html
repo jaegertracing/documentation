@@ -1,5 +1,5 @@
-{{- $dockerImages := site.Data.download.docker }}
-{{- $latest       := site.Params.latest }}
+{{ $dockerImages := site.Data.download.docker }}
+{{ $latest       := site.Params.latest }}
 <table>
   <thead>
     <tr>
@@ -9,15 +9,15 @@
     </tr>
   </thead>
   <tbody>
-    {{- range $dockerImages }}
-    {{- $org         := "jaegertracing" }}
-    {{- $image       := .image }}
-    {{- $fullImage   := printf "%s/%s" $org $image }}
-    {{- $link        := printf "https://hub.docker.com/r/%s/%s" $org $image }}
-    {{- $description := .description | markdownify }}
-    {{- $since       := .since }}
-    {{- $latestImg   := .latest | default $latest }}
-    {{- $pullCmd     := printf "<code><span class=\"is-dollar\">$</span> docker pull %s:%s</code>" $fullImage $latestImg | safeHTML }}
+    {{ range $dockerImages }}
+    {{ $org         := "jaegertracing" }}
+    {{ $image       := .image }}
+    {{ $fullImage   := printf "%s/%s" $org $image }}
+    {{ $link        := printf "https://hub.docker.com/r/%s/%s" $org $image }}
+    {{ $description := .description | markdownify }}
+    {{ $since       := .since }}
+    {{ $latestImg   := .latest | default $latest }}
+    {{ $pullCmd     := printf "<code><span class=\"is-dollar\">$</span> docker pull %s:%s</code>" $fullImage $latestImg | safeHTML }}
     <tr>
       <td>
         <a href="{{ $link }}">
@@ -25,11 +25,11 @@
         </a>
       </td>
       <td>
-        {{- with $description }}
+        {{ with $description }}
         <p>
           {{ . }}
         </p>
-        {{- end }}
+        {{ end }}
         <div>
           {{ $pullCmd }}
         </div>
@@ -38,6 +38,6 @@
         {{ $since }}
       </td>
     </tr>
-    {{- end }}
+    {{ end }}
   </tbody>
 </table>

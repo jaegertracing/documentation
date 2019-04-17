@@ -1,7 +1,8 @@
-{{- $githubRepo    := .Site.Params.githubRepo }}
-{{- $twitterHandle := .Site.Params.twitterHandle }}
-{{- $gitterHandle  := .Site.Params.gitterHandle }}
-{{- $mediumHandle  := .Site.Params.mediumHandle }}
+{{ $params        := site.Params }}
+{{ $githubRepo    := $params.githubRepo }}
+{{ $twitterHandle := $params.twitterHandle }}
+{{ $gitterHandle  := $params.gitterHandle }}
+{{ $mediumHandle  := $params.mediumHandle }}
 <footer class="footer">
   <div class="container">
     <div class="columns">
@@ -12,34 +13,34 @@
         <h4 class="is-size-4 is-size-3-mobile">
           Community
         </h4>
-        {{- with $githubRepo }}
+        {{ with $githubRepo }}
         <a href="https://github.com/{{ . }}">
           <span class="icon has-text-light">
             <i class="fab fa-lg fa-github"></i>
           </span>
         </a>
-        {{- end }}
-        {{- with $twitterHandle }}
+        {{ end }}
+        {{ with $twitterHandle }}
         <a href="https://twitter.com/{{ . }}">
           <span class="icon" style="color: #55acee;">
             <i class="fab fa-lg fa-twitter"></i>
           </span>
         </a>
-        {{- end }}
-        {{- with $gitterHandle }}
+        {{ end }}
+        {{ with $gitterHandle }}
         <a href="https://gitter.im/{{ . }}">
           <span class="icon" style="color: #e03464;">
             <i class="fab fa-gitter"></i>
           </span>
         </a>
-        {{- end }}
-        {{- with $mediumHandle }}
+        {{ end }}
+        {{ with $mediumHandle }}
         <a href="https://medium.com/{{ . }}">
           <span class="icon has-text-light">
             <i class="fab fa-lg fa-medium"></i>
           </span>
         </a>
-        {{- end }}
+        {{ end }}
       </div>
       <div class="column">
         <h4 class="is-size-4 is-size-3-mobile">

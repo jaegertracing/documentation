@@ -1,13 +1,13 @@
-{{- define "title" -}}
+{{ define "title" }}
 {{ .Title }} &mdash; Jaeger documentation
-{{- end -}}
+{{ end }}
 
-{{- define "main" -}}
+{{ define "main" }}
 <article class="article article--docs">
   <div class="container is-fluid">
 
     <div class="columns">
-      {{- if ne .Params.widescreen true }}
+      {{ if ne .Params.widescreen true }}
       <div class="column is-2 is-hidden-touch">
         {{ partial "docs/panel.html" . }}
       </div>
@@ -22,7 +22,7 @@
       <div class="column is-2 is-hidden-touch">
         {{ partial "docs/toc.html" . }}
       </div>
-      {{- else }}
+      {{ else }}
       <div class="column is-2 is-hidden-touch">
         {{ partial "docs/panel.html" . }}
       </div>
@@ -32,8 +32,8 @@
           {{ .Content }}
         </section>
       </div>
-      {{- end }}
+      {{ end }}
     </div>
   </div>
 </article>
-{{- end -}}
+{{ end }}

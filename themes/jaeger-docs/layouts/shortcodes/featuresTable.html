@@ -1,35 +1,35 @@
-{{- $clients := site.Data.clients.clients }}
-{{- $featureGroups := site.Data.clients.featureGroups }}
+{{ $clients := site.Data.clients.clients }}
+{{ $featureGroups := site.Data.clients.featureGroups }}
 <table>
   <tbody>
-    {{- range $featureGroups }}
+    {{ range $featureGroups }}
     <tr class="feature-table-sticky-row">
       <th class="feature-table-header" colspan="7">{{ .description | markdownify }}</th>
     </tr>
     <tr class="feature-table-sticky-row">
       <th class="feature-table-sub-header">Feature</th>
-      {{- range $clients }}
+      {{ range $clients }}
       <th class="feature-table-sub-header">{{ .language }}</th>
-      {{- end }}
+      {{ end }}
     </tr>
-    {{- range .features }}
-    {{- $featureName := .name }}
+    {{ range .features }}
+    {{ $featureName := .name }}
     <tr>
-      {{- $description := default .name .description }}
+      {{ $description := default .name .description }}
       <td>{{ $description | markdownify }}</td>
-      {{- range $clients }}
-      {{- $supported := index .features $featureName }}
-      {{- if eq $supported true }}
+      {{ range $clients }}
+      {{ $supported := index .features $featureName }}
+      {{ if eq $supported true }}
       <td>{{ emojify ":white_check_mark:" }}</td>
-      {{- else if eq $supported false }}
+      {{ else if eq $supported false }}
       <td>{{ emojify ":x:" }}</td>
-      {{- else }}
-      {{- $supported := default (emojify ":grey_question:") $supported }}
+      {{ else }}
+      {{ $supported := default (emojify ":grey_question:") $supported }}
       <td>{{ $supported | markdownify }}</td>
-      {{- end }}
-      {{- end }}
+      {{ end }}
+      {{ end }}
     </tr>
-    {{- end }}
-    {{- end }}
+    {{ end }}
+    {{ end }}
   </tbody>
   </table>

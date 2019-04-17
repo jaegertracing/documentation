@@ -1,12 +1,12 @@
-{{- $menuPages     := site.Menus.docs }}
-{{- $githubRepo    := site.Params.githubRepo }}
-{{- $twitterHandle := site.Params.twitterHandle }}
-{{- $versions      := site.Params.versions }}
-{{- $latest        := site.Params.latest }}
-{{- $docs          := where site.Pages "Section" "docs" }}
-{{- $isDocsPage    := eq .Section "docs" }}
-{{- $preview       := getenv "HUGO_PREVIEW" }}
-{{- $isPreview     := eq $preview "true" }}
+{{ $menuPages     := site.Menus.docs }}
+{{ $githubRepo    := site.Params.githubRepo }}
+{{ $twitterHandle := site.Params.twitterHandle }}
+{{ $versions      := site.Params.versions }}
+{{ $latest        := site.Params.latest }}
+{{ $docs          := where site.Pages "Section" "docs" }}
+{{ $isDocsPage    := eq .Section "docs" }}
+{{ $preview       := getenv "HUGO_PREVIEW" }}
+{{ $isPreview     := eq $preview "true" }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
     <div class="navbar-brand">
@@ -33,38 +33,38 @@
             Docs
           </a>
           <div class="navbar-dropdown">
-            {{- range $docs }}
-            {{- $docVersion := index (split .File.Path "/") 1 }}
-            {{- if and (eq $docVersion $latest) (not .Params.hasparent) }}
-            <a class="navbar-item" href="{{ .URL }}">
+            {{ range $docs }}
+            {{ $docVersion := index (split .File.Path "/") 1 }}
+            {{ if and (eq $docVersion $latest) (not .Params.hasparent) }}
+            <a class="navbar-item" href="{{ .RelPermalink }}">
               {{ .Title }}
             </a>
-            {{- end }}
-            {{- end }}
+            {{ end }}
+            {{ end }}
           </div>
         </div>
 
-        {{- if $isDocsPage }}
+        {{ if $isDocsPage }}
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
             Versions
           </a>
           <div class="navbar-dropdown">
-            {{- range $versions }}
-            {{- $version := . }}
-            {{- $isLatest := eq $version $latest }}
+            {{ range $versions }}
+            {{ $version := . }}
+            {{ $isLatest := eq $version $latest }}
             <a class="navbar-item" href="/docs/{{ $version }}">
               {{ $version }}{{ if $isLatest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end }}
             </a>
-            {{- end }}
-            {{- if $isPreview }}
+            {{ end }}
+            {{ if $isPreview }}
               <a class="navbar-item" href="/docs/next-release">
                 next-release&nbsp;&nbsp;(preview)
               </a>
-            {{- end }}
+            {{ end }}
           </div>
         </div>
-        {{- end }}
+        {{ end }}
 
         <a class="navbar-item" href="https://medium.com/jaegertracing" target="_blank">
           Blog
@@ -102,20 +102,20 @@
           </div>
         </div>
 
-        {{- with $githubRepo }}
+        {{ with $githubRepo }}
         <a class="navbar-item" href="https://github.com/{{ . }}" target="_blank">
           <span class="icon">
             <i class="fab fa-github" style="color: #333;"></i>
           </span>
         </a>
-        {{- end }}
-        {{- with $twitterHandle }}
+        {{ end }}
+        {{ with $twitterHandle }}
         <a class="navbar-item" href="https://twitter.com/{{ . }}" target="_blank">
           <span class="icon" style="color: #55acee;">
             <i class="fab fa-twitter"></i>
           </span>
         </a>
-        {{- end }}
+        {{ end }}
       </div>
     </div>
   </div>

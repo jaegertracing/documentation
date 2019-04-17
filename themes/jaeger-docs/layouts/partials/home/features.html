@@ -4,14 +4,14 @@
       Problems that Jaeger addresses
     </h2>
     <div class="columns">
-      {{- range site.Data.indexpage.features }}
+      {{ range site.Data.indexpage.features }}
       <div class="column has-text-centered">
         <span class="icon is-large">
           <i class="material-icons is-size-1 has-text-primary">{{ default "data_usage" .icon }}</i>
         </span>
         <h4 class="is-size-4 is-size-5-mobile">{{ .text | markdownify }}</h4>
       </div>
-      {{- end }}
+      {{ end }}
     </div>
   </div>
 </section>
