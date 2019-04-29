@@ -1,6 +1,6 @@
 {{- $menuPages     := site.Menus.docs }}
-{{- $githubRepo    := site.Params.githubRepo }}
-{{- $twitterHandle := site.Params.twitterHandle }}
+{{- $githubRepo    := site.Params.githubrepo }}
+{{- $twitterHandle := site.Params.twitterhandle }}
 {{- $versions      := site.Params.versions }}
 {{- $latest        := site.Params.latest }}
 {{- $docs          := where site.Pages "Section" "docs" }}
@@ -36,7 +36,7 @@
             {{- range $docs }}
             {{- $docVersion := index (split .File.Path "/") 1 }}
             {{- if and (eq $docVersion $latest) (not .Params.hasparent) }}
-            <a class="navbar-item" href="{{ .URL }}">
+            <a class="navbar-item" href="{{ .RelPermalink }}">
               {{ .Title }}
             </a>
             {{- end }}
@@ -75,7 +75,7 @@
             Project
           </a>
 
-          <div class="navbar-dropdown">
+          <div class="navbar-dropdown is-right">
             <a class="navbar-item" href="/get-in-touch">
               Get in touch
             </a>

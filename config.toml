@@ -19,11 +19,11 @@ home = [ "HTML", "REDIRECTS" ]
 
 [params]
   tagline = "Monitor and troubleshoot transactions in complex distributed systems"
-  githubRepo     = "jaegertracing/jaeger"
-  twitterHandle  = "JaegerTracing"
-  mediumHandle   = "jaegertracing"
-  gitterHandle   = "jaegertracing"
-  openGraphImage = "img/jaeger-icon-color.png"
+  githubrepo     = "jaegertracing/jaeger"
+  twitterhandle  = "JaegerTracing"
+  mediumhandle   = "jaegertracing"
+  gitterhandle   = "jaegertracing"
+  opengraphimage = "img/jaeger-icon-color.png"
 
   latest         = "1.11"
   binariesLatest = "1.11.0"
