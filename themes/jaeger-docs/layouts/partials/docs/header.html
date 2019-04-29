@@ -3,7 +3,7 @@
 {{- $version       := index (split .File.Path "/") 1 }}
 {{- $isLatest      := eq $version $latest }}
 {{- $isNextRelease := eq $version "next-release" }}
-{{- $latestUrl     := .URL | replaceRE $version $latest }}
+{{- $latestUrl     := .RelPermalink | replaceRE $version $latest }}
 <header>
   <p class="title is-1">{{ .Title }}</p>
   {{- with .Params.description }}<p class="subtitle is-3">{{ . }}</p>{{ end }}
