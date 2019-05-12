@@ -1,10 +1,10 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d2b1a1ea-f454-4ba8-990c-cc469c959556/deploy-status)](https://app.netlify.com/sites/jaegertracing/deploys)
+
 # Jaeger website
 
 This repo houses all the assets used to build the Jaeger website, available at https://jaegertracing.io.
 
 The site is built and hosted by [Netlify](https://www.netlify.com/).
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d2b1a1ea-f454-4ba8-990c-cc469c959556/deploy-status)](https://app.netlify.com/sites/jaegertracing/deploys)
 
 ## Setup
 
@@ -33,7 +33,11 @@ The site is published automatically by [Netlify](https://www.netlify.com/) whene
 
 We strongly encourage you to contribute to this site! For more information, see the [contributing](CONTRIBUTING.md) guide.
 
-### Publishing new Jaeger version
+## Diagrams
+
+Diagrams included in the documentation are created in the shared [Google Slides document][slides], which supports export to SVG. If you need to make changes to the diagrams as part of a PR, please copy the diagram into a new slide deck and include a shared link to it in the PR along with the exported SVG file. The maintainers will update the master deck with the new version upon merging the PR.
+
+## Publishing new Jaeger version
 
 Each Jaeger version is documented in a separate directory e.g. [content/docs/1.8/](./content/docs/1.8/). A special directory [content/docs/next-release/](./content/docs/next-release/) is reserved for the changes to be published as the next version. If you are adding documentation for features that are not yet released in the main Jaeger repository, add your changes to the `next-release` directory. If you're adding documentation for already released features, you may need to make the same change twice, i.e. in the most recent release (e.g. `1.8`) and in the `next-release` directories.
 
@@ -47,3 +51,5 @@ Before creating a new release, make sure all outstanding PRs for that version ar
 ## License
 
 [Apache 2.0 License](./LICENSE).
+
+[slides]: https://docs.google.com/presentation/d/1JuurkQn03z0BbOEAViJBEE_WWMj6JQUML-uJm7zizvI/
