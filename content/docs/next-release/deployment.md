@@ -312,7 +312,6 @@ Jaeger supports gRPC based storage plugins. For more information refer to [jaege
 Available plugins:
 * [InfluxDB](https://github.com/influxdata/jaeger-influxdb/)
 
-
 ```sh
 docker run \
   -e SPAN_STORAGE_TYPE=grpc-plugin \
@@ -320,7 +319,6 @@ docker run \
   -e GRPC_STORAGE_PLUGIN_CONFIGURATION_FINE=<...> \
   jaegertracing/all-in-one:{{< currentVersion >}}
 ```
-
 
 ## Ingester
 **jaeger-ingester** is a service which reads span data from Kafka topic and writes it to another storage backend (Elasticsearch or Cassandra).
