@@ -298,7 +298,7 @@ To view all exposed configuration options run the following command:
 docker run \
   -e SPAN_STORAGE_TYPE=cassandra \
   jaegertracing/jaeger-ingester:{{< currentVersion >}} 
-  --help \
+  --help
 ```
 
 ## Query Service & UI

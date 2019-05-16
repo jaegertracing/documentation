@@ -310,6 +310,7 @@ You can find more information about topics and partitions in general in the [off
 Jaeger supports gRPC based storage plugins. For more information refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc)
 
 Available plugins:
+
 * [InfluxDB](https://github.com/influxdata/jaeger-influxdb/)
 
 ```sh
@@ -333,7 +334,7 @@ To view all exposed configuration options run the following command:
 docker run \
   -e SPAN_STORAGE_TYPE=cassandra \
   jaegertracing/jaeger-ingester:{{< currentVersion >}}
-  --help \
+  --help
 ```
 
 ## Query Service & UI
