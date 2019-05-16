@@ -30,4 +30,5 @@ if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; t
     sed -i -e "s/versions *= *\[/versions = \[\"${versionMajorMinor}\"\,/" config.toml
     git add config.toml ./content/docs/${versionMajorMinor}
     git commit -m "Release ${version}" -s
+    git push origin master
 fi
