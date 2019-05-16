@@ -134,7 +134,7 @@ Port  | Protocol | Function
 
 Collectors require a persistent storage backend. Cassandra and Elasticsearch are the primary supported storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
-The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka`, `badger` and `memory` (only for all-in-one binary).
+The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka`, `grpc-plugin`, `badger` and `memory` (only for all-in-one binary).
 As of version 1.6.0, it's possible to use multiple storage types at the same time by providing a comma-separated list of valid types to the `SPAN_STORAGE_TYPE` environment variable.
 It's important to note that all listed storage types are used for writing, but only the first type in the list will be used for reading and archiving.
 
@@ -150,7 +150,7 @@ integer value via `--memory.max-traces`.
 Experimental since Jaeger 1.9
 
 [Badger](https://github.com/dgraph-io/badger) is an embedded local storage available in all-in-one distribution.
-By default it acts as an ephemeral storage using temporary filesystem which can be overridden by `--badger.ephemeral=false`.
+By default it acts as an ephemeral storage using a temporary filesystem. This can be overridden by using the `--badger.ephemeral=false` option.
 
 ```sh
 docker run \
