@@ -156,7 +156,7 @@ By default it acts as an ephemeral storage using temporary filesystem which can 
 docker run \
   -e SPAN_STORAGE_TYPE=badger \
   -e BADGER_EPHEMERAL=false \
-  jaegertracing/-all-in-one:{{< currentVersion >}}
+  jaegertracing/all-in-one:{{< currentVersion >}}
 ```
 
 ### Cassandra
