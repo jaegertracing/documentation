@@ -134,7 +134,7 @@ Port  | Protocol | Function
 
 Collectors require a persistent storage backend. Cassandra and Elasticsearch are the primary supported storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
-The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` and `memory` (only for all-in-one binary).
+The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka`, `badger` and `memory` (only for all-in-one binary).
 As of version 1.6.0, it's possible to use multiple storage types at the same time by providing a comma-separated list of valid types to the `SPAN_STORAGE_TYPE` environment variable.
 It's important to note that all listed storage types are used for writing, but only the first type in the list will be used for reading and archiving.
 
@@ -145,6 +145,19 @@ data will be lost once the process is gone.
 
 By default, there's no limit in the amount of traces stored in memory but a limit can be established by passing an
 integer value via `--memory.max-traces`.
+
+### Badger - local storage
+Experimental since Jaeger 1.9
+
+[Badger](https://github.com/dgraph-io/badger) is an embedded local storage available in all-in-one distribution.
+By default it acts as an ephemeral storage using temporary filesystem which can be overridden by `--badger.ephemeral=false`.
+
+```sh
+docker run \
+  -e SPAN_STORAGE_TYPE=badger \
+  -e BADGER_EPHEMERAL=false \
+  jaegertracing/-all-in-one:{{< currentVersion >}}
+```
 
 ### Cassandra
 Supported versions: 3.4+
@@ -291,6 +304,23 @@ docker run \
 Unless your Kafka cluster is configured to automatically create topics, you will need to create it ahead of time. You can refer to [the Kafka quickstart documentation](https://kafka.apache.org/documentation/#quickstart_createtopic) to learn how.
 
 You can find more information about topics and partitions in general in the [official documentation](https://kafka.apache.org/documentation/#intro_topics). [This article](https://www.confluent.io/blog/how-to-choose-the-number-of-topicspartitions-in-a-kafka-cluster/) provide more details about how to choose the number of partitions.
+
+### Storage plugin
+
+Jaeger supports gRPC based storage plugins. For more information refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc)
+
+Available plugins:
+* [InfluxDB](https://github.com/influxdata/jaeger-influxdb/)
+
+
+```sh
+docker run \
+  -e SPAN_STORAGE_TYPE=grpc-plugin \
+  -e GRPC_STORAGE_PLUGIN_BINARY=<...> \
+  -e GRPC_STORAGE_PLUGIN_CONFIGURATION_FINE=<...> \
+  jaegertracing/all-in-one:{{< currentVersion >}}
+```
+
 
 ## Ingester
 **jaeger-ingester** is a service which reads span data from Kafka topic and writes it to another storage backend (Elasticsearch or Cassandra).
