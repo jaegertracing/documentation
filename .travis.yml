@@ -11,7 +11,7 @@ env:
 before_install:
 - git config user.name "jaegertracingci"
 - git config user.email "jaegertracingci+jaeger-tracing@googlegroups.com"
-# setup https authentication credentials, used by ./gradlew publish
+# setup https authentication credentials, used by release script
 - git config credential.helper "store --file=.git/credentials"
 - echo "https://$GH_TOKEN:@github.com" > .git/credentials
 

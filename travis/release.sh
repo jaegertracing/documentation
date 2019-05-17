@@ -20,10 +20,10 @@ safe_checkout_master() {
 
 if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; then
     echo "We are on release- tag"
-    echo "Creating new documentation version"
     safe_checkout_master
     version=$(echo "${TRAVIS_TAG}" | sed 's/^release-//')
     versionMajorMinor=$(echo "${version}" | sed 's/\.[[:digit:]]$//')
+    echo "Creating new documentation for ${version}"
     cp -r ./content/docs/next-release/ ./content/docs/${versionMajorMinor}
     sed -i -e "s/latest *=.*$/latest = \"${versionMajorMinor}\"/" config.toml
     sed -i -e "s/binariesLatest *=.*$/binariesLatest = \"${version}\"/" config.toml
