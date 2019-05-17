@@ -41,12 +41,8 @@ Diagrams included in the documentation are created in the shared [Google Slides 
 
 Each Jaeger version is documented in a separate directory e.g. [content/docs/1.8/](./content/docs/1.8/). A special directory [content/docs/next-release/](./content/docs/next-release/) is reserved for the changes to be published as the next version. If you are adding documentation for features that are not yet released in the main Jaeger repository, add your changes to the `next-release` directory. If you're adding documentation for already released features, you may need to make the same change twice, i.e. in the most recent release (e.g. `1.8`) and in the `next-release` directories.
 
-Before creating a new release, make sure all outstanding PRs for that version are merged to `next-release` directory. Then create a new release:
-
-1. copy files from `next-release` to a new directory, e.g. `1.9`, without any changes
-2. add the new version to [config.toml](./config.toml) (see `latest`, `binariesLatest`, and `versions` variables)
-3. do not make any other changes to the content (if you need changes, make them before the release)
-4. open a PR
+Before creating a new release, make sure all outstanding PRs for that version are merged to `next-release` directory.
+Then create a release by pushing a tag `release-X.Y.Z`, ex `git tag release-1.12.0; git push origin release-1.12.0`.
 
 ## License
 
