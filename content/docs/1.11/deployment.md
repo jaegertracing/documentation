@@ -130,7 +130,7 @@ Port  | Protocol | Function
 
 Collectors require a persistent storage backend. Cassandra and Elasticsearch are the primary supported storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
-The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` and `memory` (only for all-in-one binary).
+The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` (only as a buffer) and `memory` (only for all-in-one binary).
 As of version 1.6.0, it's possible to use multiple storage types at the same time by providing a comma-separated list of valid types to the `SPAN_STORAGE_TYPE` environment variable.
 It's important to note that all listed storage types are used for writing, but only the first type in the list will be used for reading and archiving.
 
@@ -260,7 +260,10 @@ more information about choosing how many shards should be chosen for optimizatio
 Supported in Jaeger since 1.6.0
 Supported Kafka versions: 0.9+
 
-Starting from version 1.7.0, a new component [Ingester](#ingester) was added to support reading from Kafka and storing it in another storage backend (Elasticsearch or Cassandra).
+Kafka can be used as an intermediary buffer between collector and an actual storage.
+The collector is configured with `SPAN_STORAGE_TYPE=kafka` that makes it write all received spans
+into a Kafka topic. A new component [Ingester](#ingester), added in version 1.7.0, is used to read from
+Kafka and store spans in another storage backend (Elasticsearch or Cassandra).
 
 Writing to Kafka is particularly useful for building post-processing data pipelines.
 
