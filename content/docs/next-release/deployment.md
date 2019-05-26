@@ -147,7 +147,7 @@ data will be lost once the process is gone.
 By default, there's no limit in the amount of traces stored in memory but a limit can be established by passing an
 integer value via `--memory.max-traces`.
 
-### Badger
+### Badger - local storage
 Experimental since Jaeger 1.9
 
 [Badger](https://github.com/dgraph-io/badger) is an embedded local storage available in all-in-one distribution.
