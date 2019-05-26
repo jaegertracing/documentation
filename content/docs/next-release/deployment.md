@@ -150,13 +150,18 @@ integer value via `--memory.max-traces`.
 ### Badger - local storage
 Experimental since Jaeger 1.9
 
-[Badger](https://github.com/dgraph-io/badger) is an embedded local storage available in all-in-one distribution.
-By default it acts as an ephemeral storage using a temporary filesystem. This can be overridden by using the `--badger.ephemeral=false` option.
+[Badger](https://github.com/dgraph-io/badger) is an embedded local storage, only available
+with **all-in-one** distribution. By default it acts as an ephemeral storage using a temporary filesystem.
+This can be overridden by using the `--badger.ephemeral=false` option.
 
 ```sh
 docker run \
   -e SPAN_STORAGE_TYPE=badger \
   -e BADGER_EPHEMERAL=false \
+  -e BADGER_DIRECTORY_VALUE=/badger/data \
+  -e BADGER_DIRECTORY_KEY=/badger/key \
+  -v <storage_dir_on_host>:/badger \
+  -p 16686:16686 \
   jaegertracing/all-in-one:{{< currentVersion >}}
 ```
 
