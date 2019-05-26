@@ -1,0 +1,19 @@
+sudo: required
+language: minimal
+dist: trusty
+git:
+  # pull everything for safe commits comparison before deploying
+  depth: false
+env:
+  global:
+  # GH_TOKEN
+  - secure: "e2AoxnSUcoUGE18nj/FqHR9oSS4T4rE4LKKC0kiRia0CM9+Bm6BF6OxvfFBw3Glnkn/OzBTx3NqH/hEJnpKOJMSwcF8Z9aznkV/6muYeltnc6IbHuWsKWUbA2CcLB/AnQwyr41prWW8Bu8j7j0qt6o67Ea9kzA4yRxAGWkpc55qJ8smQgy5qCwDcONGnS6gkPA4g+L4ay1Dd7LQD1dRuyH7rcgljBcDAm6ljYXgv6YZbbmgcg0uHjDracQlIm1OvtvNF7U5kaUbYfzdP1EIt2LxnjFQMCPUmpx/gV9AzUnTmAhcONm2KZsv83Dcu0BxRuLA1LK44L4RmDLSMOBZWs6z/oqpSW1cEt0LnmaI81dt4i2yP2a7lxVo3dMhoatO+rF1pSfEbUAMICX3mBrBPw/KjJRtYnv/CTyF2x6O++4kUaA9SaV9oyrV+Qz85PWrTWzZMHJurCgIPYnnIiZOjTRGVpmTlU0Lpgp3KHGmchyVHsvPubDbnyWDQiUfSq1pIIde0oMkiYfg47sV+Wmnje1IwoW7j3tk46AhBo327OEr0XCOAyX6aK8KQOrP2afv+RBHwKP1NTP4GN7fNWl83MhLNEESVPSDzhBgDJiKIGLBHS2w8wJOhSgzK2OlGF2sV0LeWNCHq97Gl3sNIauqvukpu6brv4v3zNjLVQfWM8B0="
+before_install:
+- git config user.name "jaegertracingci"
+- git config user.email "jaegertracingci+jaeger-tracing@googlegroups.com"
+# setup https authentication credentials, used by release script
+- git config credential.helper "store --file=.git/credentials"
+- echo "https://$GH_TOKEN:@github.com" > .git/credentials
+
+script:
+  - bash ./travis/release.sh

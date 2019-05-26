@@ -39,8 +39,8 @@ improvements have been released in v1.0 to allow the UI to efficiently deal with
 ## Cloud Native Deployment
 
 Jaeger backend is distributed as a collection of Docker images. The binaries support various configuration methods,
-including command line options, environment variables, and configuration files in multiple formats (yaml, toml, etc.)
-Deployment to Kubernetes clusters is assisted by [Kubernetes templates](https://github.com/jaegertracing/jaeger-kubernetes)
+including command line options, environment variables, and configuration files in multiple formats (yaml, toml, etc.).
+Deployment to Kubernetes clusters is assisted by a [Kubernetes operator](https://github.com/jaegertracing/jaeger-operator), [Kubernetes templates](https://github.com/jaegertracing/jaeger-kubernetes)
 and a [Helm chart](https://github.com/kubernetes/charts/tree/master/incubator/jaeger).
 
 ## Observability

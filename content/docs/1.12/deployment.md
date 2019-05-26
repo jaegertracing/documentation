@@ -85,14 +85,21 @@ docker run \
   -p6832:6832/udp \
   -p5778:5778/tcp \
   jaegertracing/jaeger-agent:{{< currentVersion >}} \
-  --reporter.tchannel.host-port=jaeger-collector.jaeger-infra.svc:14267
+  --reporter.grpc.host-port=jaeger-collector.jaeger-infra.svc:14250
 ```
 
-Or add `--reporter.type=grpc` and `--reporter.grpc.host-port=jaeger-collector.jaeger-infra.svc:14250` to use gRPC
-communication with the collector. Then the `tchannel` option can be removed.
+Or use `--reporter.tchannel.host-port=jaeger-collector.jaeger-infra.svc:14267` to use
+legacy tchannel reporter.
 
-In the future we will support different service discovery systems to dynamically load balance
-across several collectors ([issue 213](https://github.com/jaegertracing/jaeger/issues/213)).
+When using gRPC, you have several options for load balancing and name resolution:
+
+* Single connection and no load balancing. This is the default if you specify a single `host:port`. (example: `--reporter.grpc.host-port=jaeger-collector.jaeger-infra.svc:14250`)
+* Static list of hostnames and round-robin load balancing. This is what you get with a comma-separated list of addresses. (example: `reporter.grpc.host-port=jaeger-collector1:14250,jaeger-collector2:14250,jaeger-collector3:14250`)
+* Dynamic DNS resolution and round-robin load balancing. To get this behaviour, prefix the address with `dns:///` and gRPC will attempt to resolve the hostname using SRV records (for [external load balancing](https://github.com/grpc/grpc/blob/master/doc/load-balancing.md)), TXT records (for [service configs](https://github.com/grpc/grpc/blob/master/doc/service_config.md)), and A records. Refer to the [gRPC Name Resolution docs](https://github.com/grpc/grpc/blob/master/doc/naming.md) and the [dns_resolver.go implementation](https://github.com/grpc/grpc-go/blob/master/resolver/dns/dns_resolver.go) for more info. (example: `--reporter.grpc.host-port=dns:///jaeger-collector.jaeger-infra.svc:14250`)
+
+### Agent level tags
+
+Jaeger supports agent level tags, that can be added to the process tags of all spans passing through the agent. This is supported through the command line flag `--jaeger.tags=key=value`. Tags can also be set through an environment flag like so - `--jaeger-tags=key=${envFlag:defaultValue}` - The tag value will be set to the value of the `envFlag` environment key and `defaultValue` if not set.
 
 
 ## Collectors
@@ -127,7 +134,7 @@ Port  | Protocol | Function
 
 Collectors require a persistent storage backend. Cassandra and Elasticsearch are the primary supported storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
-The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` (only as a sink) and `memory` (only for all-in-one binary).
+The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka`, `grpc-plugin`, `badger` and `memory` (only for all-in-one binary).
 As of version 1.6.0, it's possible to use multiple storage types at the same time by providing a comma-separated list of valid types to the `SPAN_STORAGE_TYPE` environment variable.
 It's important to note that all listed storage types are used for writing, but only the first type in the list will be used for reading and archiving.
 
@@ -138,6 +145,19 @@ data will be lost once the process is gone.
 
 By default, there's no limit in the amount of traces stored in memory but a limit can be established by passing an
 integer value via `--memory.max-traces`.
+
+### Badger - local storage
+Experimental since Jaeger 1.9
+
+[Badger](https://github.com/dgraph-io/badger) is an embedded local storage available in all-in-one distribution.
+By default it acts as an ephemeral storage using a temporary filesystem. This can be overridden by using the `--badger.ephemeral=false` option.
+
+```sh
+docker run \
+  -e SPAN_STORAGE_TYPE=badger \
+  -e BADGER_EPHEMERAL=false \
+  jaegertracing/all-in-one:{{< currentVersion >}}
+```
 
 ### Cassandra
 Supported versions: 3.4+
@@ -285,6 +305,22 @@ Unless your Kafka cluster is configured to automatically create topics, you will
 
 You can find more information about topics and partitions in general in the [official documentation](https://kafka.apache.org/documentation/#intro_topics). [This article](https://www.confluent.io/blog/how-to-choose-the-number-of-topicspartitions-in-a-kafka-cluster/) provide more details about how to choose the number of partitions.
 
+### Storage plugin
+
+Jaeger supports gRPC based storage plugins. For more information refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc)
+
+Available plugins:
+
+* [InfluxDB](https://github.com/influxdata/jaeger-influxdb/)
+
+```sh
+docker run \
+  -e SPAN_STORAGE_TYPE=grpc-plugin \
+  -e GRPC_STORAGE_PLUGIN_BINARY=<...> \
+  -e GRPC_STORAGE_PLUGIN_CONFIGURATION_FINE=<...> \
+  jaegertracing/all-in-one:{{< currentVersion >}}
+```
+
 ## Ingester
 **jaeger-ingester** is a service which reads span data from Kafka topic and writes it to another storage backend (Elasticsearch or Cassandra).
 
@@ -297,7 +333,7 @@ To view all exposed configuration options run the following command:
 ```sh
 docker run \
   -e SPAN_STORAGE_TYPE=cassandra \
-  jaegertracing/jaeger-ingester:{{< currentVersion >}} 
+  jaegertracing/jaeger-ingester:{{< currentVersion >}}
   --help
 ```
 
@@ -320,7 +356,7 @@ docker run -d --rm \
   -p 16687:16687 \
   -e SPAN_STORAGE_TYPE=elasticsearch \
   -e ES_SERVER_URLS=http://<ES_SERVER_IP>:<ES_SERVER_PORT> \
-  jaegertracing/jaeger-query:1.9
+  jaegertracing/jaeger-query:{{< currentVersion >}}
 ```
 
 ### UI Base Path
