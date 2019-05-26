@@ -134,7 +134,8 @@ Port  | Protocol | Function
 
 Collectors require a persistent storage backend. Cassandra and Elasticsearch are the primary supported storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
-The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka`, `grpc-plugin`, `badger` and `memory`.
+The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` (only as a buffer), `grpc-plugin`, `badger` (only with all-in-one) and `memory` (only with all-in-one).
+
 As of version 1.6.0, it's possible to use multiple storage types at the same time by providing a comma-separated list of valid types to the `SPAN_STORAGE_TYPE` environment variable.
 It's important to note that all listed storage types are used for writing, but only the first type in the list will be used for reading and archiving.
 
