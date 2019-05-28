@@ -17,10 +17,10 @@ Each Jaeger component exposes the metrics scraping endpoint on one of the HTTP p
 
 Component             | Port
 --------------------- | ---
-**jaeger-agent**      | 5778
-**jaeger-collector**  | 14268
-**jaeger-query**      | 16686
-**jaeger-ingester**   | 14271
+**jaeger-agent**      | 14271
+**jaeger-collector**  | 14269
+**jaeger-query**      | 16687
+**jaeger-ingester**   | 14270
 
 ## Logging
 
