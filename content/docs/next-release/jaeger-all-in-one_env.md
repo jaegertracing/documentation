@@ -1,5 +1,5 @@
 ---
-title: Env command
+title: Env
 widescreen: true
 hasparent: true
 weight: 5

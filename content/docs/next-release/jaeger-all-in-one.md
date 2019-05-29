@@ -1,5 +1,5 @@
 ---
-title: Flags
+title: Commands
 weight: 5
 description: Jaeger all-in-one flags
 children:

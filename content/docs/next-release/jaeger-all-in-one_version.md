@@ -1,5 +1,5 @@
 ---
-title: Version command
+title: Version
 widescreen: true
 hasparent: true
 weight: 5
