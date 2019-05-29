@@ -1,3 +1,10 @@
+---
+title: Env command
+widescreen: true
+hasparent: true
+weight: 5
+---
+
 ## jaeger-all-in-one env
 
 Help about environment variables

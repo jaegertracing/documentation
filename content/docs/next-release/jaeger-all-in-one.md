@@ -1,3 +1,16 @@
+---
+title: Flags
+weight: 5
+description: Jaeger all-in-one flags
+children:
+- title: Env command
+  url: jaeger-all-in-one_env
+- title: Version command
+  url: jaeger-all-in-one_version
+  
+---
+
+
 ## jaeger-all-in-one
 
 Jaeger all-in-one distribution with agent, collector and query in one process.

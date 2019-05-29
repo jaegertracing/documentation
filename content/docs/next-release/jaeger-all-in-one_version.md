@@ -1,3 +1,10 @@
+---
+title: Version command
+widescreen: true
+hasparent: true
+weight: 5
+---
+
 ## jaeger-all-in-one version
 
 Print the version
