@@ -3,7 +3,7 @@ title: Commands
 weight: 5
 description: Jaeger all-in-one flags
 children:
-- title: Env command
+- title: Env
   url: jaeger-all-in-one_env
 - title: Version command
   url: jaeger-all-in-one_version
