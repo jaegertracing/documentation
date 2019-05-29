@@ -2,6 +2,9 @@
 title: Deployment
 weight: 7
 children:
+- title: Operator
+  url: operator
+children:
 - title: Frontend/UI
   url: frontend-ui
 ---
