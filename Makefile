@@ -33,6 +33,7 @@ htmlproofer:
         --empty-alt-ignore \
         public
 
+# TODO add ingester, collector
 .PHONY:gen-commands
 gen-commands:
 	go run ${JAEGER}/cmd/all-in-one/main.go docs --dir ./content/docs/next-release
