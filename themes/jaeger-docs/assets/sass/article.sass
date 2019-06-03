@@ -1,6 +1,9 @@
 /* Rules for the main "article" sections of page domains (docs, download, taxonomies, etc.) */
 @import "variables"
 
+.notification .content
+  font-size: 1.25rem
+
 .article
   &.article--terms
     .content
@@ -26,8 +29,6 @@
 
   &.article--docs, &.article--download
     .content
-      padding-bottom: 30%
-
       // Remove the focus outline when clicking TOC items
       h1:focus, h2:focus, h3:focus
         outline: none
