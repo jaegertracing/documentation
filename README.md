@@ -45,6 +45,34 @@ Each Jaeger version is documented in a separate directory e.g. [content/docs/1.8
 Before creating a new release, make sure all outstanding PRs for that version are merged to `next-release` directory.
 Then create a release by pushing a tag `release-X.Y.Z`, ex `git tag release-1.12.0; git push origin release-1.12.0`.
 
+## Admonitions
+
+There are five admonition types available for the Jaeger docs:
+
+Admonition type | Color
+:===============|:=====
+`info` | blue
+`success` | green
+`danger` | red
+`warning` | yellow
+`requirement` | purple
+
+Here's an example:
+
+```markdown
+{{< danger >}}
+We do not recommend that you do this!
+{{< /danger >}}
+```
+
+You can also add titles:
+
+```markdown
+{{< success title="New feature" >}}
+Jaeger now supports a new thing that you definitely want.
+{{< /success >}}
+```
+
 ## License
 
 [Apache 2.0 License](./LICENSE).
