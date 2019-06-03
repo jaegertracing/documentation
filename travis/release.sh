@@ -24,6 +24,11 @@ if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; t
     version=$(echo "${TRAVIS_TAG}" | sed 's/^release-//')
     versionMajorMinor=$(echo "${version}" | sed 's/\.[[:digit:]]$//')
     echo "Creating new documentation for ${version}"
+    echo "Generating commands documentation"
+    make gen-commands
+    git add -A ./content/docs/next-release/jaeger-*.md
+    git commit -m "Add generated commands docs" -s
+    echo "Copying files from next-release folder and bumping version in the config"
     cp -r ./content/docs/next-release/ ./content/docs/${versionMajorMinor}
     sed -i -e "s/latest *=.*$/latest = \"${versionMajorMinor}\"/" config.toml
     sed -i -e "s/binariesLatest *=.*$/binariesLatest = \"${version}\"/" config.toml
