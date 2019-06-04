@@ -1,6 +1,8 @@
 HTMLPROOFER  = bundle exec htmlproofer
 HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
+JAEGER_VERSION?=latest
+
 
 develop:
 	HUGO_PREVIEW=true \
@@ -34,12 +36,12 @@ htmlproofer:
 .PHONY:gen-commands
 gen-commands:
 	rm ./content/docs/next-release/jaeger-*
-	docker run --rm -it -e SPAN_STORAGE_TYPE=elasticsearch -v "${PWD}/content/docs/next-release:/data" jaegertracing/jaeger-query:latest docs --format=md --dir=/data
+	docker run --rm -it -e SPAN_STORAGE_TYPE=elasticsearch -v "${PWD}/content/docs/next-release:/data" jaegertracing/jaeger-query:${JAEGER_VERSION} docs --format=md --dir=/data
 #	add _elasticsaerch suffix to files
 	rename '.md' '_elasticsearch.md' ./content/docs/next-release/jaeger-query*
 #	change links in files to reflect rename to _elasticsearch
 	sed -i -e "s/\.md/_elasticsearch/g" ./content/docs/next-release/jaeger-*.md
-	docker run --rm -it -v "${PWD}/content/docs/next-release:/data" jaegertracing/jaeger-query:latest docs --format=md --dir=/data
+	docker run --rm -it -v "${PWD}/content/docs/next-release:/data" jaegertracing/jaeger-query:${JAEGER_VERSION} docs --format=md --dir=/data
 	sed -i -e "s/\.md//g" ./content/docs/next-release/jaeger-*.md
 #	hugo links have to start with ../
 	sed -i -e "s/](/](..\//g" ./content/docs/next-release/jaeger-*.md

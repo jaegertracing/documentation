@@ -25,7 +25,7 @@ if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; t
     versionMajorMinor=$(echo "${version}" | sed 's/\.[[:digit:]]$//')
     echo "Creating new documentation for ${version}"
     echo "Generating commands documentation"
-    make gen-commands
+    JAEGER_VERSION=${version} make gen-commands
     git add -A ./content/docs/next-release/jaeger-*.md
     git commit -m "Add generated commands docs" -s
     echo "Copying files from next-release folder and bumping version in the config"
