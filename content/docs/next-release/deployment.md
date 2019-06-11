@@ -51,10 +51,10 @@ The agent exposes the following ports:
 
 Port | Protocol | Function
 ---- | -------  | ---
-5775 | UDP      | accept zipkin.thrift over compact thrift protocol
-6831 | UDP      | accept jaeger.thrift over compact thrift protocol
-6832 | UDP      | accept jaeger.thrift over binary thrift protocol
+6831 | UDP      | accept [jaeger.thrift][jaeger-thrift] in `compact` Thrift protocol used by most current Jaeger clients
+6832 | UDP      | accept [jaeger.thrift][jaeger-thrift] in `binary` Thrift protocol used by Node.js Jaeger client (because [thriftrw][thriftrw] npm package does not support `compact` protocol)
 5778 | HTTP     | serve configs, sampling strategies
+5775 | UDP      | accept [zipkin.thrift][zipkin-thrift] in `compact` Thrift protocol (deprecated; only used by very old Jaeger clients, circa 2016)
 
 It can be executed directly on the host or via Docker, as follows:
 
@@ -62,10 +62,10 @@ It can be executed directly on the host or via Docker, as follows:
 ## make sure to expose only the ports you use in your deployment scenario!
 docker run \
   --rm \
-  -p5775:5775/udp \
   -p6831:6831/udp \
   -p6832:6832/udp \
   -p5778:5778/tcp \
+  -p5775:5775/udp \
   jaegertracing/jaeger-agent:{{< currentVersion >}}
 ```
 
@@ -392,3 +392,6 @@ The names of environmental properties are capital letters and characters `-` and
 To list all configuration properties call `jaeger-binary -h`.
 
 [cqlsh]: http://cassandra.apache.org/doc/latest/tools/cqlsh.html
+[zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift
+[jaeger-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
+[thriftrw]: https://www.npmjs.com/package/thriftrw
