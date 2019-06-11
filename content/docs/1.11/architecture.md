@@ -19,7 +19,7 @@ Jaeger's clients adhere to the data model described in the OpenTracing standard.
 
 ## Components
 
-![Architecture](/img/architecture.png)
+![Architecture](/img/architecture-v1.png)
 
 This section details the constituent parts of Jaeger and how they relate to each other. It is arranged by the order in which spans from your application interact with them.
 

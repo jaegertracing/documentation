@@ -7,6 +7,8 @@ Jaeger's clients adhere to the data model described in the OpenTracing standard.
 
 ## Terminology
 
+Let's start with a quick refresher on the terminology defined by the [OpenTracing Specification](https://github.com/opentracing/specification/blob/master/specification.md).
+
 ### Span
 
 {{< definition "span" >}}
@@ -19,7 +21,18 @@ Jaeger's clients adhere to the data model described in the OpenTracing standard.
 
 ## Components
 
-![Architecture](/img/architecture.png)
+Jaeger can be deployed either as all-in-one binary, where all Jaeger backend components
+run in a single process, or as a scalable distributed system, discussed below. 
+There two main deployment options:
+
+  1. Collectors are writing directly to storage.
+  2. Collectors are writing to Kafka as a preliminary buffer.
+
+![Architecture](/img/architecture-v1.png)
+*Illustration of direct-to-storage architecture*
+
+![Architecture](/img/architecture-v2.png)
+*Illustration of architecture with Kafka as intermediate buffer*
 
 This section details the constituent parts of Jaeger and how they relate to each other. It is arranged by the order in which spans from your application interact with them.
 
