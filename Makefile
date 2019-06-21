@@ -7,7 +7,7 @@ develop:
 	hugo server \
         --buildDrafts \
         --buildFuture \
-        --disableFastRender
+	--ignoreCache
 
 clean:
 	rm -rf public

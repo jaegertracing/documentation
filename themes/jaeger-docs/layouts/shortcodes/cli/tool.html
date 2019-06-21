@@ -1,0 +1,23 @@
+{{ $tool  := .Get 0 }}
+{{ $cli   := index site.Data.cli $tool }}
+{{ $cmds  := split (.Get 1) " " }}
+<h2 id="{{ $tool }}">
+  {{ $tool }}
+</h2>
+
+<p>
+  {{ $cli.description }}
+</p>
+
+{{ range $cmds }}
+{{ $cmd    := . }}
+{{ $cmdKey := printf "%s_%s" $tool $cmd }}
+{{ $doc    := index site.Data.cli $cmdKey }}
+<h3>
+  {{ $tool }} {{ . }}
+</h3>
+
+<p>
+  {{ $doc.description }}
+</p>
+{{ end }}

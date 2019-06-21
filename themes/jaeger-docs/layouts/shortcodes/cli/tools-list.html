@@ -1,0 +1,12 @@
+{{ $tools := site.Data.cli.tools }}
+<ul>
+  {{ range $tools }}
+  <li>
+    <a href="#{{ . }}">
+      <code>
+        {{ . }}
+      </code>
+    </a>
+  </li>
+  {{ end }}
+</ul>
