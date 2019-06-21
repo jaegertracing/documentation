@@ -1,0 +1,173 @@
+name: jaeger-query
+synopsis: |
+  Jaeger query service provides a Web UI and an API for accessing trace data.
+description: |
+  Jaeger query service provides a Web UI and an API for accessing trace data.
+options:
+- name: admin-http-port
+  default_value: "16687"
+  usage: |
+    The http port for the admin server, including health check, /metrics, etc.
+- name: cassandra-archive.connections-per-host
+  default_value: "0"
+  usage: |
+    The number of Cassandra connections from a single backend instance
+- name: cassandra-archive.consistency
+  usage: |
+    The Cassandra consistency level, e.g. ANY, ONE, TWO, THREE, QUORUM, ALL, LOCAL_QUORUM, EACH_QUORUM, LOCAL_ONE (default LOCAL_ONE)
+- name: cassandra-archive.enable-dependencies-v2
+  default_value: "false"
+  usage: |
+    (deprecated) Jaeger will automatically detect the version of the dependencies table
+- name: cassandra-archive.enabled
+  default_value: "false"
+  usage: Enable extra storage
+- name: cassandra-archive.keyspace
+  usage: The Cassandra keyspace for Jaeger data
+- name: cassandra-archive.local-dc
+  usage: |
+    The name of the Cassandra local data center for DC Aware host selection
+- name: cassandra-archive.max-retry-attempts
+  default_value: "0"
+  usage: The number of attempts when reading from Cassandra
+- name: cassandra-archive.password
+  usage: Password for password authentication for Cassandra
+- name: cassandra-archive.port
+  default_value: "0"
+  usage: The port for cassandra
+- name: cassandra-archive.proto-version
+  default_value: "0"
+  usage: The Cassandra protocol version
+- name: cassandra-archive.reconnect-interval
+  default_value: 0s
+  usage: Reconnect interval to retry connecting to downed hosts
+- name: cassandra-archive.servers
+  usage: The comma-separated list of Cassandra servers
+- name: cassandra-archive.socket-keep-alive
+  default_value: 0s
+  usage: Cassandra's keepalive period to use, enabled if > 0
+- name: cassandra-archive.timeout
+  default_value: 0s
+  usage: Timeout used for queries. A Timeout of zero means no timeout
+- name: cassandra-archive.tls
+  default_value: "false"
+  usage: Enable TLS
+- name: cassandra-archive.tls.ca
+  usage: Path to TLS CA file
+- name: cassandra-archive.tls.cert
+  usage: Path to TLS certificate file
+- name: cassandra-archive.tls.key
+  usage: Path to TLS key file
+- name: cassandra-archive.tls.server-name
+  usage: Override the TLS server name
+- name: cassandra-archive.tls.verify-host
+  default_value: "false"
+  usage: Enable (or disable) host key verification
+- name: cassandra-archive.username
+  usage: Username for password authentication for Cassandra
+- name: cassandra.connections-per-host
+  default_value: "2"
+  usage: |
+    The number of Cassandra connections from a single backend instance
+- name: cassandra.consistency
+  usage: |
+    The Cassandra consistency level, e.g. ANY, ONE, TWO, THREE, QUORUM, ALL, LOCAL_QUORUM, EACH_QUORUM, LOCAL_ONE (default LOCAL_ONE)
+- name: cassandra.enable-dependencies-v2
+  default_value: "false"
+  usage: |
+    (deprecated) Jaeger will automatically detect the version of the dependencies table
+- name: cassandra.keyspace
+  default_value: jaeger_v1_test
+  usage: The Cassandra keyspace for Jaeger data
+- name: cassandra.local-dc
+  usage: |
+    The name of the Cassandra local data center for DC Aware host selection
+- name: cassandra.max-retry-attempts
+  default_value: "3"
+  usage: The number of attempts when reading from Cassandra
+- name: cassandra.password
+  usage: Password for password authentication for Cassandra
+- name: cassandra.port
+  default_value: "0"
+  usage: The port for cassandra
+- name: cassandra.proto-version
+  default_value: "4"
+  usage: The Cassandra protocol version
+- name: cassandra.reconnect-interval
+  default_value: 1m0s
+  usage: Reconnect interval to retry connecting to downed hosts
+- name: cassandra.servers
+  default_value: 127.0.0.1
+  usage: The comma-separated list of Cassandra servers
+- name: cassandra.socket-keep-alive
+  default_value: 0s
+  usage: Cassandra's keepalive period to use, enabled if > 0
+- name: cassandra.span-store-write-cache-ttl
+  default_value: 12h0m0s
+  usage: |
+    The duration to wait before rewriting an existing service or operation name
+- name: cassandra.timeout
+  default_value: 0s
+  usage: Timeout used for queries. A Timeout of zero means no timeout
+- name: cassandra.tls
+  default_value: "false"
+  usage: Enable TLS
+- name: cassandra.tls.ca
+  usage: Path to TLS CA file
+- name: cassandra.tls.cert
+  usage: Path to TLS certificate file
+- name: cassandra.tls.key
+  usage: Path to TLS key file
+- name: cassandra.tls.server-name
+  usage: Override the TLS server name
+- name: cassandra.tls.verify-host
+  default_value: "true"
+  usage: Enable (or disable) host key verification
+- name: cassandra.username
+  usage: Username for password authentication for Cassandra
+- name: config-file
+  usage: |
+    Configuration file in JSON, TOML, YAML, HCL, or Java properties formats (default none). See spf13/viper for precedence.
+- name: downsampling.hashsalt
+  usage: Salt used when hashing trace id for downsampling.
+- name: downsampling.ratio
+  default_value: "1"
+  usage: |
+    Ratio of spans passed to storage after downsampling (between 0 and 1), e.g ratio = 0.3 means we are keeping 30% of spans and dropping 70% of spans; ratio = 1.0 disables downsampling.
+- name: health-check-http-port
+  default_value: "0"
+  usage: (deprecated) see --admin-http-port
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for jaeger-query
+- name: log-level
+  default_value: info
+  usage: |
+    Minimal allowed log Level. For more levels see https://github.com/uber-go/zap
+- name: metrics-backend
+  default_value: prometheus
+  usage: |
+    Defines which metrics backend to use for metrics reporting: expvar, prometheus, none
+- name: metrics-http-route
+  default_value: /metrics
+  usage: |
+    Defines the route of HTTP endpoint for metrics backends that support scraping
+- name: query.base-path
+  default_value: /
+  usage: |
+    The base path for all HTTP routes, e.g. /jaeger; useful when running behind a reverse proxy
+- name: query.port
+  default_value: "16686"
+  usage: The port for the query service
+- name: query.static-files
+  usage: The directory path override for the static assets for the UI
+- name: query.ui-config
+  usage: The path to the UI configuration file in JSON format
+- name: span-storage.type
+  usage: |
+    (deprecated) please use SPAN_STORAGE_TYPE environment variable. Run this binary with "env" command for help.
+see_also:
+- docs - Generates documentation
+- env - Help about environment variables.
+- version - Print the version.

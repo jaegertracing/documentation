@@ -17,6 +17,9 @@ build-content:
 
 build: clean build-content
 
+cli-data:
+	scripts/cli-data.sh
+
 
 htmlproofer-setup:
 	gem install bundler
