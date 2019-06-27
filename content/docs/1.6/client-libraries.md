@@ -113,7 +113,7 @@ When `SpanContext` is encoded on the wire as part of the request to another serv
 
 * Key: `uberctx-{baggage-key}`
 * Value: url-encoded string
-* Limitation: since HTTP headers don’t preserve the case, Jaeger recommends baggage keys to be lowercase-snake-case,
+* Limitation: since HTTP headers don’t preserve the case, Jaeger recommends baggage keys to be lowercase-kebab-case,
 e.g. `my-baggage-key-1`.
 
 
