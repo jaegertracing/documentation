@@ -1,6 +1,7 @@
-{{ $tool  := .Get 0 }}
-{{ $cli   := index site.Data.cli $tool }}
-{{ $cmds  := split (.Get 1) " " }}
+{{ $version := index (split $.Page.File.Path "/") 1 }}
+{{ $tool    := .Get 0 }}
+{{ $cli     := index (index site.Data.cli $version) $tool }}
+{{ $cmds    := split (.Get 1) " " }}
 <h2 id="{{ $tool }}">
   {{ $tool }}
 </h2>
@@ -9,10 +10,12 @@
   {{ $cli.description }}
 </p>
 
+{{ partial "options-table.html" $cli.options }}
+
 {{ range $cmds }}
 {{ $cmd    := . }}
 {{ $cmdKey := printf "%s_%s" $tool $cmd }}
-{{ $doc    := index site.Data.cli $cmdKey }}
+{{ $doc    := index (index site.Data.cli $version) $cmdKey }}
 <h3>
   {{ $tool }} {{ . }}
 </h3>
@@ -20,4 +23,6 @@
 <p>
   {{ $doc.description }}
 </p>
+
+{{ partial "options-table.html" $doc.options }}
 {{ end }}

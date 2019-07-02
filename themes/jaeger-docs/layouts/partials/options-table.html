@@ -1,0 +1,40 @@
+<table class="is-small">
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Shorthand
+      </th>
+      <th>
+        Usage
+      </th>
+      <th>
+        Default
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range . }}
+    <tr>
+      <td>
+        <code>{{ .name }}</code>
+      </td>
+      <td>
+        {{ with .shorthand }}
+        <code>{{ . }}</code>
+        {{ end }}
+      </td>
+      <td>
+        {{ .usage }}
+      </td>
+      <td>
+        {{ with .default_value }}
+        <code>{{ . }}</code>
+        {{ end }}
+      </td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>

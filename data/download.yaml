@@ -1,0 +1,43 @@
+binaries:
+  platforms:
+    darwin:
+      name: macOS
+      icon: fa-apple
+    linux:
+      name: Linux
+      icon: fa-linux
+    windows:
+      name: Windows
+      icon: fa-windows
+docker:
+- image: all-in-one
+  description: Designed for quick local testing. It launches the Jaeger UI, collector, query, and agent, with an in-memory storage component.
+  since: 0.8
+- image: example-hotrod
+  description: Sample application "[HotROD](https://github.com/jaegertracing/jaeger/tree/master/examples/hotrod)" that demonstrates features of distributed tracing ([blog post](https://medium.com/@YuriShkuro/take-opentracing-for-a-hotrod-ride-f6e3141f7941)).
+  since: 1.6
+- image: jaeger-agent
+  description: Receives spans from Jaeger clients and forwards to collector. Designed to run as a sidecar or a host agent.
+  since: 0.8
+- image: jaeger-collector
+  description: Receives spans from agents or directly from clients and saves them in persistent storage.
+  since: 0.8
+- image: jaeger-query
+  description: Serves Jaeger UI and an API that retrieves traces from storage.
+  since: 0.8
+- image: jaeger-ingester
+  description: An alternative to collector; reads spans from Kafka topic and saves them to storage.
+  since: 1.7
+- image: spark-dependencies
+  description: An [Apache Spark](http://spark.apache.org/) job that collects Jaeger spans from storage, analyzes links between services, and stores them for later presentation in the Jaeger UI
+  latest: latest
+  since: 1.3
+- image: jaeger-operator
+  description: A [Kubernetes Operator](https://github.com/operator-framework) for packaging, deploying, and managing Jaeger installation.
+  since: 1.6
+- image: jaeger-cassandra-schema
+  description: A utility script used to initialize Cassandra keyspace and schema.
+  since: 0.8
+- image: jaeger-es-index-cleaner
+  description: A utility script used to purge old indices from Elasticsearch, since ES does not support data TTL.
+  since: 1.3
