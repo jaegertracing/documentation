@@ -349,7 +349,7 @@ docker run \
 ## Query Service & UI
 
 **jaeger-query** serves the API endpoints and a React/Javascript UI.
-The service is stateless and is typically run behind a load balancer, such as **nginx**.
+The service is stateless and is typically run behind a load balancer, such as [**NGINX**](https://www.nginx.com/).
 
 At default settings the query service exposes the following port(s):
 
