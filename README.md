@@ -45,6 +45,14 @@ Each Jaeger version is documented in a separate directory e.g. [content/docs/1.8
 Before creating a new release, make sure all outstanding PRs for that version are merged to `next-release` directory.
 Then create a release by pushing a tag `release-X.Y.Z`, ex `git tag release-1.12.0; git push origin release-1.12.0`.
 
+The docs for the Jaeger CLI tools are generated using a Docker image. If you have Docker running, you can add CLI tool docs for a new version like this:
+
+```bash
+./scripts/cli-data.sh ${VERSION}
+```
+
+This deposits the generated YAML in a new directory at `data/cli/${VERSION}` and copies that directory to `data/cli/next-release`.
+
 ## License
 
 [Apache 2.0 License](./LICENSE).

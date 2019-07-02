@@ -157,6 +157,10 @@ options:
   default_value: /
   usage: |
     The base path for all HTTP routes, e.g. /jaeger; useful when running behind a reverse proxy
+- name: query.bearer-token-propagation
+  default_value: "false"
+  usage: |
+    Allow propagation of bearer token to be used by storage plugins
 - name: query.port
   default_value: "16686"
   usage: The port for the query service
