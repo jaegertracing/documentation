@@ -48,10 +48,10 @@ Then create a release by pushing a tag `release-X.Y.Z`, ex `git tag release-1.12
 The docs for the Jaeger CLI tools are generated using a Docker image. If you have Docker running, you can add CLI tool docs for a new version like this:
 
 ```bash
-./scripts/cli-data.sh ${VERSION}
+python ./scripts/gen-cli-data.py ${VERSION}
 ```
 
-This deposits the generated YAML in a new directory at `data/cli/${VERSION}` and copies that directory to `data/cli/next-release`.
+The script requires `data/cli/${VERSION}/config.json` file that describes the tools and their storage options. When cutting a new release this file should be copied from the previous release, and adjusted as needed (e.g. if new storage option is implemented). The script generates YAML files in `data/cli/${VERSION}` directory.
 
 ## License
 

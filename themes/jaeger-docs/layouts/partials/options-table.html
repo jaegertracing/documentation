@@ -5,12 +5,6 @@
         Name
       </th>
       <th>
-        Shorthand
-      </th>
-      <th>
-        Usage
-      </th>
-      <th>
         Default
       </th>
     </tr>
@@ -22,17 +16,14 @@
         <code>{{ .name }}</code>
       </td>
       <td>
-        {{ with .shorthand }}
-        <code>{{ . }}</code>
-        {{ end }}
-      </td>
-      <td>
-        {{ .usage }}
-      </td>
-      <td>
         {{ with .default_value }}
         <code>{{ . }}</code>
         {{ end }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="padding-left: 50px;">
+        {{ .usage }}
       </td>
     </tr>
     {{ end }}

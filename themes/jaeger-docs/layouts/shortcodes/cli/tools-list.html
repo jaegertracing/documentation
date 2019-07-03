@@ -1,6 +1,8 @@
-{{ $tools := site.Data.cli.tools }}
+{{ $version := index (split $.Page.File.Path "/") 1 }}
+{{ $data    := index site.Data.cli $version }}
+{{ $config  := index $data "config" }}
 <ul>
-  {{ range $tools }}
+  {{ range $config.tools }}
   <li>
     <a href="#{{ . }}">
       <code>
@@ -10,3 +12,33 @@
   </li>
   {{ end }}
 </ul>
+
+{{ range $config.tools }}
+  {{ $tool := . }}
+  {{ $cli := index $data $tool }}
+  {{ $storage_types := index (index $config $tool) "storage" }}
+
+  <h2 id="{{ $tool }}">
+    {{ $tool }}
+  </h2>
+  <p>
+    {{ $cli.description }}
+  </p>
+
+  {{ if gt (len $storage_types) 0 }}
+    {{ range $storage_types }}
+      {{ $storage := . }}
+      {{ $file    := printf "%s-%s" $tool $storage }}
+      {{ $cli     := index $data $file }}
+
+      <!-- TODO right sidebar gets too long, we should use tabs here -->
+      <h3 id="{{ $file }}">
+        {{ $tool }} with <code>{{ $storage }}</code> storage
+      </h3>
+
+      {{ partial "options-table.html" $cli.options }}
+    {{ end }}
+  {{ else }}
+    {{ partial "options-table.html" $cli.options }}
+  {{ end }}
+{{ end }}
