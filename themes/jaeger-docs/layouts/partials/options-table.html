@@ -2,10 +2,10 @@
   <thead>
     <tr>
       <th>
-        Name
+        Flag
       </th>
       <th>
-        Default
+        Default Value
       </th>
     </tr>
   </thead>
@@ -13,7 +13,7 @@
     {{ range . }}
     <tr>
       <td>
-        <code>{{ .name }}</code>
+        <code>--{{ .name }}</code>
       </td>
       <td>
         {{ with .default_value }}

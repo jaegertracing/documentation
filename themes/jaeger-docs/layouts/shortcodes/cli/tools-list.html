@@ -1,6 +1,8 @@
 {{ $version := index (split $.Page.File.Path "/") 1 }}
 {{ $data    := index site.Data.cli $version }}
 {{ $config  := index $data "config" }}
+
+<p>The CLI flags for the following binaries are documented below:</p>
 <ul>
   {{ range $config.tools }}
   <li>
