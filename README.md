@@ -42,8 +42,19 @@ Diagrams included in the documentation are created in the shared [Google Slides 
 
 Each Jaeger version is documented in a separate directory e.g. [content/docs/1.8/](./content/docs/1.8/). A special directory [content/docs/next-release/](./content/docs/next-release/) is reserved for the changes to be published as the next version. If you are adding documentation for features that are not yet released in the main Jaeger repository, add your changes to the `next-release` directory. If you're adding documentation for already released features, you may need to make the same change twice, i.e. in the most recent release (e.g. `1.8`) and in the `next-release` directories.
 
-Before creating a new release, make sure all outstanding PRs for that version are merged to `next-release` directory.
-Then create a release by pushing a tag `release-X.Y.Z`, ex `git tag release-1.12.0; git push origin release-1.12.0`.
+Before creating a new release, make sure all outstanding PRs for that version are merged to `next-release` directory. Then create a release by pushing a tag `release-X.Y.Z`, ex `git tag release-1.12.0; git push origin release-1.12.0`.
+
+Note: next release automation currently does not include generation of CLI flag docs.
+
+### Auto-generated documentation for CLI flags
+
+The docs for the Jaeger CLI tools are generated using the `docs` command with their respective Docker images, automated with the following script:
+
+```bash
+python ./scripts/gen-cli-data.py ${VERSION_MAJOR_MINOR}
+```
+
+The script requires `data/cli/${VERSION}/config.json` file that describes the binaries and their storage options. When cutting a new release this file should be copied from the previous release, and adjusted as needed (e.g. if new storage option is implemented). The script generates YAML files in `data/cli/${VERSION}` directory.
 
 ## License
 

@@ -7,7 +7,7 @@ develop:
 	hugo server \
         --buildDrafts \
         --buildFuture \
-        --disableFastRender
+	--ignoreCache
 
 clean:
 	rm -rf public
@@ -16,7 +16,6 @@ build-content:
 	hugo -v
 
 build: clean build-content
-
 
 htmlproofer-setup:
 	gem install bundler

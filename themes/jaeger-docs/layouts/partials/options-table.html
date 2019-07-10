@@ -1,0 +1,31 @@
+<table class="is-small">
+  <thead>
+    <tr>
+      <th>
+        Flag
+      </th>
+      <th>
+        Default Value
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    {{ range . }}
+    <tr>
+      <td>
+        <code>--{{ .name }}</code>
+      </td>
+      <td>
+        {{ with .default_value }}
+        <code>{{ . }}</code>
+        {{ end }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" style="padding-left: 50px;">
+        {{ .usage }}
+      </td>
+    </tr>
+    {{ end }}
+  </tbody>
+</table>
