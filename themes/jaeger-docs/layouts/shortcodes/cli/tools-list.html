@@ -28,6 +28,19 @@
   </p>
 
   {{ if gt (len $storage_types) 0 }}
+    <p>{{ $tool }} can be used with these storage backends:</p>
+    <ul>
+      {{ range $storage_types }}
+        {{ $storage := . }}
+        {{ $file    := printf "%s-%s" $tool $storage }}
+        <li>
+            <a href="#{{ $file }}">
+                {{ $tool }} with <code>{{ $storage }}</code>
+            </a>
+        </li>
+      {{ end }}
+    </ul>
+
     {{ range $storage_types }}
       {{ $storage := . }}
       {{ $file    := printf "%s-%s" $tool $storage }}
