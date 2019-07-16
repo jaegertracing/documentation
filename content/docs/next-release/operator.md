@@ -14,13 +14,6 @@ A Kubernetes application is an application that is both deployed on Kubernetes a
 
 **IMPORTANT:** The Jaeger Operator version is related to the version of the Jaeger components (Query, Collector, Agent) up to the minor portion. The patch version portion does *not* follow the ones from the Jaeger components. For instance, the Operator version 1.8.1 uses the Jaeger Docker images tagged with version 1.8 by default.
 
-**NOTE:** The following instructions will deploy a version of the operator that is using the latest `master` version. If you want to install a particular stable version of the operator, you will need to edit the `operator.yaml` file and specify the version as the tag in the container image and then use the approproiate `apiVersion` for the Jaeger operator.
-
-|Up to version |apiVersion |CRD yaml
-| --- | --- | --- |
-|master |jaegertracing.io/v1 |[jaegertracing_v1_jaeger_crd.yaml](https://github.com/jaegertracing/jaeger-operator/blob/master/deploy/crds/jaegertracing_v1_jaeger_crd.yaml)|
-|1.10.0 |io.jaegertracing/v1alpha1 |[io_v1alpha1_jaeger_crd.yaml](https://github.com/jaegertracing/jaeger-operator/blob/master/deploy/crds/io_v1alpha1_jaeger_crd.yaml)|
-
 ## Installing the Operator on Kubernetes
 
 The following instructions will create the `observability` namespace and install the Jaeger Operator.
@@ -42,8 +35,6 @@ kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operato
 
 <2> This installs the "Custom Resource Definition" for the `apiVersion: jaegertracing.io/v1`
 
-**IMPORTANT:** When using a Jaeger Operator up to v1.10.0, install the CRD file `io_v1alpha1_jaeger_crd.yaml` in addition to `jaegertracing_v1_jaeger_crd.yaml`. This is because up to that version, the `apiVersion` in use was `io.jaegertracing/v1alpha1`.
-
 At this point, there should be a `jaeger-operator` deployment available.  You can view it by running the following command:
 
 ```bash
@@ -56,6 +47,8 @@ jaeger-operator   1         1         1            1           48s
 The operator is now ready to create Jaeger instances.
 
 ## Installing the Operator on OKD/OpenShift
+
+<!-- TODO: Add instructions for installing via the operatorhub? -->
 
 The instructions from the previous section also work for installing the operator on OKD or OpenShift. Make sure you are logged in as a privileged user, such as `system:admin`, when you install the role based acces control (RBAC) rules, the custom resource definition, and the operator.
 
@@ -73,8 +66,6 @@ oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/mas
 
 <2> This installs the "Custom Resource Definition" for the `apiVersion: jaegertracing.io/v1`
 
-**IMPORTANT:** When using a Jaeger Operator up to v1.10.0, install the CRD file `io_v1alpha1_jaeger_crd.yaml` in addition to `jaegertracing_v1_jaeger_crd.yaml`. This is because up to that version, the `apiVersion` in use was `io.jaegertracing/v1alpha1`.
-
 Once the operator is installed, grant the role `jaeger-operator` to users who should be able to install individual Jaeger instances. The following example creates a role binding allowing the user `developer` to create Jaeger instances:
 
 ```bash
@@ -86,13 +77,35 @@ oc create \
 
 After the role is granted, switch back to a non-privileged user.
 
+Jaeger Agent can be configured to be deployed as a `DaemonSet` using a `HostPort` to allow Jaeger clients in the same node to discover the agent. In OpenShift, a `HostPort` can only be set when a special security context is set. A separate service account can be used by the Jaeger Agent with the permission to bind to `HostPort`, as follows:
+
+```bash
+oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/examples/openshift/hostport-scc-daemonset.yaml # <1>
+oc new-project myappnamespace
+oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/examples/openshift/service_account_jaeger-agent-daemonset.yaml # <2>
+oc adm policy add-scc-to-user daemonset-with-hostport -z jaeger-agent-daemonset # <3>
+oc apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/examples/openshift/agent-as-daemonset.yaml # <4>
+```
+<1> The `SecurityContextConstraints` with the `allowHostPorts` policy
+<2> The `ServiceAccount` to be used by the Jaeger Agent
+<3> Adds the security policy to the service account
+<4> Creates the Jaeger Instance using the `serviceAccount` created in the steps above
+
+**WARNING:** without such a policy, errors like the following will prevent a `DaemonSet` to be created: `Warning FailedCreate 4s (x14 over 45s) daemonset-controller Error creating: pods "agent-as-daemonset-agent-daemonset-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.containers[0].hostPort: Invalid value: 5775: Host ports are not allowed to be used`
+
+After a few seconds, the `DaemonSet` should be up and running:
+
+```bash
+$ oc get daemonset agent-as-daemonset-agent-daemonset
+NAME                                 DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE
+agent-as-daemonset-agent-daemonset   1         1         1         1            1
+```
+
 # Quick Start - Deploying the AllInOne image
 
 The simplest possible way to create a Jaeger instance is by creating a YAML file like the following example.  This will install the default AllInOne strategy, which deploys the "all-in-one" image (agent, collector, query, ingestor, Jaeger UI) in a single pod, using in-memory storage by default.
 
 **NOTE:** This default strategy is intended for development, testing, and demo purposes, not for production.
-
-.simplest.yaml
 
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -175,7 +188,7 @@ The main additional requirement is to provide the details of the storage type an
 
 The `streaming` strategy is designed to augment the `production` strategy by providing a streaming capability that effectively sits between the collector and the backend storage (Cassandra or Elasticsearch). This provides the benefit of reducing the pressure on the backend storage, under high load situations, and enables other trace post-processing capabilities to tap into the real time span data directly from the streaming platform (Kafka).
 
-The only additional information required is to provide the details for accessing the Kafka platform, which is configured in the `ingester` component:
+The only additional information required is to provide the details for accessing the Kafka platform, which is configured in the `collector` component (as producer) and `ingester` component (as consumer):
 
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -228,7 +241,6 @@ https://github.com/jaegertracing/documentation/issues/250-->
 
 For reference, here's how you can create a more complex all-in-one instance:
 
-.all-in-one.yaml
 ```yaml
 apiVersion: jaegertracing.io/v1
 kind: Jaeger
@@ -290,7 +302,6 @@ You can use the simplest example (shown above) and create a Jaeger instance usin
 
 When the storage type is set to Cassandra, the operator will automatically create a batch job that creates the required schema for Jaeger to run. This batch job will block the Jaeger installation, so that it starts only after the schema is successfuly created. The creation of this batch job can be disabled by setting the `enabled` property to `false`:
 
-
 ```yaml
 apiVersion: jaegertracing.io/v1
 kind: Jaeger
@@ -306,7 +317,6 @@ spec:
 <1> Defaults to `true`
 
 Further aspects of the batch job can be configured as well. An example with all the possible options is shown below:
-
 
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -472,7 +482,6 @@ The types of supported configuration  include:
 * [tolerations](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) in conjunction with `taints` to enable pods to avoid being repelled from a node
 
 * [volumes](https://kubernetes.io/docs/concepts/storage/volumes/) and volume mounts
-
 
 ```yaml
 apiVersion: jaegertracing.io/v1
