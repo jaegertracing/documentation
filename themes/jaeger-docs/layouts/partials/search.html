@@ -1,0 +1,94 @@
+{{ $version := index (split .File.Path "/") 1 }}
+{{ $latest  := site.Params.latest }}
+{{ $isDoc   := eq .Section "docs" }}
+<script>
+  const version = {{ $version }},
+    latest = {{ $latest }};
+
+  var idx;
+
+  var store = [],
+    searchBar = $('#search-bar'),
+    searchDropdown = $('#search-dropdown'),
+    searchMenu = $('#search-menu'),
+    searchContent = $('#search-content');
+
+  const docIndex = function() {
+    this.ref('url');
+    this.field('title', {boost: 10});
+    this.field('body');
+    this.field('summary', {boost: 5});
+
+    this.b(0);
+    this.k1(1.3);
+  }
+
+  fetch("/index.json")
+    .then(function(res) {
+      return res.json();
+    })
+    .then(function(docs) {
+      idx = lunr(function() {
+        this.use(docIndex);
+
+        docs.forEach(function(doc) {
+          this.add(doc);
+
+          store[doc.url] = {
+            'title': doc.title,
+            'summary': doc.summary,
+            'version': doc.version
+          }
+        }, this);
+      });
+
+      searchBar.on('keyup', function() {
+        const searchTerm = searchBar.val();
+        const results = idx.search(searchTerm);
+
+        if (searchTerm) {
+          searchDropdown.addClass('is-active');
+        } else {
+          searchMenu.hide();
+        }
+
+        if (results.length > 0 && searchTerm) {
+          searchContent.empty();
+
+          results.forEach(function(res) {
+            const url = res.ref;
+            const title = store[url].title;
+            const summary = store[url].summary;
+            const docVersion = store[url].version;
+
+            const item = `
+            <a class="dropdown-item search-item" href="${url}">
+              <p class="is-size-5 search-item-link has-text-weight-medium">
+                ${title}
+              </p>
+
+              <p>
+                ${summary.substring(0, 50)}...
+              </p>
+            </a>
+            `;
+
+            {{ if $isDoc }}
+            if (docVersion == version) {
+              searchContent.append(item);
+            }
+            {{ else }}
+            if (docVersion == latest) {
+              searchContent.append(item);
+            }
+            {{ end }}
+
+
+            searchContent.show();
+          });
+        } else {
+          searchContent.html('<div class="dropdown-item is-size-6">No results. Keep typing...</div>');
+        }
+      });
+    });
+</script>

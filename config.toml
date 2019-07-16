@@ -15,7 +15,7 @@ mediaType = "text/netlify"
 baseName = "_redirects"
 
 [outputs]
-home = [ "HTML", "REDIRECTS" ]
+home = [ "HTML", "JSON", "REDIRECTS" ]
 
 [params]
   tagline = "Monitor and troubleshoot transactions in complex distributed systems"

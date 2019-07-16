@@ -53,6 +53,7 @@ function controlModals() {
   });
 }
 
+
 $(function () {
   scrollOffset();
   addLinkAnchors();
