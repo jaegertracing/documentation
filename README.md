@@ -56,6 +56,34 @@ python ./scripts/gen-cli-data.py ${VERSION_MAJOR_MINOR}
 
 The script requires `data/cli/${VERSION}/config.json` file that describes the binaries and their storage options. When cutting a new release this file should be copied from the previous release, and adjusted as needed (e.g. if new storage option is implemented). The script generates YAML files in `data/cli/${VERSION}` directory.
 
+## Admonitions
+
+There are five admonition types available for the Jaeger docs:
+
+Admonition type | Color
+:===============|:=====
+`info` | blue
+`success` | green
+`danger` | red
+`warning` | yellow
+`requirement` | purple
+
+Here's an example:
+
+```markdown
+{{< danger >}}
+We do not recommend that you do this!
+{{< /danger >}}
+```
+
+You can also add titles:
+
+```markdown
+{{< success title="New feature" >}}
+Jaeger now supports a new thing that you definitely want.
+{{< /success >}}
+```
+
 ## License
 
 [Apache 2.0 License](./LICENSE).
