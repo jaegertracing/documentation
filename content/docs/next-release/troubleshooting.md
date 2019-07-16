@@ -54,7 +54,7 @@ In the collector's side, these are the expected log entries when the flag `--log
 
 For the cases where it's not possible or desirable to increase the logging in the collector's side, the `/metrics` endpoint can be used to check if spans for specific services were received. Assuming that the Jaeger Collector is available under a host named `jaeger-collector`, here's a sample `curl` call to obtain the metrics:
 
-    curl http://jaeger-collector:14268/metrics
+    curl http://jaeger-collector:14269/metrics
 
 The following metrics are of special interest:
 
