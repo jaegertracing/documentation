@@ -93,7 +93,7 @@ The `items` Array should contain one or more link configurations.
 
 ### Link Patterns
 
-The `linkPatterns` node can be used to create links from tag values displayed in the Jaeger UI.
+The `linkPatterns` node can be used to create links from fields displayed in the Jaeger UI.
 
 Field | Description
 ------|------------
