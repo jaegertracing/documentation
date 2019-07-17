@@ -41,19 +41,33 @@ An example configuration file:
         }
       ]
     }
-  ]
+  ],
+  "linkPatterns": [{
+    "type": "process",
+    "key": "jaeger.version",
+    "url": "https://github.com/jaegertracing/jaeger-client-java/releases/tag/#{jaeger.version}",
+    "text": "Information about Jaeger release #{jaeger.version}"
+  }]
 }
 ```
+
+### Dependencies
 
 `dependencies.dagMaxNumServices` defines the maximum number of services allowed before the DAG dependency view is disabled. Default: `200`.
 
 `dependencies.menuEnabled` enables (`true`) or disables (`false`) the dependencies menu button. Default: `true`.
 
+### Archive Support
+
 `archiveEnabled` enables (`true`) or disables (`false`) the archive traces button. Default: `false`. It requires a configuration of an archive storage in Query service. Archived traces are only accessible directly by ID, they are not searchable.
+
+### Google Analytics Tracking
 
 `tracking.gaID` defines the Google Analytics tracking ID. This is required for Google Analytics tracking, and setting it to a non-`null` value enables Google Analytics tracking. Default: `null`.
 
 `tracking.trackErrors` enables (`true`) or disables (`false`) error tracking via Google Analytics. Errors can only be tracked if a valid Google Analytics ID is provided. For additional details on error tracking via Google Analytics see the [tracking README](https://github.com/jaegertracing/jaeger-ui/blob/c622330546afc1be59a42f874bcc1c2fadf7e69a/src/utils/tracking/README.md) in the UI repo. Default: `true`.
+
+### Custom Menu Items
 
 `menu` allows additional links to be added to the global nav. The additional links are right-aligned.
 
@@ -76,6 +90,19 @@ Links can either be members of the `menu` Array, directly, or they can be groupe
 ```
 
 The `items` Array should contain one or more link configurations.
+
+### Link Patterns
+
+The `linkPatterns` node can be used to create links from tag values displayed in the Jaeger UI.
+
+Field | Description
+------|------------
+type  | The metadata section in which your link will be added: process, tags, logs
+key   | The name of tag/process/log attribute which value will be displayed as a link
+url   | The URL where the link should point to, it can be an external site or relative path in Jaeger UI
+text  | The text displayed in the tooltip for the link
+
+Both `url` and `text` can be defined as templates where Jaeger UI will dynamically substitute values based on tags/logs data.
 
 ## Embedded Mode
 
