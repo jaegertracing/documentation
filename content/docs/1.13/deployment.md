@@ -2,6 +2,8 @@
 title: Deployment
 weight: 7
 children:
+- title: Operator for Kubernetes
+  url: operator
 - title: Frontend/UI
   url: frontend-ui
 ---
