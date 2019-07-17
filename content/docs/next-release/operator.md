@@ -12,9 +12,9 @@ A Kubernetes application is an application that is both deployed on Kubernetes a
 
 # Installing the Operator
 
-{{< danger >}}
-The Jaeger Operator version is related to the version of the Jaeger components (Query, Collector, Agent) up to the minor portion. The patch version portion does *not* follow the ones from the Jaeger components. For instance, the Operator version 1.8.1 uses the Jaeger Docker images tagged with version 1.8 by default.
-{{< /danger >}}
+{{< info >}}
+The Jaeger Operator version tracks one version of the Jaeger components (Query, Collector, Agent). When a new version of the Jaeger components is released, a new version of the operator will be released that understands how running instances of the previous version can be upgraded to the new version.
+{{< /info >}}
 
 ## Installing the Operator on Kubernetes
 
@@ -231,7 +231,9 @@ spec:
 
 <2> The deadlock interval can be disabled to avoid the ingester being terminated when no messages arrive within the default 1 minute period
 
-**TIP:** A Kafka environment can be configured using [Strimzi's Kafka operator](https://strimzi.io/).
+{{< info >}}
+A Kafka environment can be configured using [Strimzi's Kafka operator](https://strimzi.io/).
+{{< /info >}}
 
 # Understanding Custom Resource Definitions
 
@@ -361,9 +363,9 @@ The default create-schema job uses `MODE=prod`, which implies a replication fact
 
 Under some circumstances, the Jaeger Operator can make use of the [Elasticsearch Operator](https://github.com/openshift/elasticsearch-operator) to provision a suitable Elasticsearch cluster.
 
-{{< danger >}}
-This feature is experimental and has been tested only on OpenShift clusters. Elasticsearch also requires the memory setting to be configured like `minishift ssh -- 'sudo sysctl -w vm.max_map_count=262144'`. Spark dependencies are not supported with this feature [Issue #294](https://github.com/jaegertracing/jaeger-operator/issues/294).
-{{< /danger >}}
+{{< warning >}}
+This feature is only tested on OpenShift clusters. Spark dependencies are not supported with this feature [Issue #294](https://github.com/jaegertracing/jaeger-operator/issues/294).
+{{< /warning >}}
 
 When there are no `es.server-urls` options as part of a Jaeger `production` instance and `elasticsearch` is set as the storage type, the Jaeger Operator creates an Elasticsearch cluster via the Elasticsearch Operator by creating a Custom Resource based on the configuration provided in storage section. The Elasticsearch cluster is meant to be dedicated for a single Jaeger instance.
 
@@ -568,10 +570,6 @@ spec:
 
 # Accessing the Jaeger Console (UI)
 <!-- TODO Add tabs shortcode -->
-
-{{< danger >}}
-An `Ingress` object is *not* created when the operator is running on OpenShift
-{{< /danger >}}
 
 ## Kubernetes
 
