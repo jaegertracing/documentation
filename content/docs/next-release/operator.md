@@ -12,13 +12,17 @@ A Kubernetes application is an application that is both deployed on Kubernetes a
 
 # Installing the Operator
 
-**IMPORTANT:** The Jaeger Operator version is related to the version of the Jaeger components (Query, Collector, Agent) up to the minor portion. The patch version portion does *not* follow the ones from the Jaeger components. For instance, the Operator version 1.8.1 uses the Jaeger Docker images tagged with version 1.8 by default.
+{{< danger >}}
+The Jaeger Operator version is related to the version of the Jaeger components (Query, Collector, Agent) up to the minor portion. The patch version portion does *not* follow the ones from the Jaeger components. For instance, the Operator version 1.8.1 uses the Jaeger Docker images tagged with version 1.8 by default.
+{{< /danger >}}
 
 ## Installing the Operator on Kubernetes
 
 The following instructions will create the `observability` namespace and install the Jaeger Operator.
 
-**NOTE:** Make sure your `kubectl` command is properly configured to talk to a valid Kubernetes cluster. If you don't have a cluster, you can create one locally using [`minikube`](https://kubernetes.io/docs/tasks/tools/install-minikube/).
+{{< info >}}
+Make sure your `kubectl` command is properly configured to talk to a valid Kubernetes cluster. If you don't have a cluster, you can create one locally using [`minikube`](https://kubernetes.io/docs/tasks/tools/install-minikube/).
+{{< /info >}}
 
 To install the operator, run:
 <!--TODO - Does Kubernetes have privileged users? Needs to be run as a system:admin on OKD/OpenShift.-->
@@ -91,7 +95,9 @@ oc apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/mast
 <3> Adds the security policy to the service account
 <4> Creates the Jaeger Instance using the `serviceAccount` created in the steps above
 
-**WARNING:** without such a policy, errors like the following will prevent a `DaemonSet` to be created: `Warning FailedCreate 4s (x14 over 45s) daemonset-controller Error creating: pods "agent-as-daemonset-agent-daemonset-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.containers[0].hostPort: Invalid value: 5775: Host ports are not allowed to be used`
+{{< warning >}}
+Without such a policy, errors like the following will prevent a `DaemonSet` to be created: `Warning FailedCreate 4s (x14 over 45s) daemonset-controller Error creating: pods "agent-as-daemonset-agent-daemonset-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.containers[0].hostPort: Invalid value: 5775: Host ports are not allowed to be used`
+{{< /warning >}}
 
 After a few seconds, the `DaemonSet` should be up and running:
 
@@ -105,7 +111,9 @@ agent-as-daemonset-agent-daemonset   1         1         1         1            
 
 The simplest possible way to create a Jaeger instance is by creating a YAML file like the following example.  This will install the default AllInOne strategy, which deploys the "all-in-one" image (agent, collector, query, ingestor, Jaeger UI) in a single pod, using in-memory storage by default.
 
-**NOTE:** This default strategy is intended for development, testing, and demo purposes, not for production.
+{{< info >}}
+This default strategy is intended for development, testing, and demo purposes, not for production.
+{{< /info >}}
 
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -146,7 +154,9 @@ $ kubectl logs -l app.kubernetes.io/instance=simplest
 {"level":"info","ts":1535385688.0951214,"caller":"healthcheck/handler.go:133","msg":"Health Check state change","status":"ready"}
 ```
 
-**NOTE:** On OKD/OpenShift the container name must be specified.
+{{< info >}}
+On OKD/OpenShift the container name must be specified.
+{{< /info >}}
 
 ```bash
 $ kubectl logs -l app.kubernetes.io/instance=simplest -c jaeger
@@ -229,7 +239,9 @@ In the Kubernetes API, a resource is an endpoint that stores a collection of API
 
 To create _Custom Resource_ (CR) objects, cluster administrators must first create a Custom Resource Definition (CRD). The CRDs allow cluster users to create CRs to add the new resource types into their projects. An Operator watches for custom resource objects to be created, and when it sees a custom resource being created, it creates the application based on the parameters defined in the custom resource object.
 
-**NOTE:** While only cluster administrators can create CRDs, developers can create the CR from an existing CRD if they have read and write permission to it.
+{{< info >}}
+While only cluster administrators can create CRDs, developers can create the CR from an existing CRD if they have read and write permission to it.
+{{< /info >}}
 
 <!--
 ## Jaeger Custom Resource Parameters
@@ -341,19 +353,25 @@ spec:
 
 <3> The options for the `create-schema` job.
 
-**NOTE:** The default create-schema job uses `MODE=prod`, which implies a replication factor of `2`, using `NetworkTopologyStrategy` as the class, effectively meaning that at least 3 nodes are required in the Cassandra cluster. If a `SimpleStrategy` is desired, set the mode to `test`, which then sets the replication factor of `1`. Refer to the [create-schema script](https://github.com/jaegertracing/jaeger/blob/master/plugin/storage/cassandra/schema/create.sh) for more details.
+{{< info >}}
+The default create-schema job uses `MODE=prod`, which implies a replication factor of `2`, using `NetworkTopologyStrategy` as the class, effectively meaning that at least 3 nodes are required in the Cassandra cluster. If a `SimpleStrategy` is desired, set the mode to `test`, which then sets the replication factor of `1`. Refer to the [create-schema script](https://github.com/jaegertracing/jaeger/blob/master/plugin/storage/cassandra/schema/create.sh) for more details.
+{{< /info >}}
 
 ### Elasticesearch storage
 
 Under some circumstances, the Jaeger Operator can make use of the [Elasticsearch Operator](https://github.com/openshift/elasticsearch-operator) to provision a suitable Elasticsearch cluster.
 
-**IMPORTANT:** This feature is experimental and has been tested only on OpenShift clusters. Elasticsearch also requires the memory setting to be configured like `minishift ssh -- 'sudo sysctl -w vm.max_map_count=262144'`. Spark dependencies are not supported with this feature [Issue #294](https://github.com/jaegertracing/jaeger-operator/issues/294).
+{{< danger >}}
+This feature is experimental and has been tested only on OpenShift clusters. Elasticsearch also requires the memory setting to be configured like `minishift ssh -- 'sudo sysctl -w vm.max_map_count=262144'`. Spark dependencies are not supported with this feature [Issue #294](https://github.com/jaegertracing/jaeger-operator/issues/294).
+{{< /danger >}}
 
 When there are no `es.server-urls` options as part of a Jaeger `production` instance and `elasticsearch` is set as the storage type, the Jaeger Operator creates an Elasticsearch cluster via the Elasticsearch Operator by creating a Custom Resource based on the configuration provided in storage section. The Elasticsearch cluster is meant to be dedicated for a single Jaeger instance.
 
 The self-provision of an Elasticsearch cluster can be disabled by setting the flag `--es-provision` to `false`. The default value is `auto`, which will make the Jaeger Operator query the Kubernetes cluster for its ability to handle a `Elasticsearch` custom resource. This is usually set by the Elasticsearch Operator during its installation process, so, if the Elasticsearch Operator is expected to run *after* the Jaeger Operator, the flag can be set to `true`.
 
-**IMPORTANT:** At the moment there can be only one Jaeger with self-provisioned Elasticsearch instance per namespace.
+{{< danger >}}
+At the moment there can be only one Jaeger with self-provisioned Elasticsearch instance per namespace.
+{{< /danger >}}
 
 ## Auto-injecting Jaeger Agent Sidecars
 
@@ -397,7 +415,10 @@ spec:
   agent:
     strategy: DaemonSet
 ```
-**IMPORTANT:** If you attempt to install two Jaeger instances on the same cluster with `DaemonSet` as the strategy, only *one* will end up deploying a `DaemonSet`, as the agent is required to bind to well-known ports on the node. Because of that, the second daemon set will fail to bind to those ports.
+
+{{< danger >}}
+If you attempt to install two Jaeger instances on the same cluster with `DaemonSet` as the strategy, only *one* will end up deploying a `DaemonSet`, as the agent is required to bind to well-known ports on the node. Because of that, the second daemon set will fail to bind to those ports.
+{{< /danger >}}
 
 Your tracer client will then most likely need to be told where the agent is located. This is usually done by setting the environment variable `JAEGER_AGENT_HOST` to the value of the Kubernetes node's IP, for example:
 
@@ -443,7 +464,9 @@ The secret itself would be managed outside of the `jaeger-operator` custom resou
 
 ## Defining Sampling Strategies
 
-**NOTE:** This is not relevant if a trace was started by the Istio proxy as the sampling decision is made there. And the Jaeger sampling decisions are only relevant when you are using the Jaeger tracer (client).
+{{< info >}}
+This is not relevant if a trace was started by the Istio proxy as the sampling decision is made there. And the Jaeger sampling decisions are only relevant when you are using the Jaeger tracer (client).
+{{< /info >}}
 
 The operator can be used to define sampling strategies that will be supplied to tracers that have been configured to use a remote sampler:
 
@@ -546,7 +569,9 @@ spec:
 # Accessing the Jaeger Console (UI)
 <!-- TODO Add tabs shortcode -->
 
-**IMPORTANT:** An `Ingress` object is *not* created when the operator is running on OpenShift
+{{< danger >}}
+An `Ingress` object is *not* created when the operator is running on OpenShift
+{{< /danger >}}
 
 ## Kubernetes
 
@@ -575,7 +600,9 @@ When using the `operator-openshift.yaml` resource, the Operator will automatical
 oc get routes
 ```
 
-**NOTE:** Make sure to use `https` with the hostname/port you get from the command above, otherwise you'll see a message like: "Application is not available".
+{{< info >}}
+Make sure to use `https` with the hostname/port you get from the command above, otherwise you'll see a message like: "Application is not available".
+{{< /info >}}
 
 By default, the Jaeger UI is protected with OpenShift's OAuth service and any valid user is able to login. For development purposes, the user/password combination `developer/developer` can be used. To disable this feature and leave the Jaeger UI unsecured, set the Ingress property `security` to `none` in the custom resource file:
 
@@ -592,7 +619,9 @@ spec:
 
 A Jaeger instance can be updated by changing the `CustomResource`, either via `kubectl edit jaeger simplest`, where `simplest` is the Jaeger's instance name, or by applying the updated YAML file via `kubectl apply -f simplest.yaml`.
 
-**IMPORTANT:** The name of the Jaeger instance cannot be updated, as it is part of the identifying information for the resource.
+{{< danger >}}
+The name of the Jaeger instance cannot be updated, as it is part of the identifying information for the resource.
+{{< /danger >}}
 
 Simpler changes such as changing the replica sizes can be applied without much concern, whereas changes to the strategy should be watched closely and might potentially cause an outage for individual components (collector/query/agent).
 
@@ -613,13 +642,17 @@ Alternatively, you can remove a Jaeger instance by running:
 kubectl delete jaeger simplest
 ```
 
-**NOTE:** Deleting the instance will not remove the data from any permanent storage used with this instance. Data from in-memory instances, however, will be lost.
+{{< info >}}
+Deleting the instance will not remove the data from any permanent storage used with this instance. Data from in-memory instances, however, will be lost.
+{{< /info >}}
 
 # Monitoring the operator
 
 The Jaeger Operator starts a Prometheus-compatible endpoint on `0.0.0.0:8383/metrics` with internal metrics that can be used to monitor the process.
 
-**NOTE:** The Jaeger Operator does not yet publish its own metrics. Rather, it makes available metrics reported by the components it uses, such as the Operator SDK.
+{{< info >}}
+The Jaeger Operator does not yet publish its own metrics. Rather, it makes available metrics reported by the components it uses, such as the Operator SDK.
+{{< /info >}}
 
 # Uninstalling the operator
 <!-- TODO Add OKD/OpenShift commands and tabs shortcode -->
