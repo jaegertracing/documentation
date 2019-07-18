@@ -467,6 +467,31 @@ The secrets are available as environment variables in the (Collector/Query/All-I
 
 The secret itself would be managed outside of the `jaeger-operator` custom resource.
 
+## Configuring the UI
+
+Information on various configuration options for the UI can be found [here](../frontend-ui/#configuration), defined in json format.
+
+To apply UI configuration changes within the Custom Resource, the same information can be included in yaml format as shown below:
+
+```yaml
+    ui:
+      options:
+        dependencies:
+          menuEnabled: false
+        tracking:
+          gaID: UA-000000-2
+        menu:
+        - label: "About Jaeger"
+          items:
+            - label: "Documentation"
+              url: "https://www.jaegertracing.io/docs/latest"
+        linkPatterns:
+        - type: "logs"
+          key: "customer_id"
+          url: /search?limit=20&lookback=1h&service=frontend&tags=%7B%22customer_id%22%3A%22#{customer_id}%22%7D
+          text: "Search for other traces for customer_id=#{customer_id}"
+```
+
 ## Defining Sampling Strategies
 
 {{< info >}}
