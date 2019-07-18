@@ -102,7 +102,7 @@ key   | The name of tag/process/log attribute which value will be displayed as a
 url   | The URL where the link should point to, it can be an external site or relative path in Jaeger UI
 text  | The text displayed in the tooltip for the link
 
-Both `url` and `text` can be defined as templates where Jaeger UI will dynamically substitute values based on tags/logs data.
+Both `url` and `text` can be defined as templates (i.e. using `#{field-name}`) where Jaeger UI will dynamically substitute values based on tags/logs data.
 
 ## Embedded Mode
 

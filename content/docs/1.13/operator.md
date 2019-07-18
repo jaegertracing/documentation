@@ -478,7 +478,7 @@ To apply UI configuration changes within the Custom Resource, the same informati
       options:
         dependencies:
           menuEnabled: false
-        tracking: 
+        tracking:
           gaID: UA-000000-2
         menu:
         - label: "About Jaeger"
