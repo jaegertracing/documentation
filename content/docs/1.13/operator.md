@@ -378,6 +378,20 @@ The self-provision of an Elasticsearch cluster can be disabled by setting the fl
 At the moment there can be only one Jaeger with self-provisioned Elasticsearch instance per namespace.
 {{< /danger >}}
 
+#### Elasticsearch index cleaner job
+
+When using `elasticsearch` storage by default a job is created to clean old traces from it, the options for it are listed below so you can configure it to your use case
+
+```yaml
+storage:
+  type: elasticsearch
+  esIndexCleaner:
+    enabled: false                                // turn the job deployment on and off
+    numberOfDays: 7                               // number of days to wait before deleting a record
+    schedule: "55 23 * * *"                       // cron expression for it to run
+    image: jaegertracing/jaeger-es-index-cleaner  // image of the job
+```
+
 ## Auto-injecting Jaeger Agent Sidecars
 
 The operator can inject Jaeger Agent sidecars in `Deployment` workloads, provided that the deployment has the annotation `sidecar.jaegertracing.io/inject` with a suitable value. The values can be either `"true"` (as string), or the Jaeger instance name, as returned by `kubectl get jaegers`. When `"true"` is used, there should be exactly *one* Jaeger instance for the same namespace as the deployment, otherwise, the operator can't figure out automatically which Jaeger instance to use.
@@ -536,6 +550,10 @@ The types of supported configuration  include:
 
 * [volumes](https://kubernetes.io/docs/concepts/storage/volumes/) and volume mounts
 
+* [serviceAccount](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/) to run each component with separate identity
+
+* [securityContext](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) to define privileges of running components
+
 ```yaml
 apiVersion: jaegertracing.io/v1
 kind: Jaeger
@@ -584,6 +602,9 @@ spec:
       operator: "Equal"
       value: "value1"
       effect: "NoExecute"
+  serviceAccount: nameOfServiceAccount
+  securityContext:
+    runAsUser: 1000
   volumeMounts:
     - name: config-vol
       mountPath: /etc/config
@@ -641,6 +662,41 @@ spec:
   ingress:
     security: none
 ```
+
+Custom `SAR` and `Delegate URL` values can be specified as part of the `.Spec.Ingress.OpenShift.SAR` and `.Spec.Ingress.Openshift.DelegateURLs`, as follows:
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: custom-sar-oauth-proxy
+spec:
+  ingress:
+    openshift:
+      sar: '{"namespace": "default", "resource": "pods", "verb": "get"}'
+      delegate-urls: '{"/":{"namespace": "default", "resource": "pods", "verb": "get"}}'
+```
+
+When the `delegate-urls` is set, the Jaeger Operator needs to create a new `ClusterRoleBinding` between the service account used by the UI Proxy (`{InstanceName}-ui-proxy`) and the role `system:auth-delegator`, as required by the OpenShift OAuth Proxy. Because of that, the service account used by the operator itself needs to have the same cluster role binding. To accomplish that, a `ClusterRoleBinding` such as the following has to be created:
+
+```yaml
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: jaeger-operator-with-auth-delegator
+  namespace: observability
+subjects:
+- kind: ServiceAccount
+  name: jaeger-operator
+  namespace: observability
+roleRef:
+  kind: ClusterRole
+  name: system:auth-delegator
+  apiGroup: rbac.authorization.k8s.io
+```
+
+Cluster administrators not comfortable in letting users deploy Jaeger instances with this cluster role are free to not add this cluster role to the operator's service account. In that case, the Operator will auto-detect that the required permissions are missing and will log a message similar to: `the requested instance specifies the delegate-urls option for the OAuth Proxy, but this operator cannot assign the proper cluster role to it (system:auth-delegator). Create a cluster role binding between the operator's service account and the cluster role 'system:auth-delegator' in order to allow instances to use 'delegate-urls'`.
+
 # Updating a Jaeger instance (experimental)
 
 A Jaeger instance can be updated by changing the `CustomResource`, either via `kubectl edit jaeger simplest`, where `simplest` is the Jaeger's instance name, or by applying the updated YAML file via `kubectl apply -f simplest.yaml`.
