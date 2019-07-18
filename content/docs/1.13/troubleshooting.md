@@ -18,7 +18,7 @@ When diagnosing why spans are not being received by other components, make sure 
 
 ## Use the logging reporter
 
-Some Jaeger clients are able to log the spans that are being reported to the logging facility provided by the instrumented application. Typically, this can be done by setting the environment variable `JAEGER_REPORTER_LOG_SPANS` to `true`, but refer to the Jaeger Client's documentation for the language you are using (in some cases you need to explicitly pass a logger to the Client). When using the Jaeger _Java_ Client, spans are reported like the following:
+Most Jaeger clients are able to log the spans that are being reported to the logging facility provided by the instrumented application. Typically, this can be done by setting the environment variable `JAEGER_REPORTER_LOG_SPANS` to `true`, but refer to the Jaeger Client's documentation for the language you are using. In some languages, specifically in Go and Node.js, there are no de-facto standard logging facilities, so you need to explicitly pass a logger to the Client that implements a very narrow `Logger` interface defined by the Jaeger Client. When using the Jaeger _Java_ Client, spans are reported like the following:
 
     2018-12-10 17:20:54 INFO  LoggingReporter:43 - Span reported:  e66dc77b8a1e813b:6b39b9c18f8ef082:a56f41e38ca449a4:1 -  getAccountFromCache
 
