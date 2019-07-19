@@ -364,19 +364,56 @@ The default create-schema job uses `MODE=prod`, which implies a replication fact
 
 ### Elasticsearch storage
 
-Under some circumstances, the Jaeger Operator can make use of the [Elasticsearch Operator](https://github.com/openshift/elasticsearch-operator) to provision a suitable Elasticsearch cluster.
+When the storage type is set to Elasticsearch, it is possible to configure Jaeger to self provision an Elasticsearch cluster or use a pre-existing cluster.
+
+#### Self Provisioned
 
 {{< warning >}}
 This feature is only tested on OpenShift clusters. Spark dependencies are not supported with this feature [Issue #294](https://github.com/jaegertracing/jaeger-operator/issues/294).
 {{< /warning >}}
 
+If installed, the Jaeger Operator can make use of the [Elasticsearch Operator](https://github.com/openshift/elasticsearch-operator) to provision a suitable Elasticsearch cluster.
+
 When there are no `es.server-urls` options as part of a Jaeger `production` instance and `elasticsearch` is set as the storage type, the Jaeger Operator creates an Elasticsearch cluster via the Elasticsearch Operator by creating a Custom Resource based on the configuration provided in storage section. The Elasticsearch cluster is meant to be dedicated for a single Jaeger instance.
 
-The self-provision of an Elasticsearch cluster can be disabled by setting the flag `--es-provision` to `false`. The default value is `auto`, which will make the Jaeger Operator query the Kubernetes cluster for its ability to handle a `Elasticsearch` custom resource. This is usually set by the Elasticsearch Operator during its installation process, so, if the Elasticsearch Operator is expected to run *after* the Jaeger Operator, the flag can be set to `true`.
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: simple-prod
+spec:
+  strategy: production
+  storage:
+    type: elasticsearch
+    elasticsearch:
+      nodeCount: 1
+```
+
+The self-provision of an Elasticsearch cluster can be disabled by setting the Jaeger Operator flag `--es-provision` to `false`. The default value is `auto`, which will make the Jaeger Operator query the Kubernetes cluster for its ability to handle a `Elasticsearch` custom resource. This is usually set by the Elasticsearch Operator during its installation process, so, if the Elasticsearch Operator is expected to run *after* the Jaeger Operator, the flag can be set to `true`.
 
 {{< danger >}}
 At the moment there can be only one Jaeger with self-provisioned Elasticsearch instance per namespace.
 {{< /danger >}}
+
+#### Existing Cluster
+
+To configure the Jaeger components to use an existing Elasticsearch cluster, then minimum required configuration is to set the `es.server-urls` option to the URL of the cluster.
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: simple-prod
+spec:
+  strategy: production
+  storage:
+    type: elasticsearch
+    options:
+      es:
+        server-urls: http://elasticsearch:9200
+```
+
+Further options for configuring Elasticsearch are available for the [Query](https://www.jaegertracing.io/docs/1.13/cli/#jaeger-query-elasticsearch), [Collector](cli/#jaeger-collector-elasticsearch) and [Ingester](cli/#jaeger-ingester-elasticsearch) components.
 
 #### Elasticsearch index cleaner job
 
