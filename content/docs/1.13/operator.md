@@ -413,7 +413,7 @@ spec:
         server-urls: http://elasticsearch:9200
 ```
 
-Further options for configuring Elasticsearch are available for the [Query](https://www.jaegertracing.io/docs/1.13/cli/#jaeger-query-elasticsearch), [Collector](cli/#jaeger-collector-elasticsearch) and [Ingester](cli/#jaeger-ingester-elasticsearch) components.
+Further options for configuring Elasticsearch are available for the [Query](../cli/#jaeger-query-elasticsearch), [Collector](../cli/#jaeger-collector-elasticsearch) and [Ingester](../cli/#jaeger-ingester-elasticsearch) components.
 
 #### Elasticsearch index cleaner job
 
