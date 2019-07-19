@@ -544,6 +544,8 @@ The types of supported configuration  include:
 
 * [annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
 
+* [labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
+
 * [resources](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container) to limit cpu and memory
 
 * [tolerations](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) in conjunction with `taints` to enable pods to avoid being repelled from a node
@@ -568,6 +570,8 @@ spec:
         server-urls: http://elasticsearch:9200
   annotations:
     key1: value1
+  labels:
+    key2: value2
   resources:
     requests:
       memory: "64Mi"
