@@ -52,21 +52,27 @@
 
       // When the user clicks on the search bar
       searchBar.on('focusin', function() {
+
         // For each letter entered/deleted
         searchBar.on('keyup', function() {
-          const searchTerm = searchBar.val();
-          const results = idx.search(searchTerm);
+          const searchTerm = searchBar.val().toLowerCase();
 
           // When a search term is entered in the search bar
           if (searchTerm) {
+            const finalSearchTerm = `${searchTerm}*`;
+            const results = idx.search(finalSearchTerm);
+
+            //searchTerm = `${searchTerm}*`;
+
             // When there's one or more search results
             if (results.length > 0) {
-              console.log(`Search term: ${searchTerm}. Results: ${results.length}`);
               // Activate the menu
               searchMenu.show();
 
               // The search content starts at empty
               searchContent.empty();
+
+              var numAdded = 0;
 
               // Iterate through the search results
               results.forEach(function(res) {
@@ -89,19 +95,17 @@
                 </a>
                 `
 
-                if (docVersion == version) {
+                if (docVersion == version && numAdded < 8) {
                   searchContent.append(item);
+                  numAdded++;
                 }
 
                 // Now display the accumulated results
                 searchContent.show();
               });
-            } else {
-              // When a search term is entered but there are no results
-              console.log(`Search term: ${searchTerm}. No results`);
             }
           } else {
-            console.log('No search term');
+            // Hide the search menu when no search term is entered
             searchMenu.hide();
           }
         });
