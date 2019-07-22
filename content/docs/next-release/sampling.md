@@ -1,6 +1,6 @@
 ---
 title: Sampling
-weight: 9
+hasparent: true
 ---
 
 Jaeger libraries implement consistent upfront (or head-based) sampling. For example, assume we have a simple call graph where service A calls service B, and B calls service C: `A -> B -> C`. When service A receives a request that contains no tracing information, Jaeger tracer will start a new {{< tip "trace" >}}, assign it a random trace ID, and make a sampling decision based on the currently installed sampling strategy. The sampling decision will be propagated with the requests to B and to C, so those services will not be making the sampling decision again but instead will respect the decision made by the top service A. This approach guarantees that if a trace is sampled, all its {{< tip "spans" "span" >}} will be recorded in the backend. If each service was making its own sampling decision we would rarely get complete traces in the backend.
