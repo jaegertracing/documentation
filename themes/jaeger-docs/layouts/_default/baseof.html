@@ -1,4 +1,5 @@
-{{- $pageType := cond (eq .Kind "home") "home" .Section }}
+{{ $pageType := cond (eq .Kind "home") "home" .Section }}
+{{ $isDocsPage := eq .Section "docs" }}
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top" lang="{{ site.LanguageCode }}" prefix="og: http://ogp.me/ns#">
   <head>
@@ -17,5 +18,7 @@
 
     {{ partial "footer.html" . }}
     {{ partial "javascript.html" . }}
+
+    {{ partial "search.html" . }}
   </body>
 </html>
