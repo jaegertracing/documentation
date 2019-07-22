@@ -2,18 +2,11 @@
 {{- $isNextRelease := eq $versionFromPath "next-release" }}
 {{- $version := cond ($isNextRelease) site.Params.latest $versionFromPath }}
 {{- $data    := index site.Data.cli $version }}
-{{- $config  := index $data "config" }}
+{{- $config  := index (index site.Data.cli $versionFromPath) "config" }}
 
 {{ if $isNextRelease }}
   <p><b>NOTE: This page is generated for version {{ $version }}.</b></p>
 {{ end }}
-
-<p>This is auto-generated documentation for CLI flags supported by Jaeger binaries.</p>
-<ul>
-  <li>CLI flags for some binaries change depending on the <tt>SPAN_STORAGE_TYPE</tt> environment variable. Relevant variations are included below.</li>
-  <li>Some binaries support _commands_ (mostly informational), such as `env`, `docs`, and `version`. These commands are not included here.</li>
-  <li>All parameters can be also provided via environment variables, by changing all letters to upper-case and replacing all punctuation characters with underscore `_`. For example, the value for the flag `--cassandra.connections-per-host` can be  provided via `CASSANDRA_CONNECTIONS_PER_HOST` environment variable.</li>
-</ul>
 
 <p>The CLI flags for the following binaries are documented below:</p>
 <ul>
