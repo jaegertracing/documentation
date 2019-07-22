@@ -24,6 +24,7 @@
 
     <div id="topNav" class="navbar-menu">
       <div class="navbar-end">
+        {{ if $isDocsPage }}
         <div class="navbar-item">
           <div class="dropdown" id="search-dropdown">
             <div class="dropdown-trigger">
@@ -43,6 +44,7 @@
             </div>
           </div>
         </div>
+        {{ end }}
 
         <a class="navbar-item" href="/download">
           Download
