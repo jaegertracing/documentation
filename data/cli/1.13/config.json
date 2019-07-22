@@ -4,7 +4,7 @@
         "jaeger-agent",
         "jaeger-collector",
         "jaeger-ingester",
-        "jaeger-query"      
+        "jaeger-query"
     ],
     "jaeger-all-in-one": {
         "storage": [
