@@ -1,7 +1,6 @@
 ---
 title: CLI flags
 widescreen: true
-hasparent: true
 ---
 
 {{< cli/tools-list >}}
