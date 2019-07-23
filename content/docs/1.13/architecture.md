@@ -1,6 +1,6 @@
 ---
 title: Architecture
-weight: 6
+weight: 3
 children:
 - title: Sampling
   url: sampling
