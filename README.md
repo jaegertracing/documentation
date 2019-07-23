@@ -45,7 +45,8 @@ Each Jaeger version is documented in a separate directory e.g. [content/docs/1.8
 Before creating a new release:
 
   - Make sure all outstanding PRs for that version are merged to `next-release` directory.
-  - If there are new Jaeger binaries or new storage options added to the release, the CLI docs config file `data/cli/next-release/config.json` is updated accordingly (see below).
+  - Make sure the actual Jaeger release is done and Docker images for the new version are published.
+  - If there are new Jaeger binaries or new storage options added to the release, make sure the CLI docs config file `data/cli/next-release/config.json` is updated accordingly (see below).
 
 Then create a release by pushing a tag `release-X.Y.Z`, e.g.
 
