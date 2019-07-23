@@ -1,7 +1,6 @@
 ---
 title: Operator for Kubernetes
 hasparent: true
-weight: 7
 ---
 
 # Understanding Operators

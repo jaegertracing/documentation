@@ -18,7 +18,7 @@
     {{- $isCurrentPage := eq $url $.RelPermalink }}
     <br />
     <a class="nav-sublink{{ if $isCurrentPage }} is-active{{ end }}" href="{{ $url }}">
-      {{ .title }}
+      &cir; {{ if .navtitle }}{{ .navtitle }}{{ else }}{{ .title }}{{ end }}
     </a>
     {{- end }}
     {{- end }}

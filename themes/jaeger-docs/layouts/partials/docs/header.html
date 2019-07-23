@@ -25,4 +25,20 @@
   </div>
 
   <hr class="hr" />
+
+  {{ if .Params.children }}
+    <p>See also:</p>
+    <ul>
+      {{- range .Params.children }}
+        {{- $url := printf "/docs/%s/%s/" $version .url }}
+        <li>
+          <a href="{{ $url }}">
+            {{ .title }}
+          </a>
+        </li>
+      {{- end }}
+    </ul>
+    <hr class="hr" />
+  {{ end }}
+
 </header>

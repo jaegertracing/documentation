@@ -1,6 +1,9 @@
 ---
 title: Introduction
 weight: 1
+children:
+- title: Features
+  url: features
 ---
 
 Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.
@@ -19,7 +22,7 @@ It is used for monitoring and troubleshooting microservices-based distributed sy
 * Service dependency analysis
 * Performance / latency optimization
 
-Uber published a blog post, [Evolving Distributed Tracing at Uber](https://eng.uber.com/distributed-tracing/), where they explain the history and reasons for the architectural choices made in Jaeger.
+Uber published a blog post, [Evolving Distributed Tracing at Uber](https://eng.uber.com/distributed-tracing/), where they explain the history and reasons for the architectural choices made in Jaeger. [Yuri Shkuro](https://shkuro.com), creator of Jaeger, also published a book [Mastering Distributed Tracing](https://shkuro.com/books/2019-mastering-distributed-tracing/) that covers in-depth many aspects of Jaeger design and operation, as well as distributed tracing in general.
 
 ## Features
 
@@ -55,7 +58,9 @@ See [running a docker all in one image](getting-started#all-in-one).
 [![Detail View](/img/trace-detail-ss.png)](/img/trace-detail-ss.png)
 
 ## Related links
+
 - [Evolving Distributed tracing At Uber Engineering](https://eng.uber.com/distributed-tracing/)
+- [Mastering Distributed Tracing](https://shkuro.com/books/2019-mastering-distributed-tracing/)
 - [Tracing HTTP request latency in Go with OpenTracing](https://medium.com/opentracing/tracing-http-request-latency-in-go-with-opentracing-7cc1282a100a)
 - [Distributed Tracing with Jaeger & Prometheus on Kubernetes](https://blog.openshift.com/openshift-commons-briefing-82-distributed-tracing-with-jaeger-prometheus-on-kubernetes/)
 - [Using Jaeger with Istio](https://istio.io/docs/tasks/telemetry/distributed-tracing.html)

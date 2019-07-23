@@ -1,11 +1,14 @@
 ---
 title: Deployment
-weight: 7
+weight: 4
 children:
 - title: Operator for Kubernetes
   url: operator
+  navtitle: Kubernetes
 - title: Frontend/UI
   url: frontend-ui
+- title: CLI Flags
+  url: cli
 ---
 
 The main Jaeger backend components are released as Docker images on Docker Hub:

@@ -1,5 +1,6 @@
 ---
-title: Frontend/UI
+title: Frontend/UI Configuration
+navtitle: Frontend/UI
 hasparent: true
 weight: 7
 ---

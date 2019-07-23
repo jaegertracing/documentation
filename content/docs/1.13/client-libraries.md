@@ -27,10 +27,6 @@ The following client libraries are officially supported:
 
 Libraries in other languages are currently under development, please see [issue #366](https://github.com/jaegertracing/jaeger/issues/366).
 
-## Features
-
-A feature matrix for the existing client libraries is [available here](../client-features/).
-
 ## Initializing Jaeger Tracer
 
 The initialization syntax is slightly different in each languages, please refer to the README's in the respective repositories.
