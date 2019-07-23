@@ -1,6 +1,7 @@
 ---
 title: CLI flags
 widescreen: true
+hasparent: true
 ---
 
 This is auto-generated documentation for CLI flags supported by Jaeger binaries.
