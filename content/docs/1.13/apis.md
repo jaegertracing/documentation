@@ -5,15 +5,15 @@ hasparent: true
 
 Jaeger components implement various APIs for saving or retrieving trace data.
 
-TODO
+The following labels are used to describe API compatibility guarantees.
 
-  * stable
-  * restricted
-  * deprecated
+* **stable** - the API guarantees backwards compatibility. If breaking changes are going to be made in the future, they will result in a new API version, e.g. `/api/v2` URL prefix or a different namespace in the IDL.
+* **internal** - the APIs intended for internal communications between Jaeger components and not recommended for use by external components.
+* **deprecated** - the APIs that are only maintained for legacy reasons and will be phased out in the future.
 
 ## Span reporting APIs
 
-Agent and Collector are the two components of the Jaeger backend that can receive spans and forward them to storage.
+Agent and Collector are the two components of the Jaeger backend that can receive spans. At this time they support two sets of non-overlapping APIs.
 
 ### Thrift over UDP (stable)
 
@@ -23,7 +23,9 @@ For legacy reasons, the Agent also accepts spans in Zipkin format, however, only
 
 ### Protobuf via gRPC (stable)
 
-In a typical Jaeger deployment, Agents receive spans from Clients and forward them to Collectors. Since Jaeger version 1.11 the official and recommended protocol between Agents and Collectors is gRPC with Protobuf. The Protobuf IDL [collector.proto][collector.proto] is currently located in the main Jaeger repository, under [model/proto/api_v2][collector.proto]. In the future it will be moved to [jaeger-idl][jaeger-idl] repository ([jaeger-idl/issues/1234](TODO-link)).
+In a typical Jaeger deployment, Agents receive spans from Clients and forward them to Collectors. Since Jaeger version 1.11 the official and recommended protocol between Agents and Collectors is gRPC with Protobuf. 
+
+The Protobuf IDL [collector.proto][collector.proto] is currently located in the main Jaeger repository, under [model/proto/api_v2][collector.proto]. In the future it will be moved to [jaeger-idl][jaeger-idl] repository ([jaeger-idl/issues/55](https://github.com/jaegertracing/jaeger-idl/issues/55)).
 
 ### Thrift over HTTP (stable)
 
@@ -41,41 +43,45 @@ There is no official Jaeger JSON format that can be accepted by the collector. I
 
 ### Thrift via TChannel (deprecated)
 
-Agent and Collector can communicate using TChannel protocol. This protocol is generally not supported by  the routing infrastructure and has been deprecated. It will be eventually removed from Jaeger.
+Agent and Collector can communicate using TChannel protocol. This protocol is generally not supported by the routing infrastructure and has been deprecated. It will be eventually removed from Jaeger.
 
 ### Zipkin Formats (stable)
 
 Jaeger Collector can also accept spans in several Zipkin data format, namely JSON v1/v2 and Thrift. The Collector needs to be configured to enable Zipkin HTTP server, e.g. on port 9411 used by Zipkin collectors. The server enables two endpoints that expect POST requests:
 
 * `/api/v1/spans` for submitting spans in Zipkin JSON v1 or Zipkin Thrift format.
-* `/api/v2/spans` for submitting spans in Zipkin JSON v2 or format.
+* `/api/v2/spans` for submitting spans in Zipkin JSON v2.
 
 ## Trace retrieval APIs
 
-Traves saved in the storage can be retrieved by calling Jaeger Query Service.
+Traces saved in the storage can be retrieved by calling Jaeger Query Service.
 
 ### gRPC/Protobuf (stable)
 
 The recommended way for programmatically retrieving traces is via gRPC endpoint defined in [query.proto][query.proto] IDL file (located in the main Jaeger repository, similar to [collector.proto][collector.proto]).
 
-### HTTP JSON (restricted)
+### HTTP JSON (internal)
 
-Jaeger UI communicates with Jaeger Query Service via JSON API. For example, a trace can be retrieved via GET request to https://jaeger-query:16686/api/traces/{trace-id-hex-string}. This JSON API is intentionally undocumented and subject to change (see [jaeger/issues/1234](TODO-link)).
+Jaeger UI communicates with Jaeger Query Service via JSON API. For example, a trace can be retrieved via GET request to https://jaeger-query:16686/api/traces/{trace-id-hex-string}. This JSON API is intentionally undocumented and subject to change.
 
-## Clients configuration
+## Clients configuration (internal)
 
 Client libraries not only submit finished spans to Jaeger backend, but also periodically poll the Agents for various configurations, such as sampling strategies. The schema for the payload is defined by [sampling.thrift][sampling.thrift], encoded as JSON using Thrift's built-in JSON generation capabilities.
 
-## Service dependencies graph
+## Service dependencies graph (internal)
 
 Can be retrieved from Query Service at `/api/dependencies` endpoint. The GET request expects two parameters:
 
 * `endTs` (number of milliseconds since epoch) - the end of the time interval
 * `lookback` (in milliseconds) - the length the time interval (i.e. start-time + lookback = end-time).
 
-[jaeger.thrift]: TODO-link
-[agent.thrift]: TODO-link
-[sampling.thrift]: TODO-link
-[collector.proto]: TODO-model/proto/api_v2/collector.proto
-[query.proto]: TODO-model/proto/api_v2/query.proto
+The returned JSON is a list of edges represented as tuples `(caller, callee, count)`.
+
+For programmatic access to service graph, the recommended API is gRPC/Protobuf described above.
+
 [jaeger-idl]: https://github/com/jaegertracing/jaeger-idl/
+[jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
+[agent.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/agent.thrift
+[sampling.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/sampling.thrift
+[collector.proto]: https://github.com/jaegertracing/jaeger/blob/master/model/proto/api_v2/collector.proto
+[query.proto]: https://github.com/jaegertracing/jaeger/blob/master/model/proto/api_v2/query.proto

@@ -385,9 +385,11 @@ Please refer to the [dedicated Frontend/UI page](../frontend-ui/).
 
 ## Aggregation Jobs for Service Dependencies
 
-Production deployments need an external process which aggregates data and creates dependency links between services.
-Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives
-dependency links and stores them directly to the storage.
+Production deployments need an external process which aggregates data and creates dependency links between services. Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives dependency links and stores them directly to the storage.
+
+## Configuration
+
+All binaries accepts command line properties and environmental variables, power by [viper](https://github.com/spf13/viper) and [cobra](https://github.com/spf13/cobra) libraries. Please refer to the [CLI Flags](../cli/) page for more information.
 
 [cqlsh]: http://cassandra.apache.org/doc/latest/tools/cqlsh.html
 [zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift
