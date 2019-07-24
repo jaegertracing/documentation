@@ -2,6 +2,8 @@
 title: Architecture
 weight: 3
 children:
+- title: APIs
+  url: apis
 - title: Sampling
   url: sampling
 ---
