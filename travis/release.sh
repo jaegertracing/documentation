@@ -25,10 +25,12 @@ if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; t
     versionMajorMinor=$(echo "${version}" | sed 's/\.[[:digit:]]$//')
     echo "Creating new documentation for ${version}"
     cp -r ./content/docs/next-release/ ./content/docs/${versionMajorMinor}
+    cp -r ./data/cli/next-release/ ./data/cli/${versionMajorMinor}
+    python ./travis/gen-cli-data.py ${versionMajorMinor}
     sed -i -e "s/latest *=.*$/latest = \"${versionMajorMinor}\"/" config.toml
     sed -i -e "s/binariesLatest *=.*$/binariesLatest = \"${version}\"/" config.toml
     sed -i -e "s/versions *= *\[/versions = \[\"${versionMajorMinor}\"\,/" config.toml
-    git add config.toml ./content/docs/${versionMajorMinor}
+    git add config.toml ./content/docs/${versionMajorMinor} ./data/cli/${versionMajorMinor}
     git commit -m "Release ${version}" -s
     git push origin master
 fi
