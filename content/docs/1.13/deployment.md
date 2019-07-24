@@ -3,8 +3,8 @@ title: Deployment
 weight: 4
 children:
 - title: Operator for Kubernetes
-  url: operator
   navtitle: Kubernetes
+  url: operator
 - title: Frontend/UI
   url: frontend-ui
 - title: CLI Flags
