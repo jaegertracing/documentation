@@ -1,5 +1,5 @@
 ---
-title: Client features
+title: Client Library Features
 widescreen: true
 hasparent: true
 weight: 5
