@@ -1,8 +1,8 @@
 ---
-title: Client libraries
+title: Client Libraries
 weight: 5
 children:
-- title: Client features
+- title: Client Features
   url: client-features
 ---
 
@@ -19,7 +19,7 @@ The rest of this page contains information about configuring and instantiating a
 
 We use the terms *client library*, *instrumentation library*, and *tracer* interchangeably in this document.
 
-## Supported libraries
+## Supported Libraries
 
 The following client libraries are officially supported:
 

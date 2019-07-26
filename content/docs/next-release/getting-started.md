@@ -1,5 +1,5 @@
 ---
-title: Getting started
+title: Getting Started
 description: Get up and running with Jaeger in your local environment
 weight: 2
 ---
