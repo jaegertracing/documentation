@@ -700,6 +700,12 @@ roleRef:
 
 Cluster administrators not comfortable in letting users deploy Jaeger instances with this cluster role are free to not add this cluster role to the operator's service account. In that case, the Operator will auto-detect that the required permissions are missing and will log a message similar to: `the requested instance specifies the delegate-urls option for the OAuth Proxy, but this operator cannot assign the proper cluster role to it (system:auth-delegator). Create a cluster role binding between the operator's service account and the cluster role 'system:auth-delegator' in order to allow instances to use 'delegate-urls'`.
 
+# Upgrading the Operator and its managed instances
+
+Each version of the Jaeger Operator follows one Jaeger version. Whenever a new version of the Jaeger Operator is installed, all the Jaeger instances managed by the operator will be upgraded to the Operator's supported version. For example, an instance named `simplest` that was created with Jaeger Operator 1.12.0 will be running Jaeger 1.12.0. Once the Jaeger Operator is upgraded to 1.13.0, the instance `simplest` will be upgraded to the version 1.13.0, following the official upgrade instructions from the Jaeger project.
+
+The Jaeger Operator can be upgraded manually by changing the deployment (`kubectl edit deployment jaeger-operator`), or via specialized tools such as the [Operator Lifecycle Manager (OLM)](https://github.com/operator-framework/operator-lifecycle-manager).
+
 # Updating a Jaeger instance (experimental)
 
 A Jaeger instance can be updated by changing the `CustomResource`, either via `kubectl edit jaeger simplest`, where `simplest` is the Jaeger's instance name, or by applying the updated YAML file via `kubectl apply -f simplest.yaml`.
