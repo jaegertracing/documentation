@@ -677,10 +677,10 @@ spec:
   ingress:
     openshift:
       sar: '{"namespace": "default", "resource": "pods", "verb": "get"}'
-      delegate-urls: '{"/":{"namespace": "default", "resource": "pods", "verb": "get"}}'
+      delegateUrls: '{"/":{"namespace": "default", "resource": "pods", "verb": "get"}}'
 ```
 
-When the `delegate-urls` is set, the Jaeger Operator needs to create a new `ClusterRoleBinding` between the service account used by the UI Proxy (`{InstanceName}-ui-proxy`) and the role `system:auth-delegator`, as required by the OpenShift OAuth Proxy. Because of that, the service account used by the operator itself needs to have the same cluster role binding. To accomplish that, a `ClusterRoleBinding` such as the following has to be created:
+When the `delegateUrls` is set, the Jaeger Operator needs to create a new `ClusterRoleBinding` between the service account used by the UI Proxy (`{InstanceName}-ui-proxy`) and the role `system:auth-delegator`, as required by the OpenShift OAuth Proxy. Because of that, the service account used by the operator itself needs to have the same cluster role binding. To accomplish that, a `ClusterRoleBinding` such as the following has to be created:
 
 ```yaml
 kind: ClusterRoleBinding
@@ -698,7 +698,44 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-Cluster administrators not comfortable in letting users deploy Jaeger instances with this cluster role are free to not add this cluster role to the operator's service account. In that case, the Operator will auto-detect that the required permissions are missing and will log a message similar to: `the requested instance specifies the delegate-urls option for the OAuth Proxy, but this operator cannot assign the proper cluster role to it (system:auth-delegator). Create a cluster role binding between the operator's service account and the cluster role 'system:auth-delegator' in order to allow instances to use 'delegate-urls'`.
+Cluster administrators not comfortable in letting users deploy Jaeger instances with this cluster role are free to not add this cluster role to the operator's service account. In that case, the Operator will auto-detect that the required permissions are missing and will log a message similar to: `the requested instance specifies the delegateUrls option for the OAuth Proxy, but this operator cannot assign the proper cluster role to it (system:auth-delegator). Create a cluster role binding between the operator's service account and the cluster role 'system:auth-delegator' in order to allow instances to use 'delegateUrls'`.
+
+The Jaeger Operator also supports authentication using `htpasswd` files via the OpenShift OAuth Proxy. To make use of that, specify the `htpasswdFile` option within the OpenShift-specific entries, pointing to the file `htpasswd` file location in the local disk. The `htpasswd` file can be created using the `htpasswd` utility:
+
+```console
+$ htpasswd -cs /tmp/htpasswd jdoe
+New password:
+Re-type new password:
+Adding password for user jdoe
+```
+
+This file can then be used as the input for the `kubectl create secret` command:
+
+```console
+$ kubectl create secret generic htpasswd --from-file=htpasswd=/tmp/htpasswd
+secret/htpasswd created
+```
+
+Once the secret is created, it can be specified in the Jaeger CR as a volume/volume mount:
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: with-htpasswd
+spec:
+  ingress:
+    openshift:
+      sar: '{"namespace": "default", "resource": "pods", "verb": "get"}'
+      htpasswdFile: /usr/local/data/htpasswd
+  volumeMounts:
+  - name: htpasswd-volume
+    mountPath: /usr/local/data
+  volumes:
+  - name: htpasswd-volume
+    secret:
+      secretName: htpasswd
+```
 
 # Upgrading the Operator and its managed instances
 
