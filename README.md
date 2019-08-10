@@ -5,7 +5,7 @@
 
 This repo houses all the assets used to build the Jaeger website, available at https://jaegertracing.io.
 
-The site is built and hosted by [Netlify](https://www.netlify.com/).
+The site is built with [Hugo](https://gohugo.io/) and hosted by [Netlify](https://www.netlify.com/).
 
 ## Setup
 
