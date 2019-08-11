@@ -17,6 +17,7 @@
 //  - converted to JavaScript using http://www.typescriptlang.org/play
 //  - minor fix-ups to avoid using functions from Istio's src/ts/utils.ts
 //  - disable cookies functionality
+//  - remove keyboard navigation
 
 "use strict";
 
