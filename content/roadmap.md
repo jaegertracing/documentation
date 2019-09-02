@@ -38,12 +38,6 @@ See issue tracker for more info: [jaeger/issues/365](https://github.com/jaegertr
 
 Post-collection data pipeline for trace aggregation and data mining based on Apache Flink.
 
-## Drop-in Replacement for Zipkin
-
-Features for Jaeger backend to be a drop-in replacement for Zipkin backend.
-
-[jaeger/milestone/2](https://github.com/jaegertracing/jaeger/milestone/2)
-
 ## Path-Based Dependency Diagrams
 
 Service dependency diagram currently available in Jaeger (as of v0.7.0) only shows service-to-service links.
