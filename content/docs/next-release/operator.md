@@ -391,10 +391,10 @@ storage:
     image: jaegertracing/jaeger-es-index-cleaner  // image of the job
 ```
 
-## Spark dependencies
+## Deriving dependencies
 
-Spark dependencies collects spans from storage, analyzes links between services and stores them for later presentation in the UI.
-This job is needed only with production strategy and it supports Cassandra and Elasticsearch backends.
+The processing to derive dependencies will collect spans from storage, analyzes links between services and store them for later presentation in the UI.
+This job can only be used with the `production` strategy and storage type `cassandra` or `elasticsearch`.
 
 ```yaml
 storage:
