@@ -391,6 +391,22 @@ storage:
     image: jaegertracing/jaeger-es-index-cleaner  // image of the job
 ```
 
+## Spark dependencies
+
+Spark dependencies collects spans from storage, analyzes links between services and stores them for later presentation in the UI.
+This job is needed only with production strategy and it supports Cassandra and Elasticsearch backends.
+
+```yaml
+storage:
+  type: elasticsearch
+  dependencies:
+    enabled: true                                 // turn the job deployment on and off
+    schedule: "55 23 * * *"                       // cron expression for it to run
+    sparkMaster:                                  // spark master connection string, when empty spark runs in embedded local mode
+```
+
+The connection configuration to storage is derived from storage options.
+
 ## Auto-injecting Jaeger Agent Sidecars
 
 The operator can inject Jaeger Agent sidecars in `Deployment` workloads, provided that the deployment has the annotation `sidecar.jaegertracing.io/inject` with a suitable value. The values can be either `"true"` (as string), or the Jaeger instance name, as returned by `kubectl get jaegers`. When `"true"` is used, there should be exactly *one* Jaeger instance for the same namespace as the deployment, otherwise, the operator can't figure out automatically which Jaeger instance to use.
