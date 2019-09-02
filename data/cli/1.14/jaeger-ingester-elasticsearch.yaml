@@ -1,0 +1,270 @@
+name: jaeger-ingester
+synopsis: |
+  (experimental) Jaeger ingester consumes from Kafka and writes to storage.
+description: |
+  Jaeger ingester consumes spans from a particular Kafka topic and writes them to a configured storage.
+options:
+- name: admin-http-port
+  default_value: "14270"
+  usage: |
+    The http port for the admin server, including health check, /metrics, etc.
+- name: config-file
+  usage: |
+    Configuration file in JSON, TOML, YAML, HCL, or Java properties formats (default none). See spf13/viper for precedence.
+- name: downsampling.hashsalt
+  usage: Salt used when hashing trace id for downsampling.
+- name: downsampling.ratio
+  default_value: "1"
+  usage: |
+    Ratio of spans passed to storage after downsampling (between 0 and 1), e.g ratio = 0.3 means we are keeping 30% of spans and dropping 70% of spans; ratio = 1.0 disables downsampling.
+- name: es-archive.bulk.actions
+  default_value: "0"
+  usage: |
+    The number of requests that can be enqueued before the bulk processor decides to commit
+- name: es-archive.bulk.flush-interval
+  default_value: 0s
+  usage: |
+    A time.Duration after which bulk requests are committed, regardless of other thresholds. Set to zero to disable. By default, this is disabled.
+- name: es-archive.bulk.size
+  default_value: "0"
+  usage: |
+    The number of bytes that the bulk requests can take up before the bulk processor decides to commit
+- name: es-archive.bulk.workers
+  default_value: "0"
+  usage: |
+    The number of workers that are able to receive bulk requests and eventually commit them to Elasticsearch
+- name: es-archive.create-index-templates
+  default_value: "false"
+  usage: |
+    Create index templates at application startup. Set to false when templates are installed manually.
+- name: es-archive.enabled
+  default_value: "false"
+  usage: Enable extra storage
+- name: es-archive.index-prefix
+  usage: |
+    Optional prefix of Jaeger indices. For example "production" creates "production-jaeger-*".
+- name: es-archive.max-num-spans
+  default_value: "0"
+  usage: |
+    The maximum number of spans to fetch at a time per query in Elasticsearch
+- name: es-archive.max-span-age
+  default_value: 0s
+  usage: The maximum lookback for spans in Elasticsearch
+- name: es-archive.num-replicas
+  default_value: "0"
+  usage: The number of replicas per index in Elasticsearch
+- name: es-archive.num-shards
+  default_value: "0"
+  usage: The number of shards per index in Elasticsearch
+- name: es-archive.password
+  usage: The password required by Elasticsearch
+- name: es-archive.server-urls
+  usage: |
+    The comma-separated list of Elasticsearch servers, must be full url i.e. http://localhost:9200
+- name: es-archive.sniffer
+  default_value: "false"
+  usage: |
+    The sniffer config for Elasticsearch; client uses sniffing process to find all nodes automatically, disable if not required
+- name: es-archive.tags-as-fields.all
+  default_value: "false"
+  usage: |
+    (experimental) Store all span and process tags as object fields. If true .tags-as-fields.config-file is ignored. Binary tags are always stored as nested objects.
+- name: es-archive.tags-as-fields.config-file
+  usage: |
+    (experimental) Optional path to a file containing tag keys which will be stored as object fields. Each key should be on a separate line.
+- name: es-archive.tags-as-fields.dot-replacement
+  usage: |
+    (experimental) The character used to replace dots (".") in tag keys stored as object fields.
+- name: es-archive.timeout
+  default_value: 0s
+  usage: Timeout used for queries. A Timeout of zero means no timeout
+- name: es-archive.tls
+  default_value: "false"
+  usage: Enable TLS with client certificates.
+- name: es-archive.tls.ca
+  usage: Path to TLS CA file
+- name: es-archive.tls.cert
+  usage: Path to TLS certificate file
+- name: es-archive.tls.key
+  usage: Path to TLS key file
+- name: es-archive.tls.skip-host-verify
+  default_value: "false"
+  usage: |
+    (insecure) Skip server's certificate chain and host name verification
+- name: es-archive.token-file
+  usage: |
+    Path to a file containing bearer token. This flag also loads CA if it is specified.
+- name: es-archive.use-aliases
+  default_value: "false"
+  usage: |
+    (experimental) Use read and write aliases for indices. Use this option with Elasticsearch rollover API. It requires an external component to create aliases before startup and then performing its management. Note that es-archive.max-span-age is not taken into the account and has to be substituted by external component managing read alias.
+- name: es-archive.username
+  usage: |
+    The username required by Elasticsearch. The basic authentication also loads CA if it is specified.
+- name: es-archive.version
+  default_value: "0"
+  usage: |
+    The major Elasticsearch version. If not specified, the value will be auto-detected from Elasticsearch.
+- name: es.bulk.actions
+  default_value: "1000"
+  usage: |
+    The number of requests that can be enqueued before the bulk processor decides to commit
+- name: es.bulk.flush-interval
+  default_value: 200ms
+  usage: |
+    A time.Duration after which bulk requests are committed, regardless of other thresholds. Set to zero to disable. By default, this is disabled.
+- name: es.bulk.size
+  default_value: "5000000"
+  usage: |
+    The number of bytes that the bulk requests can take up before the bulk processor decides to commit
+- name: es.bulk.workers
+  default_value: "1"
+  usage: |
+    The number of workers that are able to receive bulk requests and eventually commit them to Elasticsearch
+- name: es.create-index-templates
+  default_value: "true"
+  usage: |
+    Create index templates at application startup. Set to false when templates are installed manually.
+- name: es.index-prefix
+  usage: |
+    Optional prefix of Jaeger indices. For example "production" creates "production-jaeger-*".
+- name: es.max-num-spans
+  default_value: "10000"
+  usage: |
+    The maximum number of spans to fetch at a time per query in Elasticsearch
+- name: es.max-span-age
+  default_value: 72h0m0s
+  usage: The maximum lookback for spans in Elasticsearch
+- name: es.num-replicas
+  default_value: "1"
+  usage: The number of replicas per index in Elasticsearch
+- name: es.num-shards
+  default_value: "5"
+  usage: The number of shards per index in Elasticsearch
+- name: es.password
+  usage: The password required by Elasticsearch
+- name: es.server-urls
+  default_value: http://127.0.0.1:9200
+  usage: |
+    The comma-separated list of Elasticsearch servers, must be full url i.e. http://localhost:9200
+- name: es.sniffer
+  default_value: "false"
+  usage: |
+    The sniffer config for Elasticsearch; client uses sniffing process to find all nodes automatically, disable if not required
+- name: es.tags-as-fields.all
+  default_value: "false"
+  usage: |
+    (experimental) Store all span and process tags as object fields. If true .tags-as-fields.config-file is ignored. Binary tags are always stored as nested objects.
+- name: es.tags-as-fields.config-file
+  usage: |
+    (experimental) Optional path to a file containing tag keys which will be stored as object fields. Each key should be on a separate line.
+- name: es.tags-as-fields.dot-replacement
+  default_value: '@'
+  usage: |
+    (experimental) The character used to replace dots (".") in tag keys stored as object fields.
+- name: es.timeout
+  default_value: 0s
+  usage: Timeout used for queries. A Timeout of zero means no timeout
+- name: es.tls
+  default_value: "false"
+  usage: Enable TLS with client certificates.
+- name: es.tls.ca
+  usage: Path to TLS CA file
+- name: es.tls.cert
+  usage: Path to TLS certificate file
+- name: es.tls.key
+  usage: Path to TLS key file
+- name: es.tls.skip-host-verify
+  default_value: "false"
+  usage: |
+    (insecure) Skip server's certificate chain and host name verification
+- name: es.token-file
+  usage: |
+    Path to a file containing bearer token. This flag also loads CA if it is specified.
+- name: es.use-aliases
+  default_value: "false"
+  usage: |
+    (experimental) Use read and write aliases for indices. Use this option with Elasticsearch rollover API. It requires an external component to create aliases before startup and then performing its management. Note that es.max-span-age is not taken into the account and has to be substituted by external component managing read alias.
+- name: es.username
+  usage: |
+    The username required by Elasticsearch. The basic authentication also loads CA if it is specified.
+- name: es.version
+  default_value: "0"
+  usage: |
+    The major Elasticsearch version. If not specified, the value will be auto-detected from Elasticsearch.
+- name: health-check-http-port
+  default_value: "0"
+  usage: (deprecated) see --admin-http-port
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for jaeger-ingester
+- name: ingester.deadlockInterval
+  default_value: 1m0s
+  usage: |
+    Interval to check for deadlocks. If no messages gets processed in given time, ingester app will exit. Value of 0 disables deadlock check.
+- name: ingester.parallelism
+  default_value: "1000"
+  usage: The number of messages to process in parallel
+- name: kafka.consumer.authentication
+  default_value: none
+  usage: |
+    Authentication type used to authenticate with kafka cluster. e.g. none, kerberos
+- name: kafka.consumer.brokers
+  default_value: 127.0.0.1:9092
+  usage: |
+    The comma-separated list of kafka brokers. i.e. '127.0.0.1:9092,0.0.0:1234'
+- name: kafka.consumer.client-id
+  default_value: jaeger-ingester
+  usage: The Consumer Client ID that ingester will use
+- name: kafka.consumer.encoding
+  default_value: protobuf
+  usage: |
+    The encoding of spans ("json", "protobuf", "zipkin-thrift") consumed from kafka
+- name: kafka.consumer.group-id
+  default_value: jaeger-ingester
+  usage: |
+    The Consumer Group that ingester will be consuming on behalf of
+- name: kafka.consumer.kerberos.config-file
+  default_value: /etc/krb5.conf
+  usage: Path to Kerberos configuration. i.e /etc/krb5.conf
+- name: kafka.consumer.kerberos.keytab-file
+  default_value: /etc/security/kafka.keytab
+  usage: Path to keytab file. i.e /etc/security/kafka.keytab
+- name: kafka.consumer.kerberos.password
+  usage: The Kerberos password used for authenticate with KDC
+- name: kafka.consumer.kerberos.realm
+  usage: Kerberos realm
+- name: kafka.consumer.kerberos.service-name
+  default_value: kafka
+  usage: Kerberos service name
+- name: kafka.consumer.kerberos.use-keytab
+  default_value: "false"
+  usage: |
+    Use of keytab instead of password, if this is true, keytab file will be used instead of password
+- name: kafka.consumer.kerberos.username
+  usage: The Kerberos username used for authenticate with KDC
+- name: kafka.consumer.protocol-version
+  usage: Kafka protocol version - must be supported by kafka server
+- name: kafka.consumer.topic
+  default_value: jaeger-spans
+  usage: The name of the kafka topic to consume from
+- name: log-level
+  default_value: info
+  usage: |
+    Minimal allowed log Level. For more levels see https://github.com/uber-go/zap
+- name: metrics-backend
+  default_value: prometheus
+  usage: |
+    Defines which metrics backend to use for metrics reporting: expvar, prometheus, none
+- name: metrics-http-route
+  default_value: /metrics
+  usage: |
+    Defines the route of HTTP endpoint for metrics backends that support scraping
+- name: span-storage.type
+  usage: |
+    (deprecated) please use SPAN_STORAGE_TYPE environment variable. Run this binary with "env" command for help.
+see_also:
+- docs - Generates documentation
+- env - Help about environment variables.
+- version - Print the version.
