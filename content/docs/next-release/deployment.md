@@ -252,7 +252,7 @@ usercert = ~/.cassandra/client-cert
 
 ### Elasticsearch
 Supported in Jaeger since 0.6.0
-Supported versions: 5.x, 6.x
+Supported versions: 5.x, 6.x, 7.x
 
 Elasticsearch does not require initialization other than
 [installing and running Elasticsearch](https://www.elastic.co/downloads/elasticsearch).
@@ -276,13 +276,79 @@ docker run \
   --help
 ```
 
-See the [README](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/es/README.md) for an in-depth overview of how Jaeger uses Elasticsearch for storage.
-
 #### Shards and Replicas for Elasticsearch indices
 
 Shards and replicas are some configuration values to take special attention to, because this is decided upon
 index creation. [This article](https://qbox.io/blog/optimizing-elasticsearch-how-many-shards-per-index) goes into
 more information about choosing how many shards should be chosen for optimization.
+
+#### Upgrade to Elasticsearch 7.x
+
+The index mappings in Elasticsearch 7 are not backwards compatible with the older versions. 
+Therefore using Elasticsearch 7 with data created with older version would not work.
+Elasticsearch 6.8 supports 7.x, 6.x, 5.x compatible mappings. The upgrade has to be done
+first to ES 6.8, then apply data migration or wait until old daily indices are removed (this requires
+to start Jaeger with `--es.version=7` to force using ES 7.x mappings for newly created indices).
+
+Jaeger by default uses Elasticsearch ping endpoint (`/`) to derive the version which is used
+for index mappings selection. The version can be overridden by flag `--es.version`.
+
+##### Data migration
+
+The data migration must be done on Elasticsearch 6.8.
+
+1. Create index templates for Elasticsearch 7.x. Start Jaeger collector with flag `--es.version=7` or submit the template to API manually.
+2. Reindex all span and service indices to indices with new mapping. The new indices will have suffix `-1`:
+
+    ```bash
+    curl -ivX POST -H "Content-Type: application/json" http://localhost:9200/_reindex -d @reindex.json
+    {
+      "source": {
+        "index": "jaeger-span-*"
+      },
+      "dest": {
+        "index": "jaeger-span"
+      },
+      "script": {
+        "lang": "painless",
+        "source": "ctx._index = 'jaeger-span-' + (ctx._index.substring('jaeger-span-'.length(), ctx._index.length())) + '-1'"
+      }
+    }
+    ```
+
+3. Delete indices with old mapping:
+
+    ```bash
+    curl -ivX DELETE -H "Content-Type: application/json" http://localhost:9200/jaeger-span-\*,-\*-1
+    ```
+
+4. Create indices without `-1` suffix:
+
+    ```bash
+    curl -ivX POST -H "Content-Type: application/json" http://localhost:9200/_reindex -d @reindex.json
+    {
+      "source": {
+        "index": "jaeger-span-*"
+      },
+      "dest": {
+        "index": "jaeger-span"
+      },
+      "script": {
+        "lang": "painless",
+        "source": "ctx._index = 'jaeger-span-' + (ctx._index.substring('jaeger-span-'.length(), ctx._index.length() - 2))"
+      }
+    }
+    ```
+
+5. Remove suffixed indices:
+
+    ```bash
+    curl -ivX DELETE -H "Content-Type: application/json" http://localhost:9200/jaeger-span-\*-1
+    ```
+
+Run the commands analogically for other Jaeger indices.
+
+There might exist more effective migration procedure. Please share with the community any findings.
 
 ### Kafka
 Supported in Jaeger since 1.6.0
