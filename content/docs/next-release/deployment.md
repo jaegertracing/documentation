@@ -296,50 +296,56 @@ for index mappings selection. The version can be overridden by flag `--es.versio
 
 ##### Data migration
 
-The data migration requires to be done on Elasticsearch 6.8.
+The data migration must be done on Elasticsearch 6.8.
 
 1. Create index templates for Elasticsearch 7.x. Start Jaeger collector with flag `--es.version=7` or submit the template to API manually.
 2. Reindex all span and service indices to indices with new mapping. The new indices will have suffix `-1`:
 
-```bash
-curl -ivX POST -H "Content-Type: application/json" http://localhost:9200/_reindex -d @reindex.json
-{
-  "source": {
-    "index": "jaeger-span-*"
-  },
-  "dest": {
-    "index": "jaeger-span"
-  },
-  "script": {
-    "lang": "painless",
-    "source": "ctx._index = 'jaeger-span-' + (ctx._index.substring('jaeger-span-'.length(), ctx._index.length())) + '-1'"
-  }
-}
-```
-3. Delete indices with old mapping:\
-```bash
-curl -ivX DELETE -H "Content-Type: application/json" http://localhost:9200/jaeger-span-\*,-\*-1
-```
+    ```bash
+    curl -ivX POST -H "Content-Type: application/json" http://localhost:9200/_reindex -d @reindex.json
+    {
+      "source": {
+        "index": "jaeger-span-*"
+      },
+      "dest": {
+        "index": "jaeger-span"
+      },
+      "script": {
+        "lang": "painless",
+        "source": "ctx._index = 'jaeger-span-' + (ctx._index.substring('jaeger-span-'.length(), ctx._index.length())) + '-1'"
+      }
+    }
+    ```
+
+3. Delete indices with old mapping:
+
+    ```bash
+    curl -ivX DELETE -H "Content-Type: application/json" http://localhost:9200/jaeger-span-\*,-\*-1
+    ```
+
 4. Create indices without `-1` suffix:
-```bash
-curl -ivX POST -H "Content-Type: application/json" http://localhost:9200/_reindex -d @reindex.json
-{
-  "source": {
-    "index": "jaeger-span-*"
-  },
-  "dest": {
-    "index": "jaeger-span"
-  },
-  "script": {
-    "lang": "painless",
-    "source": "ctx._index = 'jaeger-span-' + (ctx._index.substring('jaeger-span-'.length(), ctx._index.length() - 2))"
-  }
-}
-```
+
+    ```bash
+    curl -ivX POST -H "Content-Type: application/json" http://localhost:9200/_reindex -d @reindex.json
+    {
+      "source": {
+        "index": "jaeger-span-*"
+      },
+      "dest": {
+        "index": "jaeger-span"
+      },
+      "script": {
+        "lang": "painless",
+        "source": "ctx._index = 'jaeger-span-' + (ctx._index.substring('jaeger-span-'.length(), ctx._index.length() - 2))"
+      }
+    }
+    ```
+
 5. Remove suffixed indices:
-```bash
-curl -ivX DELETE -H "Content-Type: application/json" http://localhost:9200/jaeger-span-\*-1
-```
+
+    ```bash
+    curl -ivX DELETE -H "Content-Type: application/json" http://localhost:9200/jaeger-span-\*-1
+    ```
 
 Run the commands analogically for other Jaeger indices.
 
