@@ -437,6 +437,8 @@ spec:
 
 A complete sample deployment is available at [`deploy/examples/business-application-injected-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/blob/master/deploy/examples/business-application-injected-sidecar.yaml).
 
+When the sidecar is injected, the Jaeger Agent can be accessed at its default location on `localhost`.
+
 ## Installing the Agent as DaemonSet
 By default, the Operator expects the agents to be deployed as sidecars to the target applications. This is convenient for several purposes, like in a multi-tenant scenario or to have better load balancing, but there are scenarios where you might want to install the agent as a `DaemonSet`. In that case, specify the Agent's strategy to `DaemonSet`, as follows:
 
