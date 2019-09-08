@@ -3,7 +3,7 @@ publish = "public"
 command = "hugo"
 
 [build.environment]
-HUGO_VERSION = "0.56"
+HUGO_VERSION = "0.53"
 
 [context.deploy-preview]
 command = "HUGO_PREVIEW=true hugo --buildDrafts --buildFuture --baseURL $DEPLOY_PRIME_URL"
