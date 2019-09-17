@@ -6,6 +6,7 @@ pygmentsUseClasses = true
 disableKinds       = ["taxonomy", "taxonomyTerm"]
 canonifyURLs       = true
 theme              = "jaeger-docs"
+googleAnalytics    = "UA-148140018-1"
 
 [mediaTypes."text/netlify"]
 delimiter = ""
