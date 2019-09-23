@@ -389,6 +389,7 @@ storage:
     numberOfDays: 7                               // number of days to wait before deleting a record
     schedule: "55 23 * * *"                       // cron expression for it to run
     image: jaegertracing/jaeger-es-index-cleaner  // image of the job
+    successfulJobsHistoryLimit: 0                 // number of successful job will will be kept in history, support for esRollover, esIndexCleaner, dependencies.
 ```
 
 ## Auto-injecting Jaeger Agent Sidecars
