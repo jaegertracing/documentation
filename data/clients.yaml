@@ -252,7 +252,7 @@ clients:
       env_JAEGER_USER: yes
       env_JAEGER_PASSWORD: yes
       env_JAEGER_PROPAGATION: no
-      128bit_trace_id: no
+      128bit_trace_id: yes
       JAEGER_TRACEID_128BIT: no
 
   - language: Python
@@ -293,8 +293,8 @@ clients:
       env_JAEGER_USER: no
       env_JAEGER_PASSWORD: no
       env_JAEGER_PROPAGATION: no
-      128bit_trace_id: no
-      JAEGER_TRACEID_128BIT: no
+      128bit_trace_id: yes
+      JAEGER_TRACEID_128BIT: yes
 
   - language: C++
     repo: jaegertracing/jaeger-client-cpp
