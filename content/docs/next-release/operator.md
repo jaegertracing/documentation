@@ -547,6 +547,34 @@ This example defines a default sampling strategy that is probabilistic, with a 5
 
 Refer to the Jaeger documentation on [Collector Sampling Configuration](https://www.jaegertracing.io/docs/latest/sampling/#collector-sampling-configuration) to see how service and endpoint sampling can be configured. The JSON representation described in that documentation can be used in the operator by converting to YAML.
 
+## Configuring the Ingress
+
+By default, the operator creates an [Ingress Resource](https://kubernetes.io/docs/concepts/services-networking/ingress/) to expose the Jaeger UI. This can be disabled by setting `spec.ingress.enabled` to `false`.
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: disable-ingress
+spec:
+  ingress:
+    enabled: false
+```
+
+To enable TLS in the Ingress, pass a `secretName` with the name to a [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the TLS certificate:
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: ingress-with-tls
+spec:
+  ingress:
+    secretName: my-tls-secret
+```
+
+Further details on how to configure the Ingress / Route on OpenShift are documented in the [OpenShift section](#openshift).
+
 ## Finer grained configuration
 
 The custom resource can be used to define finer grained Kubernetes configuration applied to all Jaeger components or at the individual component level.
