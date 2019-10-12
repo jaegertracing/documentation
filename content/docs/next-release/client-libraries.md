@@ -87,9 +87,10 @@ When `SpanContext` is encoded on the wire as part of the request to another serv
     * 64-bit or 128-bit random number in base16 format
     * Can be variable length, shorter values are 0-padded on the left
     * Clients in some languages support 128-bit, migration pending
-    * Value of 0 is invalid
+    * Value of 0 is not valid
 * `{span-id}`
     * 64-bit random number in base16 format
+    * Value of 0 is not valid
 * `{parent-span-id}`
     * 64-bit value in base16 format representing parent span id
     * Deprecated, most Jaeger clients ignore on the receiving side, but still include it on the sending side
