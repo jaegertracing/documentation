@@ -131,7 +131,7 @@ Port  | Protocol | Function
 14267 | TChannel | used by **jaeger-agent** to send spans in jaeger.thrift format
 14250 | gRPC     | used by **jaeger-agent** to send spans in model.proto format
 14268 | HTTP     | can accept spans directly from clients in jaeger.thrift format over binary thrift protocol
-9411  | HTTP     | can accept Zipkin spans in JSON or Thrift (disabled by default)
+9411  | HTTP     | can accept Zipkin spans in Thrift, JSON and Proto (disabled by default)
 14269 | HTTP     | Healthcheck at `/` and metrics at `/metrics`
 
 
