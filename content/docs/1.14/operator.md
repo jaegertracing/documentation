@@ -480,6 +480,29 @@ spec:
               fieldPath: status.hostIP
 ```
 
+### OpenShift
+
+In OpenShift, a `HostPort` can only be set when a special security context is set. A separate service account can be used by the Jaeger Agent with the permission to bind to `HostPort`, as follows:
+
+```bash
+oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/examples/openshift/hostport-scc-daemonset.yaml # <1>
+oc new-project myappnamespace
+oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/examples/openshift/service_account_jaeger-agent-daemonset.yaml # <2>
+oc adm policy add-scc-to-user daemonset-with-hostport -z jaeger-agent-daemonset # <3>
+oc apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/examples/openshift/agent-as-daemonset.yaml # <4>
+```
+<1> The `SecurityContextConstraints` with the `allowHostPorts` policy
+
+<2> The `ServiceAccount` to be used by the Jaeger Agent
+
+<3> Adds the security policy to the service account
+
+<4> Creates the Jaeger Instance using the `serviceAccount` created in the steps above
+
+{{< warning >}}
+Without such a policy, errors like the following will prevent a `DaemonSet` to be created: `Warning FailedCreate 4s (x14 over 45s) daemonset-controller Error creating: pods "agent-as-daemonset-agent-daemonset-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.containers[0].hostPort: Invalid value: 5775: Host ports are not allowed to be used`
+{{< /warning >}}
+
 ## Secrets Support
 
 The Operator supports passing secrets to the Collector, Query and All-In-One deployments. This can be used for example, to pass credentials (username/password) to access the underlying storage backend (for example: Elasticsearch).
