@@ -74,3 +74,33 @@ The first two metrics should have similar values for the same service. Similarly
     jaeger_collector_spans_saved_by_svc{debug="false",result="ok",svc="order"} 8
     jaeger_collector_traces_received{debug="false",format="jaeger",svc="order"} 1
     jaeger_collector_traces_saved_by_svc{debug="false",result="ok",svc="order"} 1
+
+## Istio: missing ingress spans
+
+Istio requires the `Service` that exposes a workload to have the HTTP ports with a name starting with `http`. When using `kubectl expose deployment ${deployment}`, the ports receive names like `port-1`, `port-2`, and so on. This results in traces containing egress proxy spans, but without ingress proxy spans, like the following.
+
+![Service mesh missing ingress spans](/img/service-mesh-missing-ingress.png)
+
+To solve this problem, make sure that the ingress ports are named, and that their names start with `http`. Example:
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: service-mesh-account
+  name: service-mesh-account
+spec:
+  ports:
+  - name: http
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: service-mesh-account
+  type: ClusterIP
+```
+
+After applying that change, ingress spans should start to be reported, like the following.
+
+![Service mesh with ingress spans](/img/service-mesh-all-spans.png)
