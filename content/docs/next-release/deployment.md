@@ -256,6 +256,10 @@ usercert = ~/.cassandra/client-cert
 Supported in Jaeger since 0.6.0
 Supported versions: 5.x, 6.x, 7.x
 
+Elasticsearch version is automatically retrieved from root/ping endpoint.
+Based on this version Jaeger uses compatible index mappings and Elasticsearch REST API.
+The version can be explicitly provided via `--es.version=` flag.
+
 Elasticsearch does not require initialization other than
 [installing and running Elasticsearch](https://www.elastic.co/downloads/elasticsearch).
 Once it is running, pass the correct configuration values to the Jaeger collector and query service.
@@ -284,23 +288,24 @@ Shards and replicas are some configuration values to take special attention to, 
 index creation. [This article](https://qbox.io/blog/optimizing-elasticsearch-how-many-shards-per-index) goes into
 more information about choosing how many shards should be chosen for optimization.
 
-#### Upgrade to Elasticsearch 7.x
+#### Upgrade Elasticsearch version
 
-The index mappings in Elasticsearch 7 are not backwards compatible with the older versions.
-Therefore using Elasticsearch 7 with data created with older version would not work.
-Elasticsearch 6.8 supports 7.x, 6.x, 5.x compatible mappings. The upgrade has to be done
-first to ES 6.8, then apply data migration or wait until old daily indices are removed (this requires
-to start Jaeger with `--es.version=7` to force using ES 7.x mappings for newly created indices).
+Elasticsearch define wire and index compatibility versions. The index compatibility defines
+the minimal version a node can be read data from. For example Elasticsearch 7 can read indices
+created by Elasticsearch 6, however it cannot read indices created by Elasticsearch 5 even
+though they use the same index mappings. Therefore upgrade from Elasticsearch 6 to 7 does not require any
+data migration. However, upgrade from Elasticsearch 5 to 7 has to be done through Elasticsearch 6 and wait
+until indices created by ES 5.x are removed or reindex old indices manually.
 
-Jaeger by default uses Elasticsearch ping endpoint (`/`) to derive the version which is used
-for index mappings selection. The version can be overridden by flag `--es.version`.
+Refer to the Elasticsearch documentation for wire and index compatibility versions. Generally
+this information can be retrieved from root/ping REST endpoint.
 
-##### Data migration
+##### Reindex
 
-The data migration must be done on Elasticsearch 6.8.
+Manual reindexing can be used when upgrading from Elasticsearch 5 to 7 (through Elasticsearch 6)
+without waiting until indices created by Elasticsearch 5 are removed.
 
-1. Create index templates for Elasticsearch 7.x. Start Jaeger collector with flag `--es.version=7` or submit the template to API manually.
-2. Reindex all span and service indices to indices with new mapping. The new indices will have suffix `-1`:
+1. Reindex all span indices to new indices with suffix `-1`:
 
     ```bash
     curl -ivX POST -H "Content-Type: application/json" http://localhost:9200/_reindex -d @reindex.json
@@ -318,13 +323,13 @@ The data migration must be done on Elasticsearch 6.8.
     }
     ```
 
-3. Delete indices with old mapping:
+2. Delete indices with old mapping:
 
     ```bash
     curl -ivX DELETE -H "Content-Type: application/json" http://localhost:9200/jaeger-span-\*,-\*-1
     ```
 
-4. Create indices without `-1` suffix:
+3. Create indices without `-1` suffix:
 
     ```bash
     curl -ivX POST -H "Content-Type: application/json" http://localhost:9200/_reindex -d @reindex.json
@@ -342,7 +347,7 @@ The data migration must be done on Elasticsearch 6.8.
     }
     ```
 
-5. Remove suffixed indices:
+4. Remove suffixed indices:
 
     ```bash
     curl -ivX DELETE -H "Content-Type: application/json" http://localhost:9200/jaeger-span-\*-1
