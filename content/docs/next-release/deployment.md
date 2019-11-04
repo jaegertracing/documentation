@@ -290,12 +290,12 @@ more information about choosing how many shards should be chosen for optimizatio
 
 #### Upgrade Elasticsearch version
 
-Elasticsearch define wire and index compatibility versions. The index compatibility defines
-the minimal version a node can be read data from. For example Elasticsearch 7 can read indices
+Elasticsearch defines wire and index compatibility versions. The index compatibility defines
+the minimal version a node can read data from. For example Elasticsearch 7 can read indices
 created by Elasticsearch 6, however it cannot read indices created by Elasticsearch 5 even
 though they use the same index mappings. Therefore upgrade from Elasticsearch 6 to 7 does not require any
 data migration. However, upgrade from Elasticsearch 5 to 7 has to be done through Elasticsearch 6 and wait
-until indices created by ES 5.x are removed or reindex old indices manually.
+until indices created by ES 5.x are removed or explicitly reindexed.
 
 Refer to the Elasticsearch documentation for wire and index compatibility versions. Generally
 this information can be retrieved from root/ping REST endpoint.
