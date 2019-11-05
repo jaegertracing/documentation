@@ -297,8 +297,8 @@ though they use the same index mappings. Therefore upgrade from Elasticsearch 6 
 data migration. However, upgrade from Elasticsearch 5 to 7 has to be done through Elasticsearch 6 and wait
 until indices created by ES 5.x are removed or explicitly reindexed.
 
-Refer to the Elasticsearch documentation for wire and index compatibility versions. Generally
-this information can be retrieved from root/ping REST endpoint.
+Refer to the Elasticsearch [documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current//setup-upgrade.html)
+for wire and index compatibility versions. Generally this information can be retrieved from root/ping REST endpoint.
 
 ##### Reindex
 
