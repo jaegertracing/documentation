@@ -7,6 +7,8 @@ children:
   url: operator
 - title: Frontend/UI
   url: frontend-ui
+- title: Windows
+  url: windows
 - title: CLI Flags
   url: cli
 ---
@@ -284,7 +286,7 @@ more information about choosing how many shards should be chosen for optimizatio
 
 #### Upgrade to Elasticsearch 7.x
 
-The index mappings in Elasticsearch 7 are not backwards compatible with the older versions. 
+The index mappings in Elasticsearch 7 are not backwards compatible with the older versions.
 Therefore using Elasticsearch 7 with data created with older version would not work.
 Elasticsearch 6.8 supports 7.x, 6.x, 5.x compatible mappings. The upgrade has to be done
 first to ES 6.8, then apply data migration or wait until old daily indices are removed (this requires
