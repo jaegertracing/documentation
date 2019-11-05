@@ -7,6 +7,8 @@ children:
   url: operator
 - title: Frontend/UI
   url: frontend-ui
+- title: Windows Service Deployment
+  url: windows
 - title: CLI Flags
   url: cli
 ---
@@ -284,7 +286,7 @@ more information about choosing how many shards should be chosen for optimizatio
 
 #### Upgrade to Elasticsearch 7.x
 
-The index mappings in Elasticsearch 7 are not backwards compatible with the older versions. 
+The index mappings in Elasticsearch 7 are not backwards compatible with the older versions.
 Therefore using Elasticsearch 7 with data created with older version would not work.
 Elasticsearch 6.8 supports 7.x, 6.x, 5.x compatible mappings. The upgrade has to be done
 first to ES 6.8, then apply data migration or wait until old daily indices are removed (this requires
@@ -460,42 +462,3 @@ All binaries accepts command line properties and environmental variables, power 
 [zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift
 [jaeger-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
 [thriftrw]: https://www.npmjs.com/package/thriftrw
-
-## Windows Service
-
-In Windows environments, Jaeger processes can be hosted and managed as Windows services controlled via the `sc` utility.  To configure such services on Windows, download [nssm.exe](https://nssm.cc/download) for the appropriate architecture, and issue commands similar to how Jaeger is typically run.  The example below showcases a basic Elasticsearch setup, configured using both environment variables and process arguments.
-
-#### Agent
-```bat
-nssm install JaegerAgent C:\Jaeger\jaeger-1.15.0-windows-amd64\jaeger-agent.exe --reporter.grpc.host-port=localhost:14250
-
-nssm set JaegerAgent AppStdout C:\Jaeger\jaeger-agent.out.log
-nssm set JaegerAgent AppStderr C:\Jaeger\jaeger-agent.err.log
-nssm set JaegerAgent Description Jaeger Agent service
-
-nssm start JaegerAgent
-```
-
-#### Collector
-```bat
-nssm install JaegerCollector C:\Jaeger\jaeger-1.15.0-windows-amd64\jaeger-collector.exe --es.server-urls=http://localhost:9200 --es.username=jaeger --es.password=PASSWORD
-
-nssm set JaegerCollector AppStdout C:\Jaeger\jaeger-collector.out.log
-nssm set JaegerCollector AppStderr C:\Jaeger\jaeger-collector.err.log
-nssm set JaegerCollector Description Jaeger Collector service
-nssm set JaegerCollector AppEnvironmentExtra SPAN_STORAGE_TYPE=elasticsearch
-
-nssm start JaegerCollector
-```
-
-#### Query UI
-```bat
-nssm install JaegerUI C:\Jaeger\jaeger-1.15.0-windows-amd64\jaeger-query.exe --es.server-urls=http://localhost:9200 --es.username=jaeger --es.password=PASSWORD
-
-nssm set JaegerUI AppStdout C:\Jaeger\jaeger-ui.out.log
-nssm set JaegerUI AppStderr C:\Jaeger\jaeger-ui.err.log
-nssm set JaegerUI Description Jaeger Query service
-nssm set JaegerUI AppEnvironmentExtra SPAN_STORAGE_TYPE=elasticsearch
-
-nssm start JaegerUI
-```
