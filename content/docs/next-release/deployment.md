@@ -7,7 +7,7 @@ children:
   url: operator
 - title: Frontend/UI
   url: frontend-ui
-- title: Windows Service Deployment
+- title: Windows
   url: windows
 - title: CLI Flags
   url: cli
