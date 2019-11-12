@@ -1,0 +1,141 @@
+name: jaeger-collector
+synopsis: |
+  Jaeger collector receives and processes traces from Jaeger agents and clients
+description: |
+  Jaeger collector receives traces from Jaeger agents and runs them through a processing pipeline.
+options:
+- name: admin-http-port
+  default_value: "14269"
+  usage: |
+    The http port for the admin server, including health check, /metrics, etc.
+- name: collector.grpc-port
+  default_value: "14250"
+  usage: The gRPC port for the collector service
+- name: collector.grpc.tls
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: collector.grpc.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: collector.grpc.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: collector.grpc.tls.client.ca
+  usage: (deprecated) see --collector.grpc.tls.client-ca
+- name: collector.grpc.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: collector.http-port
+  default_value: "14268"
+  usage: The HTTP port for the collector service
+- name: collector.num-workers
+  default_value: "50"
+  usage: The number of workers pulling items from the queue
+- name: collector.port
+  default_value: "14267"
+  usage: The TChannel port for the collector service
+- name: collector.queue-size
+  default_value: "2000"
+  usage: The queue size of the collector
+- name: collector.zipkin.allowed-headers
+  default_value: content-type
+  usage: |
+    Comma separated list of allowed headers for the Zipkin collector service, default content-type
+- name: collector.zipkin.allowed-origins
+  default_value: '*'
+  usage: |
+    Comma separated list of allowed origins for the Zipkin collector service, default accepts all
+- name: collector.zipkin.http-port
+  default_value: "0"
+  usage: The HTTP port for the Zipkin collector service e.g. 9411
+- name: config-file
+  usage: |
+    Configuration file in JSON, TOML, YAML, HCL, or Java properties formats (default none). See spf13/viper for precedence.
+- name: downsampling.hashsalt
+  usage: Salt used when hashing trace id for downsampling.
+- name: downsampling.ratio
+  default_value: "1"
+  usage: |
+    Ratio of spans passed to storage after downsampling (between 0 and 1), e.g ratio = 0.3 means we are keeping 30% of spans and dropping 70% of spans; ratio = 1.0 disables downsampling.
+- name: health-check-http-port
+  default_value: "0"
+  usage: (deprecated) see --admin-http-port
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for jaeger-collector
+- name: kafka.producer.authentication
+  default_value: none
+  usage: |
+    Authentication type used to authenticate with kafka cluster. e.g. none, kerberos, tls
+- name: kafka.producer.brokers
+  default_value: 127.0.0.1:9092
+  usage: |
+    The comma-separated list of kafka brokers. i.e. '127.0.0.1:9092,0.0.0:1234'
+- name: kafka.producer.compression
+  default_value: none
+  usage: |
+    (experimental) Type of compression (none, gzip, snappy, lz4, zstd) to use on messages
+- name: kafka.producer.compression-level
+  default_value: "0"
+  usage: |
+    (experimental) compression level to use on messages. gzip = 1-9 (default = 6), snappy = none, lz4 = 1-17 (default = 9), zstd = -131072 - 22 (default = 3)
+- name: kafka.producer.encoding
+  default_value: protobuf
+  usage: Encoding of spans ("json" or "protobuf") sent to kafka.
+- name: kafka.producer.kerberos.config-file
+  default_value: /etc/krb5.conf
+  usage: Path to Kerberos configuration. i.e /etc/krb5.conf
+- name: kafka.producer.kerberos.keytab-file
+  default_value: /etc/security/kafka.keytab
+  usage: Path to keytab file. i.e /etc/security/kafka.keytab
+- name: kafka.producer.kerberos.password
+  usage: The Kerberos password used for authenticate with KDC
+- name: kafka.producer.kerberos.realm
+  usage: Kerberos realm
+- name: kafka.producer.kerberos.service-name
+  default_value: kafka
+  usage: Kerberos service name
+- name: kafka.producer.kerberos.use-keytab
+  default_value: "false"
+  usage: |
+    Use of keytab instead of password, if this is true, keytab file will be used instead of password
+- name: kafka.producer.kerberos.username
+  usage: The Kerberos username used for authenticate with KDC
+- name: kafka.producer.protocol-version
+  usage: Kafka protocol version - must be supported by kafka server
+- name: kafka.producer.required-acks
+  default_value: local
+  usage: |
+    (experimental) Required kafka broker acknowledgement. i.e. noack, local, all
+- name: kafka.producer.tls.ca
+  usage: Path to the TLS CA for the Kafka connection
+- name: kafka.producer.tls.cert
+  usage: Path to the TLS Certificate for the Kafka connection
+- name: kafka.producer.tls.key
+  usage: Path to the TLS Key for the Kafka connection
+- name: kafka.producer.topic
+  default_value: jaeger-spans
+  usage: The name of the kafka topic
+- name: log-level
+  default_value: info
+  usage: |
+    Minimal allowed log Level. For more levels see https://github.com/uber-go/zap
+- name: metrics-backend
+  default_value: prometheus
+  usage: |
+    Defines which metrics backend to use for metrics reporting: expvar, prometheus, none
+- name: metrics-http-route
+  default_value: /metrics
+  usage: |
+    Defines the route of HTTP endpoint for metrics backends that support scraping
+- name: sampling.strategies-file
+  usage: |
+    The path for the sampling strategies file in JSON format. See sampling documentation to see format of the file
+- name: span-storage.type
+  usage: |
+    (deprecated) please use SPAN_STORAGE_TYPE environment variable. Run this binary with the 'env' command for help.
+see_also:
+- docs - Generates documentation
+- env - Help about environment variables.
+- version - Print the version.
