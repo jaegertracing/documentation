@@ -343,8 +343,8 @@ and another two cron jobs to perform required index management actions.
 #### External Elasticsearch
 
 Jaeger can be used with any external Elasticsearch cluster it can connect to.
-The following example shows Jaeger CR using an external Elasticsearch cluster with TLS CA certificate and
-user/password stored in a secret.
+The following example shows Jaeger CR using an external Elasticsearch cluster
+with TLS CA certificate mounted from a volume and user/password stored in a secret.
 
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -379,7 +379,7 @@ spec:
 
 <4> Secret which defines environmental variables `ES_PASSWORD` and `ES_USERNAME`. Created by `kubectl create secret generic jaeger-secret --from-literal=ES_PASSWORD=changeme --from-literal=ES_USERNAME=elastic`
 
-<5> Volume and volume mounts which are mounted into all storage components.
+<5> Volume mounts and volumes which are mounted into all storage components.
 
 #### Self provisioned
 Under some circumstances, the Jaeger Operator can make use of the [Elasticsearch Operator](https://github.com/openshift/elasticsearch-operator) to provision a suitable Elasticsearch cluster.
@@ -417,7 +417,7 @@ The connection configuration to storage is derived from storage options.
 This index management strategy is more complicated than using the default daily indices and
 it requires an initialisation job to prepare the storage and two cron jobs to manage indices.
 The first cron job is used for rolling-over to a new index and the second for removing
-indices from read alias. The rollover feature is enabled when storage flag `es.use-aliases` is enabled.
+indices from read alias. The rollover feature is used when storage option `es.use-aliases` is enabled.
 
 To learn more about rollover index management in Jaeger refer to this
 [article](https://medium.com/jaegertracing/using-elasticsearch-rollover-to-manage-indices-8b3d0c77915d).
