@@ -430,9 +430,9 @@ storage:
       use-aliases: true
   esRollover:
     enabled: true                                // turn the cron job deployment on and off
-    conditions: "{\"max_age\": \"1d\"}"          // conditions when to rollover to a new index
+    conditions: "{\"max_age\": \"2d\"}"          // conditions when to rollover to a new index
     readTTL: 7d                                  // how long should be old data available for reading
-    schedule: "*/30 * * * *"                     // cron expression for it to run
+    schedule: "55 23 * * *"                      // cron expression for it to run
 ```
 
 The connection configuration to storage is derived from storage options.
