@@ -660,6 +660,18 @@ simplest-query   *         192.168.122.34   80        3m
 
 In this example, the Jaeger UI is available at http://192.168.122.34.
 
+To enable TLS in the Ingress, pass a `secretName` with the name of a [Secret](https://kubernetes.io/docs/concepts/configuration/secret/) containing the TLS certificate:
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: ingress-with-tls
+spec:
+  ingress:
+    secretName: my-tls-secret
+```
+
 ## OpenShift
 
 When the Operator is running on OpenShift, the Operator will automatically create a `Route` object for the query services. Use the following command to check the hostname/port:
