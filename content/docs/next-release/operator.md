@@ -334,13 +334,61 @@ The default create-schema job uses `MODE=prod`, which implies a replication fact
 
 ### Elasticsearch storage
 
+By default Elasticsearch storage does not require any initialization job to be run. However Elasticsearch
+storage requires a cron job to be run to clean old data from the storage.
+ 
+When rollover (`es.use-aliases`) is enabled, Jaeger operator also deploys a job to initialize Elasticsearch storage
+and another two cron jobs to perform required index management actions.
+
+#### External Elasticsearch
+
+Jaeger can be used with an external Elasticsearch cluster.
+The following example shows a Jaeger CR using an external Elasticsearch cluster
+with TLS CA certificate mounted from a volume and user/password stored in a secret.
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: simple-prod
+spec:
+  strategy: production
+  storage:
+    type: elasticsearch # <1>
+    options:
+      es:
+        server-urls: https://elasticsearch.default.svc:9200 # <2>
+        tls: # <3>
+          ca: /es/certificates/root-ca.pem
+    secretName: jaeger-secret # <4>
+  volumeMounts: # <5>
+    - name: certificates
+      mountPath: /es/certificates/
+      readOnly: true
+  volumes:
+    - name: certificates
+      secret:
+        secretName: quickstart-es-http-certs-public
+```
+
+<1> Storage type Elasticsearch.
+
+<2> Url to Elasticsearch service running in default namespace.
+
+<3> TLS configuration. In this case only CA certificate, but it can also contain `es.tls.key` and `es.tls.cert` when using mutual TLS.
+
+<4> Secret which defines environment variables `ES_PASSWORD` and `ES_USERNAME`. Created by `kubectl create secret generic jaeger-secret --from-literal=ES_PASSWORD=changeme --from-literal=ES_USERNAME=elastic`
+
+<5> Volume mounts and volumes which are mounted into all storage components.
+
+#### Self provisioned
 Under some circumstances, the Jaeger Operator can make use of the [Elasticsearch Operator](https://github.com/openshift/elasticsearch-operator) to provision a suitable Elasticsearch cluster.
 
 {{< warning >}}
-This feature is only tested on OpenShift clusters. Spark dependencies are not supported with this feature [Issue #294](https://github.com/jaegertracing/jaeger-operator/issues/294).
+This feature is supported only on OKD/OpenShift clusters. Spark dependencies are not supported with this feature [Issue #294](https://github.com/jaegertracing/jaeger-operator/issues/294).
 {{< /warning >}}
 
-When there are no `es.server-urls` options as part of a Jaeger `production` instance and `elasticsearch` is set as the storage type, the Jaeger Operator creates an Elasticsearch cluster via the Elasticsearch Operator by creating a Custom Resource based on the configuration provided in storage section. The Elasticsearch cluster is meant to be dedicated for a single Jaeger instance.
+When there is no `es.server-urls` option as part of a Jaeger `production` instance and `elasticsearch` is set as the storage type, the Jaeger Operator creates an Elasticsearch cluster via the Elasticsearch Operator by creating a Custom Resource based on the configuration provided in storage section. The Elasticsearch cluster is meant to be dedicated for a single Jaeger instance.
 
 The self-provision of an Elasticsearch cluster can be disabled by setting the flag `--es-provision` to `false`. The default value is `auto`, which will make the Jaeger Operator query the Kubernetes cluster for its ability to handle a `Elasticsearch` custom resource. This is usually set by the Elasticsearch Operator during its installation process, so, if the Elasticsearch Operator is expected to run *after* the Jaeger Operator, the flag can be set to `true`.
 
@@ -350,17 +398,44 @@ At the moment there can be only one Jaeger with self-provisioned Elasticsearch i
 
 #### Elasticsearch index cleaner job
 
-When using `elasticsearch` storage by default a job is created to clean old traces from it, the options for it are listed below so you can configure it to your use case
+When using `elasticsearch` storage by default a cron job is created to clean old traces from it, the options for it are listed below so you can configure it to your use case.
+The connection configuration is derived from the storage options.
 
 ```yaml
 storage:
   type: elasticsearch
   esIndexCleaner:
-    enabled: false                                // turn the job deployment on and off
+    enabled: true                                 // turn the cron job deployment on and off
     numberOfDays: 7                               // number of days to wait before deleting a record
     schedule: "55 23 * * *"                       // cron expression for it to run
-    image: jaegertracing/jaeger-es-index-cleaner  // image of the job
 ```
+
+The connection configuration to storage is derived from storage options.
+
+#### Elasticsearch rollover
+
+This index management strategy is more complicated than using the default daily indices and
+it requires an initialisation job to prepare the storage and two cron jobs to manage indices.
+The first cron job is used for rolling-over to a new index and the second for removing
+indices from read alias. The rollover feature is used when storage option `es.use-aliases` is enabled.
+
+To learn more about rollover index management in Jaeger refer to this
+[article](https://medium.com/jaegertracing/using-elasticsearch-rollover-to-manage-indices-8b3d0c77915d).
+
+```yaml
+storage:
+  type: elasticsearch
+  options:
+    es:
+      use-aliases: true
+  esRollover:
+    enabled: true                                // turn the cron job deployment on and off
+    conditions: "{\"max_age\": \"2d\"}"          // conditions when to rollover to a new index
+    readTTL: 7d                                  // how long should be old data available for reading
+    schedule: "55 23 * * *"                      // cron expression for it to run
+```
+
+The connection configuration to storage is derived from storage options.
 
 ## Deriving dependencies
 
