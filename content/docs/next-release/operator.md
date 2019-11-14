@@ -334,16 +334,16 @@ The default create-schema job uses `MODE=prod`, which implies a replication fact
 
 ### Elasticsearch storage
 
-By default Elasticsearch storage does not require to run any initialization job. However Elasticsearch
-storage requires to run a cron job to clean old data from the storage. 
+By default Elasticsearch storage does not require any initialization job to be run. However Elasticsearch
+storage requires a cron job to be run to clean old data from the storage.
  
-When rollover (`es.use-aliases`) is used Jaeger operator also deploys a job to initialize Elasticsearch storage
+When rollover (`es.use-aliases`) is enabled, Jaeger operator also deploys a job to initialize Elasticsearch storage
 and another two cron jobs to perform required index management actions.
 
 #### External Elasticsearch
 
-Jaeger can be used with any external Elasticsearch cluster it can connect to.
-The following example shows Jaeger CR using an external Elasticsearch cluster
+Jaeger can be used with an external Elasticsearch cluster.
+The following example shows a Jaeger CR using an external Elasticsearch cluster
 with TLS CA certificate mounted from a volume and user/password stored in a secret.
 
 ```yaml
@@ -377,7 +377,7 @@ spec:
 
 <3> TLS configuration. In this case only CA certificate, but it can also contain `es.tls.key` and `es.tls.cert` when using mutual TLS.
 
-<4> Secret which defines environmental variables `ES_PASSWORD` and `ES_USERNAME`. Created by `kubectl create secret generic jaeger-secret --from-literal=ES_PASSWORD=changeme --from-literal=ES_USERNAME=elastic`
+<4> Secret which defines environment variables `ES_PASSWORD` and `ES_USERNAME`. Created by `kubectl create secret generic jaeger-secret --from-literal=ES_PASSWORD=changeme --from-literal=ES_USERNAME=elastic`
 
 <5> Volume mounts and volumes which are mounted into all storage components.
 
