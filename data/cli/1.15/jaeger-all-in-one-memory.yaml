@@ -1,0 +1,200 @@
+name: jaeger-all-in-one
+synopsis: |
+  Jaeger all-in-one distribution with agent, collector and query in one process.
+description: |-
+  Jaeger all-in-one distribution with agent, collector and query. Use with caution this version
+  by default uses only in-memory database.
+options:
+- name: admin-http-port
+  default_value: "14269"
+  usage: |
+    The http port for the admin server, including health check, /metrics, etc.
+- name: collector.grpc-port
+  default_value: "14250"
+  usage: The gRPC port for the collector service
+- name: collector.grpc.tls
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: collector.grpc.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: collector.grpc.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: collector.grpc.tls.client.ca
+  usage: (deprecated) see --collector.grpc.tls.client-ca
+- name: collector.grpc.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: collector.host-port
+  usage: (deprecated) see --reporter.tchannel.host-port
+- name: collector.http-port
+  default_value: "14268"
+  usage: The HTTP port for the collector service
+- name: collector.num-workers
+  default_value: "50"
+  usage: The number of workers pulling items from the queue
+- name: collector.port
+  default_value: "14267"
+  usage: The TChannel port for the collector service
+- name: collector.queue-size
+  default_value: "2000"
+  usage: The queue size of the collector
+- name: collector.zipkin.allowed-headers
+  default_value: content-type
+  usage: |
+    Comma separated list of allowed headers for the Zipkin collector service, default content-type
+- name: collector.zipkin.allowed-origins
+  default_value: '*'
+  usage: |
+    Comma separated list of allowed origins for the Zipkin collector service, default accepts all
+- name: collector.zipkin.http-port
+  default_value: "0"
+  usage: The HTTP port for the Zipkin collector service e.g. 9411
+- name: config-file
+  usage: |
+    Configuration file in JSON, TOML, YAML, HCL, or Java properties formats (default none). See spf13/viper for precedence.
+- name: discovery.conn-check-timeout
+  default_value: 250ms
+  usage: |
+    (deprecated) see --reporter.tchannel.discovery.conn-check-timeout
+- name: discovery.min-peers
+  default_value: "3"
+  usage: (deprecated) see --reporter.tchannel.discovery.min-peers
+- name: downsampling.hashsalt
+  usage: Salt used when hashing trace id for downsampling.
+- name: downsampling.ratio
+  default_value: "1"
+  usage: |
+    Ratio of spans passed to storage after downsampling (between 0 and 1), e.g ratio = 0.3 means we are keeping 30% of spans and dropping 70% of spans; ratio = 1.0 disables downsampling.
+- name: health-check-http-port
+  default_value: "0"
+  usage: (deprecated) see --admin-http-port
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for jaeger-all-in-one
+- name: http-server.host-port
+  default_value: :5778
+  usage: |
+    host:port of the http server (e.g. for /sampling point and /baggageRestrictions endpoint)
+- name: jaeger.tags
+  usage: |
+    One or more tags to be added to the Process tags of all spans passing through this agent. Ex: key1=value1,key2=${envVar:defaultValue}
+- name: log-level
+  default_value: info
+  usage: |
+    Minimal allowed log Level. For more levels see https://github.com/uber-go/zap
+- name: memory.max-traces
+  default_value: "0"
+  usage: The maximum amount of traces to store in memory
+- name: metrics-backend
+  default_value: prometheus
+  usage: |
+    Defines which metrics backend to use for metrics reporting: expvar, prometheus, none
+- name: metrics-http-route
+  default_value: /metrics
+  usage: |
+    Defines the route of HTTP endpoint for metrics backends that support scraping
+- name: processor.jaeger-binary.server-host-port
+  default_value: :6832
+  usage: host:port for the UDP server
+- name: processor.jaeger-binary.server-max-packet-size
+  default_value: "65000"
+  usage: max packet size for the UDP server
+- name: processor.jaeger-binary.server-queue-size
+  default_value: "1000"
+  usage: length of the queue for the UDP server
+- name: processor.jaeger-binary.workers
+  default_value: "10"
+  usage: how many workers the processor should run
+- name: processor.jaeger-compact.server-host-port
+  default_value: :6831
+  usage: host:port for the UDP server
+- name: processor.jaeger-compact.server-max-packet-size
+  default_value: "65000"
+  usage: max packet size for the UDP server
+- name: processor.jaeger-compact.server-queue-size
+  default_value: "1000"
+  usage: length of the queue for the UDP server
+- name: processor.jaeger-compact.workers
+  default_value: "10"
+  usage: how many workers the processor should run
+- name: processor.zipkin-compact.server-host-port
+  default_value: :5775
+  usage: host:port for the UDP server
+- name: processor.zipkin-compact.server-max-packet-size
+  default_value: "65000"
+  usage: max packet size for the UDP server
+- name: processor.zipkin-compact.server-queue-size
+  default_value: "1000"
+  usage: length of the queue for the UDP server
+- name: processor.zipkin-compact.workers
+  default_value: "10"
+  usage: how many workers the processor should run
+- name: query.base-path
+  default_value: /
+  usage: |
+    The base path for all HTTP routes, e.g. /jaeger; useful when running behind a reverse proxy
+- name: query.bearer-token-propagation
+  default_value: "false"
+  usage: |
+    Allow propagation of bearer token to be used by storage plugins
+- name: query.port
+  default_value: "16686"
+  usage: The port for the query service
+- name: query.static-files
+  usage: The directory path override for the static assets for the UI
+- name: query.ui-config
+  usage: The path to the UI configuration file in JSON format
+- name: reporter.grpc.discovery.min-peers
+  default_value: "3"
+  usage: |
+    Max number of collectors to which the agent will try to connect at any given time
+- name: reporter.grpc.host-port
+  usage: |
+    Comma-separated string representing host:port of a static list of collectors to connect to directly
+- name: reporter.grpc.retry.max
+  default_value: "3"
+  usage: Sets the maximum number of retries for a call
+- name: reporter.grpc.tls
+  default_value: "false"
+  usage: Enable TLS when talking to the remote server(s)
+- name: reporter.grpc.tls.ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
+- name: reporter.grpc.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this process to the remote server(s)
+- name: reporter.grpc.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this process to the remote server(s)
+- name: reporter.grpc.tls.server-name
+  usage: |
+    Override the TLS server name we expect in the certificate of the remove server(s)
+- name: reporter.tchannel.discovery.conn-check-timeout
+  default_value: 250ms
+  usage: sets the timeout used when establishing new connections
+- name: reporter.tchannel.discovery.min-peers
+  default_value: "3"
+  usage: |
+    if using service discovery, the min number of connections to maintain to the backend
+- name: reporter.tchannel.host-port
+  usage: |
+    comma-separated string representing host:ports of a static list of collectors to connect to directly (e.g. when not using service discovery)
+- name: reporter.tchannel.report-timeout
+  default_value: 1s
+  usage: sets the timeout used when reporting spans
+- name: reporter.type
+  default_value: grpc
+  usage: Reporter type to use e.g. grpc, tchannel
+- name: sampling.strategies-file
+  usage: |
+    The path for the sampling strategies file in JSON format. See sampling documentation to see format of the file
+- name: span-storage.type
+  usage: |
+    (deprecated) please use SPAN_STORAGE_TYPE environment variable. Run this binary with the 'env' command for help.
+see_also:
+- docs - Generates documentation
+- env - Help about environment variables.
+- version - Print the version.
