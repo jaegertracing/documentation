@@ -12,11 +12,7 @@
 <ul>
   {{ range $config.tools }}
   <li>
-    <a href="#{{ . }}">
-      <code>
-        {{ . }}
-      </code>
-    </a>
+    <a href="#{{ . }}">{{ . }}</a>
   </li>
   {{ end }}
 </ul>
