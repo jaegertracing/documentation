@@ -881,6 +881,25 @@ kubectl delete jaeger simplest
 Deleting the instance will not remove the data from any permanent storage used with this instance. Data from in-memory instances, however, will be lost.
 {{< /info >}}
 
+# Tracing the operator
+
+The Jaeger Operator is able to emit spans for its own operations. By default, the Jaeger Operator ships with an `operator.yaml` that is already configured to send spans to a Jaeger instance named `jaeger`, located in the same namespace as the operator. To use a different instance, change the `operator.yaml` and adjust the flag `reporter.grpc.host-port` to use the appropriate host.
+
+Note that the Jaeger instance has to be manually provisioned and can be done after the Jaeger Operator has been initialized. The Jaeger Agent will keep the spans in the internal buffer until a connection to the instance is made. The following Jaeger CR can be used to provision a Jaeger instance suitable for non-production purposes:
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: jaeger
+```
+
+Tracing can be disabled by setting the flag `--tracing-enabled` to `false`.
+
+{{< info >}}
+At this moment, the Operator Lifecycle Manager (OLM) does not offer a way to configure an operator. As such, the default configuration for the Jaeger Operator disables tracing when installed via OLM.
+{{< /info >}}
+
 # Monitoring the operator
 
 The Jaeger Operator starts a Prometheus-compatible endpoint on `0.0.0.0:8383/metrics` with internal metrics that can be used to monitor the process.
