@@ -883,9 +883,9 @@ Deleting the instance will not remove the data from any permanent storage used w
 
 # Tracing the operator
 
-The Jaeger Operator is able to emit spans for its own operations. By default, the Jaeger Operator ships with an `operator.yaml` that is already configured to send spans to a Jaeger instance named `jaeger`, located in the same namespace as the operator. To use a different instance, change the `operator.yaml` and adjust the flag `reporter.grpc.host-port` to use the appropriate host.
+The Jaeger Operator is able to generate spans for its own operations. By default, the Jaeger Operator ships with an `operator.yaml` that is already configured to send spans to a Jaeger instance named `jaeger`, located in the same namespace as the operator. To use a different instance, change the `operator.yaml` and adjust the flag `reporter.grpc.host-port` to use the appropriate host.
 
-Note that the Jaeger instance has to be manually provisioned and can be done after the Jaeger Operator has been initialized. The Jaeger Agent will keep the spans in the internal buffer until a connection to the instance is made. The following Jaeger CR can be used to provision a Jaeger instance suitable for non-production purposes:
+Note that you must manually provision the Jaeger instance. You can do this after the Jaeger Operator has been initialized. The Jaeger Agent will keep the Operator spans in the internal buffer until it makes a connection to the Jaeger instance. The following Jaeger CR can be used to provision a Jaeger instance suitable for non-production purposes:
 
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -894,10 +894,10 @@ metadata:
   name: jaeger
 ```
 
-Tracing can be disabled by setting the flag `--tracing-enabled` to `false`.
+Tracing the operator can be disabled by setting the flag `--tracing-enabled` to `false`.
 
 {{< info >}}
-At this moment, the Operator Lifecycle Manager (OLM) does not offer a way to configure an operator. As such, the default configuration for the Jaeger Operator disables tracing when installed via OLM.
+Currently the Operator Lifecycle Manager (OLM) does not offer a way to configure an operator. As a result, if you install the Jaeger Operator via OLM, collecting traces from the Operator is disabled by default.
 {{< /info >}}
 
 # Monitoring the operator
