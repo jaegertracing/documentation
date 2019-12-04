@@ -883,9 +883,30 @@ Deleting the instance will not remove the data from any permanent storage used w
 
 # Tracing the operator
 
-The Jaeger Operator is able to generate spans for its own operations. By default, the Jaeger Operator ships with an `operator.yaml` that is already configured to send spans to a Jaeger instance named `jaeger`, located in the same namespace as the operator. To use a different instance, change the `operator.yaml` and adjust the flag `reporter.grpc.host-port` to use the appropriate host.
+Starting from version 1.16.0, the Jaeger Operator is able to generate spans related to its own operations. To take advantage of that, the `operator.yaml` has to be configured to enable tracing by setting the flag `--tracing-enabled=true` to the `args` of the container and to add a Jaeger Agent as sidecar to the pod. Here's an excerpt from an `operator.yaml` that has tracing enabled:
 
-Note that you must manually provision the Jaeger instance. You can do this after the Jaeger Operator has been initialized. The Jaeger Agent will keep the Operator spans in the internal buffer until it makes a connection to the Jaeger instance. The following Jaeger CR can be used to provision a Jaeger instance suitable for non-production purposes:
+```yaml
+...
+        # .Spec.Template.Spec.Containers[0].Args
+        args: ["start", "--tracing-enabled=true"]
+...
+      # add as a second container to .Spec.Template.Spec.Containers
+      - name: jaeger-agent
+        image: jaegertracing/jaeger-agent:1.15.1
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        args:
+        - --reporter.grpc.host-port=dns:///jaeger-collector-headless.$(POD_NAMESPACE).svc.cluster.local:14250
+        ports:
+        - containerPort: 6831
+          name: jg-compact-trft
+          protocol: UDP
+```
+
+Note that you must also manually provision the Jaeger instance. You can do this after the Jaeger Operator has been initialized. The Jaeger Agent will keep the Operator spans in the internal buffer until it makes a connection to the Jaeger instance. The following Jaeger CR can be used to provision a Jaeger instance suitable for non-production purposes:
 
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -894,10 +915,8 @@ metadata:
   name: jaeger
 ```
 
-Tracing the operator can be disabled by setting the flag `--tracing-enabled` to `false`.
-
 {{< info >}}
-Currently the Operator Lifecycle Manager (OLM) does not offer a way to configure an operator. As a result, if you install the Jaeger Operator via OLM, collecting traces from the Operator is disabled by default.
+Currently the Operator Lifecycle Manager (OLM) does not offer a way to configure an operator. As a result, if you install the Jaeger Operator via OLM, collecting traces from the Operator is not supported.
 {{< /info >}}
 
 # Monitoring the operator
