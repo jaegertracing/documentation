@@ -171,6 +171,12 @@ The main additional requirement is to provide the details of the storage type an
 
 The `streaming` strategy is designed to augment the `production` strategy by providing a streaming capability that effectively sits between the collector and the backend storage (Cassandra or Elasticsearch). This provides the benefit of reducing the pressure on the backend storage, under high load situations, and enables other trace post-processing capabilities to tap into the real time span data directly from the streaming platform (Kafka).
 
+{{< info >}}
+A Kafka environment can be configured using [Strimzi's Kafka operator](https://strimzi.io/).
+{{< /info >}}
+
+#### Existing Kafka Cluster
+
 The only additional information required is to provide the details for accessing the Kafka platform, which is configured in the `collector` component (as producer) and `ingester` component (as consumer):
 
 ```yaml
@@ -193,7 +199,7 @@ spec:
           topic: jaeger-spans
           brokers: my-cluster-kafka-brokers.kafka:9092
       ingester:
-        deadlockInterval: 0 # <2>
+        deadlockInterval: 5 # <2>
   storage:
     type: elasticsearch
     options:
@@ -202,11 +208,28 @@ spec:
 ```
 <1> Identifies the Kafka configuration used by the collector, to produce the messages, and the ingester to consume the messages.
 
-<2> The deadlock interval can be disabled to avoid the ingester being terminated when no messages arrive within the default 1 minute period
+<2> The deadlock interval is disabled by default (set to 0), to avoid the ingester being terminated when no messages arrive, but can be configured to specify the number of minutes to wait for a message before terminating.
 
-{{< info >}}
-A Kafka environment can be configured using [Strimzi's Kafka operator](https://strimzi.io/).
-{{< /info >}}
+#### Self Provisioned Kafka Cluster
+
+To use the self-provisioned approach, the producer/consumer brokers property should not be defined.
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: auto-provision-kafka
+spec:
+  strategy: streaming
+  storage:
+    type: elasticsearch
+    options:
+      es:
+        # Note: This assumes elasticsearch is running in the "default" namespace.
+        server-urls: http://elasticsearch.default.svc:9200
+```
+
+The self-provision of a Kafka cluster can be disabled by setting the flag `--kafka-provision` to `false`. The default value is `auto`, which will make the Jaeger Operator query the Kubernetes cluster for its ability to handle a `Kafka` custom resource. This is usually set by the Kafka Operator during its installation process, so, if the Kafka Operator is expected to run *after* the Jaeger Operator, the flag can be set to `true`.
 
 # Understanding Custom Resource Definitions
 
