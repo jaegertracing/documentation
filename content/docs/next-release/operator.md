@@ -892,7 +892,7 @@ Starting from version 1.16.0, the Jaeger Operator is able to generate spans rela
 ...
       # add as a second container to .Spec.Template.Spec.Containers
       - name: jaeger-agent
-        image: jaegertracing/jaeger-agent:1.15.1
+        image: jaegertracing/jaeger-agent:latest # it's best to keep this version in sync with the operator's
         env:
         - name: POD_NAMESPACE
           valueFrom:
