@@ -904,6 +904,44 @@ kubectl delete jaeger simplest
 Deleting the instance will not remove the data from any permanent storage used with this instance. Data from in-memory instances, however, will be lost.
 {{< /info >}}
 
+# Tracing the operator
+
+Starting from version 1.16.0, the Jaeger Operator is able to generate spans related to its own operations. To take advantage of that, the `operator.yaml` has to be configured to enable tracing by setting the flag `--tracing-enabled=true` to the `args` of the container and to add a Jaeger Agent as sidecar to the pod. Here's an excerpt from an `operator.yaml` that has tracing enabled and assumes that the Jaeger instance is at the same namespace as the Jaeger Operator:
+
+```yaml
+...
+        # .Spec.Template.Spec.Containers[0].Args
+        args: ["start", "--tracing-enabled=true"]
+...
+      # add as a second container to .Spec.Template.Spec.Containers
+      - name: jaeger-agent
+        image: jaegertracing/jaeger-agent:latest # it's best to keep this version in sync with the operator's
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        args:
+        - --reporter.grpc.host-port=dns:///jaeger-collector-headless.$(POD_NAMESPACE).svc.cluster.local:14250
+        ports:
+        - containerPort: 6831
+          name: jg-compact-trft
+          protocol: UDP
+```
+
+Note that you must also manually provision the Jaeger instance. You can do this after the Jaeger Operator has been initialized. The Jaeger Agent will keep the Operator spans in the internal buffer until it makes a connection to the Jaeger instance. The following Jaeger CR can be used to provision a Jaeger instance suitable for non-production purposes:
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: jaeger
+```
+
+{{< info >}}
+Currently the Operator Lifecycle Manager (OLM) does not offer a way to configure an operator. As a result, if you install the Jaeger Operator via OLM, collecting traces from the Operator is not supported.
+{{< /info >}}
+
 # Monitoring the operator
 
 The Jaeger Operator starts a Prometheus-compatible endpoint on `0.0.0.0:8383/metrics` with internal metrics that can be used to monitor the process.
