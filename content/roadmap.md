@@ -27,6 +27,15 @@ See issue tracker for more info: [jaeger/issues/365](https://github.com/jaegertr
 
 Post-collection data pipeline for trace aggregation and data mining based on Apache Flink.
 
+## AI/ML platform for Jaeger
+
+* Community/SIG for doing ML/AI with tracing/telemetry data.
+* ML/AI integration with Jaeger to make it easy for data scientists write and evaluate models
+  (e.g Jupyter notebooks).
+* A registry of models/post-processing pipelines which derive useful information out of tracing data.
+
+See issue tracker for more info: [jaeger/issues/1639](https://github.com/jaegertracing/jaeger/issues/1639).
+
 ## Trace Quality Metrics
 
 When deploying a distributed tracing solution like Jaeger in large organizations
