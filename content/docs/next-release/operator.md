@@ -440,7 +440,7 @@ spec:
 ```
 <1> Number of Elasticsearch nodes. For high availability use at least 3 nodes. Do not use 2 nodes as "split brain" problem can happen.
 
-<2> Storage configuration. In this case AWS `gp2` with `5Gi` size. When omitted `emptyDir` is used. Elasticsearch operator provisions `PersistentVolumeClaim` and `PersistentVolume` which are not removed with Jaeger instance. The same volumes can be mounted if Jaeger with the same name and namespace is crated.
+<2> Persistent storage configuration. In this case AWS `gp2` with `5Gi` size. When omitted `emptyDir` is used. Elasticsearch operator provisions `PersistentVolumeClaim` and `PersistentVolume` which are not removed with Jaeger instance. The same volumes can be mounted if Jaeger with the same name and namespace is crated. Some storages might fail in `default` namespace because of OpenShift SCC policy.
 
 <3> Resources for Elasticsearch nodes. In this case `2Gi` which is not suitable for production ready cluster. Refer to Elasticsearch documentation for memory recommendations.
 
