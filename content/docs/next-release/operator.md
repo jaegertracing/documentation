@@ -406,7 +406,7 @@ spec:
 <5> Volume mounts and volumes which are mounted into all storage components.
 
 #### Self provisioned
-Under some circumstances, the Jaeger Operator can make use of the [Elasticsearch Operator](https://github.com/openshift/elasticsearch-operator) to provision a suitable Elasticsearch cluster.
+Under some circumstances, the Jaeger Operator can make use of the [Elasticsearch Operator](https://github.com/openshift/elasticsearch-operator) to provision a suitable Elasticsearch cluster. Jaeger CR exposes the same configuration as [OpenShift Cluster Logging](https://docs.openshift.com/container-platform/4.2/logging/config/cluster-logging-elasticsearch.html).
 
 {{< warning >}}
 This feature is supported only on OKD/OpenShift clusters. Spark dependencies are not supported with this feature [Issue #294](https://github.com/jaegertracing/jaeger-operator/issues/294).
@@ -436,6 +436,7 @@ spec:
           memory: 2Gi
         limits:
           memory: 2Gi
+      redundancyPolicy: ZeroRedundancy # <4>
 ```
 <1> Number of Elasticsearch nodes. For high availability use at least 3 nodes. Do not use 2 nodes as "split brain" problem can happen.
 
@@ -443,6 +444,12 @@ spec:
 
 <3> Resources for Elasticsearch nodes. In this case `2Gi` which is not suitable for production ready cluster. Refer to Elasticsearch documentation for memory recommendations.
 
+<4> Data replication policy defines how Elasticsearch shards are replicated across data nodes in the cluster. If not specified Jaeger operator automatically determines the most appropriate replication based on number of nodes.
+
+* `FullRedundancy` Elasticsearch fully replicates the primary shards for each index to every data node. This provides the highest safety, but at the cost of the highest amount of disk required and the poorest performance.
+* `MultipleRedundancy` Elasticsearch fully replicates the primary shards for each index to half of the data nodes. This provides a good tradeoff between safety and performance.
+* `SingleRedundancy` Elasticsearch makes one copy of the primary shards for each index. Data are always available and recoverable as long as at least two data nodes exist. Better performance than MultipleRedundancy, when using 5 or more nodes. You cannot apply this policy on deployments of single Elasticsearch node.
+* `ZeroRedundancy` Elasticsearch does not make copies of the primary shards. Data might be unavailable or lost in the event a node is down or fails. Use this mode when you are more concerned with performance than safety, or have implemented your own disk/PVC backup/restore strategy.
 
 The self-provision of an Elasticsearch cluster can be disabled by setting the flag `--es-provision` to `false`. The default value is `auto`, which will make the Jaeger Operator query the Kubernetes cluster for its ability to handle a `Elasticsearch` custom resource. This is usually set by the Elasticsearch Operator during its installation process, so, if the Elasticsearch Operator is expected to run *after* the Jaeger Operator, the flag can be set to `true`.
 
