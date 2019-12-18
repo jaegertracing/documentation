@@ -433,18 +433,18 @@ spec:
       resources: # <3>
         requests:
           cpu: 200m
-          memory: 2Gi
+          memory: 4Gi
         limits:
-          memory: 2Gi
+          memory: 4Gi
       redundancyPolicy: ZeroRedundancy # <4>
 ```
 <1> Number of Elasticsearch nodes. For high availability use at least 3 nodes. Do not use 2 nodes as "split brain" problem can happen.
 
 <2> Persistent storage configuration. In this case AWS `gp2` with `5Gi` size. When omitted `emptyDir` is used. Elasticsearch operator provisions `PersistentVolumeClaim` and `PersistentVolume` which are not removed with Jaeger instance. The same volumes can be mounted if Jaeger with the same name and namespace is crated. Some storages might fail in `default` namespace because of OpenShift SCC policy.
 
-<3> Resources for Elasticsearch nodes. In this case `2Gi` which is not suitable for production ready cluster. Refer to Elasticsearch documentation for memory recommendations.
+<3> Resources for Elasticsearch nodes. In this case `4Gi` which results to by default required `2Gi` of heap space. Refer to Elasticsearch [documentation](https://www.elastic.co/guide/en/elasticsearch/reference/5.6/heap-size.html) for memory recommendations.
 
-<4> Data replication policy defines how Elasticsearch shards are replicated across data nodes in the cluster. If not specified Jaeger operator automatically determines the most appropriate replication based on number of nodes.
+<4> Data replication policy defines how Elasticsearch shards are replicated across data nodes in the cluster. If not specified Jaeger Operator automatically determines the most appropriate replication based on number of nodes.
 
 * `FullRedundancy` Elasticsearch fully replicates the primary shards for each index to every data node. This provides the highest safety, but at the cost of the highest amount of disk required and the poorest performance.
 * `MultipleRedundancy` Elasticsearch fully replicates the primary shards for each index to half of the data nodes. This provides a good tradeoff between safety and performance.
