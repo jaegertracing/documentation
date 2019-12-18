@@ -414,7 +414,7 @@ This feature is supported only on OKD/OpenShift clusters. Spark dependencies are
 
 When there is no `es.server-urls` option as part of a Jaeger `production` instance and `elasticsearch` is set as the storage type, the Jaeger Operator creates an Elasticsearch cluster via the Elasticsearch Operator by creating a Custom Resource based on the configuration provided in storage section. The Elasticsearch cluster is meant to be dedicated for a single Jaeger instance.
 
-Follows and example of Jaeger with a single node Elasticsearch cluster with persistent storage:
+Follows an example of Jaeger with a single node Elasticsearch cluster with AWS `gp2` persistent storage:
 
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -440,7 +440,7 @@ spec:
 ```
 <1> Number of Elasticsearch nodes. For high availability use at least 3 nodes. Do not use 2 nodes as "split brain" problem can happen.
 
-<2> Storage configuration. In this case AWS `gp2` with `5Gi` size. When omitted `emptyDir` is used. Elasticsearch operator provisions `PersistentVolumeClaim` and `PersistentVolume` which are not removed with Jaeger instance. The same volumes can be mounted if Jaeger with the same name is crated in the same namespace.
+<2> Storage configuration. In this case AWS `gp2` with `5Gi` size. When omitted `emptyDir` is used. Elasticsearch operator provisions `PersistentVolumeClaim` and `PersistentVolume` which are not removed with Jaeger instance. The same volumes can be mounted if Jaeger with the same name and namespace is crated.
 
 <3> Resources for Elasticsearch nodes. In this case `2Gi` which is not suitable for production ready cluster. Refer to Elasticsearch documentation for memory recommendations.
 
