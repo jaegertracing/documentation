@@ -359,14 +359,15 @@ The default create-schema job uses `MODE=prod`, which implies a replication fact
 
 By default Elasticsearch storage does not require any initialization job to be run. However Elasticsearch
 storage requires a cron job to be run to clean old data from the storage.
- 
+
 When rollover (`es.use-aliases`) is enabled, Jaeger operator also deploys a job to initialize Elasticsearch storage
 and another two cron jobs to perform required index management actions.
 
 #### External Elasticsearch
 
 Jaeger can be used with an external Elasticsearch cluster.
-The following example shows a Jaeger CR using an external Elasticsearch cluster
+The following example shows a Jaeger CR using an external Elasticsearch cluster created
+by [Elasticsearch Operator](https://operatorhub.io/operator/elastic-cloud-eck)
 with TLS CA certificate mounted from a volume and user/password stored in a secret.
 
 ```yaml
@@ -380,9 +381,9 @@ spec:
     type: elasticsearch # <1>
     options:
       es:
-        server-urls: https://elasticsearch.default.svc:9200 # <2>
+        server-urls: https://quickstart-es-http.default.svc:9200 # <2>
         tls: # <3>
-          ca: /es/certificates/root-ca.pem
+          ca: /es/certificates/ca.crt
     secretName: jaeger-secret # <4>
   volumeMounts: # <5>
     - name: certificates
