@@ -359,7 +359,7 @@ The default create-schema job uses `MODE=prod`, which implies a replication fact
 
 By default Elasticsearch storage does not require any initialization job to be run. However Elasticsearch
 storage requires a cron job to be run to clean old data from the storage.
- 
+
 When rollover (`es.use-aliases`) is enabled, Jaeger operator also deploys a job to initialize Elasticsearch storage
 and another two cron jobs to perform required index management actions.
 
@@ -413,6 +413,36 @@ This feature is supported only on OKD/OpenShift clusters. Spark dependencies are
 {{< /warning >}}
 
 When there is no `es.server-urls` option as part of a Jaeger `production` instance and `elasticsearch` is set as the storage type, the Jaeger Operator creates an Elasticsearch cluster via the Elasticsearch Operator by creating a Custom Resource based on the configuration provided in storage section. The Elasticsearch cluster is meant to be dedicated for a single Jaeger instance.
+
+Follows and example of Jaeger with a single node Elasticsearch cluster with persistent storage:
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: simple-prod
+spec:
+  strategy: production
+  storage:
+    type: elasticsearch
+    elasticsearch:
+      nodeCount: 1 # <1>
+      storage: # <2>
+        storageClassName: gp2
+        size: 5Gi
+      resources: # <3>
+        requests:
+          cpu: 200m
+          memory: 2Gi
+        limits:
+          memory: 2Gi
+```
+<1> Number of Elasticsearch nodes. For high availability use at least 3 nodes. Do not use 2 nodes as "split brain" problem can happen.
+
+<2> Storage configuration. In this case AWS `gp2` with `5Gi` size. When omitted `emptyDir` is used. Elasticsearch operator provisions `PersistentVolumeClaim` and `PersistentVolume` which are not removed with Jaeger instance. The same volumes can be mounted if Jaeger with the same name is crated in the same namespace.
+
+<3> Resources for Elasticsearch nodes. In this case `2Gi` which is not suitable for production ready cluster. Refer to Elasticsearch documentation for memory recommendations.
+
 
 The self-provision of an Elasticsearch cluster can be disabled by setting the flag `--es-provision` to `false`. The default value is `auto`, which will make the Jaeger Operator query the Kubernetes cluster for its ability to handle a `Elasticsearch` custom resource. This is usually set by the Elasticsearch Operator during its installation process, so, if the Elasticsearch Operator is expected to run *after* the Jaeger Operator, the flag can be set to `true`.
 
