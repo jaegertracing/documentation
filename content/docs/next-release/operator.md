@@ -406,6 +406,7 @@ spec:
 <5> Volume mounts and volumes which are mounted into all storage components.
 
 #### Self provisioned
+
 Under some circumstances, the Jaeger Operator can make use of the [Elasticsearch Operator](https://github.com/openshift/elasticsearch-operator) to provision a suitable Elasticsearch cluster. Jaeger CR exposes the same configuration as [OpenShift Cluster Logging](https://docs.openshift.com/container-platform/4.2/logging/config/cluster-logging-elasticsearch.html).
 
 {{< warning >}}
