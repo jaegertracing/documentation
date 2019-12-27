@@ -26,7 +26,7 @@ Let's start with a quick refresher on the terminology defined by the [OpenTracin
 
 Jaeger can be deployed either as all-in-one binary, where all Jaeger backend components
 run in a single process, or as a scalable distributed system, discussed below. 
-There two main deployment options:
+There are two main deployment options:
 
   1. Collectors are writing directly to storage.
   2. Collectors are writing to Kafka as a preliminary buffer.
