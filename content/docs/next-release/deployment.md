@@ -398,8 +398,8 @@ Jaeger supports gRPC based storage plugins. For more information refer to [jaege
 
 Available plugins:
 
-* [Logz.io](https://github.com/logzio/jaeger-logzio)
 * [InfluxDB](https://github.com/influxdata/jaeger-influxdb/)
+* [Logz.io](https://github.com/logzio/jaeger-logzio) - Secure & Scalable Log Management with Cloud-Based ELK.
 
 ```sh
 docker run \
