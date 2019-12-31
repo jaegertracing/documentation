@@ -25,9 +25,11 @@ Per-operation parameters can be configured statically or pulled periodically fro
 
 ## Collector Sampling Configuration
 
-Collectors can be instantiated with static sampling strategies (which are propagated to the respective service if configured with Remote sampler) via the `--sampling.strategies-file` option. This option requires a path to a json file which have the sampling strategies defined.
+Collectors can be instantiated with static sampling strategies (which are propagated to the respective service if configured with Remote sampler) via the `--sampling.strategies-file` option. This option requires a path to a json file which defines the sampling strategies.
 
-Example `strategies.json`
+If no configuration is provided, the collectors will return the default probabilistic sampling policy with probability 0.001 (0.1%) for all services.
+
+Example `strategies.json`:
 ```json
 {
   "service_strategies": [
@@ -56,11 +58,28 @@ Example `strategies.json`
   ],
   "default_strategy": {
     "type": "probabilistic",
-    "param": 0.5
+    "param": 0.5,
+    "operation_strategies": [
+      {
+        "operation": "/health",
+        "type": "probabilistic",
+        "param": 0.0
+      },
+      {
+        "operation": "/metrics",
+        "type": "probabilistic",
+        "param": 0.0
+      }
+    ]
   }
 }
 ```
 
-`service_strategies` defines service specific sampling strategies and `operation_strategies` defines operation specific sampling strategies. There are 2 types of strategies possible: `probabilistic` and `ratelimiting` which are described [above](#client-sampling-configuration) (NOTE: `ratelimiting` is not supported for `operation_strategies`). `default_strategy` defines the catch-all sampling strategy that is propagated if the service is not included as part of `service_strategies`.
+`service_strategies` element defines service specific sampling strategies and `operation_strategies` defines operation specific sampling strategies. There are 2 types of strategies possible: `probabilistic` and `ratelimiting` which are described [above](#client-sampling-configuration) (NOTE: `ratelimiting` is not supported for `operation_strategies`). `default_strategy` defines the catch-all sampling strategy that is propagated if the service is not included as part of `service_strategies`.
 
-In the above example, all service `foo` operations are sampled probabilistically with a probability of 0.8 except `op1` and `op2` which are probabilistically sampled with a probability of 0.2 and 0.4 respectively. All operations for service `bar` are ratelimited at 5 traces per second. Any other service is probabilistically sampled with a probability of 0.5.
+In the above example:
+
+* All operations of service `foo` are sampled with probability 0.8 except for operations `op1` and `op2` which are probabilistically sampled with probabilities 0.2 and 0.4 respectively.
+* All operations for service `bar` are rate-limited at 5 traces per second.
+* Any other service will be sampled with probability 0.5 defined by the `default_strategy`.
+* The `default_strategy` also includes shared per-operation strategies. In this example we disable tracing on `/health` and `/metrics` endpoints for all services by using probability 0. These per-operation strategies will apply to any new service not listed in the config, as well as to the `foo` and `bar` services unless they define their own strategies for these two operations.
