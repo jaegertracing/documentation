@@ -27,7 +27,7 @@ Per-operation parameters can be configured statically or pulled periodically fro
 
 Collectors can be instantiated with static sampling strategies (which are propagated to the respective service if configured with Remote sampler) via the `--sampling.strategies-file` option. This option requires a path to a json file which defines the sampling strategies.
 
-If no configuration is provided, the collectors will return the default probabilistic sampling policy with probability 0.001 for all services.
+If no configuration is provided, the collectors will return the default probabilistic sampling policy with probability 0.001 (0.1%) for all services.
 
 Example `strategies.json`:
 ```json
