@@ -100,6 +100,11 @@ Links can either be members of the `menu` Array, directly, or they can be groupe
 
 The `items` Array should contain one or more link configurations.
 
+### Search Input
+
+`search.maxLookback` allows to define the max look back interval that the ui will show in the select input.
+`search.maxLimit` allows to define the max limit that the input will let you search.
+
 ### Link Patterns
 
 The `linkPatterns` node can be used to create links from fields displayed in the Jaeger UI.
