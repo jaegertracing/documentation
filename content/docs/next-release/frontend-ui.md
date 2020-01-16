@@ -12,7 +12,8 @@ Several aspects of the UI can be configured:
   * The Dependencies section can be enabled / configured
   * Google Analytics tracking can be enabled / configured
   * Additional menu options can be added to the global nav
-
+  * Search input can be configured
+  
 These options can be configured by a JSON configuration file. The `--query.ui-config` command line parameter of the query service must then be set to the path to the JSON file when the query service is started.
 
 An example configuration file:
@@ -43,6 +44,13 @@ An example configuration file:
       ]
     }
   ],
+  "search": {
+    "maxLookback": {
+      "label": "2 Days",
+      "value": "2d"
+    },
+    "maxLimit": 1500
+  },
   "linkPatterns": [{
     "type": "process",
     "key": "jaeger.version",
