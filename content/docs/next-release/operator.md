@@ -155,7 +155,7 @@ The `production` strategy is intended (as the name suggests) for production envi
 
 The agent can be injected as a sidecar on the instrumented application or as a daemonset. 
 
-The collector can be configured to autoscale on demand. By default, when no `.Spec.Collector.Replicas` is provided, the Jaeger Operator will create a Horizontal Pod Autoscaler (HPA) configuration for the collector. We recomment setting an explicit value for `.Spec.Collector.MaxReplicas`, along with reasonable value for the resources that the collector's pod is expected to consume. When no `.Spec.Collector.MaxReplicas` is set, the operator will set `100` as its value. Read more about HPA on [Kubernetes' website](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/). Here's an example, setting the collector's limits as well as the maximum number of replicas:
+The collector can be configured to autoscale on demand. By default, when no `.Spec.Collector.Replicas` is provided, the Jaeger Operator will create a Horizontal Pod Autoscaler (HPA) configuration for the collector. We recomment setting an explicit value for `.Spec.Collector.MaxReplicas`, along with reasonable value for the resources that the collector's pod is expected to consume. When no `.Spec.Collector.MaxReplicas` is set, the operator will set `100` as its value. Read more about HPA on [Kubernetes' website](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/). The feature can be explicitly disabled by setting `.Spec.Collector.Autoscale` to `false`. Here's an example, setting the collector's limits as well as the maximum number of replicas:
 
 ```yaml
 apiVersion: jaegertracing.io/v1
