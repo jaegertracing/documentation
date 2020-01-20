@@ -315,21 +315,21 @@ clients:
       remote_sampler: yes
       adaptive_sampler: yes
       baggage_restriction: no
-      env_JAEGER_SERVICE_NAME: no
-      env_JAEGER_AGENT_HOST: no
-      env_JAEGER_AGENT_PORT: no
-      env_JAEGER_REPORTER_LOG_SPANS: no
-      env_JAEGER_REPORTER_MAX_QUEUE_SIZE: no
-      env_JAEGER_REPORTER_FLUSH_INTERVAL: no
-      env_JAEGER_SAMPLER_TYPE: no
-      env_JAEGER_SAMPLER_PARAM: no
-      env_JAEGER_SAMPLER_MANAGER_HOST_PORT: no
-      env_TRACER_TAGS: no
-      env_JAEGER_DISABLED: no
+      env_JAEGER_SERVICE_NAME: yes
+      env_JAEGER_AGENT_HOST: yes
+      env_JAEGER_AGENT_PORT: yes
+      env_JAEGER_REPORTER_LOG_SPANS: yes
+      env_JAEGER_REPORTER_MAX_QUEUE_SIZE: yes
+      env_JAEGER_REPORTER_FLUSH_INTERVAL: yes
+      env_JAEGER_SAMPLER_TYPE: yes
+      env_JAEGER_SAMPLER_PARAM: yes
+      env_JAEGER_SAMPLER_MANAGER_HOST_PORT: yes
+      env_TRACER_TAGS: yes
+      env_JAEGER_DISABLED: yes
       env_JAEGER_RPC_METRICS: no
       env_JAEGER_SAMPLER_MAX_OPERATIONS: no
       env_JAEGER_SAMPLER_REFRESH_INTERVAL: no
-      env_JAEGER_ENDPOINT: no
+      env_JAEGER_ENDPOINT: yes
       env_JAEGER_AUTH_TOKEN: no
       env_JAEGER_USER: no
       env_JAEGER_PASSWORD: no
