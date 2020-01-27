@@ -147,13 +147,30 @@ The available strategies are described in the following sections.
 
 This strategy is intended for development, testing, and demo purposes.
 
-The main backend components, agent, collector and query service, are all packaged into a single executable which is configured (by default) to use in-memory storage.
+The main backend components, agent, collector and query service, are all packaged into a single executable which is configured (by default) to use in-memory storage. This strategy cannot be scaled beyond one replica.
 
 ## Production strategy
 
 The `production` strategy is intended (as the name suggests) for production environments, where long term storage of trace data is important, as well as a more scalable and highly available architecture is required. Each of the backend components is therefore separately deployed.
 
-The agent can be injected as a sidecar on the instrumented application or as a daemonset.
+The agent can be injected as a sidecar on the instrumented application or as a daemonset. 
+
+The collector can be configured to autoscale on demand. By default, when no value for `.Spec.Collector.Replicas` is provided, the Jaeger Operator will create a Horizontal Pod Autoscaler (HPA) configuration for the collector. We recommend setting an explicit value for `.Spec.Collector.MaxReplicas`, along with a reasonable value for the resources that the collector's pod is expected to consume. When no `.Spec.Collector.MaxReplicas` is set, the operator will set `100` as its value. Read more about HPA on [Kubernetes' website](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/). The feature can be explicitly disabled by setting `.Spec.Collector.Autoscale` to `false`. Here's an example, setting the collector's limits as well as the maximum number of replicas:
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: simple-prod
+spec:
+  strategy: production
+  collector:
+    maxReplicas: 5
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+```
 
 The query and collector services are configured with a supported storage type - currently Cassandra or Elasticsearch. Multiple instances of each of these components can be provisioned as required for performance and resilience purposes.
 
@@ -169,7 +186,9 @@ The main additional requirement is to provide the details of the storage type an
 
 ## Streaming strategy
 
-The `streaming` strategy is designed to augment the `production` strategy by providing a streaming capability that effectively sits between the collector and the backend storage (Cassandra or Elasticsearch). This provides the benefit of reducing the pressure on the backend storage, under high load situations, and enables other trace post-processing capabilities to tap into the real time span data directly from the streaming platform (Kafka).
+The `streaming` strategy is designed to augment the `production` strategy by providing a streaming capability that effectively sits between the collector and the backend storage (Cassandra or Elasticsearch). This provides the benefit of reducing the pressure on the backend storage, under high load situations, and enables other trace post-processing capabilities to tap into the real time span data directly from the streaming platform (Kafka). 
+
+The collector can be configured to autoscale on demand, as described in the "Production strategy" section.
 
 {{< info >}}
 A Kafka environment can be configured using [Strimzi's Kafka operator](https://strimzi.io/).
