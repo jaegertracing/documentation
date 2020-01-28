@@ -153,7 +153,7 @@ The main backend components, agent, collector and query service, are all package
 
 The `production` strategy is intended (as the name suggests) for production environments, where long term storage of trace data is important, as well as a more scalable and highly available architecture is required. Each of the backend components is therefore separately deployed.
 
-The agent can be injected as a sidecar on the instrumented application or as a daemonset. 
+The agent can be injected as a sidecar on the instrumented application or as a daemonset.
 
 The collector can be configured to autoscale on demand. By default, when no value for `.Spec.Collector.Replicas` is provided, the Jaeger Operator will create a Horizontal Pod Autoscaler (HPA) configuration for the collector. We recommend setting an explicit value for `.Spec.Collector.MaxReplicas`, along with a reasonable value for the resources that the collector's pod is expected to consume. When no `.Spec.Collector.MaxReplicas` is set, the operator will set `100` as its value. Read more about HPA on [Kubernetes' website](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/). The feature can be explicitly disabled by setting `.Spec.Collector.Autoscale` to `false`. Here's an example, setting the collector's limits as well as the maximum number of replicas:
 
@@ -186,7 +186,7 @@ The main additional requirement is to provide the details of the storage type an
 
 ## Streaming strategy
 
-The `streaming` strategy is designed to augment the `production` strategy by providing a streaming capability that effectively sits between the collector and the backend storage (Cassandra or Elasticsearch). This provides the benefit of reducing the pressure on the backend storage, under high load situations, and enables other trace post-processing capabilities to tap into the real time span data directly from the streaming platform (Kafka). 
+The `streaming` strategy is designed to augment the `production` strategy by providing a streaming capability that effectively sits between the collector and the backend storage (Cassandra or Elasticsearch). This provides the benefit of reducing the pressure on the backend storage, under high load situations, and enables other trace post-processing capabilities to tap into the real time span data directly from the streaming platform (Kafka).
 
 The collector can be configured to autoscale on demand, as described in the "Production strategy" section.
 
@@ -530,9 +530,23 @@ storage:
     enabled: true                                 // turn the job deployment on and off
     schedule: "55 23 * * *"                       // cron expression for it to run
     sparkMaster:                                  // spark master connection string, when empty spark runs in embedded local mode
+    resources:
+      requests:
+        memory: 4096Mi
+      limits:
+        memory: 4096Mi
+
 ```
 
 The connection configuration to storage is derived from storage options.
+
+{{< info >}}
+Make sure to assign enough memory resources. Spark [documentation](https://spark.apache.org/docs/2.4.4/hardware-provisioning.html#memory) recommends at least `8Gi` of memory.
+The job is able to starts with `2Gi` of memory. The right memory settings
+will depend on the amount of data being processed.
+Note that the job loads into the memory all data from the current day.
+{{< /info >}}
+
 
 ## Auto-injecting Jaeger Agent Sidecars
 
