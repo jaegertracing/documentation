@@ -405,7 +405,7 @@ Available plugins:
 docker run \
   -e SPAN_STORAGE_TYPE=grpc-plugin \
   -e GRPC_STORAGE_PLUGIN_BINARY=<...> \
-  -e GRPC_STORAGE_PLUGIN_CONFIGURATION_FINE=<...> \
+  -e GRPC_STORAGE_PLUGIN_CONFIGURATION_FILE=<...> \
   jaegertracing/all-in-one:{{< currentVersion >}}
 ```
 
