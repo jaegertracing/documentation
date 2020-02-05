@@ -469,6 +469,7 @@ storage:
   esIndexCleaner:
     enabled: true                                 // turn the cron job deployment on and off
     numberOfDays: 7                               // number of days to wait before deleting a record
+    schedule: "55 23 * * *"                       // cron expression for it to run
 ```
 
 The connection configuration to storage is derived from storage options.
