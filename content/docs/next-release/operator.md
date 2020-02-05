@@ -547,7 +547,6 @@ will depend on the amount of data being processed.
 Note that the job loads all data for the current day into memory.
 {{< /warning >}}
 
-
 ## Auto-injecting Jaeger Agent Sidecars
 
 The operator can inject Jaeger Agent sidecars in `Deployment` workloads, provided that the deployment has the annotation `sidecar.jaegertracing.io/inject` with a suitable value. The values can be either `"true"` (as string), or the Jaeger instance name, as returned by `kubectl get jaegers`. When `"true"` is used, there should be exactly *one* Jaeger instance for the same namespace as the deployment, otherwise, the operator can't figure out automatically which Jaeger instance to use.
