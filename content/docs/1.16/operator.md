@@ -511,9 +511,21 @@ storage:
     enabled: true                                 // turn the job deployment on and off
     schedule: "55 23 * * *"                       // cron expression for it to run
     sparkMaster:                                  // spark master connection string, when empty spark runs in embedded local mode
+    resources:
+      requests:
+        memory: 4096Mi
+      limits:
+        memory: 4096Mi
 ```
 
 The connection configuration to storage is derived from storage options.
+
+{{< warning >}}
+Make sure to assign enough memory resources. Spark [documentation](https://spark.apache.org/docs/2.4.4/hardware-provisioning.html#memory) recommends at least `8Gi` of memory.
+However, the job is able to starts with at least `2Gi` of memory. The right memory settings
+will depend on the amount of data being processed.
+Note that the job loads all data for the current day into memory.
+{{< /warning >}}
 
 ## Auto-injecting Jaeger Agent Sidecars
 
