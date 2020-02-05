@@ -540,12 +540,12 @@ storage:
 
 The connection configuration to storage is derived from storage options.
 
-{{< info >}}
+{{< warning >}}
 Make sure to assign enough memory resources. Spark [documentation](https://spark.apache.org/docs/2.4.4/hardware-provisioning.html#memory) recommends at least `8Gi` of memory.
 The job is able to starts with `2Gi` of memory. The right memory settings
 will depend on the amount of data being processed.
-Note that the job loads into the memory all data from the current day.
-{{< /info >}}
+Note that the job loads all data for the current day into memory.
+{{< /warning >}}
 
 
 ## Auto-injecting Jaeger Agent Sidecars
