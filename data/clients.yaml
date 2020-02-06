@@ -136,7 +136,7 @@ clients:
     repo: jaegertracing/jaeger-client-go
     features:
       report_jaeger_thrift_udp: yes
-      report_jaeger_thrift_http: no
+      report_jaeger_thrift_http: yes # https://github.com/jaegertracing/jaeger-client-go/issues/152
       report_zipkin_thrift_http: yes
       propagation_uber: yes
       propagation_b3: yes
@@ -178,7 +178,7 @@ clients:
     features:
       report_jaeger_thrift_udp: yes
       report_jaeger_thrift_http: yes
-      report_zipkin_thrift_http: no
+      report_zipkin_thrift_http: yes # https://github.com/jaegertracing/jaeger-client-java/tree/v0.35.5/jaeger-zipkin#thrift
       propagation_uber: yes
       propagation_b3: yes
       propagation_w3c: coming
@@ -218,7 +218,7 @@ clients:
     repo: jaegertracing/jaeger-client-node
     features:
       report_jaeger_thrift_udp: yes
-      report_jaeger_thrift_http: no
+      report_jaeger_thrift_http: yes # https://github.com/jaegertracing/jaeger-client-node#reporting-spans-via-http
       report_zipkin_thrift_http: no
       propagation_uber: yes
       propagation_b3: yes
@@ -300,7 +300,7 @@ clients:
     repo: jaegertracing/jaeger-client-cpp
     features:
       report_jaeger_thrift_udp: yes
-      report_jaeger_thrift_http:
+      report_jaeger_thrift_http: yes # https://github.com/jaegertracing/jaeger-client-cpp/pull/171
       report_zipkin_thrift_http: no
       propagation_uber: yes
       propagation_b3: no
