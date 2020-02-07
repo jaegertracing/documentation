@@ -8,6 +8,13 @@ featureGroups:
     - name: report_zipkin_thrift_http
       description: Report Zipkin Thrift over HTTP
 
+  - description: Available Thrift protocols
+    features:
+    - name: report_thrift_compact
+      description: "[Thrift Compact](https://github.com/apache/thrift/blob/v0.13.0/doc/specs/thrift-compact-protocol.md) protocol"
+    - name: report_thrift_binary
+      description: "[Thrift Binary](https://github.com/apache/thrift/blob/v0.13.0/doc/specs/thrift-binary-protocol.md) protocol"
+
   - description: Inter-process propagation wire format (headers)
     features:
     - name: propagation_uber
@@ -138,6 +145,8 @@ clients:
       report_jaeger_thrift_udp: yes
       report_jaeger_thrift_http: yes # https://github.com/jaegertracing/jaeger-client-go/issues/152
       report_zipkin_thrift_http: yes
+      report_thrift_compact: yes
+      report_thrift_binary: no
       propagation_uber: yes
       propagation_b3: yes
       propagation_w3c: coming
@@ -179,6 +188,8 @@ clients:
       report_jaeger_thrift_udp: yes
       report_jaeger_thrift_http: yes
       report_zipkin_thrift_http: yes # https://github.com/jaegertracing/jaeger-client-java/tree/v0.35.5/jaeger-zipkin#thrift
+      report_thrift_compact: yes
+      report_thrift_binary: yes
       propagation_uber: yes
       propagation_b3: yes
       propagation_w3c: coming
@@ -220,6 +231,8 @@ clients:
       report_jaeger_thrift_udp: yes
       report_jaeger_thrift_http: yes # https://github.com/jaegertracing/jaeger-client-node#reporting-spans-via-http
       report_zipkin_thrift_http: no
+      report_thrift_compact: no
+      report_thrift_binary: yes
       propagation_uber: yes
       propagation_b3: yes
       propagation_w3c: coming
@@ -261,6 +274,8 @@ clients:
       report_jaeger_thrift_udp: yes
       report_jaeger_thrift_http: no
       report_zipkin_thrift_http: no
+      report_thrift_compact: yes
+      report_thrift_binary: no
       propagation_uber: yes
       propagation_b3: yes
       propagation_w3c: coming
@@ -302,6 +317,8 @@ clients:
       report_jaeger_thrift_udp: yes
       report_jaeger_thrift_http: yes # https://github.com/jaegertracing/jaeger-client-cpp/pull/171
       report_zipkin_thrift_http: no
+      report_thrift_compact: yes
+      report_thrift_binary: no
       propagation_uber: yes
       propagation_b3: no
       propagation_w3c: coming
@@ -343,6 +360,8 @@ clients:
       report_jaeger_thrift_udp: yes
       report_jaeger_thrift_http: yes
       report_zipkin_thrift_http: no
+      report_thrift_compact: yes
+      report_thrift_binary: no
       propagation_uber: yes
       propagation_b3: yes
       propagation_w3c: coming
