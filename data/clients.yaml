@@ -136,7 +136,7 @@ clients:
     repo: jaegertracing/jaeger-client-go
     features:
       report_jaeger_thrift_udp: yes
-      report_jaeger_thrift_http: no
+      report_jaeger_thrift_http: yes
       report_zipkin_thrift_http: yes
       propagation_uber: yes
       propagation_b3: yes
