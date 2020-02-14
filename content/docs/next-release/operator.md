@@ -549,7 +549,7 @@ Note that the job loads all data for the current day into memory.
 
 ## Auto-injecting Jaeger Agent Sidecars
 
-The operator can inject Jaeger Agent sidecars in `Deployment` workloads, provided that the deployment or a namespace has the annotation `sidecar.jaegertracing.io/inject` with a suitable value. The values can be either `"true"`/`"false"` (as string), or the Jaeger instance name, as returned by `kubectl get jaegers`. When `"true"` is used, there should be exactly *one* Jaeger instance for the same namespace as the deployment, otherwise, the operator can't figure out automatically which Jaeger instance to use. When `false` is used on a deployment no Jaeger instance will be injected. A specific Jaeger instance name on a deployment has a higher precedence than `true` applied on a namespace.
+The operator can inject Jaeger Agent sidecars in `Deployment` workloads, provided that the deployment or a namespace has the annotation `sidecar.jaegertracing.io/inject` with a suitable value. The values can be either `"true"` (as string), or the Jaeger instance name, as returned by `kubectl get jaegers`. When `"true"` is used, there should be exactly *one* Jaeger instance for the same namespace as the deployment, otherwise, the operator can't figure out automatically which Jaeger instance to use. A specific Jaeger instance name on a deployment has a higher precedence than `true` applied on a namespace.
 
 The following snippet shows a simple application that will get a sidecar injected, with the Jaeger Agent pointing to the single Jaeger instance available in the same namespace:
 
@@ -573,7 +573,7 @@ spec:
       - name: myapp
         image: acme/myapp:myversion
 ```
-<1> Either `"true"`/`"false"` (as string) or the Jaeger instance name.
+<1> Either `"true"` (as string) or the Jaeger instance name.
 
 A complete sample deployment is available at [`deploy/examples/business-application-injected-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/blob/master/deploy/examples/business-application-injected-sidecar.yaml).
 
