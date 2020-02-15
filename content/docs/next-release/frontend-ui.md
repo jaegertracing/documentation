@@ -102,8 +102,14 @@ The `items` Array should contain one or more link configurations.
 
 ### Search Input
 
-`search.maxLookback` allows to define the max look back interval that the ui will show in the select input.
-`search.maxLimit` allows to define the max limit that the input will let you search.
+The `search.maxLimit` configures the maximum results that the input let you search.
+
+The `search.maxLookback` configures the maximum time before the present users can query for traces.
+
+Field | Description
+------|------------
+label | The text displayed in the search form dropdown
+value | The limit used to truncate the `lookbackOptions` in `SearchForm.js`, and the value submitted in the search query if the label is selected
 
 ### Link Patterns
 
