@@ -12,7 +12,7 @@ Several aspects of the UI can be configured:
   * The Dependencies section can be enabled / configured
   * Google Analytics tracking can be enabled / configured
   * Additional menu options can be added to the global nav
-  * Search input can be configured
+  * Search input limits can be configured
   
 These options can be configured by a JSON configuration file. The `--query.ui-config` command line parameter of the query service must then be set to the path to the JSON file when the query service is started.
 
@@ -100,16 +100,16 @@ Links can either be members of the `menu` Array, directly, or they can be groupe
 
 The `items` Array should contain one or more link configurations.
 
-### Search Input
+### Search Input Limit
 
 The `search.maxLimit` configures the maximum results that the input let you search.
 
-The `search.maxLookback` configures the maximum time before the present users can query for traces.
+The `search.maxLookback` configures the maximum time before the present users can query for traces. The options in the Lookback dropdown greater than this value will not be shown.
 
 Field | Description
 ------|------------
 label | The text displayed in the search form dropdown
-value | The limit used to truncate the `lookbackOptions` in `SearchForm.js`, and the value submitted in the search query if the label is selected
+value | The value submitted in the search query if the label is selected
 
 ### Link Patterns
 
