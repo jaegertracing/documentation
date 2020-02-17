@@ -5,8 +5,6 @@ featureGroups:
       description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift), [Compact](https://github.com/apache/thrift/blob/v0.13.0/doc/specs/thrift-compact-protocol.md) protocol, over UDP
     - name: report_jaeger_thrift_binary_udp
       description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift), [Binary](https://github.com/apache/thrift/blob/v0.13.0/doc/specs/thrift-binary-protocol.md) protocol, over UDP
-    - name: report_jaeger_thrift_compact_http
-      description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift), [Compact](https://github.com/apache/thrift/blob/v0.13.0/doc/specs/thrift-compact-protocol.md) protocol, over TCP (HTTP)
     - name: report_jaeger_thrift_binary_http
       description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift), [Binary](https://github.com/apache/thrift/blob/v0.13.0/doc/specs/thrift-binary-protocol.md) protocol, over TCP (HTTP)
     - name: report_zipkin_thrift_binary_http
@@ -141,7 +139,6 @@ clients:
     features:
       report_jaeger_thrift_compact_udp: yes
       report_jaeger_thrift_binary_udp: no
-      report_jaeger_thrift_compact_http: no
       report_jaeger_thrift_binary_http: yes
       report_zipkin_thrift_binary_http: yes
       propagation_uber: yes
@@ -184,7 +181,6 @@ clients:
     features:
       report_jaeger_thrift_compact_udp: yes
       report_jaeger_thrift_binary_udp: no
-      report_jaeger_thrift_compact_http: no
       report_jaeger_thrift_binary_http: yes
       report_zipkin_thrift_binary_http: yes
       propagation_uber: yes
@@ -227,7 +223,6 @@ clients:
     features:
       report_jaeger_thrift_compact_udp: no
       report_jaeger_thrift_binary_udp: yes
-      report_jaeger_thrift_compact_http: no
       report_jaeger_thrift_binary_http: yes
       report_zipkin_thrift_binary_http: no
       propagation_uber: yes
@@ -270,7 +265,6 @@ clients:
     features:
       report_jaeger_thrift_compact_udp: yes
       report_jaeger_thrift_binary_udp: no
-      report_jaeger_thrift_compact_http: no
       report_jaeger_thrift_binary_http: no
       report_zipkin_thrift_binary_http: no
       propagation_uber: yes
@@ -313,7 +307,6 @@ clients:
     features:
       report_jaeger_thrift_compact_udp: yes
       report_jaeger_thrift_binary_udp: no
-      report_jaeger_thrift_compact_http: no
       report_jaeger_thrift_binary_http: yes
       report_zipkin_thrift_binary_http: no
       propagation_uber: yes
@@ -356,7 +349,6 @@ clients:
     features:
       report_jaeger_thrift_compact_udp: yes
       report_jaeger_thrift_binary_udp: no
-      report_jaeger_thrift_compact_http: no
       report_jaeger_thrift_binary_http: yes
       report_zipkin_thrift_binary_http: no
       propagation_uber: yes
