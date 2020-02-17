@@ -11,6 +11,10 @@ A Kubernetes application is an application that is both deployed on Kubernetes a
 
 # Installing the Operator
 
+The Jaeger Operator can be installed in Kubernetes-based clusters and is able to watch for new Jaeger custom resources (CR) in specific namespaces, or across the entire cluster. There is typically only one Jaeger Operator per cluster, but there might be at most one Jaeger Operator per namespace in multi-tenant scenarios. When a new Jaeger CR is detected, an operator will attempt to set itself as the owner of the resource, setting a label `jaegertracing.io/operated-by` to the new CR, with the operator's namespace and name as the label's value.
+
+While multiple operators might coexist watching the same set of namespaces, which operator will succeed in setting itself as the owner of the CR is undefined behavior. Automatic injection of the sidecars might also result in undefined behavior. Therefore, it's highly recommended to have at most one operator watching each namespace. Note that namespaces might contain any number of Jaeger instances (CRs).
+
 {{< info >}}
 The Jaeger Operator version tracks one version of the Jaeger components (Query, Collector, Agent). When a new version of the Jaeger components is released, a new version of the operator will be released that understands how running instances of the previous version can be upgraded to the new version.
 {{< /info >}}
