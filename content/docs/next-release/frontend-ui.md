@@ -117,12 +117,14 @@ The `linkPatterns` node can be used to create links from fields displayed in the
 
 Field | Description
 ------|------------
-type  | The metadata section in which your link will be added: process, tags, logs
-key   | The name of tag/process/log attribute which value will be displayed as a link
+type  | The metadata section in which your link will be added: process, tags, logs, traces
+key   | The name of tag/process/log attribute which value will be displayed as a link, this field is not necessary for type `traces`.
 url   | The URL where the link should point to, it can be an external site or relative path in Jaeger UI
 text  | The text displayed in the tooltip for the link
 
-Both `url` and `text` can be defined as templates (i.e. using `#{field-name}`) where Jaeger UI will dynamically substitute values based on tags/logs data.
+Both `url` and `text` can be defined as templates (i.e. using `#{field-name}`) where Jaeger UI will dynamically substitute values based on tags/logs/traces data. 
+
+For traces, the supported template fields are: `duration`, `endTime`, `startTime`, `traceName` and `traceID`.
 
 ## Embedded Mode
 
