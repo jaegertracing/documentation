@@ -17,14 +17,13 @@ build-content:
 
 build: clean build-content
 
-htmlproofer-setup:
-	gem install bundler
-	NOKOGIRI_USE_SYSTEM_LIBRARIES=true bundle install \
-	--path vendor/bundle
+link-checker-setup:
+	curl https://htmltest.wjdp.uk | bash
 
-htmlproofer:
-	rm -rf public
-	hugo --baseURL "/"
-	$(HTMLPROOFER) \
-        --empty-alt-ignore \
-        public
+run-link-checker:
+	bin/htmltest
+
+check-links: clean build link-checker-setup run-link-checker
+
+check-external-links: clean build link-checker-setup
+	bin/htmltest --conf .htmltest.external.yml

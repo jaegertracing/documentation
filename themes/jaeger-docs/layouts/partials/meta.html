@@ -18,10 +18,10 @@
 {{- $url := replace .Permalink $version "latest" }}
 <meta property="og:type" content="documentation" />
 <meta property="og:url" content="{{ $url }}" />
-<link rel="canonical" content="{{ $url }}" />
+<link rel="canonical" href="{{ $url }}" />
 {{- else }}
 <meta property="og:url" content="{{ .Permalink }}" />
-<link rel="canonical" content="{{ .Permalink }}" />
+<link rel="canonical" href="{{ .Permalink }}" />
 {{- end }}
 <meta property="og:locale" content="en_US" />
 {{- if not $isHome }}<meta property="og:site_name" content="{{ site.Title }}" />{{- end }}
