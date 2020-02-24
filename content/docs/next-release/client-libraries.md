@@ -97,13 +97,17 @@ When `SpanContext` is encoded on the wire as part of the request to another serv
     * 0 value is valid and means “root span” (when not ignored)
 * `{flags}`
     * One byte bitmap, as two hex digits
-    * Bit 1 (right-most, least significant) is “sampled” flag
+    * Bit 1 (right-most, least significant, bit mask `0x01`) is "sampled" flag
         * 1 means the trace is sampled and all downstream services are advised to respect that
         * 0 means the trace is not sampled and all downstream services are advised to respect that
             * We’re considering a new feature that allows downstream services to upsample if they find their tracing level is too low
-    * Bit 2 is “debug” flag
+    * Bit 2 (bit mask `0x02` ) is "debug" flag
         * Debug flag should only be set when the sampled flag is set
         * Instructs the backend to try really hard not to drop this trace
+    * Bit 3 (bit mask `0x04` ) is not used
+    * Bit 4 (bit mask `0x08` ) is "firehose" flag
+        * Spans tagged as "firehose" are excluded from being indexed in the storage
+        * The traces can only be retrieved by trace ID (usually available from other sources, like logs)
     * Other bits are unused
 
 ### Baggage
