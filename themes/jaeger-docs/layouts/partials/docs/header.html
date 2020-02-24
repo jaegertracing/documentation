@@ -7,6 +7,7 @@
 <header>
   <p class="title is-1">{{ .Title }}</p>
   {{- with .Params.description }}<p class="subtitle is-3">{{ . }}</p>{{ end }}
+
   <div class="tags has-addons">
     <span class="tag is-medium">
       Version&nbsp;&nbsp;<strong>{{ $version }}</strong>
@@ -23,6 +24,8 @@
     </a>
     {{- end }}
   </div>
+
+  {{ partial "docs/mobile-dropdown.html" . }}
 
   <hr class="hr" />
 

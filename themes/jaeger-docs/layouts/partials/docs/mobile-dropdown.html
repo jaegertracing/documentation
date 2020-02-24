@@ -1,0 +1,40 @@
+{{ $currentVersion := index (split .File.Path "/") 1 }}
+{{ $versionDocsPath := printf "content/docs/%s" $currentVersion }}
+{{ $here := .RelPermalink }}
+<div class="is-hidden-desktop">
+  <div class="dropdown is-primary">
+    <div class="dropdown-trigger">
+      <button class="button is-black is-outlined has-text-weight-bold" aria-haspopup="true" aria-controls="dropdown-menu">
+        <span>
+          Docs
+        </span>
+        <span class="icon is-small">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+      <div class="dropdown-content">
+        {{ range site.Pages }}
+        {{ $docVersion := index (split .File.Path "/") 1 }}
+        {{ if and (eq $docVersion $currentVersion) (not .Params.hasParent) }}
+        {{ $isCurrentPage := eq .RelPermalink $here }}
+        <a class="dropdown-item{{ if $isCurrentPage }} is-active{{ end }}" href="{{ .RelPermalink }}">
+          {{ .Title }}
+        </a>
+
+        {{ with .Params.children }}
+        {{ range . }}
+        {{ $url := printf "/docs/%s/%s/" $currentVersion .url }}
+        {{ $isCurrentPage := eq $url $here }}
+        <a class="dropdown-item{{ if $isCurrentPage }} is-active{{ end }}" href="{{ $url }}">
+          &cir; {{ if .navtitle }}{{ .navtitle }}{{ else }}{{ .title }}{{ end }}
+        </a>
+        {{ end }}
+        {{ end }}
+        {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
