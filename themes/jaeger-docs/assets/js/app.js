@@ -45,11 +45,21 @@ function controlModals() {
   });
 }
 
+function dropdownToggle() {
+  const trigger = $('.dropdown');
+
+  if (trigger) {
+    trigger.click(function() {
+      $(this).toggleClass('is-active')
+    });
+  }
+}
 
 $(function () {
   addLinkAnchors();
   navbarToggle();
   controlModals();
+  dropdownToggle();
 
   // https://tscanlin.github.io/tocbot/#api
   tocbot.init({
