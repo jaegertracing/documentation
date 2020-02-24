@@ -18,7 +18,7 @@ build-content:
 build: clean build-content
 
 link-checker-setup:
-	curl https://htmltest.wjdp.uk | bash
+	curl https://raw.githubusercontent.com/wjdp/htmltest/master/godownloader.sh | bash
 
 run-link-checker:
 	bin/htmltest
