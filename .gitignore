@@ -1,5 +1,6 @@
 public/
 resources/
 .DS_Store
-.bundle/
-vendor/bundle/
+
+bin/
+tmp/

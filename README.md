@@ -70,6 +70,10 @@ Jaeger now supports a new thing that you definitely want.
 {{< /success >}}
 ```
 
+## Link checking
+
+You can check internal links by running `make check-internal-links` and all links, including external links, by running `make check-all-links`.
+
 ## License
 
 [Apache 2.0 License](./LICENSE).
@@ -79,3 +83,4 @@ Jaeger now supports a new thing that you definitely want.
 [ci]: https://travis-ci.org/jaegertracing/documentation
 [netifly-img]: https://api.netlify.com/api/v1/badges/d2b1a1ea-f454-4ba8-990c-cc469c959556/deploy-status
 [netifly]: https://app.netlify.com/sites/jaegertracing/deploys
+[htmltest]: https://github.com/wjdp/htmltest
