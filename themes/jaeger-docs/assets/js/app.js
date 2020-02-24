@@ -1,11 +1,3 @@
-function scrollOffset() {
-  var navbarOffset = -1 * (document.querySelector("nav.navbar").offsetHeight + 15);
-  var shiftWindow = function() { scrollBy(0, navbarOffset) };
-  window.addEventListener("hashchange", shiftWindow);
-  window.addEventListener("pageshow", shiftWindow);
-  function load() { if (window.location.hash) shiftWindow(); }
-}
-
 function addLinkAnchors() {
   anchors.options = {
     icon: '#'
@@ -55,7 +47,6 @@ function controlModals() {
 
 
 $(function () {
-  scrollOffset();
   addLinkAnchors();
   navbarToggle();
   controlModals();
