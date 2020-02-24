@@ -1,5 +1,5 @@
-{{- $clients := site.Data.clients.clients }}
-{{- $features := site.Data.clients.features }}
+{{ $clients := site.Data.clients.clients }}
+{{ $features := site.Data.clients.features }}
 <table>
   <thead>
     <tr>
@@ -8,13 +8,13 @@
     </tr>
   </thead>
   <tbody>
-    {{- range $clients }}
+    {{ range $clients }}
     <tr>
       <td>{{ .language }}</td>
       <td>
         <a href="https://github.com/{{ .repo }}">{{ .repo }}</a>
       </td>
     </tr>
-    {{- end }}
+    {{ end }}
   </tbody>
 </table>

@@ -1,9 +1,9 @@
-{{- $latest        := .Site.Params.binariesLatest }}
-{{- $binaries      := .Site.Data.download.binaries }}
-{{- $releaseUrl    := printf "https://github.com/jaegertracing/jaeger/releases/tag/v%s" $latest }}
-{{- $zipUrl        := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $latest }}
-{{- $tarUrl        := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $latest }}
-{{- $platforms     := $binaries.platforms }}
+{{ $latest        := .Site.Params.binariesLatest }}
+{{ $binaries      := .Site.Data.download.binaries }}
+{{ $releaseUrl    := printf "https://github.com/jaegertracing/jaeger/releases/tag/v%s" $latest }}
+{{ $zipUrl        := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $latest }}
+{{ $tarUrl        := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $latest }}
+{{ $platforms     := $binaries.platforms }}
 <table class="table is-striped">
   <thead>
     <tr>
@@ -28,13 +28,13 @@
       </td>
       <td>
         <p class="buttons">
-          {{- range $key, $platform := $platforms }}
-          {{- $name        := $platform.name }}
-          {{- $icon        := $platform.icon }}
-          {{- $asset       := printf "jaeger-%s-%s-amd64.tar.gz" $latest $key }}
-          {{- $downloadUrl := printf "https://github.com/jaegertracing/jaeger/releases/download/v%s/%s" $latest $asset }}
-          {{- $zipUrl      := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $latest }}
-          {{- $tarUrl      := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $latest }}
+          {{ range $key, $platform := $platforms }}
+          {{ $name        := $platform.name }}
+          {{ $icon        := $platform.icon }}
+          {{ $asset       := printf "jaeger-%s-%s-amd64.tar.gz" $latest $key }}
+          {{ $downloadUrl := printf "https://github.com/jaegertracing/jaeger/releases/download/v%s/%s" $latest $asset }}
+          {{ $zipUrl      := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $latest }}
+          {{ $tarUrl      := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $latest }}
           <a class="button is-medium is-{{ $key }}" href="{{ $downloadUrl }}" download>
             <span class="icon">
               <i class="fab {{ $icon }}"></i>
@@ -43,7 +43,7 @@
               {{ $name }}
             </span>
           </a>
-          {{- end }}
+          {{ end }}
           <a class="button is-medium is-zip" href="{{ $zipUrl }}" download>
             <span class="icon">
               <i class="fas fa-file-archive"></i>

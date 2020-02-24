@@ -1,8 +1,8 @@
-{{- $versionFromPath := index (split $.Page.File.Path "/") 1 }}
-{{- $isNextRelease := eq $versionFromPath "next-release" }}
-{{- $version := cond ($isNextRelease) site.Params.latest $versionFromPath }}
-{{- $data    := index site.Data.cli $version }}
-{{- $config  := index (index site.Data.cli $versionFromPath) "config" }}
+{{ $versionFromPath := index (split $.Page.File.Path "/") 1 }}
+{{ $isNextRelease := eq $versionFromPath "next-release" }}
+{{ $version := cond ($isNextRelease) site.Params.latest $versionFromPath }}
+{{ $data    := index site.Data.cli $version }}
+{{ $config  := index (index site.Data.cli $versionFromPath) "config" }}
 
 {{ if $isNextRelease }}
   <p><b>NOTE: This page is generated for version {{ $version }}.</b></p>

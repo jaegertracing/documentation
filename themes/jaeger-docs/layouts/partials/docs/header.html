@@ -1,28 +1,30 @@
-{{- $versions      := site.Params.versions }}
-{{- $latest        := site.Params.latest }}
-{{- $version       := index (split .File.Path "/") 1 }}
-{{- $isLatest      := eq $version $latest }}
-{{- $isNextRelease := eq $version "next-release" }}
-{{- $latestUrl     := .RelPermalink | replaceRE $version $latest }}
+{{ $versions      := site.Params.versions }}
+{{ $latest        := site.Params.latest }}
+{{ $version       := index (split .File.Path "/") 1 }}
+{{ $isLatest      := eq $version $latest }}
+{{ $isNextRelease := eq $version "next-release" }}
+{{ $latestUrl     := .RelPermalink | replaceRE $version $latest }}
 <header>
   <p class="title is-1">{{ .Title }}</p>
-  {{- with .Params.description }}<p class="subtitle is-3">{{ . }}</p>{{ end }}
+  {{ with .Params.description }}
+  <p class="subtitle is-3">{{ . }}</p>
+  {{ end }}
 
   <div class="tags has-addons">
     <span class="tag is-medium">
       Version&nbsp;&nbsp;<strong>{{ $version }}</strong>
     </span>
-    {{- if $isLatest }}
+    {{ if $isLatest }}
     <span class="tag is-medium is-success">Latest</span>
-    {{- else if $isNextRelease }}
+    {{ else if $isNextRelease }}
     <a class="tag is-medium is-info">
       Preview
     </a>
-    {{- else }}
+    {{ else }}
     <a class="tag is-medium is-warning" href="{{ $latestUrl }}">
       Click here for the latest version
     </a>
-    {{- end }}
+    {{ end }}
   </div>
 
   <hr class="hr" />
@@ -30,16 +32,15 @@
   {{ if .Params.children }}
     <p>See also:</p>
     <ul>
-      {{- range .Params.children }}
-        {{- $url := printf "/docs/%s/%s/" $version .url }}
-        <li>
-          <a href="{{ $url }}">
-            {{ .title }}
-          </a>
-        </li>
-      {{- end }}
+      {{ range .Params.children }}
+      {{ $url := printf "/docs/%s/%s/" $version .url }}
+      <li>
+        <a href="{{ $url }}">
+          {{ .title }}
+        </a>
+      </li>
+      {{ end }}
     </ul>
     <hr class="hr" />
   {{ end }}
-
 </header>
