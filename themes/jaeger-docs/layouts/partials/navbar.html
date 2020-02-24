@@ -7,6 +7,7 @@
 {{- $isDocsPage    := eq .Section "docs" }}
 {{- $preview       := getenv "HUGO_PREVIEW" }}
 {{- $isPreview     := eq $preview "true" }}
+{{- $currentVersion := index (split .File.Path "/") 1 }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
     <div class="navbar-brand">
@@ -61,6 +62,15 @@
             <a class="navbar-item" href="{{ .RelPermalink }}">
               {{ .Title }}
             </a>
+
+            {{ with .Params.children }}
+            {{ range . }}
+            {{ $url := printf "/docs/%s/%s/" $currentVersion .url }}
+            <a class="navbar-item is-small" href="{{ $url }}">
+              &cir; {{ if .navtitle }}{{ .navtitle }}{{ else }}{{ .title }}{{ end }}
+            </a>
+            {{ end }}
+            {{ end }}
             {{- end }}
             {{- end }}
           </div>
