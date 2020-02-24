@@ -3,8 +3,7 @@ HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
 
 develop:
-	HUGO_PREVIEW=true \
-	hugo server \
+	HUGO_PREVIEW=true hugo server \
         --buildDrafts \
         --buildFuture \
 	--ignoreCache
@@ -12,10 +11,25 @@ develop:
 clean:
 	rm -rf public
 
-build-content:
-	hugo -v
+netlify-production-build:
+	hugo --minify
 
-build: clean build-content
+netlify-deploy-preview:
+	HUGO_PREVIEW=true hugo \
+	--buildDrafts \
+	--buildFuture \
+	--baseURL $(DEPLOY_PRIME_URL) \
+	--minify
+
+netlify-branch-deploy:
+	hugo \
+	--buildDrafts \
+	--buildFuture \
+	--baseURL $(DEPLOY_PRIME_URL) \
+	--minify
+
+build: clean
+	hugo -v
 
 link-checker-setup:
 	curl https://raw.githubusercontent.com/wjdp/htmltest/master/godownloader.sh | bash
