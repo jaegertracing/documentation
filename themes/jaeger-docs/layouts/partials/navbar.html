@@ -66,7 +66,7 @@
             {{ with .Params.children }}
             {{ range . }}
             {{ $url := printf "/docs/%s/%s/" $currentVersion .url }}
-            <a class="navbar-item is-small" href="{{ $url }}">
+            <a class="navbar-item is-small is-hidden-desktop" href="{{ $url }}">
               &cir; {{ if .navtitle }}{{ .navtitle }}{{ else }}{{ .title }}{{ end }}
             </a>
             {{ end }}
