@@ -4,14 +4,14 @@
 
     <div class="blog__container">
       <ul class="blog__slider">
-        {{- range .posts }}
-        {{- $link    := .link }}
-        {{- $img     := .thumbnail }}
-        {{- $title   := .title }}
-        {{- $author  := .author }}
-        {{- $dateRaw := .pubDate }}
-        {{- $date    := dateFormat "January 2, 2006" $dateRaw }}
-        {{- $summary := .content | plainify | truncate 150 }}
+        {{ range .posts }}
+        {{ $link    := .link }}
+        {{ $img     := .thumbnail }}
+        {{ $title   := .title }}
+        {{ $author  := .author }}
+        {{ $dateRaw := .pubDate }}
+        {{ $date    := dateFormat "January 2, 2006" $dateRaw }}
+        {{ $summary := .content | plainify | truncate 150 }}
 
 
         <li class="blog__post">
@@ -19,11 +19,11 @@
             <img src="{{ $img }}" class="blog__topImg"></img>
             <div class="blog__content">
               <div class="blog__preview">
-                  <h2 class="blog__title">{{ $title }}</h2>
+                <h2 class="blog__title">{{ $title }}</h2>
 
-                  <p class="blog__intro">
-                    {{ $summary }}
-                  </p>
+                <p class="blog__intro">
+                  {{ $summary }}
+                </p>
               </div>
               <hr>
               <div class="blog__info">
@@ -38,7 +38,7 @@
             </div>
           </a>
          </li>
-        {{- end }}
+        {{ end }}
       </ul>
     </div>
   </div>
