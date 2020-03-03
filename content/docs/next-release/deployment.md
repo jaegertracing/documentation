@@ -290,7 +290,7 @@ more information about choosing how many shards should be chosen for optimizatio
 
 #### Elasticsearch Rollover
 
-Elasticsearch rollover is index management strategy that optimizes use of resources allocated to indices.
+[Elasticsearch rollover](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html) is index management strategy that optimizes use of resources allocated to indices.
 For example indices which do not contain any data still allocate shards or in contrary a single index might contain significantly more data than the others.
 Jaeger by default stores data in daily indices which might not optimally utilize resources. Rollover feature can be enabled by `--es.use-aliases=true`.
 
