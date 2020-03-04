@@ -1020,7 +1020,7 @@ kubectl delete jaeger simplest
 Deleting the instance will not remove the data from any permanent storage used with this instance. Data from in-memory instances, however, will be lost.
 {{< /info >}}
 
-# Tracing the operator
+# Tracing and debugging the operator
 
 Starting from version 1.16.0, the Jaeger Operator is able to generate spans related to its own operations. To take advantage of that, the `operator.yaml` has to be configured to enable tracing by setting the flag `--tracing-enabled=true` to the `args` of the container and to add a Jaeger Agent as sidecar to the pod. Here's an excerpt from an `operator.yaml` that has tracing enabled and assumes that the Jaeger instance is at the same namespace as the Jaeger Operator:
 
@@ -1054,13 +1054,48 @@ metadata:
   name: jaeger
 ```
 
+The Jaeger Operator also provides extensive logging when the flag `--log-level` is set to `debug`. Here's an excerpt from an `operator.yaml` that has the logging level set to debug:
+
+```yaml
+        # .Spec.Template.Spec.Containers[0].Args
+        args: ["start", "--log-level=debug"]
+```
+
+Note that tracing and logging at debug level can be both enabled at the same time.
+
 {{< info >}}
-Currently the Operator Lifecycle Manager (OLM) does not offer a way to configure an operator. As a result, if you install the Jaeger Operator via OLM, collecting traces from the Operator is not supported.
+Currently the Operator Lifecycle Manager (OLM) does not offer a way to configure an operator. As a result, if you install the Jaeger Operator via OLM, collecting traces or changing the log level from the Operator is not supported.
 {{< /info >}}
 
 # Monitoring the operator
 
-The Jaeger Operator starts a Prometheus-compatible endpoint on `0.0.0.0:8383/metrics` with internal metrics that can be used to monitor the process.
+The Jaeger Operator starts a Prometheus-compatible endpoint on `0.0.0.0:8383/metrics` with internal metrics that can be used to monitor the process. Interesting metrics to watch are:
+
+```
+# Total number of reconciliations and their outcomes (cumulative)
+controller_runtime_reconcile_total{controller="jaeger-controller",result="error"}
+controller_runtime_reconcile_total{controller="jaeger-controller",result="success"}
+
+# Total number of retries (cumulative)
+workqueue_retries_total{name="jaeger-controller"}
+
+# Current number of reconciliation loops in progress (gauge)
+workqueue_depth{name="jaeger-controller"}
+
+# How long (in seconds) the oldest reconciliation loop is taking. (gauge)
+workqueue_unfinished_work_seconds{name="jaeger-controller"}
+
+# How long (in seconds) it takes to process an item from the workqueue. (bucket)
+workqueue_work_duration_seconds_bucket{name="jaeger-controller"}
+```
+
+A low number of reconciliation errors is normal (`controller_runtime_reconcile_total{controller="jaeger-controller",result="error"}`), as there might be several processes changing resources at the same time for different reasons. Whenever there's a failure, the operator will attempt to reconcile again, increasing the `workqueue_retries_total{name="jaeger-controller"}` metric. However, if the rate of errors over time keeps increasing, or is beyond a reasonable threshold, an investigation might be required. The reasonable threshold might differ from cluster to cluster depending on what's happening in it, but 10% is a good starting point.
+
+As of v1.17.0, the Jaeger Operator will trigger a reconciliation loop only when the custom resource has changed or when the previous reconciliation has failed. Therefore, it's normal to have this metric (`controller_runtime_reconcile_total{controller="jaeger-controller"}`) with the same value over a long period of time: it only indicates that the custom resource hasn't changed. If this number keeps changing every second, it's indicative that something in the cluster is periodically changing the custom resource, or that the Jaeger Operator is undoing a change that is being done by a different component. Future versions of the Jaeger Operator might trigger a periodic reconciliation loop.
+
+The work queue depth (`workqueue_depth{name="jaeger-controller"}`) indicates the number of currently active reconciliation loops. For small clusters, or clusters where provisioning of Jaeger instances aren't that frequent, this number should remain close to zero for most of the time. Any value that is higher than 0 for a sustained amount of time is an indication of a reconciliation loop that got stuck. If that happens, the metric `workqueue_unfinished_work_seconds{name="jaeger-controller"}` will also continually increase. This situation indicates a bug in the Jaeger Operator. As a rule of thumb, a reconciliation has to finish in a couple of minutes, except when provisioning of Elasticsearch or Kafka is involved. A reconciliation loop that takes more than 10 minutes can be considered as "stuck". Provisioning of Elasticsearch or Kafka might take several minutes. In the usual case, reconciliation loops will take under one minute to complete.
+
+The work queue buckets (`workqueue_unfinished_work_seconds{name="jaeger-controller"}` and `workqueue_work_duration_seconds_bucket{name="jaeger-controller"}`) are directly related to the time spent processing each reconciliation loop. It's normal that one of the first 3 loops of a new Jaeger instance will take far more time than the subsequent ones, especially if the container images for the underlying components aren't cached yet by the cluster. Using the auto-provisioning feature to create an Elasticsearch and/or Kafka cluster will also affects this metric. The general rule is: a few long-running reconciliation loops are normal, especially if they occur around the same time that the metric `controller_runtime_reconcile_total{controller="jaeger-controller"}` was increased.
 
 {{< info >}}
 The Jaeger Operator does not yet publish its own metrics. Rather, it makes available metrics reported by the components it uses, such as the Operator SDK.
