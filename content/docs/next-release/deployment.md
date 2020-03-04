@@ -290,8 +290,8 @@ more information about choosing how many shards should be chosen for optimizatio
 
 #### Elasticsearch Rollover
 
-[Elasticsearch rollover](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html) is index management strategy that optimizes use of resources allocated to indices.
-For example indices which do not contain any data still allocate shards or in contrary a single index might contain significantly more data than the others.
+[Elasticsearch rollover](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html) is an index management strategy that optimizes use of resources allocated to indices.
+For example, indices that do not contain any data still allocate shards, and conversely, a single index might contain significantly more data than the others.
 Jaeger by default stores data in daily indices which might not optimally utilize resources. Rollover feature can be enabled by `--es.use-aliases=true`.
 
 Rollover allows rolling over to a new index based on different criteria:
@@ -307,19 +307,19 @@ To learn more about rollover index management in Jaeger refer to this
 
 ##### Initialize
 
-The following command prepares Elasticsearch for rollover deployment by creating index aliases, indices and installing Jaeger index templates:
+The following command prepares Elasticsearch for rollover deployment by creating index aliases, indices, and index templates:
 
 ```sh
 docker run -it --rm --net=host jaegertracing/jaeger-es-rollover:latest init http://localhost:9200 # <1>
 ```
 
-<1> Add `-e ARCHIVE=true` to initialize archive storage
+If you need to initialize archive storage, add `-e ARCHIVE=true`.
 
 After the initialization Jaeger can be deployed with `--es.use-aliases=true`.
 
 ##### Rolling over to a new index
 
-The next step is to periodically execute rollover API which rolls the write alias to a new index based on supplied conditions. The command also adds a new index to read alias to make new data available for search.
+The next step is to periodically execute the rollover API which rolls the write alias to a new index based on supplied conditions. The command also adds a new index to the read alias to make new data available for search.
 
 ```shell
 docker run -it --rm --net=host -e CONDITIONS='{"max_age": "2d"}' jaegertracing/jaeger-es-rollover:latest rollover  http://localhost:9200 # <1>
@@ -327,7 +327,7 @@ docker run -it --rm --net=host -e CONDITIONS='{"max_age": "2d"}' jaegertracing/j
 
 <1> The command rolls the alias over to a new index if the age of the current write index is older than 2 days. For more conditions see [Elasticsearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html).
 
-The next step is to remove old indices from read aliases. It means that old data will not be available for search. This imitates the behavior of `--es.max-span-age` flag used in default index-per-day deployment. This step could be optional and old indices could be simply removed by index cleaner in the next step.
+The next step is to remove old indices from read aliases. It means that old data will not be available for search. This imitates the behavior of `--es.max-span-age` flag used in the default index-per-day deployment. This step could be optional and old indices could be simply removed by index cleaner in the next step.
 
 ```sh
 docker run -it --rm --net=host -e UNIT=days -e UNIT_COUNT=7 jaegertracing/jaeger-es-rollover:latest lookback  http://localhost:9200 # <1>
