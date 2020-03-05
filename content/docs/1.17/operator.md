@@ -263,7 +263,7 @@ spec:
           topic: jaeger-spans
           brokers: my-cluster-kafka-brokers.kafka:9092
       ingester:
-        deadlockInterval: 5 # <2>
+        deadlockInterval: 5s # <2>
   storage:
     type: elasticsearch
     options:
@@ -446,6 +446,7 @@ spec:
     options:
       es:
         server-urls: https://quickstart-es-http.default.svc:9200 # <2>
+        index-prefix: my-prefix
         tls: # <3>
           ca: /es/certificates/ca.crt
     secretName: jaeger-secret # <4>
