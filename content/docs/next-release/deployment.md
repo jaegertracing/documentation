@@ -345,7 +345,6 @@ docker run -it --rm --net=host -e ROLLOVER=true jaegertracing/jaeger-es-index-cl
 
 <1> Remove indices older than 14 days.
 
-
 #### Upgrade Elasticsearch version
 
 Elasticsearch defines wire and index compatibility versions. The index compatibility defines
