@@ -294,11 +294,11 @@ more information about choosing how many shards should be chosen for optimizatio
 For example, indices that do not contain any data still allocate shards, and conversely, a single index might contain significantly more data than the others.
 Jaeger by default stores data in daily indices which might not optimally utilize resources. Rollover feature can be enabled by `--es.use-aliases=true`.
 
-Rollover allows rolling over to a new index based on different criteria:
+Rollover lets you configure when to roll over to a new index based on one or more of the following criteria:
 
-* `max_age` - the maximum age of the index
-* `max_docs` - the maximum documents in the index
-* `max_size` - the maximum estimated size of primary shards (since Elasticsearch 6.x)
+* `max_age` - the maximum age of the index. It uses [time units](https://www.elastic.co/guide/en/elasticsearch/reference/master/common-options.html#time-units): `d`, `h`, `m`.
+* `max_docs` - the maximum documents in the index.
+* `max_size` - the maximum estimated size of primary shards (since Elasticsearch 6.x). It uses [byte size units](https://www.elastic.co/guide/en/elasticsearch/reference/master/common-options.html#byte-units) `tb`, `gb`, `mb`.
 
 Rollover index management strategy is more complex than using the default daily indices and it requires an initialisation job to prepare the storage and two cron jobs to manage indices.
 
