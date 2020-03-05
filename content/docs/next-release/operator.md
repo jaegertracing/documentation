@@ -594,6 +594,14 @@ Note that the job loads all data for the current day into memory.
 
 ## Auto-injecting Jaeger Agent Sidecars
 
+{{< warning >}}
+Currently, only `Deployments` are supported for auto-injecting Jaeger Agent sidecars.
+
+For other controller types, please see [Manually Defining Jaeger Agent Sidecars](#manually-defining-jaeger-agent-sidecars) below.
+
+Support for auto-injecting other controller types is being tracked with [Issue #750](https://github.com/jaegertracing/jaeger-operator/issues/750).
+{{< /warning >}}
+
 The operator can inject Jaeger Agent sidecars in `Deployment` workloads, provided that the deployment or its namespace has the annotation `sidecar.jaegertracing.io/inject` with a suitable value. The values can be either `"true"` (as string), or the Jaeger instance name, as returned by `kubectl get jaegers`. When `"true"` is used, there should be exactly *one* Jaeger instance for the same namespace as the deployment, otherwise, the operator can't figure out automatically which Jaeger instance to use. A specific Jaeger instance name on a deployment has a higher precedence than `true` applied on its namespace.
 
 The following snippet shows a simple application that will get a sidecar injected, with the Jaeger Agent pointing to the single Jaeger instance available in the same namespace:
@@ -624,7 +632,43 @@ A complete sample deployment is available at [`deploy/examples/business-applicat
 
 When the sidecar is injected, the Jaeger Agent can then be accessed at its default location on `localhost`.
 
+## Manually Defining Jaeger Agent Sidecars
+
+For controller types other than `Deployments` (e.g. `StatefulSets`, `DaemonSets`, etc), the Jaeger Agent sidecar can be manually defined in your specification.
+
+The following snippet shows the manual definition you can include in your `containers` section for a Jaeger Agent sidecar:
+
+```yaml
+- name: jaeger-agent
+  image: jaegertracing/jaeger-agent:master
+  imagePullPolicy: IfNotPresent
+  ports:
+    - containerPort: 5775
+      name: zk-compact-trft
+      protocol: UDP
+    - containerPort: 5778
+      name: config-rest
+      protocol: TCP
+    - containerPort: 6831
+      name: jg-compact-trft
+      protocol: UDP
+    - containerPort: 6832
+      name: jg-binary-trft
+      protocol: UDP
+    - containerPort: 14271
+      name: admin-http
+      protocol: TCP
+  args:
+    - --reporter.grpc.host-port=dns:///jaeger-collector-headless.observability:14250
+    - --reporter.type=grpc
+```
+
+A complete sample `StatefulSet` is available at [`deploy/examples/statefulset-manual-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/blob/master/deploy/examples/statefulset-manual-sidecar.yaml).
+
+The Jaeger Agent can then be accessed at its default location on `localhost`.
+
 ## Installing the Agent as DaemonSet
+
 By default, the Operator expects the agents to be deployed as sidecars to the target applications. This is convenient for several purposes, like in a multi-tenant scenario or to have better load balancing, but there are scenarios where you might want to install the agent as a `DaemonSet`. In that case, specify the Agent's strategy to `DaemonSet`, as follows:
 
 ```yaml
