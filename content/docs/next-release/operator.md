@@ -640,7 +640,7 @@ The following snippet shows the manual definition you can include in your `conta
 
 ```yaml
 - name: jaeger-agent
-  image: jaegertracing/jaeger-agent:master
+  image: jaegertracing/jaeger-agent:latest
   imagePullPolicy: IfNotPresent
   ports:
     - containerPort: 5775
