@@ -182,6 +182,62 @@ $ kubectl logs -l app.kubernetes.io/instance=simplest -c jaeger
 {"level":"info","ts":1535385688.0951214,"caller":"healthcheck/handler.go:133","msg":"Health Check state change","status":"ready"}
 ```
 
+# Configuring the operator
+
+The Jaeger Operator can be configured via command-line interface parameters, via environment variables or configuration file. When the same var is specified at different levels, the precedence order is: 
+
+1. command-line parameter (flag)
+1. environment variable
+1. configuration file
+
+Each item takes precedence over the item below it. The available options can be seen by running the operator with the `--help` flag, such as:
+
+```bash
+$ podman run jaegertracing/jaeger-operator:master start --help
+```
+
+## Examples
+
+Setting the `log-level` parameter via flag of a given Jaeger Operator deployment (excerpt):
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jaeger-operator
+spec:
+  template:
+    spec:
+      containers:
+      - name: jaeger-operator
+        image: jaegertracing/jaeger-operator:master
+        args: ["start", "--log-level=debug"]
+```
+
+Setting the `log-level` parameter via environment variable on a given Jaeger Operator deployment (excerpt):
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jaeger-operator
+spec:
+  template:
+    spec:
+      containers:
+      - name: jaeger-operator
+        image: jaegertracing/jaeger-operator:master
+        args: ["start"]
+        env:
+        - name: LOG-LEVEL
+          value: debug
+```
+
+Setting the `log-level` parameter in the configuration file:
+```yaml
+log-level: debug
+```
+
+To use a configuration file, either create a file at `${HOME}/.jaeger-operator.yaml`, or specify the location via `--config`. 
+
 # Deployment Strategies
 
 When you create a Jaeger instance, it is associated with a strategy.  The strategy is defined in the custom resource file, and determines the architecture to be used for the Jaeger backend.  The default strategy is `allInOne`. The other possible values are `production` and `streaming`.
@@ -1064,9 +1120,25 @@ The Jaeger Operator also provides extensive logging when the flag `--log-level` 
 
 Note that tracing and logging at debug level can be both enabled at the same time.
 
-{{< info >}}
-Currently the Operator Lifecycle Manager (OLM) does not offer a way to configure an operator. As a result, if you install the Jaeger Operator via OLM, collecting traces or changing the log level from the Operator is not supported.
-{{< /info >}}
+When using OLM, the Jaeger Operator can be configured by changing the `Subscription`'s `config` property. To set the `log-level` parameter, this is how a subscription would look like (excerpt):
+
+```yaml
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: jaeger
+  namespace: openshift-operators
+spec:
+  channel: stable
+  config:
+    env:
+      - name: LOG-LEVEL
+        value: debug
+  installPlanApproval: Automatic
+  name: jaeger
+  source: community-operators
+  sourceNamespace: openshift-marketplace
+```
 
 # Monitoring the operator
 
