@@ -123,7 +123,7 @@ featureGroups:
         `JAEGER_PROPAGATION` defines the propagation format used by the tracer.
         Supported values are `jaeger` (defined [here](../client-libraries/#propagation-format)),
         `b3` (defined [here](https://github.com/openzipkin/b3-propagation))
-        and `trace_context` (defined [here](https://github.com/w3c/distributed-tracing))
+        and `w3c` (defined [here](https://github.com/w3c/distributed-tracing))
     - name: JAEGER_TRACEID_128BIT
       description: >
         `JAEGER_TRACEID_128BIT` if true, instructs the tracer to generate 128bit trace IDs
