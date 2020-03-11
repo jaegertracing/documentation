@@ -121,8 +121,9 @@ featureGroups:
     - name: env_JAEGER_PROPAGATION
       description: >
         `JAEGER_PROPAGATION` defines the propagation format used by the tracer.
-        Supported values are `jaeger` (defined [here](../client-libraries/#propagation-format))
-        and `b3` (defined [here](https://github.com/openzipkin/b3-propagation)).
+        Supported values are `jaeger` (defined [here](../client-libraries/#propagation-format)),
+        `b3` (defined [here](https://github.com/openzipkin/b3-propagation))
+        and `w3c` (defined [here](https://github.com/w3c/distributed-tracing))
     - name: JAEGER_TRACEID_128BIT
       description: >
         `JAEGER_TRACEID_128BIT` if true, instructs the tracer to generate 128bit trace IDs
@@ -185,7 +186,7 @@ clients:
       report_zipkin_thrift_binary_http: yes
       propagation_uber: yes
       propagation_b3: yes
-      propagation_w3c: coming
+      propagation_w3c: yes
       jaeger_debug_id: when there is no trace
       jaeger_baggage: no
       standard_tracer_metrics: yes
