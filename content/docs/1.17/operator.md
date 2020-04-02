@@ -184,7 +184,7 @@ $ kubectl logs -l app.kubernetes.io/instance=simplest -c jaeger
 
 # Configuring the operator
 
-The Jaeger Operator can be configured via command-line interface parameters, via environment variables or configuration file. When the same var is specified at different levels, the precedence order is: 
+The Jaeger Operator can be configured via command-line interface parameters, via environment variables or configuration file. When the same var is specified at different levels, the precedence order is:
 
 1. command-line parameter (flag)
 1. environment variable
@@ -236,7 +236,7 @@ Setting the `log-level` parameter in the configuration file:
 log-level: debug
 ```
 
-To use a configuration file, either create a file at `${HOME}/.jaeger-operator.yaml`, or specify the location via `--config`. 
+To use a configuration file, either create a file at `${HOME}/.jaeger-operator.yaml`, or specify the location via `--config`.
 
 # Deployment Strategies
 
@@ -1224,9 +1224,9 @@ The Jaeger Operator does not yet publish its own metrics. Rather, it makes avail
 To uninstall the operator, run the following commands:
 
 ```bash
-kubectl delete -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.17.0/deploy/operator.yaml
-kubectl delete -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.17.0/deploy/role_binding.yaml
-kubectl delete -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.17.0/deploy/role.yaml
-kubectl delete -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.17.0/deploy/service_account.yaml
-kubectl delete -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.17.0/deploy/crds/jaegertracing.io_jaegers_crd.yaml
+kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.17.0/deploy/operator.yaml
+kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.17.0/deploy/role_binding.yaml
+kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.17.0/deploy/role.yaml
+kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.17.0/deploy/service_account.yaml
+kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.17.0/deploy/crds/jaegertracing.io_jaegers_crd.yaml
 ```
