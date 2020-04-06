@@ -426,7 +426,7 @@ Writing to Kafka is particularly useful for building post-processing data pipeli
 ```sh
 docker run \
   -e SPAN_STORAGE_TYPE=kafka \
-  -e KAFKA_BROKERS=<...> \
+  -e KAFKA_PRODUCER_BROKERS=<...> \
   -e KAFKA_TOPIC=<...> \
   jaegertracing/jaeger-collector:{{< currentVersion >}}
 ```
