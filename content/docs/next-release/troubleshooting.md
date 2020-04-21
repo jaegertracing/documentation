@@ -38,7 +38,7 @@ The Jaeger Java Client will not fail when a connection to the Jaeger Collector c
 
 {{< /warning >}}
 
-If your Jaeger collector is still not able to receive spans (see the following sections on how to check logs and metrics for that), then the issue is most likely with your networking namespace configuration. When running the Jaeger collector as a Docker container, the typical mistakes are:
+If your Jaeger backend is still not able to receive spans (see the following sections on how to check logs and metrics for that), then the issue is most likely with your networking namespace configuration. When running the Jaeger backend components as Docker containers, the typical mistakes are:
 
   * Not exposing the appropriate ports outside of the container. For example, the collector may be listening on `:14268` inside the container network namespace, but the port is not reachable from the outside.
   * Not making the agent's or collector's host name visible from the application's network namespace. For example, if you run both your application and Jaeger backend in separate containers in Docker, they either need to be in the same namespace, or the application's container needs to be given access to Jaeger backend using the `--link` option of the `docker` command.
