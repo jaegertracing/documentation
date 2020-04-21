@@ -28,7 +28,7 @@ The logging reporter follows the sampling decision made by the sampler, meaning 
 
 ## Bypass the Jaeger Agent
 
-By default, the Jaeger Client is configured to send spans via UDP to a Jaeger Agent running on `localhost`. As some networking setups might drop or block UDP packets, or impose size limits, the Jaeger Client can be configured to bypass the Agent, sending spans directly to the Collector. Some clients, such as the Jaeger _Java_ Client, support the environment variable `JAEGER_ENDPOINT` which can be used to specify the Collector's location, such as http://jaeger-collector:14268/api/traces. Refer to the Jaeger Client's documentation for the language you are using. When you have configured the `JAEGER_ENDPOINT` property to the endpoint for the Collector, the Jaeger _Java_ Client logs the following when the tracer is created:
+By default, the Jaeger Client is configured to send spans via UDP to a Jaeger Agent running on `localhost`. As some networking setups might drop or block UDP packets, or impose size limits, the Jaeger Client can be configured to bypass the Agent, sending spans directly to the Collector. Some clients, such as the Jaeger _Java_ Client, support the environment variable `JAEGER_ENDPOINT` which can be used to specify the Collector's location, such as `http://jaeger-collector:14268/api/traces`. Refer to the Jaeger Client's documentation for the language you are using. For example, when you have configured the `JAEGER_ENDPOINT` property to the endpoint for the Collector in the Jaeger Client for Java, it logs the following when the tracer is created (notice `sender=HttpSender`):
 
     2018-12-10 17:06:30 INFO  Configuration:236 - Initialized  tracer=JaegerTracer(...,  reporter=CompositeReporter(reporters=[RemoteReporter(sender=HttpSender(),  ...), ...]), ...)
 
@@ -38,6 +38,10 @@ The Jaeger Java Client will not fail when a connection to the Jaeger Collector c
 
 {{< /warning >}}
 
+If your Jaeger collector is still not able to receive spans (see the following sections on how to check logs and metrics for that), then the issue is most likely with your networking namespace configuration. When running the Jaeger collector as a Docker container, the typical mistakes are:
+
+  * Not exposing the appropriate ports outside of the container. For example, the collector may be listening on `:14268` inside the container network namespace, but the port is not reachable from the outside.
+  * Not making the agent's or collector's host name visible from the application's network namespace. For example, if you run both your application and Jaeger backend in separate containers in Docker, they either need to be in the same namespace, or the application's container needs to be given access to Jaeger backend using the `--link` option of the `docker` command.
 
 ## Increase the logging in the backend components
 
