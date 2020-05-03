@@ -2,12 +2,24 @@
 title: News
 ---
 
+## Jaeger Graduates to a Top-Level CNCF Project
+
+**2019-10-31**
+
+After two years of hard work and contributions from the community, Jaeger has graduated to be the 7th top-level project in the Cloud Native Computing
+Foundation, lining up alongside Kubernetes, Prometheus, Envoy, CoreDNS, containerd, and Fluentd.
+
+* [Graduation application](https://github.com/cncf/toc/blob/master/reviews/graduation-jaeger.md) to CNCF Technical Oversight Committee
+* CNCF blog: [official announcement](https://www.cncf.io/announcement/2019/10/31/cloud-native-computing-foundation-announces-jaeger-graduation/)
+* DevOps.com: [CNCF Advances Jaeger Distributed Tracing Project](https://devops.com/cncf-advances-jaeger-distributed-tracing-project/)
+* TheNewStack: [Jaeger Graduates CNCF, Sees a Future Without Native Jaeger Clients](https://thenewstack.io/jaeger-graduates-cncf-sees-a-future-without-native-jaeger-clients/)
+
 ## Announcing Jaeger v1.0
 
 **2017-12-06**
 
 Today we reached a milestone and released v1.0 of Jaeger backend. Details are in this
-[Medium blog post](https://medium.com/jaegertracing/announcing-jaeger-1-0-37b5990cc59b).
+[blog post](https://medium.com/jaegertracing/announcing-jaeger-1-0-37b5990cc59b).
 
 ## Jaeger Joins Cloud Native Computing Foundation
 
