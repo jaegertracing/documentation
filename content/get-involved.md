@@ -8,6 +8,8 @@ Jaeger is an open source project with [open governance](https://github.com/jaege
 
 * Join the [online chat room](../get-in-touch) and help answering questions from the rest of the community.
 * Join our [bi-weekly video calls](../get-in-touch) to discuss issues, large initiatives, or present case studies.
+* Help documenting answers to common questions, either in [Jaeger documentation](https://github.com/jaegertracing/documentation) or [Stackoverflow](https://stackoverflow.com/questions/tagged/jaeger).
+* Help improving [Jaeger documentation](https://github.com/jaegertracing/documentation), especially if you yourself run into issues where something is not clear or not working.
 * Publish blog posts or tutorials about Jaeger, for example:
   * What kind of deployment model you chose in your company and why.
   * How to use Jaeger with hosted storage solutions, such as AWS Elasticsearch.
@@ -19,14 +21,13 @@ Jaeger is an open source project with [open governance](https://github.com/jaege
   * Tweet about your blog post at [@Jaegertracing](https://twitter.com/jaegertracing) and email to `jaeger-tracing@googlegroups.com`.
   * If your blog is on Medium, reach out to maintainers and we may add it to our [official blog](https://medium.com/jaegertracing).
 
-* Help documenting answers to common questions, either in [Jaeger documentation](https://github.com/jaegertracing/documentation) or [Stackoverflow](https://stackoverflow.com/questions/tagged/jaeger).
-* Help improving [Jaeger documentation](https://github.com/jaegertracing/documentation), especially if you yourself run into issues where something is not clear or not working.
 * Advocate for deploying Jaeger in your company.
+* Propose new designs for building new capabilities in Jaeger.
 * Organize local meetups to explain the benefits of Jaeger and distributed tracing.
 
 ## Help with coding
 
-Of course, there's also no shortage of opportunities to help with the actual development of Jaeger. The easiest way to start is with issues tagged [good first issue](https://github.com/jaegertracing/jaeger/labels/good%20first%20issue). Note that the Jaeger project includes many different [repositories](https://github.com/jaegertracing/), covering backend components, Jaeger UI, client libraries, Kubernetes tools, analytics tools, etc. Many of them have the "good first issue" tickets, so pick whichever strikes your fancy.
+Of course, there's also no shortage of opportunities to help with the actual development of Jaeger. The easiest way to start is with issues tagged [good first issue](https://github.com/jaegertracing/jaeger/labels/good%20first%20issue). Note that the Jaeger project includes many different [repositories](https://github.com/jaegertracing/), covering backend components, Jaeger UI, client libraries, Kubernetes tools, analytics tools, etc. Many of them have the "good first issue" tickets, so pick whichever area interests you the most.
 
 Another label to look for is [help wanted](https://github.com/jaegertracing/jaeger/labels/help%20wanted), which we use to tag tickets that involve features that maintainers consider promising / useful, but which are not on the immediate roadmap (after all, we all have day jobs with different priorities).
 
