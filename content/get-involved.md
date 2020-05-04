@@ -22,7 +22,7 @@ Jaeger is an open source project with [open governance](https://github.com/jaege
   * If your blog is on Medium, reach out to maintainers and we may add it to our [official blog](https://medium.com/jaegertracing).
 
 * Advocate for deploying Jaeger in your company.
-* Propose new designs for building new capabilities in Jaeger.
+* Propose designs for building new capabilities in Jaeger.
 * Organize local meetups to explain the benefits of Jaeger and distributed tracing.
 
 ## Help with coding
