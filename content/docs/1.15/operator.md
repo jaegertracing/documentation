@@ -619,7 +619,7 @@ spec:
     options:
       default_strategy:
         type: probabilistic
-        param: 50
+        param: 0.5
 ```
 
 This example defines a default sampling strategy that is probabilistic, with a 50% chance of the trace instances being sampled.
