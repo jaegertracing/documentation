@@ -2,6 +2,7 @@
 {{ $twitterHandle := .Site.Params.twitterhandle }}
 {{ $gitterHandle  := .Site.Params.gitterhandle }}
 {{ $mediumHandle  := .Site.Params.mediumhandle }}
+{{ $year          := now.Year }}
 <footer class="footer">
   <div class="container">
     <div class="columns">
@@ -52,6 +53,20 @@
             <li><a href="/report-security-issue">Report a security issue</a></li>
         </ul>
       </div>
+    </div>
+
+    <br />
+
+    <div class="has-text-light has-text-centered">
+      <p class="is-size-5 is-size-6-mobile">
+        &copy; {{ $year }} Jaeger Authors | Documentation distributed under <a href="https://creativecommons.org/licenses/by/4.0">CC-BY-4.0</a>.
+      </p>
+
+      <br />
+
+      <p>
+        &copy; {{ $year }} The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage">Trademark Usage</a> page.
+      </p>
     </div>
   </div>
 </footer>
