@@ -33,3 +33,11 @@ Jaeger components only log to standard out, using structured logging library [go
 ```
 
 The log level can be adjusted via `--log-level` command line switch; default level is `info`.
+
+## Traces
+
+Jaeger has the ability to trace some of its own components, namely the requests to the Query service. For example, if you start `all-in-one` as described in [Getting Started](../getting-started), and refresh the UI screen a few times, you will see `jaeger-query` populated in the Services dropdown. If you prefer not to see these traces in the Jaeger UI, you can disable them by running Jaeger backend components with `JAEGER_DISABLED=true` environment variable, for example:
+
+```
+docker run -e JAEGER_DISABLED=true -p 16686:16686 jaegertracing/all-in-one:{{< currentVersion >}}
+```
