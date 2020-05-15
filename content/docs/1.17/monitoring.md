@@ -24,6 +24,10 @@ Component             | Port
 **jaeger-ingester**   | 14270
 **all-in-one**        | 14269
 
+### Prometheus monitoring mixin for Jaeger
+
+The Prometheus monitoring mixin for Jaeger provides a starting point for people wanting to monitor Jaeger using Prometheus, Alertmanager, and Grafana. This includes a prebuilt [dashboard](https://github.com/jaegertracing/jaeger/blob/master/monitoring/jaeger-mixin/dashboard-for-grafana.json). For more information, see [the documentation](https://github.com/jaegertracing/jaeger/tree/master/monitoring/jaeger-mixin).
+
 ## Logging
 
 Jaeger components only log to standard out, using structured logging library [go.uber.org/zap](https://github.com/uber-go/zap) configured to write log lines as JSON encoded strings, for example:
