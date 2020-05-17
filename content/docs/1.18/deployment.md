@@ -140,8 +140,9 @@ Collectors require a persistent storage backend. Cassandra and Elasticsearch are
 
 The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` (only as a buffer), `grpc-plugin`, `badger` (only with all-in-one) and `memory` (only with all-in-one).
 
-As of version 1.6.0, it's possible to use multiple storage types at the same time by providing a comma-separated list of valid types to the `SPAN_STORAGE_TYPE` environment variable.
-It's important to note that all listed storage types are used for writing, but only the first type in the list will be used for reading and archiving.
+As of version 1.6.0, it's possible to use multiple storage types at the same time by providing a comma-separated list of valid types to the `SPAN_STORAGE_TYPE` environment variable. It's important to note that all listed storage types are used for writing, but only the first type in the list will be used for reading and archiving.
+
+For large scale production deployment the Jaeger team [recommends Elasticsearch backend over Cassandra](../faq/#what-is-the-recommended-storage-backend).
 
 ### Memory
 
