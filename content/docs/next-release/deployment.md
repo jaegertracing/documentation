@@ -7,10 +7,12 @@ children:
   url: operator
 - title: Frontend/UI
   url: frontend-ui
-- title: Windows
-  url: windows
 - title: CLI Flags
   url: cli
+- title: Security
+  url: security
+- title: On Windows
+  url: windows
 ---
 
 The main Jaeger backend components are released as Docker images on Docker Hub:
