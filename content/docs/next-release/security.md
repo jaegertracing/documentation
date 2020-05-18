@@ -17,13 +17,13 @@ Deployments that involve Jaeger Agent are meant for trusted environments where t
 Clients can be configured to communicate directly with the Collector via HTTP. Unfortunately, at this time the Jaeger backend does not provide means of configuring TLS for its HTTP servers. The connections can be secured by using a reverse proxy placed in front of the collectors.
 
 * [ ] HTTP - no TLS/authentication.
-  * Some Jaeger clients support passing auth-tokens or basic auth.
+  * Some Jaeger clients support passing [auth-tokens or basic auth](../client-features/#tracer-configuration-via-environment-variables).
+  * Blog post: [Protecting the collection of spans (using Keycloak)](https://medium.com/jaegertracing/protecting-the-collection-of-spans-1948d88682e5).
   * Blog post: [Secure architecture for Jaeger with Apache httpd reverse proxy on OpenShift](https://medium.com/@larsmilland01/secure-architecture-for-jaeger-with-apache-httpd-reverse-proxy-on-openshift-f31983fad400).
 
 ## Agent to Collector
 
 * [x] gRPC - TLS with client cert authentication supported.
-* Blog post: [Protecting the collection of spans (using Keycloak)](https://medium.com/jaegertracing/protecting-the-collection-of-spans-1948d88682e5).
 
 ## Collector/Query to Storage
 
