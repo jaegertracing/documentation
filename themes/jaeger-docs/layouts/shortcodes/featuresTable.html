@@ -4,7 +4,7 @@
   <tbody>
     {{ range $featureGroups }}
     <tr class="feature-table-sticky-row">
-      <th class="feature-table-header" colspan="7">{{ .description | markdownify }}</th>
+      <th class="feature-table-header" id="{{ .description | anchorize }}" colspan="7">{{ .description | markdownify }}</th>
     </tr>
     <tr class="feature-table-sticky-row">
       <th class="feature-table-sub-header">Feature</th>
