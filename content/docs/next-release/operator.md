@@ -291,6 +291,23 @@ The `streaming` strategy is designed to augment the `production` strategy by pro
 
 The collector can be configured to autoscale on demand, as described in the "Production strategy" section.
 
+The ingester can also be configured to autoscale on demand. By default, when no value for `.Spec.Ingester.Replicas` is provided, the Jaeger Operator will create a Horizontal Pod Autoscaler (HPA) configuration for the ingester. We recommend setting an explicit value for `.Spec.Ingester.MaxReplicas`, along with a reasonable value for the resources that the ingester's pod is expected to consume. When no `.Spec.Ingester.MaxReplicas` is set, the operator will set `100` as its value. Read more about HPA on [Kubernetes' website](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/). The feature can be explicitly disabled by setting `.Spec.Ingester.Autoscale` to `false`. Here's an example, setting the ingester's limits as well as the maximum number of replicas:
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: simple-streaming
+spec:
+  strategy: streaming
+  ingester:
+    maxReplicas: 8
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+```
+
 {{< info >}}
 A Kafka environment can be configured using [Strimzi's Kafka operator](https://strimzi.io/).
 {{< /info >}}
