@@ -631,7 +631,7 @@ storage:
   esRollover:
     enabled: true                                // turn the cron job deployment on and off
     conditions: "{\"max_age\": \"2d\"}"          // conditions when to rollover to a new index
-    readTTL: 7d                                  // how long should be old data available for reading
+    readTTL: 168h                                // how long should be old data available for reading (7 days)
     schedule: "55 23 * * *"                      // cron expression for it to run
 ```
 
