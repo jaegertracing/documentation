@@ -68,7 +68,7 @@ TODO standardize and describe the metric names and labels (issues [#572](https:/
 
 ## Propagation Format
 
-When `SpanContext` is encoded on the wire as part of the request to another service, Jaeger client libraries default to the encoding specified below. In the future Jaeger will support the upcoming [W3C Trace-Context specification](https://github.com/w3c/distributed-tracing).
+When `SpanContext` is encoded on the wire as part of the request to another service, Jaeger client libraries default to the Jaeger native propagation format specified below. In addition, Jaeger clients support [Zipkin B3 format](https://github.com/openzipkin/b3-propagation) and [W3C Trace-Context](https://github.com/w3c/distributed-tracing).
 
 ### Trace/Span Identity
 
