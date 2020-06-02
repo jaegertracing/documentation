@@ -26,7 +26,7 @@ Uber published a blog post, [Evolving Distributed Tracing at Uber](https://eng.u
 
 ## Features
 
-  * [OpenTracing](http://opentracing.io/) and [OpenTelemetry](https://opentelemetry.io/) compatible data model and instrumentation libraries
+  * [OpenTracing](http://opentracing.io/) compatible data model and instrumentation libraries
     * in [Go](https://github.com/jaegertracing/jaeger-client-go), [Java](https://github.com/jaegertracing/jaeger-client-java), [Node](https://github.com/jaegertracing/jaeger-client-node), [Python](https://github.com/jaegertracing/jaeger-client-python),
    [C++](https://github.com/jaegertracing/cpp-client) and [C#](https://github.com/jaegertracing/jaeger-client-csharp)
   * Uses consistent upfront sampling with individual per service/endpoint probabilities
