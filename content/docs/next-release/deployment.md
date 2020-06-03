@@ -2,6 +2,8 @@
 title: Deployment
 weight: 4
 children:
+- title: OpenTelemetry
+  url: opentelemetry
 - title: Operator for Kubernetes
   navtitle: Kubernetes
   url: operator
