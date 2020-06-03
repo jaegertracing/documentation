@@ -12,7 +12,6 @@ The following is only a selection of some of the major features we plan to imple
 * forward compatibility with OpenTelemetry native data model
 * tail-based sampling
 * attribute processors
-* [standardized collection pipeline](https://opentelemetry.io/)
 * leverage a larger community
 
 More can be found in the blog post [Jaeger embraces OpenTelemetry collector](https://medium.com/jaegertracing/jaeger-embraces-opentelemetry-collector-90a545cbc24)
