@@ -4,6 +4,20 @@ title: Roadmap
 
 The following is only a selection of some of the major features we plan to implement in the near future (6-12 months). To get a more complete overview of planned features and current work, see the issue trackers for the various repositories, for example, the [Jaeger backend](https://github.com/jaegertracing/jaeger/issues/).
 
+## Integration with OpenTelemetry collector
+
+[OpenTelemetry collector](https://opentelemetry.io/docs/collector/about) is a vendor-agnostic service for receiving, processing and exporting telemetry data. We have decided to rebuild the Jaeger backed components (agent, collector, ingester, all-in-one) on top of OpenTelemetry collector which has several benefits:
+
+* automatic compatibility with OpenTelemetry SDKs
+* forward compatibility with OpenTelemetry native data model
+* tail-based sampling
+* attribute processors
+* leverage a larger community
+
+More can be found in the blog post [Jaeger embraces OpenTelemetry collector](https://medium.com/jaegertracing/jaeger-embraces-opentelemetry-collector-90a545cbc24), and the earlier post [Jaeger and OpenTelemetry](https://medium.com/jaegertracing/jaeger-and-opentelemetry-1846f701d9f2) that laid out the project strategy.
+
+The current progress can be tracked via [issues tagged as `area/otel`](https://github.com/jaegertracing/jaeger/issues?q=is%3Aissue+is%3Aopen+label%3Aarea%2Fotel).
+
 ## Adaptive Sampling
 
 The most common way of using Jaeger client libraries is with probabilistic sampling which makes a determination
