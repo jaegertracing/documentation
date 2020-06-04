@@ -22,24 +22,24 @@ Component             | Repository
 
 ## Compatibility
 
-The Jaeger OpenTelemetry components are **almost** backward compatible legacy Jaeger components.
+The Jaeger OpenTelemetry components are **almost** backward compatible the current Jaeger components.
 
 The differences are:
 
 * Health check port changed to `13133`
-* Not all legacy Jaeger flags are exposed (e.g. health check port)
+* Not all current Jaeger flags are exposed (e.g. health check port)
 * Exposed metrics
 
 ## Configuration
 
-Jaeger OpenTelemetry components can be configured by a subset of Jaeger legacy flags (or other [configuration sources](../cli/))
+Jaeger OpenTelemetry components can be configured by a subset of Jaeger current flags (or other [configuration sources](../cli/))
 and [OpenTelemetry configuration file](https://opentelemetry.io/docs/collector/configuration/).
 The OpenTelemetry configuration takes precedence over Jaeger configuration.
-The Jaeger OpenTelemetry components use hardcoded default configuration that enables predefined set of components - Jaeger receiver, attribute processor, (storage) exporter.
-The opinionated default configuration ensures compatibility between Jaeger legacy components.
+The Jaeger OpenTelemetry binaries use hardcoded default configuration that enables predefined set of components - Jaeger receiver, attribute processor, (storage) exporter.
+The opinionated default configuration ensures compatibility between Jaeger current components.
 The user provided OpenTelemetry configuration is merged with the default configuration.
 
-Let's have a look at example configuration:
+Let's have a look at the example configuration:
 
 ```sh
 $ docker run --rm -it -v ${PWD}:/config \
@@ -71,7 +71,7 @@ service:
 
 * Enables Jaeger receiver (by default) with collector endpoints - gRPC, TChannel, HTTP.
 * Enables Elasticsearch backend with URL http://elasticsearch:9200, 3 primary shards (default is 5) and 2 replica shards (default 1). The CLI flag `--es.server.urls=http://localhost:9200` is superseded by the value from the configuration file.
-* Enables attribute processor (disabled by default). Note that new components have to be explicitly added to the pipeline.
+* Enables attribute processor (disabled by default). Note that new components have to be explicitly added to the pipeline and component lists (e.g. `processors`) override the default configuration.
 * Enables health check extension (by default).
 
 The following command can be used to list all supported flags:
