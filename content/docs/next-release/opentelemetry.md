@@ -7,7 +7,8 @@ The future Jaeger backend components will be based on [OpenTelemetry collector](
 This integration will make all OpenTelemetry Collector features available in the Jaeger backend components.
 
 {{< warning >}}
-At the moment Jaeger OpenTelemetry components are experimental.
+At the moment Jaeger OpenTelemetry components are experimental and the configuration and behavior can change.
+The current progress can be tracked via [issues tagged as `area/otel`](https://github.com/jaegertracing/jaeger/issues?q=is%3Aissue+is%3Aopen+label%3Aarea%2Fotel).
 {{< /warning >}}
 
 The Jaeger OpenTelemetry backend components are published as Docker images:
@@ -31,7 +32,7 @@ The differences are:
 
 ## Configuration
 
-Jaeger OpenTelemetry components can be configured by a subset of Jaeger legacy flags (or other [configuration sources](deployment.md#configuration-3))
+Jaeger OpenTelemetry components can be configured by a subset of Jaeger legacy flags (or other [configuration sources](../cli))
 and [OpenTelemetry configuration file](https://opentelemetry.io/docs/collector/configuration/).
 The OpenTelemetry configuration takes precedence over Jaeger configuration.
 The Jaeger OpenTelemetry components use hardcoded default configuration that enables predefined set of components - Jaeger receiver, attribute processor, (storage) exporter.
@@ -68,10 +69,10 @@ service:
       processors: [attributes]
 ```
 
-* Enables Jaeger receiver with collector endpoints - gRPC, TChannel, HTTP. The Jaeger receiver is enabled by default.
-* Enables Elasticsearch backend with URL http://elasticsearch:9200, 3 primary shards (default is 5) and 2 replica shards (default 1)
+* Enables Jaeger receiver (by default) with collector endpoints - gRPC, TChannel, HTTP.
+* Enables Elasticsearch backend with URL http://elasticsearch:9200, 3 primary shards (default is 5) and 2 replica shards (default 1). The CLI flag `--es.server.urls=http://localhost:9200` is superseded by the value from the configuration file.
 * Enables attribute processor (disabled by default). Note that new components have to be explicitly added to the pipeline.
-* Enables health check extension.
+* Enables health check extension (by default).
 
 The following command can be used to list all supported flags:
 
