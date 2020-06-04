@@ -7,7 +7,7 @@ The future Jaeger backend components will be based on [OpenTelemetry collector](
 This integration will make all OpenTelemetry Collector features available in the Jaeger backend components.
 
 {{< warning >}}
-At the moment Jaeger OpenTelemetry components are experimental and the configuration and behavior can change.
+At the moment Jaeger OpenTelemetry binaries are experimental and the configuration or behavior can change.
 The current progress can be tracked via [issues tagged as `area/otel`](https://github.com/jaegertracing/jaeger/issues?q=is%3Aissue+is%3Aopen+label%3Aarea%2Fotel).
 {{< /warning >}}
 
@@ -22,7 +22,7 @@ Component             | Repository
 
 ## Compatibility
 
-The Jaeger OpenTelemetry components are **almost** backward compatible the current Jaeger components.
+The Jaeger OpenTelemetry binaries are **almost** backward compatible the current Jaeger binaries.
 
 The differences are:
 
@@ -36,7 +36,7 @@ Jaeger OpenTelemetry components can be configured by a subset of Jaeger current 
 and [OpenTelemetry configuration file](https://opentelemetry.io/docs/collector/configuration/).
 The OpenTelemetry configuration takes precedence over Jaeger configuration.
 The Jaeger OpenTelemetry binaries use hardcoded default configuration that enables predefined set of components - Jaeger receiver, attribute processor, (storage) exporter.
-The opinionated default configuration ensures compatibility between Jaeger current components.
+The opinionated default configuration ensures compatibility between Jaeger current binaries.
 The user provided OpenTelemetry configuration is merged with the default configuration.
 
 Let's have a look at the example configuration:
@@ -112,4 +112,4 @@ spec:
 
 <3> Health check port has to match Jaeger component health check port from the [deployment page](deployment.md).
 
-Once Jaeger OpenTelemetry components are released in a stable stream the Jaeger Operator will automatically use new set of images and properly change readiness probes to the new ports.
+Once Jaeger OpenTelemetry binaries are released in a stable stream the Jaeger Operator will automatically use new set of images and properly change readiness probes to the new ports.
