@@ -39,10 +39,6 @@ Content-Type: application/vnd.apache.thrift.binary
 
 There is no official Jaeger JSON format that can be accepted by the collector. In the future the Protobuf-generated JSON may be supported.
 
-### Thrift via TChannel (deprecated)
-
-Agent and Collector can communicate using TChannel protocol. This protocol is generally not supported by the routing infrastructure and has been deprecated. It will be eventually removed from Jaeger.
-
 ### Zipkin Formats (stable)
 
 Jaeger Collector can also accept spans in several Zipkin data format, namely JSON v1/v2 and Thrift. The Collector needs to be configured to enable Zipkin HTTP server, e.g. on port 9411 used by Zipkin collectors. The server enables two endpoints that expect POST requests:
