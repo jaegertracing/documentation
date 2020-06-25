@@ -108,7 +108,7 @@ When using gRPC, you have several options for load balancing and name resolution
 
 ### Agent level tags
 
-Jaeger supports agent level tags, that can be added to the process tags of all spans passing through the agent. This is supported through the command line flag `--jaeger.tags=key1=value1,key2=value2,...,keyn=valuen`. Tags can also be set through an environment flag like so - `--jaeger.tags=key=${envFlag:defaultValue}` - The tag value will be set to the value of the `envFlag` environment key and `defaultValue` if not set. This feature is not supported for the tchannel reporter, enabled using the flags `--collector.host-port` or `--reporter.tchannel.host-port`.
+Jaeger supports agent level tags, that can be added to the process tags of all spans passing through the agent. This is supported through the command line flag `--jaeger.tags=key1=value1,key2=value2,...,keyn=valuen`. Tags can also be set through an environment flag like so - `--jaeger.tags=key=${envFlag:defaultValue}` - The tag value will be set to the value of the `envFlag` environment key and `defaultValue` if not set.
 
 ## Collectors
 
@@ -131,7 +131,6 @@ At default settings the collector exposes the following ports:
 
 Port  | Protocol | Function
 ----- | -------  | ---
-14267 | TChannel | used by **jaeger-agent** to send spans in jaeger.thrift format
 14250 | gRPC     | used by **jaeger-agent** to send spans in model.proto format
 14268 | HTTP     | can accept spans directly from clients in jaeger.thrift format over binary thrift protocol
 9411  | HTTP     | can accept Zipkin spans in Thrift, JSON and Proto (disabled by default)
