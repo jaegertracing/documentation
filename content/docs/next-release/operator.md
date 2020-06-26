@@ -895,6 +895,8 @@ The types of supported configuration  include:
 
 * [annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
 
+* [imagePullSecrets](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) to run containers based on images in private registries
+
 * [labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
 
 * [resources](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container) to limit cpu and memory
@@ -957,6 +959,8 @@ spec:
       operator: "Equal"
       value: "value1"
       effect: "NoExecute"
+  imagePullSecrets:
+  - name: nameOfImagePullSecret
   serviceAccount: nameOfServiceAccount
   securityContext:
     runAsUser: 1000
