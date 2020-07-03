@@ -1000,6 +1000,8 @@ spec:
             path: log_level
 ```
 
+Note: If necessary, imagePullSecrets can be configured for components through their serviceAccounts (see https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-image-pull-secret-to-service-account). For the sidecar, see the [Deployment-level Configurations for Injected Sidecars](#deployment-level-configurations-for-injected-sidecars) section.
+
 # Accessing the Jaeger Console (UI)
 <!-- TODO Add tabs shortcode -->
 
