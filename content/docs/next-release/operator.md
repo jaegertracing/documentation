@@ -713,7 +713,7 @@ Since the sidecar may be injected in Deployments that are not managed by the jae
 - Volumes (& VolumeMounts)
 - ImagePullSecrets
 
-E.g. the following Jaeger configuration will add the `agent-volume` and `agent-imagePullSecrets` to the sidecar's deployment, but not the `common-volume` and `common-imagePullSecret`.
+E.g. the following Jaeger configuration will add the `agent-volume` and `agent-imagePullSecrets` to the sidecar's deployment.
 
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -729,19 +729,9 @@ spec:
     volumes:
       - name: agent-volume
         secret:
-          secretName: agent-volume
+          secretName: agent-secret
     imagePullSecrets:
     - name: agent-imagePullSecret
-  volumeMounts:
-  - name: common-volume
-    mountPath: /tmp/common
-    readOnly: true
-  volumes:
-    - name: common-volume
-      secret:
-        secretName: common-volume
-  imagePullSecrets:
-  - name: common-imagePullSecret
 ```
 
 ## Manually Defining Jaeger Agent Sidecars
@@ -933,8 +923,6 @@ The types of supported configuration  include:
 
 * [annotations](https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/)
 
-* [imagePullSecrets](https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod) to run containers based on images in private registries
-
 * [labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
 
 * [resources](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container) to limit cpu and memory
@@ -997,8 +985,6 @@ spec:
       operator: "Equal"
       value: "value1"
       effect: "NoExecute"
-  imagePullSecrets:
-  - name: nameOfImagePullSecret
   serviceAccount: nameOfServiceAccount
   securityContext:
     runAsUser: 1000
