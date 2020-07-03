@@ -706,6 +706,44 @@ A complete sample deployment is available at [`deploy/examples/business-applicat
 
 When the sidecar is injected, the Jaeger Agent can then be accessed at its default location on `localhost`.
 
+### Deployment-level Configurations for Injected Sidecars
+
+Since the sidecar may be injected in Deployments that are not managed by the jaeger-operator, many configurations that apply at the Deployment-level are not applied to a sidecar's Deployment *unless* they are specified under the agent node. The following configurations are supported for the sidecar's Deployment:
+
+- Volumes (& VolumeMounts)
+- ImagePullSecrets
+
+E.g. the following Jaeger configuration will add the `agent-volume` and `agent-imagePullSecrets` to the sidecar's deployment, but not the `common-volume` and `common-imagePullSecret`.
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: my-jaeger
+spec:
+  agent:
+    volumeMounts:
+    - name: agent-volume
+      mountPath: /tmp/agent
+      readOnly: true
+    volumes:
+      - name: agent-volume
+        secret:
+          secretName: agent-volume
+    imagePullSecrets:
+    - name: agent-imagePullSecret
+  volumeMounts:
+  - name: common-volume
+    mountPath: /tmp/common
+    readOnly: true
+  volumes:
+    - name: common-volume
+      secret:
+        secretName: common-volume
+  imagePullSecrets:
+  - name: common-imagePullSecret
+```
+
 ## Manually Defining Jaeger Agent Sidecars
 
 For controller types other than `Deployments` (e.g. `StatefulSets`, `DaemonSets`, etc), the Jaeger Agent sidecar can be manually defined in your specification.
