@@ -52,7 +52,7 @@ Most of the Jaeger clients, such as the Java, Go, and C# clients, buffer spans i
 
 In most common scenarios, the queue will be close to empty (metric: `jaeger_tracer_reporter_queue_length`), as spans are flushed to the Agent or Collector at regular intervals or when a certain size of the batch is reached. The detailed behavior of this queue is described in this [GitHub issue](https://github.com/jaegertracing/jaeger-client-java/issues/607).
 
-Clients also report their dropped spans to the agent.  These are then published by the agent itself as `jaeger_agent_client_stats_spans_dropped_total{cause="full-queue|send-failure|too-large",}`.  This can be useful if client metrics are unavailable for some reason.
+Thrift clients also report their dropped spans to the agent.  These are then published by the agent itself as `jaeger_agent_client_stats_spans_dropped_total{cause="full-queue|send-failure|too-large",}`.  This can be useful if client metrics are unavailable for some reason.
 
 ### Modify the batched spans flush interval
 
