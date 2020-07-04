@@ -52,6 +52,8 @@ Most of the Jaeger clients, such as the Java, Go, and C# clients, buffer spans i
 
 In most common scenarios, the queue will be close to empty (metric: `jaeger_tracer_reporter_queue_length`), as spans are flushed to the Agent or Collector at regular intervals or when a certain size of the batch is reached. The detailed behavior of this queue is described in this [GitHub issue](https://github.com/jaegertracing/jaeger-client-java/issues/607).
 
+Thrift clients also report their dropped spans to the agent.  These are then published by the agent itself as `jaeger_agent_client_stats_spans_dropped_total{cause="full-queue|send-failure|too-large",}`.  This can be useful if client metrics are unavailable for some reason.
+
 ### Modify the batched spans flush interval
 
 The Java, Go, NodeJS, Python and C# Clients allow the customization of the flush interval (default value: `1000` milliseconds, or 1 second) used by the reporters, such as the `RemoteReporter`, to trigger a `flush` operation, sending all in-memory spans to the Agent or Collector. The lower the flush interval is set to, the more frequent the flush operations happen. As most reporters will wait until enough data is in the queue, this setting will force a flush operation at periodic intervals, so that spans are sent to the backend in a timely fashion.
