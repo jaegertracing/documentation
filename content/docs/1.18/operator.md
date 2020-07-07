@@ -971,9 +971,7 @@ spec:
           - key: log_level
             path: log_level
 ```
-{{< warning >}}
-For latest EKS(v1.16.8) you will get a `The Jaeger "simple-prod" is invalid: type: Required value` error with the above `volumes` definition. A proper workaround is to rename the `key` value to the `path` value in your `configMap` resource and delete the `items` part. [Issue #1109](https://github.com/jaegertracing/jaeger-operator/issues/1109)
-{{< /warning >}}
+
 # Accessing the Jaeger Console (UI)
 <!-- TODO Add tabs shortcode -->
 
