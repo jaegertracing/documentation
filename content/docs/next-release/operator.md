@@ -710,6 +710,34 @@ A complete sample deployment is available at [`deploy/examples/business-applicat
 
 When the sidecar is injected, the Jaeger Agent can then be accessed at its default location on `localhost`.
 
+### Deployment-level Configurations for Injected Sidecars
+
+Since the sidecar may be injected in Deployments that are not managed by the jaeger-operator, many configurations that apply at the Deployment-level are not applied to a sidecar's Deployment *unless* they are specified under the agent node. The following configurations are supported for the sidecar's Deployment:
+
+- Volumes (& VolumeMounts)
+- ImagePullSecrets
+
+E.g. the following Jaeger configuration will add the `agent-volume` and `agent-imagePullSecrets` to the sidecar's deployment.
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: my-jaeger
+spec:
+  agent:
+    volumeMounts:
+    - name: agent-volume
+      mountPath: /tmp/agent
+      readOnly: true
+    volumes:
+      - name: agent-volume
+        secret:
+          secretName: agent-secret
+    imagePullSecrets:
+    - name: agent-imagePullSecret
+```
+
 ## Manually Defining Jaeger Agent Sidecars
 
 For controller types other than `Deployments` (e.g. `StatefulSets`, `DaemonSets`, etc), the Jaeger Agent sidecar can be manually defined in your specification.
@@ -975,6 +1003,8 @@ spec:
           - key: log_level
             path: log_level
 ```
+
+Note: If necessary, imagePullSecrets can be configured for components through their serviceAccounts (see https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-image-pull-secret-to-service-account). For the sidecar, see the [Deployment-level Configurations for Injected Sidecars](#deployment-level-configurations-for-injected-sidecars) section.
 
 # Accessing the Jaeger Console (UI)
 <!-- TODO Add tabs shortcode -->
