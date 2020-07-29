@@ -22,7 +22,7 @@ Component             | Repository
 
 ## Compatibility
 
-The Jaeger OpenTelemetry binaries are **almost** backward compatible the current Jaeger binaries.
+The Jaeger OpenTelemetry binaries are **almost** backward compatible with the current Jaeger binaries.
 
 The differences are:
 
