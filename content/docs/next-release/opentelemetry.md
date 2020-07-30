@@ -112,4 +112,4 @@ spec:
 
 <3> Health check port has to match Jaeger component health check port from the [deployment page](deployment.md).
 
-Once Jaeger OpenTelemetry binaries are released in a stable stream the Jaeger Operator will automatically use new set of images and properly change readiness probes to the new ports.
+Once Jaeger OpenTelemetry binaries are released in a stable stream the Jaeger Operator will automatically use a new set of images and properly change readiness probes to the new ports.
