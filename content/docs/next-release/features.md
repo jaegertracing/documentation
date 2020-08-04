@@ -55,3 +55,18 @@ from advanced features not available elsewhere, if your organization has already
 using Zipkin libraries, you do not have to rewrite all that code. Jaeger provides backwards compatibility with Zipkin
 by accepting spans in Zipkin formats (Thrift, JSON v1/v2 and Protobuf) over HTTP. Switching from Zipkin backend is just a matter
 of routing the traffic from Zipkin libraries to the Jaeger backend.
+
+## Topology
+
+In production, the Dependencies from `System Architecture` is based on service data which stored in Cassandra or Elasticsearch, 
+while `Deep Dependency Graph` only read trace data by the search result. The main differences between them are:
+
+System Architecture view:  
+  * is built from one-hop connections between services. E.g. A - B - C implies that A and B, and B and C are connected, but says nothing about A and C
+  * The graph is displayed for all services in the system at once
+  * Only takes into accounts services, not their specific endpoints
+
+Deep Dependency Graph:  
+  * is built with transitive knowledge of end to end flows through the system. You can mouse over a particular edge in the graph and see all call paths passing through it
+  * is build on the notion of a "focal service" for which the graph is rendered, meaning that paths through the system not passing through the focal service are not displayed
+  * is build at the level if individual endpoints (although service-only view is also supported)
