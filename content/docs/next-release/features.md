@@ -58,7 +58,7 @@ of routing the traffic from Zipkin libraries to the Jaeger backend.
 
 ## Topology Graphs
 
-Jaeger UI supports to types of service graphs: **System Architecture** and **Deep Dependency Graph**.
+Jaeger UI supports two types of service graphs: **System Architecture** and **Deep Dependency Graph**.
 
 ### System Architecture
 
