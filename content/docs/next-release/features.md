@@ -58,16 +58,20 @@ of routing the traffic from Zipkin libraries to the Jaeger backend.
 
 ## Topology Graphs
 
-The `System Architecture` is based on service dependencies, derived from span data reported to the Jaeger Collector. 
-When using a production configuration, the dependencies are derived using a Spark job.
-The `Deep Dependency Graph` is generated based on trace instances obtained by doing a search. The main differences between them are:
+Jaeger UI supports to types of service graphs: **System Architecture** and **Deep Dependency Graph**.
 
-System Architecture view:  
-  * is built from one-hop connections between services. E.g. A - B - C implies that A and B, and B and C are connected, but says nothing about A and C
-  * The graph is displayed for all services in the system at once
-  * Only takes into account services, not their specific endpoints
+### System Architecture
 
-Deep Dependency Graph:  
-  * is built with transitive knowledge of end to end flows through the system. You can mouse over a particular edge in the graph and see all call paths passing through it
-  * is built on the notion of a "focal service" for which the graph is rendered, meaning that paths through the system not passing through the focal service are not displayed
-  * is built at the level if individual endpoints (although service-only view is also supported)
+The "classic" service dependency graph for all services observed in the architecture. The graph represents only one-hop dependencies between services, similar to what one could get from telemetry produced by service meshes. For example, a graph `A - B - C` means that there are some traces that contain network calls between `A` and `B`, and some traces with calls between `B` and `C`. However, it does not mean there are any traces that contain the full chain `A - B - C`, i.e. we cannot say that `A` depends on `C`.
+
+The node granularity of this graph is services only, not service endpoints.
+
+The System Architecture graph can be built on the fly from in-memory storage, or by using Spark or Flink jobs when using distributed storage.
+
+### Deep Dependency Graph
+
+Also known as "Transitive Dependency Graph", where a chain `A -> B -> C` means that there is a transitive dependency of `A` on `C`. A single graph requires a "focal" service (shown in pink) and only displays the paths passing through that service. Typically, this type of graph does not represent the full architecture of the system, unless there is a service that is connected to everything, e.g. an API gateway, and it is selected as a focal service.
+
+The node granularity of this graph can be changed between services and service endpoints. In the latter mode, different endpoints in the same service will be displayed as separate nodes, e.g. `A::op1` and `A::op2`.
+
+At this time the transitive graph can only be constructed from traces in the search results. In the future there will be a Flink job that will compute the graphs by aggregating all traces.
