@@ -31,6 +31,7 @@ Uber published a blog post, [Evolving Distributed Tracing at Uber](https://eng.u
    [C++](https://github.com/jaegertracing/cpp-client) and [C#](https://github.com/jaegertracing/jaeger-client-csharp)
   * Uses consistent upfront sampling with individual per service/endpoint probabilities
   * Multiple storage backends: Cassandra, Elasticsearch, memory.
+  * System topology graphs
   * Adaptive sampling (coming soon)
   * Post-collection data processing pipeline (coming soon)
 
