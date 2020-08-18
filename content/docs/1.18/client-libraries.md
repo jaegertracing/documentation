@@ -117,6 +117,19 @@ When `SpanContext` is encoded on the wire as part of the request to another serv
 * Limitation: since HTTP headers don’t preserve the case, Jaeger recommends baggage keys to be lowercase-kebab-case,
 e.g. `my-baggage-key-1`.
 
+Example: the following code sequence:
+
+```
+span.SetBaggageItem("key1", "value1")
+span.SetBaggageItem("key2", "value2")
+```
+
+will result in the following HTTP headers:
+
+```
+uberctx-key1: value1
+uberctx-key2: value2
+```
 
 
 [HttpSender]: https://github.com/jaegertracing/jaeger-client-java/blob/master/jaeger-thrift/src/main/java/io/jaegertracing/thrift/internal/senders/HttpSender.java
