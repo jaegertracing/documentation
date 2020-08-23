@@ -46,7 +46,7 @@ $ docker run --rm -it -v ${PWD}:/config \
     -e SPAN_STORAGE_TYPE=elasticsearch \
     jaegertracing/jaeger-opentelemetry-collector \
     --config-file=/config/config.yaml \
-    --es.server.urls=http://localhost:9200 \
+    --es.server-urls=http://localhost:9200 \
     --es.num-shards=3
 ```
 
