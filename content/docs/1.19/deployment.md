@@ -492,6 +492,7 @@ At default settings the query service exposes the following port(s):
 Port  | Protocol | Function
 ----- | -------  | ---
 16686 | HTTP     | `/api/*` endpoints and Jaeger UI at `/`
+16686 | gRPC     | Protobuf/gRPC [QueryService](https://github.com/jaegertracing/jaeger-idl/blob/master/proto/api_v2/query.proto)
 16687 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
 
 ### Minimal deployment example (Elasticsearch backend):
@@ -503,6 +504,14 @@ docker run -d --rm \
   -e ES_SERVER_URLS=http://<ES_SERVER_IP>:<ES_SERVER_PORT> \
   jaegertracing/jaeger-query:{{< currentVersion >}}
 ```
+
+### Clock Skew Adjustment
+
+Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. The query service implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/master/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to its timestamps.
+
+Sometimes these adjustments themselves make the trace hard to understand. For example, when repositioning the server span within the bounds of its parent span, Jaeger does not know the exact relationship between the request and response latencies, so it assumes then to be equal and places the child span in the middle of the parent span (see [issue #961](https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244)).
+
+The query service supports a configuration flag `--query.max-clock-skew-adjustment` that controls how much clock skew adjustment should be allowed. Setting this parameter to zero (`0s`) disables clock skew adjustment completely. This setting applies to all traces retrieved from the given query service. There is an open [ticket #197](https://github.com/jaegertracing/jaeger-ui/issues/197) to support toggling the adjustment on and off directly in the UI.
 
 ### UI Base Path
 
