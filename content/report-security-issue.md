@@ -13,7 +13,7 @@ If you find something suspicious and want to report it, we'd really appreciate!
 
 ## Our PGP key
 
-No matter what channel you choose to communicate with us, feel free to encrypt your message using our [published key][published-key], available in all major key servers and which should match the one shown below. If you are new to PGP, you can run the following command to encrypt a file called "message.txt":
+No matter what channel you choose to communicate with us, prefer to encrypt your message using our [published key][published-key], available in all major key servers and which should match the one shown below. If you are new to PGP, you can run the following command to encrypt a file called "message.txt":
 
 1. Receive our keys from the key server:
 
