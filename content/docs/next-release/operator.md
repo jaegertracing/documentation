@@ -640,6 +640,40 @@ storage:
 
 The connection configuration to storage is derived from storage options.
 
+##### Elasticsearch index lifecycle management
+
+[Index lifecycle management](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-lifecycle-management.html)
+(ILM) is an Elasticsearch feature from X-Pack plugin that
+manages lifecycle of indices. In the context of the Operator it means that
+ILM can be used instead of rollover cron jobs.
+Jaeger project does not provide a direct integration with the ILM,
+however the Operator can be configured to use index aliases (required by ILM)
+and disable index template creation and rollover cron jobs.
+This allows users to configure ILM in custom index templates before Jaeger is deployed.
+
+```yaml
+spec:
+  strategy: production
+  collector:
+    options:
+      es:
+        use-aliases: true # <1>
+  query:
+    options:
+      es:
+        use-aliases: true  # <1>
+  storage:
+    type: elasticsearch
+    options:
+      es:
+        create-index-templates: false  # <2>
+        server-urls: http://elasticsearch:9200
+```
+
+<1> Configures query and collector to use read and write index aliases.
+
+<2> Disables creation of default index templates.
+
 ## Deriving dependencies
 
 The processing to derive dependencies will collect spans from storage, analyzes links between services and store them for later presentation in the UI.
