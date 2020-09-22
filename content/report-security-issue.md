@@ -6,17 +6,18 @@ If you find something suspicious and want to report it, we'd really appreciate!
 
 ## Ways to report
 
+* Prefer to always encrypt your message, no matter the channel you choose to report the issue
 * Contact us on our open chat room on [Gitter][gitter-room]
-* Send a message to [jaeger-tracing@googlegroups.com][mailing-list]. Ideally, encrypt it using our [published key][published-key], which should match the one shown below.
-* Merge request on GitHub: if you can, fork the affected repository and send us a pull request. We really prefer if you'd talk to us before, though, as our repositories are public and we would like to give a heads up to our users before disclosing it publicly.
+* Send a message to [jaeger-tracing@googlegroups.com][mailing-list]
+* Merge request on GitHub: if you can, fork the affected repository and send us a pull request. We really prefer if you'd talk to us before, though, as our repositories are public and we would like to give a heads up to our users before disclosing it publicly
 
 ## Our PGP key
 
-No matter what channel you choose to communicate with us, feel free to encrypt your message using our [published key][published-key], which should match the one shown below. If you are new to PGP, you can run the following command to encrypt a file called "message.txt":
+No matter what channel you choose to communicate with us, feel free to encrypt your message using our [published key][published-key], available in all major key servers and which should match the one shown below. If you are new to PGP, you can run the following command to encrypt a file called "message.txt":
 
 1. Receive our keys from the key server:
 
-    `gpg --keyserver sks-keyservers.net --recv-keys C043A4D2B3F2AC31`
+    `gpg --keyserver pool.sks-keyservers.net --recv-keys C043A4D2B3F2AC31`
 
 1. Encrypt a "message.txt" file into "message.txt.asc":
 
@@ -80,6 +81,6 @@ oF+qZY4uEvqFvYo8
 -----END PGP PUBLIC KEY BLOCK-----
 ```
 
-[published-key]: https://sks-keyservers.net/pks/lookup?op=get&search=0xC043A4D2B3F2AC31
+[published-key]: http://pool.sks-keyservers.net/pks/lookup?op=get&search=0xC043A4D2B3F2AC31
 [mailing-list]: https://groups.google.com/forum/#!forum/jaeger-tracing
 [gitter-room]: https://gitter.im/jaegertracing/Lobby
