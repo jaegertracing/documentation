@@ -647,7 +647,7 @@ The connection configuration to storage is derived from storage options.
 manages lifecycle of indices. In the context of the Operator it means that
 ILM can be used instead of rollover cron jobs.
 Jaeger project does not provide a direct integration with the ILM,
-however the Operator can be configured to use index aliases (required by ILM)
+however the Jaeger instance can be configured to use index aliases (required by ILM)
 and disable index template creation and rollover cron jobs.
 This allows users to configure ILM in custom index templates before Jaeger is deployed.
 
