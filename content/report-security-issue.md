@@ -8,8 +8,8 @@ If you find something suspicious and want to report it, we'd really appreciate!
 
 * Prefer to always encrypt your message, no matter the channel you choose to report the issue
 * Contact us on our open chat room on [Gitter][gitter-room]
-* Send a message to [jaeger-tracing@googlegroups.com][mailing-list]
-* Merge request on GitHub: if you can, fork the affected repository and send us a pull request. We really prefer if you'd talk to us before, though, as our repositories are public and we would like to give a heads up to our users before disclosing it publicly
+* If you can't use Gitter, send a message to [jaeger-tracing@googlegroups.com][mailing-list]
+* If you can't use Gitter nor send an email, open a merge request on GitHub: fork the affected repository and send us a pull request. We really prefer if you'd talk to us before, though, as our repositories are public and we would like to give a heads up to our users before disclosing it publicly
 
 ## Our PGP key
 
