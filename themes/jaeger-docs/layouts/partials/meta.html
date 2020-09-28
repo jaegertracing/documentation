@@ -15,12 +15,12 @@
 <!-- OpenGraph metadata -->
 <meta property="og:title" content="{{ $title }}" />
 {{ if $isDoc }}
-{{ $version := index (split .File.Path "/") 1 }}
+{{ $version := index (split .Path "/") 1 }}
 {{ $latest := site.Params.latest }}
-{{ $url := replace .Permalink $version "latest" }}
+{{ $url := replace .RelPermalink $version "latest" }}
 <meta property="og:type" content="documentation" />
-<meta property="og:url" content="{{ $url }}" />
-<link rel="canonical" href="{{ $url }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
+<link rel="canonical" href="{{ .Permalink }}" />
 {{ else }}
 <meta property="og:url" content="{{ .Permalink }}" />
 <link rel="canonical" href="{{ .Permalink }}" />

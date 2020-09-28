@@ -10,22 +10,24 @@
   <p class="subtitle is-3">{{ . }}</p>
   {{ end }}
 
-  <div class="tags has-addons">
-    <span class="tag is-medium">
-      Version&nbsp;&nbsp;<strong>{{ $version }}</strong>
-    </span>
-    {{ if $isLatest }}
-    <span class="tag is-medium is-success">Latest</span>
-    {{ else if $isNextRelease }}
-    <a class="tag is-medium is-info">
-      Preview
-    </a>
-    {{ else }}
-    <a class="tag is-medium is-warning" href="{{ $latestUrl }}">
-      Click here for the latest version
-    </a>
-    {{ end }}
-  </div>
+  {{ if ne .Path "docs" }}
+    <div class="tags has-addons">
+      <span class="tag is-medium">
+        Version&nbsp;&nbsp;<strong>{{ $version }}</strong>
+      </span>
+      {{ if $isLatest }}
+      <span class="tag is-medium is-success">Latest</span>
+      {{ else if $isNextRelease }}
+      <a class="tag is-medium is-info">
+        Preview
+      </a>
+      {{ else }}
+      <a class="tag is-medium is-warning" href="{{ $latestUrl }}">
+        Click here for the latest version
+      </a>
+      {{ end }}
+    </div>
+  {{ end }}
 
   <hr class="hr" />
 
