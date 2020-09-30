@@ -1,6 +1,6 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
-set -o errexit -o nounset -o pipefail
+set -x -u -o errexit -o nounset -o pipefail
 
 safe_checkout_master() {
   # We need to be on a branch to be able to create commits,
@@ -19,7 +19,7 @@ safe_checkout_master() {
 }
 
 if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; then
-    echo "We are on release- tag"
+    echo "We are on release-x.y.z tag: $TRAVIS_TAG"
     safe_checkout_master
     version=$(echo "${TRAVIS_TAG}" | sed 's/^release-//')
     versionMajorMinor=$(echo "${version}" | sed 's/\.[[:digit:]]$//')
@@ -30,7 +30,13 @@ if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; t
     sed -i -e "s/latest *=.*$/latest = \"${versionMajorMinor}\"/" config.toml
     sed -i -e "s/binariesLatest *=.*$/binariesLatest = \"${version}\"/" config.toml
     sed -i -e "s/versions *= *\[/versions = \[\"${versionMajorMinor}\"\,/" config.toml
+    if [[ "$DRY_RUN" = "true" ]]; then
+      echo "Not committing changes because DRY_RUN=$DRY_RUN"
+      exit 0
+    fi
     git add config.toml ./content/docs/${versionMajorMinor} ./data/cli/${versionMajorMinor}
     git commit -m "Release ${version}" -s
     git push origin master
+else
+    echo "TRAVIS_TAG=$TRAVIS_TAG is not in the form release-x.y.z, skipping release"
 fi
