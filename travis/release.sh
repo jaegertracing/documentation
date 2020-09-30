@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 
-set -o errexit -o nounset -o pipefail
-
-echo "Attempting release"
-
-TRAVIS_TAG=${TRAVIS_TAG:?'TRAVIS_TAG must be set to release-x.y.z'}
+set -x -u -o errexit -o nounset -o pipefail
 
 safe_checkout_master() {
   # We need to be on a branch to be able to create commits,
