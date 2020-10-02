@@ -2,11 +2,12 @@ import os
 import sys
 import json
 
-if len(sys.argv) < 2:
-    print("You must supply a Jaeger version as the first argument")
+if len(sys.argv) < 3:
+    print("You must supply a Jaeger version as the first argument and the output path as the second")
     exit(1)
 
 jaeger_ver=sys.argv[1]
+output_path=sys.argv[2]
 
 with open("data/cli/%s/config.json" % jaeger_ver, 'r') as f:
     cfg=json.load(f)
@@ -14,7 +15,7 @@ with open("data/cli/%s/config.json" % jaeger_ver, 'r') as f:
 def generate(tool, storage=''):
     print('Generating YAML for {} and storage {}'.format(tool, storage))
 
-    volume='%s/data/cli/%s:/data' % (os.getcwd(), jaeger_ver)
+    volume='%s/data/cli/%s:/data' % (output_path, jaeger_ver)
     docker_img='all-in-one' if tool == 'jaeger-all-in-one' else tool
     docker_image="jaegertracing/%s:%s" % (docker_img, jaeger_ver)
 
@@ -22,6 +23,7 @@ def generate(tool, storage=''):
         "docker run",
         "--rm",
         "--interactive",
+        "--privileged",
         "--volume {}".format(volume),
         "-e SPAN_STORAGE_TYPE={}".format(storage),
         docker_image,
@@ -34,8 +36,8 @@ def generate(tool, storage=''):
         os.exit(1)
     if storage:
         os.rename(
-            'data/cli/{}/{}.yaml'.format(jaeger_ver, tool),
-            'data/cli/{}/{}-{}.yaml'.format(jaeger_ver, tool, storage)
+            '{}/data/cli/{}/{}.yaml'.format(output_path, jaeger_ver, tool),
+            '{}/data/cli/{}/{}-{}.yaml'.format(output_path, jaeger_ver, tool, storage)
         )
 
 

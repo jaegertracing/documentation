@@ -1,0 +1,10 @@
+name: jaeger-all-in-one version
+synopsis: Print the version.
+description: Print the version and build information.
+options:
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for version
+see_also:
+- jaeger-all-in-one - Jaeger all-in-one distribution with agent, collector and query in one process.

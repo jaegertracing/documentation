@@ -1,0 +1,10 @@
+name: jaeger-collector version
+synopsis: Print the version.
+description: Print the version and build information.
+options:
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for version
+see_also:
+- jaeger-collector - Jaeger collector receives and processes traces from Jaeger agents and clients
