@@ -74,6 +74,10 @@ Jaeger now supports a new thing that you definitely want.
 
 You can check internal links by running `make check-internal-links` and all links, including external links, by running `make check-all-links`.
 
+## Adding new pages and redirects
+
+When new pages are added to the documentation, please add a corresponding entry to [themes/jaeger-docs/layouts/index.redirects](./themes/jaeger-docs/layouts/index.redirects).
+
 ## License
 
 [Apache 2.0 License](./LICENSE).
