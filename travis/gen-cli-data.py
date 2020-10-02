@@ -22,6 +22,7 @@ def generate(tool, storage=''):
         "docker run",
         "--rm",
         "--interactive",
+        "--privileged",
         "--volume {}".format(volume),
         "-e SPAN_STORAGE_TYPE={}".format(storage),
         docker_image,
