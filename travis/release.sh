@@ -25,8 +25,17 @@ if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; t
     versionMajorMinor=$(echo "${version}" | sed 's/\.[[:digit:]]$//')
     echo "Creating new documentation for ${version}"
     cp -r ./content/docs/next-release/ ./content/docs/${versionMajorMinor}
-    cp -r ./data/cli/next-release/ ./data/cli/${versionMajorMinor}
-    python ./travis/gen-cli-data.py ${versionMajorMinor}
+
+    # we set this as a temp dir with write permissions to everyone to overcome #441
+    # we then set the permissions back to sane levels once we are done
+    cliDocsTempDir=$(mktemp -d -t cli-docs-XXXXXXXX)
+    mkdir -p ${cliDocsTempDir}/data/cli
+    cp -r ./data/cli/next-release/ ${cliDocsTempDir}/data/cli/${versionMajorMinor}
+    chmod a+w -R ${cliDocsTempDir}
+    python ./travis/gen-cli-data.py ${versionMajorMinor} ${cliDocsTempDir}
+    chmod 644 -R ${cliDocsTempDir}
+    mv ${cliDocsTempDir}/data/cli/${versionMajorMinor} ./data/cli/
+
     sed -i -e "s/latest *=.*$/latest = \"${versionMajorMinor}\"/" config.toml
     sed -i -e "s/binariesLatest *=.*$/binariesLatest = \"${version}\"/" config.toml
     sed -i -e "s/versions *= *\[/versions = \[\"${versionMajorMinor}\"\,/" config.toml

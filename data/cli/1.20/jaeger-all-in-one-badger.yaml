@@ -13,6 +13,41 @@ options:
   default_value: :14269
   usage: |
     The host:port (e.g. 127.0.0.1:5555 or :5555) for the admin server, including health check, /metrics, etc.
+- name: badger.consistency
+  default_value: "false"
+  usage: |
+    If all writes should be synced immediately to physical disk. This will impact write performance.
+- name: badger.directory-key
+  default_value: /go/bin/data/keys
+  usage: |
+    Path to store the keys (indexes), this directory should reside in SSD disk. Set ephemeral to false if you want to define this setting.
+- name: badger.directory-value
+  default_value: /go/bin/data/values
+  usage: |
+    Path to store the values (spans). Set ephemeral to false if you want to define this setting.
+- name: badger.ephemeral
+  default_value: "true"
+  usage: Mark this storage ephemeral, data is stored in tmpfs.
+- name: badger.maintenance-interval
+  default_value: 5m0s
+  usage: |
+    How often the maintenance thread for values is ran. Format is time.Duration (https://golang.org/pkg/time/#Duration)
+- name: badger.metrics-update-interval
+  default_value: 10s
+  usage: |
+    How often the badger metrics are collected by Jaeger. Format is time.Duration (https://golang.org/pkg/time/#Duration)
+- name: badger.read-only
+  default_value: "false"
+  usage: |
+    Allows to open badger database in read only mode. Multiple instances can open same database in read-only mode. Values still in the write-ahead-log must be replayed before opening.
+- name: badger.span-store-ttl
+  default_value: 72h0m0s
+  usage: |
+    How long to store the data. Format is time.Duration (https://golang.org/pkg/time/#Duration)
+- name: badger.truncate
+  default_value: "false"
+  usage: |
+    If write-ahead-log should be truncated on restart. this will cause data loss.
 - name: collector.grpc-port
   default_value: "0"
   usage: |
@@ -100,10 +135,6 @@ options:
   default_value: info
   usage: |
     Minimal allowed log Level. For more levels see https://github.com/uber-go/zap
-- name: memory.max-traces
-  default_value: "0"
-  usage: |
-    The maximum amount of traces to store in memory. The default number of traces is unbounded.
 - name: metrics-backend
   default_value: prometheus
   usage: |

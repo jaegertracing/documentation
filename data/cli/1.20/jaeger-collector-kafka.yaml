@@ -1,9 +1,8 @@
-name: jaeger-all-in-one
+name: jaeger-collector
 synopsis: |
-  Jaeger all-in-one distribution with agent, collector and query in one process.
-description: |-
-  Jaeger all-in-one distribution with agent, collector and query. Use with caution this version
-  by default uses only in-memory database.
+  Jaeger collector receives and processes traces from Jaeger agents and clients
+description: |
+  Jaeger collector receives traces from Jaeger agents and runs them through a processing pipeline.
 options:
 - name: admin-http-port
   default_value: "0"
@@ -91,19 +90,100 @@ options:
 - name: help
   shorthand: h
   default_value: "false"
-  usage: help for jaeger-all-in-one
-- name: http-server.host-port
-  default_value: :5778
+  usage: help for jaeger-collector
+- name: kafka.producer.authentication
+  default_value: none
   usage: |
-    host:port of the http server (e.g. for /sampling point and /baggageRestrictions endpoint)
+    Authentication type used to authenticate with kafka cluster. e.g. none, kerberos, tls
+- name: kafka.producer.batch-linger
+  default_value: 0s
+  usage: |
+    (experimental) Time interval to wait before sending records to Kafka. Higher value reduce request to Kafka but increase latency and the possibility of data loss in case of process restart. See https://kafka.apache.org/documentation/
+- name: kafka.producer.batch-max-messages
+  default_value: "0"
+  usage: |
+    (experimental) Maximum number of message to batch before sending records to Kafka
+- name: kafka.producer.batch-min-messages
+  default_value: "0"
+  usage: |
+    (experimental) The best-effort minimum number of messages needed to send a batch of records to Kafka. Higher value reduce request to Kafka but increase latency and the possibility of data loss in case of process restart. See https://kafka.apache.org/documentation/
+- name: kafka.producer.batch-size
+  default_value: "0"
+  usage: |
+    (experimental) Number of bytes to batch before sending records to Kafka. Higher value reduce request to Kafka but increase latency and the possibility of data loss in case of process restart. See https://kafka.apache.org/documentation/
+- name: kafka.producer.brokers
+  default_value: 127.0.0.1:9092
+  usage: |
+    The comma-separated list of kafka brokers. i.e. '127.0.0.1:9092,0.0.0:1234'
+- name: kafka.producer.compression
+  default_value: none
+  usage: |
+    (experimental) Type of compression (none, gzip, snappy, lz4, zstd) to use on messages
+- name: kafka.producer.compression-level
+  default_value: "0"
+  usage: |
+    (experimental) compression level to use on messages. gzip = 1-9 (default = 6), snappy = none, lz4 = 1-17 (default = 9), zstd = -131072 - 22 (default = 3)
+- name: kafka.producer.encoding
+  default_value: protobuf
+  usage: Encoding of spans ("json" or "protobuf") sent to kafka.
+- name: kafka.producer.kerberos.config-file
+  default_value: /etc/krb5.conf
+  usage: Path to Kerberos configuration. i.e /etc/krb5.conf
+- name: kafka.producer.kerberos.keytab-file
+  default_value: /etc/security/kafka.keytab
+  usage: Path to keytab file. i.e /etc/security/kafka.keytab
+- name: kafka.producer.kerberos.password
+  usage: The Kerberos password used for authenticate with KDC
+- name: kafka.producer.kerberos.realm
+  usage: Kerberos realm
+- name: kafka.producer.kerberos.service-name
+  default_value: kafka
+  usage: Kerberos service name
+- name: kafka.producer.kerberos.use-keytab
+  default_value: "false"
+  usage: |
+    Use of keytab instead of password, if this is true, keytab file will be used instead of password
+- name: kafka.producer.kerberos.username
+  usage: The Kerberos username used for authenticate with KDC
+- name: kafka.producer.plaintext.password
+  usage: The plaintext Password for SASL/PLAIN authentication
+- name: kafka.producer.plaintext.username
+  usage: The plaintext Username for SASL/PLAIN authentication
+- name: kafka.producer.protocol-version
+  usage: Kafka protocol version - must be supported by kafka server
+- name: kafka.producer.required-acks
+  default_value: local
+  usage: |
+    (experimental) Required kafka broker acknowledgement. i.e. noack, local, all
+- name: kafka.producer.tls
+  default_value: "false"
+  usage: (deprecated) see --kafka.producer.tls.enabled
+- name: kafka.producer.tls.ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
+- name: kafka.producer.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this process to the remote server(s)
+- name: kafka.producer.tls.enabled
+  default_value: "false"
+  usage: Enable TLS when talking to the remote server(s)
+- name: kafka.producer.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this process to the remote server(s)
+- name: kafka.producer.tls.server-name
+  usage: |
+    Override the TLS server name we expect in the certificate of the remote server(s)
+- name: kafka.producer.tls.skip-host-verify
+  default_value: "false"
+  usage: |
+    (insecure) Skip server's certificate chain and host name verification
+- name: kafka.producer.topic
+  default_value: jaeger-spans
+  usage: The name of the kafka topic
 - name: log-level
   default_value: info
   usage: |
     Minimal allowed log Level. For more levels see https://github.com/uber-go/zap
-- name: memory.max-traces
-  default_value: "0"
-  usage: |
-    The maximum amount of traces to store in memory. The default number of traces is unbounded.
 - name: metrics-backend
   default_value: prometheus
   usage: |
@@ -112,122 +192,6 @@ options:
   default_value: /metrics
   usage: |
     Defines the route of HTTP endpoint for metrics backends that support scraping
-- name: processor.jaeger-binary.server-host-port
-  default_value: :6832
-  usage: host:port for the UDP server
-- name: processor.jaeger-binary.server-max-packet-size
-  default_value: "65000"
-  usage: max packet size for the UDP server
-- name: processor.jaeger-binary.server-queue-size
-  default_value: "1000"
-  usage: length of the queue for the UDP server
-- name: processor.jaeger-binary.server-socket-buffer-size
-  default_value: "0"
-  usage: socket buffer size for UDP packets in bytes
-- name: processor.jaeger-binary.workers
-  default_value: "10"
-  usage: how many workers the processor should run
-- name: processor.jaeger-compact.server-host-port
-  default_value: :6831
-  usage: host:port for the UDP server
-- name: processor.jaeger-compact.server-max-packet-size
-  default_value: "65000"
-  usage: max packet size for the UDP server
-- name: processor.jaeger-compact.server-queue-size
-  default_value: "1000"
-  usage: length of the queue for the UDP server
-- name: processor.jaeger-compact.server-socket-buffer-size
-  default_value: "0"
-  usage: socket buffer size for UDP packets in bytes
-- name: processor.jaeger-compact.workers
-  default_value: "10"
-  usage: how many workers the processor should run
-- name: processor.zipkin-compact.server-host-port
-  default_value: :5775
-  usage: host:port for the UDP server
-- name: processor.zipkin-compact.server-max-packet-size
-  default_value: "65000"
-  usage: max packet size for the UDP server
-- name: processor.zipkin-compact.server-queue-size
-  default_value: "1000"
-  usage: length of the queue for the UDP server
-- name: processor.zipkin-compact.server-socket-buffer-size
-  default_value: "0"
-  usage: socket buffer size for UDP packets in bytes
-- name: processor.zipkin-compact.workers
-  default_value: "10"
-  usage: how many workers the processor should run
-- name: query.additional-headers
-  default_value: '[]'
-  usage: |
-    Additional HTTP response headers.  Can be specified multiple times.  Format: "Key: Value"
-- name: query.base-path
-  default_value: /
-  usage: |
-    The base path for all HTTP routes, e.g. /jaeger; useful when running behind a reverse proxy
-- name: query.bearer-token-propagation
-  default_value: "false"
-  usage: |
-    Allow propagation of bearer token to be used by storage plugins
-- name: query.grpc-server.host-port
-  default_value: :16685
-  usage: |
-    The host:port (e.g. 127.0.0.1:5555 or :5555) of the query's gRPC server
-- name: query.host-port
-  default_value: :16686
-  usage: |
-    (deprecated, will be removed after 2020-12-31 or in release v1.21.0, whichever is later) see --query.http-server.host-port and --query.grpc-server.host-port
-- name: query.http-server.host-port
-  default_value: :16686
-  usage: |
-    The host:port (e.g. 127.0.0.1:5555 or :5555) of the query's HTTP server
-- name: query.max-clock-skew-adjustment
-  default_value: 0s
-  usage: |
-    The maximum delta by which span timestamps may be adjusted in the UI due to clock skew; set to 0s to disable clock skew adjustments
-- name: query.port
-  default_value: "0"
-  usage: |
-    (deprecated, will be removed after 2020-08-31 or in release v1.20.0, whichever is later) see --query.host-port
-- name: query.static-files
-  usage: The directory path override for the static assets for the UI
-- name: query.ui-config
-  usage: The path to the UI configuration file in JSON format
-- name: reporter.grpc.discovery.min-peers
-  default_value: "3"
-  usage: |
-    Max number of collectors to which the agent will try to connect at any given time
-- name: reporter.grpc.host-port
-  usage: |
-    Comma-separated string representing host:port of a static list of collectors to connect to directly
-- name: reporter.grpc.retry.max
-  default_value: "3"
-  usage: Sets the maximum number of retries for a call
-- name: reporter.grpc.tls
-  default_value: "false"
-  usage: (deprecated) see --reporter.grpc.tls.enabled
-- name: reporter.grpc.tls.ca
-  usage: |
-    Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
-- name: reporter.grpc.tls.cert
-  usage: |
-    Path to a TLS Certificate file, used to identify this process to the remote server(s)
-- name: reporter.grpc.tls.enabled
-  default_value: "false"
-  usage: Enable TLS when talking to the remote server(s)
-- name: reporter.grpc.tls.key
-  usage: |
-    Path to a TLS Private Key file, used to identify this process to the remote server(s)
-- name: reporter.grpc.tls.server-name
-  usage: |
-    Override the TLS server name we expect in the certificate of the remote server(s)
-- name: reporter.grpc.tls.skip-host-verify
-  default_value: "false"
-  usage: |
-    (insecure) Skip server's certificate chain and host name verification
-- name: reporter.type
-  default_value: grpc
-  usage: Reporter type to use e.g. grpc
 - name: sampling.strategies-file
   usage: |
     The path for the sampling strategies file in JSON format. See sampling documentation to see format of the file

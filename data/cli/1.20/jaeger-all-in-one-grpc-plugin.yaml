@@ -84,6 +84,14 @@ options:
   default_value: "1"
   usage: |
     Ratio of spans passed to storage after downsampling (between 0 and 1), e.g ratio = 0.3 means we are keeping 30% of spans and dropping 70% of spans; ratio = 1.0 disables downsampling.
+- name: grpc-storage-plugin.binary
+  usage: The location of the plugin binary
+- name: grpc-storage-plugin.configuration-file
+  usage: |
+    A path pointing to the plugin's configuration file, made available to the plugin with the --config arg
+- name: grpc-storage-plugin.log-level
+  default_value: warn
+  usage: Set the log level of the plugin's logger
 - name: health-check-http-port
   default_value: "0"
   usage: |
@@ -100,10 +108,6 @@ options:
   default_value: info
   usage: |
     Minimal allowed log Level. For more levels see https://github.com/uber-go/zap
-- name: memory.max-traces
-  default_value: "0"
-  usage: |
-    The maximum amount of traces to store in memory. The default number of traces is unbounded.
 - name: metrics-backend
   default_value: prometheus
   usage: |
