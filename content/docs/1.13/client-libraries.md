@@ -95,7 +95,7 @@ When `SpanContext` is encoded on the wire as part of the request to another serv
     * Deprecated, most Jaeger clients ignore on the receiving side, but still include it on the sending side
     * 0 value is valid and means “root span” (when not ignored)
 * `{flags}`
-    * One byte bitmap, as two hex digits
+    * One byte bitmap, as one or two hex digits (leading zero may be omitted)
     * Bit 1 (right-most, least significant) is “sampled” flag
         * 1 means the trace is sampled and all downstream services are advised to respect that
         * 0 means the trace is not sampled and all downstream services are advised to respect that
