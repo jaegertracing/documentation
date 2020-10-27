@@ -26,6 +26,7 @@ The Jaeger OpenTelemetry binaries are **almost** backward compatible with the cu
 
 The differences are:
 
+* OTLP receiver listening on port 55680
 * Health check port changed to `13133`
 * Not all current Jaeger flags are exposed (e.g. health check port)
 * Exposed metrics
@@ -35,7 +36,7 @@ The differences are:
 Jaeger OpenTelemetry components can be configured by a subset of Jaeger current flags (or other [configuration sources](../cli/))
 and [OpenTelemetry configuration file](https://opentelemetry.io/docs/collector/configuration/).
 The OpenTelemetry configuration takes precedence over Jaeger configuration.
-The Jaeger OpenTelemetry binaries use hardcoded default configuration that enables predefined set of components - Jaeger receiver, attribute processor, (storage) exporter.
+The Jaeger OpenTelemetry binaries use hardcoded default configuration that enables predefined set of components - OTLP receiver, Jaeger receiver, attribute processor, (storage) exporter.
 The opinionated default configuration ensures compatibility between Jaeger current binaries.
 The user provided OpenTelemetry configuration is merged with the default configuration.
 
