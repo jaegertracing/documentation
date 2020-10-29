@@ -34,3 +34,4 @@ home = [ "HTML", "JSON", "REDIRECTS" ]
     [[links]]
       title = "Docs"
       url = "/docs"
+
