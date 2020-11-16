@@ -33,9 +33,7 @@ if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; t
     cp -r ./data/cli/next-release/ ${cliDocsTempDir}/data/cli/${versionMajorMinor}
     chmod a+w -R ${cliDocsTempDir}
     python ./travis/gen-cli-data.py ${versionMajorMinor} ${cliDocsTempDir}
-    chmod 644 -R ${cliDocsTempDir}
     mv ${cliDocsTempDir}/data/cli/${versionMajorMinor} ./data/cli/
-
     sed -i -e "s/latest *=.*$/latest = \"${versionMajorMinor}\"/" config.toml
     sed -i -e "s/binariesLatest *=.*$/binariesLatest = \"${version}\"/" config.toml
     sed -i -e "s/versions *= *\[/versions = \[\"${versionMajorMinor}\"\,/" config.toml
