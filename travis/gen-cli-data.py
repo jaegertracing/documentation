@@ -9,7 +9,7 @@ if len(sys.argv) < 3:
 jaeger_ver=sys.argv[1]
 output_path=sys.argv[2]
 
-with open("data/cli/%s/config.json" % jaeger_ver, 'r') as f:
+with open("%s/data/cli/%s/config.json" % (output_path, jaeger_ver), 'r') as f:
     cfg=json.load(f)
 
 def generate(tool, storage=''):
