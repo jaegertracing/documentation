@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -x -o errexit -o nounset -o pipefail
+set -x -o errexit -o pipefail
 
 safe_checkout_master() {
   # We need to be on a branch to be able to create commits,
