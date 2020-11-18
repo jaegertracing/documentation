@@ -113,7 +113,7 @@ featureGroups:
     - name: env_JAEGER_SAMPLER_REFRESH_INTERVAL
       description: >
         `JAEGER_SAMPLER_REFRESH_INTERVAL` defines how often the sampler polls the config server
-        for updates to the samling strategies.
+        for updates to the sampling strategies.
     - name: env_JAEGER_SAMPLER_MAX_OPERATIONS
       description: >
         `JAEGER_SAMPLER_MAX_OPERATIONS` instructs the adaptive sampler to limit how many distinct
