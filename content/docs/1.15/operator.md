@@ -82,7 +82,7 @@ After the role is granted, switch back to a non-privileged user.
 
 # Quick Start - Deploying the AllInOne image
 
-The simplest possible way to create a Jaeger instance is by creating a YAML file like the following example.  This will install the default AllInOne strategy, which deploys the "all-in-one" image (agent, collector, query, ingestor, Jaeger UI) in a single pod, using in-memory storage by default.
+The simplest possible way to create a Jaeger instance is by creating a YAML file like the following example.  This will install the default AllInOne strategy, which deploys the "all-in-one" image (agent, collector, query, ingester, Jaeger UI) in a single pod, using in-memory storage by default.
 
 {{< info >}}
 This default strategy is intended for development, testing, and demo purposes, not for production.
