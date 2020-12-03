@@ -138,7 +138,7 @@ uberctx-key2: value2
 
 #### Value Encoding
 
-OpenTracing defines two formats for plan text headers: `HTTP_HEADERS` and `TEXT_MAP`. The former was introduced to deal with restrictions imposed by the HTTP protocol on the context of the headers, whereas the latter does not impose any restrictions, e.g. it can be used with Kafka Record Headers. The main difference between these two formats in the Jaeger SDKs is that the baggage values are URL-encoded when using the `HTTP_HEADERS` propagation format.
+OpenTracing defines two formats for plain text headers: `HTTP_HEADERS` and `TEXT_MAP`. The former was introduced to deal with restrictions imposed by the HTTP protocol on the context of the headers, whereas the latter does not impose any restrictions, e.g. it can be used with Kafka Record Headers. The main difference between these two formats in the Jaeger SDKs is that the baggage values are URL-encoded when using the `HTTP_HEADERS` propagation format.
 
 Example: when using the `HTTP_HEADERS` propagation format, the following code sequence:
 
