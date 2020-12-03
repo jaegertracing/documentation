@@ -86,10 +86,15 @@ When `SpanContext` is encoded on the wire as part of the request to another serv
 * `{trace-id}`
     * 64-bit or 128-bit random number in base16 format
     * Can be variable length, shorter values are 0-padded on the left
+      * Receivers MUST accept hex-strings shorter than 32 characters and 0-pad them on the left
+      * Senders SHOULD generate hex strings of exactly 16 or 32 characters in length
     * Clients in some languages support 128-bit, migration pending
     * Value of 0 is not valid
 * `{span-id}`
     * 64-bit random number in base16 format
+    * Can be variable length, shorter values are 0-padded on the left
+      * Receivers MUST accept hex-strings shorter than 16 characters and 0-pad them on the left
+      * Senders SHOULD generate hex strings of exactly 16 characters in length
     * Value of 0 is not valid
 * `{parent-span-id}`
     * 64-bit value in base16 format representing parent span id
@@ -113,7 +118,7 @@ When `SpanContext` is encoded on the wire as part of the request to another serv
 ### Baggage
 
 * Key: `uberctx-{baggage-key}`
-* Value: url-encoded string
+* Value: `{baggage-value}` as a string (see Value Encoding below)
 * Limitation: since HTTP headers don’t preserve the case, Jaeger recommends baggage keys to be lowercase-kebab-case,
 e.g. `my-baggage-key-1`.
 
@@ -129,6 +134,22 @@ will result in the following HTTP headers:
 ```
 uberctx-key1: value1
 uberctx-key2: value2
+```
+
+#### Value Encoding
+
+OpenTracing defines two formats for plain text headers: `HTTP_HEADERS` and `TEXT_MAP`. The former was introduced to deal with restrictions imposed by the HTTP protocol on the context of the headers, whereas the latter does not impose any restrictions, e.g. it can be used with Kafka Record Headers. The main difference between these two formats in the Jaeger SDKs is that the baggage values are URL-encoded when using the `HTTP_HEADERS` propagation format.
+
+Example: when using the `HTTP_HEADERS` propagation format, the following code sequence:
+
+```
+span.SetBaggageItem("key1", "value 1 / blah")
+```
+
+will result in the following HTTP header:
+
+```
+uberctx-key1: value%201%20%2F%20blah
 ```
 
 
