@@ -14,15 +14,17 @@
 
 <!-- OpenGraph metadata -->
 <meta property="og:title" content="{{ $title }}" />
+<meta property="og:url" content="{{ .Permalink }}" />
 {{ if $isDoc }}
+<meta property="og:type" content="documentation" />
 {{ $version := index (split .Path "/") 1 }}
 {{ $latest := site.Params.latest }}
-{{ $url := replace .RelPermalink $version "latest" }}
-<meta property="og:type" content="documentation" />
-<meta property="og:url" content="{{ .Permalink }}" />
-<link rel="canonical" href="{{ .Permalink }}" />
+{{ $url := .RelPermalink }}
+{{ if in site.Params.versions $version }}
+{{ $url = replace .RelPermalink $version $latest }}
+{{ end }}
+<link rel="canonical" href="{{ $url }}" />
 {{ else }}
-<meta property="og:url" content="{{ .Permalink }}" />
 <link rel="canonical" href="{{ .Permalink }}" />
 {{ end }}
 <meta property="og:locale" content="en_US" />
