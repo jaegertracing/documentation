@@ -6,7 +6,7 @@ The following is only a selection of some of the major features we plan to imple
 
 ## Integration with OpenTelemetry collector
 
-[OpenTelemetry collector](https://opentelemetry.io/docs/collector/configuration/) is a vendor-agnostic service for receiving, processing and exporting telemetry data. We have decided to rebuild the Jaeger backed components (agent, collector, ingester, all-in-one) on top of OpenTelemetry collector which has several benefits:
+[OpenTelemetry collector](https://opentelemetry.io/docs/collector/getting-started/) is a vendor-agnostic service for receiving, processing and exporting telemetry data. We have decided to rebuild the Jaeger backed components (agent, collector, ingester, all-in-one) on top of OpenTelemetry collector which has several benefits:
 
 * automatic compatibility with OpenTelemetry SDKs
 * forward compatibility with OpenTelemetry native data model
