@@ -18,8 +18,6 @@ def generate(tool, storage=''):
     volume='%s/data/cli/%s:/data' % (output_path, jaeger_ver)
     docker_img='all-in-one' if tool == 'jaeger-all-in-one' else tool
     docker_image="jaegertracing/%s:%s" % (docker_img, jaeger_ver)
-    # TODO remove after testing
-    docker_image="jaegertracing/%s:%s" % (docker_img, '1.21.0')
 
     cmd=" ".join([
         "docker run",
