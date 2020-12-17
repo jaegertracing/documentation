@@ -7,11 +7,12 @@ safe_checkout_master() {
   # and we want that branch to be master, which has been checked before.
   # But we also want to make sure that we build and release exactly the tagged version, so we verify that the remote
   # branch is where our tag is.
+  git remote -v
   checkoutBranch=master
   git checkout -B "${checkoutBranch}"
   git fetch origin "${checkoutBranch}":origin/"${checkoutBranch}"
-  commit_local_master="$(git show --pretty='format:%H' ${checkoutBranch})"
-  commit_remote_master="$(git show --pretty='format:%H' origin/${checkoutBranch})"
+  commit_local_master="$(git rev-parse ${checkoutBranch})"
+  commit_remote_master="$(git rev-parse origin/${checkoutBranch})"
   if [ "$commit_local_master" != "$commit_remote_master" ]; then
     echo "${checkoutBranch} on remote 'origin' has commits since the version under release, aborting"
     exit 1
