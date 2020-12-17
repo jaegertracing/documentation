@@ -1,0 +1,27 @@
+name: Release
+
+on:
+  create:
+    branches: [ master ]
+    tags: ["release-*.*.*"]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Attempt release
+      shell: bash
+      run: |
+        git config user.name "jaegertracingci"
+        git config user.email "jaegertracingci+jaeger-tracing@googlegroups.com"
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+        export TRAVIS_TAG=${GITHUB_REF##*/}
+        ./travis/release.sh
