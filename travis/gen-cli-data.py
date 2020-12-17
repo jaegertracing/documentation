@@ -4,7 +4,7 @@ import json
 
 if len(sys.argv) < 3:
     print("You must supply a Jaeger version as the first argument and the output path as the second")
-    exit(1)
+    sys.exit(1)
 
 jaeger_ver=sys.argv[1]
 output_path=sys.argv[2]
@@ -33,7 +33,7 @@ def generate(tool, storage=''):
     ])
     print(cmd)
     if os.system(cmd) != 0:
-        os.exit(1)
+        sys.exit(1)
     if storage:
         os.rename(
             '{}/data/cli/{}/{}.yaml'.format(output_path, jaeger_ver, tool),
