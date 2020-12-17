@@ -9,6 +9,8 @@ safe_checkout_master() {
   # branch is where our tag is.
   git remote -v
   checkoutBranch=master
+  # TODO remove me:
+  checkoutBranch=release-test
   git checkout -B "${checkoutBranch}"
   git fetch origin "${checkoutBranch}":origin/"${checkoutBranch}"
   commit_local_master="$(git rev-parse ${checkoutBranch})"
@@ -33,7 +35,7 @@ if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; t
     mkdir -p ${cliDocsTempDir}/data/cli
     cp -r ./data/cli/next-release/ ${cliDocsTempDir}/data/cli/${versionMajorMinor}
     chmod a+w -R ${cliDocsTempDir}
-    python ./travis/gen-cli-data.py ${versionMajorMinor} ${cliDocsTempDir}
+    # TODO restore me: python ./travis/gen-cli-data.py ${versionMajorMinor} ${cliDocsTempDir}
     mv ${cliDocsTempDir}/data/cli/${versionMajorMinor} ./data/cli/
     sed -i -e "s/latest *=.*$/latest = \"${versionMajorMinor}\"/" config.toml
     sed -i -e "s/binariesLatest *=.*$/binariesLatest = \"${version}\"/" config.toml

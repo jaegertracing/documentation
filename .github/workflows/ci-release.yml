@@ -2,7 +2,7 @@ name: Release
 
 on:
   create:
-    branches: [ master ]
+    branches: [ release-test ]
     tags: ["release-*.*.*"]
 
 jobs:
@@ -22,8 +22,8 @@ jobs:
       run: |
         git config user.name "jaegertracingbot"
         git config user.email "jaegertracingbot+jaeger-tracing@googlegroups.com"
-        git remote set-url origin https://x-access-token:${{ secrets.JAEGERTRACINGBOT_GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
-        # git config credential.helper "store --file=.git/credentials"
-        # echo "https://$GH_TOKEN:@github.com" > .git/credentials
+        # git remote set-url origin https://x-access-token:${{ secrets.JAEGERTRACINGBOT_GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+        git config credential.helper "store --file=.git/credentials"
+        echo "https://${{ secrets.JAEGERTRACINGBOT_GITHUB_TOKEN }}" > .git/credentials
         export TRAVIS_TAG=${GITHUB_REF##*/}
         ./travis/release.sh
