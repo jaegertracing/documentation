@@ -2,15 +2,16 @@
 
 set -x -o errexit -o pipefail
 
+checkoutBranch=master
+# TODO remove me:
+checkoutBranch=release-test
+
 safe_checkout_master() {
   # We need to be on a branch to be able to create commits,
   # and we want that branch to be master, which has been checked before.
   # But we also want to make sure that we build and release exactly the tagged version, so we verify that the remote
   # branch is where our tag is.
   git remote -v
-  checkoutBranch=master
-  # TODO remove me:
-  checkoutBranch=release-test
   git checkout -B "${checkoutBranch}"
   git fetch origin "${checkoutBranch}":origin/"${checkoutBranch}"
   commit_local_master="$(git rev-parse ${checkoutBranch})"
@@ -46,7 +47,7 @@ if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; t
     fi
     git add config.toml ./content/docs/${versionMajorMinor} ./data/cli/${versionMajorMinor}
     git commit -m "Release ${version}" -s
-    git push origin master
+    git push origin $checkoutBranch
 else
     echo "TRAVIS_TAG=$TRAVIS_TAG is not in the form release-x.y.z, skipping release"
 fi
