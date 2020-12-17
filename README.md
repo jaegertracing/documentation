@@ -1,4 +1,3 @@
-[![Build Status][ci-img]][ci]
 [![Netlify Status][netifly-img]][netifly]
 
 # Jaeger website
@@ -83,8 +82,6 @@ When new pages are added to the documentation, please add a corresponding entry 
 [Apache 2.0 License](./LICENSE).
 
 [slides]: https://docs.google.com/presentation/d/1JuurkQn03z0BbOEAViJBEE_WWMj6JQUML-uJm7zizvI/
-[ci-img]: https://travis-ci.org/jaegertracing/documentation.svg?branch=master
-[ci]: https://travis-ci.org/jaegertracing/documentation
 [netifly-img]: https://api.netlify.com/api/v1/badges/d2b1a1ea-f454-4ba8-990c-cc469c959556/deploy-status
 [netifly]: https://app.netlify.com/sites/jaegertracing/deploys
 [htmltest]: https://github.com/wjdp/htmltest
