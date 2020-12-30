@@ -144,15 +144,15 @@ The YAML file can then be used with `kubectl`:
 <!-- TODO - Add OKD commands and tabs shortcode. -->
 
 ```bash
-kubectl apply -f simplest.yaml
+kubectl apply -n observability -f simplest.yaml
 ```
 
 In a few seconds, a new in-memory all-in-one instance of Jaeger will be available, suitable for quick demos and development purposes. To check the instances that were created, list the `jaeger` objects:
 
 ```bash
-$ kubectl get jaegers
-NAME        CREATED AT
-simplest    28s
+$ kubectl get jaegers -n observability
+NAME       STATUS    VERSION   STRATEGY   STORAGE   AGE
+simplest   Running   1.21.0    allinone   memory    11m
 ```
 
 To get the pod name, query for the pods belonging to the `simplest` Jaeger  instance:
