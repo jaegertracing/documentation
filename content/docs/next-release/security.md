@@ -38,7 +38,7 @@ Clients can be configured to communicate directly with the Collector via HTTP. U
 
 ## Consumers to Query Service
 
-* {{< check_no >}} HTTP - no TLS/authentication.
-* {{< check_no >}} gRPC - no TLS/authentication.
+* {{< check_yes >}} HTTP - no TLS/authentication.
+* {{< check_yes >}} gRPC - no TLS/authentication.
 
 [issue-1718]: https://github.com/jaegertracing/jaeger/issues/1718
