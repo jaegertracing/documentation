@@ -282,11 +282,11 @@ The query and collector services are configured with a supported storage type - 
 The main additional requirement is to provide the details of the storage type and options, for example:
 
 ```yaml
-    storage:
-      type: elasticsearch
-      options:
-        es:
-          server-urls: http://elasticsearch:9200
+  storage:
+    type: elasticsearch
+    options:
+      es:
+        server-urls: http://elasticsearch:9200
 ```
 
 ## Streaming strategy
