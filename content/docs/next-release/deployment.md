@@ -333,12 +333,10 @@ The following command prepares Elasticsearch for rollover deployment by creating
 docker run -it --rm --net=host jaegertracing/jaeger-es-rollover:latest init http://localhost:9200 # <1>
 ```
 
-If you need to initialize archive storage, add `-e ARCHIVE=true`.
+<1> If you need to initialize archive storage, add `-e ARCHIVE=true`.
+   After the initialization Jaeger can be deployed with `--es.use-aliases=true`.
 
-After the initialization Jaeger can be deployed with `--es.use-aliases=true`.
-
-If you need to initialize ILM support, add `-e ES_USE_ILM=true`.
-
+<2> If you need to initialize ILM support, add `-e ES_USE_ILM=true`.
 {{< info >}}
 While initializing with ILM support, make sure that an ILM policy named *jaeger-ilm-policy* is created in Elasticsearch beforehand.
 Initialization checks for this policy - if it does not exist, it would error out with following message.
@@ -346,7 +344,7 @@ Initialization checks for this policy - if it does not exist, it would error out
 *ILM policy jaeger-ilm-policy doesn't exist in Elasticsearch. Please create it and rerun init*
 {{< /info >}}
 
-To use ILM support, Jaeger can be deployed with `--es.use-aliases=true` and `--es.use-ilm=true`
+To use ILM support, Jaeger can be deployed with `--es.use-aliases=true` and `--es.use-ilm=true` after the initialization
 
 ##### Rolling over to a new index
 
@@ -356,7 +354,7 @@ The next step is to periodically execute the rollover API which rolls the write 
 docker run -it --rm --net=host -e CONDITIONS='{"max_age": "2d"}' jaegertracing/jaeger-es-rollover:latest rollover  http://localhost:9200 # <1>
 ```
 
-The command rolls the alias over to a new index if the age of the current write index is older than 2 days. For more conditions see [Elasticsearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html).
+<1> The command rolls the alias over to a new index if the age of the current write index is older than 2 days. For more conditions see [Elasticsearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html).
 
 The next step is to remove old indices from read aliases. It means that old data will not be available for search. This imitates the behavior of `--es.max-span-age` flag used in the default index-per-day deployment. This step could be optional and old indices could be simply removed by index cleaner in the next step.
 
@@ -364,7 +362,7 @@ The next step is to remove old indices from read aliases. It means that old data
 docker run -it --rm --net=host -e UNIT=days -e UNIT_COUNT=7 jaegertracing/jaeger-es-rollover:latest lookback  http://localhost:9200 # <1>
 ```
 
-Removes indices older than 7 days from read alias.
+<1> Removes indices older than 7 days from read alias.
 
 ##### Remove old data
 
@@ -374,7 +372,7 @@ The historical data can be removed with the `jaeger-es-index-cleaner` that is al
 docker run -it --rm --net=host -e ROLLOVER=true jaegertracing/jaeger-es-index-cleaner:latest 14 http://localhost:9200 # <1>
 ```
 
-Remove indices older than 14 days.
+<1> Remove indices older than 14 days.
 
 #### Upgrade Elasticsearch version
 
