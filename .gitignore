@@ -1,6 +1,7 @@
 public/
 resources/
 .DS_Store
+.idea
 
 bin/
 tmp/

@@ -306,6 +306,25 @@ Rollover index management strategy is more complex than using the default daily 
 To learn more about rollover index management in Jaeger refer to this
 [article](https://medium.com/jaegertracing/using-elasticsearch-rollover-to-manage-indices-8b3d0c77915d).
 
+#### Elasticsearch ILM support
+{{< warning >}}
+Experimental Feature, Added in release 1.22.
+
+Supported versions: 7.x
+{{< /warning >}}
+[Elasticsearch ILM](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-lifecycle-management.html) helps us automatically manage indices according to our performance, resiliency, and retention requirements.
+For example, you could use ILM to:
+
+* Spin up a new index when an index reaches a certain size or number of documents
+* Create a new index each day, week, or month and archive previous ones
+* Delete stale indices to enforce data retention standards
+
+ILM usage for jaeger indices can be enabled by following below steps:
+
+- Create an ILM policy in elasticsearch named *jaeger-ilm-policy*
+- Run elasticsearch initializer with ES_USE_ILM=true in environment variables. (details in below section)
+- After the initialization, deploy Jaeger with `--es.use-ilm=true` and `--es.use-aliases=true`.
+
 ##### Initialize
 
 The following command prepares Elasticsearch for rollover deployment by creating index aliases, indices, and index templates:
@@ -318,6 +337,17 @@ If you need to initialize archive storage, add `-e ARCHIVE=true`.
 
 After the initialization Jaeger can be deployed with `--es.use-aliases=true`.
 
+If you need to initialize ILM support, add `-e ES_USE_ILM=true`.
+
+{{< info >}}
+While initializing with ILM support, make sure that an ILM policy named *jaeger-ilm-policy* is created in Elasticsearch beforehand.
+Initialization checks for this policy - if it does not exist, it would error out with following message.
+
+*ILM policy jaeger-ilm-policy doesn't exist in Elasticsearch. Please create it and rerun init*
+{{< /info >}}
+
+To use ILM support, Jaeger can be deployed with `--es.use-aliases=true` and `--es.use-ilm=true`
+
 ##### Rolling over to a new index
 
 The next step is to periodically execute the rollover API which rolls the write alias to a new index based on supplied conditions. The command also adds a new index to the read alias to make new data available for search.
@@ -326,7 +356,7 @@ The next step is to periodically execute the rollover API which rolls the write 
 docker run -it --rm --net=host -e CONDITIONS='{"max_age": "2d"}' jaegertracing/jaeger-es-rollover:latest rollover  http://localhost:9200 # <1>
 ```
 
-<1> The command rolls the alias over to a new index if the age of the current write index is older than 2 days. For more conditions see [Elasticsearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html).
+The command rolls the alias over to a new index if the age of the current write index is older than 2 days. For more conditions see [Elasticsearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html).
 
 The next step is to remove old indices from read aliases. It means that old data will not be available for search. This imitates the behavior of `--es.max-span-age` flag used in the default index-per-day deployment. This step could be optional and old indices could be simply removed by index cleaner in the next step.
 
@@ -334,7 +364,7 @@ The next step is to remove old indices from read aliases. It means that old data
 docker run -it --rm --net=host -e UNIT=days -e UNIT_COUNT=7 jaegertracing/jaeger-es-rollover:latest lookback  http://localhost:9200 # <1>
 ```
 
-<1> Removes indices older than 7 days from read alias.
+Removes indices older than 7 days from read alias.
 
 ##### Remove old data
 
@@ -344,7 +374,7 @@ The historical data can be removed with the `jaeger-es-index-cleaner` that is al
 docker run -it --rm --net=host -e ROLLOVER=true jaegertracing/jaeger-es-index-cleaner:latest 14 http://localhost:9200 # <1>
 ```
 
-<1> Remove indices older than 14 days.
+Remove indices older than 14 days.
 
 #### Upgrade Elasticsearch version
 
