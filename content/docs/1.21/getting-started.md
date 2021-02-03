@@ -4,6 +4,8 @@ description: Get up and running with Jaeger in your local environment
 weight: 2
 ---
 
+If you are new to distributed tracing, please check the [Introduction](../) page.
+
 ## Instrumentation
 
 Your applications must be instrumented before they can send tracing data to Jaeger backend. Check the [Client Libraries](../client-libraries) section for information about how to use the OpenTracing API and how to initialize and configure Jaeger tracers.

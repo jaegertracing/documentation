@@ -10,6 +10,8 @@ Welcome to Jaeger's documentation portal! Below, you'll find information for beg
 
 If you can't find what you are looking for, or have an issue not covered here, we'd love to hear from you either on [Gitter chat](https://gitter.im/jaegertracing/Lobby), our [mailing list](https://groups.google.com/forum/#!forum/jaeger-tracing) or [Github](https://github.com/jaegertracing/jaeger/issues).
 
+If you are new to distributed tracing, please take a look at the [Related Links](#related-links) section below.
+
 ## About
 
 Jaeger, inspired by [Dapper][dapper] and [OpenZipkin](http://zipkin.io),
@@ -59,13 +61,15 @@ See [running a docker all in one image](getting-started#all-in-one).
 [![Detail View](/img/trace-detail-ss.png)](/img/trace-detail-ss.png)
 
 ## Related links
-- [Evolving Distributed tracing At Uber Engineering](https://eng.uber.com/distributed-tracing/)
-- [Mastering Distributed Tracing](https://shkuro.com/books/2019-mastering-distributed-tracing/)
-- [Tracing HTTP request latency in Go with OpenTracing](https://medium.com/opentracing/tracing-http-request-latency-in-go-with-opentracing-7cc1282a100a)
-- [Distributed Tracing with Jaeger & Prometheus on Kubernetes](https://blog.openshift.com/openshift-commons-briefing-82-distributed-tracing-with-jaeger-prometheus-on-kubernetes/)
-- [Using Jaeger with Istio](https://istio.io/latest/docs/tasks/observability/distributed-tracing/jaeger/)
-- [Using Jaeger with Envoy](https://www.envoyproxy.io/docs/envoy/latest/start/sandboxes/jaeger_tracing.html)
+- [Evolving Distributed tracing At Uber Engineering](https://eng.uber.com/distributed-tracing/) (blog)
+- [Mastering Distributed Tracing](https://shkuro.com/books/2019-mastering-distributed-tracing/) (book)
+- [OpenTracing Tutorial (Java, Go, Python, Node.js, C#)](https://github.com/yurishkuro/opentracing-tutorial/) (tutorials)
+- [IBM Garage Cloud Native Bootcamp - Distributed Tracing](https://cloudnative101.dev/electives/dist-trace/) (tutorials)
+- [Learning Distributed Tracing 101](https://tracing.cloudnative101.dev/docs/index.html) (tutorials)
+- [Tracing HTTP request latency in Go with OpenTracing](https://medium.com/opentracing/tracing-http-request-latency-in-go-with-opentracing-7cc1282a100a) (blog)
+- [Distributed Tracing with Jaeger & Prometheus on Kubernetes](https://blog.openshift.com/openshift-commons-briefing-82-distributed-tracing-with-jaeger-prometheus-on-kubernetes/) (blog)
+- [Using Jaeger with Istio](https://istio.io/latest/docs/tasks/observability/distributed-tracing/jaeger/) (docs)
+- [Using Jaeger with Envoy](https://www.envoyproxy.io/docs/envoy/latest/start/sandboxes/jaeger_tracing.html) (docs)
 
 [dapper]: https://research.google.com/pubs/pub36356.html
 [ubeross]: http://uber.github.io
-
