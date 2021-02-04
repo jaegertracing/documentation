@@ -363,53 +363,52 @@ For example:
 ###### Enabling ILM support
 * Create an ILM policy in elasticsearch named jaeger-ilm-policy.
 
-  For example, the following policy will rollover the "active" index when it is
-  older than 1m and delete indices that are older than 2m.
+    For example, the following policy will rollover the "active" index when it is
+    older than 1m and delete indices that are older than 2m.
 
-```shell
-  curl -X PUT http://localhost:9200/_ilm/policy/jaeger-ilm-policy \
-  -H 'Content-Type: application/json; charset=utf-8' \
-  --data-binary @- << EOF
-  {
-  "policy": {
-    "phases": {
-      "hot": {
-        "min_age": "0ms",
-        "actions": {
-          "rollover": {
-            "max_age": "1m"
-          },
-          "set_priority": {
-            "priority": 100
+  ```shell
+    curl -X PUT http://localhost:9200/_ilm/policy/jaeger-ilm-policy \
+    -H 'Content-Type: application/json; charset=utf-8' \
+    --data-binary @- << EOF
+    {
+    "policy": {
+      "phases": {
+        "hot": {
+          "min_age": "0ms",
+          "actions": {
+            "rollover": {
+              "max_age": "1m"
+            },
+            "set_priority": {
+              "priority": 100
+            }
           }
-        }
-      },
-      "delete": {
-        "min_age": "2m",
-        "actions": {
-          "delete": {}
+        },
+        "delete": {
+          "min_age": "2m",
+          "actions": {
+            "delete": {}
+          }
         }
       }
     }
   }
-}
-  EOF
-  ```
-* Run elasticsearch initializer with ES_USE_ILM=true:
+    EOF
+    ```
+* Run elasticsearch initializer with `ES_USE_ILM=true`:
 
-```shell
-  docker run -it --rm --net=host -e ES_USE_ILM=true jaegertracing/jaeger-es-rollover:latest init http://localhost:9200 # <1>
-  ```
-<1> If you need to initialize archive storage, add -e ARCHIVE=true.
+  ```shell
+    docker run -it --rm --net=host -e ES_USE_ILM=true jaegertracing/jaeger-es-rollover:latest init http://localhost:9200 # <1>
+    ```
+  <1> If you need to initialize archive storage, add `-e ARCHIVE=true`.
 
-{{< info >}}
-While initializing with ILM support, make sure that an ILM policy named jaeger-ilm-policy is created in Elasticsearch beforehand.
-Initialization checks for this policy - if it does not exist, it would error out with following message.
+  {{< info >}}
+  While initializing with ILM support, make sure that an ILM policy named `jaeger-ilm-policy` is created in Elasticsearch beforehand (see the previous step), otherwise the following error message will be shown:
 
-"ILM policy jaeger-ilm-policy doesn't exist in Elasticsearch. Please create it and rerun init"
-{{< /info >}}
+  "ILM policy jaeger-ilm-policy doesn't exist in Elasticsearch. Please create it and rerun init"
+  {{< /info >}}
 
-  After the initialization, deploy Jaeger with --es.use-ilm=true and --es.use-aliases=true.
+   After the initialization, deploy Jaeger with `--es.use-ilm=true` and `--es.use-aliases=true`.
 
 
 #### Upgrade Elasticsearch version
