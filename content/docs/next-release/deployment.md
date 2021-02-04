@@ -363,14 +363,14 @@ For example:
 ###### Enabling ILM support
 * Create an ILM policy in elasticsearch named jaeger-ilm-policy.
 
-    For example, the following policy will rollover the "active" index when it is
-    older than 1m and delete indices that are older than 2m.
+  For example, the following policy will rollover the "active" index when it is
+  older than 1m and delete indices that are older than 2m.
 
   ```shell
-    curl -X PUT http://localhost:9200/_ilm/policy/jaeger-ilm-policy \
-    -H 'Content-Type: application/json; charset=utf-8' \
-    --data-binary @- << EOF
-    {
+  curl -X PUT http://localhost:9200/_ilm/policy/jaeger-ilm-policy \
+  -H 'Content-Type: application/json; charset=utf-8' \
+  --data-binary @- << EOF
+  {
     "policy": {
       "phases": {
         "hot": {
@@ -393,8 +393,8 @@ For example:
       }
     }
   }
-    EOF
-    ```
+  EOF
+  ```
 * Run elasticsearch initializer with `ES_USE_ILM=true`:
 
   ```shell
@@ -408,7 +408,7 @@ For example:
   "ILM policy jaeger-ilm-policy doesn't exist in Elasticsearch. Please create it and rerun init"
   {{< /info >}}
 
-   After the initialization, deploy Jaeger with `--es.use-ilm=true` and `--es.use-aliases=true`.
+  After the initialization, deploy Jaeger with `--es.use-ilm=true` and `--es.use-aliases=true`.
 
 
 #### Upgrade Elasticsearch version
