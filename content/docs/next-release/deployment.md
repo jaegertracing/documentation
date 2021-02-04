@@ -306,6 +306,7 @@ Rollover index management strategy is more complex than using the default daily 
 To learn more about rollover index management in Jaeger refer to this
 [article](https://medium.com/jaegertracing/using-elasticsearch-rollover-to-manage-indices-8b3d0c77915d).
 
+For automated rollover, please refer to [Elasticsearch ILM support](#elasticsearch-ilm-support).
 ##### Initialize
 
 The following command prepares Elasticsearch for rollover deployment by creating index aliases, indices, and index templates:
@@ -345,6 +346,70 @@ docker run -it --rm --net=host -e ROLLOVER=true jaegertracing/jaeger-es-index-cl
 ```
 
 <1> Remove indices older than 14 days.
+
+
+#### Elasticsearch ILM support
+{{< warning >}}
+Experimental feature added in [release v1.22.0](https://github.com/jaegertracing/jaeger/releases/tag/v1.22.0).
+
+Supported Elasticsearch versions: 7.x
+{{< /warning >}}
+[Elasticsearch ILM](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-lifecycle-management.html) automatically manages indices according to performance, resiliency, and retention requirements.
+
+For example:
+* Rollover to a new index by size (bytes or number of documents) or age, archiving previous indices
+* Delete stale indices to enforce data retention standards
+
+###### Enabling ILM support
+* Create an ILM policy in elasticsearch named jaeger-ilm-policy.
+
+  For example, the following policy will rollover the "active" index when it is
+  older than 1m and delete indices that are older than 2m.
+
+  ```shell
+  curl -X PUT http://localhost:9200/_ilm/policy/jaeger-ilm-policy \
+  -H 'Content-Type: application/json; charset=utf-8' \
+  --data-binary @- << EOF
+  {
+    "policy": {
+      "phases": {
+        "hot": {
+          "min_age": "0ms",
+          "actions": {
+            "rollover": {
+              "max_age": "1m"
+            },
+            "set_priority": {
+              "priority": 100
+            }
+          }
+        },
+        "delete": {
+          "min_age": "2m",
+          "actions": {
+            "delete": {}
+          }
+        }
+      }
+    }
+  }
+  EOF
+  ```
+* Run elasticsearch initializer with `ES_USE_ILM=true`:
+
+  ```shell
+  docker run -it --rm --net=host -e ES_USE_ILM=true jaegertracing/jaeger-es-rollover:latest init http://localhost:9200 # <1>
+  ```
+  <1> If you need to initialize archive storage, add `-e ARCHIVE=true`.
+
+  {{< info >}}
+  While initializing with ILM support, make sure that an ILM policy named `jaeger-ilm-policy` is created in Elasticsearch beforehand (see the previous step), otherwise the following error message will be shown:
+
+  "ILM policy jaeger-ilm-policy doesn't exist in Elasticsearch. Please create it and rerun init"
+  {{< /info >}}
+
+  After the initialization, deploy Jaeger with `--es.use-ilm=true` and `--es.use-aliases=true`.
+
 
 #### Upgrade Elasticsearch version
 
