@@ -96,7 +96,6 @@ mkdir -p $GOPATH/src/github.com/jaegertracing
 cd $GOPATH/src/github.com/jaegertracing
 git clone git@github.com:jaegertracing/jaeger.git jaeger
 cd jaeger
-make install
 go run ./examples/hotrod/main.go all
 ```
 #### From docker
