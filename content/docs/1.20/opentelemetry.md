@@ -3,7 +3,7 @@ title: OpenTelemetry
 hasparent: true
 ---
 
-The future Jaeger backend components will be based on [OpenTelemetry collector](https://opentelemetry.io/docs/collector/about/).
+The future Jaeger backend components will be based on [OpenTelemetry collector](https://opentelemetry.io/docs/collector/).
 This integration will make all OpenTelemetry Collector features available in the Jaeger backend components.
 
 {{< warning >}}
