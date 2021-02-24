@@ -12,7 +12,6 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: true
-        persist-credentials: false
 
     - uses: actions/setup-python@v2
       with:
@@ -25,7 +24,5 @@ jobs:
         git config user.email "jaegertracingbot+jaeger-tracing@googlegroups.com"
         git config credential.helper "store --file=.git/credentials"
         echo "https://${{ secrets.JAEGERTRACINGBOT_GITHUB_TOKEN }}" > .git/credentials
-        echo check github credentials
-        curl -H "Authorization: token ${{ secrets.JAEGERTRACINGBOT_GITHUB_TOKEN }}" https://api.github.com/users/jaegertracingbot -I
         export TRAVIS_TAG=${GITHUB_REF##*/}
         ./travis/release.sh
