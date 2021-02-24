@@ -7,12 +7,14 @@ Before creating a new release:
   - Make sure all outstanding PRs for that version are merged to `next-release` directory.
   - Make sure the actual Jaeger release is done and Docker images for the new version are published.
   - If there are new Jaeger binaries or new storage options added to the release, make sure the CLI docs config file `data/cli/next-release/config.json` is updated accordingly (see below).
+  - Make sure you have git remote `upstream` pointing to the official repository, e.g.
+    `git remote add upstream git@github.com:jaegertracing/documentation.git`
 
 Then create a release by pushing a tag `release-X.Y.Z`, e.g.
 
 ```shell
 git tag release-1.12.0
-git push origin release-1.12.0
+git push upstream release-1.12.0
 ```
 
 TODO: shouldn't the tag only specify major/minor, not patch? I don't think the process will work twice for the same major.minor
