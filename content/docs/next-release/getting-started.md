@@ -18,7 +18,7 @@ The simplest way to start the all-in-one is to use the pre-built image published
 
 ```bash
 $ docker run -d --name jaeger \
-  -e COLLECTOR_ZIPKIN_HTTP_PORT=9411 \
+  -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
   -p 5775:5775/udp \
   -p 6831:6831/udp \
   -p 6832:6832/udp \
@@ -33,7 +33,7 @@ $ docker run -d --name jaeger \
 Or run the `jaeger-all-in-one(.exe)` executable from the [binary distribution archives][download]:
 
 ```bash
-$ jaeger-all-in-one --collector.zipkin.http-port=9411
+$ jaeger-all-in-one --collector.zipkin.host-port=:9411
 ```
 
 You can then navigate to `http://localhost:16686` to access the Jaeger UI.
@@ -122,7 +122,7 @@ Then navigate to `http://localhost:8080`.
 ## Migrating from Zipkin
 
 Collector service exposes Zipkin compatible REST API `/api/v1/spans` which accepts both Thrift and JSON. Also there is `/api/v2/spans` for JSON and Proto.
-By default it's disabled. It can be enabled with `--collector.zipkin.http-port=9411`.
+By default it's disabled. It can be enabled with `--collector.zipkin.host-port=:9411`.
 
 Zipkin [Thrift](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift) IDL and Zipkin [Proto](https://github.com/jaegertracing/jaeger-idl/blob/master/proto/zipkin.proto) IDL files can be found in [jaegertracing/jaeger-idl](https://github.com/jaegertracing/jaeger-idl) repository.
 They're compatible with [openzipkin/zipkin-api](https://github.com/openzipkin/zipkin-api) [Thrift](https://github.com/openzipkin/zipkin-api/blob/master/thrift/zipkinCore.thrift) and [Proto](https://github.com/openzipkin/zipkin-api/blob/master/zipkin.proto).
