@@ -8,7 +8,7 @@ children:
 
 Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.
 
-If you can't find what you are looking for, or have an issue not covered here, we'd love to hear from you either on [CNCF Slack chat](https://cloud-native.slack.com/archives/CGG7NFUJ3), our [mailing list](https://groups.google.com/forum/#!forum/jaeger-tracing) or [Github](https://github.com/jaegertracing/jaeger/issues).
+If you can't find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch).
 
 If you are new to distributed tracing, please take a look at the [Related Links](#related-links) section below.
 
