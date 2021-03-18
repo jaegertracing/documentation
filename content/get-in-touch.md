@@ -4,7 +4,7 @@ title: Getting in touch
 
 ## Via chat or email
 
-Join our open online chat room [gitter.im/jaegertracing](https://gitter.im/jaegertracing/Lobby) or Google mail group [jaeger-tracing@googlegroups.com](https://groups.google.com/forum/#!forum/jaeger-tracing).
+Join our open online chat room [#jaeger at the CNCF Slack](https://cloud-native.slack.com/archives/CGG7NFUJ3Lobby) or Google mail group [jaeger-tracing@googlegroups.com](https://groups.google.com/forum/#!forum/jaeger-tracing).
 
 ## Bi-weekly project meetings
 

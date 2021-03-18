@@ -1,6 +1,6 @@
 {{ $githubRepo    := .Site.Params.githubrepo }}
 {{ $twitterHandle := .Site.Params.twitterhandle }}
-{{ $gitterHandle  := .Site.Params.gitterhandle }}
+{{ $chatHandle  := .Site.Params.chathandle }}
 {{ $mediumHandle  := .Site.Params.mediumhandle }}
 {{ $year          := now.Year }}
 <footer class="footer">
@@ -27,13 +27,11 @@
           </span>
         </a>
         {{ end }}
-        {{ with $gitterHandle }}
-        <a href="https://gitter.im/{{ . }}">
+        <a href="https://cloud-native.slack.com/archives/CGG7NFUJ3">
           <span class="icon" style="color: #e03464;">
-            <i class="fab fa-gitter"></i>
+            <i class="fab fa-slack"></i>
           </span>
         </a>
-        {{ end }}
         {{ with $mediumHandle }}
         <a href="https://medium.com/{{ . }}">
           <span class="icon has-text-light">

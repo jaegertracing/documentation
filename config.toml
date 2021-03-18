@@ -23,7 +23,6 @@ home = [ "HTML", "JSON", "REDIRECTS" ]
   githubrepo     = "jaegertracing/jaeger"
   twitterhandle  = "JaegerTracing"
   mediumhandle   = "jaegertracing"
-  gitterhandle   = "jaegertracing"
   opengraphimage = "img/jaeger-icon-color.png"
 
   latest = "1.22"
