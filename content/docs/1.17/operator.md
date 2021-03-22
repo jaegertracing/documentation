@@ -73,7 +73,7 @@ kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operato
 kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.17.0/deploy/cluster_role_binding.yaml
 ```
 
-Note that you'll need to download and customize the `cluster_role_binding.yaml` if you are using a namespace other than `observability`. You probably also want to download and customize the `operator.yaml`, setting the env var `WATCH_NAMESPACES` to have an empty value, so that it can watch for instances across all namespaces.
+Note that you'll need to download and customize the `cluster_role_binding.yaml` if you are using a namespace other than `observability`. You probably also want to download and customize the `operator.yaml`, setting the env var `WATCH_NAMESPACE` to have an empty value, so that it can watch for instances across all namespaces.
 
 At this point, there should be a `jaeger-operator` deployment available.  You can view it by running the following command:
 
@@ -112,7 +112,7 @@ oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.
 oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.17.0/deploy/cluster_role_binding.yaml
 ```
 
-Note that you'll need to download and customize the `cluster_role_binding.yaml` if you are using a namespace other than `observability`. You probably also want to download and customize the `operator.yaml`, setting the env var `WATCH_NAMESPACES` to have an empty value, so that it can watch for instances across all namespaces.
+Note that you'll need to download and customize the `cluster_role_binding.yaml` if you are using a namespace other than `observability`. You probably also want to download and customize the `operator.yaml`, setting the env var `WATCH_NAMESPACE` to have an empty value, so that it can watch for instances across all namespaces.
 
 Once the operator is installed, grant the role `jaeger-operator` to users who should be able to install individual Jaeger instances. The following example creates a role binding allowing the user `developer` to create Jaeger instances:
 
