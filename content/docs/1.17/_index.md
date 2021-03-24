@@ -8,7 +8,7 @@ children:
 
 Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.
 
-If you can't find what you are looking for, or have an issue not covered here, we'd love to hear from you either on [Gitter chat](https://gitter.im/jaegertracing/Lobby), our [mailing list](https://groups.google.com/forum/#!forum/jaeger-tracing) or [Github](https://github.com/jaegertracing/jaeger/issues).
+If you can't find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch).
 
 ## About
 
