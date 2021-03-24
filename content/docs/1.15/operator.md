@@ -481,7 +481,7 @@ spec:
 ```
 <1> Either `"true"` (as string) or the Jaeger instance name.
 
-A complete sample deployment is available at [`deploy/examples/business-application-injected-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/blob/master/deploy/examples/business-application-injected-sidecar.yaml).
+A complete sample deployment is available at [`deploy/examples/business-application-injected-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/blob/master/examples/business-application-injected-sidecar.yaml).
 
 When the sidecar is injected, the Jaeger Agent can then be accessed at its default location on `localhost`.
 
