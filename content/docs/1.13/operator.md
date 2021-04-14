@@ -385,10 +385,10 @@ When using `elasticsearch` storage by default a job is created to clean old trac
 storage:
   type: elasticsearch
   esIndexCleaner:
-    enabled: false                                // turn the job deployment on and off
-    numberOfDays: 7                               // number of days to wait before deleting a record
-    schedule: "55 23 * * *"                       // cron expression for it to run
-    image: jaegertracing/jaeger-es-index-cleaner  // image of the job
+    enabled: false                                # turn the job deployment on and off
+    numberOfDays: 7                               # number of days to wait before deleting a record
+    schedule: "55 23 * * *"                       # cron expression for it to run
+    image: jaegertracing/jaeger-es-index-cleaner  # image of the job
 ```
 
 ## Auto-injecting Jaeger Agent Sidecars

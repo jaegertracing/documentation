@@ -356,10 +356,10 @@ When using `elasticsearch` storage by default a job is created to clean old trac
 storage:
   type: elasticsearch
   esIndexCleaner:
-    enabled: false                                // turn the job deployment on and off
-    numberOfDays: 7                               // number of days to wait before deleting a record
-    schedule: "55 23 * * *"                       // cron expression for it to run
-    image: jaegertracing/jaeger-es-index-cleaner  // image of the job
+    enabled: false                                # turn the job deployment on and off
+    numberOfDays: 7                               # number of days to wait before deleting a record
+    schedule: "55 23 * * *"                       # cron expression for it to run
+    image: jaegertracing/jaeger-es-index-cleaner  # image of the job
 ```
 
 ## Deriving dependencies
@@ -371,9 +371,9 @@ This job can only be used with the `production` strategy and storage type `cassa
 storage:
   type: elasticsearch
   dependencies:
-    enabled: true                                 // turn the job deployment on and off
-    schedule: "55 23 * * *"                       // cron expression for it to run
-    sparkMaster:                                  // spark master connection string, when empty spark runs in embedded local mode
+    enabled: true                                 # turn the job deployment on and off
+    schedule: "55 23 * * *"                       # cron expression for it to run
+    sparkMaster:                                  # spark master connection string, when empty spark runs in embedded local mode
 ```
 
 The connection configuration to storage is derived from storage options.

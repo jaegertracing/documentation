@@ -336,7 +336,7 @@ The default create-schema job uses `MODE=prod`, which implies a replication fact
 
 By default Elasticsearch storage does not require any initialization job to be run. However Elasticsearch
 storage requires a cron job to be run to clean old data from the storage.
- 
+
 When rollover (`es.use-aliases`) is enabled, Jaeger operator also deploys a job to initialize Elasticsearch storage
 and another two cron jobs to perform required index management actions.
 
@@ -446,9 +446,9 @@ This job can only be used with the `production` strategy and storage type `cassa
 storage:
   type: elasticsearch
   dependencies:
-    enabled: true                                 // turn the job deployment on and off
-    schedule: "55 23 * * *"                       // cron expression for it to run
-    sparkMaster:                                  // spark master connection string, when empty spark runs in embedded local mode
+    enabled: true                                 # turn the job deployment on and off
+    schedule: "55 23 * * *"                       # cron expression for it to run
+    sparkMaster:                                  # spark master connection string, when empty spark runs in embedded local mode
 ```
 
 The connection configuration to storage is derived from storage options.
