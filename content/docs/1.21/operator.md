@@ -683,9 +683,9 @@ This job can only be used with the `production` strategy and storage type `cassa
 storage:
   type: elasticsearch
   dependencies:
-    enabled: true                                 // turn the job deployment on and off
-    schedule: "55 23 * * *"                       // cron expression for it to run
-    sparkMaster:                                  // spark master connection string, when empty spark runs in embedded local mode
+    enabled: true                                 # turn the job deployment on and off
+    schedule: "55 23 * * *"                       # cron expression for it to run
+    sparkMaster:                                  # spark master connection string, when empty spark runs in embedded local mode
     resources:
       requests:
         memory: 4096Mi
