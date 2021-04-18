@@ -720,7 +720,7 @@ The following snippet shows the manual definition you can include in your `conta
     - --reporter.type=grpc
 ```
 
-A complete sample `StatefulSet` is available at [`deploy/examples/statefulset-manual-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/blob/master/deploy/examples/statefulset-manual-sidecar.yaml).
+A complete sample `StatefulSet` is available at [`deploy/examples/statefulset-manual-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/tree/master/examples/statefulset-manual-sidecar.yaml).
 
 The Jaeger Agent can then be accessed at its default location on `localhost`.
 
