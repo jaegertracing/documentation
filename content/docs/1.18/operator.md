@@ -432,7 +432,7 @@ spec:
 
 <10> Define annotations to be applied to all deployments (not services). These can be overridden by annotations defined on the individual components.
 
-You can view example custom resources for different Jaeger configurations [on GitHub](https://github.com/jaegertracing/jaeger-operator/tree/master/deploy/examples).
+You can view example custom resources for different Jaeger configurations [on GitHub](https://github.com/jaegertracing/jaeger-operator/tree/master/examples).
 
 # Configuring the Custom Resource
 
@@ -736,7 +736,7 @@ The following snippet shows the manual definition you can include in your `conta
     - --reporter.type=grpc
 ```
 
-A complete sample `StatefulSet` is available at [`deploy/examples/statefulset-manual-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/blob/master/deploy/examples/statefulset-manual-sidecar.yaml).
+A complete sample `StatefulSet` is available at [`deploy/examples/statefulset-manual-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/tree/master/examples/statefulset-manual-sidecar.yaml).
 
 The Jaeger Agent can then be accessed at its default location on `localhost`.
 
@@ -789,11 +789,11 @@ spec:
 In OpenShift, a `HostPort` can only be set when a special security context is set. A separate service account can be used by the Jaeger Agent with the permission to bind to `HostPort`, as follows:
 
 ```bash
-oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/examples/openshift/hostport-scc-daemonset.yaml # <1>
+oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/examples/openshift/hostport-scc-daemonset.yaml # <1>
 oc new-project myproject
-oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/examples/openshift/service_account_jaeger-agent-daemonset.yaml # <2>
+oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/examples/openshift/service_account_jaeger-agent-daemonset.yaml # <2>
 oc adm policy add-scc-to-user daemonset-with-hostport -z jaeger-agent-daemonset # <3>
-oc apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/examples/openshift/agent-as-daemonset.yaml # <4>
+oc apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/examples/openshift/agent-as-daemonset.yaml # <4>
 ```
 <1> The `SecurityContextConstraints` with the `allowHostPorts` policy
 
