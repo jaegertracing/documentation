@@ -2,21 +2,19 @@
 title: Roadmap
 ---
 
-The following is only a selection of some of the major features we plan to implement in the near future (6-12 months). To get a more complete overview of planned features and current work, see the issue trackers for the various repositories, for example, the [Jaeger backend](https://github.com/jaegertracing/jaeger/issues/).
+The following is only a selection of some of the major features we plan to implement, some of which are near term and some are longer term. We have tried to put these in rough priority as well as having a wishlist at the end. To get a more complete overview of planned features and current work, see the issue trackers for the various repositories, for example, the [Jaeger backend](https://github.com/jaegertracing/jaeger/issues/).
 
-## Integration with OpenTelemetry collector
+## Aggregated Trace Metrics (ATM)
 
-[OpenTelemetry collector](https://opentelemetry.io/docs/collector/getting-started/) is a vendor-agnostic service for receiving, processing and exporting telemetry data. We have decided to rebuild the Jaeger backed components (agent, collector, ingester, all-in-one) on top of OpenTelemetry collector which has several benefits:
+Aggregated trace metrics can be exported by the OpenTelemetry Collector [/opentelemetry-collector-contrib/tree/main/processor/spanmetricsprocessor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/spanmetricsprocessor) this allows metrics to be calculated off trace data and metrics to be exported from the Collector. We are adapting Jaeger to be able to read metrics from a Prometheus compatible backend, but additional backends may be supported. For additional information see [jaeger/pull/2946](https://github.com/jaegertracing/jaeger/pull/2946). 
 
-* automatic compatibility with OpenTelemetry SDKs
-* forward compatibility with OpenTelemetry native data model
-* tail-based sampling
-* attribute processors
-* leverage a larger community
+## Operational Monitoring HomePage
 
-More can be found in the blog post [Jaeger embraces OpenTelemetry collector](https://medium.com/jaegertracing/jaeger-embraces-opentelemetry-collector-90a545cbc24), and the earlier post [Jaeger and OpenTelemetry](https://medium.com/jaegertracing/jaeger-and-opentelemetry-1846f701d9f2) that laid out the project strategy.
+Enhancements to the Jaeger search and homepage to improve not only the user interface but introduce operational metrics including average response time, tansactions per minute, and error rate (R.E.D) to allow Jaeger to be used operationally. For more details see [jaeger/issues/2954](https://github.com/jaegertracing/jaeger/issues/2954).
 
-The current progress can be tracked via [issues tagged as `area/otel`](https://github.com/jaegertracing/jaeger/issues?q=is%3Aissue+is%3Aopen+label%3Aarea%2Fotel).
+## Support for OpenSearch
+
+Backend storage support for [OpenSearch](https://opensearch.org/) as a backend database. Today this is fully compatible with ElasticSearch APIs, but these may diverge. OpenSearch is Apache 2.0 licensed and hopefully will be led by a community of contributors, but today is led by AWS. ElasticSearch is SSPL licensed and led by Elastic NV making it no longer an open source project.
 
 ## Adaptive Sampling
 
@@ -35,11 +33,26 @@ the storage backend. There are two issues with the current approach:
 Currently Jaeger backend allows configuring per-endpoint sampling strategies in a centralized configuration file.
 The auto-calculation of the sampling probabilities (the "adaptive" part) is still work in progress.
 
-See issue tracker for more info: [jaeger/issues/365](https://github.com/jaegertracing/jaeger/issues/365).
+See issue tracker for more info: [jaeger/issues/365](https://github.com/jaegertracing/jaeger/issues/365). This is also being tracked in OpenTelemetry that has similar requirements: [open-telemetry/opentelemetry-specification/issues/691](https://github.com/open-telemetry/opentelemetry-specification/issues/691)
 
+## Integration with OpenTelemetry collector
+
+[OpenTelemetry collector](https://opentelemetry.io/docs/collector/getting-started/) is a vendor-agnostic service for receiving, processing and exporting telemetry data. We have decided to rebuild the Jaeger backed components (agent, collector, ingester, all-in-one) on top of OpenTelemetry collector which has several benefits:
+
+* automatic compatibility with OpenTelemetry SDKs
+* forward compatibility with OpenTelemetry native data model
+* tail-based sampling
+* attribute processors
+* leverage a larger community
+
+More can be found in the blog post [Jaeger embraces OpenTelemetry collector](https://medium.com/jaegertracing/jaeger-embraces-opentelemetry-collector-90a545cbc24), and the earlier post [Jaeger and OpenTelemetry](https://medium.com/jaegertracing/jaeger-and-opentelemetry-1846f701d9f2) that laid out the project strategy. This work will occur after the Collector and associated APIs are more stable, towards the end of 2021.
+
+The current progress can be tracked via [issues tagged as `area/otel`](https://github.com/jaegertracing/jaeger/issues?q=is%3Aissue+is%3Aopen+label%3Aarea%2Fotel).
+
+# Wish List or Longer Term Goals
 ## Data Pipeline
 
-Post-collection data pipeline for trace aggregation and data mining based on Apache Flink.
+Post-collection data pipeline for trace aggregation and data mining based on Apache Flink. Some of this work has been done and can be found in [jaeger-analytics-flink/](https://github.com/jaegertracing/jaeger-analytics-flink)
 
 ## AI/ML platform for Jaeger
 
@@ -74,17 +87,9 @@ that comes in handy in various scenarios:
   * Black/whitelisting services for adaptive sampling,
   * etc.
 
-## Tail-based Sampling
-
-Jaeger clients implement so-called _head-based sampling_, where a sampling decision is made at the root of the call tree and propagated down the tree along with the trace context. This is done to guarantee consistent sampling of all spans of a given trace (or none of them), because we don't want to make the coin flip at every node and end up with partial/broken traces. However, if 99% of all requests in the system are normal, then 99% of all traces we collect are not very interesting, and the probability of capturing really unusual traces is quite low, because at the start of the trace the platform has very little information for making a sampling decision.
-
-The alternative way to implement sampling is with _tail-based sampling_, a technique employed by some of the commercial vendors today, such as Lightstep, DataDog. With tail-based sampling, 100% of spans are captured from the application, but only stored in memory in a collection tier, until the full trace is gathered and a sampling decision is made. The decision making code has a lot more information now, including errors, unusual latencies, etc. If we decide to sample the trace, only then it goes to disk storage, otherwise we evict it from memory, so that we only need to keep spans in memory for a few seconds on average. Tail-based sampling imposes heavier performance penalty on the traced applications because 100% of traffic needs to be profiled by tracing instrumentation.
-
-You can read more about head-based and tail-based sampling either in Chapter 3 of Yuri Shkuro's book [Mastering Distributed Tracing](https://www.shkuro.com/books/2019-mastering-distributed-tracing/) or in the awesome paper ["So, you want to trace your distributed system? Key design insights from years of practical experience"](http://www.pdl.cmu.edu/PDL-FTP/SelfStar/CMU-PDL-14-102.pdf) by Raja R. Sambasivan, Rodrigo Fonseca, Ilari Shafer, Gregory R. Ganger.
-
-See issue tracker for more info: [jaeger/issues/425](https://github.com/jaegertracing/jaeger/issues/425).
-
-## Long Term Roadmap
+## Ideation
 
 * Multi-Tenancy ([mailgroup thread](https://groups.google.com/forum/#!topic/jaeger-tracing/PcxftflO4_o))
 * Cloud and Multi-DC strategy
+* Flagging of anomalous traces 
+* Alerting capabilities to complement operational use cases
