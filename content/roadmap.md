@@ -87,7 +87,7 @@ that comes in handy in various scenarios:
   * Black/whitelisting services for adaptive sampling,
   * etc.
 
-## Ideation
+## Wishlist
 
 * Multi-Tenancy ([mailgroup thread](https://groups.google.com/forum/#!topic/jaeger-tracing/PcxftflO4_o))
 * Cloud and Multi-DC strategy
