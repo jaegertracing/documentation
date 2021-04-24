@@ -6,7 +6,7 @@ The following is only a selection of some of the major features we plan to imple
 
 ## Aggregated Trace Metrics (ATM)
 
-Aggregated trace metrics can be exported by the OpenTelemetry Collector [/opentelemetry-collector-contrib/tree/main/processor/spanmetricsprocessor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/spanmetricsprocessor) this allows metrics to be calculated off trace data and metrics to be exported from the Collector. We are adapting Jaeger to be able to read metrics from a Prometheus compatible backend, but additional backends may be supported. For additional information see [jaeger/pull/2946](https://github.com/jaegertracing/jaeger/pull/2946). 
+Aggregated trace metrics can be exported from the OpenTelemetry Collector by [spanmetricsprocessor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/spanmetricsprocessor) that allows metrics to be calculated from trace data. We are adapting Jaeger to be able to read metrics from a Prometheus compatible backend, but additional backends may be supported. For additional information see [jaeger/pull/2946](https://github.com/jaegertracing/jaeger/pull/2946). 
 
 ## Operational Monitoring HomePage
 
