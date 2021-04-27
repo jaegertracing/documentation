@@ -105,3 +105,18 @@ For Visual Studio Code, you need to have the following configuration at the root
             }
         ]
     }
+
+## make: esc: Command not found
+
+Make sure `esc` is installed:
+```
+make install-tools
+```
+
+`esc` will be installed in your `$GOPATH`; check it is added in your `$PATH`:
+```
+export PATH=$PATH:$(go env GOPATH)/bin
+```
+
+To make this more permanent, add the above `export` command to your preferred
+login shell: `~/.bash_profile`, `~/.zshrc`, etc.
