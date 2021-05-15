@@ -554,13 +554,14 @@ At default settings the query service exposes the following port(s):
 
 Port  | Protocol | Function
 ----- | -------  | ---
+16685 | gRPC     | Protobuf/gRPC [QueryService](https://github.com/jaegertracing/jaeger-idl/blob/master/proto/api_v2/query.proto)
 16686 | HTTP     | `/api/*` endpoints and Jaeger UI at `/`
-16686 | gRPC     | Protobuf/gRPC [QueryService](https://github.com/jaegertracing/jaeger-idl/blob/master/proto/api_v2/query.proto)
 16687 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
 
 ### Minimal deployment example (Elasticsearch backend):
 ```sh
 docker run -d --rm \
+  -p 16685:16685 \
   -p 16686:16686 \
   -p 16687:16687 \
   -e SPAN_STORAGE_TYPE=elasticsearch \
