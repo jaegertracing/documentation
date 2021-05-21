@@ -84,7 +84,8 @@ It can be run standalone, but requires Jaeger backend to view the traces.
 
 ### Prerequisites
 
--   You need Go 1.11 or higher installed on your machine to run from source.
+-   You need [Go toolchain](https://golang.org/doc/install) installed on your machine to run from source
+    (see [go.mod](https://github.com/jaegertracing/jaeger/blob/master/go.mod#L3) file for required Go version).
 -   Requires a [running Jaeger backend](#all-in-one) to view the traces.
 
 ### Running
