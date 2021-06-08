@@ -1,0 +1,16 @@
+name: jaeger-collector status
+synopsis: Print the status.
+description: |
+  Print Jaeger component status information, exit non-zero on any error.
+options:
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for status
+- name: status.http.host-port
+  default_value: :14269
+  usage: |
+    The host:port (e.g. 127.0.0.1:14269 or :14269) for the health check
+see_also:
+- jaeger-collector - Jaeger collector receives and processes traces from Jaeger agents
+  and clients
