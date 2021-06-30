@@ -175,7 +175,7 @@ clients:
       env_JAEGER_PASSWORD: yes
       env_JAEGER_PROPAGATION: no
       128bit_trace_id: yes
-      JAEGER_TRACEID_128BIT: no
+      JAEGER_TRACEID_128BIT: yes
 
   - language: Java
     repo: jaegertracing/jaeger-client-java
