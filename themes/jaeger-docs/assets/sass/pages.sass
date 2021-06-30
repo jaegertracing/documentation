@@ -48,26 +48,35 @@
   /* Documentation pages */
   &--docs
     /* Left-hand documentation nav */
-    .nav
+    .nav-wrapper
       position: fixed
-      width: inherit
-      max-width: 10rem
-      line-height: 150%
+      bottom: 0%
+      top: 9rem
 
-      .nav-link
-        a
-          line-height: 110%
+      .nav
+        position: absolute
+        z-index: 10
+        width: inherit
+        max-width: 11rem
+        line-height: 150%
+        overflow-y: scroll
+        overflow-x: hidden
+        height: 100%
+
+        .nav-link
+          a
+            line-height: 110%
+            color: black
+
+            &.is-active
+              color: $link
+
+            &.nav-sublink
+              font-size: 1.1rem
+              margin-left: 1rem
+
           color: black
+          font-size: 1.4rem
 
-          &.is-active
-            color: $link
-
-          &.nav-sublink
-            font-size: 1.1rem
-            margin-left: 1rem
-
-        color: black
-        font-size: 1.4rem
-
-        & + .nav-link
-          margin-top: .75rem
+          & + .nav-link
+            margin-top: .75rem
