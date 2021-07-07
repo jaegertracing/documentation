@@ -30,10 +30,10 @@ jobs:
 
     - name: GH CLI create PR
       run: |
-        gh auth login --with-token $PAVOL_TOKEN
+#        gh auth login --with-token $PAVOL_TOKEN
         gh pr create --title "The bug is fixed" --body "Everything works again"
       env:
-        GITHUB_TOKEN: ${{ secrets.PAVOL_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 # didn't work
 #    - name: Create Pull Request
