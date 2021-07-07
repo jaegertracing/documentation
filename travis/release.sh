@@ -22,7 +22,7 @@ safe_checkout_master() {
 
 if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; then
     echo "We are on release-x.y.z tag: $TRAVIS_TAG"
-#    safe_checkout_master
+    safe_checkout_master
     version=$(echo "${TRAVIS_TAG}" | sed 's/^release-//')
     versionMajorMinor=$(echo "${version}" | sed 's/\.[[:digit:]]$//')
     echo "Creating new documentation for ${version}"
@@ -34,8 +34,8 @@ if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; t
     mkdir -p ${cliDocsTempDir}/data/cli
     cp -r ./data/cli/next-release/ ${cliDocsTempDir}/data/cli/${versionMajorMinor}
     chmod a+w -R ${cliDocsTempDir}
-#    python ./travis/gen-cli-data.py ${versionMajorMinor} ${cliDocsTempDir}
-#    mv ${cliDocsTempDir}/data/cli/${versionMajorMinor} ./data/cli/
+    python ./travis/gen-cli-data.py ${versionMajorMinor} ${cliDocsTempDir}
+    mv ${cliDocsTempDir}/data/cli/${versionMajorMinor} ./data/cli/
     sed -i -e "s/latest *=.*$/latest = \"${versionMajorMinor}\"/" config.toml
     sed -i -e "s/binariesLatest *=.*$/binariesLatest = \"${version}\"/" config.toml
     sed -i -e "s/versions *= *\[/versions = \[\"${versionMajorMinor}\"\,/" config.toml
@@ -43,7 +43,7 @@ if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; t
       echo "Not committing changes because DRY_RUN=$DRY_RUN"
       exit 0
     fi
-    git add config.toml ./content/docs/${versionMajorMinor}
+    git add config.toml ./content/docs/${versionMajorMinor} ./data/cli/${versionMajorMinor}
     git commit -m "Release ${version}" -s
 else
     echo "TRAVIS_TAG=$TRAVIS_TAG is not in the form release-x.y.z, skipping release"
