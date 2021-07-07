@@ -22,7 +22,7 @@ safe_checkout_master() {
 
 if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; then
     echo "We are on release-x.y.z tag: $TRAVIS_TAG"
-    safe_checkout_master
+#    safe_checkout_master
     version=$(echo "${TRAVIS_TAG}" | sed 's/^release-//')
     versionMajorMinor=$(echo "${version}" | sed 's/\.[[:digit:]]$//')
     echo "Creating new documentation for ${version}"
