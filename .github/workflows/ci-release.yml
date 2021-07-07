@@ -29,7 +29,18 @@ jobs:
         ./travis/release.sh
         git checkout -b release-branch
 
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v3
+#    - name: Create Pull Request
+#      uses: peter-evans/create-pull-request@v3
+#      with:
+#        base: release-branch
+
+    - name: Create pull request
+      uses: gr2m/create-or-update-pull-request-action@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAVOL_TOKEN }}
       with:
-        base: release-branch
+        title: "My pull request title"
+        body: "My pull request body"
+#        branch: "my-pull-request-base-branch"
+        commit-message: "My commit message for uncommitted changes in lib/ folder"
+        author: "Lorem J. Ipsum <lorem@example.com>"
