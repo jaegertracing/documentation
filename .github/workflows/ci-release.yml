@@ -31,7 +31,7 @@ jobs:
     - name: GH CLI create PR
       run: |
         git checkout -b creating-release # branch is need for GH CLI
-        gh pr create --title "The bug is fixed" --body "Everything works again"
+        gh pr create --head --title "The bug is fixed" --body "Everything works again"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
