@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v2
       with:
         submodules: true
-        token: ${{ secrets.JAEGERTRACINGBOT_GITHUB_TOKEN }}
+        token: ${{ secrets.PAVOL_TOKEN }}
 
     - uses: actions/setup-python@v2
       with:
