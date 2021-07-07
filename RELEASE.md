@@ -17,6 +17,9 @@ git tag release-1.12.0
 git push upstream release-1.12.0
 ```
 
+Tag triggers CI job that opens a pull request with documentation changes for the new version.
+Release is done after the PR is merged.
+
 TODO: shouldn't the tag only specify major/minor, not patch? I don't think the process will work twice for the same major.minor
 
 ### Auto-generated documentation for CLI flags

@@ -33,6 +33,6 @@ jobs:
         export TAG=${GITHUB_REF##*/}
         git checkout -b gen-release-${TAG} # branch is need for GH CLI
         git push origin gen-release-${TAG} # branch has to be on remote  before PR is opened
-        gh pr create --base master --title "Creating release ${TAG}" --body "Release ${TAG}. This PR is created from CI and is part of the release process."
+        gh pr create --base master --title "Release ${TAG}" --body "Release ${TAG}. This PR is created from CI and is part of the release process."
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
