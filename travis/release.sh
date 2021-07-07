@@ -43,7 +43,7 @@ if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; t
       echo "Not committing changes because DRY_RUN=$DRY_RUN"
       exit 0
     fi
-    git add config.toml ./content/docs/${versionMajorMinor} ./data/cli/${versionMajorMinor}
+    git add config.toml ./content/docs/${versionMajorMinor}
     git commit -m "Release ${version}" -s
 else
     echo "TRAVIS_TAG=$TRAVIS_TAG is not in the form release-x.y.z, skipping release"
