@@ -28,8 +28,13 @@ jobs:
         export TRAVIS_TAG=${GITHUB_REF##*/}
         ./travis/release.sh
 
-    - name: muzzle
-      run: gh pr create --title "The bug is fixed" --body "Everything works again"
+    - name: GH CLI create PR
+      run: |
+        gh auth login --with-token $PAVOL_TOKEN
+        gh pr create --title "The bug is fixed" --body "Everything works again"
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAVOL_TOKEN }}
+
 # didn't work
 #    - name: Create Pull Request
 #      uses: peter-evans/create-pull-request@v3
