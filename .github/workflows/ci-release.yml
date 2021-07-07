@@ -27,8 +27,7 @@ jobs:
         # echo "https://${{ secrets.JAEGERTRACINGBOT_GITHUB_TOKEN }}" > .git/credentials
         export TRAVIS_TAG=${GITHUB_REF##*/}
         ./travis/release.sh
+        git checkout -b release-branch
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3
-      with:
-        base: foo-bar-base
