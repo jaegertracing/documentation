@@ -1,0 +1,16 @@
+name: jaeger-agent docs
+synopsis: Generates documentation
+description: Generates command and flags documentation
+options:
+- name: dir
+  default_value: ./
+  usage: Directory where generate the documentation.
+- name: format
+  default_value: md
+  usage: 'Supported formats: [md man rst yaml].'
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for docs
+see_also:
+- jaeger-agent - Jaeger agent is a local daemon program which collects tracing data.
