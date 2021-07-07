@@ -1,0 +1,26 @@
+name: jaeger-all-in-one env
+synopsis: Help about environment variables.
+description: |2+
+
+  All command line options can be provided via environment variables by converting
+  their names to upper case and replacing punctuation with underscores. For example:
+
+  command line option                 environment variable
+  ------------------------------------------------------------------
+  --cassandra.connections-per-host    CASSANDRA_CONNECTIONS_PER_HOST
+  --metrics-backend                   METRICS_BACKEND
+
+  The following configuration options are only available via environment variables:
+
+  SPAN_STORAGE_TYPE string         The type of backend [cassandra, elasticsearch, memory, kafka, badger, grpc-plugin] used for trace storage. Multiple backends can be specified as comma-separated list, e.g. "cassandra,elasticsearch" (currently only for writing spans). Note that "kafka" is only valid in jaeger-collector; it is not a replacement for a proper storage backend, and only used as a buffer for spans when Jaeger is deployed in the collector+ingester configuration.  (default "cassandra")
+
+  DEPENDENCY_STORAGE_TYPE string   The type of backend used for service dependencies storage. (default "${SPAN_STORAGE_TYPE}")
+
+options:
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for env
+see_also:
+- jaeger-all-in-one - Jaeger all-in-one distribution with agent, collector and query
+  in one process.
