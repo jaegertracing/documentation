@@ -45,7 +45,7 @@ if [[ "$TRAVIS_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; t
     fi
     git add config.toml ./content/docs/${versionMajorMinor} ./data/cli/${versionMajorMinor}
     git commit -m "Release ${version}" -s
-    git push origin $checkoutBranch
 else
     echo "TRAVIS_TAG=$TRAVIS_TAG is not in the form release-x.y.z, skipping release"
+    exit 1
 fi
