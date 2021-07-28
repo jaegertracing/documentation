@@ -674,7 +674,7 @@ spec:
 
 <2> Disables creation of default index templates.
 
-### Grpc-plugin storage
+### Storage plugin
 
 Storage type `grpc-plugin` allows using Jaeger with 3rd party storage implementations.
 
