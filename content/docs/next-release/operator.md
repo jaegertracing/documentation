@@ -674,6 +674,47 @@ spec:
 
 <2> Disables creation of default index templates.
 
+### Grpc-plugin storage
+
+Storage type `grpc-plugin` allows using Jaeger with 3rd party storage implementations.
+
+Follows an example of Jaeger CR with `allInOne` strategy and Clickhouse storage plugin.
+Refer to [jaeger-clickhouse](https://github.com/pavolloffay/jaeger-clickhouse) documentation
+how to deploy fully functional example.
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: clickhouse-grpc-plugin
+spec:
+  strategy: allInOne
+  storage:
+    type: grpc-plugin # <1>
+    grpcPlugin:
+      image: ghcr.io/pavolloffay/jaeger-clickhouse:0.5.1 # <2>
+    options:
+      grpc-storage-plugin: # <3>
+        binary: /plugin/jaeger-clickhouse
+        configuration-file: /plugin-config/config.yaml
+        log-level: debug
+  volumeMounts:
+    - name: plugin-config
+      mountPath: /plugin-config
+  volumes:
+    - name: plugin-config
+      configMap:
+        name: jaeger-clickhouse # <4>
+ ```
+
+<1> `grpc-plugin` storage type.
+
+<2> Image with the plugin binary. The image is used as init-container to copy the binary into volume that is available to the Jaeger process. The image has to copy the binary into `/plugin` directory.
+
+<3> Configuration options for the `grpc-plugin`.
+
+<4> Config map with the plugin configuration.
+
 ## Deriving dependencies
 
 The processing to derive dependencies will collect spans from storage, analyzes links between services and store them for later presentation in the UI.
