@@ -678,9 +678,10 @@ spec:
 
 Setting `spec.storage.type` to `grpc-plugin` enables using Jaeger with 3rd party storage implementations.
 
-Follows an example of Jaeger CR with `allInOne` strategy and Clickhouse storage plugin.
-Refer to [jaeger-clickhouse](https://github.com/pavolloffay/jaeger-clickhouse) documentation
-how to deploy fully functional example.
+The following is an example of a Jaeger CR using the `allInOne` deployment strategy
+and the Clickhouse storage plugin.
+Refer to [jaeger-clickhouse](https://github.com/pavolloffay/jaeger-clickhouse) for documentation
+and a fully functional example.
 
 ```yaml
 apiVersion: jaegertracing.io/v1
