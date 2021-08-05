@@ -10,15 +10,16 @@ Before creating a new release:
   - Make sure you have git remote `upstream` pointing to the official repository, e.g.
     `git remote add upstream git@github.com:jaegertracing/documentation.git`
 
-Then create a release by pushing a tag `release-X.Y.Z`, e.g.
+Then create a release by pushing a tag corresponding to the jaegertracing/jaeger version `release-X.Y.Z`, e.g.
 
 ```shell
 git tag release-1.12.0
 git push upstream release-1.12.0
 ```
 
-Tag triggers CI job that opens a pull request with documentation changes for the new version.
-Release is done after the PR is merged.
+  - Wait for the CI job to create a pull request with the documentation changes for the new version.
+  - Approve and merge that pull request.
+  - Because the site is statically generated, the release is completed after the merge.
 
 TODO: shouldn't the tag only specify major/minor, not patch? I don't think the process will work twice for the same major.minor
 
