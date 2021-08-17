@@ -173,7 +173,7 @@ options:
 - name: collector.grpc.tls.key
   usage: |
     Path to a TLS Private Key file, used to identify this server to clients
-- name: collector.grpc.max-receive-message-length
+- name: collector.grpc-server.max-message-size
   usage: |
     The maximum receivable message size for the collector's GRPC server
 - name: collector.http-server.host-port
