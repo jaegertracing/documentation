@@ -17,7 +17,7 @@ All-in-one is an executable designed for quick local testing, launches the Jaege
 The simplest way to start the all-in-one is to use the pre-built image published to DockerHub (a single command line).
 
 ```bash
-$ docker run -d --name jaeger \
+docker run -d --name jaeger \
   -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
   -p 5775:5775/udp \
   -p 6831:6831/udp \
@@ -33,7 +33,7 @@ $ docker run -d --name jaeger \
 Or run the `jaeger-all-in-one(.exe)` executable from the [binary distribution archives][download]:
 
 ```bash
-$ jaeger-all-in-one --collector.zipkin.host-port=:9411
+jaeger-all-in-one --collector.zipkin.host-port=:9411
 ```
 
 You can then navigate to `http://localhost:16686` to access the Jaeger UI.
@@ -102,7 +102,7 @@ go run ./examples/hotrod/main.go all
 #### From docker
 
 ```bash
-$ docker run --rm -it \
+docker run --rm -it \
   --link jaeger \
   -p8080-8083:8080-8083 \
   -e JAEGER_AGENT_HOST="jaeger" \
@@ -114,7 +114,7 @@ $ docker run --rm -it \
 
 Run `example-hotrod(.exe)` executable from the [binary distribution archives][download]:
 ```bash
-$ example-hotrod all
+example-hotrod all
 ```
 
 Then navigate to `http://localhost:8080`.
