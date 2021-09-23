@@ -10,10 +10,10 @@ weight: 7
 Several aspects of the UI can be configured:
 
   * The Dependencies section can be enabled / configured
-  * Google Analytics tracking can be enabled / configured
+  * App analytics tracking can be enabled / configured (via Google Analytics or custom plugin)
   * Additional menu options can be added to the global nav
   * Search input limits can be configured
-  
+
 These options can be configured by a JSON configuration file. The `--query.ui-config` command line parameter of the query service must then be set to the path to the JSON file when the query service is started.
 
 An example configuration file:
@@ -70,11 +70,15 @@ An example configuration file:
 
 `archiveEnabled` enables (`true`) or disables (`false`) the archive traces button. Default: `false`. It requires a configuration of an archive storage in Query service. Archived traces are only accessible directly by ID, they are not searchable.
 
-### Google Analytics Tracking
+### App Analytics Tracking
 
 `tracking.gaID` defines the Google Analytics tracking ID. This is required for Google Analytics tracking, and setting it to a non-`null` value enables Google Analytics tracking. Default: `null`.
 
-`tracking.trackErrors` enables (`true`) or disables (`false`) error tracking via Google Analytics. Errors can only be tracked if a valid Google Analytics ID is provided. For additional details on error tracking via Google Analytics see the [tracking README](https://github.com/jaegertracing/jaeger-ui/blob/c622330546afc1be59a42f874bcc1c2fadf7e69a/src/utils/tracking/README.md) in the UI repo. Default: `true`.
+`tracking.customWebAnalytics` defines a factory function for a custom tracking plugin (only when using Javascript-form of UI configuration).
+
+`tracking.trackErrors` enables (`true`) or disables (`false`) error tracking. Errors can only be tracked if a valid analytics tracker is configured. Default: `true`.
+
+For additional details on app analytics see the [tracking README](https://github.com/jaegertracing/jaeger-ui/blob/master/packages/jaeger-ui/src/utils/tracking/README.md) in the UI repo.
 
 ### Custom Menu Items
 
@@ -122,7 +126,7 @@ key   | The name of tag/process/log attribute which value will be displayed as a
 url   | The URL where the link should point to, it can be an external site or relative path in Jaeger UI
 text  | The text displayed in the tooltip for the link
 
-Both `url` and `text` can be defined as templates (i.e. using `#{field-name}`) where Jaeger UI will dynamically substitute values based on tags/logs/traces data. 
+Both `url` and `text` can be defined as templates (i.e. using `#{field-name}`) where Jaeger UI will dynamically substitute values based on tags/logs/traces data.
 
 For traces, the supported template fields are: `duration`, `endTime`, `startTime`, `traceName` and `traceID`.
 
