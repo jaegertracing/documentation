@@ -13,7 +13,8 @@
             "memory",
             "badger",
             "grpc-plugin"
-        ]
+        ],
+        "sampling": []
     },
     "jaeger-collector": {
         "storage": [
@@ -21,6 +22,10 @@
             "elasticsearch",
             "kafka",
             "grpc-plugin"
+        ],
+        "sampling": [
+            "ADAPTIVE",
+            "STATIC"
         ]
     },
     "jaeger-ingester": {
@@ -28,16 +33,19 @@
             "cassandra",
             "elasticsearch",
             "grpc-plugin"
-        ]
+        ],
+        "sampling": []
     },
     "jaeger-query": {
         "storage": [
             "cassandra",
             "elasticsearch",
             "grpc-plugin"
-        ]
+        ],
+        "sampling": []
     },
     "jaeger-agent": {
-        "storage": []
+        "storage": [],
+        "sampling": []
     }
 }
