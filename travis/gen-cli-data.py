@@ -27,6 +27,7 @@ def generate(tool, storage='', sampling=''):
         "--privileged",
         "--volume {}".format(volume),
         "-e SPAN_STORAGE_TYPE={}".format(storage),
+        "-e SAMPLING_TYPE={}".format(sampling),
         docker_image,
         "docs",
         "--format=yaml",
@@ -35,7 +36,7 @@ def generate(tool, storage='', sampling=''):
     print(cmd)
     if os.system(cmd) != 0:
         sys.exit(1)
-    if storage:
+    if storageOrSampling:
         os.rename(
             '{}/data/cli/{}/{}.yaml'.format(output_path, jaeger_ver, tool),
             '{}/data/cli/{}/{}-{}.yaml'.format(output_path, jaeger_ver, tool, storageOrSampling)

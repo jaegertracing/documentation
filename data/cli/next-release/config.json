@@ -24,8 +24,8 @@
             "grpc-plugin"
         ],
         "sampling": [
-            "ADAPTIVE",
-            "STATIC"
+            "adaptive",
+            "static"
         ]
     },
     "jaeger-ingester": {
