@@ -25,8 +25,8 @@ jobs:
         git config user.email "jaegertracingbot+jaeger-tracing@googlegroups.com"
         # git config credential.helper "store --file=.git/credentials"
         # echo "https://${{ secrets.JAEGERTRACINGBOT_GITHUB_TOKEN }}" > .git/credentials
-        export TRAVIS_TAG=${GITHUB_REF##*/}
-        ./travis/release.sh
+        export RELEASE_TAG=${GITHUB_REF##*/}
+        ./scripts/release.sh
 
     - name: GH CLI create PR
       run: |
