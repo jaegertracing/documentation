@@ -20,7 +20,7 @@ If your clients are configured to use remote sampling then sampling rates can be
 
 ### File Sampling
 
-Collectors can be instantiated with static sampling strategies (which are propagated to the respective service if configured with Remote sampler) via the `--sampling.strategies-file` option. This option requires a path to a json file or an http url which indicates the location of the sampling strategies file. Also note that `--sampling.strategies-reload-interval` allows for periodic reloading of the indicated file.
+Collectors can be instantiated with the `--sampling.strategies-file` option that points to a file containing sampling strategies to be served to Jaeger clients. The option's value can contain a path to a JSON file, which will be automatically reloaded if its contents change, or an HTTP URL from where the file will be periodically retrieved, with reload frequency controlled by the `--sampling.strategies-reload-interval` option.
 
 If no configuration is provided, the collectors will return the default probabilistic sampling policy with probability 0.001 (0.1%) for all services.
 
