@@ -16,11 +16,11 @@ When using configuration object to instantiate the tracer, the type of sampling 
 
 ## Collector Sampling Configuration
 
-If your clients are configured to use remote sampling then sampling rates can be centrally controlled via the collectors. In a remote sampling setup a json document is served to the Jaeger client that describes endpoints and their sampling probabilities. This document can be generated two different ways: [statically](#static-sampling) or [dynamically](#adaptive-sampling). The method of document generation is controlled by the environment variable `SAMPLING_TYPE` which can be set to either `static`(default) or `adaptive`.
+If your clients are configured to use remote sampling then sampling rates can be centrally controlled via the collectors. In a remote sampling setup a json document is served to the Jaeger client that describes endpoints and their sampling probabilities. This document can be generated two different ways: [periodically loaded from a file](#file-sampling) or [dynamically based on traffic](#adaptive-sampling). The method of document generation is controlled by the environment variable `SAMPLING_CONFIG_TYPE` which can be set to either `file`(default) or `adaptive`.
 
-### Static Sampling
+### File Sampling
 
-Collectors can be instantiated with static sampling strategies (which are propagated to the respective service if configured with Remote sampler) via the `--sampling.strategies-file` option. This option requires a path to a json file which defines the sampling strategies.
+Collectors can be instantiated with static sampling strategies (which are propagated to the respective service if configured with Remote sampler) via the `--sampling.strategies-file` option. This option requires a path to a json file or an http url which indicates the location of the sampling strategies file. Also note that `--sampling.strategies-reload-interval` allows for periodic reloading of the indicated file.
 
 If no configuration is provided, the collectors will return the default probabilistic sampling policy with probability 0.001 (0.1%) for all services.
 
@@ -81,9 +81,4 @@ In the above example:
 
 ### Adaptive Sampling
 
-Adaptive sampler is a composite sampler that combines two functions:
-
-  * It makes sampling decisions on a per-operation basis, i.e. based on {{< tip "span" >}} operation name. This is especially useful in the API services whose endpoints may have very different traffic volumes and using a single probabilistic sampler for the whole service might starve (never sample) some of the low QPS endpoints.
-  * It supports a minimum guaranteed rate of sampling, such as always allowing up to N {{< tip "traces" "trace" >}} per seconds and then sampling anything above that with a certain probability (everything is per-operation, not per-service).
-
-Adaptive sampling requires a central store for the collectors to coordinate information about spans received/second and current sampling rates. Currently this has only been implemented for Cassandra and adaptive sampling shares the same storage as your span storage. Right now adaptive sampling will only work if `SPAN_STORAGE_TYPE` is set to Cassandra and the [relevant tables](https://github.com/jaegertracing/jaeger/blob/master/plugin/storage/cassandra/schema/v003.cql.tmpl#L206-L229) have been created. If you're just getting started please review `sampling.initial-sampling-probability` and `sampling.target-samples-per-second`, and see the [cli parameters](/docs/latest/cli/#jaeger-collector-adaptive) for details on advanced configuration.
+Adaptive sampling works in the Jaeger collector by observing the spans received from services and recalculating sampling probabilities for each service/endpoint combination to ensure that the volume of collected traces matches `--sampling.target-samples-per-second`. When a new service or endpoint is detected, it is initially sampled with `--sampling.initial-sampling-probability` until enough data is collected to calculate the rate appropriate for the traffic going through the endpoint.
