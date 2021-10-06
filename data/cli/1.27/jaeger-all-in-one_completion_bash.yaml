@@ -1,0 +1,22 @@
+name: jaeger-all-in-one completion bash
+synopsis: generate the autocompletion script for bash
+description: "\nGenerate the autocompletion script for the bash shell.\n\nThis script
+  depends on the 'bash-completion' package.\nIf it is not installed already, you can
+  install it via your OS's package manager.\n\nTo load completions in your current
+  shell session:\n$ source <(jaeger-all-in-one completion bash)\n\nTo load completions
+  for every new session, execute once:\nLinux:\n  $ jaeger-all-in-one completion bash
+  > /etc/bash_completion.d/jaeger-all-in-one\nMacOS:\n  $ jaeger-all-in-one completion
+  bash > /usr/local/etc/bash_completion.d/jaeger-all-in-one\n\nYou will need to start
+  a new shell for this setup to take effect.\n  "
+usage: jaeger-all-in-one completion bash
+options:
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for bash
+- name: no-descriptions
+  default_value: "false"
+  usage: disable completion descriptions
+see_also:
+- jaeger-all-in-one completion - generate the autocompletion script for the specified
+  shell
