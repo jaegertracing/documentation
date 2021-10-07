@@ -27,7 +27,7 @@ def generate(tool, storage='', sampling=''):
         "--privileged",
         "--volume {}".format(volume),
         "-e SPAN_STORAGE_TYPE={}".format(storage),
-        "-e SAMPLING_TYPE={}".format(sampling),
+        "-e SAMPLING_CONFIG_TYPE={}".format(sampling),
         docker_image,
         "docs",
         "--format=yaml",
