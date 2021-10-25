@@ -85,4 +85,4 @@ Since Jaeger v1.27.
 
 Adaptive sampling works in the Jaeger collector by observing the spans received from services and recalculating sampling probabilities for each service/endpoint combination to ensure that the volume of collected traces matches `--sampling.target-samples-per-second`. When a new service or endpoint is detected, it is initially sampled with `--sampling.initial-sampling-probability` until enough data is collected to calculate the rate appropriate for the traffic going through the endpoint.
 
-Adaptive sampling requires a storage backend to store the observed traffic data and computed probabilities. At the moment only Cassandra is supported as sampling backend. We are seeking help in implementing support for other backends (https://github.com/jaegertracing/jaeger/issues/3305).
+Adaptive sampling requires a storage backend to store the observed traffic data and computed probabilities. At the moment Cassandra and memory(all-in-one) are supported as sampling backend. We are seeking help in implementing support for other backends (https://github.com/jaegertracing/jaeger/issues/3305).
