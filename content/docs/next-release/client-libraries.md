@@ -15,7 +15,7 @@ All Jaeger client libraries support the [OpenTracing APIs](http://opentracing.io
 
 The rest of this page contains information about configuring and instantiating a Jaeger tracer in an application that is already instrumented with OpenTracing API.
 
-For the future, we recommend using the [OpenTelemetry](https://opentelemetry.io) API instead. For applications that are already using the Jaeger client with OpenTracing API, we published a blog post with the migration steps: ["Migrating from Jaeger client to OpenTelemetry SDK"](https://medium.com/jaegertracing/migrating-from-jaeger-client-to-opentelemetry-sdk-bd337d796759).
+For the future, we recommend using the [OpenTelemetry](https://opentelemetry.io) APIs and SDKs. For applications that are already instrumented with the OpenTracing API, we recommend replacing the Jaeger client with the OpenTelemetry SDK and the OpenTracing shim that is available to use with it. We published a blog post with the migration steps: ["Migrating from Jaeger client to OpenTelemetry SDK"](https://medium.com/jaegertracing/migrating-from-jaeger-client-to-opentelemetry-sdk-bd337d796759).
 
 ## Terminology
 
