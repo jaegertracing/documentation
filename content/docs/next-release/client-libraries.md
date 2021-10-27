@@ -6,6 +6,10 @@ children:
   url: client-features
 ---
 
+{{< warning >}}
+For the future, we recommend using the [OpenTelemetry](https://opentelemetry.io) APIs and SDKs. For applications that are already instrumented with the OpenTracing API, we recommend replacing the Jaeger client with the OpenTelemetry SDK and the OpenTracing shim that is available to use with it. We published a blog post with the migration steps: ["Migrating from Jaeger client to OpenTelemetry SDK"](https://medium.com/jaegertracing/migrating-from-jaeger-client-to-opentelemetry-sdk-bd337d796759).
+{{< /warning >}}
+
 All Jaeger client libraries support the [OpenTracing APIs](http://opentracing.io). The following resources provide more information about instrumenting your application with OpenTracing:
 
 * [OpenTracing tutorials](https://github.com/yurishkuro/opentracing-tutorial) for Java, Go, Python, Node.js and C#
@@ -14,8 +18,6 @@ All Jaeger client libraries support the [OpenTracing APIs](http://opentracing.io
 * The [`opentracing-contrib` org on GitHub](https://github.com/opentracing-contrib) contains many repositories with off-the-shelf instrumentation for many popular frameworks, including JAXRS & Dropwizard (Java), Flask & Django (Python), Go std library, etc.
 
 The rest of this page contains information about configuring and instantiating a Jaeger tracer in an application that is already instrumented with OpenTracing API.
-
-For the future, we recommend using the [OpenTelemetry](https://opentelemetry.io) APIs and SDKs. For applications that are already instrumented with the OpenTracing API, we recommend replacing the Jaeger client with the OpenTelemetry SDK and the OpenTracing shim that is available to use with it. We published a blog post with the migration steps: ["Migrating from Jaeger client to OpenTelemetry SDK"](https://medium.com/jaegertracing/migrating-from-jaeger-client-to-opentelemetry-sdk-bd337d796759).
 
 ## Terminology
 
