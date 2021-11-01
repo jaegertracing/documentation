@@ -2,6 +2,13 @@ HTMLPROOFER  = bundle exec htmlproofer
 HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
 
+VERSION_DIRS = $(shell ls -d content/docs/*)
+
+client-libs:
+	@for d in $(VERSION_DIRS); do \
+		echo $$d; \
+	done
+
 develop:
 	HUGO_PREVIEW=true hugo server \
         --buildDrafts \
