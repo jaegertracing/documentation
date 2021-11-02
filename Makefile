@@ -2,7 +2,15 @@ HTMLPROOFER  = bundle exec htmlproofer
 HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
 
-develop:
+client-libs-docs:
+	@for d in $(shell ls -d content/docs/*); do \
+		cp content/_client_libs/*.md $$d/; \
+		echo "copied content/_client_libs/*.md -> $$d/"; \
+	done
+
+generate:	client-libs-docs
+
+develop:	generate
 	HUGO_PREVIEW=true hugo server \
         --buildDrafts \
         --buildFuture \
@@ -11,24 +19,24 @@ develop:
 clean:
 	rm -rf public
 
-netlify-production-build:
+netlify-production-build:	generate
 	hugo --minify
 
-netlify-deploy-preview:
+netlify-deploy-preview:	generate
 	HUGO_PREVIEW=true hugo \
 	--buildDrafts \
 	--buildFuture \
 	--baseURL $(DEPLOY_PRIME_URL) \
 	--minify
 
-netlify-branch-deploy:
+netlify-branch-deploy:	generate
 	hugo \
 	--buildDrafts \
 	--buildFuture \
 	--baseURL $(DEPLOY_PRIME_URL) \
 	--minify
 
-build: clean
+build: clean generate
 	hugo -v
 
 link-checker-setup:
