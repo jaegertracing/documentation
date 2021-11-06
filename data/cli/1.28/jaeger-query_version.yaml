@@ -1,0 +1,12 @@
+name: jaeger-query version
+synopsis: Print the version.
+description: Print the version and build information.
+usage: jaeger-query version [flags]
+options:
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for version
+see_also:
+- jaeger-query - Jaeger query service provides a Web UI and an API for accessing trace
+  data.
