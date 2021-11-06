@@ -9,6 +9,7 @@ Before creating a new release:
   - If there are new Jaeger binaries or new storage options added to the release, make sure the CLI docs config file `data/cli/next-release/config.json` is updated accordingly (see below).
   - Make sure you have git remote `upstream` pointing to the official repository, e.g.
     `git remote add upstream git@github.com:jaegertracing/documentation.git`
+  - Make sure you are on your `master` branch.
 
 Then create a release by pushing a tag corresponding to the jaegertracing/jaeger version `release-X.Y.Z`, e.g.
 
@@ -17,7 +18,9 @@ git tag release-1.12.0
 git push upstream release-1.12.0
 ```
 
-  - Wait for the CI job to create a pull request with the documentation changes for the new version.
+  - Wait for the [CI job](https://github.com/jaegertracing/documentation/actions) to create a
+    [pull request](https://github.com/jaegertracing/documentation/pulls) with the documentation
+    changes for the new version.
   - Approve and merge that pull request.
   - Because the site is statically generated, the release is completed after the merge.
 
