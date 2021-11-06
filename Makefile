@@ -3,9 +3,14 @@ HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
 
 client-libs-docs:
+	# invoke one group of commands in bash to allow pushd/popd
 	@for d in $(shell ls -d content/docs/*); do \
-		cp content/_client_libs/*.md $$d/; \
-		echo "copied content/_client_libs/*.md -> $$d/"; \
+		/bin/bash -c "pushd $$d/; \
+			rm -f client-libraries.md client-features.md; \
+			ln -s ../../_client_libs/client-libraries.md; \
+			ln -s ../../_client_libs/client-features.md; \
+			popd"; \
+		echo "sym-linked content/_client_libs/*.md -> $$d/"; \
 	done
 
 generate:	client-libs-docs
