@@ -7,8 +7,70 @@ children:
 ---
 
 {{< warning >}}
-For the future, we recommend using the [OpenTelemetry](https://opentelemetry.io) APIs and SDKs. For applications that are already instrumented with the OpenTracing API, we recommend replacing the Jaeger client with the OpenTelemetry SDK and the OpenTracing shim that is available to use with it. We published a blog post with the migration steps: ["Migrating from Jaeger client to OpenTelemetry SDK"](https://medium.com/jaegertracing/migrating-from-jaeger-client-to-opentelemetry-sdk-bd337d796759).
+Jaeger clients are being retired.
 {{< /warning >}}
+
+## Deprecating Jaeger clients
+
+The Jaeger clients have faithfully served our community for several years. We pioneered many new features, such as remotely controlled samplers and per-operation / adaptive sampling, which were critical to the success of distributed tracing deployments at large organizations. However, now that the larger community in OpenTelemetry has caught up with the Jaeger clients in terms of feature parity and there is full support for exporting data to Jaeger, we believe it is time to **decommission Jaeger's native clients and refocus the efforts on the OpenTelemetry SDKs**.
+
+For new applications, we recommend using the [OpenTelemetry](https://opentelemetry.io/) APIs and SDKs. For existing applications that are already instrumented with the OpenTracing API, we recommend replacing the Jaeger clients with the corresponding OpenTelemetry SDKs and the OpenTracing shim/bridge (available in most languages supported by Jaeger). We published a blog post that shows an example of the migration steps for Java: ["Migrating from Jaeger client to OpenTelemetry SDK"][blog-otel-java].
+
+### Timeline
+
+We plan to continue accepting pull requests and making new releases of Jaeger clients **through the end of 2021**. From 2022 we will enter a code freeze period **for 6 months**, during which we will no longer accept pull requests with new features, only with security-related fixes.  After that the client library repositories will be archived and accept no new changes.
+
+### Migration to OpenTelemetry
+
+The OpenTelemetry project is working on publishing the migration guides from OpenTracing API to OpenTelemetry SDKs via OpenTracing bridges/shims. There may be different level of maturity and features in the SDKs. We will keep updating the information below as more of it becomes available.
+
+**Baggage support**: OpenTelemetry implements baggage propagation differently from OpenTracing and they are not completely equivalent. In OpenTelemetry the `context` layer sits below the tracing API and relies on immutable context objects, whereas baggage in OpenTracing is stored in a `span` which is mutable (and may occasionally lead to tricky race conditions when starting children spans).
+
+**We need your help!** If you find inaccuracies or have information that can be added, please open an issue or a PR to the [documentation repo](https://github.com/jaegertracing/documentation). If some features are missing and you need them, please open tickets in the respective OpenTelemetry repos or contibute. For example, Jaeger's remote samplers are not yet implemented in every OpenTelemetry SDK, but porting them from the Jaeger codebase is a fairly straightforward task.
+
+#### Java
+* OpenTelemetry SDK: https://github.com/open-telemetry/opentelemetry-java
+  * Remote sampling: [sdk-extensions/jaeger-remote-sampler](https://github.com/open-telemetry/opentelemetry-java/tree/main/sdk-extensions/jaeger-remote-sampler)
+  * Internal SDK metrics: n/a
+* OpenTracing Bridge: [opentracing-shim](https://github.com/open-telemetry/opentelemetry-java/tree/main/opentracing-shim)
+  * Migration Guide: ["Migrating from Jaeger client to OpenTelemetry SDK"][blog-otel-java]
+
+#### Python
+* OpenTelemetry SDK: https://github.com/open-telemetry/opentelemetry-python
+  * Remote sampling: ?
+  * Internal SDK metrics: n/a
+* OpenTracing Bridge: [opentelemetry-opentracing-shim](https://github.com/open-telemetry/opentelemetry-python/tree/main/shim/opentelemetry-opentracing-shim)
+  * Migration Guide: available in the shim's README
+
+#### Node.js
+* OpenTelemetry SDK: https://github.com/open-telemetry/opentelemetry-js
+  * Remote sampling: ?
+  * Internal SDK metrics: n/a
+* OpenTracing Bridge: [opentelemetry-shim-opentracing](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-shim-opentracing)
+  * Migration Guide: available in the shim's README and the corresponding readthedocs
+
+#### Go
+* OpenTelemetry SDK: https://github.com/open-telemetry/opentelemetry-go
+  * Remote sampling: https://github.com/open-telemetry/opentelemetry-go-contrib/pull/936
+  * Internal SDK metrics: n/a
+* OpenTracing Bridge: [bridge/opentracing](https://github.com/open-telemetry/opentelemetry-go/tree/main/bridge/opentracing)
+  * Migration Guide: ?
+
+#### C# / .NET
+* OpenTelemetry SDK: https://github.com/open-telemetry/opentelemetry-dotnet
+  * Remote sampling: ?
+  * Internal SDK metrics: n/a
+* OpenTracing Bridge: [OpenTelemetry.Shims.OpenTracing](https://github.com/open-telemetry/opentelemetry-dotnet/tree/main/src/OpenTelemetry.Shims.OpenTracing)
+  * Migration Guide: available in the shim's README, but is very terse
+
+#### C++
+* OpenTelemetry SDK: https://github.com/open-telemetry/opentelemetry-cpp
+  * Remote sampling: ?
+  * Internal SDK metrics: n/a
+* OpenTracing Bridge: n/a
+  * Migration Guide: n/a
+
+## Intro
 
 All Jaeger client libraries support the [OpenTracing APIs](http://opentracing.io). The following resources provide more information about instrumenting your application with OpenTracing:
 
@@ -41,7 +103,7 @@ simpler parameterization of the Tracer, such as changing the default sampler or 
 
 ### Sampling
 
-See [here](../sampling#client-sampling-configuration).
+See [Architecture | Sampling](../sampling#client-sampling-configuration).
 
 ### Reporters
 
@@ -159,3 +221,4 @@ uberctx-key1: value%201%20%2F%20blah
 
 [HttpSender]: https://github.com/jaegertracing/jaeger-client-java/blob/master/jaeger-thrift/src/main/java/io/jaegertracing/thrift/internal/senders/HttpSender.java
 [http-latency-medium]: https://medium.com/@YuriShkuro/tracing-http-request-latency-in-go-with-opentracing-7cc1282a100a
+[blog-otel-java]: https://medium.com/jaegertracing/migrating-from-jaeger-client-to-opentelemetry-sdk-bd337d796759

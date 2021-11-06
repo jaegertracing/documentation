@@ -4,8 +4,12 @@ THEME_DIR    := themes/$(HUGO_THEME)
 
 client-libs-docs:
 	@for d in $(shell ls -d content/docs/*); do \
-		cp content/_client_libs/*.md $$d/; \
-		echo "copied content/_client_libs/*.md -> $$d/"; \
+		pushd $$d/; \
+		rm -f client-libraries.md client-features.md; \
+		ln -s ../../_client_libs/client-libraries.md; \
+		ln -s ../../_client_libs/client-features.md; \
+		popd; \
+		echo "sym-linked content/_client_libs/*.md -> $$d/"; \
 	done
 
 generate:	client-libs-docs
