@@ -18,11 +18,11 @@ For new applications, we recommend using the [OpenTelemetry](https://opentelemet
 
 ### Timeline
 
-We plan to continue accepting pull requests and making new releases of Jaeger clients **through the end of 2021**. From 2022 we will enter a code freeze period **for 6 months**, during which we will no longer accept pull requests with new features, only with security-related fixes.  After that the client library repositories will be archived and accept no new changes.
+We plan to continue accepting pull requests and making new releases of Jaeger clients **through the end of 2021**. In January 2022 we will enter a code freeze period **for 6 months**, during which we will no longer accept pull requests with new features, with the exception of security-related fixes.  After that we will archive the client library repositories and will no longer accept new changes.
 
 ### Migration to OpenTelemetry
 
-The OpenTelemetry project is working on publishing the migration guides from OpenTracing API to OpenTelemetry SDKs via OpenTracing bridges/shims. There may be different level of maturity and features in the SDKs. We will keep updating the information below as more of it becomes available.
+The OpenTelemetry project is working on publishing the migration guides from OpenTracing API to OpenTelemetry SDKs via OpenTracing bridges/shims. There may be different levels of maturity and features in the SDKs. We will keep updating the information below as more of it becomes available.
 
 **Baggage support**: OpenTelemetry implements baggage propagation differently from OpenTracing and they are not completely equivalent. In OpenTelemetry the `context` layer sits below the tracing API and relies on immutable context objects, whereas baggage in OpenTracing is stored in a `span` which is mutable (and may occasionally lead to tricky race conditions when starting children spans).
 
