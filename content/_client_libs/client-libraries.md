@@ -24,9 +24,23 @@ We plan to continue accepting pull requests and making new releases of Jaeger cl
 
 The OpenTelemetry project is working on publishing the migration guides from OpenTracing API to OpenTelemetry SDKs via OpenTracing bridges/shims. There may be different levels of maturity and features in the SDKs. We will keep updating the information below as more of it becomes available.
 
-**Baggage support**: OpenTelemetry implements baggage propagation differently from OpenTracing and they are not completely equivalent. In OpenTelemetry the `context` layer sits below the tracing API and relies on immutable context objects, whereas baggage in OpenTracing is stored in a `span` which is mutable (and may occasionally lead to tricky race conditions when starting children spans).
+#### Baggage support
 
-**We need your help!** If you find inaccuracies or have information that can be added, please open an issue or a PR to the [documentation repo](https://github.com/jaegertracing/documentation). If some features are missing and you need them, please open tickets in the respective OpenTelemetry repos or contibute. For example, Jaeger's remote samplers are not yet implemented in every OpenTelemetry SDK, but porting them from the Jaeger codebase is a fairly straightforward task.
+OpenTelemetry implements baggage propagation differently from OpenTracing and they are not completely equivalent. In OpenTelemetry the `context` layer sits below the tracing API and relies on immutable context objects, whereas baggage in OpenTracing is stored in a `span` which is mutable (and may occasionally lead to tricky race conditions when starting children spans).
+
+#### We need your help!
+
+If you find inaccuracies or have information that can be added, please open an issue or a PR to the [documentation repo](https://github.com/jaegertracing/documentation). If some features are missing and you need them, please open tickets in the respective OpenTelemetry repos or contibute. For example, Jaeger's remote samplers are not yet implemented in every OpenTelemetry SDK, but porting them from the Jaeger codebase is a fairly straightforward task.
+
+#### Copying Jaeger code
+
+We encourage OpenTelemetry SDK authors to copy relevant pieces of the Jaeger clients instead of depending on Jaeger modules directly. This is why we use a liberal APL2 license. When copying code, the correct way to respect the license requirements is to keep the copyright notices. For example, Jaeger authors did the same with the code originally written at Uber:
+
+```
+// Copyright (c) 2019 The Jaeger Authors.
+// Copyright (c) 2017 Uber Technologies, Inc.
+// ... <rest of Apache notice> ...
+```
 
 #### Java
 * OpenTelemetry SDK: https://github.com/open-telemetry/opentelemetry-java
