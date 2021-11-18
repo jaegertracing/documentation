@@ -58,10 +58,6 @@ The following instructions will create the `observability` namespace and install
 Make sure your `kubectl` command is properly configured to talk to a valid Kubernetes cluster. If you don't have a cluster, you can create one locally using [`minikube`](https://kubernetes.io/docs/tasks/tools/install-minikube/).
 {{< /info >}}
 
-{{< info >}}
-Because the master branch could change, we are using pined versions now, if you are using master branch please make sure do the proper changes
-{{< /info >}}
-
 To install the operator, run:
 ```bash
 kubectl create namespace observability # <1>
