@@ -61,11 +61,11 @@ Make sure your `kubectl` command is properly configured to talk to a valid Kuber
 To install the operator, run:
 ```bash
 kubectl create namespace observability # <1>
-kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/crds/jaegertracing.io_jaegers_crd.yaml # <2>
-kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/service_account.yaml
-kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role.yaml
-kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role_binding.yaml
-kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/operator.yaml
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/crds/jaegertracing.io_jaegers_crd.yaml # <2>
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/service_account.yaml
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/role.yaml
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/role_binding.yaml
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/operator.yaml
 ```
 <1> This creates the namespace used by default in the deployment files. If you want to install the Jaeger operator in a different namespace, you must edit the deployment files to change `observability` to the desired namespace value.
 
@@ -73,8 +73,8 @@ kubectl create -n observability -f https://raw.githubusercontent.com/jaegertraci
 
 The operator will activate extra features if given cluster-wide permissions. To enable that, run:
 ```
-kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/cluster_role.yaml
-kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/cluster_role_binding.yaml
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/cluster_role.yaml
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/cluster_role_binding.yaml
 ```
 
 Note that you'll need to download and customize the `cluster_role_binding.yaml` if you are using a namespace other than `observability`. You probably also want to download and customize the `operator.yaml`, setting the env var `WATCH_NAMESPACE` to have an empty value, so that it can watch for instances across all namespaces.
@@ -94,17 +94,17 @@ The operator is now ready to create Jaeger instances.
 
 <!-- TODO: Add instructions for installing via the operatorhub? -->
 
-The instructions from the previous section also work for installing the operator on OKD or OpenShift. Make sure you are logged in as a privileged user, when you install the role based acces control (RBAC) rules, the custom resource definition, and the operator.
+The instructions from the previous section also work for installing the operator on OKD or OpenShift. Make sure you are logged in as a privileged user, when you install the role based access control (RBAC) rules, the custom resource definition, and the operator.
 
 ```bash
 oc login -u <privileged user>
 
 oc new-project observability # <1>
-oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/crds/jaegertracing.io_jaegers_crd.yaml # <2>
-oc create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/service_account.yaml
-oc create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role.yaml
-oc create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role_binding.yaml
-oc create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/operator.yaml
+oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/crds/jaegertracing.io_jaegers_crd.yaml # <2>
+oc create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/service_account.yaml
+oc create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/role.yaml
+oc create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/role_binding.yaml
+oc create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/operator.yaml
 ```
 <1> This creates the namespace used by default in the deployment files. If you want to install the Jaeger operator in a different namespace, you must edit the deployment files to change `observability` to the desired namespace value.
 
@@ -112,8 +112,8 @@ oc create -n observability -f https://raw.githubusercontent.com/jaegertracing/ja
 
 The operator will activate extra features if given cluster-wide permissions. To enable that, run:
 ```
-oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/cluster_role.yaml
-oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/cluster_role_binding.yaml
+oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/cluster_role.yaml
+oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/cluster_role_binding.yaml
 ```
 
 Note that you'll need to download and customize the `cluster_role_binding.yaml` if you are using a namespace other than `observability`. You probably also want to download and customize the `operator.yaml`, setting the env var `WATCH_NAMESPACE` to have an empty value, so that it can watch for instances across all namespaces.
@@ -197,7 +197,7 @@ The Jaeger Operator can be configured via command-line interface parameters, via
 Each item takes precedence over the item below it. The available options can be seen by running the operator with the `--help` flag, such as:
 
 ```bash
-$ podman run jaegertracing/jaeger-operator:master start --help
+$ podman run jaegertracing/jaeger-operator:1.28.0 start --help
 ```
 
 ## Examples
@@ -213,7 +213,7 @@ spec:
     spec:
       containers:
       - name: jaeger-operator
-        image: jaegertracing/jaeger-operator:master
+        image: jaegertracing/jaeger-operator:1.28.0
         args: ["start", "--log-level=debug"]
 ```
 
@@ -228,7 +228,7 @@ spec:
     spec:
       containers:
       - name: jaeger-operator
-        image: jaegertracing/jaeger-operator:master
+        image: jaegertracing/jaeger-operator:1.28.0
         args: ["start"]
         env:
         - name: LOG-LEVEL
@@ -436,7 +436,7 @@ spec:
 
 <10> Define annotations to be applied to all deployments (not services). These can be overridden by annotations defined on the individual components.
 
-You can view example custom resources for different Jaeger configurations [on GitHub](https://github.com/jaegertracing/jaeger-operator/tree/master/examples).
+You can view example custom resources for different Jaeger configurations [on GitHub](https://github.com/jaegertracing/jaeger-operator/tree/v1.28.0/examples).
 
 # Configuring the Custom Resource
 
@@ -781,7 +781,7 @@ spec:
 ```
 <1> Either `"true"` (as string) or the Jaeger instance name.
 
-A complete sample deployment is available at [`deploy/examples/business-application-injected-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/blob/master/examples/business-application-injected-sidecar.yaml).
+A complete sample deployment is available at [`deploy/examples/business-application-injected-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/blob/v1.28.0/examples/business-application-injected-sidecar.yaml).
 
 When the sidecar is injected, the Jaeger Agent can then be accessed at its default location on `localhost`.
 
@@ -844,7 +844,7 @@ The following snippet shows the manual definition you can include in your `conta
     - --reporter.type=grpc
 ```
 
-A complete sample `StatefulSet` is available at [`deploy/examples/statefulset-manual-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/tree/master/examples/statefulset-manual-sidecar.yaml).
+A complete sample `StatefulSet` is available at [`deploy/examples/statefulset-manual-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/tree/v1.28.0/examples/statefulset-manual-sidecar.yaml).
 
 The Jaeger Agent can then be accessed at its default location on `localhost`.
 
@@ -897,11 +897,11 @@ spec:
 In OpenShift, a `HostPort` can only be set when a special security context is set. A separate service account can be used by the Jaeger Agent with the permission to bind to `HostPort`, as follows:
 
 ```bash
-oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/examples/openshift/hostport-scc-daemonset.yaml # <1>
+oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/examples/openshift/hostport-scc-daemonset.yaml # <1>
 oc new-project myproject
-oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/examples/openshift/service_account_jaeger-agent-daemonset.yaml # <2>
+oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/examples/openshift/service_account_jaeger-agent-daemonset.yaml # <2>
 oc adm policy add-scc-to-user daemonset-with-hostport -z jaeger-agent-daemonset # <3>
-oc apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/examples/openshift/agent-as-daemonset.yaml # <4>
+oc apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/examples/openshift/agent-as-daemonset.yaml # <4>
 ```
 <1> The `SecurityContextConstraints` with the `allowHostPorts` policy
 
@@ -1350,9 +1350,9 @@ The Jaeger Operator does not yet publish its own metrics. Rather, it makes avail
 To uninstall the operator, run the following commands:
 
 ```bash
-kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/operator.yaml
-kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role_binding.yaml
-kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role.yaml
-kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/service_account.yaml
-kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/crds/jaegertracing.io_jaegers_crd.yaml
+kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/operator.yaml
+kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/role_binding.yaml
+kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/role.yaml
+kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/service_account.yaml
+kubectl delete -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/deploy/crds/jaegertracing.io_jaegers_crd.yaml
 ```
