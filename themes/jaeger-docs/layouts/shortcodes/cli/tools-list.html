@@ -22,6 +22,7 @@
   {{ $cli := index $data $tool }}
   {{ $storage_types := index (index $config $tool) "storage" }}
   {{ $sampling_types := index (index $config $tool) "sampling" }}
+  {{ $metrics_storage_types := index (index $config $tool) "metrics-storage" }}
 
   <h2 id="{{ $tool }}">
     {{ $tool }}
@@ -49,13 +50,28 @@
       <p>{{ $tool }} can be used with these sampling types:</p>
       <ul>
         {{ range $sampling_types }}
-          {{ $storage := . }}
-          {{ $file    := printf "%s-%s" $tool $storage }}
+          {{ $sampling := . }}
+          {{ $file    := printf "%s-%s" $tool $sampling }}
           <li>
               <a href="#{{ $file }}">
-                  {{ $tool }} with <code>{{ $storage }}</code>
+                  {{ $tool }} with <code>{{ $sampling }}</code> sampling
               </a>
           </li>
+        {{ end }}
+      </ul>
+    {{ end }}
+
+    {{ if $metrics_storage_types }}
+      <p>(Experimental) {{ $tool }} can be used with these metrics storage types:</p>
+      <ul>
+        {{ range $metrics_storage_types }}
+        {{ $metrics_storage := . }}
+        {{ $file    := printf "%s-%s" $tool $metrics_storage }}
+        <li>
+          <a href="#{{ $file }}">
+            {{ $tool }} with <code>{{ $metrics_storage }}</code> metrics storage
+          </a>
+        </li>
         {{ end }}
       </ul>
     {{ end }}
@@ -80,11 +96,25 @@
 
       <!-- TODO right sidebar gets too long, we should use tabs here -->
       <h3 id="{{ $file }}">
-        {{ $tool }} with <code>{{ $sampling }}</code> sampling type
+        {{ $tool }} with <code>{{ $sampling }}</code> sampling
       </h3>
 
       {{ partial "options-table.html" $cli.options }}
     {{ end }}
+
+    {{ range $metrics_storage_types }}
+      {{ $metrics_storage := . }}
+      {{ $file    := printf "%s-%s" $tool $metrics_storage }}
+      {{ $cli     := index $data $file }}
+
+      <!-- TODO right sidebar gets too long, we should use tabs here -->
+      <h3 id="{{ $file }}">
+        {{ $tool }} with <code>{{ $metrics_storage }}</code> metrics storage
+      </h3>
+
+      {{ partial "options-table.html" $cli.options }}
+    {{ end }}
+
   {{ else }}
     {{ partial "options-table.html" $cli.options }}
   {{ end }}
