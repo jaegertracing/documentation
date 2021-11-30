@@ -14,12 +14,19 @@ with open(f"{output_path}/data/cli/{jaeger_ver}/config.json", 'r') as f:
     cfg = json.load(f)
 
 
+# generate generates the CLI documentation for a given "tool" (e.g.
+# jaeger-collector, jaeger-query, etc.) and feature (e.g. storage=elasticsearch,
+# sampling=adaptive, metrics-storage=prometheus).
 def generate(tool, **kwargs):
     if len(kwargs) > 1:
-        print(f"Expected 1 feature, got {len(kwargs)}.")
+        print(f"Expected at most 1 feature, got {len(kwargs)}.")
         sys.exit(1)
 
     feature_name = ""
+
+    # Get the first feature value (e.g. elasticsearch, adaptive, prometheus,
+    # etc.) in kwargs if it exists. The feature name (e.g. storage,
+    # sampling, metrics-storage) is not used, and hence ignored.
     for _, feature_name in kwargs.items():
         break
 
