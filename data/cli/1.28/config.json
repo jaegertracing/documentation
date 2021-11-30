@@ -14,10 +14,7 @@
             "badger",
             "grpc-plugin"
         ],
-        "sampling": [],
-        "metrics-storage": [
-          "prometheus"
-        ]
+        "sampling": []
     },
     "jaeger-collector": {
         "storage": [
@@ -29,8 +26,7 @@
         "sampling": [
             "adaptive",
             "file"
-        ],
-        "metrics-storage": []
+        ]
     },
     "jaeger-ingester": {
         "storage": [
@@ -38,8 +34,7 @@
             "elasticsearch",
             "grpc-plugin"
         ],
-        "sampling": [],
-        "metrics-storage": []
+        "sampling": []
     },
     "jaeger-query": {
         "storage": [
@@ -47,14 +42,10 @@
             "elasticsearch",
             "grpc-plugin"
         ],
-        "sampling": [],
-        "metrics-storage": [
-            "prometheus"
-        ]
+        "sampling": []
     },
     "jaeger-agent": {
         "storage": [],
-        "sampling": [],
-        "metrics-storage": []
+        "sampling": []
     }
 }
