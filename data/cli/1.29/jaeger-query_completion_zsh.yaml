@@ -1,0 +1,29 @@
+name: jaeger-query completion zsh
+synopsis: generate the autocompletion script for zsh
+description: |2
+
+  Generate the autocompletion script for the zsh shell.
+
+  If shell completion is not already enabled in your environment you will need
+  to enable it.  You can execute the following once:
+
+  $ echo "autoload -U compinit; compinit" >> ~/.zshrc
+
+  To load completions for every new session, execute once:
+  # Linux:
+  $ jaeger-query completion zsh > "${fpath[1]}/_jaeger-query"
+  # macOS:
+  $ jaeger-query completion zsh > /usr/local/share/zsh/site-functions/_jaeger-query
+
+  You will need to start a new shell for this setup to take effect.
+usage: jaeger-query completion zsh [flags]
+options:
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for zsh
+- name: no-descriptions
+  default_value: "false"
+  usage: disable completion descriptions
+see_also:
+- jaeger-query completion - generate the autocompletion script for the specified shell
