@@ -1,0 +1,25 @@
+name: jaeger-ingester completion fish
+synopsis: generate the autocompletion script for fish
+description: |2
+
+  Generate the autocompletion script for the fish shell.
+
+  To load completions in your current shell session:
+  $ jaeger-ingester completion fish | source
+
+  To load completions for every new session, execute once:
+  $ jaeger-ingester completion fish > ~/.config/fish/completions/jaeger-ingester.fish
+
+  You will need to start a new shell for this setup to take effect.
+usage: jaeger-ingester completion fish [flags]
+options:
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for fish
+- name: no-descriptions
+  default_value: "false"
+  usage: disable completion descriptions
+see_also:
+- jaeger-ingester completion - generate the autocompletion script for the specified
+  shell
