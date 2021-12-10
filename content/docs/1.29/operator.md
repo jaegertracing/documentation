@@ -52,7 +52,7 @@ roleRef:
 
 ## Installing the Operator on Kubernetes
 
-The following instructions will create the `observability` namespace and install the Jaeger Operator there. By default, the operator will watch all namespaces
+The following instructions will create the `observability` namespace and install the Jaeger Operator there. By default, the operator will watch all namespaces.
 
 {{< info >}}
 Make sure your `kubectl` command is properly configured to talk to a valid Kubernetes cluster. If you don't have a cluster, you can create one locally using [`minikube`](https://kubernetes.io/docs/tasks/tools/install-minikube/).
