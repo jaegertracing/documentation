@@ -14,11 +14,11 @@ Jaeger clients are being retired.
 
 The Jaeger clients have faithfully served our community for several years. We pioneered many new features, such as remotely controlled samplers and per-operation / adaptive sampling, which were critical to the success of distributed tracing deployments at large organizations. However, now that the larger community in OpenTelemetry has caught up with the Jaeger clients in terms of feature parity and there is full support for exporting data to Jaeger, we believe it is time to **decommission Jaeger's native clients and refocus the efforts on the OpenTelemetry SDKs**.
 
-For new applications, we recommend using the [OpenTelemetry](https://opentelemetry.io/) APIs and SDKs. For existing applications that are already instrumented with the OpenTracing API, we recommend replacing the Jaeger clients with the corresponding OpenTelemetry SDKs and the OpenTracing shim/bridge (available in most languages supported by Jaeger). We published a blog post that shows an example of the migration steps for Java: ["Migrating from Jaeger client to OpenTelemetry SDK"][blog-otel-java].
+For new applications, we recommend using the [OpenTelemetry](https://opentelemetry.io/) APIs and SDKs. For existing applications that are already instrumented with the OpenTracing API, we recommend replacing the Jaeger clients with the corresponding OpenTelemetry SDKs and the OpenTracing shim/bridge available in most languages supported by Jaeger.
 
 ### Timeline
 
-We plan to continue accepting pull requests and making new releases of Jaeger clients **through the end of 2021**. In January 2022 we will enter a code freeze period **for 6 months**, during which we will no longer accept pull requests with new features, with the exception of security-related fixes.  After that we will archive the client library repositories and will no longer accept new changes.
+We plan to continue accepting pull requests and making new releases of Jaeger clients **through the end of 2021**. In January 2022 we will enter a code freeze period **for 6 months**, during which time we will no longer accept pull requests with new features, with the exception of security-related fixes.  After that we will archive the client library repositories and will no longer accept new changes.
 
 ### Migration to OpenTelemetry
 

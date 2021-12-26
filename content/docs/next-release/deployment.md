@@ -19,6 +19,7 @@ The main Jaeger backend components are released as Docker images on [Docker Hub]
 
 Component             | Docker Hub                                                                                                   | Quay
 --------------------- | -------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------
+**jaeger-all-in-one**      | [hub.docker.com/r/jaegertracing/all-in-one/](https://hub.docker.com/r/jaegertracing/all-in-one/)         | [quay.io/repository/jaegertracing/all-in-one](https://quay.io/repository/jaegertracing/all-in-one)
 **jaeger-agent**      | [hub.docker.com/r/jaegertracing/jaeger-agent/](https://hub.docker.com/r/jaegertracing/jaeger-agent/)         | [quay.io/repository/jaegertracing/jaeger-agent](https://quay.io/repository/jaegertracing/jaeger-agent)
 **jaeger-collector**  | [hub.docker.com/r/jaegertracing/jaeger-collector/](https://hub.docker.com/r/jaegertracing/jaeger-collector/) | [quay.io/repository/jaegertracing/jaeger-collector](https://quay.io/repository/jaegertracing/jaeger-collector)
 **jaeger-query**      | [hub.docker.com/r/jaegertracing/jaeger-query/](https://hub.docker.com/r/jaegertracing/jaeger-query/)         | [quay.io/repository/jaegertracing/jaeger-query](https://quay.io/repository/jaegertracing/jaeger-query)
@@ -52,6 +53,34 @@ Command line option                | Environment variable
 -----------------------------------|-------------------------------
 `--cassandra.connections-per-host` | `CASSANDRA_CONNECTIONS_PER_HOST`
 `--metrics-backend`                | `METRICS_BACKEND`
+
+## All-in-one
+
+Jaeger all-in-one is a special distribution that combines three Jaeger components, [agent](#agent), [collector](#collector), and [query service/UI](#query-service--ui), in a single binary or container image. It is useful for single-node deployments where your trace volume is light enough to be handled by a single instance. By default, all-in-one starts with `memory` storage, meaning it will lose all data upon restart. All other [storage backends](#storage-backends) can also be used with all-in-one, but `memory` and `badger` are exclusive to all-in-one because they cannot be shared between instances.
+
+All-in-one listens to the same ports as the components it contains (described below), with the exception of the admin port.
+
+Port  | Protocol | Function
+----- | -------  | ---
+14269 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
+
+```bash
+## make sure to expose only the ports you use in your deployment scenario!
+docker run -d --name jaeger \
+  -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
+  -p 5775:5775/udp \
+  -p 6831:6831/udp \
+  -p 6832:6832/udp \
+  -p 5778:5778 \
+  -p 16686:16686 \
+  -p 14250:14250 \
+  -p 14268:14268 \
+  -p 14269:14269 \
+  -p 9411:9411 \
+  jaegertracing/all-in-one:{{< currentVersion >}}
+```
+
+You can navigate to `http://localhost:16686` to access the Jaeger UI.
 
 ## Agent
 
@@ -108,36 +137,27 @@ When using gRPC, you have several options for load balancing and name resolution
 
 Jaeger supports agent level tags, that can be added to the process tags of all spans passing through the agent. This is supported through the command line flag `--agent.tags=key1=value1,key2=value2,...,keyn=valuen`. Tags can also be set through an environment flag like so - `--agent.tags=key=${envFlag:defaultValue}` - The tag value will be set to the value of the `envFlag` environment key and `defaultValue` if not set.
 
-## Collectors
+## Collector
 
 The collectors are stateless and thus many instances of **jaeger-collector** can be run in parallel.
-Collectors require almost no configuration, except for the location of Cassandra cluster,
-via `--cassandra.keyspace` and `--cassandra.servers` options, or the location of Elasticsearch cluster, via
-`--es.server-urls`, depending on which storage is specified. To see all command line options run
-
-```sh
-go run ./cmd/collector/main.go -h
-```
-
-or, if you don't have the source code
-
-```sh
-docker run -it --rm jaegertracing/jaeger-collector:{{< currentVersion >}} -h
-```
+Collectors require almost no configuration, except for storage location, such as
+`--cassandra.keyspace` and `--cassandra.servers` options, or the location of Elasticsearch cluster,
+via `--es.server-urls`, depending on which storage is specified. See the [CLI Flags](../cli/) for all
+command line options.
 
 At default settings the collector exposes the following ports:
 
 Port  | Protocol | Function
 ----- | -------  | ---
+9411  | HTTP     | can accept Zipkin spans in Thrift, JSON and Proto (disabled by default)
 14250 | gRPC     | used by **jaeger-agent** to send spans in model.proto format
 14268 | HTTP     | can accept spans directly from clients in jaeger.thrift format over binary thrift protocol
-9411  | HTTP     | can accept Zipkin spans in Thrift, JSON and Proto (disabled by default)
 14269 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
 
 
 ## Storage Backends
 
-Collectors require a persistent storage backend. Cassandra and Elasticsearch are the primary supported storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
+Collectors require a persistent storage backend. Cassandra and Elasticsearch are the primary supported distributed storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
 The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` (only as a buffer), `grpc-plugin`, `badger` (only with all-in-one) and `memory` (only with all-in-one).
 

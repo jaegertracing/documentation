@@ -61,7 +61,7 @@ Make sure your `kubectl` command is properly configured to talk to a valid Kuber
 To install the operator, run:
 ```bash
 kubectl create namespace observability # <1>
-kubectl create -f kubectl apply -f https://github.com/jaegertracing/jaeger-operator/releases/download/v{{< currentVersion >}}.0/jaeger-operator.yaml -n observability # <2>
+kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/download/v{{< currentVersion >}}.0/jaeger-operator.yaml -n observability # <2>
 ```
 <1> This creates the namespace used by default in the deployment files. If you want to install the Jaeger operator in a different namespace, you must edit the deployment files to change `observability` to the desired namespace value.
 
