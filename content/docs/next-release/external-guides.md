@@ -19,6 +19,7 @@ weight: 13
 
 * [The life of a span](https://medium.com/jaegertracing/the-life-of-a-span-ee508410200b) by Juraci Paixão Kröhling
 * Sampling - content needed
+* Adaptive sampling - content needed
 
 ## Deployment
 
@@ -26,6 +27,7 @@ weight: 13
 * [Protecting Jaeger UI with an OAuth sidecar Proxy](https://medium.com/jaegertracing/protecting-jaeger-ui-with-an-oauth-sidecar-proxy-34205cca4bb1) by Juraci Paixão Kröhling
 * [Jaeger and multi-tenancy](https://medium.com/jaegertracing/jaeger-and-multitenancy-99dfa1d49dc0) by Juraci Paixão Kröhling
 * [Deployment strategies for the Jaeger Agent](https://medium.com/jaegertracing/deployment-strategies-for-the-jaeger-agent-1d6f91796d09) by Juraci Paixão Kröhling
+* [How to deploy Jaeger on AWS: a comprehensive step-by-step guide](https://www.aspecto.io/blog/how-to-deploy-jaeger-on-aws-a-comprehensive-step-by-step-guide/) by Tom Zach
 
 ## Jaeger Performance Tuning
 
