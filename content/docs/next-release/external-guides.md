@@ -33,6 +33,6 @@ weight: 13
 
 * [How to maximize span ingestion while limiting writes per second to Scylla with Jaeger](https://medium.com/jaegertracing/how-to-maximize-span-ingestion-while-limiting-writes-per-second-to-scylla-with-jaeger-3bcda5608841) by Joe Elliott
 
-## Troublshooting
+## Troubleshooting
 
 * [Where did all my spans go? A guide to diagnosing dropped spans in Jaeger](https://medium.com/jaegertracing/where-did-all-my-spans-go-a-guide-to-diagnosing-dropped-spans-in-jaeger-10d9697f8182) by Joe Elliott
