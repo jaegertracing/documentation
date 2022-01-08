@@ -2,11 +2,11 @@ featureGroups:
   - description: Data format and transport for reporting spans to Jaeger backend
     features:
     - name: report_jaeger_thrift_compact_udp
-      description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift), [Compact](https://github.com/apache/thrift/blob/v0.13.0/doc/specs/thrift-compact-protocol.md) protocol, over UDP
+      description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift), [Compact](https://github.com/apache/thrift/blob/v0.13.0/doc/specs/thrift-compact-protocol.md) protocol, over UDP
     - name: report_jaeger_thrift_binary_udp
-      description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift), [Binary](https://github.com/apache/thrift/blob/v0.13.0/doc/specs/thrift-binary-protocol.md) protocol, over UDP
+      description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift), [Binary](https://github.com/apache/thrift/blob/v0.13.0/doc/specs/thrift-binary-protocol.md) protocol, over UDP
     - name: report_jaeger_thrift_binary_http
-      description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift), [Binary](https://github.com/apache/thrift/blob/v0.13.0/doc/specs/thrift-binary-protocol.md) protocol, over TCP (HTTP)
+      description: Report [`jaeger.thrift`](https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift), [Binary](https://github.com/apache/thrift/blob/v0.13.0/doc/specs/thrift-binary-protocol.md) protocol, over TCP (HTTP)
     - name: report_zipkin_thrift_binary_http
       description: Report Zipkin Thrift, Binary protocol, over TCP (HTTP)
 

@@ -9,7 +9,7 @@ Before creating a new release:
   - If there are new Jaeger binaries or new storage options added to the release, make sure the CLI docs config file `data/cli/next-release/config.json` is updated accordingly (see below).
   - Make sure you have git remote `upstream` pointing to the official repository, e.g.
     `git remote add upstream git@github.com:jaegertracing/documentation.git`
-  - Make sure you are on your `master` branch.
+  - Make sure you are on your `main` branch.
 
 Then create a release by pushing a tag corresponding to the jaegertracing/jaeger version `release-X.Y.Z`, e.g.
 

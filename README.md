@@ -27,7 +27,7 @@ This will start up a local server on localhost port 1313. When you make changes 
 
 ## Publishing the site
 
-The site is published automatically by [Netlify](https://www.netlify.com/) whenever changes are merged to the `master` branch. The site cannot be published in an ad-hoc way (e.g. through a `make` command or script in the repo).
+The site is published automatically by [Netlify](https://www.netlify.com/) whenever changes are merged to the `main` branch. The site cannot be published in an ad-hoc way (e.g. through a `make` command or script in the repo).
 
 ## Contributing to the site
 
@@ -35,7 +35,7 @@ We strongly encourage you to contribute to this site! For more information, see 
 
 ## Diagrams
 
-Diagrams included in the documentation are created in the shared [Google Slides document][slides], which supports export to SVG. If you need to make changes to the diagrams as part of a PR, please copy the diagram into a new slide deck and include a shared link to it in the PR along with the exported SVG file. The maintainers will update the master deck with the new version upon merging the PR.
+Diagrams included in the documentation are created in the shared [Google Slides document][slides], which supports export to SVG. If you need to make changes to the diagrams as part of a PR, please copy the diagram into a new slide deck and include a shared link to it in the PR along with the exported SVG file. The maintainers will update the main deck with the new version upon merging the PR.
 
 ## Publishing new Jaeger version
 

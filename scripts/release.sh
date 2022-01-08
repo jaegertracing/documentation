@@ -2,19 +2,19 @@
 
 set -x -o errexit -o pipefail
 
-checkoutBranch=master
+checkoutBranch=main
 
-safe_checkout_master() {
+safe_checkout_main() {
   # We need to be on a branch to be able to create commits,
-  # and we want that branch to be master, which has been checked before.
+  # and we want that branch to be main, which has been checked before.
   # But we also want to make sure that we build and release exactly the tagged version, so we verify that the remote
   # branch is where our tag is.
   git remote -v
   git checkout -B "${checkoutBranch}"
   git fetch origin "${checkoutBranch}":origin/"${checkoutBranch}"
-  commit_local_master="$(git rev-parse ${checkoutBranch})"
-  commit_remote_master="$(git rev-parse origin/${checkoutBranch})"
-  if [ "$commit_local_master" != "$commit_remote_master" ]; then
+  commit_local_main="$(git rev-parse ${checkoutBranch})"
+  commit_remote_main="$(git rev-parse origin/${checkoutBranch})"
+  if [ "$commit_local_main" != "$commit_remote_main" ]; then
     echo "${checkoutBranch} on remote 'origin' has commits since the version under release, aborting"
     exit 1
   fi
@@ -22,7 +22,7 @@ safe_checkout_master() {
 
 if [[ "$RELEASE_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; then
     echo "We are on release-x.y.z tag: $RELEASE_TAG"
-    safe_checkout_master
+    safe_checkout_main
     version=$(echo "${RELEASE_TAG}" | sed 's/^release-//')
     versionMajorMinor=$(echo "${version}" | sed 's/\.[[:digit:]]$//')
     echo "Creating new documentation for ${version}"

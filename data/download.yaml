@@ -14,7 +14,7 @@ docker:
   description: Designed for quick local testing. It launches the Jaeger UI, collector, query, and agent, with an in-memory storage component.
   since: 0.8
 - image: example-hotrod
-  description: Sample application "[HotROD](https://github.com/jaegertracing/jaeger/tree/master/examples/hotrod)" that demonstrates features of distributed tracing ([blog post](https://medium.com/@YuriShkuro/take-opentracing-for-a-hotrod-ride-f6e3141f7941)).
+  description: Sample application "[HotROD](https://github.com/jaegertracing/jaeger/tree/main/examples/hotrod)" that demonstrates features of distributed tracing ([blog post](https://medium.com/@YuriShkuro/take-opentracing-for-a-hotrod-ride-f6e3141f7941)).
   since: 1.6
 - image: jaeger-agent
   description: Receives spans from Jaeger clients and forwards to collector. Designed to run as a sidecar or a host agent.
