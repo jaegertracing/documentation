@@ -118,9 +118,14 @@ then you just add a line to every git commit message:
 
 using your real name (sorry, no pseudonyms or anonymous contributions.)
 
-You can add the sign off when creating the git commit via `git commit -s`.
+You can add the sign off when creating the git commit via `git commit -s`. Make sure that your name and email are correctly configured in your local git and match those on your GitHub account:
 
-If you want this to be automatic you can set up some aliases:
+```shell
+git config --global user.name "FIRST_NAME LAST_NAME"
+git config --global user.email "MY_NAME@example.com"
+```
+
+If you want signing to be automatic you can set up some aliases:
 
 ```
 git config --add alias.amend "commit -s --amend"

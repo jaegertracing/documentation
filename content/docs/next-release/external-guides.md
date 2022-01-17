@@ -19,7 +19,7 @@ weight: 13
 
 * [The life of a span](https://medium.com/jaegertracing/the-life-of-a-span-ee508410200b) by Juraci Paixão Kröhling
 * Sampling - content needed
-* Adaptive sampling - content needed
+* [Adaptive Sampling](https://medium.com/jaegertracing/adaptive-sampling-in-jaeger-50f336f4334) by Yuri Shkuro and Joe Elliot
 
 ## Deployment
 
