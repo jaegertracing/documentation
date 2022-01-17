@@ -16,25 +16,6 @@ Enhancements to the Jaeger search and homepage to improve not only the user inte
 
 Backend storage support for [OpenSearch](https://opensearch.org/) as a backend database. Today this is fully compatible with ElasticSearch APIs, but these may diverge. OpenSearch is Apache 2.0 licensed and hopefully will be led by a community of contributors, but today is led by AWS. ElasticSearch is SSPL licensed and led by Elastic NV making it no longer an open source project.
 
-## Adaptive Sampling
-
-The most common way of using Jaeger client libraries is with probabilistic sampling which makes a determination
-if a new trace should be sampled or not. Sampling is necessary to control the amount of tracing data reaching
-the storage backend. There are two issues with the current approach:
-
-  1. Individual microservices have little insight into what the appropriate sampling rate should be.
-     For example, 0.001 probability (one trace per second per service instance) might seem reasonable,
-     but if the fanout in some downstream services is very high it might flood the tracing backend.
-  1. Sampling rates are defined on a per-service basis. If a service has two endpoints with vastly different
-     throughputs, then its sampling rate will be driven on the high QPS endpoint, which may leave the low QPS
-     endpoint never sampled. For example, if the QPS of the endpoints is different by a factor of 100, and the
-     probability is set to 0.001, then the low QPS traffic will have only 1 in 100,000 chance to be sampled.
-
-Currently Jaeger backend allows configuring per-endpoint sampling strategies in a centralized configuration file.
-The auto-calculation of the sampling probabilities (the "adaptive" part) is still work in progress.
-
-See issue tracker for more info: [jaeger/issues/365](https://github.com/jaegertracing/jaeger/issues/365). This is also being tracked in OpenTelemetry that has similar requirements: [open-telemetry/opentelemetry-specification/issues/691](https://github.com/open-telemetry/opentelemetry-specification/issues/691)
-
 ## Integration with OpenTelemetry collector
 
 [OpenTelemetry collector](https://opentelemetry.io/docs/collector/getting-started/) is a vendor-agnostic service for receiving, processing and exporting telemetry data. We have decided to rebuild the Jaeger backed components (agent, collector, ingester, all-in-one) on top of OpenTelemetry collector which has several benefits:
