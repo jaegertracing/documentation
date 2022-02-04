@@ -1,0 +1,22 @@
+name: jaeger-collector completion bash
+synopsis: Generate the autocompletion script for bash
+description: "Generate the autocompletion script for the bash shell.\n\nThis script
+  depends on the 'bash-completion' package.\nIf it is not installed already, you can
+  install it via your OS's package manager.\n\nTo load completions in your current
+  shell session:\n\n\tsource <(jaeger-collector completion bash)\n\nTo load completions
+  for every new session, execute once:\n\n#### Linux:\n\n\tjaeger-collector completion
+  bash > /etc/bash_completion.d/jaeger-collector\n\n#### macOS:\n\n\tjaeger-collector
+  completion bash > /usr/local/etc/bash_completion.d/jaeger-collector\n\nYou will
+  need to start a new shell for this setup to take effect.\n"
+usage: jaeger-collector completion bash
+options:
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for bash
+- name: no-descriptions
+  default_value: "false"
+  usage: disable completion descriptions
+see_also:
+- jaeger-collector completion - Generate the autocompletion script for the specified
+  shell

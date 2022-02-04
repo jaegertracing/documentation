@@ -1,0 +1,18 @@
+name: jaeger-collector docs
+synopsis: Generates documentation
+description: Generates command and flags documentation
+usage: jaeger-collector docs [flags]
+options:
+- name: dir
+  default_value: ./
+  usage: Directory where generate the documentation.
+- name: format
+  default_value: md
+  usage: 'Supported formats: [md man rst yaml].'
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for docs
+see_also:
+- jaeger-collector - Jaeger collector receives and processes traces from Jaeger agents
+  and clients
