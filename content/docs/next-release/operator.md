@@ -416,7 +416,7 @@ spec:
 
 <10> Define annotations to be applied to all deployments (not services). These can be overridden by annotations defined on the individual components.
 
-You can view example custom resources for different Jaeger configurations [on GitHub](https://github.com/jaegertracing/jaeger-operator/tree/master/examples).
+You can view example custom resources for different Jaeger configurations [on GitHub](https://github.com/jaegertracing/jaeger-operator/tree/main/examples).
 
 # Configuring the Custom Resource
 
@@ -473,7 +473,7 @@ spec:
 <3> The options for the `create-schema` job.
 
 {{< info >}}
-The default create-schema job uses `MODE=prod`, which implies a replication factor of `2`, using `NetworkTopologyStrategy` as the class, effectively meaning that at least 3 nodes are required in the Cassandra cluster. If a `SimpleStrategy` is desired, set the mode to `test`, which then sets the replication factor of `1`. Refer to the [create-schema script](https://github.com/jaegertracing/jaeger/blob/master/plugin/storage/cassandra/schema/create.sh) for more details.
+The default create-schema job uses `MODE=prod`, which implies a replication factor of `2`, using `NetworkTopologyStrategy` as the class, effectively meaning that at least 3 nodes are required in the Cassandra cluster. If a `SimpleStrategy` is desired, set the mode to `test`, which then sets the replication factor of `1`. Refer to the [create-schema script](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/cassandra/schema/create.sh) for more details.
 {{< /info >}}
 
 ### Elasticsearch storage
@@ -761,7 +761,7 @@ spec:
 ```
 <1> Either `"true"` (as string) or the Jaeger instance name.
 
-A complete sample deployment is available at [`deploy/examples/business-application-injected-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/blob/master/examples/business-application-injected-sidecar.yaml).
+A complete sample deployment is available at [`deploy/examples/business-application-injected-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/blob/main/examples/business-application-injected-sidecar.yaml).
 
 When the sidecar is injected, the Jaeger Agent can then be accessed at its default location on `localhost`.
 
@@ -824,7 +824,7 @@ The following snippet shows the manual definition you can include in your `conta
     - --reporter.type=grpc
 ```
 
-A complete sample `StatefulSet` is available at [`deploy/examples/statefulset-manual-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/tree/master/examples/statefulset-manual-sidecar.yaml).
+A complete sample `StatefulSet` is available at [`deploy/examples/statefulset-manual-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/tree/main/examples/statefulset-manual-sidecar.yaml).
 
 The Jaeger Agent can then be accessed at its default location on `localhost`.
 
@@ -877,11 +877,11 @@ spec:
 In OpenShift, a `HostPort` can only be set when a special security context is set. A separate service account can be used by the Jaeger Agent with the permission to bind to `HostPort`, as follows:
 
 ```bash
-oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/examples/openshift/hostport-scc-daemonset.yaml # <1>
+oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/main/examples/openshift/hostport-scc-daemonset.yaml # <1>
 oc new-project myproject
-oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/examples/openshift/service_account_jaeger-agent-daemonset.yaml # <2>
+oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/main/examples/openshift/service_account_jaeger-agent-daemonset.yaml # <2>
 oc adm policy add-scc-to-user daemonset-with-hostport -z jaeger-agent-daemonset # <3>
-oc apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/examples/openshift/agent-as-daemonset.yaml # <4>
+oc apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/main/examples/openshift/agent-as-daemonset.yaml # <4>
 ```
 <1> The `SecurityContextConstraints` with the `allowHostPorts` policy
 
