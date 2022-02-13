@@ -10,6 +10,7 @@ weight: 7
 Several aspects of the UI can be configured:
 
   * The Dependencies section can be enabled / configured
+  * The Monitor section can be enabled / configured
   * App analytics tracking can be enabled / configured (via Google Analytics or custom plugin)
   * Additional menu options can be added to the global nav
   * Search input limits can be configured
@@ -22,6 +23,9 @@ An example configuration file:
 {
   "dependencies": {
     "dagMaxNumServices": 200,
+    "menuEnabled": true
+  },
+  "monitor": {
     "menuEnabled": true
   },
   "archiveEnabled": true,
@@ -65,6 +69,10 @@ An example configuration file:
 `dependencies.dagMaxNumServices` defines the maximum number of services allowed before the DAG dependency view is disabled. Default: `200`.
 
 `dependencies.menuEnabled` enables (`true`) or disables (`false`) the dependencies menu button. Default: `true`.
+
+### Monitor (Experimental)
+
+`monitor.menuEnabled` enables (`true`) or disables (`false`) the Monitor menu button. Default: `false`.
 
 ### Archive Support
 

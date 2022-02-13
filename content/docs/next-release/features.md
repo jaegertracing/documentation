@@ -81,7 +81,7 @@ At this time the transitive graph can only be constructed from traces in the sea
 For use cases where one needs to identify services and/or operations that have high statistically significant error rates or latencies,
 aggregating traces, or more precisely, spans, is one means of satisfying this use case.
 
-Jaeger's Monitor tab provides a service-level aggregation, as well as an operation-level aggregation within the service,
+Jaeger's "Monitor" tab provides a service-level aggregation, as well as an operation-level aggregation within the service,
 of Request rates, Error rates and Durations (P95, P75 and P50), also known as RED metrics.
 
 Within the operation-level aggregations, an "Impact" metric, computed as the product of latency and request rate, is another
@@ -90,3 +90,5 @@ or conversely highlight operations that are lower in the latency rankings but wi
 
 From these aggregations, Jaeger UI is able to pre-populate a Trace search with the relevant service, operation
 and lookback period, narrowing down the search space for these more interesting traces.
+
+This feature can be enabled
