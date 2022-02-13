@@ -11,6 +11,8 @@ The following labels are used to describe API compatibility guarantees.
 * **internal** - the APIs intended for internal communications between Jaeger components and not recommended for use by external components.
 * **deprecated** - the APIs that are only maintained for legacy reasons and will be phased out in the future.
 
+Since Jaeger v1.32, the Collector and Query Service ports that serve gRPC endpoints enable [gRPC reflection][grpc-reflection]. Unfortunately, the internally used `gogo/protobuf` has a [compatibility issue][gogo-reflection] with the official `golang/protobuf`, and as a result only the `list` reflection command is currently working properly.
+
 ## Span reporting APIs
 
 Agent and Collector are the two components of the Jaeger backend that can receive spans. At this time they support two sets of non-overlapping APIs.
@@ -19,15 +21,15 @@ Agent and Collector are the two components of the Jaeger backend that can receiv
 
 The Agent can only receive spans over UDP in Thrift format. The primary API is a UDP packet that contains a Thrift-encoded `Batch` struct defined in [jaeger.thrift][jaeger.thrift] IDL file, located in the [jaeger-idl][jaeger-idl] repository. Most Jaeger Clients use Thrift's `compact` encoding, however some client libraries do not support it (notably, Node.js) and use Thrift's `binary` encoding (sent to  a different UDP port). The Agent's API is defined by [agent.thrift][agent.thrift] IDL file.
 
-For legacy reasons, the Agent also accepts spans in Zipkin format, however, only very old versions of Jaeger clients can send data in that format and it is officially deprecated.
+For legacy reasons, the Agent also accepts spans over UDP in Zipkin format, however, only very old versions of Jaeger clients can send data in that format and it is officially deprecated.
 
 ### Protobuf via gRPC (stable)
 
-In a typical Jaeger deployment, Agents receive spans from Clients and forward them to Collectors. Since Jaeger version 1.11 the official and recommended protocol between Agents and Collectors is gRPC with Protobuf as defined in [collector.proto][collector.proto] IDL file.
+In a typical Jaeger deployment, Agents receive spans from Clients and forward them to Collectors. Since Jaeger v1.11 the official and recommended protocol between Agents and Collectors is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto][collector.proto] IDL file.
 
 ### Thrift over HTTP (stable)
 
-In some cases it is not feasible to deploy Jaeger Agent next to the application, for example, when the application code is running as AWS Lambda function. In these scenarios the Jaeger Clients can be configured to submit spans directly to the Collectors over HTTP/HTTPS.
+In some cases it is not feasible to deploy Jaeger Agent next to the application, for example, when the application code is running as a serverless function. In these scenarios the Jaeger Clients can be configured to submit spans directly to the Collectors over HTTP/HTTPS.
 
 The same [jaeger.thrift][jaeger.thrift] payload can be submitted in HTTP POST request to `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
 
@@ -37,7 +39,7 @@ Content-Type: application/vnd.apache.thrift.binary
 
 ### JSON over HTTP (n/a)
 
-There is no official Jaeger JSON format that can be accepted by the collector. In the future the Protobuf-generated JSON may be supported.
+There is no official Jaeger JSON format that can be accepted by the collector. In the future the OpenTelemetry JSON may be supported.
 
 ### Zipkin Formats (stable)
 
@@ -52,7 +54,7 @@ Traces saved in the storage can be retrieved by calling Jaeger Query Service.
 
 ### gRPC/Protobuf (stable)
 
-The recommended way for programmatically retrieving traces and other data is via gRPC endpoint defined in [query.proto][query.proto] IDL file.
+The recommended way for programmatically retrieving traces and other data is via `jaeger.api_v2.QueryService` gRPC endpoint defined in [query.proto][query.proto] IDL file.
 
 ### HTTP JSON (internal)
 
@@ -61,6 +63,8 @@ Jaeger UI communicates with Jaeger Query Service via JSON API. For example, a tr
 ## Clients configuration (internal)
 
 Client libraries not only submit finished spans to Jaeger backend, but also periodically poll the Agents for various configurations, such as sampling strategies. The schema for the payload is defined by [sampling.thrift][sampling.thrift], encoded as JSON using Thrift's built-in JSON generation capabilities.
+
+Agent acts as a proxy by retrieving sampling configuration from the Collector using `jaeger.api_v2.SamplingManager` gRPC endpoint defined in [sampling.proto][sampling.proto] IDL file.
 
 ## Service dependencies graph (internal)
 
@@ -74,8 +78,11 @@ The returned JSON is a list of edges represented as tuples `(caller, callee, cou
 For programmatic access to service graph, the recommended API is gRPC/Protobuf described above.
 
 [jaeger-idl]: https://github.com/jaegertracing/jaeger-idl/
-[jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
-[agent.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/agent.thrift
-[sampling.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/sampling.thrift
-[collector.proto]: https://github.com/jaegertracing/jaeger-idl/blob/master/proto/api_v2/collector.proto
-[query.proto]: https://github.com/jaegertracing/jaeger-idl/blob/master/proto/api_v2/query.proto
+[jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift
+[agent.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/agent.thrift
+[sampling.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/sampling.thrift
+[collector.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/collector.proto
+[query.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/query.proto
+[sampling.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/sampling.proto
+[grpc-reflection]: https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#enable-server-reflection
+[gogo-reflection]: https://jbrandhorst.com/post/gogoproto/#reflection
