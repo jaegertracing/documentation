@@ -75,3 +75,18 @@ Also known as "Transitive Dependency Graph", where a chain `A -> B -> C` means t
 The node granularity of this graph can be changed between services and service endpoints. In the latter mode, different endpoints in the same service will be displayed as separate nodes, e.g. `A::op1` and `A::op2`.
 
 At this time the transitive graph can only be constructed from traces in the search results. In the future there will be a Flink job that will compute the graphs by aggregating all traces.
+
+## Aggregated Trace Metrics
+
+For use cases where one needs to identify services and/or operations that have high statistically significant error rates or latencies,
+aggregating traces, or more precisely, spans, is one means of satisfying this use case.
+
+Jaeger's Monitor tab provides a service-level aggregation, as well as an operation-level aggregation within the service,
+of Request rates, Error rates and Durations (P95, P75 and P50), also known as RED metrics.
+
+Within the operation-level aggregations, an "Impact" metric, computed as the product of latency and request rate, is another
+signal that can be used to rule-out operations that may naturally have a high latency profile such as daily batch jobs,
+or conversely highlight operations that are lower in the latency rankings but with a high RPS (request per second).
+
+From these aggregations, Jaeger UI is able to pre-populate a Trace search with the relevant service, operation
+and lookback period, narrowing down the search space for these more interesting traces.
