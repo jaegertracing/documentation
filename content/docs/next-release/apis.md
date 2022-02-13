@@ -15,17 +15,17 @@ The following labels are used to describe API compatibility guarantees.
 
 Agent and Collector are the two components of the Jaeger backend that can receive spans. At this time they support two sets of non-overlapping APIs.
 
-### Thrift over UDP (stable)
+### UDP Thrift (stable)
 
 The Agent can only receive spans over UDP in Thrift format. The primary API is a UDP packet that contains a Thrift-encoded `Batch` struct defined in [jaeger.thrift][jaeger.thrift] IDL file, located in the [jaeger-idl][jaeger-idl] repository. Most Jaeger Clients use Thrift's `compact` encoding, however some client libraries do not support it (notably, Node.js) and use Thrift's `binary` encoding (sent to  a different UDP port). The Agent's API is defined by [agent.thrift][agent.thrift] IDL file.
 
 For legacy reasons, the Agent also accepts spans in Zipkin format, however, only very old versions of Jaeger clients can send data in that format and it is officially deprecated.
 
-### Protobuf via gRPC (stable)
+### gRPC/Protobuf (stable)
 
 In a typical Jaeger deployment, Agents receive spans from Clients and forward them to Collectors. Since Jaeger version 1.11 the official and recommended protocol between Agents and Collectors is gRPC with Protobuf as defined in [collector.proto][collector.proto] IDL file.
 
-### Thrift over HTTP (stable)
+### HTTP Thrift (stable)
 
 In some cases it is not feasible to deploy Jaeger Agent next to the application, for example, when the application code is running as AWS Lambda function. In these scenarios the Jaeger Clients can be configured to submit spans directly to the Collectors over HTTP/HTTPS.
 
@@ -35,7 +35,7 @@ The same [jaeger.thrift][jaeger.thrift] payload can be submitted in HTTP POST re
 Content-Type: application/vnd.apache.thrift.binary
 ```
 
-### JSON over HTTP (n/a)
+### HTTP JSON (n/a)
 
 There is no official Jaeger JSON format that can be accepted by the collector. In the future the Protobuf-generated JSON may be supported.
 
@@ -77,9 +77,13 @@ For programmatic access to service graph, the recommended API is gRPC/Protobuf d
 
 Used by the Monitor tab of Jaeger UI to populate the metrics for its visualizations.
 
-### API Definition
+## gRPC/Protobuf
 
-#### R.E.D. Metrics Queries
+The recommended way for programmatically retrieving traces and other data is via `jaeger.api_v2.metrics.MetricsQueryService` gRPC endpoint defined in [metricsquery.proto][metricsquery.proto] IDL file.
+
+## HTTP JSON
+
+### R.E.D. Metrics Queries
 
 `/api/metrics/{metric_type}?{query}`
 
@@ -132,14 +136,7 @@ spanKindType = 'unspecified' | 'internal' | 'server' | 'client' | 'producer' | '
   - Optional with default: 'server'
 ```
 
-#### Min Step Query
-
-`/api/metrics/minstep`
-
-Gets the min time resolution supported by the backing metrics store, in milliseconds, that can be used in the `step` parameter.
-e.g. a min step of 1 means the backend can only return data points that are at least 1ms apart, not closer.
-
-### Responses
+#### Responses
 
 The response data model is based on [`MetricsFamily`](https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53).
 
@@ -187,9 +184,17 @@ If the `groupByOperation=true` parameter is set, the response will include the o
       ],
 ```
 
+### Min Step Query
+
+`/api/metrics/minstep`
+
+Gets the min time resolution supported by the backing metrics store, in milliseconds, that can be used in the `step` parameter.
+e.g. a min step of 1 means the backend can only return data points that are at least 1ms apart, not closer.
+
 [jaeger-idl]: https://github.com/jaegertracing/jaeger-idl/
 [jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
 [agent.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/agent.thrift
 [sampling.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/sampling.thrift
 [collector.proto]: https://github.com/jaegertracing/jaeger-idl/blob/master/proto/api_v2/collector.proto
 [query.proto]: https://github.com/jaegertracing/jaeger-idl/blob/master/proto/api_v2/query.proto
+[metrics.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto
