@@ -2,6 +2,6 @@ public/
 resources/
 .DS_Store
 .idea
-
+.hugo_build.lock
 bin/
 tmp/
