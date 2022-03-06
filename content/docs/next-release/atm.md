@@ -20,6 +20,33 @@ https://promlabs.com/blog/2020/11/26/an-update-on-promql-compatibility-across-ve
 
 ## Architecture
 
+
+```mermaid
+graph TD
+    TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_PROC[Spanmetrics Processor]
+    TRACE_RECEIVER --> |spans| TRACE_EXPORTER[Trace Exporter]
+    %% TRACE_EXPORTER --> |HTTP/sampling| TRACE_RECEIVER
+    TRACE_EXPORTER --> |HTTP or gRPC| JAEGER[Jaeger]
+    %% JAEGER --> |gRPC/sampling| TRACE_EXPORTER
+    SPANMETRICS_PROC --> |metrics| PROMETHEUS_EXPORTER[Prometheus Exporter]
+    JAEGER --> STORE[Storage]
+    JAEGER --> |gRPC| PLUGIN[Storage Plugin]
+    PLUGIN --> STORE
+    QUERY[Jaeger Query Service] --> STORE
+    QUERY --> |gRPC| PLUGIN
+    UI[Jaeger UI] --> |HTTP| QUERY
+    subgraph Opentelemetry Collector
+        subgraph Pipeline
+            TRACE_RECEIVER
+            SPANMETRICS_PROC
+            TRACE_EXPORTER
+            PROMETHEUS_EXPORTER
+        end
+    end
+    style JAEGER fill:#9AEBFE,color:black
+```
+
+
 ## Configuration
 
 ## API
