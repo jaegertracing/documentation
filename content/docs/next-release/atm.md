@@ -1,14 +1,19 @@
 # Aggregated Trace Metrics (ATM)
 
-The motivation for this feature is to help identify interesting traces (high qps, slow or erroneous) without knowing the service or operations up-front.
+The motivation for this feature is to help identify interesting traces (e.g. high
+QPS, slow or erroneous requests) without knowing the service or operations up-front.
 
-This is essentially achieved through aggregating span data to produce R.E.D (Request, Error, Duration) metrics.
-As such, the term "Trace" used in the ATM acronym is a slight misnomer, while the term "Span" would be more appropriate
-because these metrics are trace unaware.
+This is essentially achieved through aggregating span data to produce R.E.D
+(Request, Error, Duration) metrics.
 
-Use cases include:
+As such, technically speaking, the term "Trace" used in the ATM acronym is a
+slight misnomer, while the term "Span" would be more appropriate because these
+metrics are trace unaware.
 
-- Post deployment sanity checks across the org, or on known dependent services in the request chain.
+Potential use cases include:
+
+- Post deployment sanity checks across the org, or on known dependent services
+  in the request chain.
 - Monitoring and root-causing when alerted of an issue.
 - Better onboarding experience for new users of Jaeger UI.
 - Long-term trend analysis of QPS, errors and latencies.
@@ -18,23 +23,25 @@ Use cases include:
 Prometheus compatible backends:
 https://promlabs.com/blog/2020/11/26/an-update-on-promql-compatibility-across-vendors
 
+## Getting Started
+
+A locally runnable setup is available in: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor.
+
+This is for demonstration purposes only and does not reflect deployment best practices.
+
 ## Architecture
 
-
 ```mermaid
-graph TD
+graph
     TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_PROC[Spanmetrics Processor]
     TRACE_RECEIVER --> |spans| TRACE_EXPORTER[Trace Exporter]
-    %% TRACE_EXPORTER --> |HTTP/sampling| TRACE_RECEIVER
-    TRACE_EXPORTER --> |HTTP or gRPC| JAEGER[Jaeger]
-    %% JAEGER --> |gRPC/sampling| TRACE_EXPORTER
-    SPANMETRICS_PROC --> |metrics| PROMETHEUS_EXPORTER[Prometheus Exporter]
-    JAEGER --> STORE[Storage]
-    JAEGER --> |gRPC| PLUGIN[Storage Plugin]
-    PLUGIN --> STORE
-    QUERY[Jaeger Query Service] --> STORE
-    QUERY --> |gRPC| PLUGIN
-    UI[Jaeger UI] --> |HTTP| QUERY
+    TRACE_EXPORTER --> |spans| JAEGER[Jaeger Collector]
+    SPANMETRICS_PROC --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PromethesusRemoteWrite Exporter]
+    UI[Jaeger UI] --> QUERY
+    JAEGER --> SPAN_STORE[Span Storage]
+    QUERY[Jaeger Query Service] --> METRICS_STORE[Metrics Storage]
+    QUERY --> SPAN_STORE
+    PROMETHEUS_EXPORTER --> |metrics| METRICS_STORE
     subgraph Opentelemetry Collector
         subgraph Pipeline
             TRACE_RECEIVER
@@ -44,10 +51,29 @@ graph TD
         end
     end
     style JAEGER fill:#9AEBFE,color:black
+    style UI fill:#9AEBFE,color:black
+    style QUERY fill:#9AEBFE,color:black
+
+    style TRACE_RECEIVER fill:#404ca8,color:white
+    style TRACE_EXPORTER fill:#404ca8,color:white
+    style SPANMETRICS_PROC fill:#404ca8,color:white
+    style PROMETHEUS_EXPORTER fill:#404ca8,color:white
 ```
 
 
 ## Configuration
+
+### Enabling ATM
+
+The following configuration is required to enable the ATM feature:
+
+- Jaeger UI: [Frontend/UI Configuration][frontend-ui.md]
+- Jaeger Query:
+  - Set the `METRICS_STORAGE_TYPE` environment variable to `prometheus`.
+  - Optional: Set `--prometheus.server-url` (or `PROMETHEUS_SERVER_URL` environment variable)
+    to the URL of the prometheus server. Default: http://localhost:9090.
+
+### Enabling ATM
 
 ## API
 
@@ -55,7 +81,7 @@ Used by the Monitor tab of Jaeger UI to populate the metrics for its visualizati
 
 ### gRPC/Protobuf
 
-The recommended way for programmatically retrieving traces and other data is via `jaeger.api_v2.metrics.MetricsQueryService` gRPC endpoint defined in [metricsquery.proto][metricsquery.proto] IDL file.
+The recommended way to programmatically retrieve traces and other data is via `jaeger.api_v2.metrics.MetricsQueryService` gRPC endpoint defined in the [metricsquery.proto][metricsquery.proto] IDL file.
 
 ### HTTP JSON
 
@@ -63,7 +89,7 @@ The recommended way for programmatically retrieving traces and other data is via
 
 `/api/metrics/{metric_type}?{query}`
 
-Where (Backus-Naur form):
+Where (in Backus-Naur form):
 ```
 metric_type = 'latencies' | 'calls' | 'errors'
 
@@ -167,6 +193,5 @@ If the `groupByOperation=true` parameter is set, the response will include the o
 Gets the min time resolution supported by the backing metrics store, in milliseconds, that can be used in the `step` parameter.
 e.g. a min step of 1 means the backend can only return data points that are at least 1ms apart, not closer.
 
-## Enabling
 
 [metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto
