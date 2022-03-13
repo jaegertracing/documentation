@@ -17,17 +17,17 @@ Since Jaeger v1.32, the Collector and Query Service ports that serve gRPC endpoi
 
 Agent and Collector are the two components of the Jaeger backend that can receive spans. At this time they support two sets of non-overlapping APIs.
 
-### UDP Thrift (stable)
+### Thrift over UDP (stable)
 
 The Agent can only receive spans over UDP in Thrift format. The primary API is a UDP packet that contains a Thrift-encoded `Batch` struct defined in [jaeger.thrift][jaeger.thrift] IDL file, located in the [jaeger-idl][jaeger-idl] repository. Most Jaeger Clients use Thrift's `compact` encoding, however some client libraries do not support it (notably, Node.js) and use Thrift's `binary` encoding (sent to  a different UDP port). The Agent's API is defined by [agent.thrift][agent.thrift] IDL file.
 
 For legacy reasons, the Agent also accepts spans over UDP in Zipkin format, however, only very old versions of Jaeger clients can send data in that format and it is officially deprecated.
 
-### gRPC/Protobuf (stable)
+### Protobuf via gRPC (stable)
 
 In a typical Jaeger deployment, Agents receive spans from Clients and forward them to Collectors. Since Jaeger v1.11 the official and recommended protocol between Agents and Collectors is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto][collector.proto] IDL file.
 
-### HTTP Thrift (stable)
+### Thrift over HTTP (stable)
 
 In some cases it is not feasible to deploy Jaeger Agent next to the application, for example, when the application code is running as a serverless function. In these scenarios the Jaeger Clients can be configured to submit spans directly to the Collectors over HTTP/HTTPS.
 
@@ -37,7 +37,7 @@ The same [jaeger.thrift][jaeger.thrift] payload can be submitted in HTTP POST re
 Content-Type: application/vnd.apache.thrift.binary
 ```
 
-### HTTP JSON (n/a)
+### JSON over HTTP (n/a)
 
 There is no official Jaeger JSON format that can be accepted by the collector. In the future the OpenTelemetry JSON may be supported.
 
@@ -79,8 +79,7 @@ For programmatic access to service graph, the recommended API is gRPC/Protobuf d
 
 ## Aggregated Trace Metrics (internal)
 
-
-Please refer to the [ATM Documentation](atm.md#API)
+Please refer to the [ATM Documentation](../atm#API)
 
 [jaeger-idl]: https://github.com/jaegertracing/jaeger-idl/
 [jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift

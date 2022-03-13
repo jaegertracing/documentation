@@ -30,6 +30,18 @@ Potential use cases include:
 - Long-term trend analysis of QPS, errors and latencies.
 - Capacity planning.
 
+## UI Feature Overview
+
+The "Monitor" tab provides a service-level aggregation, as well as an operation-level aggregation within the service,
+of Request rates, Error rates and Durations (P95, P75 and P50), also known as RED metrics.
+
+Within the operation-level aggregations, an "Impact" metric, computed as the product of latency and request rate, is another
+signal that can be used to rule-out operations that may naturally have a high latency profile such as daily batch jobs,
+or conversely highlight operations that are lower in the latency rankings but with a high RPS (request per second).
+
+From these aggregations, Jaeger UI is able to pre-populate a Trace search with the relevant service, operation
+and lookback period, narrowing down the search space for these more interesting traces.
+
 ## Getting Started
 
 A locally runnable setup is available in: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor.
@@ -75,7 +87,7 @@ graph
     style PROMETHEUS_EXPORTER fill:#404ca8,color:white
 {{< /mermaid >}}
 
-## Expected metrics created
+## Metrics Created
 
 Though more in scope of the OpenTelemetry Collector, it is worth understanding the
 additional metrics that the SpanMetrics Processor will generate in metrics storage
