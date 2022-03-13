@@ -10,7 +10,7 @@ weight: 7
 Several aspects of the UI can be configured:
 
   * The Dependencies section can be enabled / configured
-  * The [Monitor](./atm/) section can be enabled / configured
+  * The [Monitor tab (aka: Aggregated Trace Metrics)](../atm) can be enabled / configured
   * App analytics tracking can be enabled / configured (via Google Analytics or custom plugin)
   * Additional menu options can be added to the global nav
   * Search input limits can be configured

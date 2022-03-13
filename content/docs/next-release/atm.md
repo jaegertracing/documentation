@@ -1,14 +1,25 @@
-# Aggregated Trace Metrics (ATM)
+---
+title: Aggregated Trace Metrics (ATM) - Experimental
+hasparent: true
+---
 
-The motivation for this feature is to help identify interesting traces (e.g. high
-QPS, slow or erroneous requests) without knowing the service or operations up-front.
+{{< info >}}
+As the Aggregated Trace Metrics feature is in its infancy, it is being marked
+as experimental to give the community time to provide feedback and address
+issues which may involve breaking changes.
+{{< /info >}}
 
-This is essentially achieved through aggregating span data to produce R.E.D
+Surfaced in Jaeger UI as the "Monitor" tab, the motivation for this feature is
+to help identify interesting traces (e.g. high QPS, slow or erroneous requests)
+without needing to know the service or operation names up-front.
+
+It is essentially achieved through aggregating span data to produce R.E.D
 (Request, Error, Duration) metrics.
 
 As such, technically speaking, the term "Trace" used in the ATM acronym is a
 slight misnomer, while the term "Span" would be more appropriate because these
-metrics are trace unaware.
+metrics are trace unaware. ATM remains the name for this feature for historical
+reasons, to avoid confusion.
 
 Potential use cases include:
 
@@ -19,10 +30,6 @@ Potential use cases include:
 - Long-term trend analysis of QPS, errors and latencies.
 - Capacity planning.
 
-
-Prometheus compatible backends:
-https://promlabs.com/blog/2020/11/26/an-update-on-promql-compatibility-across-vendors
-
 ## Getting Started
 
 A locally runnable setup is available in: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor.
@@ -31,7 +38,15 @@ This is for demonstration purposes only and does not reflect deployment best pra
 
 ## Architecture
 
-```mermaid
+The R.E.D metrics queried by Jaeger for the Monitor tab are the result of span
+data collected by the OpenTelemetry Collector and aggregated by the
+[SpanMetrics Processor](https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanmetricsprocessor#section-readme)
+component configured within its pipeline.
+
+It is worth emphasizing that Jaeger will only read metrics from this feature and,
+as such, this feature is only relevant to the Jaeger Query component (and All In One).
+
+{{<mermaid align="center">}}
 graph
     TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_PROC[Spanmetrics Processor]
     TRACE_RECEIVER --> |spans| TRACE_EXPORTER[Trace Exporter]
@@ -58,8 +73,31 @@ graph
     style TRACE_EXPORTER fill:#404ca8,color:white
     style SPANMETRICS_PROC fill:#404ca8,color:white
     style PROMETHEUS_EXPORTER fill:#404ca8,color:white
+{{< /mermaid >}}
+
+## Expected metrics created
+
+Though more in scope of the OpenTelemetry Collector, it is worth understanding the
+additional metrics that the SpanMetrics Processor will generate in metrics storage
+to help with capacity planning when deploying ATM.
+
+The following formula aims to provide some guidance on the number new metrics created:
+```
+num_status_codes * num_span_kinds * (num_calls_metrics + num_latency_buckets) * num_operations
+
+Where:
+  num_status_codes = 3 max (typically 2: ok/error)
+  num_span_kinds = 6 max (typically 2: client/server)
+  num_calls_metrics = 1
+  num_latency_buckets = 17 default
 ```
 
+Plugging those numbers in, assuming default configuration (no custom dimensions
+or latency buckets):
+```
+max = 324 * num_operations
+typical = 72 * num_operations
+```
 
 ## Configuration
 
@@ -67,13 +105,11 @@ graph
 
 The following configuration is required to enable the ATM feature:
 
-- Jaeger UI: [Frontend/UI Configuration][frontend-ui.md]
-- Jaeger Query:
+- [Jaeger UI](../frontend-ui#monitor-experimental)
+- [Jaeger Query](../cli#jaeger-query-prometheus)
   - Set the `METRICS_STORAGE_TYPE` environment variable to `prometheus`.
   - Optional: Set `--prometheus.server-url` (or `PROMETHEUS_SERVER_URL` environment variable)
     to the URL of the prometheus server. Default: http://localhost:9090.
-
-### Enabling ATM
 
 ## API
 
@@ -140,7 +176,7 @@ spanKindType = 'unspecified' | 'internal' | 'server' | 'client' | 'producer' | '
 
 ##### Responses
 
-The response data model is based on [`MetricsFamily`](https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53).
+The response data model is based on [OpenMetrics' `MetricFamily`](https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53).
 
 For example:
 ```

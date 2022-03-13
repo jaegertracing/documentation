@@ -13,6 +13,9 @@ children:
   url: security
 - title: On Windows
   url: windows
+- title: Aggregated Trace Metrics (ATM)
+  navtitle: ATM
+  url: atm
 ---
 
 The main Jaeger backend components are released as Docker images on [Docker Hub](https://hub.docker.com/r/jaegertracing) and [Quay](https://quay.io/organization/jaegertracing):
@@ -56,7 +59,15 @@ Command line option                | Environment variable
 
 ## All-in-one
 
-Jaeger all-in-one is a special distribution that combines three Jaeger components, [agent](#agent), [collector](#collector), and [query service/UI](#query-service--ui), in a single binary or container image. It is useful for single-node deployments where your trace volume is light enough to be handled by a single instance. By default, all-in-one starts with `memory` storage, meaning it will lose all data upon restart. All other [storage backends](#storage-backends) can also be used with all-in-one, but `memory` and `badger` are exclusive to all-in-one because they cannot be shared between instances.
+Jaeger all-in-one is a special distribution that combines three Jaeger components,
+[agent](#agent), [collector](#collector), and [query service/UI](#query-service--ui),
+in a single binary or container image.
+It is useful for single-node deployments where your trace volume is light enough
+to be handled by a single instance. By default, all-in-one starts with `memory`
+storage, meaning it will lose all data upon restart. All other
+[span storage backends](#span-storage-backends) can also be used with all-in-one,
+but `memory` and `badger` are exclusive to all-in-one because they cannot be shared
+between instances.
 
 All-in-one listens to the same ports as the components it contains (described below), with the exception of the admin port.
 
@@ -155,7 +166,7 @@ Port  | Protocol | Function
 14269 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
 
 
-## Storage Backends
+## Span Storage Backends
 
 Collectors require a persistent storage backend. Cassandra and Elasticsearch are the primary supported distributed storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
@@ -662,6 +673,54 @@ docker run \
   -e GRPC_STORAGE_PLUGIN_BINARY=<...> \
   -e GRPC_STORAGE_PLUGIN_CONFIGURATION_FILE=<...> \
   jaegertracing/all-in-one:{{< currentVersion >}}
+```
+
+## Metrics Storage Backends
+
+Jaeger Query is capable of querying aggregated R.E.D metrics from a storage backend,
+visualizing them on the [Monitor tab](../atm). It should be emphasized that the
+configured metrics storage type is for reading _only_ and therefore, only applies
+to the Jaeger Query component (and All In One, which contains Jaeger Query).
+
+The storage type can be passed via `METRICS_STORAGE_TYPE` environment variable.
+Valid values are: `prometheus`.
+
+### Prometheus
+
+Any PromQL-compatible backend is supported by Jaeger Query. A list of these have
+been compiled by Julius Volz in:
+https://promlabs.com/blog/2020/11/26/an-update-on-promql-compatibility-across-vendors
+
+#### Configuration
+
+##### Minimal
+```sh
+docker run \
+  -e METRICS_STORAGE_TYPE=prometheus \
+  jaegertracing/jaeger-query:{{< currentVersion >}}
+```
+
+##### All options
+To view the full list of configuration options, you can run the following command:
+```sh
+docker run \
+  -e METRICS_STORAGE_TYPE=prometheus \
+  jaegertracing/jaeger-query:{{< currentVersion >}} \
+  --help
+```
+#### TLS support
+
+Jaeger supports TLS client to Prometheus server connections as long as you've [configured
+your Prometheus server](https://prometheus.io/docs/guides/tls-encryption/) correctly. You can
+configure Jaeger Query like so:
+
+```sh
+docker run \
+  -e METRICS_STORAGE_TYPE=prometheus \
+  -e PROMETHEUS_SERVER_URL=<...> \
+  -e PROMETHEUS_TLS_ENABLED=true \
+  -e PROMETHEUS_TLS_CA=<path to your CA cert file> \
+  jaegertracing/jaeger-query:{{< currentVersion >}}
 ```
 
 ## Ingester
