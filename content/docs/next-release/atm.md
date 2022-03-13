@@ -32,15 +32,19 @@ Potential use cases include:
 
 ## UI Feature Overview
 
-The "Monitor" tab provides a service-level aggregation, as well as an operation-level aggregation within the service,
-of Request rates, Error rates and Durations (P95, P75 and P50), also known as RED metrics.
+The "Monitor" tab provides a service-level aggregation, as well as an operation-level
+aggregation within the service, of Request rates, Error rates and Durations
+(P95, P75 and P50), also known as RED metrics.
 
-Within the operation-level aggregations, an "Impact" metric, computed as the product of latency and request rate, is another
-signal that can be used to rule-out operations that may naturally have a high latency profile such as daily batch jobs,
-or conversely highlight operations that are lower in the latency rankings but with a high RPS (request per second).
+Within the operation-level aggregations, an "Impact" metric, computed as the
+product of latency and request rate, is another signal that can be used to
+rule-out operations that may naturally have a high latency profile such as daily
+batch jobs, or conversely highlight operations that are lower in the latency
+rankings but with a high RPS (request per second).
 
-From these aggregations, Jaeger UI is able to pre-populate a Trace search with the relevant service, operation
-and lookback period, narrowing down the search space for these more interesting traces.
+From these aggregations, Jaeger UI is able to pre-populate a Trace search with
+the relevant service, operation and lookback period, narrowing down the search
+space for these more interesting traces.
 
 ## Getting Started
 
