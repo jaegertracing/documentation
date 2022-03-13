@@ -59,15 +59,7 @@ Command line option                | Environment variable
 
 ## All-in-one
 
-Jaeger all-in-one is a special distribution that combines three Jaeger components,
-[agent](#agent), [collector](#collector), and [query service/UI](#query-service--ui),
-in a single binary or container image.
-It is useful for single-node deployments where your trace volume is light enough
-to be handled by a single instance. By default, all-in-one starts with `memory`
-storage, meaning it will lose all data upon restart. All other
-[span storage backends](#span-storage-backends) can also be used with all-in-one,
-but `memory` and `badger` are exclusive to all-in-one because they cannot be shared
-between instances.
+Jaeger all-in-one is a special distribution that combines three Jaeger components, [agent](#agent), [collector](#collector), and [query service/UI](#query-service--ui), in a single binary or container image. It is useful for single-node deployments where your trace volume is light enough to be handled by a single instance. By default, all-in-one starts with `memory` storage, meaning it will lose all data upon restart. All other [span storage backends](#span-storage-backends) can also be used with all-in-one, but `memory` and `badger` are exclusive to all-in-one because they cannot be shared between instances.
 
 All-in-one listens to the same ports as the components it contains (described below), with the exception of the admin port.
 
