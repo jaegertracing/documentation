@@ -34,7 +34,7 @@ Potential use cases include:
 
 The "Monitor" tab provides a service-level aggregation, as well as an operation-level
 aggregation within the service, of Request rates, Error rates and Durations
-(P95, P75 and P50), also known as RED metrics.
+(P95, P75 and P50), also known as R.E.D metrics.
 
 Within the operation-level aggregations, an "Impact" metric, computed as the
 product of latency and request rate, is another signal that can be used to
@@ -48,19 +48,33 @@ space for these more interesting traces.
 
 ## Getting Started
 
-A locally runnable setup is available in: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor.
-
+{{< info >}}
 This is for demonstration purposes only and does not reflect deployment best practices.
+{{< /info >}}
+
+A locally runnable setup is available in the [Jaeger repository][atm-demo] along
+with instructions on how to run it.
+
+The feature can be accessed from the "Monitor" tab along the top menu.
+
+This demo includes [Microsim](https://github.com/yurishkuro/microsim); a microservices
+simulator to generate trace data.
+
+If generating traces manually is preferred, the [Sample App: HotROD](#Sample-App-HotROD)
+can be started via docker. Be sure to include `--net monitor_backend` in the `docker run` command.
 
 ## Architecture
 
 The R.E.D metrics queried by Jaeger for the Monitor tab are the result of span
-data collected by the OpenTelemetry Collector and aggregated by the
-[SpanMetrics Processor](https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanmetricsprocessor#section-readme)
-component configured within its pipeline.
+data collected by the [OpenTelemetry Collector][opentelemetry-collector] which
+is then aggregated by the [SpanMetrics Processor][spanmetrics] component configured
+within its pipeline.
 
-It is worth emphasizing that Jaeger will only read metrics from this feature and,
-as such, this feature is only relevant to the Jaeger Query component (and All In One).
+These metrics are finally exported by the OpenTelemetry Collector (via prometheus
+exporters) to a Prometheus-compatible metrics store.
+
+It is worth emphasizing that this is a "read-only" feature and,
+as such, is only relevant to the Jaeger Query component (and All In One).
 
 {{<mermaid align="center">}}
 graph
@@ -93,8 +107,8 @@ graph
 
 ## Metrics Created
 
-Though more in scope of the OpenTelemetry Collector, it is worth understanding the
-additional metrics that the SpanMetrics Processor will generate in metrics storage
+Though more in scope of the [OpenTelemetry Collector][opentelemetry-collector], it is worth understanding the
+additional metrics that the [SpanMetrics Processor][spanmetrics] will generate in metrics storage
 to help with capacity planning when deploying ATM.
 
 The following formula aims to provide some guidance on the number new metrics created:
@@ -192,7 +206,7 @@ spanKindType = 'unspecified' | 'internal' | 'server' | 'client' | 'producer' | '
 
 ##### Responses
 
-The response data model is based on [OpenMetrics' `MetricFamily`](https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53).
+The response data model is based on [OpenMetrics' `MetricFamily`][openmetrics.proto]
 
 For example:
 ```
@@ -246,4 +260,8 @@ Gets the min time resolution supported by the backing metrics store, in millisec
 e.g. a min step of 1 means the backend can only return data points that are at least 1ms apart, not closer.
 
 
+[atm-demo]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor
 [metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto
+[openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53
+[opentelemetry-collector]: https://opentelemetry.io/docs/collector/
+[spanmetrics]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanmetricsprocessor#section-readme

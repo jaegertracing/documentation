@@ -52,20 +52,9 @@ Port  | Protocol | Component | Function
 14250 | HTTP     | collector | accept `model.proto`
 9411  | HTTP     | collector | Zipkin compatible endpoint (optional)
 
-### With Aggregated Trace Metrics (Experimental)
+### With Aggregated Trace Metrics (ATM)
 
-The following command runs a local demo of the Aggregated Trace Metrics feature:
-```shell
-docker-compose -f docker-compose/monitor/docker-compose.yml up
-```
-
-The feature can be accessed from the "Monitor" tab along the top menu.
-
-This demo includes [Microsim](https://github.com/yurishkuro/microsim); a microservices
-simulator to generate trace data.
-
-If you prefer generating traces manually with [Sample App: HotROD](#Sample-App-HotROD)
-via docker, be sure to include `--net monitor_backend` in the `docker run` command.
+Please refer to [Aggregated Trace Metrics (ATM)](../atm#getting-started).
 
 ## Kubernetes and OpenShift
 
