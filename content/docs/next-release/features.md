@@ -78,4 +78,9 @@ At this time the transitive graph can only be constructed from traces in the sea
 
 ## Aggregated Trace Metrics (ATM)
 
-Please refer to [Aggregated Trace Metrics (ATM)](../atm).
+Visualizes aggregated span data in the form of RED (Requests, Errors, Duration) metrics
+to highlight services and/or operations with statistically significant request/error rates or
+latencies, then leveraging Jaeger's Trace Search capabilities to pinpoint specific
+traces belonging to these services/operations.
+
+See [Aggregated Trace Metrics (ATM)](../atm) for more details.

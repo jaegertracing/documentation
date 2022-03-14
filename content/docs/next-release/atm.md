@@ -105,7 +105,7 @@ graph
     style PROMETHEUS_EXPORTER fill:#404ca8,color:white
 {{< /mermaid >}}
 
-## Metrics Created
+## Derived Time Series
 
 Though more in scope of the [OpenTelemetry Collector][opentelemetry-collector],
 it is worth understanding the additional metrics and time series that the
@@ -133,14 +133,13 @@ Two metric names will be created:
       or equal to) label. The `latency_bucket` counter with lowest `le` and
       `le >= span latency` will be incremented for each span.
 
-The following formula aims to provide some guidance on the number new time series created:
+The following formula aims to provide some guidance on the number of new time series created:
 ```
-num_status_codes * num_span_kinds * (num_calls_metrics + num_latency_buckets) * num_operations
+num_status_codes * num_span_kinds * (1 + num_latency_buckets) * num_operations
 
 Where:
   num_status_codes = 3 max (typically 2: ok/error)
   num_span_kinds = 6 max (typically 2: client/server)
-  num_calls_metrics = 1
   num_latency_buckets = 17 default
 ```
 
