@@ -427,7 +427,7 @@ Spark dependencies
 
 You can use the simplest example (shown above) and create a Jaeger instance using the defaults, or you can create your own custom resource file.
 
-## Storage options
+## Span storage options
 
 ### Cassandra storage
 
@@ -695,6 +695,51 @@ spec:
 <3> Configuration options for the `grpc-plugin`.
 
 <4> User created config map with the plugin configuration.
+
+## Metrics storage options
+
+### Prometheus
+
+Setting `spec.metricsStorage.type` to `prometheus` enables using Jaeger with
+PromQL-compatible storage implementations to query R.E.D metrics for the
+[Aggregated Trace Metrics](../atm) feature.
+
+The following is an example of a Jaeger CR using the `allInOne` deployment strategy,
+an in-memory span storage and prometheus metrics storage.
+
+```yaml
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: jaeger-atm
+spec:
+  strategy: allInOne
+  allInOne:
+    image: jaegertracing/all-in-one:latest
+    options:
+      log-level: debug
+      query:
+        base-path: /jaeger
+      prometheus: # <1>
+        server-url: "http://prometheus:9090" # <2>
+    metricsStorage: # <3>
+      type: prometheus # <4>
+  storage:
+    options:
+      memory:
+        max-traces: 100000
+```
+
+<1> Beginning of `prometheus`-namespaced configuration, defined as a simple `key: value` map.
+    All available options are documented in the
+    [Jaeger All-In-One with Prometheus CLI section](../cli#jaeger-all-in-one-prometheus)
+
+<2> Overrides the default `http://localhost:9090` prometheus server URL with `http://prometheus:9090`.
+
+<3> Section to enable metrics querying capabilities.
+
+<4> Selects `prometheus` as the metrics storage backend.
+
 
 ## Deriving dependencies
 
