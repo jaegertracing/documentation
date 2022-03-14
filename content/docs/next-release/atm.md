@@ -73,7 +73,7 @@ within its pipeline.
 These metrics are finally exported by the OpenTelemetry Collector (via prometheus
 exporters) to a Prometheus-compatible metrics store.
 
-It is worth emphasizing that this is a "read-only" feature and,
+It is important emphasize that this is a "read-only" feature and,
 as such, is only relevant to the Jaeger Query component (and All In One).
 
 {{<mermaid align="center">}}
@@ -144,7 +144,7 @@ Where:
   num_latency_buckets = 17 default
 ```
 
-Plugging those numbers in, assuming default configuration (no custom dimensions
+Plugging those numbers in, assuming default configuration (no custom dimensions/labels
 or latency buckets):
 ```
 max = 324 * num_operations
