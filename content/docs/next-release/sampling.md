@@ -87,4 +87,6 @@ Adaptive sampling works in the Jaeger collector by observing the spans received 
 
 Adaptive sampling requires a storage backend to store the observed traffic data and computed probabilities. At the moment `memory` (for all-in-one deployment) and `cassandra` are supported as sampling storage backends. We are seeking help in implementing support for other backends (https://github.com/jaegertracing/jaeger/issues/3305).
 
+By default adaptive sampling will attempt to use the backend specified by `SPAN_STORAGE_TYPE` to store data. However, a second type of backend can also be specified by using `SAMPLING_STORAGE_TYPE`. For instance, `SPAN_STORAGE_TYPE=elasticsearch SAMPLING_STORAGE_TYPE=cassandra ./jaeger-collector` will run the collector in a mode where it attempts to store its span data in the configured elasticsearch cluster and its adaptive sampling data in the configured cassandra cluster. Note that this feature can not be used to store span and adaptive sampling data in two different backends of the same type.
+
 Read [this blog post](https://medium.com/jaegertracing/adaptive-sampling-in-jaeger-50f336f4334) for more details on adaptive sampling engine.
