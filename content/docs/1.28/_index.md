@@ -34,7 +34,7 @@ Uber published a blog post, [Evolving Distributed Tracing at Uber](https://eng.u
   * Uses consistent upfront sampling with individual per service/endpoint probabilities
   * Multiple storage backends: Cassandra, Elasticsearch, memory.
   * System topology graphs
-  * Adaptive sampling (coming soon)
+  * Adaptive sampling
   * Post-collection data processing pipeline (coming soon)
 
 See [Features](./features/) page for more details.
