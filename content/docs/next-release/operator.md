@@ -23,6 +23,14 @@ While multiple operators might coexist watching the same set of namespaces, whic
 The Jaeger Operator version tracks one version of the Jaeger components (Query, Collector, Agent). When a new version of the Jaeger components is released, a new version of the operator will be released that understands how running instances of the previous version can be upgraded to the new version.
 {{< /info >}}
 
+## Prerequisite
+
+Since version 1.31 the Jaeger Operator uses webhooks to validate Jaeger custom resources (CRs). This requires an installed version of the [cert-manager](https://cert-manager.io/docs/). A more detailed list of supported versions can be found in the [compability matrix](https://github.com/jaegertracing/jaeger-operator#compatibility-matrix). An installation guide can be found [here](https://cert-manager.io/v1.6-docs/installation/#default-static-install).
+
+{{< warning >}}
+cert-manager version 1.6.1 or higher must be installed.
+{{< /warning >}}
+
 ## Install modes
 
 The Jaeger Operator can be installed to watch for new Jaeger custom resources (CRs) either in the whole cluster or in specific namespaces. When configured for cluster-mode, the operator can:
