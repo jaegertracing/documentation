@@ -143,12 +143,16 @@ Where:
   num_latency_buckets = 17 default
 ```
 
-Plugging those numbers in, assuming default configuration (no custom dimensions/labels
-or latency buckets):
+Plugging those numbers in, assuming default configuration:
 ```
 max = 324 * num_operations
 typical = 72 * num_operations
 ```
+
+Note:
+- Custom [latency buckets][spanmetrics-config-latency] or [dimensions][spanmetrics-config-dimensions]
+  configured in the spanmetrics processor will alter the calculation above.
+- Querying custom dimensions are not supported by ATM and will be aggregated over.
 
 ## Configuration
 
@@ -197,3 +201,5 @@ both ingress and egress spans in the `server` and `client` span kinds, respectiv
 [spanmetrics]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanmetricsprocessor#section-readme
 [prom-metric-labels]: https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels
 [http-api-readme]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api
+[spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/spanmetricsprocessor/testdata/config-full.yaml#L46
+[spanmetrics-config-latency]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/spanmetricsprocessor/testdata/config-full.yaml#L38
