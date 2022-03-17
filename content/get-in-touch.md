@@ -6,10 +6,11 @@ title: Getting in touch
 
 Join our Google mail group [jaeger-tracing@googlegroups.com](https://groups.google.com/forum/#!forum/jaeger-tracing) or the chat room [#jaeger at the CNCF Slack](https://cloud-native.slack.com/archives/CGG7NFUJ3). You can get an invitation at https://slack.cncf.io in order to register to this Slack workspace.
 
-## Bi-weekly project meetings
+## Project video meetings
 
-The Jaeger maintainers and contributors meet on a video call every other week, and everyone is welcome to join and participate, discuss their issues, present case studies. Agenda and meeting details [are in this Google doc][bi-weekly-call]
-and information on our jaeger project bi-weekly meetings [are in this calendar][jaeger-project-calendar].
+The Jaeger maintainers and contributors meet on a video call regularly, and everyone is welcome to join and participate, discuss their issues, present case studies. Agenda and meeting details [are in this Google doc][bi-weekly-call],
+and the meetings invitations [are in this calendar][jaeger-project-calendar].
+
 ## Report issues on GitHub
 
 Our GitHub org has many different repos, please make sure to pick the one appropriate for your issue.
