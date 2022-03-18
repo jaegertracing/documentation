@@ -4,14 +4,6 @@ title: Roadmap
 
 The following is only a selection of some of the major features we plan to implement, some of which are near term and some are longer term. We have tried to put these in rough priority as well as having a wishlist at the end. To get a more complete overview of planned features and current work, see the issue trackers for the various repositories, for example, the [Jaeger backend](https://github.com/jaegertracing/jaeger/issues/).
 
-## Aggregated Trace Metrics (ATM)
-
-Aggregated trace metrics can be exported by the OpenTelemetry Collector's [span metrics processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/spanmetricsprocessor) this allows metrics to be calculated off trace data and exported from the Collector. We are adapting Jaeger to be able to read metrics from a Prometheus compatible backend, but additional backends may be supported. For additional information see [Issue #2954](https://github.com/jaegertracing/jaeger/issues/2954). 
-
-## Operational Monitoring HomePage
-
-Enhancements to the Jaeger search and homepage to improve not only the user interface but introduce operational metrics including average response time, tansactions per minute, and error rate (R.E.D) to allow Jaeger to be used operationally. For more details see [jaeger/issues/2954](https://github.com/jaegertracing/jaeger/issues/2954).
-
 ## Support for OpenSearch
 
 Backend storage support for [OpenSearch](https://opensearch.org/) as a backend database. Today this is fully compatible with ElasticSearch APIs, but these may diverge. OpenSearch is Apache 2.0 licensed and hopefully will be led by a community of contributors, but today is led by AWS. ElasticSearch is SSPL licensed and led by Elastic NV making it no longer an open source project.
@@ -72,5 +64,5 @@ that comes in handy in various scenarios:
 
 * Multi-Tenancy ([mailgroup thread](https://groups.google.com/forum/#!topic/jaeger-tracing/PcxftflO4_o))
 * Cloud and Multi-DC strategy
-* Flagging of anomalous traces 
+* Flagging of anomalous traces
 * Alerting capabilities to complement operational use cases
