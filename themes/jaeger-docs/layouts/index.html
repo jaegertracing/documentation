@@ -3,6 +3,7 @@
 {{ $posts        := first 100 $json.items }}
 
 {{ partial "home/hero.html" (dict "posts" $posts "title" site.Title "tagline" site.Params.tagline "latestVersion" site.Params.latest) }}
+{{ partial "home/ukraine.html" . }}
 {{ partial "home/why.html" . }}
 {{ partial "home/features.html" . }}
 {{ partial "home/articles.html" (dict "posts" $posts) }}
