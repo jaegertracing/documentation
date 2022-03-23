@@ -22,7 +22,7 @@ We plan to continue accepting pull requests and making new releases of Jaeger cl
 
 ### Migration to OpenTelemetry
 
-The OpenTelemetry project is working on publishing the migration guides from OpenTracing API to OpenTelemetry SDKs via OpenTracing bridges/shims. There may be different levels of maturity and features in the SDKs. We will keep updating the information below as more of it becomes available.
+The OpenTelemetry project [published a migration guide](https://opentelemetry.io/docs/migration/opentracing/) from the OpenTracing APIs to the OpenTelemetry SDKs via the OpenTracing bridges/shims. There may be different levels of maturity and features in different OpenTelemetry SDKs. We will keep updating the information below as more of it becomes available.
 
 #### Baggage support
 
