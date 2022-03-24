@@ -539,7 +539,7 @@ For example:
   "ILM policy jaeger-ilm-policy doesn't exist in Elasticsearch. Please create it and rerun init"
   {{< /info >}}
 
-  After the initialization, deploy Jaeger with `--es.use-ilm=true` and `--es.use-aliases=true`.
+  After the initialization, deploy Jaeger with `--es.use-ilm=true`, `--es.use-aliases=true` and `--es.create-index-templates=false`..
 
 
 #### Upgrade Elasticsearch version
