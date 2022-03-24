@@ -80,12 +80,9 @@ as such, is only relevant to the Jaeger Query component (and All In One).
 graph
     TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_PROC[Spanmetrics Processor]
     TRACE_RECEIVER --> |spans| TRACE_EXPORTER[Trace Exporter]
-    TRACE_EXPORTER --> |spans| JAEGER[Jaeger Collector]
     SPANMETRICS_PROC --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PromethesusRemoteWrite Exporter]
     UI[Jaeger UI] --> QUERY
-    JAEGER --> SPAN_STORE[Span Storage]
     QUERY[Jaeger Query Service] --> METRICS_STORE[Metrics Storage]
-    QUERY --> SPAN_STORE
     PROMETHEUS_EXPORTER --> |metrics| METRICS_STORE
     subgraph Opentelemetry Collector
         subgraph Pipeline
@@ -95,7 +92,6 @@ graph
             PROMETHEUS_EXPORTER
         end
     end
-    style JAEGER fill:#9AEBFE,color:black
     style UI fill:#9AEBFE,color:black
     style QUERY fill:#9AEBFE,color:black
 
