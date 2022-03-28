@@ -76,11 +76,11 @@ The node granularity of this graph can be changed between services and service e
 
 At this time the transitive graph can only be constructed from traces in the search results. In the future there will be a Flink job that will compute the graphs by aggregating all traces.
 
-## Aggregated Trace Metrics (ATM)
+## Service Performance Monitoring (SPM)
 
 Visualizes aggregated span data in the form of RED (Requests, Errors, Duration) metrics
 to highlight services and/or operations with statistically significant request/error rates or
 latencies, then leveraging Jaeger's Trace Search capabilities to pinpoint specific
 traces belonging to these services/operations.
 
-See [Aggregated Trace Metrics (ATM)](../atm) for more details.
+See [Service Performance Monitoring (SPM)](../spm) for more details.

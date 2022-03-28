@@ -13,9 +13,9 @@ children:
   url: security
 - title: On Windows
   url: windows
-- title: Aggregated Trace Metrics (ATM)
-  navtitle: ATM
-  url: atm
+- title: Service Performance Monitoring (SPM)
+  navtitle: SPM
+  url: spm
 ---
 
 The main Jaeger backend components are released as Docker images on [Docker Hub](https://hub.docker.com/r/jaegertracing) and [Quay](https://quay.io/organization/jaegertracing):
@@ -670,7 +670,7 @@ docker run \
 ## Metrics Storage Backends
 
 Jaeger Query is capable of querying aggregated R.E.D metrics from a storage backend,
-visualizing them on the [Monitor tab](../atm). It should be emphasized that the
+visualizing them on the [Monitor tab](../spm). It should be emphasized that the
 configured metrics storage type is for reading _only_ and therefore, only applies
 to the Jaeger Query component (and All In One, which contains Jaeger Query).
 

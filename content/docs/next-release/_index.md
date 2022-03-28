@@ -36,7 +36,7 @@ Uber published a blog post, [Evolving Distributed Tracing at Uber](https://eng.u
   * System topology graphs
   * Adaptive sampling
   * Post-collection data processing pipeline (coming soon)
-  * Aggregated Trace Metrics (ATM)
+  * Service Performance Monitoring (SPM)
 
 See [Features](./features/) page for more details.
 

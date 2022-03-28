@@ -52,9 +52,9 @@ Port  | Protocol | Component | Function
 14250 | HTTP     | collector | accept `model.proto`
 9411  | HTTP     | collector | Zipkin compatible endpoint (optional)
 
-### With Aggregated Trace Metrics (ATM)
+### With Service Performance Monitoring (SPM)
 
-Please refer to [Aggregated Trace Metrics (ATM)](../atm#getting-started).
+Please refer to [Service Performance Monitoring (SPM)](../spm#getting-started).
 
 ## Kubernetes and OpenShift
 
