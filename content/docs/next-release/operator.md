@@ -710,7 +710,7 @@ spec:
 
 Setting `spec.metricsStorage.type` to `prometheus` enables using Jaeger with
 PromQL-compatible storage implementations to query R.E.D metrics for the
-[Aggregated Trace Metrics](../atm) feature.
+[Service Performance Monitoring](../spm) feature.
 
 The following is an example of a Jaeger CR using the `allInOne` deployment strategy,
 an in-memory span storage and prometheus metrics storage.
@@ -719,7 +719,7 @@ an in-memory span storage and prometheus metrics storage.
 apiVersion: jaegertracing.io/v1
 kind: Jaeger
 metadata:
-  name: jaeger-atm
+  name: jaeger-spm
 spec:
   strategy: allInOne
   allInOne:

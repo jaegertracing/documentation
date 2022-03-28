@@ -77,9 +77,9 @@ The returned JSON is a list of edges represented as tuples `(caller, callee, cou
 
 For programmatic access to service graph, the recommended API is gRPC/Protobuf described above.
 
-## Aggregated Trace Metrics (internal)
+## Service Performance Monitoring (internal)
 
-Please refer to the [ATM Documentation](../atm#API)
+Please refer to the [SPM Documentation](../spm#API)
 
 [jaeger-idl]: https://github.com/jaegertracing/jaeger-idl/
 [jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift

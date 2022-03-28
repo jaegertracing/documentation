@@ -1,10 +1,10 @@
 ---
-title: Aggregated Trace Metrics (ATM) - Experimental
+title: Service Performance Monitoring (SPM) - Experimental
 hasparent: true
 ---
 
 {{< info >}}
-As the Aggregated Trace Metrics feature is in its infancy, it is being marked
+As the Service Performance Monitoring feature is in its infancy, it is being marked
 as experimental to signal that this feature will be in flux while bugs and
 enhancements are added in response to community feedback.
 {{< /info >}}
@@ -13,13 +13,8 @@ Surfaced in Jaeger UI as the "Monitor" tab, the motivation for this feature is
 to help identify interesting traces (e.g. high QPS, slow or erroneous requests)
 without needing to know the service or operation names up-front.
 
-It is essentially achieved through aggregating span data to produce R.E.D
+It is essentially achieved through aggregating span data to produce RED
 (Request, Error, Duration) metrics.
-
-As such, technically speaking, the term "Trace" used in the ATM acronym is a
-slight misnomer, while the term "Span" would be more appropriate because these
-metrics are trace unaware. ATM remains the name for this feature for historical
-reasons, to avoid confusion.
 
 Potential use cases include:
 
@@ -34,7 +29,7 @@ Potential use cases include:
 
 The "Monitor" tab provides a service-level aggregation, as well as an operation-level
 aggregation within the service, of Request rates, Error rates and Durations
-(P95, P75 and P50), also known as R.E.D metrics.
+(P95, P75 and P50), also known as RED metrics.
 
 Within the operation-level aggregations, an "Impact" metric, computed as the
 product of latency and request rate, is another signal that can be used to
@@ -52,7 +47,7 @@ space for these more interesting traces.
 This is for demonstration purposes only and does not reflect deployment best practices.
 {{< /info >}}
 
-A locally runnable setup is available in the [Jaeger repository][atm-demo] along
+A locally runnable setup is available in the [Jaeger repository][spm-demo] along
 with instructions on how to run it.
 
 The feature can be accessed from the "Monitor" tab along the top menu.
@@ -65,7 +60,7 @@ can be started via docker. Be sure to include `--net monitor_backend` in the `do
 
 ## Architecture
 
-The R.E.D metrics queried by Jaeger for the Monitor tab are the result of span
+The RED metrics queried by Jaeger for the Monitor tab are the result of span
 data collected by the [OpenTelemetry Collector][opentelemetry-collector] which
 is then aggregated by the [SpanMetrics Processor][spanmetrics] component configured
 within its pipeline.
@@ -106,7 +101,7 @@ graph
 Though more in scope of the [OpenTelemetry Collector][opentelemetry-collector],
 it is worth understanding the additional metrics and time series that the
 [SpanMetrics Processor][spanmetrics] will generate in metrics storage to help
-with capacity planning when deploying ATM.
+with capacity planning when deploying SPM.
 
 Please refer to [Prometheus documentation][prom-metric-labels] covering the
 concepts of metric names, types, labels and time series; terms that will be used
@@ -148,13 +143,13 @@ typical = 72 * num_operations
 Note:
 - Custom [latency buckets][spanmetrics-config-latency] or [dimensions][spanmetrics-config-dimensions]
   configured in the spanmetrics processor will alter the calculation above.
-- Querying custom dimensions are not supported by ATM and will be aggregated over.
+- Querying custom dimensions are not supported by SPM and will be aggregated over.
 
 ## Configuration
 
-### Enabling ATM
+### Enabling SPM
 
-The following configuration is required to enable the ATM feature:
+The following configuration is required to enable the SPM feature:
 
 - [Jaeger UI](../frontend-ui#monitor-experimental)
 - [Jaeger Query](../cli#jaeger-query-prometheus)
@@ -190,7 +185,7 @@ data quality issue, and the instrumentation should set the span kind.
 The reason for defaulting to `server` span kinds is to avoid double-counting
 both ingress and egress spans in the `server` and `client` span kinds, respectively.
 
-[atm-demo]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor
+[spm-demo]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor
 [metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto
 [openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53
 [opentelemetry-collector]: https://opentelemetry.io/docs/collector/
