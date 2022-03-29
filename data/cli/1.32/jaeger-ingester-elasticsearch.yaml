@@ -24,7 +24,7 @@ options:
 - name: es-archive.bulk.flush-interval
   default_value: 200ms
   usage: |
-    A time.Duration after which bulk requests are committed, regardless of other thresholds. Set to zero to disable. By default, this is disabled.
+    A time.Duration after which bulk requests are committed, regardless of other thresholds. Set to zero to disable.
 - name: es-archive.bulk.size
   default_value: "5000000"
   usage: |
@@ -149,7 +149,7 @@ options:
 - name: es.bulk.flush-interval
   default_value: 200ms
   usage: |
-    A time.Duration after which bulk requests are committed, regardless of other thresholds. Set to zero to disable. By default, this is disabled.
+    A time.Duration after which bulk requests are committed, regardless of other thresholds. Set to zero to disable.
 - name: es.bulk.size
   default_value: "5000000"
   usage: |
