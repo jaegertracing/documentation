@@ -79,7 +79,7 @@ graph
     UI[Jaeger UI] --> QUERY
     QUERY[Jaeger Query Service] --> METRICS_STORE[Metrics Storage]
     PROMETHEUS_EXPORTER --> |metrics| METRICS_STORE
-    subgraph Opentelemetry Collector
+    subgraph OpenTelemetry Collector
         subgraph Pipeline
             TRACE_RECEIVER
             SPANMETRICS_PROC
@@ -172,6 +172,93 @@ the HTTP API.
 
 ## Troubleshooting
 
+### Check the /metrics endpoint
+
+The `/metrics` endpoint can be used to check if spans for specific services were received.
+The `/metrics` endpoint is served from the admin port.
+Assuming that Jaeger all-in-one and query are available under hosts named `all-in-one`
+and `jaeger-query` respectively, here are sample `curl` calls to obtain the metrics:
+
+```shell
+$ curl http://all-in-one:14269/metrics
+
+$ curl http://jaeger-query:16687/metrics
+```
+
+The following metrics are of most interest:
+
+```shell
+# all-in-one
+jaeger_requests_total
+jaeger_latency_bucket
+
+# jaeger-query
+jaeger_query_requests_total
+jaeger_query_latency_bucket
+```
+
+Each of these metrics will have a label for each of the following operations:
+```shell
+get_call_rates
+get_error_rates
+get_latencies
+get_min_step_duration
+```
+
+If things are working as expected, the metrics with label `result="ok"` should
+be incrementing, and `result="err"` being static. For example:
+```shell
+jaeger_query_requests_total{operation="get_call_rates",result="ok"} 18
+jaeger_query_requests_total{operation="get_error_rates",result="ok"} 18
+jaeger_query_requests_total{operation="get_latencies",result="ok"} 36
+
+jaeger_query_latency_bucket{operation="get_call_rates",result="ok",le="0.005"} 5
+jaeger_query_latency_bucket{operation="get_call_rates",result="ok",le="0.01"} 13
+jaeger_query_latency_bucket{operation="get_call_rates",result="ok",le="0.025"} 18
+
+jaeger_query_latency_bucket{operation="get_error_rates",result="ok",le="0.005"} 7
+jaeger_query_latency_bucket{operation="get_error_rates",result="ok",le="0.01"} 13
+jaeger_query_latency_bucket{operation="get_error_rates",result="ok",le="0.025"} 18
+
+jaeger_query_latency_bucket{operation="get_latencies",result="ok",le="0.005"} 7
+jaeger_query_latency_bucket{operation="get_latencies",result="ok",le="0.01"} 25
+jaeger_query_latency_bucket{operation="get_latencies",result="ok",le="0.025"} 36
+```
+
+If there are issues reading metrics from Prometheus such as a failure to reach
+the Prometheus server, then the `result="err"` metrics will be incremented. For example:
+```shell
+jaeger_query_requests_total{operation="get_call_rates",result="err"} 4
+jaeger_query_requests_total{operation="get_error_rates",result="err"} 4
+jaeger_query_requests_total{operation="get_latencies",result="err"} 8
+```
+
+At this point, checking the logs will provide more insight towards root causing
+the problem.
+
+### Query Prometheus
+
+Graphs may still appear empty even when the above jaeger metrics indicate successful reads
+from Prometheus. In this case, query Prometheus directly on any one of these metrics:
+
+- `latency_bucket`
+- `calls_total`
+
+You should expect to see these counters increasing as spans are being emitted
+by services to the OpenTelemetry Collector.
+
+### Inspect OpenTelemetry Collector
+
+If the above `latency_bucket` and `calls_total` metrics are empty, then it could
+be misconfiguration in OpenTelemetry Collector or anything upstream from it.
+
+Some questions to ask while troubleshooting are:
+- Is the OpenTelemetry Collector configured correctly?
+  - See: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/spanmetricsprocessor
+- Is the Prometheus server reachable by the OpenTelemetry Collector?
+- Are the services sending spans to the OpenTelemetry Collector?
+  - See: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/troubleshooting.md
+
 ### Service/Operation missing in Monitor Tab
 
 If the service/operation is missing in the Monitor Tab, but visible in the Jaeger
@@ -184,6 +271,7 @@ data quality issue, and the instrumentation should set the span kind.
 
 The reason for defaulting to `server` span kinds is to avoid double-counting
 both ingress and egress spans in the `server` and `client` span kinds, respectively.
+
 
 [spm-demo]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor
 [metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto
