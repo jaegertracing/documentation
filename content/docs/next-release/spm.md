@@ -238,7 +238,7 @@ the problem.
 
 ### Query Prometheus
 
-Graphs may still appear empty even when the above jaeger metrics indicate successful reads
+Graphs may still appear empty even when the above Jaeger metrics indicate successful reads
 from Prometheus. In this case, query Prometheus directly on any one of these metrics:
 
 - `latency_bucket`
@@ -247,10 +247,10 @@ from Prometheus. In this case, query Prometheus directly on any one of these met
 You should expect to see these counters increasing as spans are being emitted
 by services to the OpenTelemetry Collector.
 
-### Inspect OpenTelemetry Collector
+### Inspect the OpenTelemetry Collector
 
 If the above `latency_bucket` and `calls_total` metrics are empty, then it could
-be misconfiguration in OpenTelemetry Collector or anything upstream from it.
+be misconfiguration in the OpenTelemetry Collector or anything upstream from it.
 
 Some questions to ask while troubleshooting are:
 - Is the OpenTelemetry Collector configured correctly?
