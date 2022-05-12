@@ -61,6 +61,9 @@ See [running a docker all in one image](getting-started#all-in-one).
 ### Trace Detail View
 [![Detail View](/img/trace-detail-ss.png)](/img/trace-detail-ss.png)
 
+### Service Performance Monitoring View
+![Service Performance Monitoring](/img/frontend-ui/spm.png)
+
 ## Related links
 - [Evolving Distributed tracing At Uber Engineering](https://eng.uber.com/distributed-tracing/) (blog)
 - [Mastering Distributed Tracing](https://shkuro.com/books/2019-mastering-distributed-tracing/) (book)
