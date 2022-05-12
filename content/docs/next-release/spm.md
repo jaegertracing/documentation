@@ -9,6 +9,8 @@ as experimental to signal that this feature will be in flux while bugs are fixed
 enhancements are added in response to community feedback.
 {{< /info >}}
 
+![Service Performance Monitoring](/img/frontend-ui/spm.png)
+
 Surfaced in Jaeger UI as the "Monitor" tab, the motivation for this feature is
 to help identify interesting traces (e.g. high QPS, slow or erroneous requests)
 without needing to know the service or operation names up-front.
