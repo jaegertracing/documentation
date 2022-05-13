@@ -8,7 +8,6 @@
 {{ $preview       := getenv "HUGO_PREVIEW" }}
 {{ $isPreview     := eq $preview "true" }}
 {{ $currentVersion := index (split .File.Path "/") 1 }}
-{{ $isDoc          := eq .Section "docs" }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
     <div class="navbar-brand">
@@ -27,6 +26,7 @@
     <div id="topNav" class="navbar-menu">
       <div class="navbar-end">
         {{ if $isDocsPage }}
+        {{ if eq $latest $currentVersion }}
         <div class="navbar-item">
           <div class="dropdown" id="search-dropdown">
             <div class="dropdown-trigger">
@@ -47,10 +47,7 @@
           </div>
         </div>
         {{ end }}
-
-        <a class="navbar-item" href="/download">
-          Download
-        </a>
+        {{ end }}
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link">
@@ -66,7 +63,7 @@
 
             {{ with .Params.children }}
             {{ range . }}
-            {{ $url := cond $isDoc (printf "/docs/%s/%s" $currentVersion .url) (printf "/docs/%s/%s" $latest .url) }}
+            {{ $url := cond $isDocsPage (printf "/docs/%s/%s" $currentVersion .url) (printf "/docs/%s/%s" $latest .url) }}
             <a class="navbar-item is-small is-hidden-desktop" href="{{ $url }}">
               &cir; {{ if .navtitle }}{{ .navtitle }}{{ else }}{{ .title }}{{ end }}
             </a>
@@ -98,6 +95,10 @@
           </div>
         </div>
         {{ end }}
+
+        <a class="navbar-item" href="/download">
+          Download
+        </a>
 
         <a class="navbar-item" href="https://medium.com/jaegertracing/latest" target="_blank">
           Blog
