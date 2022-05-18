@@ -35,3 +35,16 @@ The Jaeger team recommends Elasticsearch as the storage backend over Cassandra, 
 One benefit of Cassandra backend is simplified maintenance due to its native support for data TTL. In Elasticsearch the data expiration is managed through index rotation, which requires additional setup (see [Elasticsearch Rollover](../deployment/#elasticsearch-rollover)).
 
 [issue-166]: https://github.com/jaegertracing/jaeger/issues/166
+
+## Why do Jaeger trace IDs look differently in Kafka and in the UI?
+
+Under the hood, at the data model level, the Jaeger trace IDs are a sequence of 16 bytes. However, these 16 bytes can be represented in many diffferent ways:
+
+  * in the UI, we historically represented them as hex-encoded strings, e.g., `7e90c0eca22784ec7e90c0eca22784ec`. These strings can be either 32 characters long when using the 128-bit IDs (as more common in OpenTelemetry), or 16 characters if the IDs are generated in the legacy 64-bit mode.
+  * in the [domain model][trace-id-domain] in the Jaeger backend code, we represent trace ID as a pair of unsigned 64-bit integers using big-endian encoding. This was done for efficiency because a byte slice in Go requires an extra memory allocation.
+  * in the original [Thrift model][trace-id-thrift] we also represented them as a pair of unsigned 64-bit integers
+  * in the [Protobuf model][trace-id-proto], the ID is represented as a byte sequence. When Protobuf is serialized as a binary payload, these bytes are transmitted as is. However, Protobuf also supports a JSON encoding, where byte sequences are serialized using base64 encoding. So if you configure collector-Kafka-ingester pipeline to use the JSON encoding, you will see trace IDs that look like `fpDA7KInhOx+kMDsoieE7A==`. These can be converted to hex-encoded IDs that are recognized by the UI using online tools like https://base64.guru/converter/encode/hex.
+
+[trace-id-domain]: https://github.com/jaegertracing/jaeger/blob/7872d1b07439c3f2d316065b1fd53e885b26a66f/model/ids.go#L82
+[trace-id-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/05fe64e9c305526901f70ff692030b388787e388/thrift/jaeger.thrift#L53
+[trace-id-proto]: https://github.com/jaegertracing/jaeger-idl/blob/05fe64e9c305526901f70ff692030b388787e388/proto/api_v2/model.proto#L97
