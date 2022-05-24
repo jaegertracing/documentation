@@ -7,7 +7,7 @@
         {{ range .posts }}
         {{ $link    := .link }}
         {{ $img     := .thumbnail }}
-        {{ $title   := .title }}
+        {{ $title   := .title | plainify }}
         {{ $author  := .author }}
         {{ $dateRaw := .pubDate }}
         {{ $date    := dateFormat "January 2, 2006" $dateRaw }}
