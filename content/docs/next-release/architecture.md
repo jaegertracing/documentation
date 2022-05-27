@@ -24,7 +24,7 @@ A **trace** represents the data or execution path through the system. It can be 
 
 ### Baggage
 
-**Baggage** is arbitrary user-defined metadata (key-value pairs) that can be attached to distributed context propagated by the tracing SDKs. See [W3C Baggage](https://www.w3.org/TR/baggage/) for more information.
+**Baggage** is arbitrary user-defined metadata (key-value pairs) that can be attached to distributed context and propagated by the tracing SDKs. See [W3C Baggage](https://www.w3.org/TR/baggage/) for more information.
 
 ## Components
 
@@ -61,7 +61,7 @@ The instrumentation is designed to be always on in production. To minimize the o
 
 ### Agent
 
-The Jaeger **agent** is a network daemon that listens for spans sent over UDP, which it batches and sends to the collector. It is designed to be deployed to all hosts as an infrastructure component. The agent abstracts the routing and discovery of the collectors away from the client.
+The Jaeger **agent** is a network daemon that listens for spans sent over UDP, which are batched and sent to the collector. It is designed to be deployed to all hosts as an infrastructure component. The agent abstracts the routing and discovery of the collectors away from the client.
 
 The agent is **not** a required component. For example, when your applications are instrumented with OpenTelemetry, the SDKs can be configured to forward the trace data directly to Jaeger collectors.
 
@@ -77,4 +77,4 @@ The Jaeger **query** is a service that exposes the [APIs](../apis) for retrievin
 
 ### Ingester
 
-**Ingester** is a service that reads traces from Kafka and writes them to a storage backend. Effectively, it is a stripped down version of the Jaeger collector that supports Kafka sa the only input protocol.
+The Jaeger **ingester** is a service that reads traces from Kafka and writes them to a storage backend. Effectively, it is a stripped-down version of the Jaeger collector that supports Kafka as the only input protocol.

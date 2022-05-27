@@ -19,7 +19,7 @@ Agent and Collector are the two components of the Jaeger backend that can receiv
 
 ### OpenTelemetry Protocol (stable)
 
-Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. That means that the OpenTelemetry SDKs no longer need to be configured with Jaeger exporters, nor the OpenTelemetry Collectors need to be deployed between the OTel SDKs and the Jaeger backend.
+Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. That means that the OpenTelemetry SDKs no longer need to be configured with Jaeger exporters, nor the OpenTelemetry Collectors need to be deployed between the OpenTelemetry SDKs and the Jaeger backend.
 
 ### Thrift over UDP (stable)
 
