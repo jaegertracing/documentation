@@ -8,7 +8,9 @@ If you are new to distributed tracing, please check the [Introduction](../) page
 
 ## Instrumentation
 
-Your applications must be instrumented before they can send tracing data to Jaeger backend. Check the [Client Libraries](../client-libraries) section for information about how to use the OpenTracing API and how to initialize and configure Jaeger tracers.
+Your applications must be instrumented before they can send tracing data to Jaeger. We recommend using the [OpenTelemetry](https://opentelemetry.io) instrumentation and SDKs.
+
+Historically, the Jaeger project supported its own SDKs (aka tracers, client libraries) that implemented the OpenTracing API. The [Client Libraries](../client-libraries) section provides information about how to use the OpenTracing API and how to initialize and configure Jaeger tracers. As of 2022, the Jaeger SDKs are no longer supported, and all users are advised to migrate to OpenTelemetry.
 
 ## All in One
 
