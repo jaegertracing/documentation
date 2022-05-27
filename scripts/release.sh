@@ -35,6 +35,7 @@ if [[ "$RELEASE_TAG" =~ ^release-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+?$ ]]; 
     cp -r ./data/cli/next-release/ ${cliDocsTempDir}/data/cli/${versionMajorMinor}
     chmod a+w -R ${cliDocsTempDir}
     python ./scripts/gen-cli-data.py ${versionMajorMinor} ${cliDocsTempDir}
+    rm -f ${cliDocsTempDir}/*_completion_*.yaml
     mv ${cliDocsTempDir}/data/cli/${versionMajorMinor} ./data/cli/
     sed -i -e "s/latest *=.*$/latest = \"${versionMajorMinor}\"/" config.toml
     sed -i -e "s/binariesLatest *=.*$/binariesLatest = \"${version}\"/" config.toml
