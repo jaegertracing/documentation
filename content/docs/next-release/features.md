@@ -14,15 +14,17 @@ Jaeger is used for monitoring and troubleshooting microservices-based distribute
 ## High Scalability
 
 Jaeger backend is designed to have no single points of failure and to scale with the business needs.
-For example, any given Jaeger installation at Uber is typically processing several billion {{< tip "spans" "span" >}} per day.
+For example, any given Jaeger installation at Uber is typically processing several billion spans per day.
 
-## Native support for OpenTracing
+## Native support for OpenTracing and OpenTelemetry
 
 Jaeger backend, Web UI, and instrumentation libraries have been designed from ground up to support the OpenTracing standard.
 
-* Represent {{< tip "traces" "trace" >}} as {{< tip "directed acyclic graphs" "directed acyclic graph" >}} (not just trees) via [span references](https://github.com/opentracing/specification/blob/master/specification.md#references-between-spans)
+* Represent traces as directed acyclic graphs (not just trees) via [span references](https://github.com/opentracing/specification/blob/master/specification.md#references-between-spans)
 * Support strongly typed span _tags_ and _structured logs_
 * Support general distributed context propagation mechanism via _baggage_
+
+Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. However, the internal data representation and the UI still follow the OpenTracing specification's model.
 
 ## Multiple storage backends
 
@@ -32,9 +34,7 @@ with a simple in-memory storage for testing setups.
 
 ## Modern Web UI
 
-Jaeger Web UI is implemented in Javascript using popular open source frameworks like React. Several performance
-improvements have been released in v1.0 to allow the UI to efficiently deal with large volumes of data, and to display
-{{< tip "traces" "trace" >}} with tens of thousands of {{< tip "spans" "span" >}} (e.g. we tried a trace with 80,000 spans).
+Jaeger Web UI is implemented in Javascript using popular open source frameworks like React. Several performance improvements have been released in v1.0 to allow the UI to efficiently deal with large volumes of data, and to display traces with tens of thousands of spans (e.g. we tried a trace with 80,000 spans).
 
 ## Cloud Native Deployment
 
@@ -46,15 +46,11 @@ and a [Helm chart](https://github.com/kubernetes/charts/tree/master/incubator/ja
 ## Observability
 
 All Jaeger backend components expose [Prometheus](https://prometheus.io/) metrics by default (other metrics backends are
-also supported). Logs are written to standard out using the structured logging library [zap](https://github.com/uber-go/zap).
+also supported). Logs are written to stdout using the structured logging library [zap](https://github.com/uber-go/zap).
 
 ## Backwards compatibility with Zipkin
 
-Although we recommend instrumenting applications with OpenTracing API and binding to Jaeger client libraries to benefit
-from advanced features not available elsewhere, if your organization has already invested in the instrumentation
-using Zipkin libraries, you do not have to rewrite all that code. Jaeger provides backwards compatibility with Zipkin
-by accepting spans in Zipkin formats (Thrift, JSON v1/v2 and Protobuf) over HTTP. Switching from Zipkin backend is just a matter
-of routing the traffic from Zipkin libraries to the Jaeger backend.
+Although we recommend instrumenting applications with OpenTelemetry, if your organization has already invested in the instrumentation using Zipkin libraries, you do not have to rewrite all that code. Jaeger provides backwards compatibility with Zipkin by accepting spans in Zipkin formats (Thrift, JSON v1/v2 and Protobuf) over HTTP. Switching from Zipkin backend is just a matter of routing the traffic from Zipkin libraries to the Jaeger backend.
 
 ## Topology Graphs
 
@@ -84,3 +80,5 @@ latencies, then leveraging Jaeger's Trace Search capabilities to pinpoint specif
 traces belonging to these services/operations.
 
 See [Service Performance Monitoring (SPM)](../spm) for more details.
+
+[otlp]: https://opentelemetry.io/docs/reference/specification/protocol/

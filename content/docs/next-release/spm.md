@@ -4,9 +4,7 @@ hasparent: true
 ---
 
 {{< info >}}
-As the Service Performance Monitoring feature is in its infancy, it is being marked
-as experimental to signal that this feature will be in flux while bugs are fixed and
-enhancements are added in response to community feedback.
+The Service Performance Monitoring feature is currently considered **experimental**.
 {{< /info >}}
 
 ![Service Performance Monitoring](/img/frontend-ui/spm.png)

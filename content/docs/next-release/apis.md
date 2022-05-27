@@ -17,6 +17,10 @@ Since Jaeger v1.32, the Collector and Query Service ports that serve gRPC endpoi
 
 Agent and Collector are the two components of the Jaeger backend that can receive spans. At this time they support two sets of non-overlapping APIs.
 
+### OpenTelemetry Protocol (stable)
+
+Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. That means that the OpenTelemetry SDKs no longer need to be configured with Jaeger exporters, nor the OpenTelemetry Collectors need to be deployed between the OTel SDKs and the Jaeger backend.
+
 ### Thrift over UDP (stable)
 
 The Agent can only receive spans over UDP in Thrift format. The primary API is a UDP packet that contains a Thrift-encoded `Batch` struct defined in [jaeger.thrift][jaeger.thrift] IDL file, located in the [jaeger-idl][jaeger-idl] repository. Most Jaeger Clients use Thrift's `compact` encoding, however some client libraries do not support it (notably, Node.js) and use Thrift's `binary` encoding (sent to  a different UDP port). The Agent's API is defined by [agent.thrift][agent.thrift] IDL file.
@@ -90,3 +94,4 @@ Please refer to the [SPM Documentation](../spm#API)
 [sampling.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/sampling.proto
 [grpc-reflection]: https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#enable-server-reflection
 [gogo-reflection]: https://jbrandhorst.com/post/gogoproto/#reflection
+[otlp]: https://opentelemetry.io/docs/reference/specification/protocol/

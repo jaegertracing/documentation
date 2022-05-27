@@ -14,7 +14,9 @@ Jaeger clients are being retired.
 
 The Jaeger clients have faithfully served our community for several years. We pioneered many new features, such as remotely controlled samplers and per-operation / adaptive sampling, which were critical to the success of distributed tracing deployments at large organizations. However, now that the larger community in OpenTelemetry has caught up with the Jaeger clients in terms of feature parity and there is full support for exporting data to Jaeger, we believe it is time to **decommission Jaeger's native clients and refocus the efforts on the OpenTelemetry SDKs**.
 
-For new applications, we recommend using the [OpenTelemetry](https://opentelemetry.io/) APIs and SDKs. For existing applications that are already instrumented with the OpenTracing API, we recommend replacing the Jaeger clients with the corresponding OpenTelemetry SDKs and the OpenTracing shim/bridge available in most languages supported by Jaeger.
+For new applications, we recommend using the [OpenTelemetry](https://opentelemetry.io/) APIs, SDKs, and instrumentation. Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp].
+
+For existing applications that are already instrumented with the OpenTracing API, we recommend replacing the Jaeger clients with the corresponding OpenTelemetry SDKs and the OpenTracing shim/bridge available in most languages supported by Jaeger.
 
 ### Timeline
 
@@ -236,3 +238,4 @@ uberctx-key1: value%201%20%2F%20blah
 [HttpSender]: https://github.com/jaegertracing/jaeger-client-java/blob/master/jaeger-thrift/src/main/java/io/jaegertracing/thrift/internal/senders/HttpSender.java
 [http-latency-medium]: https://medium.com/@YuriShkuro/tracing-http-request-latency-in-go-with-opentracing-7cc1282a100a
 [blog-otel-java]: https://medium.com/jaegertracing/migrating-from-jaeger-client-to-opentelemetry-sdk-bd337d796759
+[otlp]: https://opentelemetry.io/docs/reference/specification/protocol/
