@@ -956,6 +956,76 @@ NAME                                 DESIRED   CURRENT   READY     UP-TO-DATE   
 agent-as-daemonset-agent-daemonset   1         1         1         1            1
 ```
 
+### Calico CNI
+
+In AWS EKS (or Fargate) running custom Calico CNI webhooks pointing at service cannot be reached.
+
+Below error is displayed when `jaeger` resource is requested.
+
+```bash
+Error from server (InternalError): Internal error occurred: failed calling webhook "myservice.mynamespace.svc": Post "https://myservice.mynamespace.svc:443/mutate?timeout=30s": Address is not allowed
+```
+
+In order to workaround that issue:
+
+- set `hostNetwork:true` on `jaeger-operator` deployment
+- change `/healtz` and `/readyz` ports from 8081 to other value
+- change `kube-rbac-proxy` secure port from 8443 to other value
+- change `webhook-server` port from 9443 to other value
+  - this setting is conrolled by `webhook-bind-port` flag
+
+Jaeger operator config example:
+
+```yaml
+    spec:
+      hostNetwork: true
+      containers:
+      - args:
+        - start
+        - --health-probe-bind-address=:10280
+        - --webhook-bind-port=:10290
+        - --leader-elect
+        command:
+        - /jaeger-operator
+      ...
+      ports:
+        - containerPort: 10290
+          name: webhook-server
+          protocol: TCP
+      ...
+      readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 10280
+      ...
+      livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 10280
+```
+
+Kube-rbac-proxy config example:
+
+```yaml
+    spec:
+      hostNetwork: true
+      containers:
+      - args:
+        - --secure-listen-address=0.0.0.0:10270
+        - --upstream=http://127.0.0.1:8383/
+        - --logtostderr=true
+        - --v=0
+      ...
+      ports:
+        - containerPort: 10270
+          name: https
+          protocol: TCP
+```
+
+{{< warning >}}
+Above port values must be globally unique, so `jaeger-operator` port can expose it on every k8s node.
+{{< /warning >}}
+
 ## Secrets Support
 
 The Operator supports passing secrets to the Collector, Query and All-In-One deployments. This can be used for example, to pass credentials (username/password) to access the underlying storage backend (for example: Elasticsearch).
