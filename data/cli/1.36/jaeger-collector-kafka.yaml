@@ -1,0 +1,347 @@
+name: jaeger-collector
+synopsis: |
+  Jaeger collector receives and processes traces from Jaeger agents and clients
+description: |
+  Jaeger collector receives traces from Jaeger agents and runs them through a processing pipeline.
+usage: jaeger-collector [flags]
+options:
+- name: admin.http.host-port
+  default_value: :14269
+  usage: |
+    The host:port (e.g. 127.0.0.1:14269 or :14269) for the admin server, including health check, /metrics, etc.
+- name: admin.http.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: admin.http.tls.cipher-suites
+  usage: |
+    Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+- name: admin.http.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: admin.http.tls.enabled
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: admin.http.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: admin.http.tls.max-version
+  usage: |
+    Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: admin.http.tls.min-version
+  usage: |
+    Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.enable-span-size-metrics
+  default_value: "false"
+  usage: |
+    Enables metrics based on processed span size, which are more expensive to calculate.
+- name: collector.grpc-server.host-port
+  default_value: :14250
+  usage: |
+    The host:port (e.g. 127.0.0.1:12345 or :12345) of the collector's gRPC server
+- name: collector.grpc-server.max-connection-age
+  default_value: 0s
+  usage: |
+    The maximum amount of time a connection may exist. Set this value to a few seconds or minutes on highly elastic environments, so that clients discover new collector nodes frequently. See https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters
+- name: collector.grpc-server.max-connection-age-grace
+  default_value: 0s
+  usage: |
+    The additive period after MaxConnectionAge after which the connection will be forcibly closed. See https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters
+- name: collector.grpc-server.max-message-size
+  default_value: "4194304"
+  usage: |
+    The maximum receivable message size for the collector's gRPC server
+- name: collector.grpc.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: collector.grpc.tls.cipher-suites
+  usage: |
+    Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+- name: collector.grpc.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: collector.grpc.tls.enabled
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: collector.grpc.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: collector.grpc.tls.max-version
+  usage: |
+    Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.grpc.tls.min-version
+  usage: |
+    Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.http-server.host-port
+  default_value: :14268
+  usage: |
+    The host:port (e.g. 127.0.0.1:12345 or :12345) of the collector's HTTP server
+- name: collector.http.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: collector.http.tls.cipher-suites
+  usage: |
+    Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+- name: collector.http.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: collector.http.tls.enabled
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: collector.http.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: collector.http.tls.max-version
+  usage: |
+    Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.http.tls.min-version
+  usage: |
+    Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.num-workers
+  default_value: "50"
+  usage: The number of workers pulling items from the queue
+- name: collector.otlp.enabled
+  default_value: "false"
+  usage: |
+    Enables OpenTelemetry OTLP receiver on dedicated HTTP and gRPC ports
+- name: collector.otlp.grpc.host-port
+  usage: |
+    The host:port (e.g. 127.0.0.1:12345 or :12345) of the collector's gRPC server
+- name: collector.otlp.grpc.max-connection-age
+  default_value: 0s
+  usage: |
+    The maximum amount of time a connection may exist. Set this value to a few seconds or minutes on highly elastic environments, so that clients discover new collector nodes frequently. See https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters
+- name: collector.otlp.grpc.max-connection-age-grace
+  default_value: 0s
+  usage: |
+    The additive period after MaxConnectionAge after which the connection will be forcibly closed. See https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters
+- name: collector.otlp.grpc.max-message-size
+  default_value: "4194304"
+  usage: |
+    The maximum receivable message size for the collector's gRPC server
+- name: collector.otlp.grpc.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: collector.otlp.grpc.tls.cipher-suites
+  usage: |
+    Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+- name: collector.otlp.grpc.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: collector.otlp.grpc.tls.enabled
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: collector.otlp.grpc.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: collector.otlp.grpc.tls.max-version
+  usage: |
+    Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.otlp.grpc.tls.min-version
+  usage: |
+    Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.otlp.http.host-port
+  usage: |
+    The host:port (e.g. 127.0.0.1:12345 or :12345) of the collector's HTTP server
+- name: collector.otlp.http.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: collector.otlp.http.tls.cipher-suites
+  usage: |
+    Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+- name: collector.otlp.http.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: collector.otlp.http.tls.enabled
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: collector.otlp.http.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: collector.otlp.http.tls.max-version
+  usage: |
+    Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.otlp.http.tls.min-version
+  usage: |
+    Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.queue-size
+  default_value: "2000"
+  usage: The queue size of the collector
+- name: collector.queue-size-memory
+  default_value: "0"
+  usage: |
+    (experimental) The max memory size in MiB to use for the dynamic queue.
+- name: collector.tags
+  usage: |
+    One or more tags to be added to the Process tags of all spans passing through this collector. Ex: key1=value1,key2=${envVar:defaultValue}
+- name: collector.zipkin.allowed-headers
+  default_value: content-type
+  usage: |
+    Comma separated list of allowed headers for the Zipkin collector service, default content-type
+- name: collector.zipkin.allowed-origins
+  default_value: '*'
+  usage: |
+    Comma separated list of allowed origins for the Zipkin collector service, default accepts all
+- name: collector.zipkin.host-port
+  usage: |
+    The host:port (e.g. 127.0.0.1:9411 or :9411) of the collector's Zipkin server (disabled by default)
+- name: collector.zipkin.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: collector.zipkin.tls.cipher-suites
+  usage: |
+    Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+- name: collector.zipkin.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: collector.zipkin.tls.enabled
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: collector.zipkin.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: collector.zipkin.tls.max-version
+  usage: |
+    Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.zipkin.tls.min-version
+  usage: |
+    Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: config-file
+  usage: |
+    Configuration file in JSON, TOML, YAML, HCL, or Java properties formats (default none). See spf13/viper for precedence.
+- name: downsampling.hashsalt
+  usage: Salt used when hashing trace id for downsampling.
+- name: downsampling.ratio
+  default_value: "1"
+  usage: |
+    Ratio of spans passed to storage after downsampling (between 0 and 1), e.g ratio = 0.3 means we are keeping 30% of spans and dropping 70% of spans; ratio = 1.0 disables downsampling.
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for jaeger-collector
+- name: kafka.producer.authentication
+  default_value: none
+  usage: |
+    Authentication type used to authenticate with kafka cluster. e.g. none, kerberos, tls, plaintext
+- name: kafka.producer.batch-linger
+  default_value: 0s
+  usage: |
+    (experimental) Time interval to wait before sending records to Kafka. Higher value reduce request to Kafka but increase latency and the possibility of data loss in case of process restart. See https://kafka.apache.org/documentation/
+- name: kafka.producer.batch-max-messages
+  default_value: "0"
+  usage: |
+    (experimental) Maximum number of message to batch before sending records to Kafka
+- name: kafka.producer.batch-min-messages
+  default_value: "0"
+  usage: |
+    (experimental) The best-effort minimum number of messages needed to send a batch of records to Kafka. Higher value reduce request to Kafka but increase latency and the possibility of data loss in case of process restart. See https://kafka.apache.org/documentation/
+- name: kafka.producer.batch-size
+  default_value: "0"
+  usage: |
+    (experimental) Number of bytes to batch before sending records to Kafka. Higher value reduce request to Kafka but increase latency and the possibility of data loss in case of process restart. See https://kafka.apache.org/documentation/
+- name: kafka.producer.brokers
+  default_value: 127.0.0.1:9092
+  usage: |
+    The comma-separated list of kafka brokers. i.e. '127.0.0.1:9092,0.0.0:1234'
+- name: kafka.producer.compression
+  default_value: none
+  usage: |
+    (experimental) Type of compression (none, gzip, snappy, lz4, zstd) to use on messages
+- name: kafka.producer.compression-level
+  default_value: "0"
+  usage: |
+    (experimental) compression level to use on messages. gzip = 1-9 (default = 6), snappy = none, lz4 = 1-17 (default = 9), zstd = -131072 - 22 (default = 3)
+- name: kafka.producer.encoding
+  default_value: protobuf
+  usage: Encoding of spans ("json" or "protobuf") sent to kafka.
+- name: kafka.producer.kerberos.config-file
+  default_value: /etc/krb5.conf
+  usage: Path to Kerberos configuration. i.e /etc/krb5.conf
+- name: kafka.producer.kerberos.keytab-file
+  default_value: /etc/security/kafka.keytab
+  usage: Path to keytab file. i.e /etc/security/kafka.keytab
+- name: kafka.producer.kerberos.password
+  usage: The Kerberos password used for authenticate with KDC
+- name: kafka.producer.kerberos.realm
+  usage: Kerberos realm
+- name: kafka.producer.kerberos.service-name
+  default_value: kafka
+  usage: Kerberos service name
+- name: kafka.producer.kerberos.use-keytab
+  default_value: "false"
+  usage: |
+    Use of keytab instead of password, if this is true, keytab file will be used instead of password
+- name: kafka.producer.kerberos.username
+  usage: The Kerberos username used for authenticate with KDC
+- name: kafka.producer.plaintext.mechanism
+  default_value: PLAIN
+  usage: |
+    The plaintext Mechanism for SASL/PLAIN authentication, e.g. 'SCRAM-SHA-256' or 'SCRAM-SHA-512' or 'PLAIN'
+- name: kafka.producer.plaintext.password
+  usage: The plaintext Password for SASL/PLAIN authentication
+- name: kafka.producer.plaintext.username
+  usage: The plaintext Username for SASL/PLAIN authentication
+- name: kafka.producer.protocol-version
+  usage: Kafka protocol version - must be supported by kafka server
+- name: kafka.producer.required-acks
+  default_value: local
+  usage: |
+    (experimental) Required kafka broker acknowledgement. i.e. noack, local, all
+- name: kafka.producer.tls.ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
+- name: kafka.producer.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this process to the remote server(s)
+- name: kafka.producer.tls.enabled
+  default_value: "false"
+  usage: Enable TLS when talking to the remote server(s)
+- name: kafka.producer.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this process to the remote server(s)
+- name: kafka.producer.tls.server-name
+  usage: |
+    Override the TLS server name we expect in the certificate of the remote server(s)
+- name: kafka.producer.tls.skip-host-verify
+  default_value: "false"
+  usage: |
+    (insecure) Skip server's certificate chain and host name verification
+- name: kafka.producer.topic
+  default_value: jaeger-spans
+  usage: The name of the kafka topic
+- name: log-level
+  default_value: info
+  usage: |
+    Minimal allowed log Level. For more levels see https://github.com/uber-go/zap
+- name: metrics-backend
+  default_value: prometheus
+  usage: |
+    Defines which metrics backend to use for metrics reporting: expvar, prometheus, none
+- name: metrics-http-route
+  default_value: /metrics
+  usage: |
+    Defines the route of HTTP endpoint for metrics backends that support scraping
+- name: multi_tenancy.enabled
+  default_value: "false"
+  usage: Enable tenancy header when receiving or querying
+- name: multi_tenancy.header
+  default_value: x-tenant
+  usage: HTTP header carrying tenant
+- name: multi_tenancy.tenants
+  usage: |
+    comma-separated list of allowed values for --multi_tenancy.header header.  (If not supplied, tenants are not restricted)
+- name: sampling.strategies-file
+  usage: |
+    The path for the sampling strategies file in JSON format. See sampling documentation to see format of the file
+- name: sampling.strategies-reload-interval
+  default_value: 0s
+  usage: |
+    Reload interval to check and reload sampling strategies file. Zero value means no reloading
+- name: span-storage.type
+  usage: |
+    (deprecated) please use SPAN_STORAGE_TYPE environment variable. Run this binary with the 'env' command for help.
+see_also:
+- completion - Generate the autocompletion script for the specified shell
+- docs - Generates documentation
+- env - Help about environment variables.
+- status - Print the status.
+- version - Print the version.
