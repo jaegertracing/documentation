@@ -653,30 +653,15 @@ You can find more information about topics and partitions in general in the [off
 
 Jaeger supports an extension mechanism that allows the storage to be implemented as a gRPC server. The server can run either as a child process of Jaeger components (the Hashicorp go-plugin model), or as a remote gRPC service (since Jaeger v1.30). For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc).
 
-#### Available plugins:
+- Available sidecar plugins:
 
 * [InfluxDB](https://github.com/influxdata/influxdb-observability/tree/main/jaeger-query-plugin) - time series database.
 * [Logz.io](https://github.com/logzio/jaeger-logzio) - secure, scalable, managed, cloud-based ELK storage.
 * [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse) - fast open-source OLAP DBMS.
 
-```sh
-docker run \
-  -e SPAN_STORAGE_TYPE=grpc-plugin \
-  -e GRPC_STORAGE_PLUGIN_BINARY=<...> \
-  -e GRPC_STORAGE_PLUGIN_CONFIGURATION_FILE=<...> \
-  jaegertracing/all-in-one:{{< currentVersion >}}
-```
-
-#### Available remote gRPC services:
+- Available remote gRPC services:
 
 * [Promscale](https://github.com/timescale/promscale#promscale-for-jaeger-and-opentelemetry) - Jaeger and Prometheus storage backend built on PostgreSQL.
-
-```sh
-docker run \
-  -e SPAN_STORAGE_TYPE=grpc-plugin \
-  -e GRPC_STORAGE_SERVER=<...> \
-  jaegertracing/all-in-one:{{< currentVersion >}} 
-```
 
 ## Metrics Storage Backends
 
