@@ -661,7 +661,7 @@ Jaeger supports an extension mechanism that allows the storage to be implemented
 
 - Available remote gRPC services:
 
-* [Promscale](https://github.com/timescale/promscale#promscale-for-jaeger-and-opentelemetry) - Jaeger and Prometheus storage backend built on PostgreSQL.
+* [Promscale](https://github.com/timescale/promscale#promscale-for-jaeger-and-opentelemetry) - Jaeger and Prometheus storage backend built on PostgreSQL. Implements read path of Jaeger's Remote gRPC storage API. Trace ingestion is done via the OpenTelemetry Collector / OpenTelemetry Protocol (OTLP).
 
 ## Metrics Storage Backends
 
