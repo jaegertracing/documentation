@@ -651,17 +651,39 @@ You can find more information about topics and partitions in general in the [off
 
 ### Storage plugin
 
-Jaeger supports an extension mechanism that allows the storage to be implemented as a gRPC server. The server can run either as a child process of Jaeger components (the Hashicorp go-plugin model), or as a remote gRPC service (since Jaeger v1.30). For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc).
+Jaeger supports an extension mechanism that allows the storage to be implemented as a gRPC server. The server can run either as a child process (sidecar) of Jaeger components (the Hashicorp go-plugin model), or as a remote gRPC service (since Jaeger v1.30). For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc).
 
-- Available sidecar plugins:
+To use a storage plugin as Jaeger storage backend, select `grpc-plugin` as the storage type and specify either the binary name for the sidecar mode, or the remote gRPC server address.
+
+**Available sidecar plugins:**
 
 * [InfluxDB](https://github.com/influxdata/influxdb-observability/tree/main/jaeger-query-plugin) - time series database.
 * [Logz.io](https://github.com/logzio/jaeger-logzio) - secure, scalable, managed, cloud-based ELK storage.
 * [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse) - fast open-source OLAP DBMS.
 
-- Available remote gRPC services:
+Example:
+```sh
+docker run \
+  -e SPAN_STORAGE_TYPE=grpc-plugin \
+  -e GRPC_STORAGE_PLUGIN_BINARY=<...> \
+  -e GRPC_STORAGE_PLUGIN_CONFIGURATION_FILE=<...> \
+  jaegertracing/all-in-one:{{< currentVersion >}}
+```
 
-* [Promscale](https://github.com/timescale/promscale#promscale-for-jaeger-and-opentelemetry) - Jaeger and Prometheus storage backend built on PostgreSQL. Implements read path of Jaeger's Remote gRPC storage API. Trace ingestion is done via the OpenTelemetry Collector / OpenTelemetry Protocol (OTLP).
+**Available remote gRPC services:**
+
+* [Promscale](https://github.com/timescale/promscale#promscale-for-jaeger-and-opentelemetry) - Jaeger and Prometheus storage backend built on PostgreSQL.
+  * Implements the read path of Jaeger's Remote Storage API, thus can be used as a backend with Jaeger Query.
+  * Currently does not implement the write path of Jaeger's Remote Storage API. Trace ingestion must be done via the OpenTelemetry Collector using the OpenTelemetry Protocol (OTLP).
+  * Supports remote storage API for Prometheus, thus can be used as a backend for [SPM](../spm).
+
+Example:
+```sh
+docker run \
+  -e SPAN_STORAGE_TYPE=grpc-plugin \
+  -e GRPC_STORAGE_SERVER=<...> \
+  jaegertracing/all-in-one:{{< currentVersion >}}
+```
 
 ## Metrics Storage Backends
 
