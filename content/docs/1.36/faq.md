@@ -48,3 +48,14 @@ Under the hood, at the data model level, the Jaeger trace IDs are a sequence of 
 [trace-id-domain]: https://github.com/jaegertracing/jaeger/blob/7872d1b07439c3f2d316065b1fd53e885b26a66f/model/ids.go#L82
 [trace-id-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/05fe64e9c305526901f70ff692030b388787e388/thrift/jaeger.thrift#L53
 [trace-id-proto]: https://github.com/jaegertracing/jaeger-idl/blob/05fe64e9c305526901f70ff692030b388787e388/proto/api_v2/model.proto#L97
+
+## Do I need to run multiple collectors?
+
+> Does having high availability of collector improve the overall system performance like decreasing the dropped span count and having the less outage for trace collection? Is it recommended? If yes, why?
+
+These are the reasons to run multiple instances:
+  * Your clients send so much data that a single collector is not able to accept it fast enough.
+  * You want higher availability, e.g., when you do rolling restarts of collectors for upgrade, to have some instances still running and able to process inbound data.
+
+These are NOT the reasons to run multiple instances:
+  * To avoid data loss. The collector drops data when the backend storage is not able to save it fast enough. Increasing the number of collectors, with more memory allocated to their internal queues, could provide a small, temporary relief, but does not remove the bottleneck of the storage backend.
