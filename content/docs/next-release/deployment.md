@@ -27,6 +27,7 @@ Component             | Docker Hub                                              
 **jaeger-collector**  | [hub.docker.com/r/jaegertracing/jaeger-collector/](https://hub.docker.com/r/jaegertracing/jaeger-collector/) | [quay.io/repository/jaegertracing/jaeger-collector](https://quay.io/repository/jaegertracing/jaeger-collector)
 **jaeger-query**      | [hub.docker.com/r/jaegertracing/jaeger-query/](https://hub.docker.com/r/jaegertracing/jaeger-query/)         | [quay.io/repository/jaegertracing/jaeger-query](https://quay.io/repository/jaegertracing/jaeger-query)
 **jaeger-ingester**   | [hub.docker.com/r/jaegertracing/jaeger-ingester/](https://hub.docker.com/r/jaegertracing/jaeger-ingester/)   | [quay.io/repository/jaegertracing/jaeger-ingester](https://quay.io/repository/jaegertracing/jaeger-ingester)
+**jaeger-remote-storage**   | [hub.docker.com/r/jaegertracing/jaeger-remote-storage/](https://hub.docker.com/r/jaegertracing/jaeger-remote-storage/)   | [quay.io/repository/jaegertracing/jaeger-remote-storage](https://quay.io/repository/jaegertracing/jaeger-remote-storage)
 
 There are orchestration templates for running Jaeger with:
 
@@ -41,7 +42,7 @@ Jaeger binaries can be configured in a number of ways (in the order of decreasin
   * environment variables,
   * configuration files in JSON, TOML, YAML, HCL, or Java properties formats.
 
-To see the complete list of options, run the binary with `help` command or refer to the [CLI Flags](../cli/) page for more information. Options that are specific to a certain storage backend are only listed if the storage type is selected. For example, to see all available options in the Collector with Cassandra storage:
+To see the complete list of options, run the binary with `help` command or refer to the [CLI Flags](../cli/) page for more information. Options that are specific to a certain storage backend are _only listed if the storage type is selected_. For example, to see all available options in the Collector with Cassandra storage:
 
 ```sh
 $ docker run --rm \
@@ -157,16 +158,83 @@ Port  | Protocol | Function
 14268 | HTTP     | can accept spans directly from clients in jaeger.thrift format over binary thrift protocol
 14269 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
 
+## Ingester
+**jaeger-ingester** is a service which reads span data from Kafka topic and writes it to another storage backend (Elasticsearch or Cassandra).
+
+Port  | Protocol | Function
+----- | -------  | ---
+14270 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
+
+To view all exposed configuration options run the following command:
+```sh
+docker run \
+  -e SPAN_STORAGE_TYPE=cassandra \
+  jaegertracing/jaeger-ingester:{{< currentVersion >}}
+  --help
+```
+
+## Query Service & UI
+
+**jaeger-query** serves the API endpoints and a React/Javascript UI.
+The service is stateless and is typically run behind a load balancer, such as [**NGINX**](https://www.nginx.com/).
+
+At default settings the query service exposes the following port(s):
+
+Port  | Protocol | Function
+----- | -------  | ---
+16685 | gRPC     | Protobuf/gRPC [QueryService](https://github.com/jaegertracing/jaeger-idl/blob/master/proto/api_v2/query.proto)
+16686 | HTTP     | `/api/*` endpoints and Jaeger UI at `/`
+16687 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
+
+### Minimal deployment example (Elasticsearch backend):
+```sh
+docker run -d --rm \
+  -p 16685:16685 \
+  -p 16686:16686 \
+  -p 16687:16687 \
+  -e SPAN_STORAGE_TYPE=elasticsearch \
+  -e ES_SERVER_URLS=http://<ES_SERVER_IP>:<ES_SERVER_PORT> \
+  jaegertracing/jaeger-query:{{< currentVersion >}}
+```
+
+### Clock Skew Adjustment
+
+Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. The query service implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/master/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to its timestamps.
+
+Sometimes these adjustments themselves make the trace hard to understand. For example, when repositioning the server span within the bounds of its parent span, Jaeger does not know the exact relationship between the request and response latencies, so it assumes then to be equal and places the child span in the middle of the parent span (see [issue #961](https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244)).
+
+The query service supports a configuration flag `--query.max-clock-skew-adjustment` that controls how much clock skew adjustment should be allowed. Setting this parameter to zero (`0s`) disables clock skew adjustment completely. This setting applies to all traces retrieved from the given query service. There is an open [ticket #197](https://github.com/jaegertracing/jaeger-ui/issues/197) to support toggling the adjustment on and off directly in the UI.
+
+### UI Base Path
+
+The base path for all **jaeger-query** HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running **jaeger-query** behind a reverse proxy.
+
+The base path can be configured via the `--query.base-path` command line parameter or the `QUERY_BASE_PATH` environment variable.
+
+### UI Customization and Embedding
+
+Please refer to the [dedicated Frontend/UI page](../frontend-ui/).
+
+## Remote Storage (component)
+
+**jaeger-remote-storage** implements the [Remote Storage gRPC API][storage.proto] and proxies it into one of the regular Jaeger backends. It can be useful in the situation when we want to run a full deployment of Jaeger components, e.g., separate collector and query services, but use a single-node storage backend like the memory store or Badger. Without the remote storage, the single-node backends can only be used with all-in-one since they cannot be shared between multiple processes.
+
+At default settings the service listens on the following port(s):
+
+Port  | Protocol | Function
+----- | -------  | ---
+17271 | gRPC     | [Remote Storage API][storage.proto]
+17270 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
 
 ## Span Storage Backends
 
-Collectors require a persistent storage backend. Cassandra and Elasticsearch are the primary supported distributed storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
+Jaeger requires a persistent storage backend. Cassandra and Elasticsearch/OpenSearch are the primary supported distributed storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
-The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` (only as a buffer), `grpc-plugin`, `badger` (only with all-in-one) and `memory` (only with all-in-one).
+The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` (only as a buffer), `grpc-plugin`, `badger` and `memory`.
 
 As of version 1.6.0, it's possible to use multiple storage types at the same time by providing a comma-separated list of valid types to the `SPAN_STORAGE_TYPE` environment variable. It's important to note that all listed storage types are used for writing, but only the first type in the list will be used for reading and archiving.
 
-For large scale production deployment the Jaeger team [recommends Elasticsearch backend over Cassandra](../faq/#what-is-the-recommended-storage-backend).
+For large scale production deployment the Jaeger team [recommends OpenSearch backend over Cassandra](../faq/#what-is-the-recommended-storage-backend).
 
 ### Memory
 
@@ -651,15 +719,13 @@ You can find more information about topics and partitions in general in the [off
 
 ### Storage plugin
 
-Jaeger supports an extension mechanism that allows the storage to be implemented as a gRPC server. The server can run either as a child process (sidecar) of Jaeger components (the Hashicorp go-plugin model), or as a remote gRPC service (since Jaeger v1.30). For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc).
+Jaeger supports a gRPC-based [Remote Storage API][storage.proto] that allows extending the Jaeger ecosystem with other storage backends, or "plugins", not directly supported by the project. These storage backends can be deployed in two modes: as a sidecar or as a remote gRPC server (since Jaeger v1.30).
 
-To use a storage plugin as Jaeger storage backend, select `grpc-plugin` as the storage type and specify either the binary name for the sidecar mode, or the remote gRPC server address.
+To use a storage plugin as Jaeger storage backend, use `grpc-plugin` as the storage type and specify either the binary name for the sidecar mode, or the remote gRPC server address. For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc).
 
-**Available sidecar plugins:**
+#### Sidecar model
 
-* [InfluxDB](https://github.com/influxdata/influxdb-observability/tree/main/jaeger-query-plugin) - time series database.
-* [Logz.io](https://github.com/logzio/jaeger-logzio) - secure, scalable, managed, cloud-based ELK storage.
-* [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse) - fast open-source OLAP DBMS.
+In the sidecar model, the backend server that implements the Remote Storage API runs as a child process of some Jaeger component (the [Hashicorp go-plugin model](https://github.com/hashicorp/go-plugin)).
 
 Example:
 ```sh
@@ -670,12 +736,15 @@ docker run \
   jaegertracing/all-in-one:{{< currentVersion >}}
 ```
 
-**Available remote gRPC services:**
+Available sidecar plugins:
 
-* [Promscale](https://github.com/timescale/promscale#promscale-for-jaeger-and-opentelemetry) - Jaeger and Prometheus storage backend built on PostgreSQL.
-  * Implements the read path of Jaeger's Remote Storage API, thus can be used as a backend with Jaeger Query.
-  * Currently does not implement the write path of Jaeger's Remote Storage API. Trace ingestion must be done via the OpenTelemetry Collector using the OpenTelemetry Protocol (OTLP).
-  * Supports remote storage API for Prometheus, thus can be used as a metrics storage backend for [SPM](../spm).
+* [InfluxDB](https://github.com/influxdata/influxdb-observability/tree/main/jaeger-query-plugin) - time series database.
+* [Logz.io](https://github.com/logzio/jaeger-logzio) - secure, scalable, managed, cloud-based ELK storage.
+* [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse) - fast open-source OLAP DBMS.
+
+#### Remote storage model
+
+In the remote storage model the backend server runs as a separate process, and the Jaeger components are configured to talk to it over gRPC.
 
 Example:
 ```sh
@@ -684,6 +753,13 @@ docker run \
   -e GRPC_STORAGE_SERVER=<...> \
   jaegertracing/all-in-one:{{< currentVersion >}}
 ```
+
+Available remote storage backends:
+
+* [Promscale](https://github.com/timescale/promscale#promscale-for-jaeger-and-opentelemetry) - Jaeger and Prometheus storage backend built on PostgreSQL.
+  * Implements the read path of Jaeger's Remote Storage API, thus can be used as a backend with Jaeger Query.
+  * Currently does not implement the write path of Jaeger's Remote Storage API. Trace ingestion must be done via the OpenTelemetry Collector using the OpenTelemetry Protocol (OTLP).
+  * Supports remote storage API for Prometheus, thus can be used as a metrics storage backend for [SPM](../spm).
 
 ## Metrics Storage Backends
 
@@ -733,63 +809,6 @@ docker run \
   jaegertracing/jaeger-query:{{< currentVersion >}}
 ```
 
-## Ingester
-**jaeger-ingester** is a service which reads span data from Kafka topic and writes it to another storage backend (Elasticsearch or Cassandra).
-
-Port  | Protocol | Function
------ | -------  | ---
-14270 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
-
-To view all exposed configuration options run the following command:
-```sh
-docker run \
-  -e SPAN_STORAGE_TYPE=cassandra \
-  jaegertracing/jaeger-ingester:{{< currentVersion >}}
-  --help
-```
-
-## Query Service & UI
-
-**jaeger-query** serves the API endpoints and a React/Javascript UI.
-The service is stateless and is typically run behind a load balancer, such as [**NGINX**](https://www.nginx.com/).
-
-At default settings the query service exposes the following port(s):
-
-Port  | Protocol | Function
------ | -------  | ---
-16685 | gRPC     | Protobuf/gRPC [QueryService](https://github.com/jaegertracing/jaeger-idl/blob/master/proto/api_v2/query.proto)
-16686 | HTTP     | `/api/*` endpoints and Jaeger UI at `/`
-16687 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
-
-### Minimal deployment example (Elasticsearch backend):
-```sh
-docker run -d --rm \
-  -p 16685:16685 \
-  -p 16686:16686 \
-  -p 16687:16687 \
-  -e SPAN_STORAGE_TYPE=elasticsearch \
-  -e ES_SERVER_URLS=http://<ES_SERVER_IP>:<ES_SERVER_PORT> \
-  jaegertracing/jaeger-query:{{< currentVersion >}}
-```
-
-### Clock Skew Adjustment
-
-Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. The query service implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/master/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to its timestamps.
-
-Sometimes these adjustments themselves make the trace hard to understand. For example, when repositioning the server span within the bounds of its parent span, Jaeger does not know the exact relationship between the request and response latencies, so it assumes then to be equal and places the child span in the middle of the parent span (see [issue #961](https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244)).
-
-The query service supports a configuration flag `--query.max-clock-skew-adjustment` that controls how much clock skew adjustment should be allowed. Setting this parameter to zero (`0s`) disables clock skew adjustment completely. This setting applies to all traces retrieved from the given query service. There is an open [ticket #197](https://github.com/jaegertracing/jaeger-ui/issues/197) to support toggling the adjustment on and off directly in the UI.
-
-### UI Base Path
-
-The base path for all **jaeger-query** HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running **jaeger-query** behind a reverse proxy.
-
-The base path can be configured via the `--query.base-path` command line parameter or the `QUERY_BASE_PATH` environment variable.
-
-### UI Customization and Embedding
-
-Please refer to the [dedicated Frontend/UI page](../frontend-ui/).
-
 ## Aggregation Jobs for Service Dependencies
 
 Production deployments need an external process which aggregates data and creates dependency links between services. Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives dependency links and stores them directly to the storage.
@@ -798,3 +817,4 @@ Production deployments need an external process which aggregates data and create
 [zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift
 [jaeger-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
 [thriftrw]: https://www.npmjs.com/package/thriftrw
+[storage.proto]: https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/grpc/proto/storage.proto

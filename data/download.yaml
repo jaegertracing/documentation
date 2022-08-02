@@ -28,6 +28,9 @@ docker:
 - image: jaeger-ingester
   description: An alternative to collector; reads spans from Kafka topic and saves them to storage.
   since: 1.7
+- image: jaeger-remote-storage
+  description: A service that implements the Remote Storage API on top of another supported backend. Can be used to share a single-node storage backend, like `memory`, across multiple Jaeger processes.
+  since: 1.37
 - image: spark-dependencies
   description: An [Apache Spark](http://spark.apache.org/) job that collects Jaeger spans from storage, analyzes links between services, and stores them for later presentation in the Jaeger UI
   latest: latest

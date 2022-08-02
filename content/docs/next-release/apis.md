@@ -64,6 +64,10 @@ The recommended way for programmatically retrieving traces and other data is via
 
 Jaeger UI communicates with Jaeger Query Service via JSON API. For example, a trace can be retrieved via GET request to `https://jaeger-query:16686/api/traces/{trace-id-hex-string}`. This JSON API is intentionally undocumented and subject to change.
 
+## Remote Storage API (stable)
+
+When using the `grpc-plugin` storage type (a.k.a. [storage plugin](../deployment/#storage-plugin)), Jaeger components can use custom storage backends as long as those backends implement the gRPC [Remote Storage API][storage.proto].
+
 ## Clients configuration (internal)
 
 Client libraries not only submit finished spans to Jaeger backend, but also periodically poll the Agents for various configurations, such as sampling strategies. The schema for the payload is defined by [sampling.thrift][sampling.thrift], encoded as JSON using Thrift's built-in JSON generation capabilities.
@@ -95,3 +99,4 @@ Please refer to the [SPM Documentation](../spm#API)
 [grpc-reflection]: https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#enable-server-reflection
 [gogo-reflection]: https://jbrandhorst.com/post/gogoproto/#reflection
 [otlp]: https://opentelemetry.io/docs/reference/specification/protocol/
+[storage.proto]: https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/grpc/proto/storage.proto
