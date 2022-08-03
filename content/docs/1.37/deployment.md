@@ -29,6 +29,11 @@ Component             | Docker Hub                                              
 **jaeger-ingester**   | [hub.docker.com/r/jaegertracing/jaeger-ingester/](https://hub.docker.com/r/jaegertracing/jaeger-ingester/)   | [quay.io/repository/jaegertracing/jaeger-ingester](https://quay.io/repository/jaegertracing/jaeger-ingester)
 **jaeger-remote-storage**   | [hub.docker.com/r/jaegertracing/jaeger-remote-storage/](https://hub.docker.com/r/jaegertracing/jaeger-remote-storage/)   | [quay.io/repository/jaegertracing/jaeger-remote-storage](https://quay.io/repository/jaegertracing/jaeger-remote-storage)
 
+The images listed above are the primary release versions. Most components have additional images published:
+  * `${component}-debug` images include Delve debugger
+  * `${component}-snapshot` images are published from the tip of the main branch for every commit, allowing testing unreleased versions
+  * `${component}-debug-snapshot` snapshot images that include Delve debugger
+
 There are orchestration templates for running Jaeger with:
 
   * Kubernetes: [github.com/jaegertracing/jaeger-kubernetes](https://github.com/jaegertracing/jaeger-kubernetes),
