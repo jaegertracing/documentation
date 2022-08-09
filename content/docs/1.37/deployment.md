@@ -76,6 +76,7 @@ Port  | Protocol | Function
 ```bash
 ## make sure to expose only the ports you use in your deployment scenario!
 docker run -d --name jaeger \
+  -e COLLECTOR_OTLP_ENABLED=true \
   -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
   -p 5775:5775/udp \
   -p 6831:6831/udp \
@@ -85,6 +86,8 @@ docker run -d --name jaeger \
   -p 14250:14250 \
   -p 14268:14268 \
   -p 14269:14269 \
+  -p 4317:4317 \
+  -p 4318:4318 \
   -p 9411:9411 \
   jaegertracing/all-in-one:{{< currentVersion >}}
 ```
@@ -162,6 +165,8 @@ Port  | Protocol | Function
 14250 | gRPC     | used by **jaeger-agent** to send spans in model.proto format
 14268 | HTTP     | can accept spans directly from clients in jaeger.thrift format over binary thrift protocol
 14269 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
+4317  | gRPC     | accepts traces in OpenTelemetry OTLP format if `--collector.otlp.enabled=true`
+4318  | HTTP     | accepts traces in OpenTelemetry OTLP format if `--collector.otlp.enabled=true`
 
 ## Ingester
 **jaeger-ingester** is a service which reads span data from Kafka topic and writes it to another storage backend (Elasticsearch or Cassandra).
