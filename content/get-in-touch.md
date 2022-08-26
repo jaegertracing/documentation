@@ -2,9 +2,9 @@
 title: Getting in touch
 ---
 
-## Via chat or email
+## Via chat
 
-Join our Google mail group [jaeger-tracing@googlegroups.com](https://groups.google.com/forum/#!forum/jaeger-tracing) or the chat room [#jaeger at the CNCF Slack](https://cloud-native.slack.com/archives/CGG7NFUJ3). You can get an invitation at https://slack.cncf.io in order to register to this Slack workspace.
+Join [#jaeger chat room at the CNCF Slack workspace](https://cloud-native.slack.com/archives/CGG7NFUJ3) (new users can register at https://slack.cncf.io).
 
 ## Project video meetings
 
