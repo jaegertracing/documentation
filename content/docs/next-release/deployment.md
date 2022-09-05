@@ -767,8 +767,7 @@ docker run \
 Available remote storage backends:
 
 * [Promscale](https://github.com/timescale/promscale#promscale-for-jaeger-and-opentelemetry) - Jaeger and Prometheus storage backend built on PostgreSQL.
-  * Implements the read path of Jaeger's Remote Storage API, thus can be used as a backend with Jaeger Query.
-  * Implements the write path of Jaeger's Remote Storage API, thus can be used as a storage backend with Jaeger SDK/Agent/Collector.
+  * Implements full Jaeger's Remote Storage API; can be used as a span storage backend.
   * Supports remote storage API for Prometheus, thus can be used as a metrics storage backend for [SPM](../spm).
 
 ## Metrics Storage Backends
