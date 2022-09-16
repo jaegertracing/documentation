@@ -1,0 +1,140 @@
+name: jaeger-agent
+synopsis: |
+  Jaeger agent is a local daemon program which collects tracing data.
+description: |
+  Jaeger agent is a daemon program that runs on every host and receives tracing data submitted by Jaeger client libraries.
+usage: jaeger-agent [flags]
+options:
+- name: admin.http.host-port
+  default_value: :14271
+  usage: |
+    The host:port (e.g. 127.0.0.1:14271 or :14271) for the admin server, including health check, /metrics, etc.
+- name: admin.http.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: admin.http.tls.cipher-suites
+  usage: |
+    Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+- name: admin.http.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: admin.http.tls.enabled
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: admin.http.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: admin.http.tls.max-version
+  usage: |
+    Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: admin.http.tls.min-version
+  usage: |
+    Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: agent.tags
+  usage: |
+    One or more tags to be added to the Process tags of all spans passing through this agent. Ex: key1=value1,key2=${envVar:defaultValue}
+- name: config-file
+  usage: |
+    Configuration file in JSON, TOML, YAML, HCL, or Java properties formats (default none). See spf13/viper for precedence.
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for jaeger-agent
+- name: http-server.host-port
+  default_value: :5778
+  usage: |
+    host:port of the http server (e.g. for /sampling point and /baggageRestrictions endpoint)
+- name: log-level
+  default_value: info
+  usage: |
+    Minimal allowed log Level. For more levels see https://github.com/uber-go/zap
+- name: metrics-backend
+  default_value: prometheus
+  usage: |
+    Defines which metrics backend to use for metrics reporting: expvar, prometheus, none
+- name: metrics-http-route
+  default_value: /metrics
+  usage: |
+    Defines the route of HTTP endpoint for metrics backends that support scraping
+- name: processor.jaeger-binary.server-host-port
+  default_value: :6832
+  usage: host:port for the UDP server
+- name: processor.jaeger-binary.server-max-packet-size
+  default_value: "65000"
+  usage: max packet size for the UDP server
+- name: processor.jaeger-binary.server-queue-size
+  default_value: "1000"
+  usage: length of the queue for the UDP server
+- name: processor.jaeger-binary.server-socket-buffer-size
+  default_value: "0"
+  usage: socket buffer size for UDP packets in bytes
+- name: processor.jaeger-binary.workers
+  default_value: "10"
+  usage: how many workers the processor should run
+- name: processor.jaeger-compact.server-host-port
+  default_value: :6831
+  usage: host:port for the UDP server
+- name: processor.jaeger-compact.server-max-packet-size
+  default_value: "65000"
+  usage: max packet size for the UDP server
+- name: processor.jaeger-compact.server-queue-size
+  default_value: "1000"
+  usage: length of the queue for the UDP server
+- name: processor.jaeger-compact.server-socket-buffer-size
+  default_value: "0"
+  usage: socket buffer size for UDP packets in bytes
+- name: processor.jaeger-compact.workers
+  default_value: "10"
+  usage: how many workers the processor should run
+- name: processor.zipkin-compact.server-host-port
+  default_value: :5775
+  usage: host:port for the UDP server
+- name: processor.zipkin-compact.server-max-packet-size
+  default_value: "65000"
+  usage: max packet size for the UDP server
+- name: processor.zipkin-compact.server-queue-size
+  default_value: "1000"
+  usage: length of the queue for the UDP server
+- name: processor.zipkin-compact.server-socket-buffer-size
+  default_value: "0"
+  usage: socket buffer size for UDP packets in bytes
+- name: processor.zipkin-compact.workers
+  default_value: "10"
+  usage: how many workers the processor should run
+- name: reporter.grpc.discovery.min-peers
+  default_value: "3"
+  usage: |
+    Max number of collectors to which the agent will try to connect at any given time
+- name: reporter.grpc.host-port
+  usage: |
+    Comma-separated string representing host:port of a static list of collectors to connect to directly
+- name: reporter.grpc.retry.max
+  default_value: "3"
+  usage: Sets the maximum number of retries for a call
+- name: reporter.grpc.tls.ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
+- name: reporter.grpc.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this process to the remote server(s)
+- name: reporter.grpc.tls.enabled
+  default_value: "false"
+  usage: Enable TLS when talking to the remote server(s)
+- name: reporter.grpc.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this process to the remote server(s)
+- name: reporter.grpc.tls.server-name
+  usage: |
+    Override the TLS server name we expect in the certificate of the remote server(s)
+- name: reporter.grpc.tls.skip-host-verify
+  default_value: "false"
+  usage: |
+    (insecure) Skip server's certificate chain and host name verification
+- name: reporter.type
+  default_value: grpc
+  usage: Reporter type to use e.g. grpc
+see_also:
+- completion - Generate the autocompletion script for the specified shell
+- docs - Generates documentation
+- status - Print the status.
+- version - Print the version.
