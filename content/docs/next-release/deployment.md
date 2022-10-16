@@ -770,6 +770,8 @@ Available remote storage backends:
   * Implements full Jaeger's Remote Storage API; can be used as a span storage backend.
   * Supports remote storage API for Prometheus, thus can be used as a metrics storage backend for [SPM](../spm).
 
+For more information, see [sending data using the Jaeger Collector](https://docs.timescale.com/promscale/latest/send-data/jaeger/).
+
 ## Metrics Storage Backends
 
 Jaeger Query is capable of querying aggregated R.E.D metrics from a storage backend,
