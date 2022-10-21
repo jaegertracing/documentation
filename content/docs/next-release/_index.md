@@ -30,7 +30,7 @@ Uber published a blog post, [Evolving Distributed Tracing at Uber](https://eng.u
 
   * [OpenTracing](http://opentracing.io/)-inspired data model
   * Uses consistent upfront sampling with individual per service/endpoint probabilities
-  * Multiple storage inbuilt backends: Cassandra, Elasticsearch, in-memory
+  * Multiple storage built-in backends: Cassandra, Elasticsearch, in-memory
   * Community supported external storage backend via gRPC plugin: [PostgreSQL with Promscale](https://github.com/timescale/promscale#promscale-for-jaeger-and-opentelemetry), [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse)
   * System topology graphs
   * Adaptive sampling
