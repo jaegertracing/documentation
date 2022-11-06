@@ -1,0 +1,60 @@
+{
+    "tools": [
+        "jaeger-all-in-one",
+        "jaeger-agent",
+        "jaeger-collector",
+        "jaeger-ingester",
+        "jaeger-query"
+    ],
+    "jaeger-all-in-one": {
+        "storage": [
+            "cassandra",
+            "elasticsearch",
+            "memory",
+            "badger",
+            "grpc-plugin"
+        ],
+        "sampling": [],
+        "metrics-storage": [
+          "prometheus"
+        ]
+    },
+    "jaeger-collector": {
+        "storage": [
+            "cassandra",
+            "elasticsearch",
+            "kafka",
+            "grpc-plugin"
+        ],
+        "sampling": [
+            "adaptive",
+            "file"
+        ],
+        "metrics-storage": []
+    },
+    "jaeger-ingester": {
+        "storage": [
+            "cassandra",
+            "elasticsearch",
+            "grpc-plugin"
+        ],
+        "sampling": [],
+        "metrics-storage": []
+    },
+    "jaeger-query": {
+        "storage": [
+            "cassandra",
+            "elasticsearch",
+            "grpc-plugin"
+        ],
+        "sampling": [],
+        "metrics-storage": [
+            "prometheus"
+        ]
+    },
+    "jaeger-agent": {
+        "storage": [],
+        "sampling": [],
+        "metrics-storage": []
+    }
+}
