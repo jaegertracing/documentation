@@ -3,13 +3,12 @@ title: OpenTelemetry
 hasparent: true
 ---
 
+{{< danger >}}
+DO NOT USE: The functionality described here was experimental and has been discontinued.
+{{< /danger >}}
+
 The future Jaeger backend components will be based on [OpenTelemetry collector](https://opentelemetry.io/docs/collector/).
 This integration will make all OpenTelemetry Collector features available in the Jaeger backend components.
-
-{{< warning >}}
-At the moment Jaeger OpenTelemetry binaries are experimental and the configuration or behavior can change.
-The current progress can be tracked via [issues tagged as `area/otel`](https://github.com/jaegertracing/jaeger/issues?q=is%3Aissue+is%3Aopen+label%3Aarea%2Fotel).
-{{< /warning >}}
 
 The Jaeger OpenTelemetry backend components are published as Docker images:
 

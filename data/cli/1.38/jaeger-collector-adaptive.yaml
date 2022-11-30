@@ -1,0 +1,436 @@
+name: jaeger-collector
+synopsis: |
+  Jaeger collector receives and processes traces from Jaeger agents and clients
+description: |
+  Jaeger collector receives traces from Jaeger agents and runs them through a processing pipeline.
+usage: jaeger-collector [flags]
+options:
+- name: admin.http.host-port
+  default_value: :14269
+  usage: |
+    The host:port (e.g. 127.0.0.1:14269 or :14269) for the admin server, including health check, /metrics, etc.
+- name: admin.http.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: admin.http.tls.cipher-suites
+  usage: |
+    Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+- name: admin.http.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: admin.http.tls.enabled
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: admin.http.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: admin.http.tls.max-version
+  usage: |
+    Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: admin.http.tls.min-version
+  usage: |
+    Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: cassandra-archive.connect-timeout
+  default_value: 0s
+  usage: Timeout used for connections to Cassandra Servers
+- name: cassandra-archive.connections-per-host
+  default_value: "0"
+  usage: |
+    The number of Cassandra connections from a single backend instance
+- name: cassandra-archive.consistency
+  usage: |
+    The Cassandra consistency level, e.g. ANY, ONE, TWO, THREE, QUORUM, ALL, LOCAL_QUORUM, EACH_QUORUM, LOCAL_ONE (default LOCAL_ONE)
+- name: cassandra-archive.disable-compression
+  default_value: "false"
+  usage: |
+    Disables the use of the default Snappy Compression while connecting to the Cassandra Cluster if set to true. This is useful for connecting to Cassandra Clusters(like Azure Cosmos Db with Cassandra API) that do not support SnappyCompression
+- name: cassandra-archive.enabled
+  default_value: "false"
+  usage: Enable extra storage
+- name: cassandra-archive.keyspace
+  usage: The Cassandra keyspace for Jaeger data
+- name: cassandra-archive.local-dc
+  usage: |
+    The name of the Cassandra local data center for DC Aware host selection
+- name: cassandra-archive.max-retry-attempts
+  default_value: "0"
+  usage: The number of attempts when reading from Cassandra
+- name: cassandra-archive.password
+  usage: Password for password authentication for Cassandra
+- name: cassandra-archive.port
+  default_value: "0"
+  usage: The port for cassandra
+- name: cassandra-archive.proto-version
+  default_value: "0"
+  usage: The Cassandra protocol version
+- name: cassandra-archive.reconnect-interval
+  default_value: 0s
+  usage: Reconnect interval to retry connecting to downed hosts
+- name: cassandra-archive.servers
+  usage: The comma-separated list of Cassandra servers
+- name: cassandra-archive.socket-keep-alive
+  default_value: 0s
+  usage: Cassandra's keepalive period to use, enabled if > 0
+- name: cassandra-archive.timeout
+  default_value: 0s
+  usage: Timeout used for queries. A Timeout of zero means no timeout
+- name: cassandra-archive.tls.ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
+- name: cassandra-archive.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this process to the remote server(s)
+- name: cassandra-archive.tls.enabled
+  default_value: "false"
+  usage: Enable TLS when talking to the remote server(s)
+- name: cassandra-archive.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this process to the remote server(s)
+- name: cassandra-archive.tls.server-name
+  usage: |
+    Override the TLS server name we expect in the certificate of the remote server(s)
+- name: cassandra-archive.tls.skip-host-verify
+  default_value: "false"
+  usage: |
+    (insecure) Skip server's certificate chain and host name verification
+- name: cassandra-archive.username
+  usage: Username for password authentication for Cassandra
+- name: cassandra.connect-timeout
+  default_value: 0s
+  usage: Timeout used for connections to Cassandra Servers
+- name: cassandra.connections-per-host
+  default_value: "2"
+  usage: |
+    The number of Cassandra connections from a single backend instance
+- name: cassandra.consistency
+  usage: |
+    The Cassandra consistency level, e.g. ANY, ONE, TWO, THREE, QUORUM, ALL, LOCAL_QUORUM, EACH_QUORUM, LOCAL_ONE (default LOCAL_ONE)
+- name: cassandra.disable-compression
+  default_value: "false"
+  usage: |
+    Disables the use of the default Snappy Compression while connecting to the Cassandra Cluster if set to true. This is useful for connecting to Cassandra Clusters(like Azure Cosmos Db with Cassandra API) that do not support SnappyCompression
+- name: cassandra.index.logs
+  default_value: "true"
+  usage: Controls log field indexing. Set to false to disable.
+- name: cassandra.index.process-tags
+  default_value: "true"
+  usage: Controls process tag indexing. Set to false to disable.
+- name: cassandra.index.tag-blacklist
+  usage: |
+    The comma-separated list of span tags to blacklist from being indexed. All other tags will be indexed. Mutually exclusive with the whitelist option.
+- name: cassandra.index.tag-whitelist
+  usage: |
+    The comma-separated list of span tags to whitelist for being indexed. All other tags will not be indexed. Mutually exclusive with the blacklist option.
+- name: cassandra.index.tags
+  default_value: "true"
+  usage: Controls tag indexing. Set to false to disable.
+- name: cassandra.keyspace
+  default_value: jaeger_v1_test
+  usage: The Cassandra keyspace for Jaeger data
+- name: cassandra.local-dc
+  usage: |
+    The name of the Cassandra local data center for DC Aware host selection
+- name: cassandra.max-retry-attempts
+  default_value: "3"
+  usage: The number of attempts when reading from Cassandra
+- name: cassandra.password
+  usage: Password for password authentication for Cassandra
+- name: cassandra.port
+  default_value: "0"
+  usage: The port for cassandra
+- name: cassandra.proto-version
+  default_value: "4"
+  usage: The Cassandra protocol version
+- name: cassandra.reconnect-interval
+  default_value: 1m0s
+  usage: Reconnect interval to retry connecting to downed hosts
+- name: cassandra.servers
+  default_value: 127.0.0.1
+  usage: The comma-separated list of Cassandra servers
+- name: cassandra.socket-keep-alive
+  default_value: 0s
+  usage: Cassandra's keepalive period to use, enabled if > 0
+- name: cassandra.span-store-write-cache-ttl
+  default_value: 12h0m0s
+  usage: |
+    The duration to wait before rewriting an existing service or operation name
+- name: cassandra.timeout
+  default_value: 0s
+  usage: Timeout used for queries. A Timeout of zero means no timeout
+- name: cassandra.tls.ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
+- name: cassandra.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this process to the remote server(s)
+- name: cassandra.tls.enabled
+  default_value: "false"
+  usage: Enable TLS when talking to the remote server(s)
+- name: cassandra.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this process to the remote server(s)
+- name: cassandra.tls.server-name
+  usage: |
+    Override the TLS server name we expect in the certificate of the remote server(s)
+- name: cassandra.tls.skip-host-verify
+  default_value: "false"
+  usage: |
+    (insecure) Skip server's certificate chain and host name verification
+- name: cassandra.username
+  usage: Username for password authentication for Cassandra
+- name: collector.enable-span-size-metrics
+  default_value: "false"
+  usage: |
+    Enables metrics based on processed span size, which are more expensive to calculate.
+- name: collector.grpc-server.host-port
+  default_value: :14250
+  usage: |
+    The host:port (e.g. 127.0.0.1:12345 or :12345) of the collector's gRPC server
+- name: collector.grpc-server.max-connection-age
+  default_value: 0s
+  usage: |
+    The maximum amount of time a connection may exist. Set this value to a few seconds or minutes on highly elastic environments, so that clients discover new collector nodes frequently. See https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters
+- name: collector.grpc-server.max-connection-age-grace
+  default_value: 0s
+  usage: |
+    The additive period after MaxConnectionAge after which the connection will be forcibly closed. See https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters
+- name: collector.grpc-server.max-message-size
+  default_value: "4194304"
+  usage: |
+    The maximum receivable message size for the collector's gRPC server
+- name: collector.grpc.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: collector.grpc.tls.cipher-suites
+  usage: |
+    Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+- name: collector.grpc.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: collector.grpc.tls.enabled
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: collector.grpc.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: collector.grpc.tls.max-version
+  usage: |
+    Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.grpc.tls.min-version
+  usage: |
+    Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.http-server.host-port
+  default_value: :14268
+  usage: |
+    The host:port (e.g. 127.0.0.1:12345 or :12345) of the collector's HTTP server
+- name: collector.http.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: collector.http.tls.cipher-suites
+  usage: |
+    Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+- name: collector.http.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: collector.http.tls.enabled
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: collector.http.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: collector.http.tls.max-version
+  usage: |
+    Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.http.tls.min-version
+  usage: |
+    Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.num-workers
+  default_value: "50"
+  usage: The number of workers pulling items from the queue
+- name: collector.otlp.enabled
+  default_value: "false"
+  usage: |
+    Enables OpenTelemetry OTLP receiver on dedicated HTTP and gRPC ports
+- name: collector.otlp.grpc.host-port
+  usage: |
+    The host:port (e.g. 127.0.0.1:12345 or :12345) of the collector's gRPC server
+- name: collector.otlp.grpc.max-connection-age
+  default_value: 0s
+  usage: |
+    The maximum amount of time a connection may exist. Set this value to a few seconds or minutes on highly elastic environments, so that clients discover new collector nodes frequently. See https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters
+- name: collector.otlp.grpc.max-connection-age-grace
+  default_value: 0s
+  usage: |
+    The additive period after MaxConnectionAge after which the connection will be forcibly closed. See https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters
+- name: collector.otlp.grpc.max-message-size
+  default_value: "4194304"
+  usage: |
+    The maximum receivable message size for the collector's gRPC server
+- name: collector.otlp.grpc.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: collector.otlp.grpc.tls.cipher-suites
+  usage: |
+    Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+- name: collector.otlp.grpc.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: collector.otlp.grpc.tls.enabled
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: collector.otlp.grpc.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: collector.otlp.grpc.tls.max-version
+  usage: |
+    Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.otlp.grpc.tls.min-version
+  usage: |
+    Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.otlp.http.host-port
+  usage: |
+    The host:port (e.g. 127.0.0.1:12345 or :12345) of the collector's HTTP server
+- name: collector.otlp.http.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: collector.otlp.http.tls.cipher-suites
+  usage: |
+    Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+- name: collector.otlp.http.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: collector.otlp.http.tls.enabled
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: collector.otlp.http.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: collector.otlp.http.tls.max-version
+  usage: |
+    Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.otlp.http.tls.min-version
+  usage: |
+    Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.queue-size
+  default_value: "2000"
+  usage: The queue size of the collector
+- name: collector.queue-size-memory
+  default_value: "0"
+  usage: |
+    (experimental) The max memory size in MiB to use for the dynamic queue.
+- name: collector.tags
+  usage: |
+    One or more tags to be added to the Process tags of all spans passing through this collector. Ex: key1=value1,key2=${envVar:defaultValue}
+- name: collector.zipkin.allowed-headers
+  default_value: content-type
+  usage: |
+    Comma separated list of allowed headers for the Zipkin collector service, default content-type
+- name: collector.zipkin.allowed-origins
+  default_value: '*'
+  usage: |
+    Comma separated list of allowed origins for the Zipkin collector service, default accepts all
+- name: collector.zipkin.host-port
+  usage: |
+    The host:port (e.g. 127.0.0.1:9411 or :9411) of the collector's Zipkin server (disabled by default)
+- name: collector.zipkin.tls.cert
+  usage: |
+    Path to a TLS Certificate file, used to identify this server to clients
+- name: collector.zipkin.tls.cipher-suites
+  usage: |
+    Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+- name: collector.zipkin.tls.client-ca
+  usage: |
+    Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+- name: collector.zipkin.tls.enabled
+  default_value: "false"
+  usage: Enable TLS on the server
+- name: collector.zipkin.tls.key
+  usage: |
+    Path to a TLS Private Key file, used to identify this server to clients
+- name: collector.zipkin.tls.max-version
+  usage: |
+    Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: collector.zipkin.tls.min-version
+  usage: |
+    Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+- name: config-file
+  usage: |
+    Configuration file in JSON, TOML, YAML, HCL, or Java properties formats (default none). See spf13/viper for precedence.
+- name: downsampling.hashsalt
+  usage: Salt used when hashing trace id for downsampling.
+- name: downsampling.ratio
+  default_value: "1"
+  usage: |
+    Ratio of spans passed to storage after downsampling (between 0 and 1), e.g ratio = 0.3 means we are keeping 30% of spans and dropping 70% of spans; ratio = 1.0 disables downsampling.
+- name: help
+  shorthand: h
+  default_value: "false"
+  usage: help for jaeger-collector
+- name: log-level
+  default_value: info
+  usage: |
+    Minimal allowed log Level. For more levels see https://github.com/uber-go/zap
+- name: metrics-backend
+  default_value: prometheus
+  usage: |
+    Defines which metrics backend to use for metrics reporting: expvar, prometheus, none
+- name: metrics-http-route
+  default_value: /metrics
+  usage: |
+    Defines the route of HTTP endpoint for metrics backends that support scraping
+- name: multi-tenancy.enabled
+  default_value: "false"
+  usage: Enable tenancy header when receiving or querying
+- name: multi-tenancy.header
+  default_value: x-tenant
+  usage: HTTP header carrying tenant
+- name: multi-tenancy.tenants
+  usage: |
+    comma-separated list of allowed values for --multi-tenancy.header header.  (If not supplied, tenants are not restricted)
+- name: sampling.aggregation-buckets
+  default_value: "10"
+  usage: Amount of historical data to keep in memory.
+- name: sampling.buckets-for-calculation
+  default_value: "1"
+  usage: |
+    This determines how much of the previous data is used in calculating the weighted QPS, ie. if BucketsForCalculation is 1, only the most recent data will be used in calculating the weighted QPS.
+- name: sampling.calculation-interval
+  default_value: 1m0s
+  usage: |
+    How often new sampling probabilities are calculated. Recommended to be greater than the polling interval of your clients.
+- name: sampling.delay
+  default_value: 2m0s
+  usage: |
+    Determines how far back the most recent state is. Use this if you want to add some buffer time for the aggregation to finish.
+- name: sampling.delta-tolerance
+  default_value: "0.3"
+  usage: |
+    The acceptable amount of deviation between the observed samples-per-second and the desired (target) samples-per-second, expressed as a ratio.
+- name: sampling.follower-lease-refresh-interval
+  default_value: 1m0s
+  usage: The duration to sleep if this processor is a follower.
+- name: sampling.initial-sampling-probability
+  default_value: "0.001"
+  usage: The initial sampling probability for all new operations.
+- name: sampling.leader-lease-refresh-interval
+  default_value: 5s
+  usage: |
+    The duration to sleep if this processor is elected leader before attempting to renew the lease on the leader lock. This should be less than follower-lease-refresh-interval to reduce lock thrashing.
+- name: sampling.min-samples-per-second
+  default_value: "0.016666666666666666"
+  usage: The minimum number of traces that are sampled per second.
+- name: sampling.min-sampling-probability
+  default_value: "1e-05"
+  usage: The minimum sampling probability for all operations.
+- name: sampling.target-samples-per-second
+  default_value: "1"
+  usage: The the global target rate of samples per operation.
+- name: span-storage.type
+  usage: |
+    (deprecated) please use SPAN_STORAGE_TYPE environment variable. Run this binary with the 'env' command for help.
+see_also:
+- completion - Generate the autocompletion script for the specified shell
+- docs - Generates documentation
+- env - Help about environment variables.
+- status - Print the status.
+- version - Print the version.

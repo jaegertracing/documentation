@@ -7,9 +7,10 @@ on:
 
 jobs:
   release:
+    if: ${{ github.repository == 'jaegertracing/documentation' && startsWith(github.ref, 'refs/tags/release-') }}
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         submodules: true
 
