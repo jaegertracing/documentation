@@ -977,13 +977,32 @@ In order to workaround that issue:
 Jaeger operator config example:
 
 ```yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: jaeger-operator
+    name: jaeger-operator
+  name: jaeger-operator-webhook-service
+  namespace: monitoring
+spec:
+  ports:
+  - port: 443
+    protocol: TCP
+    targetPort: 10290
+  selector:
+    app.kubernetes.io/name: jaeger-operator
+    name: jaeger-operator
+---
+...
     spec:
       hostNetwork: true
       containers:
       - args:
         - start
         - --health-probe-bind-address=:10280
-        - --webhook-bind-port=:10290
+        - --webhook-bind-port=10290
         - --leader-elect
         command:
         - /jaeger-operator
@@ -1007,6 +1026,27 @@ Jaeger operator config example:
 Kube-rbac-proxy config example:
 
 ```yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: metrics
+    app.kubernetes.io/name: jaeger-operator
+    name: jaeger-operator
+  name: jaeger-operator-metrics
+  namespace: monitoring
+spec:
+  ports:
+  - name: https
+    port: 10270
+    protocol: TCP
+    targetPort: https
+  selector:
+    app.kubernetes.io/name: jaeger-operator
+    name: jaeger-operator
+---
+...
     spec:
       hostNetwork: true
       containers:
