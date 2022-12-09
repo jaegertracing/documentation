@@ -43,8 +43,6 @@ $ shasum -b -a 256 jaeger-1.39.0-darwin-amd64/example-hotrod
 
 ## Signed Artifacts
 
-NOTE: will be enabled in the next release.
-
 We also publish cryptographic signatures for each of the artifact archives.
 The signatures can be verified using the public key below.
 
