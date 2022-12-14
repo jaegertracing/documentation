@@ -5,3 +5,4 @@ resources/
 .hugo_build.lock
 bin/
 tmp/
+.vscode/
