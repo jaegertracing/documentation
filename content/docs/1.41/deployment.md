@@ -161,12 +161,12 @@ At default settings the collector exposes the following ports:
 
 Port  | Protocol | Function
 ----- | -------  | ---
-9411  | HTTP     | can accept Zipkin spans in Thrift, JSON and Proto (disabled by default)
-14250 | gRPC     | used by **jaeger-agent** to send spans in model.proto format
-14268 | HTTP     | can accept spans directly from clients in jaeger.thrift format over binary thrift protocol
-14269 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
-4317  | gRPC     | accepts traces in OpenTelemetry OTLP format if `--collector.otlp.enabled=true`
-4318  | HTTP     | accepts traces in OpenTelemetry OTLP format if `--collector.otlp.enabled=true`
+9411  | HTTP     | Accepts Zipkin spans in Thrift, JSON and Proto (disabled by default).
+14250 | gRPC     | Used by **jaeger-agent** to send spans in model.proto format.
+14268 | HTTP     | Accepts spans directly from clients in [jaeger.thrift][jaeger-thrift] format with `binary` thrift protocol (`POST` to `/api/traces`). Also serves sampling policies at `/api/sampling`, similar to Agent's port 5778.
+14269 | HTTP     | Admin port: health check at `/` and metrics at `/metrics`.
+4317  | gRPC     | Accepts traces in OpenTelemetry OTLP format if `--collector.otlp.enabled=true`.
+4318  | HTTP     | Accepts traces in OpenTelemetry OTLP format if `--collector.otlp.enabled=true`.
 
 ## Ingester
 **jaeger-ingester** is a service which reads span data from Kafka topic and writes it to another storage backend (Elasticsearch or Cassandra).
