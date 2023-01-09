@@ -101,11 +101,11 @@ The agent exposes the following ports:
 
 Port  | Protocol | Function
 ----- | -------  | ---
-6831  | UDP      | accept [jaeger.thrift][jaeger-thrift] in `compact` Thrift protocol used by most current Jaeger clients
-6832  | UDP      | accept [jaeger.thrift][jaeger-thrift] in `binary` Thrift protocol used by Node.js Jaeger client (because [thriftrw][thriftrw] npm package does not support `compact` protocol)
-5778  | HTTP     | serve configs, sampling strategies
-5775  | UDP      | accept [zipkin.thrift][zipkin-thrift] in `compact` Thrift protocol (deprecated; only used by very old Jaeger clients, circa 2016)
-14271 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
+6831  | UDP      | Accepts [jaeger.thrift][jaeger-thrift] in `compact` Thrift protocol used by most current Jaeger clients.
+6832  | UDP      | Accepts [jaeger.thrift][jaeger-thrift] in `binary` Thrift protocol used by Node.js Jaeger client (because [thriftrw][thriftrw] npm package does not support `compact` protocol).
+5778  | HTTP     | Serves SDK configs, namely sampling strategies at `/sampling`.
+5775  | UDP      | Accepts [zipkin.thrift][zipkin-thrift] in `compact` Thrift protocol (deprecated; only used by very old Jaeger clients, circa 2016).
+14271 | HTTP     | Admin port: health check at `/` and metrics at `/metrics`.
 
 It can be executed directly on the host or via Docker, as follows:
 
