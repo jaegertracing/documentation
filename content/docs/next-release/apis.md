@@ -19,7 +19,11 @@ Agent and Collector are the two components of the Jaeger backend that can receiv
 
 ### OpenTelemetry Protocol (stable)
 
-Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. That means that the OpenTelemetry SDKs no longer need to be configured with Jaeger exporters, nor the OpenTelemetry Collectors need to be deployed between the OpenTelemetry SDKs and the Jaeger backend.
+Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. It is no longer necessary to configure the OpenTelemetry SDKs with Jaeger exporters, nor deploy the OpenTelemetry Collectors between the OpenTelemetry SDKs and the Jaeger backend.
+
+The OTLP data is accepted in these formats: (1) binary gRPC, (2) Protobuf over HTTP, (3) JSON over HTTP. For more details on the OTLP receiver see the [official documentation][otlp-rcvr] (note that not all configuration options are supported in the Jaeger collector, and only tracing data is accepted, since Jaeger does not store other telemetry types).
+
+[otlp-rcvr]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
 
 ### Thrift over UDP (stable)
 
@@ -29,11 +33,11 @@ For legacy reasons, the Agent also accepts spans over UDP in Zipkin format, howe
 
 ### Protobuf via gRPC (stable)
 
-In a typical Jaeger deployment, Agents receive spans from Clients and forward them to Collectors. Since Jaeger v1.11 the official and recommended protocol between Agents and Collectors is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto][collector.proto] IDL file.
+In a typical Jaeger deployment, Agents receive spans from Clients and forward them to Collectors. Since Jaeger v1.11 the official and recommended protocol between Agents and Collectors is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto][collector.proto] IDL file. The same endpoint can be used to submit trace data from SDKs directly to the Collector.
 
 ### Thrift over HTTP (stable)
 
-In some cases it is not feasible to deploy Jaeger Agent next to the application, for example, when the application code is running as a serverless function. In these scenarios the Jaeger Clients can be configured to submit spans directly to the Collectors over HTTP/HTTPS.
+In some cases it is not feasible to deploy Jaeger Agent next to the application, for example, when the application code is running as a serverless function. In these scenarios the SDKs can be configured to submit spans directly to the Collectors over HTTP/HTTPS.
 
 The same [jaeger.thrift][jaeger.thrift] payload can be submitted in HTTP POST request to `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
 
@@ -43,7 +47,8 @@ Content-Type: application/vnd.apache.thrift.binary
 
 ### JSON over HTTP (n/a)
 
-There is no official Jaeger JSON format that can be accepted by the collector. In the future the OpenTelemetry JSON may be supported.
+There is no official Jaeger JSON format that can be accepted by the collector.
+Jaeger does accept the OpenTelemetry protocol via JSON (see [above](#opentelemetry-protocol-stable)).
 
 ### Zipkin Formats (stable)
 
@@ -68,11 +73,43 @@ Jaeger UI communicates with Jaeger Query Service via JSON API. For example, a tr
 
 When using the `grpc-plugin` storage type (a.k.a. [storage plugin](../deployment/#storage-plugin)), Jaeger components can use custom storage backends as long as those backends implement the gRPC [Remote Storage API][storage.proto].
 
-## Clients configuration (internal)
+## Remote Sampling Configuration (stable)
 
-Client libraries not only submit finished spans to Jaeger backend, but also periodically poll the Agents for various configurations, such as sampling strategies. The schema for the payload is defined by [sampling.thrift][sampling.thrift], encoded as JSON using Thrift's built-in JSON generation capabilities.
+This API supports Jaeger's [Remote Sampling](../sampling/#remote-sampling) protocol, defined in [sampling.proto][sampling.proto] IDL file.
 
-Agent acts as a proxy by retrieving sampling configuration from the Collector using `jaeger.api_v2.SamplingManager` gRPC endpoint defined in [sampling.proto][sampling.proto] IDL file.
+Both the Jaeger Agent and Jaeger Collector implement the API. See [Remote Sampling](../sampling/#remote-sampling) for details on how to configure the Collector with sampling strategies. The Agent is merely acting as a proxy to the Collector.
+
+The following table lists different endpoints and formats that can be used to query for sampling strategies. The official HTTP/JSON endpoints use standard [Protobuf-to-JSON mapping](https://developers.google.com/protocol-buffers/docs/proto3#json).
+
+Component | Port  | Endpoint          | Format | Notes
+--------- | ----- | ----------------- | ------ | -----
+Collector | 14268 | `/api/sampling`   | HTTP/JSON | Recommended for most SDKs
+Collector | 14250 | [sampling.proto][sampling.proto] | gRPC | For SDKs that want to use gRPC (e.g. OpenTelemetry Java SDK)
+Agent     | 5778  | `/sampling`       | HTTP/JSON | Recommended for most SDKs if the Agent is used in a deployment
+Agent     | 5778  | `/` (deprecated)  | HTTP/JSON | Legacy format, with enums encoded as numbers. **Not recommended.**
+
+**Examples**
+
+Run all-in-one in one terminal:
+```shell
+$ go run ./cmd/all-in-one \
+  --sampling.strategies-file=cmd/all-in-one/sampling_strategies.json
+```
+
+Query different endpoints in another terminal:
+```shell
+# Collector
+$ curl "http://localhost:14268/api/sampling?service=foo"
+{"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":1}}
+
+# Agent
+$ curl "http://localhost:5778/sampling?service=foo"
+{"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":1}}
+
+# Agent, legacy endpoint / (not recommended)
+$ curl "http://localhost:5778/?service=foo"
+{"strategyType":0,"probabilisticSampling":{"samplingRate":1}}
+```
 
 ## Service dependencies graph (internal)
 
