@@ -7,7 +7,7 @@ children:
 ---
 
 {{< warning >}}
-Jaeger clients are being retired.
+Jaeger clients have been retired. Please use the OpenTelemetry SDKs.
 {{< /warning >}}
 
 ## Deprecating Jaeger clients

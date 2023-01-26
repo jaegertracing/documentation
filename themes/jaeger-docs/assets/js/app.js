@@ -80,7 +80,7 @@ $(function () {
   });
 });
 
-//Add Copy button to code snippets. 
+//Add Copy button to code snippets.
 
 function addCopyButtons(clipboard) {
   document.querySelectorAll('pre > code').forEach(function (codeBlock) {
@@ -108,7 +108,8 @@ function addCopyButtons(clipboard) {
       var pre = codeBlock.parentNode;
       if (pre.parentNode.classList.contains('highlight')) {
           var highlight = pre.parentNode;
-          highlight.parentNode.insertBefore(button, highlight);
+          //highlight.insertBefore(button, pre);
+          pre.insertBefore(button, codeBlock);
       } else {
           pre.parentNode.insertBefore(button, pre);
       }
