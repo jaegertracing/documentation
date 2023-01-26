@@ -27,19 +27,19 @@ The OTLP data is accepted in these formats: (1) binary gRPC, (2) Protobuf over H
 
 ### Thrift over UDP (stable)
 
-The Agent can only receive spans over UDP in Thrift format. The primary API is a UDP packet that contains a Thrift-encoded `Batch` struct defined in [jaeger.thrift][jaeger.thrift] IDL file, located in the [jaeger-idl][jaeger-idl] repository. Most Jaeger Clients use Thrift's `compact` encoding, however some client libraries do not support it (notably, Node.js) and use Thrift's `binary` encoding (sent to  a different UDP port). The Agent's API is defined by [agent.thrift][agent.thrift] IDL file.
+The Agent can only receive spans over UDP in Thrift format. The primary API is a UDP packet that contains a Thrift-encoded `Batch` struct defined in [jaeger.thrift] IDL file, located in the [jaeger-idl] repository. Most Jaeger Clients use Thrift's `compact` encoding, however some client libraries do not support it (notably, Node.js) and use Thrift's `binary` encoding (sent to  a different UDP port). The Agent's API is defined by [agent.thrift] IDL file.
 
 For legacy reasons, the Agent also accepts spans over UDP in Zipkin format, however, only very old versions of Jaeger clients can send data in that format and it is officially deprecated.
 
 ### Protobuf via gRPC (stable)
 
-In a typical Jaeger deployment, Agents receive spans from Clients and forward them to Collectors. Since Jaeger v1.11 the official and recommended protocol between Agents and Collectors is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto][collector.proto] IDL file. The same endpoint can be used to submit trace data from SDKs directly to the Collector.
+In a typical Jaeger deployment, Agents receive spans from Clients and forward them to Collectors. Since Jaeger v1.11 the official and recommended protocol between Agents and Collectors is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto] IDL file. The same endpoint can be used to submit trace data from SDKs directly to the Collector.
 
 ### Thrift over HTTP (stable)
 
 In some cases it is not feasible to deploy Jaeger Agent next to the application, for example, when the application code is running as a serverless function. In these scenarios the SDKs can be configured to submit spans directly to the Collectors over HTTP/HTTPS.
 
-The same [jaeger.thrift][jaeger.thrift] payload can be submitted in HTTP POST request to `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
+The same [jaeger.thrift] payload can be submitted in HTTP POST request to `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
 
 ```
 Content-Type: application/vnd.apache.thrift.binary
@@ -63,7 +63,7 @@ Traces saved in the storage can be retrieved by calling Jaeger Query Service.
 
 ### gRPC/Protobuf (stable)
 
-The recommended way for programmatically retrieving traces and other data is via `jaeger.api_v2.QueryService` gRPC endpoint defined in [query.proto][query.proto] IDL file.
+The recommended way for programmatically retrieving traces and other data is via `jaeger.api_v2.QueryService` gRPC endpoint defined in [query.proto] IDL file.
 
 ### HTTP JSON (internal)
 
@@ -75,16 +75,16 @@ When using the `grpc-plugin` storage type (a.k.a. [storage plugin](../deployment
 
 ## Remote Sampling Configuration (stable)
 
-This API supports Jaeger's [Remote Sampling](../sampling/#remote-sampling) protocol, defined in [sampling.proto][sampling.proto] IDL file.
+This API supports Jaeger's [Remote Sampling](../sampling/#remote-sampling) protocol, defined in [sampling.proto] IDL file.
 
 Both the Jaeger Agent and Jaeger Collector implement the API. See [Remote Sampling](../sampling/#remote-sampling) for details on how to configure the Collector with sampling strategies. The Agent is merely acting as a proxy to the Collector.
 
 The following table lists different endpoints and formats that can be used to query for sampling strategies. The official HTTP/JSON endpoints use standard [Protobuf-to-JSON mapping](https://developers.google.com/protocol-buffers/docs/proto3#json).
 
-Component | Port  | Endpoint          | Format | Notes
---------- | ----- | ----------------- | ------ | -----
+Component | Port  | Endpoint          | Format    | Notes
+--------- | ----- | ----------------- | --------- | -----
 Collector | 14268 | `/api/sampling`   | HTTP/JSON | Recommended for most SDKs
-Collector | 14250 | [sampling.proto][sampling.proto] | gRPC | For SDKs that want to use gRPC (e.g. OpenTelemetry Java SDK)
+Collector | 14250 | [sampling.proto]  | gRPC      | For SDKs that want to use gRPC (e.g. OpenTelemetry Java SDK)
 Agent     | 5778  | `/sampling`       | HTTP/JSON | Recommended for most SDKs if the Agent is used in a deployment
 Agent     | 5778  | `/` (deprecated)  | HTTP/JSON | Legacy format, with enums encoded as numbers. **Not recommended.**
 
