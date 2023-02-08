@@ -60,6 +60,12 @@ An example configuration file:
     "key": "jaeger.version",
     "url": "https://github.com/jaegertracing/jaeger-client-java/releases/tag/#{jaeger.version}",
     "text": "Information about Jaeger release #{jaeger.version}"
+  },
+  {
+    "type": "tags",
+    "key": "uniqueId",
+    "url": "https://mykibana.com/uniqueId=#{uniqueId}&traceId=#{trace.traceID}",
+    "text": "Redirect to kibana to view log"
   }]
 }
 ```
@@ -137,6 +143,8 @@ text  | The text displayed in the tooltip for the link
 Both `url` and `text` can be defined as templates (i.e. using `#{field-name}`) where Jaeger UI will dynamically substitute values based on tags/logs/traces data.
 
 For traces, the supported template fields are: `duration`, `endTime`, `startTime`, `traceName` and `traceID`.
+
+Further, the trace template fields are available for substitution in process/logs/tags type when the trace template fields are prefixed with `trace.`. For example: `trace.traceID`, `trace.startTime`.
 
 ## Embedded Mode
 
