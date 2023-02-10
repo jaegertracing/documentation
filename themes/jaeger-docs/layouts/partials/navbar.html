@@ -3,7 +3,6 @@
 {{ $twitterHandle := site.Params.twitterhandle }}
 {{ $versions      := site.Params.versions }}
 {{ $latest        := site.Params.latest }}
-{{ $currentVersion := index (split .File.Path "/") 1 }}
 {{ $docs          := where site.Pages "Section" "docs" }}
 {{ $isDocsPage    := eq .Section "docs" }}
 {{ $preview       := getenv "HUGO_PREVIEW" }}
@@ -57,7 +56,10 @@
           <div class="navbar-dropdown">
             {{ range $docs }}
               {{ $docVersion := index (split .File.Path "/") 1 }}
-              {{ if and (eq $docVersion $currentVersion) (not .Params.hasparent) }}
+              <!-- When generating Docs menu for home page, use the latest version, -->
+              <!-- when generating menu for pages inside docs/, use same version as the doc -->
+              {{ $matchVersion := cond ($isDocsPage) $currentVersion $latest }}
+              {{ if and (eq $docVersion $matchVersion) (not .Params.hasparent) }}
                 <a class="navbar-item" href="{{ .RelPermalink }}">
                   {{ .Title }}
                 </a>
