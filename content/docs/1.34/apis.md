@@ -79,7 +79,7 @@ For programmatic access to service graph, the recommended API is gRPC/Protobuf d
 
 ## Service Performance Monitoring (internal)
 
-Please refer to the [SPM Documentation](../spm#API)
+Please refer to the [SPM Documentation](../spm#api)
 
 [jaeger-idl]: https://github.com/jaegertracing/jaeger-idl/
 [jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift

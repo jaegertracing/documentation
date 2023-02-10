@@ -55,7 +55,7 @@ The feature can be accessed from the "Monitor" tab along the top menu.
 This demo includes [Microsim](https://github.com/yurishkuro/microsim); a microservices
 simulator to generate trace data.
 
-If generating traces manually is preferred, the [Sample App: HotROD](#Sample-App-HotROD)
+If generating traces manually is preferred, the [Sample App: HotROD](../getting-started/#sample-app-hotrod)
 can be started via docker. Be sure to include `--net monitor_backend` in the `docker run` command.
 
 ## Architecture

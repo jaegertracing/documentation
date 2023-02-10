@@ -48,7 +48,7 @@ For applications with low to medium traffic, setting the sampling type to `const
 Some Clients support the setting `JAEGER_DISABLED` to completely disable the Jaeger Tracer. This is recommended only if the Tracer is behaving in a way that causes problems to the instrumented application, as it will not propagate the context to the downstream services.
 
 {{< info >}}
-We recommend to set your clients to use the [`remote` sampling strategy](../sampling/#collector-sampling-configuration), so that admins can centrally set the concrete sampling strategy for each service.
+We recommend to set your clients to use the [`remote` sampling strategy](../sampling/#remote-sampling), so that admins can centrally set the concrete sampling strategy for each service.
 {{< /info >}}
 
 ### Increase in-memory queue size
