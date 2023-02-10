@@ -748,7 +748,7 @@ docker run \
 
 Available sidecar plugins:
 
-* [InfluxDB](https://github.com/influxdata/influxdb-observability/tree/main/jaeger-query-plugin) - time series database.
+* [InfluxDB](https://github.com/influxdata/influxdb-observability/blob/main/jaeger-influxdb/README.md) - time series database.
 * [Logz.io](https://github.com/logzio/jaeger-logzio) - secure, scalable, managed, cloud-based ELK storage.
 * [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse) - fast open-source OLAP DBMS.
 
