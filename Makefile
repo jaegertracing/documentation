@@ -17,8 +17,8 @@ generate:	client-libs-docs
 
 develop:	generate
 	HUGO_PREVIEW=true hugo server \
-        --buildDrafts \
-        --buildFuture \
+		--buildDrafts \
+		--buildFuture \
 		--ignoreCache
 
 clean:
