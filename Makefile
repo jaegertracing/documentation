@@ -19,13 +19,14 @@ develop:	generate
 	HUGO_PREVIEW=true hugo server \
         --buildDrafts \
         --buildFuture \
-	--ignoreCache
+		--ignoreCache
 
 clean:
 	rm -rf public
 
 netlify-production-build:	generate
 	hugo --minify
+	rm -rf public/_client_libs
 
 netlify-deploy-preview:	generate
 	HUGO_PREVIEW=true hugo \
@@ -33,6 +34,7 @@ netlify-deploy-preview:	generate
 	--buildFuture \
 	--baseURL $(DEPLOY_PRIME_URL) \
 	--minify
+	rm -rf public/_client_libs
 
 netlify-branch-deploy:	generate
 	hugo \
@@ -40,9 +42,11 @@ netlify-branch-deploy:	generate
 	--buildFuture \
 	--baseURL $(DEPLOY_PRIME_URL) \
 	--minify
+	rm -rf public/_client_libs
 
 build: clean generate
 	hugo -v
+	rm -rf public/_client_libs
 
 link-checker-setup:
 	curl https://raw.githubusercontent.com/wjdp/htmltest/master/godownloader.sh | bash

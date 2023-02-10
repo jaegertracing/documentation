@@ -1,0 +1,31 @@
+name: Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: true
+
+    - name: ✨ Setup Hugo
+      env:
+        # should match one from netlify.toml
+        HUGO_VERSION: 0.102.3
+      run: |
+        mkdir ~/hugo
+        cd ~/hugo
+        curl -L "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" --output hugo.tar.gz
+        tar -xvzf hugo.tar.gz
+        sudo mv hugo /usr/local/bin
+        hugo version
+
+    - name: Build and test links
+      run: |
+        make check-internal-links
