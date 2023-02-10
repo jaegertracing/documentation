@@ -8,30 +8,30 @@
 
     <div class="columns">
       {{ if ne .Params.widescreen true }}
-      <div class="column is-2 is-hidden-touch">
-        {{ partial "docs/panel.html" . }}
-      </div>
+        <div class="column is-2 is-hidden-touch">
+          {{ partial "docs/panel.html" . }}
+        </div>
 
-      <div class="column is-8 is-full-touch">
-        <section class="content content--docs is-medium">
-          {{ partial "docs/header.html" . }}
-          {{ .Content }}
-        </section>
-      </div>
+        <div class="column is-8 is-full-touch">
+          <section class="content content--docs is-medium">
+            {{ partial "docs/header.html" . }}
+            {{ .Content }}
+          </section>
+        </div>
 
-      <div class="column is-2 is-hidden-touch">
-        {{ partial "docs/toc.html" . }}
-      </div>
+        <div class="column is-2 is-hidden-touch">
+          {{ partial "docs/toc.html" . }}
+        </div>
       {{ else }}
-      <div class="column is-2 is-hidden-touch">
-        {{ partial "docs/panel.html" . }}
-      </div>
-      <div class="column is-10">
-        <section class="content content--docs is-medium">
-          {{ partial "docs/header.html" . }}
-          {{ .Content }}
-        </section>
-      </div>
+        <div class="column is-2 is-hidden-touch">
+          {{ partial "docs/panel.html" . }}
+        </div>
+        <div class="column is-10">
+          <section class="content content--docs is-medium">
+            {{ partial "docs/header.html" . }}
+            {{ .Content }}
+          </section>
+        </div>
       {{ end }}
     </div>
   </div>

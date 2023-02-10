@@ -3,6 +3,7 @@
 {{ $twitterHandle := site.Params.twitterhandle }}
 {{ $versions      := site.Params.versions }}
 {{ $latest        := site.Params.latest }}
+{{ $currentVersion := index (split .File.Path "/") 1 }}
 {{ $docs          := where site.Pages "Section" "docs" }}
 {{ $isDocsPage    := eq .Section "docs" }}
 {{ $preview       := getenv "HUGO_PREVIEW" }}
@@ -49,27 +50,27 @@
         {{ end }}
         {{ end }}
 
-        <div class="navbar-item has-dropdown is-hoverable">
+        <div class="navbar-item has-dropdown is-hoverable" id="sandwich-popup-menu">
           <a class="navbar-link">
             Docs
           </a>
           <div class="navbar-dropdown">
             {{ range $docs }}
-            {{ $docVersion := index (split .File.Path "/") 1 }}
-            {{ if and (eq $docVersion $latest) (not .Params.hasparent) }}
-            <a class="navbar-item" href="{{ .RelPermalink }}">
-              {{ .Title }}
-            </a>
+              {{ $docVersion := index (split .File.Path "/") 1 }}
+              {{ if and (eq $docVersion $currentVersion) (not .Params.hasparent) }}
+                <a class="navbar-item" href="{{ .RelPermalink }}">
+                  {{ .Title }}
+                </a>
 
-            {{ with .Params.children }}
-            {{ range . }}
-            {{ $url := cond $isDocsPage (printf "/docs/%s/%s" $currentVersion .url) (printf "/docs/%s/%s" $latest .url) }}
-            <a class="navbar-item is-small is-hidden-desktop" href="{{ $url }}">
-              &cir; {{ if .navtitle }}{{ .navtitle }}{{ else }}{{ .title }}{{ end }}
-            </a>
-            {{ end }}
-            {{ end }}
-            {{ end }}
+                {{ with .Params.children }}
+                  {{ range . }}
+                    {{ $url := cond $isDocsPage (printf "/docs/%s/%s" $currentVersion .url) (printf "/docs/%s/%s" $latest .url) }}
+                    <a class="navbar-item is-small is-hidden-desktop" href="{{ $url }}">
+                      &cir; {{ if .navtitle }}{{ .navtitle }}{{ else }}{{ .title }}{{ end }}
+                    </a>
+                  {{ end }}
+                {{ end }}
+              {{ end }}
             {{ end }}
           </div>
         </div>
