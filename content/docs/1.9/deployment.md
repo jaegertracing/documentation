@@ -250,7 +250,7 @@ See the [README](https://github.com/jaegertracing/jaeger/tree/master/plugin/stor
 #### Shards and Replicas for Elasticsearch indices
 
 Shards and replicas are some configuration values to take special attention to, because this is decided upon
-index creation. [This article](https://qbox.io/blog/optimizing-elasticsearch-how-many-shards-per-index) goes into
+index creation. [This article](https://www.elastic.co/blog/how-many-shards-should-i-have-in-my-elasticsearch-cluster) goes into
 more information about choosing how many shards should be chosen for optimization.
 
 ### Kafka

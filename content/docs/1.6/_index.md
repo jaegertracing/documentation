@@ -57,7 +57,7 @@ See [running a docker all in one image](getting-started#all-in-one-docker-image)
 - [Evolving Distributed tracing At Uber Engineering](https://eng.uber.com/distributed-tracing/)
 - [Tracing HTTP request latency in Go with OpenTracing](https://medium.com/opentracing/tracing-http-request-latency-in-go-with-opentracing-7cc1282a100a)
 - [Distributed Tracing with Jaeger & Prometheus on Kubernetes](https://blog.openshift.com/openshift-commons-briefing-82-distributed-tracing-with-jaeger-prometheus-on-kubernetes/)
-- [Using Jaeger with Istio](https://istio.io/docs/tasks/telemetry/distributed-tracing.html)
+- [Using Jaeger with Istio](https://istio.io/latest/docs/tasks/observability/distributed-tracing/jaeger/)
 - [Using Jaeger with Envoy](https://www.envoyproxy.io/docs/envoy/latest/start/sandboxes/jaeger_tracing.html)
 
 [dapper]: https://research.google.com/pubs/pub36356.html
