@@ -498,7 +498,7 @@ docker run \
 #### Shards and Replicas for Elasticsearch indices
 
 Shards and replicas are some configuration values to take special attention to, because this is decided upon
-index creation. [This article](https://aws.amazon.com/blogs/database/choosing-the-right-number-of-shards-for-your-large-scale-amazon-dynamodb-table/) goes into
+index creation. [This article](https://www.elastic.co/blog/how-many-shards-should-i-have-in-my-elasticsearch-cluster) goes into
 more information about choosing how many shards should be chosen for optimization.
 
 #### Elasticsearch Rollover
