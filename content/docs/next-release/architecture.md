@@ -10,7 +10,14 @@ children:
 
 ## Terminology
 
-Jaeger represents tracing data in a data model inspired by the [OpenTracing Specification](https://github.com/opentracing/specification/blob/master/specification.md).
+Jaeger represents tracing data in a data model inspired by the [OpenTracing Specification](https://github.com/opentracing/specification/blob/master/specification.md). The data model is logically very similar to [OpenTelemetry Traces](https://opentelemetry.io/docs/concepts/signals/traces/), with some naming differences:
+
+| Jaeger               | OpenTelemetry   | Notes |
+| -------------------- | --------------- | ----------------------------------------------------------------------- |
+| Tags                 | Attributes      | Both support typed values, but nested tags are not supported in Jaeger. |
+| Span Logs            | Span Events     | Point-in-time events on the span recorded in a structured form.         |
+| Span References      | Span Links      | Jaeger's Span References have a required type (`child-of` or `follows-from`) and always refer to predecessor spans; OpenTelemetry's Span Links have no type, but allow attributes. |
+| Process              | Resource        | A struct describing the entity that produces the telemetry.             |
 
 ### Span
 
@@ -26,40 +33,57 @@ A **trace** represents the data or execution path through the system. It can be 
 
 **Baggage** is arbitrary user-defined metadata (key-value pairs) that can be attached to distributed context and propagated by the tracing SDKs. See [W3C Baggage](https://www.w3.org/TR/baggage/) for more information.
 
-## Components
+## Architecture
 
 Jaeger can be deployed either as an **all-in-one** binary, where all Jaeger backend components
-run in a single process, or as a scalable distributed system, discussed below.
-There are two main deployment options:
+run in a single process, or as a scalable distributed system. There are two main deployment options discussed below.
 
-  1. Collectors are writing directly to storage.
-  2. Collectors are writing to Kafka as a preliminary buffer.
+### Direct to storage
 
-![Architecture](/img/architecture-v1.png)
-*Illustration of direct-to-storage architecture*
+In this deployment the collectors receive the data from traced applications and write it directly to storage. The storage must be able to handle both the average and peak traffic. Collectors use an in-memory queue to smooth short-term traffic peaks, but a sustained traffic spike may result in dropped data if the storage is not able to keep up.
 
-![Architecture](/img/architecture-v2.png)
-*Illustration of architecture with Kafka as intermediate buffer*
+Collectors are able to centrally serve sampling configuration to the SDKs, known as [remote sampling mode](../sampling/#remote-sampling). They can also enable automatic sampling configuration calculation, known as [adaptive sampling](../sampling/#adaptive-sampling).
+
+![Architecture](/img/architecture-v1-2023.png)
+
+### Via Kafka
+
+To prevent data loss between collectors and storage, Kafka can be used as an intermediary, persistent queue. An additional component, Jaeger Ingester, needs to be deployed to read data from Kafka and save to the database. Multiple ingesters can be deployed to scale up ingestion; they will automatically partition the load across them.
+
+![Architecture](/img/architecture-v2-2023.png)
+
+### With OpenTelemetry
+
+The Jaeger Collectors can receive OpenTelemetry data directly from the OpenTelemetry SDKs. However, if you already use the OpenTelemetry Collectors, e.g. for gathering other types of telemetry or for pre-processing / enriching the tracing data, it can be placed between the SDKs and the Jaeger Collectors. The OpenTelemetry Collectors can be run as an application sidecar, as a host agent / daemon, or as a central cluster.
+
+## Components
 
 This section details the constituent parts of Jaeger and how they relate to each other. It is arranged by the order in which spans from your application interact with them.
 
-### Jaeger client libraries (deprecated)
+### Tracing SDKs
 
 {{< warning >}}
-Jaeger clients are [being retired](../client-libraries). Please use OpenTelemetry.
+The Jaeger project historically provided a collection of tracing SDKs, called [Jaeger clients](../client-libraries). These libraries have been retired in favor of the [OpenTelemetry SDKs](https://opentelemetry.io).
 {{< /warning >}}
 
+In order to generate tracing data, the applications must be instrumented. An instrumented application creates spans when receiving new requests and attaches context information (trace id, span id, and baggage) to outgoing requests. Only the ids and baggage are propagated with requests; all other profiling data, like operation name, timing, tags and logs, is not propagated. Instead, it is exported out of process to the Jaeger backend asynchronously, in the background.
 
-Jaeger clients are language specific implementations of the [OpenTracing API](https://opentracing.io). They can be used to instrument applications for distributed tracing either manually or with a variety of existing open source frameworks, such as Flask, Dropwizard, gRPC, and many more, that are already integrated with OpenTracing.
+![Context propagation explained](/img/context-prop-2023.png)
 
-An instrumented service creates spans when receiving new requests and attaches context information (trace id, span id, and baggage) to outgoing requests. Only the ids and baggage are propagated with requests; all other profiling data, like operation name, timing, tags and logs, is not propagated. Instead, it is transmitted out of process to the Jaeger backend asynchronously, in the background.
+There are many ways to instrument an application:
+  * manually, using the tracing APIs directly,
+  * relying on instrumentation already created for a variety of existing open source frameworks,
+  * automatically, via byte code manipulation, monkey-patching, eBPF, and similar techniques.
 
-The instrumentation is designed to be always on in production. To minimize the overhead, Jaeger clients employ various sampling strategies. When a trace is sampled, the profiling span data is captured and transmitted to the Jaeger backend. When a trace is not sampled, no profiling data is collected at all, and the calls to the OpenTracing APIs are short-circuited to incur the minimal amount of overhead. By default, Jaeger clients sample 0.1% of traces (1 in 1000), and have the ability to retrieve sampling strategies from the Jaeger backend. For more information, please refer to [Sampling](../sampling/).
+Instrumentation typically should not depend on specific tracing SDKs, but only on abstract tracing APIs like the OpenTelemetry API. The tracing SDKs implement the tracing APIs and take care of data export.
 
-![Context propagation explained](/img/context-prop.png)
-*Illustration of context propagation*
+The instrumentation is designed to be always on in production. To minimize the overhead, the SDKs employ various sampling strategies. When a trace is sampled, the profiling span data is captured and transmitted to the Jaeger backend. When a trace is not sampled, no profiling data is collected at all, and the calls to the tracing API are short-circuited to incur the minimal amount of overhead. For more information, please refer to the [Sampling](../sampling/) page.
 
 ### Agent
+
+{{< warning >}}
+The Jaeger Agent is deprecated. The OpenTelemetry data can be sent directly to the Jaeger backend, or the OpenTelemetry Collector can be used as agent.
+{{< /warning >}}
 
 The Jaeger **agent** is a network daemon that listens for spans sent over UDP, which are batched and sent to the collector. It is designed to be deployed to all hosts as an infrastructure component. The agent abstracts the routing and discovery of the collectors away from the client.
 
@@ -67,7 +91,7 @@ The agent is **not** a required component. For example, when your applications a
 
 ### Collector
 
-The Jaeger **collector** receives traces from the SDKs or Jaeger [agents](../architecture#agent), runs them through a processing pipeline for validation and clean-up/enrichment, and stores them in a storage backend.
+The Jaeger **collector** receives traces, runs them through a processing pipeline for validation and clean-up/enrichment, and stores them in a storage backend.
 
 Jaeger comes with built-in support for several storage backends (see [Deployment](../deployment)), as well as extensible plugin framework for implementing custom storage plugins.
 
