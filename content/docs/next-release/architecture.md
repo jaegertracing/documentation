@@ -56,6 +56,31 @@ To prevent data loss between collectors and storage, Kafka can be used as an int
 
 The Jaeger Collectors can receive OpenTelemetry data directly from the OpenTelemetry SDKs. However, if you already use the OpenTelemetry Collectors, e.g. for gathering other types of telemetry or for pre-processing / enriching the tracing data, it can be placed between the SDKs and the Jaeger Collectors. The OpenTelemetry Collectors can be run as an application sidecar, as a host agent / daemon, or as a central cluster.
 
+The OpenTelemetry Collector supports Jaeger's Remote Sampling protocol and can either serve static configurations from config files directly, or proxy the requests to the Jaeger backend (e.g., when using adaptive sampling).
+
+![Architecture](/img/architecture-otel.png)
+
+#### OpenTelemetry Collector as a sidecar / host agent
+
+Benefits:
+
+* The SDK configuration is simplified as both trace export endpoint and sampling config endpoint can point to a local host and not worry about discovering where those services run remotely.
+* Collector may provide data enrichment by adding environment information, like k8s pod name.
+* Resource usage for data enrichment can be distributed across all application hosts.
+
+Downsides:
+
+* An extra layer of marshaling/unmarshaling the data.
+
+#### OpenTelemetry Collector as a remote cluster
+
+Benefits:
+* Sharding capabilities, e.g., when using [tail-based sampling](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md).
+
+Downsides:
+
+* An extra layer of marshaling/unmarshaling the data.
+
 ## Components
 
 This section details the constituent parts of Jaeger and how they relate to each other. It is arranged by the order in which spans from your application interact with them.
