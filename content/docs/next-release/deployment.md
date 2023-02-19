@@ -96,14 +96,17 @@ You can navigate to `http://localhost:16686` to access the Jaeger UI.
 
 ## Agent
 
-Jaeger client libraries expect **jaeger-agent** process to run locally on each host.
-The agent exposes the following ports:
+{{< warning >}}
+Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
+{{< /warning >}}
+
+**jaeger-agent** is designed to receive tracing data in Thrift format over UDP and run locally on each host, either as a host agent / daemon or as an application sidecar. The agent exposes the following ports:
 
 Port  | Protocol | Function
 ----- | -------  | ---
 6831  | UDP      | Accepts [jaeger.thrift][jaeger-thrift] in `compact` Thrift protocol used by most current Jaeger clients.
 6832  | UDP      | Accepts [jaeger.thrift][jaeger-thrift] in `binary` Thrift protocol used by Node.js Jaeger client (because [thriftrw][thriftrw] npm package does not support `compact` protocol).
-5778  | HTTP     | Serves SDK configs, namely sampling strategies at `/sampling`.
+5778  | HTTP     | Serves SDK configs, namely sampling strategies at `/sampling` (see [Remote Sampling](../sampling/#remote-sampling)).
 5775  | UDP      | Accepts [zipkin.thrift][zipkin-thrift] in `compact` Thrift protocol (deprecated; only used by very old Jaeger clients, circa 2016).
 14271 | HTTP     | Admin port: health check at `/` and metrics at `/metrics`.
 
@@ -122,7 +125,7 @@ docker run \
 
 ### Discovery System Integration
 
-The agents can connect point to point to a single collector address, which could be
+The agents can connect point-to-point to a single collector address, which could be
 load balanced by another infrastructure component (e.g. DNS) across multiple collectors.
 The agent can also be configured with a static list of collector addresses.
 
@@ -163,12 +166,13 @@ Port  | Protocol | Function
 ----- | -------  | ---
 9411  | HTTP     | Accepts Zipkin spans in Thrift, JSON and Proto (disabled by default).
 14250 | gRPC     | Used by **jaeger-agent** to send spans in model.proto format.
-14268 | HTTP     | Accepts spans directly from clients in [jaeger.thrift][jaeger-thrift] format with `binary` thrift protocol (`POST` to `/api/traces`). Also serves sampling policies at `/api/sampling`, similar to Agent's port 5778.
+14268 | HTTP     | Accepts spans directly from clients in [jaeger.thrift][jaeger-thrift] format with `binary` thrift protocol (`POST` to `/api/traces`). Also serves sampling policies at `/api/sampling` (see [Remote Sampling](../sampling/#remote-sampling)).
 14269 | HTTP     | Admin port: health check at `/` and metrics at `/metrics`.
 4317  | gRPC     | Accepts traces in OpenTelemetry OTLP format if `--collector.otlp.enabled=true`.
 4318  | HTTP     | Accepts traces in OpenTelemetry OTLP format if `--collector.otlp.enabled=true`.
 
 ## Ingester
+
 **jaeger-ingester** is a service which reads span data from Kafka topic and writes it to another storage backend (Elasticsearch or Cassandra).
 
 Port  | Protocol | Function
@@ -255,10 +259,11 @@ By default, there's no limit in the amount of traces stored in memory but a limi
 integer value via `--memory.max-traces`.
 
 ### Badger - local storage
-Experimental since Jaeger 1.9
+
+Since Jaeger 1.9
 
 [Badger](https://github.com/dgraph-io/badger) is an embedded local storage, only available
-with **all-in-one** distribution. By default it acts as an ephemeral storage using a temporary filesystem.
+with **all-in-one** distribution. By default, it acts as an ephemeral storage using a temporary file system.
 This can be overridden by using the `--badger.ephemeral=false` option.
 
 ```sh

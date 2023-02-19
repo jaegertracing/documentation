@@ -18,6 +18,10 @@ Please refer to the [Troubleshooting](../troubleshooting/) guide.
 
 ## Do I need to run jaeger-agent?
 
+{{< warning >}}
+Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
+{{< /warning >}}
+
 `jaeger-agent` is not always necessary. Jaeger client libraries can be configured to export trace data directly to `jaeger-collector`. However, the following are the reasons why running `jaeger-agent` is recommended:
 
   * If we want Jaeger client libraries to send trace data directly to collectors, we must provide them with a URL of the HTTP endpoint. It means that our applications require additional configuration containing this parameter, especially if we are running multiple Jaeger installations (e.g. in different availability zones or regions) and want the data sent to a nearby installation. In contrast, when using the agent, the libraries require no additional configuration because the agent is always accessible via `localhost`. It acts as a sidecar and proxies the requests to the appropriate collectors.
