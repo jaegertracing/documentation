@@ -30,7 +30,7 @@ Since the Jaeger client libraries [are deprecated](../client-libraries) and the 
 
 ## What is the recommended storage backend?
 
-The Jaeger team recommends OpenSsearch/Elasticsearch as the storage backend over Cassandra, for the following reasons:
+The Jaeger team recommends OpenSearch/Elasticsearch as the storage backend over Cassandra, for the following reasons:
 
   * Cassandra is a key-value database, so it is more efficient for retrieving traces by trace ID, but it does not provide the same powerful search capabilities as OpenSearch. Effectively, the Jaeger backend implements the search functionality on the client side, on top of k-v storage, which is limited and may produce inconsistent results (see [issue-166][issue-166] for more details). OpenSearch does not suffer from these issues, resulting in better usability. OpenSearch can also be queried directly, e.g. from Kibana dashboards, and provide useful analytics and aggregations.
 
