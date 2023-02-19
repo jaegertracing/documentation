@@ -5,7 +5,7 @@ description: Tweaking your Jaeger instance to achieve a better performance
 weight: 10
 ---
 
-Jaeger was built from day 1 to be able to ingest huge amounts of data in a resilient way. To better utilize resources that might cause delays, such as storage or network communications, Jaeger buffers and batches data. When more spans are generated than Jaeger is able to safely process, spans might get dropped. However, the defaults might not fit all scenarios: for instance, Agents running as a sidecar might have more memory constraints than Agents running as a daemon in bare metal.
+Jaeger was built from day 1 to be able to ingest huge amounts of data in a resilient way. To better utilize resources that might cause delays, such as storage or network communications, Jaeger buffers and batches data. When more spans are generated than Jaeger is able to safely process, spans might get dropped. However, the defaults might not fit all scenarios.
 
 ## Deployment considerations
 
@@ -23,6 +23,10 @@ Each span is written to the storage by the Collector using one worker, blocking 
 
 ### Place the Agents close to your applications
 
+{{< warning >}}
+Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
+{{< /warning >}}
+
 The Agent is meant to be placed on the same host as the instrumented application, in order to avoid UDP packet loss over the network. This is typically accomplished by having one Agent per bare metal host for traditional applications, or as a sidecar in container environments like Kubernetes, as this helps spread the load handled by Agents with the additional advantage of allowing each Agent to be tweaked individually, according to the application’s needs and importance.
 
 ### Consider using Apache Kafka as intermediate buffer
@@ -37,18 +41,22 @@ Jaeger Ingesters can also be scaled as needed to sustain the throughput. They wi
 
 ## Client (Tracer) settings
 
+{{< warning >}}
+Jaeger clients have been retired. Please use the OpenTelemetry SDKs.
+{{< /warning >}}
+
 The Jaeger Clients are built to have minimal effect to the instrumented application. As such, it has conservative defaults that might not be suitable for all cases. Note that Jaeger Clients can be configured programmatically or via [environment variables](../client-features/).
 
 ### Adjust the sampling configuration
 
-Together, the `JAEGER_SAMPLER_TYPE` and `JAEGER_SAMPLER_PARAM` specify how often traces should be "sampled", ie, recorded and sent to the Jaeger backend. For applications generating a large number of spans, setting the sampling type to `probabilistic` and the value to `0.001` (the default) will cause traces to be reported with a 1/1000th chance. Note that the sampling decision is made at the root span and propagated down to all child spans.
+Together, the `JAEGER_SAMPLER_TYPE` and `JAEGER_SAMPLER_PARAM` specify how often traces should be "sampled", ie, recorded and sent to the Jaeger backend. For applications generating many spans, setting the sampling type to `probabilistic` and the value to `0.001` (the default) will cause traces to be reported with a 1/1000th chance. Note that the sampling decision is made at the root span and propagated down to all child spans.
 
 For applications with low to medium traffic, setting the sampling type to `const` and value to `1` will cause all spans to be reported. Similarly, tracing can be disabled by setting the value to `0`, while context propagation will continue to work.
 
 Some Clients support the setting `JAEGER_DISABLED` to completely disable the Jaeger Tracer. This is recommended only if the Tracer is behaving in a way that causes problems to the instrumented application, as it will not propagate the context to the downstream services.
 
 {{< info >}}
-We recommend to set your clients to use the [`remote` sampling strategy](../sampling/#remote-sampling), so that admins can centrally set the concrete sampling strategy for each service.
+We recommend setting your clients/SDKs to use the [`remote` sampling strategy](../sampling/#remote-sampling), so that admins can centrally set the concrete sampling strategy for each service.
 {{< /info >}}
 
 ### Increase in-memory queue size
@@ -66,6 +74,10 @@ The Java, Go, NodeJS, Python and C# Clients allow the customization of the flush
 When the instrumented application is generating a large number of spans and the Agent/Collector is close to the application, the networking overhead might be low, justifying a higher number of flush operations. When the `HttpSender` is being used and the Collector is not close enough to the application, the networking overhead might be too high so that a higher value for this property makes sense.
 
 ## Agent settings
+
+{{< warning >}}
+Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
+{{< /warning >}}
 
 Jaeger Agents receive data from Clients, sending them in batches to the Collector. When not properly configured, it might end up discarding data even if the host machine has plenty of resources.
 
