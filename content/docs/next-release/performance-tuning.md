@@ -31,13 +31,13 @@ The Agent is meant to be placed on the same host as the instrumented application
 
 ### Consider using Apache Kafka as intermediate buffer
 
-Jaeger [can use Apache Kafka](../architecture/) as a buffer between the Collector and the actual backing storage (Elasticsearch, Apache Cassandra). This is ideal for cases where the traffic spikes are relatively frequent (prime time traffic) but the storage can eventually catch up once the traffic normalizes. For that, the `SPAN_STORAGE_TYPE` environment variable should be set to `kafka` in the Collector and the Jaeger Ingester component must be used, reading data from Kafka and writing it to the storage.
+Jaeger [can use Apache Kafka](../architecture/) as a buffer between **jaeger-collector** and the actual backing storage (Elasticsearch, Apache Cassandra). This is ideal for cases where the traffic spikes are relatively frequent (prime time traffic) but the storage can eventually catch up once the traffic normalizes. For that, the `SPAN_STORAGE_TYPE` environment variable should be set to `kafka` in  **jaeger-collector**, and **jaeger-ingester** component must be used, reading data from Kafka and writing it to the storage.
 
 In addition to the performance aspects, having spans written to Kafka is useful for building real time data pipeline for aggregations and feature extraction from traces.
 
-The Collectors can still be scaled in the same way as when writing to storage directly. The trace IDs are used as sharding keys for Kafka partitions, such that all spans for a given trace end up in the same partition of the Kafka topic. Each collector can write to any partition.
+The Collectors can still be scaled in the same way as when writing to storage directly. The trace IDs are used as sharding keys for Kafka partitions, such that all spans for a given trace end up in the same partition of the Kafka topic. Each **jaeger-collector** can write to any partition.
 
-Jaeger Ingesters can also be scaled as needed to sustain the throughput. They will automatically negotiate and rebalance Kafka partitions among them. However, it does not make sense to run more Ingesters than there are partitions in the Kafka topic, as in this case some of Ingesters will be idle.
+**jaeger-ingester**s can also be scaled as needed to sustain the throughput. They will automatically negotiate and rebalance Kafka partitions among them. However, it does not make sense to run more **jaeger-ingester**s than there are partitions in the Kafka topic, as in this case some of **jaeger-ingester**s will be idle.
 
 ## Client (Tracer) settings
 

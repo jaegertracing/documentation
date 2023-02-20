@@ -97,7 +97,7 @@ You can navigate to `http://localhost:16686` to access the Jaeger UI.
 ## Agent
 
 {{< warning >}}
-Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
+Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
 {{< /warning >}}
 
 **jaeger-agent** is designed to receive tracing data in Thrift format over UDP and run locally on each host, either as a host agent / daemon or as an application sidecar. The agent exposes the following ports:
@@ -703,7 +703,7 @@ Supported Kafka versions: 0.9+
 
 Kafka can be used as an intermediary buffer between collector and an actual storage.
 The collector is configured with `SPAN_STORAGE_TYPE=kafka` that makes it write all received spans
-into a Kafka topic. A new component [Ingester](#ingester), added in version 1.7.0, is used to read from
+into a Kafka topic. [**jaeger-ingester**](#ingester) is used to read from
 Kafka and store spans in another storage backend (Elasticsearch or Cassandra).
 
 Writing to Kafka is particularly useful for building post-processing data pipelines.
