@@ -48,7 +48,7 @@ Collectors are able to centrally serve sampling configuration to the SDKs, known
 
 ### Via Kafka
 
-To prevent data loss between collectors and storage, Kafka can be used as an intermediary, persistent queue. An additional component, Jaeger Ingester, needs to be deployed to read data from Kafka and save to the database. Multiple ingesters can be deployed to scale up ingestion; they will automatically partition the load across them.
+To prevent data loss between collectors and storage, Kafka can be used as an intermediary, persistent queue. An additional component, **jaeger-ingester**, needs to be deployed to read data from Kafka and save to the database. Multiple **jaeger-ingester**s can be deployed to scale up ingestion; they will automatically partition the load across them.
 
 ![Architecture](/img/architecture-v2-2023.png)
 
@@ -107,23 +107,21 @@ The instrumentation is designed to be always on in production. To minimize the o
 ### Agent
 
 {{< warning >}}
-The Jaeger Agent is deprecated. The OpenTelemetry data can be sent directly to the Jaeger backend, or the OpenTelemetry Collector can be used as agent.
+**jaeger-agent** is deprecated. The OpenTelemetry data can be sent directly to the Jaeger backend, or the OpenTelemetry Collector can be used as agent.
 {{< /warning >}}
 
-The Jaeger **agent** is a network daemon that listens for spans sent over UDP, which are batched and sent to the collector. It is designed to be deployed to all hosts as an infrastructure component. The agent abstracts the routing and discovery of the collectors away from the client.
+**jaeger-agent** is a network daemon that listens for spans sent over UDP, which are batched and sent to the collector. It is designed to be deployed to all hosts as an infrastructure component. The agent abstracts the routing and discovery of the collectors away from the client.
 
-The agent is **not** a required component. For example, when your applications are instrumented with OpenTelemetry, the SDKs can be configured to forward the trace data directly to Jaeger collectors.
+**jaeger-agent** is **not** a required component. For example, when your applications are instrumented with OpenTelemetry, the SDKs can be configured to forward the trace data directly to **jaeger-collector**.
 
 ### Collector
 
-The Jaeger **collector** receives traces, runs them through a processing pipeline for validation and clean-up/enrichment, and stores them in a storage backend.
-
-Jaeger comes with built-in support for several storage backends (see [Deployment](../deployment)), as well as extensible plugin framework for implementing custom storage plugins.
+**jaeger-collector** receives traces, runs them through a processing pipeline for validation and clean-up/enrichment, and stores them in a storage backend. Jaeger comes with built-in support for several storage backends (see [Deployment](../deployment)), as well as extensible plugin framework for implementing custom storage plugins.
 
 ### Query
 
-The Jaeger **query** is a service that exposes the [APIs](../apis) for retrieving traces from storage and hosts a Web UI for searching and analyzing traces.
+**jaeger-query** is a service that exposes the [APIs](../apis) for retrieving traces from storage and hosts a Web UI for searching and analyzing traces.
 
 ### Ingester
 
-The Jaeger **ingester** is a service that reads traces from Kafka and writes them to a storage backend. Effectively, it is a stripped-down version of the Jaeger collector that supports Kafka as the only input protocol.
+**jaeger-ingester** is a service that reads traces from Kafka and writes them to a storage backend. Effectively, it is a stripped-down version of the Jaeger collector that supports Kafka as the only input protocol.
