@@ -119,7 +119,7 @@ After the role is granted, switch back to a non-privileged user.
 
 # Quick Start - Deploying the AllInOne image
 
-The simplest possible way to create a Jaeger instance is by creating a YAML file like the following example.  This will install the default AllInOne strategy, which deploys the "all-in-one" image (agent, collector, query, ingester, Jaeger UI) in a single pod, using in-memory storage by default.
+The simplest possible way to create a Jaeger instance is by creating a YAML file like the following example.  This will install the default AllInOne strategy, which deploys the **all-in-one** image (combining **jaeger-agent**, **jaeger-collector**, **jaeger-query**, and Jaeger UI) in a single pod, using in-memory storage by default.
 
 {{< info >}}
 This default strategy is intended for development, testing, and demo purposes, not for production.
@@ -283,7 +283,7 @@ The `streaming` strategy is designed to augment the `production` strategy by pro
 
 The collector can be configured to autoscale on demand, as described in the "Production strategy" section.
 
-The ingester can also be configured to autoscale on demand. By default, when no value for `.Spec.Ingester.Replicas` is provided, the Jaeger Operator will create a Horizontal Pod Autoscaler (HPA) configuration for the ingester. We recommend setting an explicit value for `.Spec.Ingester.MaxReplicas`, along with a reasonable value for the resources that the ingester's pod is expected to consume. When no `.Spec.Ingester.MaxReplicas` is set, the operator will set `100` as its value. Read more about HPA on [Kubernetes' website](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/). The feature can be explicitly disabled by setting `.Spec.Ingester.Autoscale` to `false`. Here's an example, setting the ingester's limits as well as the maximum number of replicas:
+**jaeger-ingester** can also be configured to autoscale on demand. By default, when no value for `.Spec.Ingester.Replicas` is provided, the Jaeger Operator will create a Horizontal Pod Autoscaler (HPA) configuration for **jaeger-ingester**. We recommend setting an explicit value for `.Spec.Ingester.MaxReplicas`, along with a reasonable value for the resources that **jaeger-ingester**'s pod is expected to consume. When no `.Spec.Ingester.MaxReplicas` is set, the operator will set `100` as its value. Read more about HPA on [Kubernetes' website](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/). The feature can be explicitly disabled by setting `.Spec.Ingester.Autoscale` to `false`. Here's an example, setting **jaeger-ingester**'s limits as well as the maximum number of replicas:
 
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -335,9 +335,9 @@ spec:
       es:
         server-urls: http://elasticsearch:9200
 ```
-<1> Identifies the Kafka configuration used by the collector, to produce the messages, and the ingester to consume the messages.
+<1> Identifies the Kafka configuration used by **jaeger-collector** to produce the messages, and by **jaeger-ingester** to consume them.
 
-<2> The deadlock interval is disabled by default (set to 0), to avoid the ingester being terminated when no messages arrive, but can be configured to specify the number of minutes to wait for a message before terminating.
+<2> The deadlock interval is disabled by default (set to 0), to prevent **jaeger-ingester** from being terminated when no messages arrive. It can be configured to specify the number of minutes to wait for a message before terminating.
 
 #### Self Provisioned Kafka Cluster
 
