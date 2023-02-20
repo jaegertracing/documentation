@@ -451,7 +451,7 @@ You can use the simplest example (shown above) and create a Jaeger instance usin
 
 ### Cassandra storage
 
-When the storage type is set to Cassandra, the operator will automatically create a batch job that creates the required schema for Jaeger to run. This batch job will block the Jaeger installation, so that it starts only after the schema is successfuly created. The creation of this batch job can be disabled by setting the `enabled` property to `false`:
+When the storage type is set to Cassandra, the operator will automatically create a batch job that creates the required schema for Jaeger to run. This batch job will block the Jaeger installation, so that it starts only after the schema is successfully created. The creation of this batch job can be disabled by setting the `enabled` property to `false`:
 
 ```yaml
 apiVersion: jaegertracing.io/v1
