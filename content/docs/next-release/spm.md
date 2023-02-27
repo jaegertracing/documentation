@@ -1,11 +1,7 @@
 ---
-title: Service Performance Monitoring (SPM) - Experimental
+title: Service Performance Monitoring (SPM)
 hasparent: true
 ---
-
-{{< info >}}
-The Service Performance Monitoring feature is currently considered **experimental**.
-{{< /info >}}
 
 ![Service Performance Monitoring](/img/frontend-ui/spm.png)
 
