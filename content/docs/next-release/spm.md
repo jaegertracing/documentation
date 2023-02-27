@@ -1,11 +1,7 @@
 ---
-title: Service Performance Monitoring (SPM) - Experimental
+title: Service Performance Monitoring (SPM)
 hasparent: true
 ---
-
-{{< info >}}
-The Service Performance Monitoring feature is currently considered **experimental**.
-{{< /info >}}
 
 ![Service Performance Monitoring](/img/frontend-ui/spm.png)
 
@@ -151,7 +147,7 @@ Note:
 
 The following configuration is required to enable the SPM feature:
 
-- [Jaeger UI](../frontend-ui#monitor-experimental)
+- [Jaeger UI](../frontend-ui#monitor)
 - [Jaeger Query](../cli#jaeger-query-prometheus)
   - Set the `METRICS_STORAGE_TYPE` environment variable to `prometheus`.
   - Optional: Set `--prometheus.server-url` (or `PROMETHEUS_SERVER_URL` environment variable)

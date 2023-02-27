@@ -76,7 +76,7 @@ An example configuration file:
 
 `dependencies.menuEnabled` enables (`true`) or disables (`false`) the dependencies menu button. Default: `true`.
 
-### Monitor (Experimental)
+### Monitor
 
 `monitor.menuEnabled` enables (`true`) or disables (`false`) the Monitor menu button. Default: `false`.
 
