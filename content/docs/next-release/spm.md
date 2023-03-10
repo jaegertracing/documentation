@@ -69,12 +69,25 @@ as such, is only relevant to the Jaeger Query component (and All In One).
 
 {{<mermaid align="center">}}
 graph
+    OTLP_EXPORTER[OTLP Exporter] --> TRACE_RECEIVER
+
+    subgraph Service
+        subgraph OpenTelemetry SDK
+            OTLP_EXPORTER
+        end
+    end
+
     TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_PROC[Spanmetrics Processor]
     TRACE_RECEIVER --> |spans| TRACE_EXPORTER[Trace Exporter]
+    TRACE_EXPORTER --> |spans| COLLECTOR[Jaeger Collector]
     SPANMETRICS_PROC --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PromethesusRemoteWrite Exporter]
-    UI[Jaeger UI] --> QUERY
-    QUERY[Jaeger Query Service] --> METRICS_STORE[Metrics Storage]
-    PROMETHEUS_EXPORTER --> |metrics| METRICS_STORE
+    PROMETHEUS_EXPORTER --> |metrics| METRICS_STORE[(Metrics Storage)]
+
+    COLLECTOR --> |spans| SPAN_STORE[(Span Storage)]
+    SPAN_STORE --> QUERY[Jaeger Query]
+    METRICS_STORE --> QUERY
+    QUERY --> UI[Jaeger UI]
+
     subgraph OpenTelemetry Collector
         subgraph Pipeline
             TRACE_RECEIVER
@@ -83,13 +96,18 @@ graph
             PROMETHEUS_EXPORTER
         end
     end
+
+    style Service fill:#DFDFDF,color:black
+
+    style OTLP_EXPORTER fill:#404CA8,color:white
+    style TRACE_RECEIVER fill:#404CA8,color:white
+    style TRACE_EXPORTER fill:#404CA8,color:white
+    style SPANMETRICS_PROC fill:#404CA8,color:white
+    style PROMETHEUS_EXPORTER fill:#404CA8,color:white
+
     style UI fill:#9AEBFE,color:black
     style QUERY fill:#9AEBFE,color:black
-
-    style TRACE_RECEIVER fill:#404ca8,color:white
-    style TRACE_EXPORTER fill:#404ca8,color:white
-    style SPANMETRICS_PROC fill:#404ca8,color:white
-    style PROMETHEUS_EXPORTER fill:#404ca8,color:white
+    style COLLECTOR fill:#9AEBFE,color:black
 {{< /mermaid >}}
 
 ## Derived Time Series
