@@ -84,7 +84,7 @@ graph
     PROMETHEUS_EXPORTER --> |metrics| METRICS_STORE[(Metrics Storage)]
 
     COLLECTOR --> |spans| SPAN_STORE[(Span Storage)]
-    SPAN_STORE --> QUERY[Jaeger Query Service]
+    SPAN_STORE --> QUERY[Jaeger Query]
     METRICS_STORE --> QUERY
     QUERY --> UI[Jaeger UI]
 
