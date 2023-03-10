@@ -97,15 +97,17 @@ graph
         end
     end
 
+    style Service fill:#DFDFDF,color:black
+
+    style OTLP_EXPORTER fill:#404CA8,color:white
+    style TRACE_RECEIVER fill:#404CA8,color:white
+    style TRACE_EXPORTER fill:#404CA8,color:white
+    style SPANMETRICS_PROC fill:#404CA8,color:white
+    style PROMETHEUS_EXPORTER fill:#404CA8,color:white
+
     style UI fill:#9AEBFE,color:black
     style QUERY fill:#9AEBFE,color:black
     style COLLECTOR fill:#9AEBFE,color:black
-
-    style OTLP_EXPORTER fill:#404ca8,color:white
-    style TRACE_RECEIVER fill:#404ca8,color:white
-    style TRACE_EXPORTER fill:#404ca8,color:white
-    style SPANMETRICS_PROC fill:#404ca8,color:white
-    style PROMETHEUS_EXPORTER fill:#404ca8,color:white
 {{< /mermaid >}}
 
 ## Derived Time Series
