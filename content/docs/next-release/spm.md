@@ -69,44 +69,43 @@ as such, is only relevant to the Jaeger Query component (and All In One).
 
 {{<mermaid align="center">}}
 graph
+    OTLP_EXPORTER[OTLP Exporter] --> TRACE_RECEIVER
 
-  OTLP_EXPORTER[OTLP Exporter] --> TRACE_RECEIVER
-
-  subgraph Service
-    subgraph OpenTelemetry SDK
-      OTLP_EXPORTER
+    subgraph Service
+        subgraph OpenTelemetry SDK
+            OTLP_EXPORTER
+        end
     end
-  end
 
-  TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_PROC[Spanmetrics Processor]
-  TRACE_RECEIVER --> |spans| TRACE_EXPORTER[Trace Exporter]
-  TRACE_EXPORTER --> |spans| COLLECTOR[Jaeger Collector]
-  SPANMETRICS_PROC --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PromethesusRemoteWrite Exporter]
-  PROMETHEUS_EXPORTER --> |metrics| METRICS_STORE[(Metrics Storage)]
+    TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_PROC[Spanmetrics Processor]
+    TRACE_RECEIVER --> |spans| TRACE_EXPORTER[Trace Exporter]
+    TRACE_EXPORTER --> |spans| COLLECTOR[Jaeger Collector]
+    SPANMETRICS_PROC --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PromethesusRemoteWrite Exporter]
+    PROMETHEUS_EXPORTER --> |metrics| METRICS_STORE[(Metrics Storage)]
 
-  COLLECTOR --> |spans| SPAN_STORE[(Span Storage)]
-  SPAN_STORE --> QUERY[Jaeger Query Service]
-  METRICS_STORE --> QUERY
-  QUERY --> UI[Jaeger UI]
+    COLLECTOR --> |spans| SPAN_STORE[(Span Storage)]
+    SPAN_STORE --> QUERY[Jaeger Query Service]
+    METRICS_STORE --> QUERY
+    QUERY --> UI[Jaeger UI]
 
-  subgraph OpenTelemetry Collector
-      subgraph Pipeline
-          TRACE_RECEIVER
-          SPANMETRICS_PROC
-          TRACE_EXPORTER
-          PROMETHEUS_EXPORTER
-      end
-  end
+    subgraph OpenTelemetry Collector
+        subgraph Pipeline
+            TRACE_RECEIVER
+            SPANMETRICS_PROC
+            TRACE_EXPORTER
+            PROMETHEUS_EXPORTER
+        end
+    end
 
-  style UI fill:#9AEBFE,color:black
-  style QUERY fill:#9AEBFE,color:black
-  style COLLECTOR fill:#9AEBFE,color:black
+    style UI fill:#9AEBFE,color:black
+    style QUERY fill:#9AEBFE,color:black
+    style COLLECTOR fill:#9AEBFE,color:black
 
-  style OTLP_EXPORTER fill:#404ca8,color:white
-  style TRACE_RECEIVER fill:#404ca8,color:white
-  style TRACE_EXPORTER fill:#404ca8,color:white
-  style SPANMETRICS_PROC fill:#404ca8,color:white
-  style PROMETHEUS_EXPORTER fill:#404ca8,color:white
+    style OTLP_EXPORTER fill:#404ca8,color:white
+    style TRACE_RECEIVER fill:#404ca8,color:white
+    style TRACE_EXPORTER fill:#404ca8,color:white
+    style SPANMETRICS_PROC fill:#404ca8,color:white
+    style PROMETHEUS_EXPORTER fill:#404ca8,color:white
 {{< /mermaid >}}
 
 ## Derived Time Series
