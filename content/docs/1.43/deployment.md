@@ -429,7 +429,7 @@ where `{datacenter}` is the name used in the Cassandra configuration / network t
 The script also allows overriding TTL, keyspace name, replication factor, etc.
 Run the script without arguments to see the full list of recognized parameters.
 
-**Note**: See [README](https://github.com/jaegertracing/jaeger/blob/43c29a0e2a331c36e1755e2a6c0f90c1f4181e8e/plugin/storage/cassandra/schema/README.md) for more details on Cassandra schema management.
+**Note**: See [README](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/cassandra/schema/README.md) for more details on Cassandra schema management.
 
 #### TLS support
 
