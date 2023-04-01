@@ -4,9 +4,9 @@ title: Roadmap
 
 The following is only a selection of some of the major features we plan to implement, some of which are near term and some are longer term. We have tried to put these in rough priority as well as having a wishlist at the end. To get a more complete overview of planned features and current work, see the issue trackers for the various repositories, for example, the [Jaeger backend](https://github.com/jaegertracing/jaeger/issues/).
 
-## Support for OpenSearch
+## Support for ClickHouse as a native datasource
 
-Backend storage support for [OpenSearch](https://opensearch.org/) as a backend database. Today this is fully compatible with ElasticSearch APIs, but these may diverge. OpenSearch is Apache 2.0 licensed and hopefully will be led by a community of contributors, but today is led by AWS. ElasticSearch is SSPL licensed and led by Elastic NV making it no longer an open source project.
+Backend storage support for [Clickhouse](https://github.com/ClickHouse/ClickHouse) which is an open-source column-oriented database for OLAP use cases. It is highly efficient and performant for high volumes of ingestion and search making it a good database for tracing and logging data specifically. It can also do aggregates very quickly which will come in handy for several features in Jaeger. [[[Feature]]: ClickHouse as a core storage backend](https://github.com/jaegertracing/jaeger/issues/4196)
 
 ## Integration with OpenTelemetry collector
 
