@@ -42,7 +42,7 @@ One benefit of Cassandra backend is simplified maintenance due to its native sup
 
 ## Why do Jaeger trace IDs look differently in Kafka and in the UI?
 
-Under the hood, at the data model level, the Jaeger trace IDs are a sequence of 16 bytes. However, these 16 bytes can be represented in many diffferent ways:
+Under the hood, at the data model level, the Jaeger trace IDs are a sequence of 16 bytes. However, these 16 bytes can be represented in many different ways:
 
   * in the UI, we historically represented them as hex-encoded strings, e.g., `7e90c0eca22784ec7e90c0eca22784ec`. These strings can be either 32 characters long when using the 128-bit IDs (as more common in OpenTelemetry), or 16 characters if the IDs are generated in the legacy 64-bit mode.
   * in the [domain model][trace-id-domain] in the Jaeger backend code, we represent trace ID as a pair of unsigned 64-bit integers using big-endian encoding. This was done for efficiency because a byte slice in Go requires an extra memory allocation.

@@ -90,7 +90,7 @@ The operator is now ready to create Jaeger instances.
 
 <!-- TODO: Add instructions for installing via the operatorhub? -->
 
-The instructions from the previous section also work for installing the operator on OKD or OpenShift. Make sure you are logged in as a privileged user, when you install the role based acces control (RBAC) rules, the custom resource definition, and the operator.
+The instructions from the previous section also work for installing the operator on OKD or OpenShift. Make sure you are logged in as a privileged user, when you install the role based access control (RBAC) rules, the custom resource definition, and the operator.
 
 ```bash
 oc login -u <privileged user>
