@@ -472,6 +472,22 @@ usercert = ~/.cassandra/client-cert
 # validate = false
 ```
 
+### ScyllaDB
+Last checked version: 5.1.7
+
+ScyllaDB can be utilized as a drop-in replacement for Cassandra when deploying the Jaeger tracing server. The integration process is straightforward and requires minimal changes to your existing configuration.
+
+To utilize ScyllaDB in place of Cassandra, you simply need to update the CASSANDRA_SERVERS environment variable to point to your ScyllaDB hosts. No other specific configuration changes are necessary, as ScyllaDB is fully compatible with Cassandra settings. Ensure that the environment variable reflects the correct host information, and the Jaeger tracing server will function seamlessly with ScyllaDB.
+
+Example:
+
+```sh
+docker run \
+  -e SPAN_STORAGE_TYPE=cassandra \
+  -e CASSANDRA_SERVERS="scylla_db_1, scylla_db_2, scylla_db_3" \
+  jaegertracing/jaeger-collector:{{< currentVersion >}}
+```
+
 ### Elasticsearch
 Supported in Jaeger since 0.6.0
 Supported versions: 5.x, 6.x, 7.x
