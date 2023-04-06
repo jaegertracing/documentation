@@ -759,6 +759,10 @@ Available sidecar plugins:
 * [Logz.io](https://github.com/logzio/jaeger-logzio) - secure, scalable, managed, cloud-based ELK storage.
 * [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse) - fast open-source OLAP DBMS.
 
+### Compatible Backends
+
+* ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
+
 #### Remote storage model
 
 In the remote storage model the backend server runs as a separate process, and the Jaeger components are configured to talk to it over gRPC.
