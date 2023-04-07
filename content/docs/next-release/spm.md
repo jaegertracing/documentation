@@ -296,3 +296,12 @@ both ingress and egress spans in the `server` and `client` span kinds, respectiv
 [http-api-readme]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api
 [spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/spanmetricsprocessor/testdata/config-full.yaml#L46
 [spanmetrics-config-latency]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/spanmetricsprocessor/testdata/config-full.yaml#L38
+
+### 403 when executing metrics query
+
+If logs contain the error resembling: `failed executing metrics query: client_error: client error: 403`,
+it is possible that the Prometheus server is expecting a bearer token.
+
+Jaeger Query (and all-in-one) can be configured to pass the bearer token in
+metrics queries via the `--prometheus.token-file` (or `PROMETHEUS_TOKEN_FILE`)
+parameter, with its value set to the path of the file containing the bearer token.
