@@ -303,5 +303,6 @@ If logs contain the error resembling: `failed executing metrics query: client_er
 it is possible that the Prometheus server is expecting a bearer token.
 
 Jaeger Query (and all-in-one) can be configured to pass the bearer token in
-metrics queries via the `--prometheus.token-file` (or `PROMETHEUS_TOKEN_FILE`)
-parameter, with its value set to the path of the file containing the bearer token.
+metrics queries via the `--prometheus.token-file` (or the `PROMETHEUS_TOKEN_FILE`
+environment variable) parameter, with its value set to the path of the file
+containing the bearer token.
