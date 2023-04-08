@@ -286,7 +286,6 @@ data quality issue, and the instrumentation should set the span kind.
 The reason for defaulting to `server` span kinds is to avoid double-counting
 both ingress and egress spans in the `server` and `client` span kinds, respectively.
 
-
 [spm-demo]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor
 [metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto
 [openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53
@@ -296,3 +295,13 @@ both ingress and egress spans in the `server` and `client` span kinds, respectiv
 [http-api-readme]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api
 [spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/spanmetricsprocessor/testdata/config-full.yaml#L46
 [spanmetrics-config-latency]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/spanmetricsprocessor/testdata/config-full.yaml#L38
+
+### 403 when executing metrics query
+
+If logs contain the error resembling: `failed executing metrics query: client_error: client error: 403`,
+it is possible that the Prometheus server is expecting a bearer token.
+
+Jaeger Query (and all-in-one) can be configured to pass the bearer token in
+metrics queries via the `--prometheus.token-file` command-line parameter
+(or the `PROMETHEUS_TOKEN_FILE` environment variable), with its value set to
+the path of the file containing the bearer token.
