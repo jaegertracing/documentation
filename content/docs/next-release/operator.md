@@ -20,7 +20,7 @@ While we intend to have the Jaeger Operator working for as many Kubernetes versi
 While multiple operators might coexist watching the same set of namespaces, which operator will succeed in setting itself as the owner of the CR is undefined behavior. Automatic injection of the sidecars might also result in undefined behavior. Therefore, it's highly recommended to have at most one operator watching each namespace. Note that namespaces might contain any number of Jaeger instances (CRs).
 
 {{< info >}}
-The Jaeger Operator version tracks one version of the Jaeger components (Query, Collector, Agent). When a new version of the Jaeger components is released, a new version of the operator will be released that understands how running instances of the previous version can be upgraded to the new version.
+The Jaeger Operator version tracks one version of the Jaeger components (**jaeger-query**, **jaeger-collector**, **jaeger-agent**). When a new version of the Jaeger components is released, a new version of the operator will be released that understands how running instances of the previous version can be upgraded to the new version.
 {{< /info >}}
 
 ## Prerequisite
@@ -240,15 +240,15 @@ The available strategies are described in the following sections.
 
 This strategy is intended for development, testing, and demo purposes.
 
-The main backend components, agent, collector and query service, are all packaged into a single executable which is configured (by default) to use in-memory storage. This strategy cannot be scaled beyond one replica.
+The main backend components,**jaeger-agent**, **jaeger-collector** and **jaeger-query** service, are all packaged into a single executable which is configured (by default) to use in-memory storage. This strategy cannot be scaled beyond one replica.
 
 ## Production strategy
 
 The `production` strategy is intended (as the name suggests) for production environments, where long term storage of trace data is important, as well as a more scalable and highly available architecture is required. Each of the backend components is therefore separately deployed.
 
-The agent can be injected as a sidecar on the instrumented application or as a daemonset.
+**jaeger-agent** can be injected as a sidecar on the instrumented application or as a daemonset.
 
-The collector can be configured to autoscale on demand. By default, when no value for `.Spec.Collector.Replicas` is provided, the Jaeger Operator will create a Horizontal Pod Autoscaler (HPA) configuration for the collector. We recommend setting an explicit value for `.Spec.Collector.MaxReplicas`, along with a reasonable value for the resources that the collector's pod is expected to consume. When no `.Spec.Collector.MaxReplicas` is set, the operator will set `100` as its value. Read more about HPA on [Kubernetes' website](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/). The feature can be explicitly disabled by setting `.Spec.Collector.Autoscale` to `false`. Here's an example, setting the collector's limits as well as the maximum number of replicas:
+**jaeger-collector** can be configured to autoscale on demand. By default, when no value for `.Spec.Collector.Replicas` is provided, the Jaeger Operator will create a Horizontal Pod Autoscaler (HPA) configuration for **jaeger-collector**. We recommend setting an explicit value for `.Spec.Collector.MaxReplicas`, along with a reasonable value for the resources that **jaeger-collector**'s pod is expected to consume. When no `.Spec.Collector.MaxReplicas` is set, the operator will set `100` as its value. Read more about HPA on [Kubernetes' website](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/). The feature can be explicitly disabled by setting `.Spec.Collector.Autoscale` to `false`. Here's an example, setting **jaeger-collector**'s limits as well as the maximum number of replicas:
 
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -265,7 +265,7 @@ spec:
         memory: 128Mi
 ```
 
-The query and collector services are configured with a supported storage type - currently Cassandra or Elasticsearch. Multiple instances of each of these components can be provisioned as required for performance and resilience purposes.
+**jaeger-query** and **jaeger-collector** services are configured with a supported storage type - currently Cassandra or Elasticsearch. Multiple instances of each of these components can be provisioned as required for performance and resilience purposes.
 
 The main additional requirement is to provide the details of the storage type and options, for example:
 
@@ -281,7 +281,7 @@ The main additional requirement is to provide the details of the storage type an
 
 The `streaming` strategy is designed to augment the `production` strategy by providing a streaming capability that effectively sits between the collector and the backend storage (Cassandra or Elasticsearch). This provides the benefit of reducing the pressure on the backend storage, under high load situations, and enables other trace post-processing capabilities to tap into the real time span data directly from the streaming platform (Kafka).
 
-The collector can be configured to autoscale on demand, as described in the "Production strategy" section.
+**jaeger-collector** can be configured to autoscale on demand, as described in the "Production strategy" section.
 
 **jaeger-ingester** can also be configured to autoscale on demand. By default, when no value for `.Spec.Ingester.Replicas` is provided, the Jaeger Operator will create a Horizontal Pod Autoscaler (HPA) configuration for **jaeger-ingester**. We recommend setting an explicit value for `.Spec.Ingester.MaxReplicas`, along with a reasonable value for the resources that **jaeger-ingester**'s pod is expected to consume. When no `.Spec.Ingester.MaxReplicas` is set, the operator will set `100` as its value. Read more about HPA on [Kubernetes' website](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/). The feature can be explicitly disabled by setting `.Spec.Ingester.Autoscale` to `false`. Here's an example, setting **jaeger-ingester**'s limits as well as the maximum number of replicas:
 
@@ -418,9 +418,9 @@ spec:
 
 <7> Some options are namespaced and we can alternatively break them into nested objects. We could have specified `memory.max-traces: 100000`.
 
-<8> By default, an ingress object is created for the query service. It can be disabled by setting its `enabled` option to `false`. If deploying on OpenShift, this will be represented by a Route object.
+<8> By default, an ingress object is created for the **jaeger-query** service. It can be disabled by setting its `enabled` option to `false`. If deploying on OpenShift, this will be represented by a Route object.
 
-<9> By default, the operator assumes that agents are deployed as sidecars within the target pods. Specifying the strategy as "DaemonSet" changes that and makes the operator deploy the agent as DaemonSet. Note that your tracer client will probably have to override the "JAEGER_AGENT_HOST" environment variable to use the node's IP.
+<9> By default, the operator assumes that **jaeger-agent**s are deployed as sidecars within the target pods. Specifying the strategy as "DaemonSet" changes that and makes the operator deploy **jaeger-agent** as DaemonSet. Note that your tracer client will probably have to override the "JAEGER_AGENT_HOST" environment variable to use the node's IP.
 
 <10> Define annotations to be applied to all deployments (not services). These can be overridden by annotations defined on the individual components.
 
@@ -658,7 +658,7 @@ spec:
         server-urls: http://elasticsearch:9200
 ```
 
-<1> Configures query and collector to use read and write index aliases.
+<1> Configures **jaeger-query** and **jaeger-collector** to use read and write index aliases.
 
 <2> Disables creation of default index templates.
 
@@ -709,7 +709,7 @@ spec:
 ### Prometheus
 
 Setting `spec.metricsStorage.type` to `prometheus` enables using Jaeger with
-PromQL-compatible storage implementations to query R.E.D metrics for the
+PromQL-compatible storage implementations to **jaeger-query** R.E.D metrics for the
 [Service Performance Monitoring](../spm) feature.
 
 The following is an example of a Jaeger CR using the `allInOne` deployment strategy,
@@ -781,16 +781,16 @@ Note that the job loads all data for the current day into memory.
 ## Auto-injecting Jaeger Agent Sidecars
 
 {{< warning >}}
-Currently, only `Deployments` are supported for auto-injecting Jaeger Agent sidecars.
+Currently, only `Deployments` are supported for auto-injecting **jaeger-agent** sidecars.
 
 For other controller types, please see [Manually Defining Jaeger Agent Sidecars](#manually-defining-jaeger-agent-sidecars) below.
 
 Support for auto-injecting other controller types is being tracked with [Issue #750](https://github.com/jaegertracing/jaeger-operator/issues/750).
 {{< /warning >}}
 
-The operator can inject Jaeger Agent sidecars in `Deployment` workloads, provided that the deployment or its namespace has the annotation `sidecar.jaegertracing.io/inject` with a suitable value. The values can be either `"true"` (as string), or the Jaeger instance name, as returned by `kubectl get jaegers`. When `"true"` is used, there should be exactly *one* Jaeger instance for the same namespace as the deployment, otherwise, the operator can't figure out automatically which Jaeger instance to use. A specific Jaeger instance name on a deployment has a higher precedence than `true` applied on its namespace.
+The operator can inject **jaeger-agent** sidecars in `Deployment` workloads, provided that the deployment or its namespace has the annotation `sidecar.jaegertracing.io/inject` with a suitable value. The values can be either `"true"` (as string), or the Jaeger instance name, as returned by `kubectl get jaegers`. When `"true"` is used, there should be exactly *one* Jaeger instance for the same namespace as the deployment, otherwise, the operator can't figure out automatically which Jaeger instance to use. A specific Jaeger instance name on a deployment has a higher precedence than `true` applied on its namespace.
 
-The following snippet shows a simple application that will get a sidecar injected, with the Jaeger Agent pointing to the single Jaeger instance available in the same namespace:
+The following snippet shows a simple application that will get a sidecar injected, with **jaeger-agent** pointing to the single Jaeger instance available in the same namespace:
 
 ```yaml
 apiVersion: apps/v1
@@ -816,11 +816,11 @@ spec:
 
 A complete sample deployment is available at [`deploy/examples/business-application-injected-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/blob/main/examples/business-application-injected-sidecar.yaml).
 
-When the sidecar is injected, the Jaeger Agent can then be accessed at its default location on `localhost`.
+When the sidecar is injected, **jaeger-agent** can then be accessed at its default location on `localhost`.
 
 ### Deployment-level Configurations for Injected Sidecars
 
-Since the sidecar may be injected in Deployments that are not managed by the jaeger-operator, many configurations that apply at the Deployment-level are not applied to a sidecar's Deployment *unless* they are specified under the agent node. The following configurations are supported for the sidecar's Deployment:
+Since the sidecar may be injected in Deployments that are not managed by the jaeger-operator, many configurations that apply at the Deployment-level are not applied to a sidecar's Deployment *unless* they are specified under **jaeger-agent** node. The following configurations are supported for the sidecar's Deployment:
 
 - Volumes (& VolumeMounts)
 - ImagePullSecrets
@@ -848,9 +848,9 @@ spec:
 
 ## Manually Defining Jaeger Agent Sidecars
 
-For controller types other than `Deployments` (e.g. `StatefulSets`, `DaemonSets`, etc), the Jaeger Agent sidecar can be manually defined in your specification.
+For controller types other than `Deployments` (e.g. `StatefulSets`, `DaemonSets`, etc), **jaeger-agent** sidecar can be manually defined in your specification.
 
-The following snippet shows the manual definition you can include in your `containers` section for a Jaeger Agent sidecar:
+The following snippet shows the manual definition you can include in your `containers` section for a **jaeger-agent** sidecar:
 
 ```yaml
 - name: jaeger-agent
@@ -879,11 +879,11 @@ The following snippet shows the manual definition you can include in your `conta
 
 A complete sample `StatefulSet` is available at [`deploy/examples/statefulset-manual-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/tree/main/examples/statefulset-manual-sidecar.yaml).
 
-The Jaeger Agent can then be accessed at its default location on `localhost`.
+**jaeger-agent** can then be accessed at its default location on `localhost`.
 
 ## Installing the Agent as DaemonSet
 
-By default, the Operator expects the agents to be deployed as sidecars to the target applications. This is convenient for several purposes, like in a multi-tenant scenario or to have better load balancing, but there are scenarios where you might want to install the agent as a `DaemonSet`. In that case, specify the Agent's strategy to `DaemonSet`, as follows:
+By default, the Operator expects **jaeger-agent**s to be deployed as sidecars to the target applications. This is convenient for several purposes, like in a multi-tenant scenario or to have better load balancing, but there are scenarios where you might want to install **jaeger-agent** as a `DaemonSet`. In that case, specify the **jaeger-agent**'s strategy to `DaemonSet`, as follows:
 
 ```yaml
 apiVersion: jaegertracing.io/v1
@@ -899,7 +899,7 @@ spec:
 If you attempt to install two Jaeger instances on the same cluster with `DaemonSet` as the strategy, only *one* will end up deploying a `DaemonSet`, as the agent is required to bind to well-known ports on the node. Because of that, the second daemon set will fail to bind to those ports.
 {{< /danger >}}
 
-Your tracer client will then most likely need to be told where the agent is located. This is usually done by setting the environment variable `JAEGER_AGENT_HOST` to the value of the Kubernetes node's IP, for example:
+Your tracer client will then most likely need to be told where **jaeger-agent** is located. This is usually done by setting the environment variable `JAEGER_AGENT_HOST` to the value of the Kubernetes node's IP, for example:
 
 ```yaml
 apiVersion: apps/v1
@@ -927,7 +927,7 @@ spec:
 
 ### OpenShift
 
-In OpenShift, a `HostPort` can only be set when a special security context is set. A separate service account can be used by the Jaeger Agent with the permission to bind to `HostPort`, as follows:
+In OpenShift, a `HostPort` can only be set when a special security context is set. A separate service account can be used by **jaeger-agent** with the permission to bind to `HostPort`, as follows:
 
 ```bash
 oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/main/examples/openshift/hostport-scc-daemonset.yaml # <1>
@@ -938,7 +938,7 @@ oc apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/main
 ```
 <1> The `SecurityContextConstraints` with the `allowHostPorts` policy
 
-<2> The `ServiceAccount` to be used by the Jaeger Agent
+<2> The `ServiceAccount` to be used by **jaeger-agent**
 
 <3> Adds the security policy to the service account
 
@@ -1068,7 +1068,7 @@ Above port values must be globally unique, so `jaeger-operator` port can expose 
 
 ## Secrets Support
 
-The Operator supports passing secrets to the Collector, Query and All-In-One deployments. This can be used for example, to pass credentials (username/password) to access the underlying storage backend (for example: Elasticsearch).
+The Operator supports passing secrets to the **jaeger-collector**, **jaeger-query** and **all-in-one** deployments. This can be used for example, to pass credentials (username/password) to access the underlying storage backend (for example: Elasticsearch).
 The secrets are available as environment variables in the (Collector/Query/All-In-One) nodes.
 
 ```yaml
@@ -1415,7 +1415,7 @@ Starting from version 1.16.0, the Jaeger Operator is able to generate spans rela
           protocol: UDP
 ```
 
-Note that you must also manually provision the Jaeger instance. You can do this after the Jaeger Operator has been initialized. The Jaeger Agent will keep the Operator spans in the internal buffer until it makes a connection to the Jaeger instance. The following Jaeger CR can be used to provision a Jaeger instance suitable for non-production purposes:
+Note that you must also manually provision the Jaeger instance. You can do this after the Jaeger Operator has been initialized. **jaeger-agent** will keep the Operator spans in the internal buffer until it makes a connection to the Jaeger instance. The following Jaeger CR can be used to provision a Jaeger instance suitable for non-production purposes:
 
 ```yaml
 apiVersion: jaegertracing.io/v1
