@@ -1,0 +1,17 @@
+name: jaeger-ingester docs
+synopsis: Generates documentation
+description: Generates command and flags documentation
+usage: jaeger-ingester docs [flags]
+options:
+    - name: dir
+      default_value: ./
+      usage: Directory where generate the documentation.
+    - name: format
+      default_value: md
+      usage: 'Supported formats: [md man rst yaml].'
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for docs
+see_also:
+    - jaeger-ingester - Jaeger ingester consumes from Kafka and writes to storage.
