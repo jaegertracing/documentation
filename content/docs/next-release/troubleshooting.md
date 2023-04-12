@@ -24,35 +24,35 @@ Most Jaeger clients are able to log the spans that are being reported to the log
 
 The log entry above contains three IDs: the trace ID `e66dc77b8a1e813b`, the span's ID `6b39b9c18f8ef082` and the span's parent ID `a56f41e38ca449a4`. When the backend components have the log level set to `debug`, the span and trace IDs should be visible on their standard output (see more about that below, under “Increase the logging in the backend components”).
 
-The logging reporter follows the sampling decision made by the sampler, meaning that if the span is logged, it should also reach the agent or collector.
+The logging reporter follows the sampling decision made by the sampler, meaning that if the span is logged, it should also reach the **jaeger-agent** or **jaeger-collector**.
 
 ## Bypass the Jaeger Agent
 
-By default, the Jaeger Client is configured to send spans via UDP to a Jaeger Agent running on `localhost`. As some networking setups might drop or block UDP packets, or impose size limits, the Jaeger Client can be configured to bypass the Agent, sending spans directly to the Collector. Some clients, such as the Jaeger _Java_ Client, support the environment variable `JAEGER_ENDPOINT` which can be used to specify the Collector's location, such as `http://jaeger-collector:14268/api/traces`. Refer to the Jaeger Client's documentation for the language you are using. For example, when you have configured the `JAEGER_ENDPOINT` property in the Jaeger _Java_ Client, it logs the following when the tracer is created (notice `sender=HttpSender`):
+By default, the Jaeger Client is configured to send spans via UDP to a **jaeger-agent** running on `localhost`. As some networking setups might drop or block UDP packets, or impose size limits, the Jaeger Client can be configured to bypass **jaeger-agent**, sending spans directly to **jaeger-collector**. Some clients, such as the Jaeger _Java_ Client, support the environment variable `JAEGER_ENDPOINT` which can be used to specify **jaeger-collector**'s location, such as `http://jaeger-collector:14268/api/traces`. Refer to the Jaeger Client's documentation for the language you are using. For example, when you have configured the `JAEGER_ENDPOINT` property in the Jaeger _Java_ Client, it logs the following when the tracer is created (notice `sender=HttpSender`):
 
     2018-12-10 17:06:30 INFO  Configuration:236 - Initialized  tracer=JaegerTracer(...,  reporter=CompositeReporter(reporters=[RemoteReporter(sender=HttpSender(),  ...), ...]), ...)
 
 {{< warning >}}
 
-The Jaeger Java Client will not fail when a connection to the Jaeger Collector can't be established. Spans will be collected and placed in an internal buffer. They might eventually reach the Collector once a connection is established, or get dropped in case the buffer reaches its maximum size.
+The Jaeger Java Client will not fail when a connection to **jaeger-collector** can't be established. Spans will be collected and placed in an internal buffer. They might eventually reach **jaeger-collector** once a connection is established, or get dropped in case the buffer reaches its maximum size.
 
 {{< /warning >}}
 
 If your Jaeger backend is still not able to receive spans (see the following sections on how to check logs and metrics for that), then the issue is most likely with your networking namespace configuration. When running the Jaeger backend components as Docker containers, the typical mistakes are:
 
-  * Not exposing the appropriate ports outside of the container. For example, the collector may be listening on `:14268` inside the container network namespace, but the port is not reachable from the outside.
-  * Not making the agent's or collector's host name visible from the application's network namespace. For example, if you run both your application and Jaeger backend in separate containers in Docker, they either need to be in the same namespace, or the application's container needs to be given access to Jaeger backend using the `--link` option of the `docker` command.
+  * Not exposing the appropriate ports outside of the container. For example, **jaeger-collector** may be listening on `:14268` inside the container network namespace, but the port is not reachable from the outside.
+  * Not making **jaeger-agent**'s or **jaeger-collector**'s host name visible from the application's network namespace. For example, if you run both your application and Jaeger backend in separate containers in Docker, they either need to be in the same namespace, or the application's container needs to be given access to Jaeger backend using the `--link` option of the `docker` command.
 
 ## Increase the logging in the backend components
 
-The Jaeger Agent and Collector provide useful debugging information when the log level is set to `debug`. Every UDP packet that is received by the Agent is logged, as well as every batch that is sent by the Agent to the Collector. The Collector also logs every batch it receives and logs every span that is stored in the permanent storage.
+**jaeger-agent** and **jaeger-collector** provide useful debugging information when the log level is set to `debug`. Every UDP packet that is received by **jaeger-agent** is logged, as well as every batch that is sent by **jaeger-agent** to the **jaeger-collector**. **jaeger-collector** also logs every batch it receives and logs every span that is stored in the permanent storage.
 
-Here's what to expect when the Jaeger Agent is started with the `--log-level=debug` flag:
+Here's what to expect when **jaeger-agent** is started with the `--log-level=debug` flag:
 
     {"level":"debug","ts":1544458854.5367086,"caller":"processors/thrift_processor.go:113","msg":"Span(s) received by the agent","bytes-received":359}
     {"level":"debug","ts":1544458854.5408711,"caller":"tchannel/reporter.go:133","msg":"Span batch submitted by the agent","span-count":3}
 
-On the Collector side, these are the expected log entries when the flag `--log-level=debug` is specified:
+On **jaeger-collector** side, these are the expected log entries when the flag `--log-level=debug` is specified:
 
     {"level":"debug","ts":1544458854.5406284,"caller":"app/span_handler.go:90","msg":"Span batch processed by the collector.","ok":true}
     {"level":"debug","ts":1544458854.5406587,"caller":"app/span_processor.go:105","msg":"Span written to the storage by the collector","trace-id":"e66dc77b8a1e813b","span-id":"6b39b9c18f8ef082"}
@@ -61,7 +61,7 @@ On the Collector side, these are the expected log entries when the flag `--log-l
 
 ## Check the /metrics endpoint
 
-For the cases where it's not possible or desirable to increase the logging on the Collector side, the `/metrics` endpoint can be used to check if spans for specific services were received. The `/metrics` endpoint is served from the admin port, which is different for each binary (see [Deployment](../deployment/)). Assuming that the Jaeger Collector is available under a host named `jaeger-collector`, here's a sample `curl` call to obtain the metrics:
+For the cases where it's not possible or desirable to increase the logging on the Collector side, the `/metrics` endpoint can be used to check if spans for specific services were received. The `/metrics` endpoint is served from the admin port, which is different for each binary (see [Deployment](../deployment/)). Assuming that **jaeger-collector** is available under a host named `jaeger-collector`, here's a sample `curl` call to obtain the metrics:
 
     curl http://jaeger-collector:14269/metrics
 

@@ -7,14 +7,14 @@ This page documents the existing security mechanisms in Jaeger, organized by the
 
 ## Client to Agent
 
-Deployments that involve Jaeger Agent are meant for trusted environments where the agent is run as a sidecar within the container's network namespace, or as a host agent. Therefore, there is currently no support for traffic encryption between clients and agents.
+Deployments that involve **jaeger-agent** are meant for trusted environments where the agent is run as a sidecar within the container's network namespace, or as a host agent. Therefore, there is currently no support for traffic encryption between clients and agents.
 
 * {{< check_no >}} Sending trace data over UDP - no TLS/authentication.
 * {{< check_no >}} Retrieving sampling configuration via HTTP - no TLS/authentication.
 
 ## Client to Collector
 
-Clients can be configured to communicate directly with the Collector via HTTP. Unfortunately, at this time the Jaeger backend does not provide means of configuring TLS for its HTTP servers. The connections can be secured by using a reverse proxy placed in front of the collectors.
+Clients can be configured to communicate directly with **jaeger-collector** via HTTP. Unfortunately, at this time the Jaeger backend does not provide means of configuring TLS for its HTTP servers. The connections can be secured by using a reverse proxy placed in front of **jaeger-collector**s.
 
 * {{< check_no >}} HTTP - no TLS/authentication.
   * Some Jaeger clients support passing [auth-tokens or basic auth](../client-features/#tracer-configuration-via-environment-variables).
