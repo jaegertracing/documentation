@@ -14,7 +14,7 @@ Historically, the Jaeger project supported its own SDKs (aka tracers, client lib
 
 ## All in One
 
-All-in-one is an executable designed for quick local testing, launches the Jaeger UI, collector, query, and agent, with an in memory storage component.
+All-in-one is an executable designed for quick local testing, launches the Jaeger UI, **jaeger-collector**, **jaeger-query**, and **jaeger-agent**, with an in memory storage component.
 
 The simplest way to start the all-in-one is to use the pre-built image published to DockerHub (a single command line).
 
@@ -135,7 +135,7 @@ Then navigate to `http://localhost:8080`.
 
 ## Migrating from Zipkin
 
-Collector service exposes Zipkin compatible REST API `/api/v1/spans` which accepts both Thrift and JSON. Also there is `/api/v2/spans` for JSON and Proto.
+**jaeger-collector** service exposes Zipkin compatible REST API `/api/v1/spans` which accepts both Thrift and JSON. Also there is `/api/v2/spans` for JSON and Proto.
 By default it's disabled. It can be enabled with `--collector.zipkin.host-port=:9411`.
 
 Zipkin [Thrift](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift) IDL and Zipkin [Proto](https://github.com/jaegertracing/jaeger-idl/blob/master/proto/zipkin.proto) IDL files can be found in [jaegertracing/jaeger-idl](https://github.com/jaegertracing/jaeger-idl) repository.
