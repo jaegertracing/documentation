@@ -11,33 +11,33 @@ The following labels are used to describe API compatibility guarantees.
 * **internal** - the APIs intended for internal communications between Jaeger components and not recommended for use by external components.
 * **deprecated** - the APIs that are only maintained for legacy reasons and will be phased out in the future.
 
-Since Jaeger v1.32, the Collector and Query Service ports that serve gRPC endpoints enable [gRPC reflection][grpc-reflection]. Unfortunately, the internally used `gogo/protobuf` has a [compatibility issue][gogo-reflection] with the official `golang/protobuf`, and as a result only the `list` reflection command is currently working properly.
+Since Jaeger v1.32, **jaeger-collector** and **jaeger-query** Service ports that serve gRPC endpoints enable [gRPC reflection][grpc-reflection]. Unfortunately, the internally used `gogo/protobuf` has a [compatibility issue][gogo-reflection] with the official `golang/protobuf`, and as a result only the `list` reflection command is currently working properly.
 
 ## Span reporting APIs
 
-Agent and Collector are the two components of the Jaeger backend that can receive spans. At this time they support two sets of non-overlapping APIs.
+**jaeger-agent** and **jaeger-collector** are the two components of the Jaeger backend that can receive spans. At this time they support two sets of non-overlapping APIs.
 
 ### OpenTelemetry Protocol (stable)
 
-Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. It is no longer necessary to configure the OpenTelemetry SDKs with Jaeger exporters, nor deploy the OpenTelemetry Collectors between the OpenTelemetry SDKs and the Jaeger backend.
+Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. It is no longer necessary to configure the OpenTelemetry SDKs with Jaeger exporters, nor deploy the OpenTelemetry **jaeger-collector**s between the OpenTelemetry SDKs and the Jaeger backend.
 
-The OTLP data is accepted in these formats: (1) binary gRPC, (2) Protobuf over HTTP, (3) JSON over HTTP. For more details on the OTLP receiver see the [official documentation][otlp-rcvr] (note that not all configuration options are supported in the Jaeger collector, and only tracing data is accepted, since Jaeger does not store other telemetry types).
+The OTLP data is accepted in these formats: (1) binary gRPC, (2) Protobuf over HTTP, (3) JSON over HTTP. For more details on the OTLP receiver see the [official documentation][otlp-rcvr] (note that not all configuration options are supported in **jaeger-collector**, and only tracing data is accepted, since Jaeger does not store other telemetry types).
 
 [otlp-rcvr]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
 
 ### Thrift over UDP (stable)
 
-The Agent can only receive spans over UDP in Thrift format. The primary API is a UDP packet that contains a Thrift-encoded `Batch` struct defined in [jaeger.thrift] IDL file, located in the [jaeger-idl] repository. Most Jaeger Clients use Thrift's `compact` encoding, however some client libraries do not support it (notably, Node.js) and use Thrift's `binary` encoding (sent to  a different UDP port). The Agent's API is defined by [agent.thrift] IDL file.
+**jaeger-agent** can only receive spans over UDP in Thrift format. The primary API is a UDP packet that contains a Thrift-encoded `Batch` struct defined in [jaeger.thrift] IDL file, located in the [jaeger-idl] repository. Most Jaeger Clients use Thrift's `compact` encoding, however some client libraries do not support it (notably, Node.js) and use Thrift's `binary` encoding (sent to  a different UDP port). **jaeger-agent**'s API is defined by [agent.thrift] IDL file.
 
-For legacy reasons, the Agent also accepts spans over UDP in Zipkin format, however, only very old versions of Jaeger clients can send data in that format and it is officially deprecated.
+For legacy reasons, **jaeger-agent** also accepts spans over UDP in Zipkin format, however, only very old versions of Jaeger clients can send data in that format and it is officially deprecated.
 
 ### Protobuf via gRPC (stable)
 
-In a typical Jaeger deployment, Agents receive spans from Clients and forward them to Collectors. Since Jaeger v1.11 the official and recommended protocol between Agents and Collectors is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto] IDL file. The same endpoint can be used to submit trace data from SDKs directly to the Collector.
+In a typical Jaeger deployment, **jaeger-agent**s receive spans from Clients and forward them to **jaeger-collector**s. Since Jaeger v1.11 the official and recommended protocol between **jaeger-agent**s and **jaeger-collector**s is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto] IDL file. The same endpoint can be used to submit trace data from SDKs directly to **jaeger-collector**.
 
 ### Thrift over HTTP (stable)
 
-In some cases it is not feasible to deploy Jaeger Agent next to the application, for example, when the application code is running as a serverless function. In these scenarios the SDKs can be configured to submit spans directly to the Collectors over HTTP/HTTPS.
+In some cases it is not feasible to deploy **jaeger-agent** next to the application, for example, when the application code is running as a serverless function. In these scenarios the SDKs can be configured to submit spans directly to **jaeger-collector**s over HTTP/HTTPS.
 
 The same [jaeger.thrift] payload can be submitted in HTTP POST request to `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
 
@@ -47,19 +47,19 @@ Content-Type: application/vnd.apache.thrift.binary
 
 ### JSON over HTTP (n/a)
 
-There is no official Jaeger JSON format that can be accepted by the collector.
+There is no official Jaeger JSON format that can be accepted by **jaeger-collector**.
 Jaeger does accept the OpenTelemetry protocol via JSON (see [above](#opentelemetry-protocol-stable)).
 
 ### Zipkin Formats (stable)
 
-Jaeger Collector can also accept spans in several Zipkin data format, namely JSON v1/v2 and Thrift. The Collector needs to be configured to enable Zipkin HTTP server, e.g. on port 9411 used by Zipkin collectors. The server enables two endpoints that expect POST requests:
+**jaeger-collector** can also accept spans in several Zipkin data format, namely JSON v1/v2 and Thrift. **jaeger-collector** needs to be configured to enable Zipkin HTTP server, e.g. on port 9411 used by Zipkin collectors. The server enables two endpoints that expect POST requests:
 
 * `/api/v1/spans` for submitting spans in Zipkin JSON v1 or Zipkin Thrift format.
 * `/api/v2/spans` for submitting spans in Zipkin JSON v2.
 
 ## Trace retrieval APIs
 
-Traces saved in the storage can be retrieved by calling Jaeger Query Service.
+Traces saved in the storage can be retrieved by calling **jaeger-query** Service.
 
 ### gRPC/Protobuf (stable)
 
@@ -67,7 +67,7 @@ The recommended way for programmatically retrieving traces and other data is via
 
 ### HTTP JSON (internal)
 
-Jaeger UI communicates with Jaeger Query Service via JSON API. For example, a trace can be retrieved via GET request to `https://jaeger-query:16686/api/traces/{trace-id-hex-string}`. This JSON API is intentionally undocumented and subject to change.
+Jaeger UI communicates with **jaeger-query** Service via JSON API. For example, a trace can be retrieved via GET request to `https://jaeger-query:16686/api/traces/{trace-id-hex-string}`. This JSON API is intentionally undocumented and subject to change.
 
 ## Remote Storage API (stable)
 
@@ -77,7 +77,7 @@ When using the `grpc-plugin` storage type (a.k.a. [storage plugin](../deployment
 
 This API supports Jaeger's [Remote Sampling](../sampling/#remote-sampling) protocol, defined in [sampling.proto] IDL file.
 
-Both the Jaeger Agent and Jaeger Collector implement the API. See [Remote Sampling](../sampling/#remote-sampling) for details on how to configure the Collector with sampling strategies. The Agent is merely acting as a proxy to the Collector.
+Both **jaeger-agent** and **jaeger-collector** implement the API. See [Remote Sampling](../sampling/#remote-sampling) for details on how to configure the Collector with sampling strategies. **jaeger-agent** is merely acting as a proxy to **jaeger-collector**.
 
 The following table lists different endpoints and formats that can be used to query for sampling strategies. The official HTTP/JSON endpoints use standard [Protobuf-to-JSON mapping](https://developers.google.com/protocol-buffers/docs/proto3#json).
 
@@ -113,7 +113,7 @@ $ curl "http://localhost:5778/?service=foo"
 
 ## Service dependencies graph (internal)
 
-Can be retrieved from Query Service at `/api/dependencies` endpoint. The GET request expects two parameters:
+Can be retrieved from**jaeger-query** Service at `/api/dependencies` endpoint. The GET request expects two parameters:
 
 * `endTs` (number of milliseconds since epoch) - the end of the time interval
 * `lookback` (in milliseconds) - the length the time interval (i.e. start-time + lookback = end-time).

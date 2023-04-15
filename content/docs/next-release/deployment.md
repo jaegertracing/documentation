@@ -100,7 +100,7 @@ You can navigate to `http://localhost:16686` to access the Jaeger UI.
 Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
 {{< /warning >}}
 
-**jaeger-agent** is designed to receive tracing data in Thrift format over UDP and run locally on each host, either as a host agent / daemon or as an application sidecar. The agent exposes the following ports:
+**jaeger-agent** is designed to receive tracing data in Thrift format over UDP and run locally on each host, either as a host agent / daemon or as an application sidecar. **jaeger-agent** exposes the following ports:
 
 Port  | Protocol | Function
 ----- | -------  | ---
@@ -125,9 +125,9 @@ docker run \
 
 ### Discovery System Integration
 
-The agents can connect point-to-point to a single collector address, which could be
-load balanced by another infrastructure component (e.g. DNS) across multiple collectors.
-The agent can also be configured with a static list of collector addresses.
+**jaeger-agent**s can connect point-to-point to a single **jaeger-collector** address, which could be
+load balanced by another infrastructure component (e.g. DNS) across multiple **jaeger-collector**s.
+**jaeger-agent** can also be configured with a static list of **jaeger-collector** addresses.
 
 On Docker, a command like the following can be used:
 
@@ -150,17 +150,17 @@ When using gRPC, you have several options for load balancing and name resolution
 
 ### Agent level tags
 
-Jaeger supports agent level tags, that can be added to the process tags of all spans passing through the agent. This is supported through the command line flag `--agent.tags=key1=value1,key2=value2,...,keyn=valuen`. Tags can also be set through an environment flag like so - `--agent.tags=key=${envFlag:defaultValue}` - The tag value will be set to the value of the `envFlag` environment key and `defaultValue` if not set.
+Jaeger supports agent level tags, that can be added to the process tags of all spans passing through **jaeger-agent**. This is supported through the command line flag `--agent.tags=key1=value1,key2=value2,...,keyn=valuen`. Tags can also be set through an environment flag like so - `--agent.tags=key=${envFlag:defaultValue}` - The tag value will be set to the value of the `envFlag` environment key and `defaultValue` if not set.
 
 ## Collector
 
-The collectors are stateless and thus many instances of **jaeger-collector** can be run in parallel.
-Collectors require almost no configuration, except for storage location, such as
+**jaeger-collector**s are stateless and thus many instances of **jaeger-collector** can be run in parallel.
+**jaeger-collector**s require almost no configuration, except for storage location, such as
 `--cassandra.keyspace` and `--cassandra.servers` options, or the location of Elasticsearch cluster,
 via `--es.server-urls`, depending on which storage is specified. See the [CLI Flags](../cli/) for all
 command line options.
 
-At default settings the collector exposes the following ports:
+At default settings **jaeger-collector** exposes the following ports:
 
 Port  | Protocol | Function
 ----- | -------  | ---
@@ -192,7 +192,7 @@ docker run \
 **jaeger-query** serves the API endpoints and a React/Javascript UI.
 The service is stateless and is typically run behind a load balancer, such as [**NGINX**](https://www.nginx.com/).
 
-At default settings the query service exposes the following port(s):
+At default settings the **jaeger-query** service exposes the following port(s):
 
 Port  | Protocol | Function
 ----- | -------  | ---
@@ -213,11 +213,11 @@ docker run -d --rm \
 
 ### Clock Skew Adjustment
 
-Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. The query service implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/master/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to its timestamps.
+Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. **jaeger-query** service implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/master/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to its timestamps.
 
 Sometimes these adjustments themselves make the trace hard to understand. For example, when repositioning the server span within the bounds of its parent span, Jaeger does not know the exact relationship between the request and response latencies, so it assumes then to be equal and places the child span in the middle of the parent span (see [issue #961](https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244)).
 
-The query service supports a configuration flag `--query.max-clock-skew-adjustment` that controls how much clock skew adjustment should be allowed. Setting this parameter to zero (`0s`) disables clock skew adjustment completely. This setting applies to all traces retrieved from the given query service. There is an open [ticket #197](https://github.com/jaegertracing/jaeger-ui/issues/197) to support toggling the adjustment on and off directly in the UI.
+**jaeger-query** service supports a configuration flag `--query.max-clock-skew-adjustment` that controls how much clock skew adjustment should be allowed. Setting this parameter to zero (`0s`) disables clock skew adjustment completely. This setting applies to all traces retrieved from the given query service. There is an open [ticket #197](https://github.com/jaegertracing/jaeger-ui/issues/197) to support toggling the adjustment on and off directly in the UI.
 
 ### UI Base Path
 
@@ -704,7 +704,7 @@ Supported in Jaeger since 1.6.0
 Supported Kafka versions: 0.9+
 
 Kafka can be used as an intermediary buffer between collector and an actual storage.
-The collector is configured with `SPAN_STORAGE_TYPE=kafka` that makes it write all received spans
+**jaeger-collector** is configured with `SPAN_STORAGE_TYPE=kafka` that makes it write all received spans
 into a Kafka topic. [**jaeger-ingester**](#ingester) is used to read from
 Kafka and store spans in another storage backend (Elasticsearch or Cassandra).
 
@@ -816,7 +816,7 @@ docker run \
 
 Jaeger supports TLS client to Prometheus server connections as long as you've [configured
 your Prometheus server](https://prometheus.io/docs/guides/tls-encryption/) correctly. You can
-configure Jaeger Query like so:
+configure **jaeger-query** like so:
 
 ```sh
 docker run \
