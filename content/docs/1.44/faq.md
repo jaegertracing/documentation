@@ -63,3 +63,9 @@ These are the reasons to run multiple instances:
 
 These are NOT the reasons to run multiple instances:
   * To avoid data loss. The collector drops data when the backend storage is not able to save it fast enough. Increasing the number of collectors, with more memory allocated to their internal queues, could provide a small, temporary relief, but does not remove the bottleneck of the storage backend.
+
+## How do I configure authentication for Jaeger UI
+
+Jaeger UI does not support any notion of accounts or roles, so it has no need to authenticate the users. If you need authentication in order to simply restrict who can access Jaeger UI, we recommend running a reverse proxy in front of it, such as HAProxy, NGINX, Keycloak, etc. The advantage of using standard reverse proxies is that they support a wide variery of integrations with various authentication and single sign-on services, something we would never be able to match in Jaeger UI.
+
+For example, refer to this blog post for an example of [protecting Jaeger UI with Keycloak](https://medium.com/jaegertracing/protecting-jaeger-ui-with-an-oauth-sidecar-proxy-34205cca4bb1).
