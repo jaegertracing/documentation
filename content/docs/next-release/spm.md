@@ -58,7 +58,7 @@ can be started via docker. Be sure to include `--net monitor_backend` in the `do
 
 The RED metrics queried by Jaeger for the Monitor tab are the result of span
 data collected by the [OpenTelemetry Collector][opentelemetry-collector] which
-is then aggregated by the [SpanMetrics Processor][spanmetrics] component configured
+is then aggregated by the [SpanMetrics Connector][spanmetrics] component configured
 within its pipeline.
 
 These metrics are finally exported by the OpenTelemetry Collector (via prometheus
@@ -77,10 +77,10 @@ graph
         end
     end
 
-    TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_PROC[Spanmetrics Processor]
+    TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_CONNECTOR[Spanmetrics Connector]
     TRACE_RECEIVER --> |spans| TRACE_EXPORTER[Trace Exporter]
     TRACE_EXPORTER --> |spans| COLLECTOR[Jaeger Collector]
-    SPANMETRICS_PROC --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PromethesusRemoteWrite Exporter]
+    SPANMETRICS_CONNECTOR --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PromethesusRemoteWrite Exporter]
     PROMETHEUS_EXPORTER --> |metrics| METRICS_STORE[(Metrics Storage)]
 
     COLLECTOR --> |spans| SPAN_STORE[(Span Storage)]
@@ -91,7 +91,7 @@ graph
     subgraph OpenTelemetry Collector
         subgraph Pipeline
             TRACE_RECEIVER
-            SPANMETRICS_PROC
+            SPANMETRICS_CONNECTOR
             TRACE_EXPORTER
             PROMETHEUS_EXPORTER
         end
@@ -102,7 +102,7 @@ graph
     style OTLP_EXPORTER fill:#404CA8,color:white
     style TRACE_RECEIVER fill:#404CA8,color:white
     style TRACE_EXPORTER fill:#404CA8,color:white
-    style SPANMETRICS_PROC fill:#404CA8,color:white
+    style SPANMETRICS_CONNECTOR fill:#404CA8,color:white
     style PROMETHEUS_EXPORTER fill:#404CA8,color:white
 
     style UI fill:#9AEBFE,color:black
@@ -114,7 +114,7 @@ graph
 
 Though more in scope of the [OpenTelemetry Collector][opentelemetry-collector],
 it is worth understanding the additional metrics and time series that the
-[SpanMetrics Processor][spanmetrics] will generate in metrics storage to help
+[SpanMetrics Connector][spanmetrics] will generate in metrics storage to help
 with capacity planning when deploying SPM.
 
 Please refer to [Prometheus documentation][prom-metric-labels] covering the
@@ -156,7 +156,7 @@ typical = 72 * num_operations
 
 Note:
 - Custom [latency buckets][spanmetrics-config-latency] or [dimensions][spanmetrics-config-dimensions]
-  configured in the spanmetrics processor will alter the calculation above.
+  configured in the spanmetrics connector will alter the calculation above.
 - Querying custom dimensions are not supported by SPM and will be aggregated over.
 
 ## Configuration
@@ -268,7 +268,7 @@ be misconfiguration in the OpenTelemetry Collector or anything upstream from it.
 
 Some questions to ask while troubleshooting are:
 - Is the OpenTelemetry Collector configured correctly?
-  - See: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/spanmetricsprocessor
+  - See: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/
 - Is the Prometheus server reachable by the OpenTelemetry Collector?
 - Are the services sending spans to the OpenTelemetry Collector?
   - See: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/troubleshooting.md
@@ -290,11 +290,11 @@ both ingress and egress spans in the `server` and `client` span kinds, respectiv
 [metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto
 [openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53
 [opentelemetry-collector]: https://opentelemetry.io/docs/collector/
-[spanmetrics]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanmetricsprocessor#section-readme
+[spanmetrics]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector#section-readme
 [prom-metric-labels]: https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels
 [http-api-readme]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api
-[spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/spanmetricsprocessor/testdata/config-full.yaml#L46
-[spanmetrics-config-latency]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/spanmetricsprocessor/testdata/config-full.yaml#L38
+[spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/eecccc91a74b3bacf4f909c068321f96452d472e/connector/spanmetricsconnector/testdata/config.yaml#L23
+[spanmetrics-config-latency]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/eecccc91a74b3bacf4f909c068321f96452d472e/connector/spanmetricsconnector/testdata/config.yaml#LL14C38-L15C1
 
 ### 403 when executing metrics query
 
