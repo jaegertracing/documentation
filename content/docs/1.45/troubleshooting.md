@@ -12,7 +12,7 @@ Before everything else, make sure to confirm what sampling strategy is being use
 
 ### OpenTelemtery SDKs
 
-If you are using OpenTelemetry SDKs, they should default to `parentbased_always_on` sampler, which is effectively sampling at 100%. It can be changed via `OTEL_TRACES_SAMPLER` environment variable ([see documentation](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/sdk-environment-variables.md)).
+If you are using OpenTelemetry SDKs, they should default to `parentbased_always_on` sampler, which is effectively sampling at 100%. It can be changed via `OTEL_TRACES_SAMPLER` environment variable ([see documentation](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/configuration/sdk-environment-variables.md)).
 
 #### Using stdout Exporter
 
