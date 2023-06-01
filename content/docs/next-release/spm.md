@@ -64,7 +64,6 @@ Specifically for the SPM feature, Jaeger versions &le; 1.45.0 will support Opent
 
 As a corollary, Jaeger versions &ge; 1.46.0 will support Opentelemetry Collector versions &ge; 0.71.0.
 
-
 For details on migrating your Jaeger components to use the metrics produced by the
 [SpanMetrics Connector](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector)
 please refer to the [migration guide](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector).
