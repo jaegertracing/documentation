@@ -57,13 +57,17 @@ can be started via docker. Be sure to include `--net monitor_backend` in the `do
 ## Architecture
 
 {{< info >}}
-The [SpanMetrics Processor][spanmetrics-proc] is deprecated in favour of the [SpanMetrics Connector][spanmetrics-conn].
+The [SpanMetrics Processor](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector)
+is deprecated in favour of the [SpanMetrics Connector](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector).
 
-Specifically for the SPM feature, Jaeger versions <= 1.45.0 will support Opentelemetry Collector versions <= 0.70.0.
-Jaeger versions >= 1.46.0 will support Opentelemetry Collector versions > 0.70.0.
+Specifically for the SPM feature, Jaeger versions &le; 1.45.0 will support Opentelemetry Collector versions &le; 0.70.0.
+
+As a corollary, Jaeger versions &ge; 1.46.0 will support Opentelemetry Collector versions &ge; 0.71.0.
+
 
 For details on migrating your Jaeger components to use the metrics produced by the
-[SpanMetrics Connector][spanmetrics-conn], please refer to this [migration guide][jaeger-migrate-spanmetrics-conn].
+[SpanMetrics Connector](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector)
+please refer to the [migration guide](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector).
 {{< /info >}}
 
 The RED metrics queried by Jaeger for the Monitor tab are the result of span
@@ -301,13 +305,11 @@ both ingress and egress spans in the `server` and `client` span kinds, respectiv
 [metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto
 [openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53
 [opentelemetry-collector]: https://opentelemetry.io/docs/collector/
-[spanmetrics-proc]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanmetricsprocessor#section-readme
 [spanmetrics-conn]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector#section-readme
 [prom-metric-labels]: https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels
 [http-api-readme]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api
 [spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L23
 [spanmetrics-config-duration]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L14
-[jaeger-migrate-spanmetrics-conn]: https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector
 
 ### 403 when executing metrics query
 
