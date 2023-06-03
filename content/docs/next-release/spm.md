@@ -56,9 +56,13 @@ can be started via docker. Be sure to include `--net monitor_backend` in the `do
 
 ## Architecture
 
+{{< info >}}
+Starting with v1.46.0, Jaeger supports the OpenTelemetry [SpanMetrics Connector][spanmetrics-conn], which is replacing the deprecated [SpanMetrics Processor][spanmetrics]. Please refer to the [migration guide](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector).
+{{< /info >}}
+
 The RED metrics queried by Jaeger for the Monitor tab are the result of span
 data collected by the [OpenTelemetry Collector][opentelemetry-collector] which
-is then aggregated by the [SpanMetrics Processor][spanmetrics] component configured
+is then aggregated by the [SpanMetrics Connector][spanmetrics-conn] component configured
 within its pipeline.
 
 These metrics are finally exported by the OpenTelemetry Collector (via prometheus
@@ -77,10 +81,10 @@ graph
         end
     end
 
-    TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_PROC[Spanmetrics Processor]
+    TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_CONN[SpanMetrics Connector]
     TRACE_RECEIVER --> |spans| TRACE_EXPORTER[Trace Exporter]
     TRACE_EXPORTER --> |spans| COLLECTOR[Jaeger Collector]
-    SPANMETRICS_PROC --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PromethesusRemoteWrite Exporter]
+    SPANMETRICS_CONN --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PromethesusRemoteWrite Exporter]
     PROMETHEUS_EXPORTER --> |metrics| METRICS_STORE[(Metrics Storage)]
 
     COLLECTOR --> |spans| SPAN_STORE[(Span Storage)]
@@ -91,7 +95,7 @@ graph
     subgraph OpenTelemetry Collector
         subgraph Pipeline
             TRACE_RECEIVER
-            SPANMETRICS_PROC
+            SPANMETRICS_CONN
             TRACE_EXPORTER
             PROMETHEUS_EXPORTER
         end
@@ -102,7 +106,7 @@ graph
     style OTLP_EXPORTER fill:#404CA8,color:white
     style TRACE_RECEIVER fill:#404CA8,color:white
     style TRACE_EXPORTER fill:#404CA8,color:white
-    style SPANMETRICS_PROC fill:#404CA8,color:white
+    style SPANMETRICS_CONN fill:#404CA8,color:white
     style PROMETHEUS_EXPORTER fill:#404CA8,color:white
 
     style UI fill:#9AEBFE,color:black
@@ -114,7 +118,7 @@ graph
 
 Though more in scope of the [OpenTelemetry Collector][opentelemetry-collector],
 it is worth understanding the additional metrics and time series that the
-[SpanMetrics Processor][spanmetrics] will generate in metrics storage to help
+[SpanMetrics Connector][spanmetrics-conn] will generate in metrics storage to help
 with capacity planning when deploying SPM.
 
 Please refer to [Prometheus documentation][prom-metric-labels] covering the
@@ -127,16 +131,17 @@ Two metric names will be created:
   - **Description**: counts the total number of spans, including error spans.
     Call counts are differentiated from errors via the `status_code` label. Errors
     are identified as any time series with the label `status_code = "STATUS_CODE_ERROR"`.
-- `latency`
+- `[namespace_]duration_[units]`
   - **Type**: histogram
-  - **Description**: a histogram of span latencies. Under the hood, Prometheus histograms
-    will create a number of time series:
-    - `latency_count`: The total number of data points across all buckets in the histogram.
-    - `latency_sum`: The sum of all data point values.
-    - `latency_bucket`: A collection of `n` time series (where `n` is the number of
-      latency buckets) for each latency bucket identified by an `le` (less than
-      or equal to) label. The `latency_bucket` counter with lowest `le` and
-      `le >= span latency` will be incremented for each span.
+  - **Description**: a histogram of span durations/latencies. Under the hood, Prometheus histograms
+    will create a number of time series. For illustrative purposes, assume no namespace
+    is configured and the units are `milliseconds`:
+    - `duration_milliseconds_count`: The total number of data points across all buckets in the histogram.
+    - `duration_milliseconds_sum`: The sum of all data point values.
+    - `duration_milliseconds_bucket`: A collection of `n` time series (where `n` is the number of
+      duration buckets) for each duration bucket identified by an `le` (less than
+      or equal to) label. The `duration_milliseconds_bucket` counter with lowest `le` and
+      `le >= span duration` will be incremented for each span.
 
 The following formula aims to provide some guidance on the number of new time series created:
 ```
@@ -155,8 +160,8 @@ typical = 72 * num_operations
 ```
 
 Note:
-- Custom [latency buckets][spanmetrics-config-latency] or [dimensions][spanmetrics-config-dimensions]
-  configured in the spanmetrics processor will alter the calculation above.
+- Custom [duration buckets][spanmetrics-config-duration] or [dimensions][spanmetrics-config-dimensions]
+  configured in the spanmetrics connector will alter the calculation above.
 - Querying custom dimensions are not supported by SPM and will be aggregated over.
 
 ## Configuration
@@ -268,7 +273,7 @@ be misconfiguration in the OpenTelemetry Collector or anything upstream from it.
 
 Some questions to ask while troubleshooting are:
 - Is the OpenTelemetry Collector configured correctly?
-  - See: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/spanmetricsprocessor
+  - See: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/spanmetricsconnector
 - Is the Prometheus server reachable by the OpenTelemetry Collector?
 - Are the services sending spans to the OpenTelemetry Collector?
   - See: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/troubleshooting.md
@@ -291,10 +296,11 @@ both ingress and egress spans in the `server` and `client` span kinds, respectiv
 [openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53
 [opentelemetry-collector]: https://opentelemetry.io/docs/collector/
 [spanmetrics]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanmetricsprocessor#section-readme
+[spanmetrics-conn]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector#section-readme
 [prom-metric-labels]: https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels
 [http-api-readme]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api
-[spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/spanmetricsprocessor/testdata/config-full.yaml#L46
-[spanmetrics-config-latency]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/spanmetricsprocessor/testdata/config-full.yaml#L38
+[spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L23
+[spanmetrics-config-duration]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L14
 
 ### 403 when executing metrics query
 
