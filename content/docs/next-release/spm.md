@@ -57,16 +57,7 @@ can be started via docker. Be sure to include `--net monitor_backend` in the `do
 ## Architecture
 
 {{< info >}}
-The [SpanMetrics Processor](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector)
-is deprecated in favour of the [SpanMetrics Connector](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector).
-
-Specifically for the SPM feature, Jaeger versions &le; 1.45.0 will support Opentelemetry Collector versions &le; 0.70.0.
-
-As a corollary, Jaeger versions &ge; 1.46.0 will support Opentelemetry Collector versions &ge; 0.71.0.
-
-For details on migrating your Jaeger components to use the metrics produced by the
-[SpanMetrics Connector](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector)
-please refer to the [migration guide](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector).
+Starting with v1.46.0, Jaeger supports the OpenTelemetry [SpanMetrics Connector][spanmetrics-conn], which is replacing the deprecated [SpanMetrics Processor][spanmetrics]. Please refer to the [migration guide](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector).
 {{< /info >}}
 
 The RED metrics queried by Jaeger for the Monitor tab are the result of span
