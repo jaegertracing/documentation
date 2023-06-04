@@ -27,6 +27,9 @@ Congratulations on being selected as a Jaeger Mentee! It can be daunting when st
 - [ ] Carefully read through the Github issue to get a firm understanding of the requirements.
   Post any clarifying questions on that issue, ensuring a persistent record for
   later reference by yourself, mentors and the community.
+- [ ] Create a Google doc (copy this [template][]) and share it with your mentors. Use it as a log to write down weekly goals and progess made.
+
+[template]: https://docs.google.com/document/d/1lAL0iHHozXZoIL4W0qiOWyXVPo9a6lUTeH9cz95O6Kg/edit#
 
 ## Tips
 
