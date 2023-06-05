@@ -32,3 +32,7 @@ Of course, there's also no shortage of opportunities to help with the actual dev
 Another label to look for is [help wanted](https://github.com/jaegertracing/jaeger/labels/help%20wanted), which we use to tag tickets that involve features that maintainers consider promising / useful, but which are not on the immediate roadmap (after all, we all have day jobs with different priorities).
 
 Please refer to the [Contributing Guidelines](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md) on how to make code contributions. And make sure to follow the [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/master/code-of-conduct.md).
+
+## Mentorship programs
+
+The Jaeger project regularly participates in mentorship programs via CNCF. See [Mentorships](../mentorship/).
