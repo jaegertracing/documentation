@@ -177,6 +177,8 @@ The following configuration is required to enable the SPM feature:
   - Set the `METRICS_STORAGE_TYPE` environment variable to `prometheus`.
   - Optional: Set `--prometheus.server-url` (or `PROMETHEUS_SERVER_URL` environment variable)
     to the URL of the prometheus server. Default: http://localhost:9090.
+  - Optional: Set `--prometheus.query.support-spanmetrics-connector=true` to explicitly enable the [SpanMetrics Connector][spanmetrics-conn] if you intend to use it. This will become the default behavior in the future.
+
 
 ## API
 
