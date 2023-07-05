@@ -75,7 +75,7 @@ kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/down
 
 <2> This installs the "Custom Resource Definition" for the `apiVersion: jaegertracing.io/v1`
 
-The operator will be installed in cluster wide mode, if you want to only watch an specific namespace you need to change the `ClusterRole` and `ClusterBindingRole` of the operator manifest to `Role` and `RoleBinding`, also set the `WATCH_NAMESPACE` environment variable on the jaeger operator Deployment.
+The operator will be installed in cluster wide mode, if you want to only watch an specific namespace you need to change the `ClusterRole` and `ClusterRoleBinding` of the operator manifest to `Role` and `RoleBinding`, also set the `WATCH_NAMESPACE` environment variable on the jaeger operator Deployment.
 
 At this point, there should be a `jaeger-operator` deployment available.  You can view it by running the following command:
 
@@ -104,7 +104,7 @@ oc create -f https://github.com/jaegertracing/jaeger-operator/releases/download/
 
 <2> This installs the "Custom Resource Definition" for the `apiVersion: jaegertracing.io/v1`
 
-The operator will be installed in cluster wide mode, if you want to only watch an specific namespace you need to change the `ClusterRole` and `ClusterBindingRole` of the operator manifest to `Role` and `RoleBinding`, also set the `WATCH_NAMESPACE` environment variable on the jaeger operator Deployment.
+The operator will be installed in cluster wide mode, if you want to only watch an specific namespace you need to change the `ClusterRole` and `ClusterRoleBinding` of the operator manifest to `Role` and `RoleBinding`, also set the `WATCH_NAMESPACE` environment variable on the jaeger operator Deployment.
 
 Once the operator is installed, grant the role `jaeger-operator` to users who should be able to install individual Jaeger instances. The following example creates a role binding allowing the user `developer` to create Jaeger instances:
 
