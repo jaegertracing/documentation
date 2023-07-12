@@ -6,6 +6,8 @@ weight: 10
 
 Jaeger backend is itself a distributed system, composed of different components, potentially running on many hosts. It might be the case that one of these moving parts is not working properly, causing spans to not be processed or stored. When something goes wrong, make sure to check the items listed here.
 
+If you are using the OpenTelemetry Collector as part of your pipeline, make sure to check its own [Troubleshooting guide](https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/troubleshooting.md).
+
 ## Verify the sampling strategy
 
 Before everything else, make sure to confirm what sampling strategy is being used. For development purposes or for low-traffic scenarios, it is useful to sample every trace. In production, you may want to use lower rates. When diagnosing why spans are not being received by the backend, make sure to configure the SDK to _sample every trace_. Typically, the sampling strategy can be set via environment variables.
