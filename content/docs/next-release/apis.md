@@ -67,7 +67,14 @@ The recommended way for programmatically retrieving traces and other data is via
 
 ### HTTP JSON (internal)
 
-Jaeger UI communicates with **jaeger-query** Service via JSON API. For example, a trace can be retrieved via GET request to `https://jaeger-query:16686/api/traces/{trace-id-hex-string}`. This JSON API is intentionally undocumented and subject to change.
+Jaeger UI communicates with **jaeger-query** Service via JSON API:
+
+* fetch the list of services via GET request to: `https://jaeger-query:16686/api/services`
+* fetch the list of operations of a service via GET request to `"http://jaeger-query:16686/api/services/{service-name}/operations`
+  * alternatively, the operations could be queried via GET request to `http://jaeger-query:16686/api/operations?service={service-name}[&spanKind={span-kind}]`
+* traces could be queried via GET request to `https://jaeger-query:16686/api/traces?service={service-name}[&limit={number}]`
+  * if no "limit" is supplied a default limit of 100 traces is used
+* a specific trace can be retrieved via GET request to `https://jaeger-query:16686/api/traces/{trace-id-hex-string}`
 
 ## Remote Storage API (stable)
 
