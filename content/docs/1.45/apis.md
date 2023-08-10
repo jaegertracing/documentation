@@ -19,7 +19,7 @@ Since Jaeger v1.32, **jaeger-collector** and **jaeger-query** Service ports that
 
 ### OpenTelemetry Protocol (stable)
 
-Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. It is no longer necessary to configure the OpenTelemetry SDKs with Jaeger exporters, nor deploy the OpenTelemetry **jaeger-collector**s between the OpenTelemetry SDKs and the Jaeger backend.
+Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. It is no longer necessary to configure the OpenTelemetry SDKs with Jaeger exporters, nor deploy the OpenTelemetry Collector between the OpenTelemetry SDKs and the Jaeger backend.
 
 The OTLP data is accepted in these formats: (1) binary gRPC, (2) Protobuf over HTTP, (3) JSON over HTTP. For more details on the OTLP receiver see the [official documentation][otlp-rcvr] (note that not all configuration options are supported in **jaeger-collector**, and only tracing data is accepted, since Jaeger does not store other telemetry types).
 
