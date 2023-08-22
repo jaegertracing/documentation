@@ -8,13 +8,13 @@ If you are new to distributed tracing, please check the [Introduction](../) page
 
 ## Instrumentation
 
-Your applications must be instrumented before they can send tracing data to Jaeger. We recommend using the [OpenTelemetry](https://opentelemetry.io) instrumentation and SDKs.
+Your applications must be instrumented before they can send tracing data to Jaeger. We recommend using the [OpenTelemetry][otel] instrumentation and SDKs.
 
-Historically, the Jaeger project supported its own SDKs (aka tracers, client libraries) that implemented the OpenTracing API. The [Client Libraries](../client-libraries) section provides information about how to use the OpenTracing API and how to initialize and configure Jaeger tracers. As of 2022, the Jaeger SDKs are no longer supported, and all users are advised to migrate to OpenTelemetry.
+Historically, the Jaeger project supported its own SDKs (aka tracers, client libraries) that implemented the OpenTracing API. As of 2022, the Jaeger SDKs are no longer supported, and all users are advised to migrate to OpenTelemetry.
 
 ## All in One
 
-All-in-one is an executable designed for quick local testing, launches the Jaeger UI, **jaeger-collector**, **jaeger-query**, and **jaeger-agent**, with an in memory storage component.
+**all-in-one** is an executable designed for quick local testing. It includes the Jaeger UI, **jaeger-collector**, **jaeger-query**, and **jaeger-agent**, with an in memory storage component.
 
 The simplest way to start the all-in-one is to use the pre-built image published to DockerHub (a single command line).
 
@@ -54,8 +54,8 @@ Port  | Protocol | Component | Function
       |          |           |
 16686 | HTTP     | query     | serve frontend
       |          |           |
-4317  | HTTP     | collector | accept OpenTelemetry Protocol (OTLP) over gRPC, if enabled
-4318  | HTTP     | collector | accept OpenTelemetry Protocol (OTLP) over HTTP, if enabled
+4317  | HTTP     | collector | accept OpenTelemetry Protocol (OTLP) over gRPC
+4318  | HTTP     | collector | accept OpenTelemetry Protocol (OTLP) over HTTP
 14268 | HTTP     | collector | accept `jaeger.thrift` directly from clients
 14250 | HTTP     | collector | accept `model.proto`
 9411  | HTTP     | collector | Zipkin compatible endpoint (optional)
@@ -65,54 +65,46 @@ Port  | Protocol | Component | Function
 
 Please refer to [Service Performance Monitoring (SPM)](../spm#getting-started).
 
-## Kubernetes and OpenShift
+## On Kubernetes
 
-* Kubernetes templates: https://github.com/jaegertracing/jaeger-kubernetes
-* Kubernetes Operator: https://github.com/jaegertracing/jaeger-operator
-* OpenShift templates: https://github.com/jaegertracing/jaeger-openshift
+Please see Kubernetes Operator: https://github.com/jaegertracing/jaeger-operator
 
 ## Sample App: HotROD
 
-HotROD (Rides on Demand)  is a demo application that consists of several microservices and
-illustrates the use of the [OpenTracing API](http://opentracing.io).
-A tutorial / walkthrough is available in the blog post:
-[Take OpenTracing for a HotROD ride][hotrod-tutorial].
+HotROD (Rides on Demand) is a demo application that consists of several microservices and illustrates
+the use of [OpenTelemetry][otel] and distirbuted tracing. A tutorial / walkthrough is available in the blog post:
+[Take Jaeger for a HotROD ride][hotrod-tutorial].
 
-It can be run standalone, but requires Jaeger backend to view the traces.
+The HotROD app can be run standalone, but requires Jaeger backend to view the traces.
 
 ### Features
 
--   Discover architecture of the whole system via data-driven dependency
-    diagram.
--   View request timeline and errors; understand how the app works.
--   Find sources of latency and lack of concurrency.
--   Highly contextualized logging.
--   Use baggage propagation to:
-
-    -   Diagnose inter-request contention (queueing).
-    -   Attribute time spent in a service.
-
--   Use open source libraries with OpenTracing integration to get
-    vendor-neutral instrumentation for free.
-
-### Prerequisites
-
--   You need [Go toolchain](https://golang.org/doc/install) installed on your machine to run from source
-    (see [go.mod](https://github.com/jaegertracing/jaeger/blob/master/go.mod) file for required Go version).
--   Requires a [running Jaeger backend](#all-in-one) to view the traces.
+- Discover architecture of the whole system via data-driven dependency
+  diagram.
+- View request timeline and errors; understand how the app works.
+- Find sources of latency and lack of concurrency.
+- Highly contextualized logging.
+- Use baggage propagation to diagnose inter-request contention (queueing) and time spent in a service.
+- Use open source libraries from `opentelemetry-contrib` to get vendor-neutral instrumentation for free.
 
 ### Running
 
-#### From Source
+We recommend running Jaeger and HotROD via `docker compose`. In order to run it from source you need:
+
+- [Go toolchain](https://golang.org/doc/install) installed on your machine
+  (see [go.mod](https://github.com/jaegertracing/jaeger/blob/master/go.mod) file for required Go version).
+- A [running Jaeger backend](#all-in-one) to view the traces.
+
+#### With Docker Compose
 
 ```bash
-mkdir -p $GOPATH/src/github.com/jaegertracing
-cd $GOPATH/src/github.com/jaegertracing
 git clone git@github.com:jaegertracing/jaeger.git jaeger
-cd jaeger
-go run ./examples/hotrod/main.go all
+cd jaeger/examples/hotrod
+docker compose up
+# Ctrl-C to stop
 ```
-#### From docker
+
+#### With Docker
 
 ```bash
 docker run --rm -it \
@@ -121,6 +113,14 @@ docker run --rm -it \
   -e JAEGER_AGENT_HOST="jaeger" \
   jaegertracing/example-hotrod:{{< currentVersion >}} \
   all
+```
+
+#### From Source
+
+```bash
+git clone git@github.com:jaegertracing/jaeger.git jaeger
+cd jaeger
+go run ./examples/hotrod/main.go all
 ```
 
 #### From binary distribution
@@ -141,5 +141,6 @@ By default it's disabled. It can be enabled with `--collector.zipkin.host-port=:
 Zipkin [Thrift](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift) IDL and Zipkin [Proto](https://github.com/jaegertracing/jaeger-idl/blob/master/proto/zipkin.proto) IDL files can be found in [jaegertracing/jaeger-idl](https://github.com/jaegertracing/jaeger-idl) repository.
 They're compatible with [openzipkin/zipkin-api](https://github.com/openzipkin/zipkin-api) [Thrift](https://github.com/openzipkin/zipkin-api/blob/master/thrift/zipkinCore.thrift) and [Proto](https://github.com/openzipkin/zipkin-api/blob/master/zipkin.proto).
 
-[hotrod-tutorial]: https://medium.com/@YuriShkuro/take-opentracing-for-a-hotrod-ride-f6e3141f7941
+[hotrod-tutorial]: https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2
+[otel]: https://opentelemetry.io
 [download]: ../../../download/

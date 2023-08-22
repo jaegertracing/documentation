@@ -8,34 +8,32 @@ children:
 
 Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.
 
-If you can't find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch).
+If you cannot find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch).
 
 If you are new to distributed tracing, please take a look at the [Related Links](#related-links) section below.
 
 ## About
 
-Jaeger, inspired by [Dapper][dapper] and [OpenZipkin](http://zipkin.io),
-is a distributed tracing system released as open source by [Uber Technologies][ubeross].
-It is used for monitoring and troubleshooting microservices-based distributed systems, including:
+Jaeger is a distributed tracing platform released as open source by [Uber Technologies][ubeross].
+With Jaeger you can:
 
-* Distributed context propagation
-* Distributed transaction monitoring
-* Root cause analysis
-* Service dependency analysis
-* Performance / latency optimization
+* Monitor and troubleshoot distributed workflows
+* Identify performance bottlenecks
+* Track down root causes
+* Analyze service dependencies
 
 Uber published a blog post, [Evolving Distributed Tracing at Uber](https://eng.uber.com/distributed-tracing/), where they explain the history and reasons for the architectural choices made in Jaeger. [Yuri Shkuro](https://shkuro.com), creator of Jaeger, also published a book [Mastering Distributed Tracing](https://shkuro.com/books/2019-mastering-distributed-tracing/) that covers in-depth many aspects of Jaeger design and operation, as well as distributed tracing in general.
 
 ## Features
 
-  * [OpenTracing](http://opentracing.io/)-inspired data model
-  * Uses consistent upfront sampling with individual per service/endpoint probabilities
+  * [OpenTracing](https://opentracing.io/)-inspired data model
+  * [OpenTelemetry](https://opentelemetry.io/) compatible
   * Multiple built-in storage backends: Cassandra, Elasticsearch, in-memory
   * Community supported external storage backends via gRPC plugin: [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse)
   * System topology graphs
   * Adaptive sampling
-  * Post-collection data processing pipeline (coming soon)
   * Service Performance Monitoring (SPM)
+  * Post-collection data processing
 
 See [Features](./features/) page for more details.
 
@@ -52,7 +50,7 @@ See [Features](./features/) page for more details.
       * [ClickHouse](./deployment/#sidecar-model)
 
 ## Quick Start
-See [running a docker all in one image](getting-started#all-in-one).
+See [Getting Started](./getting-started).
 
 ## Screenshots
 
@@ -66,6 +64,7 @@ See [running a docker all in one image](getting-started#all-in-one).
 ![Service Performance Monitoring](/img/frontend-ui/spm.png)
 
 ## Related links
+- [Take Jaeger for a HotROD ride](https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2) (blog)
 - [Evolving Distributed tracing At Uber Engineering](https://eng.uber.com/distributed-tracing/) (blog)
 - [Mastering Distributed Tracing](https://shkuro.com/books/2019-mastering-distributed-tracing/) (book)
 - [OpenTracing Tutorial (Java, Go, Python, Node.js, C#)](https://github.com/yurishkuro/opentracing-tutorial/) (tutorials)
@@ -75,5 +74,4 @@ See [running a docker all in one image](getting-started#all-in-one).
 - [Using Jaeger with Istio](https://istio.io/latest/docs/tasks/observability/distributed-tracing/jaeger/) (docs)
 - [Using Jaeger with Envoy](https://www.envoyproxy.io/docs/envoy/latest/start/sandboxes/jaeger_tracing.html) (docs)
 
-[dapper]: https://research.google.com/pubs/pub36356.html
 [ubeross]: http://uber.github.io
