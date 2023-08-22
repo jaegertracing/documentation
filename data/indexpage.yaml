@@ -1,13 +1,11 @@
 features:
-- text: distributed transaction monitoring
+- text: monitor and troubleshoot distributed workflows
   icon: tv
-- text: performance and latency optimization
+- text: identify performance bottlenecks
   icon: build
-- text: root cause analysis
+- text: track down root causes
   icon: call_split
-- text: service dependency analysis
+- text: analyze service dependencies
   icon: format_align_center
-- text: distributed context propagation
-  icon: wifi
 why: |
-  As on-the-ground microservice practitioners are quickly realizing, the majority of operational problems that arise when moving to a distributed architecture are ultimately grounded in two areas: **networking** and **observability**. It is simply an orders of magnitude larger problem to network and debug a set of intertwined distributed services versus a single monolithic application.
+  Distributed tracing observability platforms, such as Jaeger, are essential for modern software applications that are architected as microservices. Jaeger maps the flow of requests and data as they traverse a distributed system. These requests may make calls to multiple services, which may introduce their own delays or errors. Jaeger connects the dots between these disparate components, helping to identify performance bottlenecks, troubleshoot errors, and improve overall application reliability. Jaeger is 100% open source, cloud native, and infinitely scalable.

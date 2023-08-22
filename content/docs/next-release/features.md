@@ -3,14 +3,6 @@ title: Features
 hasparent: true
 ---
 
-Jaeger is used for monitoring and troubleshooting microservices-based distributed systems, including:
-
-* Distributed context propagation
-* Distributed transaction monitoring
-* Root cause analysis
-* Service dependency analysis
-* Performance / latency optimization
-
 ## High Scalability
 
 Jaeger backend is designed to have no single points of failure and to scale with the business needs.
@@ -22,7 +14,6 @@ Jaeger backend, Web UI, and instrumentation libraries have been designed from gr
 
 * Represent traces as directed acyclic graphs (not just trees) via [span references](https://github.com/opentracing/specification/blob/master/specification.md#references-between-spans)
 * Support strongly typed span _tags_ and _structured logs_
-* Support general distributed context propagation mechanism via _baggage_
 
 Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. However, the internal data representation and the UI still follow the OpenTracing specification's model.
 
@@ -32,7 +23,7 @@ Jaeger can be used with a growing a number of storage backends:
 * It natively supports popular open source NoSQL databases as trace storage backends: Cassandra 3.4+, Elasticsearch 5.x/6.x/7.x, and OpenSearch 1.0+.
 * It integrates via a gRPC API with other well known databases that have been certified to be Jaeger compliant: [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse).
 * There is embedded database support using [Badger](https://github.com/dgraph-io/badger) and simple in-memory storage for testing setups.
-* There are ongoing community experiments using other databases you can find more by following [this issue](https://github.com/jaegertracing/jaeger/issues/638).
+* There are ongoing community experiments using other databases; you can find more in [this issue](https://github.com/jaegertracing/jaeger/issues/638).
 
 ## Modern Web UI
 
@@ -42,13 +33,13 @@ Jaeger Web UI is implemented in Javascript using popular open source frameworks 
 
 Jaeger backend is distributed as a collection of Docker images. The binaries support various configuration methods,
 including command line options, environment variables, and configuration files in multiple formats (yaml, toml, etc.).
-Deployment to Kubernetes clusters is assisted by a [Kubernetes operator](https://github.com/jaegertracing/jaeger-operator), [Kubernetes templates](https://github.com/jaegertracing/jaeger-kubernetes)
+Deployment to Kubernetes clusters is assisted by a [Kubernetes operator](https://github.com/jaegertracing/jaeger-operator)
 and a [Helm chart](https://github.com/kubernetes/charts/tree/master/incubator/jaeger).
 
 ## Observability
 
-All Jaeger backend components expose [Prometheus](https://prometheus.io/) metrics by default (other metrics backends are
-also supported). Logs are written to stdout using the structured logging library [zap](https://github.com/uber-go/zap).
+All Jaeger backend components expose [Prometheus](https://prometheus.io/) metrics by default.
+Logs are written to stdout using the structured logging library [zap](https://github.com/uber-go/zap).
 
 ## Backwards compatibility with Zipkin
 
