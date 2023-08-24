@@ -19,9 +19,8 @@ Historically, the Jaeger project supported its own SDKs (aka tracers, client lib
 The simplest way to start the all-in-one is to use the pre-built image published to DockerHub (a single command line).
 
 ```bash
-docker run -d --name jaeger \
+docker run --rm --name jaeger \
   -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
-  -e COLLECTOR_OTLP_ENABLED=true \
   -p 6831:6831/udp \
   -p 6832:6832/udp \
   -p 5778:5778 \
@@ -89,11 +88,8 @@ The HotROD app can be run standalone, but requires Jaeger backend to view the tr
 
 ### Running
 
-We recommend running Jaeger and HotROD via `docker compose`. In order to run it from source you need:
+We recommend running Jaeger and HotROD together via `docker compose`.
 
-- [Go toolchain](https://golang.org/doc/install) installed on your machine
-  (see [go.mod](https://github.com/jaegertracing/jaeger/blob/master/go.mod) file for required Go version).
-- A [running Jaeger backend](#all-in-one) to view the traces.
 
 #### With Docker Compose
 
@@ -107,15 +103,20 @@ docker compose up
 #### With Docker
 
 ```bash
-docker run --rm -it \
-  --link jaeger \
+docker run --rm -it --link jaeger \
   -p8080-8083:8080-8083 \
-  -e JAEGER_AGENT_HOST="jaeger" \
+  -e OTEL_EXPORTER_OTLP_ENDPOINT="http://jaeger:4318" \
   jaegertracing/example-hotrod:{{< currentVersion >}} \
-  all
+  all --otel-exporter=otlp
 ```
 
 #### From Source
+
+In order to run from source you need:
+
+- [Go toolchain](https://golang.org/doc/install) installed on your machine
+  (see [go.mod](https://github.com/jaegertracing/jaeger/blob/master/go.mod) file for minimum required Go version).
+- A [running Jaeger backend](#all-in-one) to view the traces.
 
 ```bash
 git clone git@github.com:jaegertracing/jaeger.git jaeger
