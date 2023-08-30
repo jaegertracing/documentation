@@ -6,7 +6,9 @@ The Jaeger project regularly participates in mentorship programs via CNCF, such 
 
 ## LFX Mentorship Sep-Nov 2023
 
-https://github.com/jaegertracing/jaeger/issues/4457 (to be announced by July 27)
+* [Ansh Goyal](https://github.com/anshgoyalevil) -- [Upgrade Jaeger UI to the latest version of React.js](https://github.com/jaegertracing/jaeger-ui/issues/998)
+* [Prathamesh Mutkure](https://github.com/prathamesh-mutkure) -- [Combine three distinct graph views in Jaeger UI into one](https://github.com/jaegertracing/jaeger-ui/issues/1466)
+* [Yashwanth Reddy](https://github.com/pmuls99) -- [Build official support in Jaeger for Elasticsearch 8](https://github.com/jaegertracing/jaeger/issues/4600)
 
 ## LFX Mentorship Jun-Aug 2023
 
