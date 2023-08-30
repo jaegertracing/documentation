@@ -16,8 +16,7 @@ If you found a bug or want to propose an enhancement, please open an issue on Gi
 
 ## Project video meetings
 
-The Jaeger maintainers and contributors meet on a video call regularly, and everyone is welcome to join and participate, discuss their issues, present case studies. Agenda and meeting details [are in this Google doc][bi-weekly-call],
-and the meetings invitations [are in this calendar][jaeger-project-calendar].
+The Jaeger maintainers and contributors meet on a video call regularly (every 3rd Thursday, 11am New York time), and everyone is welcome to join and participate, discuss their issues, present case studies. Agenda and meeting details [are in this Google doc][bi-weekly-call], and the meetings invitations [are in this calendar][jaeger-project-calendar].
 
 [bi-weekly-call]: https://docs.google.com/document/d/1ZuBAwTJvQN7xkWVvEFXj5WU9_JmS5TPiNbxCJSvPqX0/
 [jaeger-project-calendar]: https://calendar.google.com/calendar/u/0/embed?src=77a1bva4sn9cm822r8oa03l2j0@group.calendar.google.com
