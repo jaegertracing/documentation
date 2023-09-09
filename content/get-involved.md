@@ -2,7 +2,8 @@
 title: Get Involved
 ---
 
-Jaeger is an open source project with [open governance](https://github.com/jaegertracing/jaeger/blob/main/GOVERNANCE.md). We welcome contributions from the community, and we’d love your help to improve and extend the project. Here are some ideas for how to get involved with the project. Some of them don't even require any coding.
+Jaeger is an open source project with [open governance](https://github.com/jaegertracing/jaeger/blob/main/GOVERNANCE.md). We welcome contributions from the community, and we'd love your help to improve and extend the project. Below you will find some ideas for how to get involved with the project. Some of them don't even require any coding. There is also a good 
+CNCF guide on [how to start contributing to open source and figure out where to begin](https://contribute.cncf.io/contributors/getting-started/).
 
 ## No-coding involvement
 

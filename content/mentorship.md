@@ -4,6 +4,10 @@ title: Mentorships
 
 The Jaeger project regularly participates in mentorship programs via CNCF, such as [Outreachy](https://www.outreachy.org/), [Google Summer of Code](https://summerofcode.withgoogle.com/), and [LFX Mentorship](https://mentorship.lfx.linuxfoundation.org/). As a mentee, you will have the opportunity to contribute to an open-source project while working under the guidance of an experienced mentor who is an active contributor to the project and open-source community. The mentees receive an internship stipend.
 
+See also:
+  * [For mentees](../mentorship-for-mentees/)
+  * [For mentors](../mentorship-for-mentors/)
+
 ## LFX Mentorship Sep-Nov 2023
 
 * [Ansh Goyal](https://github.com/anshgoyalevil) -- [Upgrade Jaeger UI to the latest version of React.js](https://github.com/jaegertracing/jaeger-ui/issues/998)
