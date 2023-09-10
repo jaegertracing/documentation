@@ -52,9 +52,9 @@ To prevent data loss between collectors and storage, Kafka can be used as an int
 
 ![Architecture](/img/architecture-v2-2023.png)
 
-### With OpenTelemetry
+### With OpenTelemetry Collector
 
-The Jaeger Collectors can receive OpenTelemetry data directly from the OpenTelemetry SDKs. However, if you already use the OpenTelemetry Collectors, e.g. for gathering other types of telemetry or for pre-processing / enriching the tracing data, it can be placed between the SDKs and the Jaeger Collectors. The OpenTelemetry Collectors can be run as an application sidecar, as a host agent / daemon, or as a central cluster.
+The Jaeger Collectors can receive OpenTelemetry data directly from the OpenTelemetry SDKs (using OTLP exporters). However, if you already use the OpenTelemetry Collectors, e.g. for gathering other types of telemetry or for pre-processing / enriching the tracing data, it can be placed between the SDKs and the Jaeger Collectors. The OpenTelemetry Collectors can be run as an application sidecar, as a host agent / daemon, or as a central cluster.
 
 The OpenTelemetry Collector supports Jaeger's Remote Sampling protocol and can either serve static configurations from config files directly, or proxy the requests to the Jaeger backend (e.g., when using adaptive sampling).
 
