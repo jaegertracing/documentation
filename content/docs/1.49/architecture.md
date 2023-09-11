@@ -54,7 +54,7 @@ To prevent data loss between collectors and storage, Kafka can be used as an int
 
 ### With OpenTelemetry Collector
 
-The Jaeger Collectors can receive OpenTelemetry data directly from the OpenTelemetry SDKs (using OTLP exporters). However, if you already use the OpenTelemetry Collectors, e.g. for gathering other types of telemetry or for pre-processing / enriching the tracing data, it can be placed between the SDKs and the Jaeger Collectors. The OpenTelemetry Collectors can be run as an application sidecar, as a host agent / daemon, or as a central cluster.
+You **do not need to use OpenTelemetry Collector**, because **jaeger-collector** can receive OpenTelemetry data directly from the OpenTelemetry SDKs (using OTLP exporters). However, if you already use the OpenTelemetry Collectors, such as for gathering other types of telemetry or for pre-processing / enriching the tracing data, it __can be placed between__ the SDKs and **jaeger-collector**'s. The OpenTelemetry Collectors can be run as an application sidecar, as a host agent / daemon, or as a central cluster.
 
 The OpenTelemetry Collector supports Jaeger's Remote Sampling protocol and can either serve static configurations from config files directly, or proxy the requests to the Jaeger backend (e.g., when using adaptive sampling).
 
@@ -107,12 +107,10 @@ The instrumentation is designed to be always on in production. To minimize the o
 ### Agent
 
 {{< warning >}}
-**jaeger-agent** is deprecated. The OpenTelemetry data can be sent directly to the Jaeger backend, or the OpenTelemetry Collector can be used as agent.
+**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equiped with OTLP exporters) directly to **jaeger-collector**. Alternatively, use the OpenTelemetry Collector as a local agent.
 {{< /warning >}}
 
-**jaeger-agent** is a network daemon that listens for spans sent over UDP, which are batched and sent to the collector. It is designed to be deployed to all hosts as an infrastructure component. The agent abstracts the routing and discovery of the collectors away from the client.
-
-**jaeger-agent** is **not** a required component. For example, when your applications are instrumented with OpenTelemetry, the SDKs can be configured to forward the trace data directly to **jaeger-collector**.
+**jaeger-agent** is a network daemon that listens for spans sent over UDP, which are batched and sent to the collector. It is designed to be deployed to all hosts as an infrastructure component. The agent abstracts the routing and discovery of the collectors away from the client. **jaeger-agent** is **not** a required component.
 
 ### Collector
 

@@ -97,7 +97,7 @@ You can navigate to `http://localhost:16686` to access the Jaeger UI.
 ## Agent
 
 {{< warning >}}
-Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
+**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equiped with OTLP exporters) directly to **jaeger-collector**. See the [Architecture](../architecture) page for alternative deployment options.
 {{< /warning >}}
 
 **jaeger-agent** is designed to receive tracing data in Thrift format over UDP and run locally on each host, either as a host agent / daemon or as an application sidecar. **jaeger-agent** exposes the following ports:
