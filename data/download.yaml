@@ -17,7 +17,7 @@ docker:
   description: Sample application "[HotROD](https://github.com/jaegertracing/jaeger/tree/main/examples/hotrod)" that demonstrates features of distributed tracing ([blog post](https://medium.com/@YuriShkuro/take-opentracing-for-a-hotrod-ride-f6e3141f7941)).
   since: 1.6
 - image: jaeger-agent
-  description: Receives spans from Jaeger clients and forwards to collector. Designed to run as a sidecar or a host agent.
+  description: (deprecated) Receives spans from Jaeger clients and forwards to collector. Designed to run as a sidecar or a host agent. **jaeger-agent** is deprecated and no longer recommended for use, see https://github.com/jaegertracing/jaeger/issues/4739.
   since: 0.8
 - image: jaeger-collector
   description: Receives spans from agents or directly from clients and saves them in persistent storage.
