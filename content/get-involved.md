@@ -2,7 +2,7 @@
 title: Get Involved
 ---
 
-Jaeger is an open source project with [open governance](https://github.com/jaegertracing/jaeger/blob/main/GOVERNANCE.md). We welcome contributions from the community, and we'd love your help to improve and extend the project. Below you will find some ideas for how to get involved with the project. Some of them don't even require any coding. There is also a good 
+Jaeger is an open source project with [open governance](https://github.com/jaegertracing/jaeger/blob/main/GOVERNANCE.md). We welcome contributions from the community, and we'd love your help to improve and extend the project. Below you will find some ideas for how to get involved with the project. Some of them don't even require any coding. There is also a good
 CNCF guide on [how to start contributing to open source and figure out where to begin](https://contribute.cncf.io/contributors/getting-started/).
 
 ## No-coding involvement
@@ -28,9 +28,9 @@ CNCF guide on [how to start contributing to open source and figure out where to 
 
 ## Help with coding
 
-Of course, there's also no shortage of opportunities to help with the actual development of Jaeger. The easiest way to start is with issues tagged `good-first-issue`. Note that the Jaeger project includes many different [repositories](https://github.com/jaegertracing/), covering backend components, Jaeger UI, Kubernetes tools, analytics tools, etc. Many of them have these tickets, so pick whichever area interests you the most.
+Of course, there's also no shortage of opportunities to help with the actual development of Jaeger. The easiest way to start is with issues labeled as [good-first-issue][]. Note that the Jaeger project includes many different [repositories](https://github.com/jaegertracing/), covering backend components, Jaeger UI, Kubernetes tools, analytics tools, etc. Many of them have these tickets, so pick whichever area interests you the most.
 
-Another label to look for is `help-wanted`, which we use to tag tickets that involve features that maintainers consider promising / useful, but which are not on the immediate roadmap (after all, we all have day jobs with different priorities).
+Another label to look for is [help-wanted][], which we use to tag tickets that involve features that maintainers consider promising / useful, but which are not on the immediate roadmap (after all, we all have day jobs with different priorities).
 
   * Jaeger backend: [good-first-issue](https://github.com/jaegertracing/jaeger/labels/good%20first%20issue), [help-wanted](https://github.com/jaegertracing/jaeger/labels/help%20wanted)
   * Jaeger frontend: [good-first-issue](https://github.com/jaegertracing/jaeger-ui/labels/good%20first%20issue), [help-wanted](https://github.com/jaegertracing/jaeger-ui/labels/help%20wanted)
@@ -40,3 +40,6 @@ Please refer to the [Contributing Guidelines](https://github.com/jaegertracing/j
 ## Mentorship programs
 
 The Jaeger project regularly participates in mentorship programs via CNCF. See [Mentorships](../mentorship/).
+
+[good-first-issue]: https://github.com/search?q=org%3Ajaegertracing+label%3A%22good+first+issue%22&type=issues&state=open
+[help-wanted]: https://github.com/search?q=org%3Ajaegertracing+label%3A%22help+wanted%22&type=issues&state=open
