@@ -72,7 +72,24 @@ Congratulations on being selected as a Jaeger Mentee! It can be daunting when st
 - Carefully read through the Github issue to get a firm understanding of the requirements.
   Post any clarifying questions on that issue, ensuring a persistent record for
   later reference by yourself, mentors and the community.
-- Create a Google doc (copy this [template][]) and share it with your mentors. Use it as a log to write down weekly goals and progess made.
+
+### Keep a Progress Log
+
+Since the mentorships are remote, the best way to ensure you are making steady progress and to keep your mentor informed is to keep a regular progress log.
+
+- At the start of the term, copy this [Google doc template][template] and share it with your mentors (allow comments).
+- At the start of each week, create a section for that week with a list of goals that you want to achieve.
+- At the end of each day, add a dated log entry under the corresponding goal(s) with a brief summary of what you did.
+  - This could be just one sentence, e.g. "Read the XYZ documentation {link}".
+  - Ideally document some conclusions / decisions on how the work you did affects your future plans.
+  - If you weren't able to work on a project on a given day, log that too, for transparency.
+
+Why the log is important:
+- The log gives your mentors visiblity into your progress, and allows them to make course corrections.
+- If you are unable to write your goals for a week, it's a sign of misunderstanding, and your mentors need to work with you to clarify the requirements and the approach.
+- Many projects require research / analysis of how best to solve specific issues. Writing down your findings helps you organize your own understanding, and get timely feedback from the mentors. Remember that mentors may not be familiar with that specific area too, and they rely on you to research, synthesize, and present the information that affects the project.
+- Clear writing is one of the most important skills for software engineers. You may think it's coding skills, but as you become more senior, writing is how you communicate your ideas and get alignment with the team / community. Use this mentorship to hone your writing skills.
+- Treat the mentorship project as a job, with responsibility to make progress and meet the goals.
 
 ### Tips
 
