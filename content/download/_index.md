@@ -17,7 +17,7 @@ You can find the binaries for previous versions on the [GitHub releases page](ht
 
 ## Docker images
 
-The following Docker images are available for the Jaeger project via the [jaegertracing](https://hub.docker.com/r/jaegertracing/) organization on [Docker Hub](https://hub.docker.com):
+The following Docker images are available for the Jaeger project via the `jaegertracing` organization on [Docker Hub](https://hub.docker.com/r/jaegertracing/) and [Quay.io](https://quay.io/organization/jaegertracing):
 
 {{< dockerImages >}}
 
