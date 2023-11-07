@@ -63,7 +63,7 @@ Traces saved in the storage can be retrieved by calling **jaeger-query** Service
 
 ### gRPC/Protobuf (stable)
 
-The recommended way for programmatically retrieving traces and other data is via `jaeger.api_v2.QueryService` gRPC endpoint defined in [query.proto] IDL file.
+The recommended way for programmatically retrieving traces and other data is via `jaeger.api_v2.QueryService` gRPC endpoint defined in [query.proto] IDL file. In the default configuration this endpoint is accessible from `jaeger-query:16685`.
 
 ### HTTP JSON (internal)
 
