@@ -21,9 +21,15 @@ Since Jaeger v1.32, **jaeger-collector** and **jaeger-query** Service ports that
 
 Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. It is no longer necessary to configure the OpenTelemetry SDKs with Jaeger exporters, nor deploy the OpenTelemetry Collector between the OpenTelemetry SDKs and the Jaeger backend.
 
-The OTLP data is accepted in these formats: (1) binary gRPC, (2) Protobuf over HTTP, (3) JSON over HTTP. For more details on the OTLP receiver see the [official documentation][otlp-rcvr] (note that not all configuration options are supported in **jaeger-collector**, and only tracing data is accepted, since Jaeger does not store other telemetry types).
+The OTLP data is accepted in these formats: (1) binary gRPC, (2) Protobuf over HTTP, (3) JSON over HTTP. For more details on the OTLP receiver see the [official documentation][otlp-rcvr]. Note that not all configuration options are supported in **jaeger-collector** (see `--collector.otlp.*` [CLI Flags](../cli/#jaeger-collector)), and only tracing data is accepted, since Jaeger does not store other telemetry types.
+
+| Port  | Protocol | Endpoint     | Format
+| ----- | -------  | ------------ | ----
+| 4317  | gRPC     | n/a          | Protobuf
+| 4318  | HTTP     | `/v1/traces` | Protobuf or JSON
 
 [otlp-rcvr]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
+[otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md
 
 ### Thrift over UDP (stable)
 
@@ -135,5 +141,4 @@ Please refer to the [SPM Documentation](../spm#api)
 [sampling.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/sampling.proto
 [grpc-reflection]: https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#enable-server-reflection
 [gogo-reflection]: https://jbrandhorst.com/post/gogoproto/#reflection
-[otlp]: https://opentelemetry.io/docs/reference/specification/protocol/
 [storage.proto]: https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/grpc/proto/storage.proto

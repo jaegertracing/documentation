@@ -162,14 +162,16 @@ command line options.
 
 At default settings **jaeger-collector** exposes the following ports:
 
-Port  | Protocol | Function
------ | -------  | ---
-9411  | HTTP     | Accepts Zipkin spans in Thrift, JSON and Proto (disabled by default).
-14250 | gRPC     | Used by **jaeger-agent** to send spans in model.proto format.
-14268 | HTTP     | Accepts spans directly from clients in [jaeger.thrift][jaeger-thrift] format with `binary` thrift protocol (`POST` to `/api/traces`). Also serves sampling policies at `/api/sampling` (see [Remote Sampling](../sampling/#remote-sampling)).
-14269 | HTTP     | Admin port: health check at `/` and metrics at `/metrics`.
-4317  | gRPC     | Accepts traces in OpenTelemetry OTLP format if `--collector.otlp.enabled=true`.
-4318  | HTTP     | Accepts traces in OpenTelemetry OTLP format if `--collector.otlp.enabled=true`.
+| Port  | Protocol | Endpoint | Function
+| ----- | -------  | -------- | ----
+| 4317  | gRPC     | n/a      | Accepts traces in [OpenTelemetry OTLP format][otlp] (Protobuf).
+| 4318  | HTTP     | `/v1/traces` | Accepts traces in [OpenTelemetry OTLP format][otlp] (Protobuf and JSON).
+| 14268 | HTTP     | `/api/sampling` | Serves sampling policies (see [Remote Sampling](../sampling/#remote-sampling)).
+|       |          | `/api/traces` | Accepts spans in [jaeger.thrift][jaeger-thrift] format with `binary` thrift protocol (`POST`).
+| 14269 | HTTP     | `/`      | Admin port: health check (`GET`).
+|       |          | `/metrics` | Prometheus-style metrics (`GET`).
+| 9411  | HTTP     | `/api/v1/spans` and `/api/v2/spans` | Accepts Zipkin spans in Thrift, JSON and Proto (disabled by default).
+| 14250 | gRPC     | n/a      | Used by **jaeger-agent** to send spans in [model.proto][] Protobuf format.
 
 ## Ingester
 
@@ -834,5 +836,7 @@ Production deployments need an external process which aggregates data and create
 [cqlsh]: http://cassandra.apache.org/doc/latest/tools/cqlsh.html
 [zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift
 [jaeger-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
+[model.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/model.proto
 [thriftrw]: https://www.npmjs.com/package/thriftrw
 [storage.proto]: https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/grpc/proto/storage.proto
+[otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md
