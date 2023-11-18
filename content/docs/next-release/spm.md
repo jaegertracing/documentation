@@ -377,4 +377,4 @@ it is possible that the Prometheus server is expecting a bearer token.
 Jaeger Query (and all-in-one) can be configured to pass the bearer token in
 metrics queries via the `--prometheus.token-file` command-line parameter
 (or the `PROMETHEUS_TOKEN_FILE` environment variable), with its value set to
-the path of the file containing the bearer token._
+the path of the file containing the bearer token.
