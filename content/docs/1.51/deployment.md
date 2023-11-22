@@ -475,8 +475,12 @@ usercert = ~/.cassandra/client-cert
 ```
 
 ### Elasticsearch
-Supported in Jaeger since 0.6.0
-Supported versions: 5.x, 6.x, 7.x
+* Supported since Jaeger v0.6.0
+* Supported ES versions: 5.x, 6.x, 7.x
+  * 8.x support is [coming soon][es8-pr]. Meanwhile, there is a [manual workaround][es8-workaround].
+
+[es8-pr]: https://github.com/jaegertracing/jaeger/pull/4829
+[es8-workaround]: https://github.com/jaegertracing/jaeger/issues/3571#issuecomment-1124926679
 
 Elasticsearch version is automatically retrieved from root/ping endpoint.
 Based on this version Jaeger uses compatible index mappings and Elasticsearch REST API.
