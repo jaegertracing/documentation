@@ -262,7 +262,7 @@ integer value via `--memory.max-traces`.
 
 ### Badger - local storage
 
-Since Jaeger 1.9
+* Since Jaeger v1.9
 
 [Badger](https://github.com/dgraph-io/badger) is an embedded local storage, only available
 with **all-in-one** distribution. By default, it acts as an ephemeral storage using a temporary file system.
@@ -391,7 +391,7 @@ This will restore the data in jaeger-v3 directory. It will look like this
 8. Start Jaeger v1.24.0. It should start well.
 
 ### Cassandra
-Supported versions: 3.4+
+* Supported versions: 3.4+
 
 Deploying Cassandra itself is out of scope for our documentation. One good
 source of documentation is the [Apache Cassandra Docs](https://cassandra.apache.org/doc/latest/).
@@ -476,11 +476,7 @@ usercert = ~/.cassandra/client-cert
 
 ### Elasticsearch
 * Supported since Jaeger v0.6.0
-* Supported ES versions: 5.x, 6.x, 7.x
-  * 8.x support is [coming soon][es8-pr]. Meanwhile, there is a [manual workaround][es8-workaround].
-
-[es8-pr]: https://github.com/jaegertracing/jaeger/pull/4829
-[es8-workaround]: https://github.com/jaegertracing/jaeger/issues/3571#issuecomment-1124926679
+* Supported ES versions: 5.x, 6.x, 7.x, 8.x (since Jaeger v1.52.0)
 
 Elasticsearch version is automatically retrieved from root/ping endpoint.
 Based on this version Jaeger uses compatible index mappings and Elasticsearch REST API.
@@ -488,7 +484,7 @@ The version can be explicitly provided via `--es.version=` flag.
 
 Elasticsearch does not require initialization other than
 [installing and running Elasticsearch](https://www.elastic.co/downloads/elasticsearch).
-Once it is running, pass the correct configuration values to the Jaeger collector and query service.
+Once it is running, pass the correct configuration values to **jaeger-collector** and **jaeger-query**.
 
 #### Configuration
 ##### Minimal
@@ -706,8 +702,8 @@ Run the commands analogically for other Jaeger indices.
 There might exist more effective migration procedure. Please share with the community any findings.
 
 ### Kafka
-Supported in Jaeger since 1.6.0
-Supported Kafka versions: 0.9+
+* Supported in Jaeger since 1.6.0
+* Supported Kafka versions: 0.9+
 
 Kafka can be used as an intermediary buffer between collector and an actual storage.
 **jaeger-collector** is configured with `SPAN_STORAGE_TYPE=kafka` that makes it write all received spans
