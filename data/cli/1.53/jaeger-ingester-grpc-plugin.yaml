@@ -1,0 +1,181 @@
+name: jaeger-ingester
+synopsis: Jaeger ingester consumes from Kafka and writes to storage.
+description: |
+    Jaeger ingester consumes spans from a particular Kafka topic and writes them to a configured storage.
+usage: jaeger-ingester [flags]
+options:
+    - name: admin.http.host-port
+      default_value: :14270
+      usage: |
+        The host:port (e.g. 127.0.0.1:14270 or :14270) for the admin server, including health check, /metrics, etc.
+    - name: admin.http.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this server to clients
+    - name: admin.http.tls.cipher-suites
+      usage: |
+        Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+    - name: admin.http.tls.client-ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+    - name: admin.http.tls.enabled
+      default_value: "false"
+      usage: Enable TLS on the server
+    - name: admin.http.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this server to clients
+    - name: admin.http.tls.max-version
+      usage: |
+        Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: admin.http.tls.min-version
+      usage: |
+        Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: config-file
+      usage: |
+        Configuration file in JSON, TOML, YAML, HCL, or Java properties formats (default none). See spf13/viper for precedence.
+    - name: downsampling.hashsalt
+      usage: Salt used when hashing trace id for downsampling.
+    - name: downsampling.ratio
+      default_value: "1"
+      usage: |
+        Ratio of spans passed to storage after downsampling (between 0 and 1), e.g ratio = 0.3 means we are keeping 30% of spans and dropping 70% of spans; ratio = 1.0 disables downsampling.
+    - name: grpc-storage-plugin.binary
+      usage: |
+        (deprecated, will be removed after 2024-03-01) The location of the plugin binary
+    - name: grpc-storage-plugin.configuration-file
+      usage: |
+        (deprecated, will be removed after 2024-03-01) A path pointing to the plugin's configuration file, made available to the plugin with the --config arg
+    - name: grpc-storage-plugin.log-level
+      default_value: warn
+      usage: Set the log level of the plugin's logger
+    - name: grpc-storage.connection-timeout
+      default_value: 5s
+      usage: The remote storage gRPC server connection timeout
+    - name: grpc-storage.server
+      usage: The remote storage gRPC server address as host:port
+    - name: grpc-storage.tls.ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
+    - name: grpc-storage.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this process to the remote server(s)
+    - name: grpc-storage.tls.enabled
+      default_value: "false"
+      usage: Enable TLS when talking to the remote server(s)
+    - name: grpc-storage.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this process to the remote server(s)
+    - name: grpc-storage.tls.server-name
+      usage: |
+        Override the TLS server name we expect in the certificate of the remote server(s)
+    - name: grpc-storage.tls.skip-host-verify
+      default_value: "false"
+      usage: |
+        (insecure) Skip server's certificate chain and host name verification
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for jaeger-ingester
+    - name: ingester.deadlockInterval
+      default_value: 0s
+      usage: |
+        Interval to check for deadlocks. If no messages gets processed in given time, ingester app will exit. Value of 0 disables deadlock check.
+    - name: ingester.parallelism
+      default_value: "1000"
+      usage: The number of messages to process in parallel
+    - name: kafka.consumer.authentication
+      default_value: none
+      usage: |
+        Authentication type used to authenticate with kafka cluster. e.g. none, kerberos, tls, plaintext
+    - name: kafka.consumer.brokers
+      default_value: 127.0.0.1:9092
+      usage: |
+        The comma-separated list of kafka brokers. i.e. '127.0.0.1:9092,0.0.0:1234'
+    - name: kafka.consumer.client-id
+      default_value: jaeger-ingester
+      usage: The Consumer Client ID that ingester will use
+    - name: kafka.consumer.encoding
+      default_value: protobuf
+      usage: |
+        The encoding of spans ("json", "protobuf", "zipkin-thrift") consumed from kafka
+    - name: kafka.consumer.group-id
+      default_value: jaeger-ingester
+      usage: |
+        The Consumer Group that ingester will be consuming on behalf of
+    - name: kafka.consumer.kerberos.config-file
+      default_value: /etc/krb5.conf
+      usage: Path to Kerberos configuration. i.e /etc/krb5.conf
+    - name: kafka.consumer.kerberos.disable-fast-negotiation
+      default_value: "false"
+      usage: |
+        Disable FAST negotiation when not supported by KDC's like Active Directory. See https://github.com/jcmturner/gokrb5/blob/master/USAGE.md#active-directory-kdc-and-fast-negotiation.
+    - name: kafka.consumer.kerberos.keytab-file
+      default_value: /etc/security/kafka.keytab
+      usage: Path to keytab file. i.e /etc/security/kafka.keytab
+    - name: kafka.consumer.kerberos.password
+      usage: The Kerberos password used for authenticate with KDC
+    - name: kafka.consumer.kerberos.realm
+      usage: Kerberos realm
+    - name: kafka.consumer.kerberos.service-name
+      default_value: kafka
+      usage: Kerberos service name
+    - name: kafka.consumer.kerberos.use-keytab
+      default_value: "false"
+      usage: |
+        Use of keytab instead of password, if this is true, keytab file will be used instead of password
+    - name: kafka.consumer.kerberos.username
+      usage: The Kerberos username used for authenticate with KDC
+    - name: kafka.consumer.plaintext.mechanism
+      default_value: PLAIN
+      usage: |
+        The plaintext Mechanism for SASL/PLAIN authentication, e.g. 'SCRAM-SHA-256' or 'SCRAM-SHA-512' or 'PLAIN'
+    - name: kafka.consumer.plaintext.password
+      usage: The plaintext Password for SASL/PLAIN authentication
+    - name: kafka.consumer.plaintext.username
+      usage: The plaintext Username for SASL/PLAIN authentication
+    - name: kafka.consumer.protocol-version
+      usage: Kafka protocol version - must be supported by kafka server
+    - name: kafka.consumer.rack-id
+      usage: |
+        Rack identifier for this client. This can be any string value which indicates where this client is located. It corresponds with the broker config `broker.rack`
+    - name: kafka.consumer.tls.ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
+    - name: kafka.consumer.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this process to the remote server(s)
+    - name: kafka.consumer.tls.enabled
+      default_value: "false"
+      usage: Enable TLS when talking to the remote server(s)
+    - name: kafka.consumer.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this process to the remote server(s)
+    - name: kafka.consumer.tls.server-name
+      usage: |
+        Override the TLS server name we expect in the certificate of the remote server(s)
+    - name: kafka.consumer.tls.skip-host-verify
+      default_value: "false"
+      usage: |
+        (insecure) Skip server's certificate chain and host name verification
+    - name: kafka.consumer.topic
+      default_value: jaeger-spans
+      usage: The name of the kafka topic to consume from
+    - name: log-level
+      default_value: info
+      usage: |
+        Minimal allowed log Level. For more levels see https://github.com/uber-go/zap
+    - name: metrics-backend
+      default_value: prometheus
+      usage: "Defines which metrics backend to use for metrics reporting: prometheus, none, or expvar (deprecated, will be removed after 2024-01-01 or in release v1.53.0, whichever is later) \n"
+    - name: metrics-http-route
+      default_value: /metrics
+      usage: |
+        Defines the route of HTTP endpoint for metrics backends that support scraping
+    - name: span-storage.type
+      usage: |
+        (deprecated) please use SPAN_STORAGE_TYPE environment variable. Run this binary with the 'env' command for help.
+see_also:
+    - jaeger-ingester completion - Generate the autocompletion script for the specified shell
+    - jaeger-ingester docs - Generates documentation
+    - jaeger-ingester env - Help about environment variables.
+    - jaeger-ingester status - Print the status.
+    - jaeger-ingester version - Print the version.
