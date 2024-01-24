@@ -61,7 +61,7 @@ See [Getting Started](./getting-started).
 [![Detail View](/img/trace-detail-ss.png)](/img/trace-detail-ss.png)
 
 ### Service Performance Monitoring View
-![Service Performance Monitoring](/img/frontend-ui/spm.png)
+[![Service Performance Monitoring View](/img/frontend-ui/spm.png)](/img/frontend-ui/spm.png)
 
 ## Related links
 - [Take Jaeger for a HotROD ride](https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2) (blog)
