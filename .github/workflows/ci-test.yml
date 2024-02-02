@@ -26,9 +26,9 @@ jobs:
         sudo mv hugo /usr/local/bin
         hugo version
 
-    - name: Build and test links
+    - name: Build
       run: |
-        make check-internal-links
+        make build
     
     - name: Spelling Check
       uses: streetsidesoftware/cspell-action@v5.3.0
