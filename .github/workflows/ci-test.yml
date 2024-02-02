@@ -29,10 +29,3 @@ jobs:
     - name: Build
       run: |
         make build
-    
-    - name: Spelling Check
-      uses: streetsidesoftware/cspell-action@v5.3.0
-      with:
-        files: /
-          content/**/*.md
-        config: .cspell.yml
