@@ -8,6 +8,14 @@ See also:
   * [For mentees](../mentorship-for-mentees/)
   * [For mentors](../mentorship-for-mentors/)
 
+## LFS Mentorship March-May 2024 (Term 1)
+
+{{< warning >}}
+Mentee applications are open between Monday Jan 29 - Tues Feb 13, 5:00 PM PDT.
+{{< /warning >}}
+
+* See [this issue](https://github.com/jaegertracing/jaeger/issues/5084) for project details.
+
 ## LFX Mentorship Sep-Nov 2023
 
 * [Ansh Goyal](https://github.com/anshgoyalevil) -- [Upgrade Jaeger UI to the latest version of React.js](https://github.com/jaegertracing/jaeger-ui/issues/998)
