@@ -29,7 +29,12 @@ It does not mean that the longer the proposal the better. It's about the quality
 In order to understand the project better and come up with reasonable solutions, it's always helpful to become familiar with Jaeger and its code base. We strongly recommend:
 
 * Going through some Jaeger tutorials, such as [this one][hotrod].
-* Trying to solve some of the [simple open issues](../get-involved/) that you can find across Jaeger repositories.
+* Review the hotrod video demo and tutorial such as [this video on youtube][hotrod_video].
+* Run the [hotrod demo yourself][hotrod_repo] as the blogs and video is outdated, it's good to get hands on.
+* Review the Jaeger architecture from the [documentation](https://www.jaegertracing.io/docs/architecture/) and understand the microservices architecture.
+* Fork and clone the respective repositories to be able to [build and run the project locally](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING.md#getting-started). 
+* Learn about contributing with the best practices including how to [sign your code and contribute](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md#creating-a-pull-request).
+* Now you are ready to try to solve some of the [simple open issues](../get-involved/) that you can find across Jaeger repositories.
 
 ### Evaluation criteria
 
@@ -120,4 +125,6 @@ Why the log is important:
 [gsoc]: https://summerofcode.withgoogle.com/
 [lfxm]: https://mentorship.lfx.linuxfoundation.org/
 [hotrod]: https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2
+[hotrod_video] : https://youtu.be/s7IrYt1igSM?si=B3NI6ruohKfSPUCl&t=445 
+[hotrod_repo] : https://github.com/jaegertracing/jaeger/blob/main/examples/hotrod/README.md 
 [template]: https://docs.google.com/document/d/1lAL0iHHozXZoIL4W0qiOWyXVPo9a6lUTeH9cz95O6Kg/edit#
