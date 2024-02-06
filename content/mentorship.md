@@ -10,9 +10,11 @@ See also:
 
 ## LFS Mentorship March-May 2024 (Term 1)
 
-* See open Issue https://github.com/jaegertracing/jaeger/issues/5084
+{{< warning >}}
+Mentee applications are open between Monday Jan 29 - Tues Feb 13, 5:00 PM PDT.
+{{< /warning >}}
 
-*Updates to follow selection.*
+* See [this issue](https://github.com/jaegertracing/jaeger/issues/5084) for project details.
 
 ## LFX Mentorship Sep-Nov 2023
 
