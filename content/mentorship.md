@@ -8,6 +8,12 @@ See also:
   * [For mentees](../mentorship-for-mentees/)
   * [For mentors](../mentorship-for-mentors/)
 
+## LFS Mentorship March-May 2024 (Term 1)
+
+* See open Issue https://github.com/jaegertracing/jaeger/issues/5084
+
+*Updates to follow selection.*
+
 ## LFX Mentorship Sep-Nov 2023
 
 * [Ansh Goyal](https://github.com/anshgoyalevil) -- [Upgrade Jaeger UI to the latest version of React.js](https://github.com/jaegertracing/jaeger-ui/issues/998)
