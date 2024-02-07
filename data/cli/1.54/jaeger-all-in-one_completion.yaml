@@ -1,0 +1,16 @@
+name: jaeger-all-in-one completion
+synopsis: Generate the autocompletion script for the specified shell
+description: |
+    Generate the autocompletion script for jaeger-all-in-one for the specified shell.
+    See each sub-command's help for details on how to use the generated script.
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for completion
+see_also:
+    - jaeger-all-in-one - Jaeger all-in-one distribution with agent, collector and query in one process.
+    - jaeger-all-in-one completion bash - Generate the autocompletion script for bash
+    - jaeger-all-in-one completion fish - Generate the autocompletion script for fish
+    - jaeger-all-in-one completion powershell - Generate the autocompletion script for powershell
+    - jaeger-all-in-one completion zsh - Generate the autocompletion script for zsh
