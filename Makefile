@@ -60,4 +60,4 @@ check-all-links: clean build link-checker-setup
 	bin/htmltest --conf .htmltest.external.yml
 
 spellcheck:
-	python3 scripts/spellcheck.py
+	./scripts/spellcheck.sh
