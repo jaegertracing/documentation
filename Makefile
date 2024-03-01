@@ -45,7 +45,7 @@ netlify-branch-deploy:	generate
 	rm -rf public/_client_libs
 
 build: clean generate
-	hugo -v
+	hugo --logLevel info
 	rm -rf public/_client_libs
 
 link-checker-setup:
