@@ -2,7 +2,13 @@
 {{ $index := newScratch }}
 {{ $index.Add "index" slice }}
 {{ range where site.Pages "Section" "docs" }}
-  {{ $version := index (split .File.Path "/") 1 }}
+  {{ $versionPath := "" }}
+  {{ with .File }}
+    {{ $versionPath = .Path }}
+  {{ else }}
+    {{ $versionPath = .Path }}
+  {{ end }}
+  {{ $version := index (split $versionPath "/") 1 }}
   {{ if eq $version $latestVersion }}
     {{ $index.Add "index" (dict "title" .Title "url" .Permalink "body" (.Content | plainify | jsonify) "summary" .Summary "version" $version) }}
   {{ end }}{{ end }}

@@ -1,11 +1,23 @@
 <!-- This renders the left-side menu panel -->
-{{ $currentVersion := index (split .File.Path "/") 1 }}
+{{ $path := "" }}
+{{ with .File }}
+  {{ $path = .Path }}
+{{ else }}
+  {{ $path = .Path }}
+{{ end }}
+{{ $currentVersion := index (split $path "/") 1 }}
 {{ $versionDocsPath := printf "content/docs/%s" $currentVersion }}
 {{ $url := .RelPermalink }}
 <div class="nav-wrapper">
   <aside class="nav">
     {{ range site.Pages }}
-      {{ $docVersion := index (split .File.Path "/") 1 }}
+      {{ $pagePath := "" }}
+      {{ with .File }}
+        {{ $pagePath = .Path }}
+      {{ else }}
+        {{ $pagePath = .Path }}
+      {{ end }}
+      {{ $docVersion := index (split $pagePath "/") 1 }}
       {{ if and (eq $docVersion $currentVersion) (not .Params.hasParent) }}
         {{ $isCurrentPage := eq $url .RelPermalink }}
         <div class="nav-link">

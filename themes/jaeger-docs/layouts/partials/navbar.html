@@ -7,7 +7,13 @@
 {{ $isDocsPage    := eq .Section "docs" }}
 {{ $preview       := getenv "HUGO_PREVIEW" }}
 {{ $isPreview     := eq $preview "true" }}
-{{ $currentVersion := index (split .File.Path "/") 1 }}
+{{ $path := "" }}
+{{ with .File }}
+  {{ $path = .Path }}
+{{ else }}
+  {{ $path = .Path }}
+{{ end }}
+{{ $currentVersion := index (split $path "/") 1 }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
     <div class="navbar-brand">
@@ -55,7 +61,13 @@
           </a>
           <div class="navbar-dropdown">
             {{ range $docs }}
-              {{ $docVersion := index (split .File.Path "/") 1 }}
+              {{ $docPath := "" }}
+              {{ with .File }}
+                {{ $docPath = .Path }}
+              {{ else }}
+                {{ $docPath = .Path }}
+              {{ end }}
+              {{ $docVersion := index (split $docPath "/") 1 }}
               <!-- When generating Docs menu for home page, use the latest version, -->
               <!-- when generating menu for pages inside docs/, use same version as the doc -->
               {{ $matchVersion := cond ($isDocsPage) $currentVersion $latest }}
