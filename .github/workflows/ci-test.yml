@@ -17,7 +17,7 @@ jobs:
     - name: ✨ Setup Hugo
       env:
         # should match one from netlify.toml
-        HUGO_VERSION: 0.102.3
+        HUGO_VERSION: 0.123.6
       run: |
         mkdir ~/hugo
         cd ~/hugo
