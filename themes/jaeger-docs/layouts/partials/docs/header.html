@@ -1,6 +1,12 @@
 {{ $versions      := site.Params.versions }}
 {{ $latest        := site.Params.latest }}
-{{ $version       := index (split .File.Path "/") 1 }}
+{{ $path := "" }}
+{{ with .File }}
+  {{ $path = .Path }}
+{{ else }}
+  {{ $path = .Path }}
+{{ end }}
+{{ $version       := index (split $path "/") 1 }}
 {{ $isLatest      := eq $version $latest }}
 {{ $isNextRelease := eq $version "next-release" }}
 {{ $latestUrl     := .RelPermalink | replaceRE $version $latest }}
@@ -10,7 +16,7 @@
   <p class="subtitle is-3">{{ . }}</p>
   {{ end }}
 
-  {{ if ne .Path "docs" }}
+  {{ if ne $path "docs" }}
     <div class="tags has-addons">
       <span class="tag is-medium">
         Version&nbsp;&nbsp;<strong>{{ $version }}</strong>
