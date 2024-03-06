@@ -8,13 +8,11 @@ See also:
   * [For mentees](../mentorship-for-mentees/)
   * [For mentors](../mentorship-for-mentors/)
 
-## LFS Mentorship March-May 2024 (Term 1)
+## LFX Mentorship March-May 2024 (Term 1)
 
-{{< warning >}}
-Mentee applications are open between Monday Jan 29 - Tues Feb 13, 5:00 PM PDT.
-{{< /warning >}}
-
-* See [this issue](https://github.com/jaegertracing/jaeger/issues/5084) for project details.
+* [Harshvir Potpose](https://github.com/akagami-harsh) -- [Achieve observability parity between v1 and v2 (metrics, logs, traces)](https://github.com/jaegertracing/jaeger/issues/5084)
+* [James Ryans](https://github.com/james-ryans) -- [Build out full support in jaeger-v2 for all storage backends supported by jaeger-v1](https://github.com/jaegertracing/jaeger/issues/5084)
+* [Pushkar Mishra](https://github.com/Pushkarm029) -- [Support adaptive sampling](https://github.com/jaegertracing/jaeger/issues/5084)
 
 ## LFX Mentorship Sep-Nov 2023
 
