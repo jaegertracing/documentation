@@ -10,9 +10,9 @@ See also:
 
 ## LFX Mentorship March-May 2024 (Term 1)
 
-* [Harshvir Potpose](https://github.com/akagami-harsh) -- [Achieve observability parity between v1 and v2 (metrics, logs, traces)](https://github.com/jaegertracing/jaeger/issues/5084)
-* [James Ryans](https://github.com/james-ryans) -- [Build out full support in jaeger-v2 for all storage backends supported by jaeger-v1](https://github.com/jaegertracing/jaeger/issues/5084)
-* [Pushkar Mishra](https://github.com/Pushkarm029) -- [Support adaptive sampling](https://github.com/jaegertracing/jaeger/issues/5084)
+* [Harshvir Potpose](https://github.com/akagami-harsh) -- [Jaeger V2](https://github.com/jaegertracing/jaeger/issues/5084)
+* [James Ryans](https://github.com/james-ryans) -- [Jaeger V2](https://github.com/jaegertracing/jaeger/issues/5084)
+* [Pushkar Mishra](https://github.com/Pushkarm029) -- [Jaeger V2](https://github.com/jaegertracing/jaeger/issues/5084)
 
 ## LFX Mentorship Sep-Nov 2023
 
