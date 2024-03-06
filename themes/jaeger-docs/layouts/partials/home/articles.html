@@ -4,9 +4,9 @@
 
     <div class="blog__container">
       <ul class="blog__slider">
-        {{ range .posts }}
+        {{ range $idx, $val := .posts }}
         {{ $link    := .link }}
-        {{ $img     := .thumbnail }}
+        {{ $img     := (index $.imgLinks $idx) }}
         {{ $title   := .title | plainify }}
         {{ $author  := .author }}
         {{ $dateRaw := .pubDate }}

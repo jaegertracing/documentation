@@ -3,12 +3,31 @@
 {{ with resources.GetRemote "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/jaegertracing" }}
   {{ $json = . | transform.Unmarshal }}
 {{ end }}
-{{ $posts        := first 100 $json.items }}
+{{ $posts := first 100 $json.items }}
+{{ $imgLinks := slice }}
+{{ $defaultImgLink := "/img/jaeger-icon-color.png" }}
+
+{{/* Parse Medium's post first image link */}}
+{{ range $k, $v := $posts }}
+  {{ $imgLink := $defaultImgLink }}
+  {{ with strings.FindRESubmatch "<img[^>]+src=\"([^\">]+)\"" (index $v "content") 1 }}
+    {{ if . }} {{/* If image found in post */}}
+      {{ $findMatch := index . 0 }} {{/* Choose the first image */}}
+      {{ with $findMatch }}
+        {{ $findGroup := index . 1 }}
+        {{ if . }} {{/* If src link found */}}
+          {{ $imgLink = $findGroup }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $imgLinks = $imgLinks | append $imgLink }}
+{{ end }}
 
 {{ partial "home/hero.html" (dict "posts" $posts "title" site.Title "tagline" site.Params.tagline "latestVersion" site.Params.latest) }}
 {{ partial "home/why.html" . }}
 {{ partial "home/features.html" . }}
-{{ partial "home/articles.html" (dict "posts" $posts) }}
+{{ partial "home/articles.html" (dict "posts" $posts "imgLinks" $imgLinks) }}
 {{ partial "home/contributing.html" . }}
 {{ partial "home/cncf.html" . }}
 {{ end }}
