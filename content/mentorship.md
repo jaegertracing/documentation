@@ -8,6 +8,15 @@ See also:
   * [For mentees](../mentorship-for-mentees/)
   * [For mentors](../mentorship-for-mentors/)
 
+## Google Summer of Code 2024
+
+{{< warning >}}
+* GSoC contributor application period begins March 18 - 18:00 UTC
+* GSoC contributor application deadline April 2 - 18:00 UTC
+{{< /warning >}}
+
+* See [this issue](https://github.com/jaegertracing/jaeger/issues/5221) for project details.
+
 ## LFX Mentorship March-May 2024 (Term 1)
 
 * [Harshvir Potpose](https://github.com/akagami-harsh) -- [Jaeger V2](https://github.com/jaegertracing/jaeger/issues/5084)
