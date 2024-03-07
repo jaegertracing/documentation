@@ -11,8 +11,8 @@ See also:
 ## Google Summer of Code 2024
 
 {{< warning >}}
-GSoC contributor application period begins March 18 - 18:00 UTC
-GSoC contributor application deadline April 2 - 18:00 UTC
+* GSoC contributor application period begins March 18 - 18:00 UTC
+* GSoC contributor application deadline April 2 - 18:00 UTC
 {{< /warning >}}
 
 * See [this issue](https://github.com/jaegertracing/jaeger/issues/5221) for project details.
