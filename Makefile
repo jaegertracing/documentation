@@ -60,4 +60,5 @@ check-all-links: clean build link-checker-setup
 	bin/htmltest --conf .htmltest.external.yml
 
 spellcheck:
-	./scripts/spellcheck.sh
+	npm install cspell
+	npm run spellcheck

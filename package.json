@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "cspell": "^8.6.0"
+  },
+  "scripts": {
+    "spellcheck": "cspell \"content/**\" --quiet"
+  }
+}
