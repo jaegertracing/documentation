@@ -1,2 +1,0 @@
-pyspellchecker
-markdown-it-py
