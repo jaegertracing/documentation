@@ -6,3 +6,7 @@ if ! sort -c project-words.txt; then
 fi
 npm install cspell
 npm run spellcheck
+if [ $? -ne 0 ]; then
+    echo "Misspelling(s) found."
+    exit 1
+fi
