@@ -279,7 +279,8 @@ docker run \
   jaegertracing/all-in-one:{{< currentVersion >}}
 ```
 
-[Upgrade Badger v1 to v3](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/badger/docs/upgrade-v1-to-v3.md)
+* [Upgrade Badger v1 to v3](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/badger/docs/upgrade-v1-to-v3.md)
+* [Badger file permissions as non-root service](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/badger/docs/storage-file-non-root-permission.md)
 
 ### Cassandra
 * Supported versions: 3.4+
