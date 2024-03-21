@@ -32,7 +32,7 @@ OpenTelemetry implements baggage propagation differently from OpenTracing and th
 
 #### We need your help!
 
-If you find inaccuracies or have information that can be added, please open an issue or a PR to the [documentation repo](https://github.com/jaegertracing/documentation). If some features are missing and you need them, please open tickets in the respective OpenTelemetry repos or contibute. For example, Jaeger's remote samplers are not yet implemented in every OpenTelemetry SDK, but porting them from the Jaeger codebase is a fairly straightforward task.
+If you find inaccuracies or have information that can be added, please open an issue or a PR to the [documentation repo](https://github.com/jaegertracing/documentation). If some features are missing and you need them, please open tickets in the respective OpenTelemetry repos or contribute. For example, Jaeger's remote samplers are not yet implemented in every OpenTelemetry SDK, but porting them from the Jaeger codebase is a fairly straightforward task.
 
 #### Copying Jaeger code
 
