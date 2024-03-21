@@ -40,6 +40,7 @@ glvs
 gobin
 gopath
 goyal
+harshvir
 hasparent
 healthcheck
 healthz
@@ -77,6 +78,7 @@ mentorships
 metricsquery
 metricsstore
 microsim
+mishra
 mutkure
 myapp
 myappnamespace
@@ -97,6 +99,7 @@ outreachy
 paixão
 parentbased
 pavolloffay
+potpose
 prakriti
 prathamesh
 promethesus
@@ -104,6 +107,7 @@ prometheusexporter
 promscale
 proto
 protobuf
+pushkar
 quickstart
 ratelimited
 ratelimiting
@@ -113,6 +117,7 @@ reddy
 reindex
 reindexing
 rolebinding
+ryans
 shkuro
 shortcode
 soria
