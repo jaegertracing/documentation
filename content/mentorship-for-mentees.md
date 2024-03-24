@@ -89,7 +89,7 @@ Since the mentorships are remote, the best way to ensure you are making steady p
   - If you weren't able to work on a project on a given day, log that too, for transparency.
 
 Why the log is important:
-- The log gives your mentors visiblity into your progress, and allows them to make course corrections.
+- The log gives your mentors visibility into your progress, and allows them to make course corrections.
 - If you are unable to write your goals for a week, it's a sign of misunderstanding, and your mentors need to work with you to clarify the requirements and the approach.
 - Many projects require research / analysis of how best to solve specific issues. Writing down your findings helps you organize your own understanding, and get timely feedback from the mentors. Remember that mentors may not be familiar with that specific area too, and they rely on you to research, synthesize, and present the information that affects the project.
 - Clear writing is one of the most important skills for software engineers. You may think it's coding skills, but as you become more senior, writing is how you communicate your ideas and get alignment with the team / community. Use this mentorship to hone your writing skills.

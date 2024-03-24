@@ -54,3 +54,6 @@ check-internal-links: clean build link-checker-setup run-link-checker
 
 check-all-links: clean build link-checker-setup
 	bin/htmltest --conf .htmltest.external.yml
+
+spellcheck:
+	cd scripts/cspell && ./spellcheck.sh

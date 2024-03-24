@@ -97,7 +97,7 @@ You can navigate to `http://localhost:16686` to access the Jaeger UI.
 ## Agent
 
 {{< warning >}}
-**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equiped with OTLP exporters) directly to **jaeger-collector**. See the [Architecture](../architecture) page for alternative deployment options.
+**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equipped with OTLP exporters) directly to **jaeger-collector**. See the [Architecture](../architecture) page for alternative deployment options.
 {{< /warning >}}
 
 **jaeger-agent** is designed to receive tracing data in Thrift format over UDP and run locally on each host, either as a host agent / daemon or as an application sidecar. **jaeger-agent** exposes the following ports:
@@ -403,7 +403,7 @@ docker run \
   jaegertracing/jaeger-collector:{{< currentVersion >}}
 ```
 
-Note: White space characters are allowed in `CASSANDA_SERVERS`. For Example: Servers can be passed as `CASSANDRA_SERVERS="1.2.3.4, 5.6.7.8" for better readability.
+Note: White space characters are allowed in `CASSANDRA_SERVERS`. For Example: Servers can be passed as `CASSANDRA_SERVERS="1.2.3.4, 5.6.7.8" for better readability.
 
 ##### All options
 To view the full list of configuration options, you can run the following command:

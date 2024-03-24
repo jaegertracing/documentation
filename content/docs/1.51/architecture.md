@@ -107,7 +107,7 @@ The instrumentation is designed to be always on in production. To minimize the o
 ### Agent
 
 {{< warning >}}
-**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equiped with OTLP exporters) directly to **jaeger-collector**. Alternatively, use the OpenTelemetry Collector as a local agent.
+**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equipped with OTLP exporters) directly to **jaeger-collector**. Alternatively, use the OpenTelemetry Collector as a local agent.
 {{< /warning >}}
 
 **jaeger-agent** is a network daemon that listens for spans sent over UDP, which are batched and sent to the collector. It is designed to be deployed to all hosts as an infrastructure component. The agent abstracts the routing and discovery of the collectors away from the client. **jaeger-agent** is **not** a required component.
