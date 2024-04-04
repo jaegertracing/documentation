@@ -3,14 +3,10 @@ HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
 
 client-libs-docs:
-	# invoke one group of commands in bash to allow pushd/popd
 	@for d in $(shell ls -d content/docs/*); do \
-		/bin/bash -c "pushd $$d/; \
-			rm -f client-libraries.md client-features.md; \
-			ln -s ../../_client_libs/client-libraries.md; \
-			ln -s ../../_client_libs/client-features.md; \
-			popd"; \
-		echo "sym-linked content/_client_libs/*.md -> $$d/"; \
+		cp content/_client_libs/client-libraries.md $$d/; \
+		cp content/_client_libs/client-features.md $$d/; \
+		echo "copied content/_client_libs/*.md -> $$d/"; \
 	done
 
 generate:	client-libs-docs
@@ -45,7 +41,7 @@ netlify-branch-deploy:	generate
 	rm -rf public/_client_libs
 
 build: clean generate
-	hugo -v
+	hugo --logLevel info
 	rm -rf public/_client_libs
 
 link-checker-setup:
@@ -61,3 +57,21 @@ check-all-links: clean build link-checker-setup
 
 spellcheck:
 	cd scripts/cspell && ./spellcheck.sh
+
+# only x.y.0 semver values are valid for kicking off a new release.
+SEMVER_REGEX := ^([0-9]+\.){2}0$$
+VALID_VERSION := $(shell echo "$(VERSION)" | grep -E "$(SEMVER_REGEX)")
+
+ifneq "$(VALID_VERSION)" "$(VERSION)"
+validate-version:
+	@echo "ERROR: Invalid VERSION=$(VERSION). Must be in format x.y.0."
+	@false  # Exit with an error code
+else
+validate-version:
+	@echo "VERSION=$(VERSION) is valid."
+endif
+
+# `make start-release VERSION=x.y.0
+start-release: validate-version
+	git tag release-$(VERSION)
+	git push upstream release-$(VERSION)

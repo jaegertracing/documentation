@@ -1,4 +1,10 @@
-{{ $version := index (split .File.Path "/") 1 }}
+{{ $path := "" }}
+{{ with .File }}
+  {{ $path = .Path }}
+{{ else }}
+  {{ $path = .Path }}
+{{ end }}
+{{ $version := index (split $path "/") 1 }}
 {{ $isDoc   := eq .Section "docs" }}
 <script>
   const version = {{ $version }};

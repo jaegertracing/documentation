@@ -17,7 +17,13 @@
 <meta property="og:url" content="{{ .Permalink }}" />
 {{ if $isDoc }}
 <meta property="og:type" content="documentation" />
-{{ $version := index (split .Path "/") 1 }}
+{{ $path := "" }}
+{{ with .File }}
+  {{ $path = .Path }}
+{{ else }}
+  {{ $path = .Path }}
+{{ end }}
+{{ $version := index (split $path "/") 1 }}
 {{ $latest := site.Params.latest }}
 {{ $url := .RelPermalink }}
 {{ if in site.Params.versions $version }}
