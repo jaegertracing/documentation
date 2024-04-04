@@ -97,7 +97,7 @@ You can navigate to `http://localhost:16686` to access the Jaeger UI.
 ## Agent
 
 {{< warning >}}
-**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equiped with OTLP exporters) directly to **jaeger-collector**. See the [Architecture](../architecture) page for alternative deployment options.
+**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equipped with OTLP exporters) directly to **jaeger-collector**. See the [Architecture](../architecture) page for alternative deployment options.
 {{< /warning >}}
 
 **jaeger-agent** is designed to receive tracing data in Thrift format over UDP and run locally on each host, either as a host agent / daemon or as an application sidecar. **jaeger-agent** exposes the following ports:
@@ -297,7 +297,7 @@ docker run \
   jaegertracing/jaeger-collector:{{< currentVersion >}}
 ```
 
-Note: White space characters are allowed in `CASSANDA_SERVERS`. For Example: Servers can be passed as `CASSANDRA_SERVERS="1.2.3.4, 5.6.7.8" for better readability.
+Note: White space characters are allowed in `CASSANDRA_SERVERS`. For Example: Servers can be passed as `CASSANDRA_SERVERS="1.2.3.4, 5.6.7.8" for better readability.
 
 ##### All options
 To view the full list of configuration options, you can run the following command:
@@ -652,7 +652,6 @@ Available sidecar plugins:
 * [InfluxDB](https://github.com/influxdata/influxdb-observability/blob/main/jaeger-influxdb/README.md) - time series database.
 * [Logz.io](https://github.com/logzio/jaeger-logzio) - secure, scalable, managed, cloud-based ELK storage.
 * [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse) - fast open-source OLAP DBMS.
-* [PostgreSQL](https://github.com/robbert229/jaeger-postgresql) - a powerful, open source object-relational database system.
 ### Compatible Backends
 
 * ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
@@ -671,7 +670,7 @@ docker run \
 
 Known remote storage backends:
 
-* N/A
+* [PostgreSQL](https://github.com/robbert229/jaeger-postgresql) - a powerful, open source object-relational database system.
 
 ## Metrics Storage Backends
 

@@ -317,7 +317,7 @@ docker run \
   jaegertracing/jaeger-collector:{{< currentVersion >}}
 ```
 
-Note: White space characters are allowed in `CASSANDA_SERVERS`. For Example: Servers can be passed as `CASSANDRA_SERVERS="1.2.3.4, 5.6.7.8" for better readability.
+Note: White space characters are allowed in `CASSANDRA_SERVERS`. For Example: Servers can be passed as `CASSANDRA_SERVERS="1.2.3.4, 5.6.7.8" for better readability.
 
 ##### All options
 To view the full list of configuration options, you can run the following command:

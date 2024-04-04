@@ -26,6 +26,10 @@ jobs:
         sudo mv hugo /usr/local/bin
         hugo version
 
+    - name: Spellcheck
+      run: |
+        make spellcheck
+
     - name: Build
       run: |
         make build

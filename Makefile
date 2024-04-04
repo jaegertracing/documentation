@@ -55,6 +55,9 @@ check-internal-links: clean build link-checker-setup run-link-checker
 check-all-links: clean build link-checker-setup
 	bin/htmltest --conf .htmltest.external.yml
 
+spellcheck:
+	cd scripts/cspell && ./spellcheck.sh
+
 # only x.y.0 semver values are valid for kicking off a new release.
 SEMVER_REGEX := ^([0-9]+\.){2}0$$
 VALID_VERSION := $(shell echo "$(VERSION)" | grep -E "$(SEMVER_REGEX)")

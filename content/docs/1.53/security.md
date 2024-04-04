@@ -8,7 +8,7 @@ This page documents the existing security mechanisms in Jaeger, organized by the
 ## SDK to Agent
 
 {{< warning >}}
-**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equiped with OTLP exporters) directly to **jaeger-collector**. Alternatively, use the OpenTelemetry Collector as a local agent.
+**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equipped with OTLP exporters) directly to **jaeger-collector**. Alternatively, use the OpenTelemetry Collector as a local agent.
 {{< /warning >}}
 
 Deployments that involve **jaeger-agent** are meant for trusted environments where the agent is run as a sidecar within the container's network namespace, or as a host agent. Therefore, there is currently no support for traffic encryption between clients and agents.
