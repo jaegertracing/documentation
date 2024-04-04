@@ -652,7 +652,6 @@ Available sidecar plugins:
 * [InfluxDB](https://github.com/influxdata/influxdb-observability/blob/main/jaeger-influxdb/README.md) - time series database.
 * [Logz.io](https://github.com/logzio/jaeger-logzio) - secure, scalable, managed, cloud-based ELK storage.
 * [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse) - fast open-source OLAP DBMS.
-* [PostgreSQL](https://github.com/robbert229/jaeger-postgresql) - a powerful, open source object-relational database system.
 ### Compatible Backends
 
 * ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
@@ -671,7 +670,7 @@ docker run \
 
 Known remote storage backends:
 
-* N/A
+* [PostgreSQL](https://github.com/robbert229/jaeger-postgresql) - a powerful, open source object-relational database system.
 
 ## Metrics Storage Backends
 
