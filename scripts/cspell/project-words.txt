@@ -23,7 +23,7 @@ datacenter
 datasource
 developercertificate
 dilligence
-distirbuted
+distributed
 documentiing
 downsampling
 dropwizard
