@@ -33,3 +33,6 @@ jobs:
     - name: Build
       run: |
         make build
+
+    - name: Ensure PR is not on main branch
+      uses: jaegertracing/jaeger/.github/actions/block-pr-not-on-main@main
