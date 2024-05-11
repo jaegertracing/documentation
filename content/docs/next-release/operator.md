@@ -664,45 +664,9 @@ spec:
 
 ### Storage plugin
 
-Setting `spec.storage.type` to `grpc-plugin` enables using Jaeger with 3rd party storage implementations.
-
-The following is an example of a Jaeger CR using the `allInOne` deployment strategy
-and the Clickhouse storage plugin.
-Refer to [jaeger-clickhouse](https://github.com/pavolloffay/jaeger-clickhouse) for documentation
-and a fully functional example.
-
-```yaml
-apiVersion: jaegertracing.io/v1
-kind: Jaeger
-metadata:
-  name: clickhouse-grpc-plugin
-spec:
-  strategy: allInOne
-  storage:
-    type: grpc-plugin # <1>
-    grpcPlugin:
-      image: ghcr.io/pavolloffay/jaeger-clickhouse:0.5.1 # <2>
-    options:
-      grpc-storage-plugin: # <3>
-        binary: /plugin/jaeger-clickhouse
-        configuration-file: /plugin-config/config.yaml
-        log-level: debug
-  volumeMounts:
-    - name: plugin-config
-      mountPath: /plugin-config
-  volumes:
-    - name: plugin-config
-      configMap:
-        name: jaeger-clickhouse # <4>
- ```
-
-<1> Storage type set to `grpc-plugin`.
-
-<2> Image with the plugin binary. The image is used as init-container to copy the binary into volume that is available to the Jaeger process. The image has to copy the binary into `/plugin` directory.
-
-<3> Configuration options for the `grpc-plugin`.
-
-<4> User created config map with the plugin configuration.
+{{< warning >}}
+Sidecar plugins will not be supported from v1.58. Custom storage backends should migrate to Remote Storage API.
+{{< /warning >}}
 
 ## Metrics storage options
 
