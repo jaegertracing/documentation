@@ -12,7 +12,7 @@ If you are using the OpenTelemetry Collector as part of your pipeline, make sure
 
 Before everything else, make sure to confirm what sampling strategy is being used. For development purposes or for low-traffic scenarios, it is useful to sample every trace. In production, you may want to use lower rates. When diagnosing why spans are not being received by the backend, make sure to configure the SDK to _sample every trace_. Typically, the sampling strategy can be set via environment variables.
 
-### OpenTelemtery SDKs
+### OpenTelemetry SDKs
 
 If you are using OpenTelemetry SDKs, they should default to `parentbased_always_on` sampler, which is effectively sampling at 100%. It can be changed via `OTEL_TRACES_SAMPLER` environment variable ([see documentation](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/configuration/sdk-environment-variables.md)).
 
