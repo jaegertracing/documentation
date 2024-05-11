@@ -44,12 +44,13 @@ See [Features](./features/) page for more details.
   * Supported storage backends:
     * [Cassandra 3.4+](./deployment/#cassandra)
     * [Elasticsearch 5.x, 6.x, 7.x](./deployment/#elasticsearch)
-    * [Kafka](./deployment/#kafka)
+    * [Badger](./deployment/#badger---local-storage)
+    * [Kafka](./deployment/#kafka) - as an intermediate buffer
     * memory storage
-    * certified grpc-plugins:
-      * [ClickHouse](./deployment/#sidecar-model)
+    * Custom backends via [Remote Storage API](./deployment/#remote-storage)
 
 ## Quick Start
+
 See [Getting Started](./getting-started).
 
 ## Screenshots
