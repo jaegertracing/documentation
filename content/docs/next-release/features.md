@@ -20,7 +20,7 @@ Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SD
 ## Multiple storage backends
 
 Jaeger can be used with a growing a number of storage backends:
-* It natively supports popular open source NoSQL databases as trace storage backends: Cassandra 3.4+, Elasticsearch 5.x/6.x/7.x, and OpenSearch 1.0+.
+* It natively supports popular open source NoSQL databases as trace storage backends: Cassandra 3.4+, Elasticsearch 7.x/8.x, and OpenSearch 1.0+.
 * It integrates via a gRPC API with other well known databases that have been certified to be Jaeger compliant: [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse).
 * There is embedded database support using [Badger](https://github.com/dgraph-io/badger) and simple in-memory storage for testing setups.
 * There are ongoing community experiments using other databases; you can find more in [this issue](https://github.com/jaegertracing/jaeger/issues/638).

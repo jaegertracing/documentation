@@ -372,7 +372,7 @@ usercert = ~/.cassandra/client-cert
 
 ### Elasticsearch
 * Supported since Jaeger v0.6.0
-* Supported ES versions: 5.x, 6.x, 7.x, 8.x (since Jaeger v1.52.0)
+* Supported ES versions: 7.x, 8.x (since Jaeger v1.52.0)
 
 Elasticsearch version is automatically retrieved from root/ping endpoint.
 Based on this version Jaeger uses compatible index mappings and Elasticsearch REST API.
@@ -531,19 +531,19 @@ For example:
 #### Upgrade Elasticsearch version
 
 Elasticsearch defines wire and index compatibility versions. The index compatibility defines
-the minimal version a node can read data from. For example Elasticsearch 7 can read indices
-created by Elasticsearch 6, however it cannot read indices created by Elasticsearch 5 even
-though they use the same index mappings. Therefore upgrade from Elasticsearch 6 to 7 does not require any
-data migration. However, upgrade from Elasticsearch 5 to 7 has to be done through Elasticsearch 6 and wait
-until indices created by ES 5.x are removed or explicitly reindexed.
+the minimal version a node can read data from. For example Elasticsearch 8 can read indices
+created by Elasticsearch 7, however it cannot read indices created by Elasticsearch 6 even
+though they use the same index mappings. Therefore upgrade from Elasticsearch 7 to 8 does not require any
+data migration. However, upgrade from Elasticsearch 6 to 8 has to be done through Elasticsearch 7 and wait
+until indices created by ES 6.x are removed or explicitly reindexed.
 
 Refer to the Elasticsearch [documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current//setup-upgrade.html)
 for wire and index compatibility versions. Generally this information can be retrieved from root/ping REST endpoint.
 
 ##### Reindex
 
-Manual reindexing can be used when upgrading from Elasticsearch 5 to 7 (through Elasticsearch 6)
-without waiting until indices created by Elasticsearch 5 are removed.
+Manual reindexing can be used when upgrading from Elasticsearch 6 to 8 (through Elasticsearch 7)
+without waiting until indices created by Elasticsearch 6 are removed.
 
 1. Reindex all span indices to new indices with suffix `-1`:
 
