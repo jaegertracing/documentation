@@ -43,7 +43,7 @@ See [Features](./features/) page for more details.
   * React/Javascript UI
   * Supported storage backends:
     * [Cassandra 3.4+](./deployment/#cassandra)
-    * [Elasticsearch 5.x, 6.x, 7.x](./deployment/#elasticsearch)
+    * [Elasticsearch 7.x, 8.x](./deployment/#elasticsearch)
     * [Badger](./deployment/#badger---local-storage)
     * [Kafka](./deployment/#kafka) - as an intermediate buffer
     * memory storage
