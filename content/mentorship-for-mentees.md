@@ -45,7 +45,7 @@ We do not have an exact checklist that we use for evaluation, but the following 
   * their coding and problem solving skills.
 * High quality proposal that demonstrates:
   * good understanding of the problem,
-  * technical due dilligence conducted,
+  * technical due diligence conducted,
   * viable approach to solving the problem.
 * Evidence of previous high quality development tasks completed, e.g., in other open source projects.
 
@@ -101,7 +101,7 @@ Why the log is important:
   in the documentation or the code, then don’t hesitate to ask your mentor for pointers. You can also ask in
   [#jaeger](https://cloud-native.slack.com/archives/CGG7NFUJ3) and #jaeger-mentorships Slack channels.
 - Before embarking on a relatively substantial change, write up a plan on what you plan to do,
-  why and potential challenges or unknowns. Consider documentiing this as a
+  why and potential challenges or unknowns. Consider documenting this as a
   [new issue](https://github.com/jaegertracing/jaeger/issues) in Jaeger.
 - Work on small deliverables at a time, making small enhancements as you go along.
   Breaking down a large task into smaller pieces can help make a seemingly daunting task appear manageable.

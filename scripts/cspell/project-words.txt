@@ -14,7 +14,7 @@ certfile
 changeme
 clickhouse
 cncf
-conrolled
+controlled
 containerd
 cqlsh
 cqlshrc
@@ -23,8 +23,8 @@ datacenter
 datasource
 developercertificate
 dilligence
-distirbuted
-documentiing
+distributed
+documenting
 downsampling
 dropwizard
 dsoie

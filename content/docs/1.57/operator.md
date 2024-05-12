@@ -972,7 +972,7 @@ In order to workaround that issue:
 - change `/healtz` and `/readyz` ports from 8081 to other value
 - change `kube-rbac-proxy` secure port from 8443 to other value
 - change `webhook-server` port from 9443 to other value
-  - this setting is conrolled by `webhook-bind-port` flag
+  - this setting is controlled by `webhook-bind-port` flag
 
 Jaeger operator config example:
 
