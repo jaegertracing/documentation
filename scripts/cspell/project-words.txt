@@ -14,8 +14,8 @@ certfile
 changeme
 clickhouse
 cncf
-controlled
 containerd
+controlled
 cqlsh
 cqlshrc
 daemonset
