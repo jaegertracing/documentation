@@ -71,7 +71,7 @@ Please see Kubernetes Operator: https://github.com/jaegertracing/jaeger-operator
 ## Sample App: HotROD
 
 HotROD (Rides on Demand) is a demo application that consists of several microservices and illustrates
-the use of [OpenTelemetry][otel] and distirbuted tracing. A tutorial / walkthrough is available in the blog post:
+the use of [OpenTelemetry][otel] and distributed tracing. A tutorial / walkthrough is available in the blog post:
 [Take Jaeger for a HotROD ride][hotrod-tutorial].
 
 The HotROD app can be run standalone, but requires Jaeger backend to view the traces.
