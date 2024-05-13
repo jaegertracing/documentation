@@ -15,16 +15,12 @@ changeme
 clickhouse
 cncf
 containerd
-controlled
 cqlsh
 cqlshrc
 daemonset
 datacenter
 datasource
 developercertificate
-dilligence
-distributed
-documenting
 downsampling
 dropwizard
 dsoie
