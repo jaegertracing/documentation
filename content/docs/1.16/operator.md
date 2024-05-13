@@ -477,7 +477,7 @@ The connection configuration to storage is derived from storage options.
 #### Elasticsearch rollover
 
 This index management strategy is more complicated than using the default daily indices and
-it requires an initialisation job to prepare the storage and two cron jobs to manage indices.
+it requires an initialization job to prepare the storage and two cron jobs to manage indices.
 The first cron job is used for rolling-over to a new index and the second for removing
 indices from read alias. The rollover feature is used when storage option `es.use-aliases` is enabled.
 

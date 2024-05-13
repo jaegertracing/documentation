@@ -9,7 +9,6 @@ bansal
 behaviour
 bohara
 bootcamp
-boths
 certfile
 changeme
 clickhouse
@@ -48,7 +47,6 @@ ingester
 ingester's
 ingesters
 ingestor
-initialisation
 istio
 istio's
 jaegertracing
@@ -136,7 +134,6 @@ upsample
 usercert
 userkey
 valuen
-variery
 vlog
 volz
 weaveworks

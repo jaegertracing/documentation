@@ -410,7 +410,7 @@ Rollover lets you configure when to roll over to a new index based on one or mor
 * `max_docs` - the maximum documents in the index.
 * `max_size` - the maximum estimated size of primary shards (since Elasticsearch 6.x). It uses [byte size units](https://www.elastic.co/guide/en/elasticsearch/reference/master/common-options.html#byte-units) `tb`, `gb`, `mb`.
 
-Rollover index management strategy is more complex than using the default daily indices and it requires an initialisation job to prepare the storage and two cron jobs to manage indices.
+Rollover index management strategy is more complex than using the default daily indices and it requires an initialization job to prepare the storage and two cron jobs to manage indices.
 
 To learn more about rollover index management in Jaeger refer to this
 [article](https://medium.com/jaegertracing/using-elasticsearch-rollover-to-manage-indices-8b3d0c77915d).

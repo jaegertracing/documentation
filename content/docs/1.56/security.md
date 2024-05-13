@@ -22,7 +22,7 @@ OpenTelemetry SDKs can be configured to communicate directly with **jaeger-colle
 
 * {{< check_yes >}} HTTP - TLS with mTLS (client cert authentication) supported.
 * {{< check_yes >}} gRPC - TLS with mTLS (client cert authentication) supported.
-  * Covers boths span export and sampling configuration querying.
+  * Covers both span export and sampling configuration querying.
 
 ## Agent to Collector
 
