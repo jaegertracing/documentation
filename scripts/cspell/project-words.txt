@@ -6,7 +6,6 @@ ashmita
 autoscale
 autoscaler
 bansal
-behaviour
 bohara
 bootcamp
 certfile
@@ -46,7 +45,6 @@ htpasswd
 ingester
 ingester's
 ingesters
-ingestor
 istio
 istio's
 jaegertracing
