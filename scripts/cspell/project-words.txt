@@ -125,11 +125,13 @@ telemtery
 thriftrw
 tolerations
 tracegen
+trft
 uberctx
 unmarshaling
 upsample
 usercert
 userkey
+valuen
 vlog
 volz
 weaveworks
