@@ -976,7 +976,7 @@ Starting from version 1.16.0, the Jaeger Operator is able to generate spans rela
         - --reporter.grpc.host-port=dns:///jaeger-collector-headless.$(POD_NAMESPACE).svc.cluster.local:14250
         ports:
         - containerPort: 6831
-          name: jg-compact-thrift
+          name: jg-compact-trft
           protocol: UDP
 ```
 
