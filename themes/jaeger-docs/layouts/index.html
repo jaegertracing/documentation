@@ -1,16 +1,16 @@
 {{ define "main" }}
-{{ $json := "" }}
-{{ with resources.GetRemote "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/jaegertracing" }}
-  {{ $json = . | transform.Unmarshal }}
+{{ $xml := "" }}
+{{ with resources.Get "https://medium.com/feed/jaegertracing" }}
+  {{ $xml = .Content | html }}
 {{ end }}
-{{ $posts := first 100 $json.items }}
+{{ $posts := first 100 $xml.channel.item }}
 {{ $imgLinks := slice }}
 {{ $defaultImgLink := "/img/jaeger-icon-color.png" }}
 
 {{/* Parse Medium's post first image link */}}
 {{ range $k, $v := $posts }}
   {{ $imgLink := $defaultImgLink }}
-  {{ with strings.FindRESubmatch "<img[^>]+src=\"([^\">]+)\"" (index $v "content") 1 }}
+  {{ with strings.FindRESubmatch "<img[^>]+src=\"([^\">]+)\"" (index $v "content:encoded") 1 }}
     {{ if . }} {{/* If image found in post */}}
       {{ $findMatch := index . 0 }} {{/* Choose the first image */}}
       {{ with $findMatch }}
