@@ -100,7 +100,7 @@ When using gRPC, you have several options for load balancing and name resolution
 
 ### Agent level tags
 
-Jaeger supports agent level tags, that can be added to the process tags of all spans passing through the agent. This is supported through the command line flag `--jaeger.tags=key1=value1,key2=value2,...,keyn=valuen`. Tags can also be set through an environment flag like so - `--jaeger.tags=key=${envFlag:defaultValue}` - The tag value will be set to the value of the `envFlag` environment key and `defaultValue` if not set. This feature is not supported for the tchannel reporter, enabled using the flags `--collector.host-port` or `--reporter.tchannel.host-port`.
+Jaeger supports agent level tags, that can be added to the process tags of all spans passing through the agent. This is supported through the command line flag `--jaeger.tags=key1=value1,key2=value2,...,keyn=value`. Tags can also be set through an environment flag like so - `--jaeger.tags=key=${envFlag:defaultValue}` - The tag value will be set to the value of the `envFlag` environment key and `defaultValue` if not set. This feature is not supported for the tchannel reporter, enabled using the flags `--collector.host-port` or `--reporter.tchannel.host-port`.
 
 
 ## Collectors
