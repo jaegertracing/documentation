@@ -1,16 +1,23 @@
 {{ define "main" }}
-{{ $json := "" }}
-{{ with resources.GetRemote "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/jaegertracing" }}
-  {{ $json = . | transform.Unmarshal }}
+{{ $rss := "" }}
+{{ with resources.GetRemote "https://medium.com/feed/jaegertracing" }}
+  {{ with .Err }}
+    {{ errorf "%s" . }}
+  {{ else }}
+    {{ $rss = . | transform.Unmarshal }}
+  {{ end }}
 {{ end }}
-{{ $posts := first 100 $json.items }}
-{{ $imgLinks := slice }}
-{{ $defaultImgLink := "/img/jaeger-icon-color.png" }}
 
-{{/* Parse Medium's post first image link */}}
+{{/* Parse image links */}}
+{{ $defaultImgLink := "/img/jaeger-icon-color.png" }}
+{{ warnf "Downloaded RSS feed for: %v" $rss.channel.title }}
+{{ $posts := first 20 $rss.channel.item }}
+{{ $imgLinks := slice }}
+
 {{ range $k, $v := $posts }}
   {{ $imgLink := $defaultImgLink }}
-  {{ with strings.FindRESubmatch "<img[^>]+src=\"([^\">]+)\"" (index $v "content") 1 }}
+  {{ $content := index $v "encoded" }}
+  {{ with strings.FindRESubmatch "<img[^>]+src=\"([^\">]+)\"" $content 1 }}
     {{ if . }} {{/* If image found in post */}}
       {{ $findMatch := index . 0 }} {{/* Choose the first image */}}
       {{ with $findMatch }}
@@ -22,6 +29,7 @@
     {{ end }}
   {{ end }}
   {{ $imgLinks = $imgLinks | append $imgLink }}
+  {{ warnf "Post: %v" $v.title }}
 {{ end }}
 
 {{ partial "home/hero.html" (dict "posts" $posts "title" site.Title "tagline" site.Params.tagline "latestVersion" site.Params.latest) }}
