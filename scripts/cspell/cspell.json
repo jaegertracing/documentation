@@ -5,8 +5,12 @@
     {
       "name": "project-words",
       "path": "./project-words.txt"
+    },
+    {
+      "name": "project-names",
+      "path": "./project-names-parsed.txt"
     }
   ],
-  "dictionaries": ["project-words"],
-  "ignorePaths": ["node_modules", "/project-words.txt"]
+  "dictionaries": ["project-words", "project-names"],
+  "ignorePaths": ["node_modules", "/project-words.txt", "/project-names.txt", "project-names-parsed.txt"]
 }

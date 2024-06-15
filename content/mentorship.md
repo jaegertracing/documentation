@@ -8,14 +8,11 @@ See also:
   * [For mentees](../mentorship-for-mentees/)
   * [For mentors](../mentorship-for-mentors/)
 
-## Google Summer of Code 2024
+## LFX Mentorship June-August 2024 (Term 2)
 
-{{< warning >}}
-* GSoC contributor application period begins March 18 - 18:00 UTC
-* GSoC contributor application deadline April 2 - 18:00 UTC
-{{< /warning >}}
-
-* See [this issue](https://github.com/jaegertracing/jaeger/issues/5221) for project details.
+* [Harshith Mente](https://github.com/joeyyy09) -- [Jaeger-V2 Kafka-based architecture](https://github.com/jaegertracing/jaeger/issues/5240)
+* [Raghuram Kannan](https://github.com/FlamingSaint) -- [Jaeger-V2 Service Performance Monitoring](https://github.com/jaegertracing/jaeger/issues/5240)
+* [Saransh Shankar](https://github.com/Wise-Wizard) -- [Jaeger-V2 Observability and Health Checks](https://github.com/jaegertracing/jaeger/issues/5240)
 
 ## LFX Mentorship March-May 2024 (Term 1)
 
