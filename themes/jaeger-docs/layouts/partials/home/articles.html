@@ -8,11 +8,10 @@
         {{ $link    := .link }}
         {{ $img     := (index $.imgLinks $idx) }}
         {{ $title   := .title | plainify }}
-        {{ $author  := .author }}
+        {{ $author  := .creator }}
         {{ $dateRaw := .pubDate }}
         {{ $date    := dateFormat "January 2, 2006" $dateRaw }}
-        {{ $summary := .content | plainify | truncate 150 }}
-
+        {{ $summary := .encoded | plainify | truncate 150 }}
 
         <li class="blog__post">
           <a href="{{ $link }}">
