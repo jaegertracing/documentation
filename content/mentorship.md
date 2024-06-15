@@ -12,7 +12,7 @@ See also:
 
 * [Harshith Mente](https://github.com/joeyyy09) -- [Jaeger-V2 Kafka-based architecture](https://github.com/jaegertracing/jaeger/issues/5240)
 * [Raghuram Kannan](https://github.com/FlamingSaint) -- [Jaeger-V2 Service Performance Monitoring](https://github.com/jaegertracing/jaeger/issues/5240)
-* [Saransh Shankar](https://github.com/Wise-Wizard) -- [Jaeger-V2 Observability and Healthchecks](https://github.com/jaegertracing/jaeger/issues/5240)
+* [Saransh Shankar](https://github.com/Wise-Wizard) -- [Jaeger-V2 Observability and Health Checks](https://github.com/jaegertracing/jaeger/issues/5240)
 
 ## LFX Mentorship March-May 2024 (Term 1)
 

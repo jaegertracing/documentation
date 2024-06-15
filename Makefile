@@ -56,6 +56,7 @@ check-all-links: clean build link-checker-setup
 	bin/htmltest --conf .htmltest.external.yml
 
 spellcheck:
+	cat scripts/cspell/project-names.txt | grep -v '^#' | grep -v '^\s*$$' | tr ' ' '\n' > scripts/cspell/project-names-parsed.txt
 	cd scripts/cspell && ./spellcheck.sh
 
 # only x.y.0 semver values are valid for kicking off a new release.

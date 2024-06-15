@@ -1,0 +1,42 @@
+# Maintainers (current and former)
+Yuri Shkuro yurishkuro
+Pavol Loffay pavolloffay
+Joe Farro
+Juraci Paixão Kröhling
+
+# Other names (sometimes from github links)
+robbert
+
+## LFX Mentorship June-August 2024 (Term 2)
+Harshith Mente
+Raghuram Kannan
+Saransh Shankar
+
+## LFX Mentorship March-May 2024 (Term 1)
+Harshvir Potpose
+James Ryans
+Pushkar Mishra
+
+## LFX Mentorship Sep-Nov 2023
+Ansh Goyal
+Prathamesh Mutkure
+Yashwanth Reddy
+
+## LFX Mentorship Jun-Aug 2023
+Afzal Ansari
+GLVS Kiriti
+
+## Google Summer of Code 2023
+Ha Anh Vu
+
+## Outreachy Dec'20 - Mar'21
+Ashmita Bohara
+
+## Outreachy Dec'18 - Mar'19
+Gaby Soria
+
+## Outreachy May'18 - Aug'18
+Prakriti Bansal
+
+## Outreachy Dec'17 - Mar'18
+Kara de la Marck
