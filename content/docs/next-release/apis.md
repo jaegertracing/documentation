@@ -58,7 +58,7 @@ Jaeger does accept the OpenTelemetry protocol via JSON (see [above](#opentelemet
 
 ### Zipkin Formats (stable)
 
-**jaeger-collector** can also accept spans in several Zipkin data format, namely JSON v1/v2 and Thrift. **jaeger-collector** needs to be configured to enable Zipkin HTTP server, e.g. on port 9411 used by Zipkin collectors. The server enables two endpoints that expect POST requests:
+**jaeger-collector** can also accept spans in several Zipkin data formats, namely JSON v1/v2 and Thrift. **jaeger-collector** needs to be configured to enable Zipkin HTTP server, e.g. on port 9411 used by Zipkin collectors. The server enables two endpoints that expect POST requests:
 
 * `/api/v1/spans` for submitting spans in Zipkin JSON v1 or Zipkin Thrift format.
 * `/api/v2/spans` for submitting spans in Zipkin JSON v2.
@@ -122,11 +122,11 @@ $ curl "http://localhost:5778/?service=foo"
 Can be retrieved from**jaeger-query** Service at `/api/dependencies` endpoint. The GET request expects two parameters:
 
 * `endTs` (number of milliseconds since epoch) - the end of the time interval
-* `lookback` (in milliseconds) - the length the time interval (i.e. start-time + lookback = end-time).
+* `lookback` (in milliseconds) - the length of the time interval (i.e. start-time + lookback = end-time).
 
 The returned JSON is a list of edges represented as tuples `(caller, callee, count)`.
 
-For programmatic access to service graph, the recommended API is gRPC/Protobuf described above.
+For programmatic access to service graphs, the recommended API is gRPC/Protobuf described above.
 
 ## Service Performance Monitoring (internal)
 

@@ -7,7 +7,7 @@ weight: 12
 
 ## Tracegen
 
-It is a powerful utility that can be used to generate continuous stream of simple spans. This is specially useful for stress testing. It supports flags to control the number of workers and number of traces to generate in each worker. Not only that, it can generate spans in firehose mode (a flag set on spans to skip indexing).
+It is a powerful utility that can be used to generate a continuous stream of simple spans. This is specially useful for stress testing. It supports flags to control the number of workers and number of traces to generate in each worker. Not only that, it can generate spans in firehose mode (a flag set on spans to skip indexing).
 
 ```sh
 docker run \
