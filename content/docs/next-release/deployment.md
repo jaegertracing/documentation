@@ -255,7 +255,7 @@ For large scale production deployment the Jaeger team [recommends OpenSearch bac
 ### Memory
 
 The in-memory storage is not intended for production workloads. It's intended as a simple solution to get started quickly and
-data will be lost once the process is over.
+data will be lost once the process exits.
 
 By default, there's no limit in the amount of traces stored in memory but a limit can be established by passing an
 integer value via `--memory.max-traces`.
@@ -700,7 +700,7 @@ docker run \
 
 ## Aggregation Jobs for Service Dependencies
 
-Production deployments need an external process that aggregates data and creates dependency links between services. Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives dependency links and stores them directly in the storage.
+Production deployments need an external process that aggregates data and creates dependency links between services. Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives dependency links and writes them directly to the storage.
 
 [cqlsh]: http://cassandra.apache.org/doc/latest/tools/cqlsh.html
 [zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift

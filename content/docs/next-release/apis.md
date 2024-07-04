@@ -8,7 +8,7 @@ Jaeger components implement various APIs for saving or retrieving trace data.
 The following labels are used to describe API compatibility guarantees.
 
 * **stable** - the API guarantees backwards compatibility. If breaking changes are going to be made in the future, they will result in a new API version, e.g. `/api/v2` URL prefix or a different namespace in the IDL.
-* **internal** - the APIs intended for internal communications between Jaeger components and are not recommended for use by external components.
+* **internal** - the APIs are intended for internal communications between Jaeger components and are not recommended for use by external components.
 * **deprecated** - the APIs that are only maintained for legacy reasons and will be phased out in the future.
 
 Since Jaeger v1.32, **jaeger-collector** and **jaeger-query** Service ports that serve gRPC endpoints enable [gRPC reflection][grpc-reflection]. Unfortunately, the internally used `gogo/protobuf` has a [compatibility issue][gogo-reflection] with the official `golang/protobuf`, and as a result only the `list` reflection command is currently working properly.
