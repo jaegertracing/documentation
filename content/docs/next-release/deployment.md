@@ -31,8 +31,8 @@ Component             | Docker Hub                                              
 
 The images listed above are the primary release versions. Most components have additional images published:
   * `${component}-debug` images include Delve debugger
-  * `${component}-snapshot` images are published from the tip of the main branch for every commit, allowing testing unreleased versions
-  * `${component}-debug-snapshot` snapshot images that include Delve debugger
+  * `${component}-snapshot` images are published from the tip of the main branch for every commit, allowing testing of unreleased versions
+  * `${component}-debug-snapshot` snapshot images that include the Delve debugger
 
 There are orchestration templates for running Jaeger with:
 
@@ -47,7 +47,7 @@ Jaeger binaries can be configured in a number of ways (in the order of decreasin
   * environment variables,
   * configuration files in JSON, TOML, YAML, HCL, or Java properties formats.
 
-To see the complete list of options, run the binary with `help` command or refer to the [CLI Flags](../cli/) page for more information. Options that are specific to a certain storage backend are _only listed if the storage type is selected_. For example, to see all available options in the Collector with Cassandra storage:
+To see the complete list of options, run the binary with the `help` command or refer to the [CLI Flags](../cli/) page for more information. Options that are specific to a certain storage backend are _only listed if the storage type is selected_. For example, to see all available options in the Collector with Cassandra storage:
 
 ```sh
 $ docker run --rm \
@@ -215,9 +215,9 @@ docker run -d --rm \
 
 ### Clock Skew Adjustment
 
-Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. **jaeger-query** service implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/master/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to its timestamps.
+Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. **jaeger-query** service implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/master/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to their timestamps.
 
-Sometimes these adjustments themselves make the trace hard to understand. For example, when repositioning the server span within the bounds of its parent span, Jaeger does not know the exact relationship between the request and response latencies, so it assumes then to be equal and places the child span in the middle of the parent span (see [issue #961](https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244)).
+Sometimes these adjustments themselves make the trace hard to understand. For example, when repositioning the server span within the bounds of its parent span, Jaeger does not know the exact relationship between the request and response latencies, so it assumes they are equal and places the child span in the middle of the parent span (see [issue #961](https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244)).
 
 **jaeger-query** service supports a configuration flag `--query.max-clock-skew-adjustment` that controls how much clock skew adjustment should be allowed. Setting this parameter to zero (`0s`) disables clock skew adjustment completely. This setting applies to all traces retrieved from the given query service. There is an open [ticket #197](https://github.com/jaegertracing/jaeger-ui/issues/197) to support toggling the adjustment on and off directly in the UI.
 
@@ -255,7 +255,7 @@ For large scale production deployment the Jaeger team [recommends OpenSearch bac
 ### Memory
 
 The in-memory storage is not intended for production workloads. It's intended as a simple solution to get started quickly and
-data will be lost once the process is gone.
+data will be lost once the process is over.
 
 By default, there's no limit in the amount of traces stored in memory but a limit can be established by passing an
 integer value via `--memory.max-traces`.
@@ -265,7 +265,7 @@ integer value via `--memory.max-traces`.
 * Since Jaeger v1.9
 
 [Badger](https://github.com/dgraph-io/badger) is an embedded local storage, only available
-with **all-in-one** distribution. By default, it acts as an ephemeral storage using a temporary file system.
+with **all-in-one** distribution. By default, it acts as ephemeral storage using a temporary file system.
 This can be overridden by using the `--badger.ephemeral=false` option.
 
 ```sh
@@ -329,7 +329,7 @@ Run the script without arguments to see the full list of recognized parameters.
 
 Jaeger supports TLS client to node connections as long as you've configured
 your Cassandra cluster correctly. After verifying with e.g. `cqlsh`, you can
-configure the collector and query like so:
+configure the collector and query like this:
 
 ```sh
 docker run \
@@ -700,7 +700,7 @@ docker run \
 
 ## Aggregation Jobs for Service Dependencies
 
-Production deployments need an external process which aggregates data and creates dependency links between services. Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives dependency links and stores them directly to the storage.
+Production deployments need an external process that aggregates data and creates dependency links between services. Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives dependency links and stores them directly in the storage.
 
 [cqlsh]: http://cassandra.apache.org/doc/latest/tools/cqlsh.html
 [zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift
