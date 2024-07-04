@@ -7,7 +7,7 @@ weight: 11
 
 ## Why is the Dependencies page empty?
 
-The Dependencies page shows a graph of services traced by Jaeger and connections between them. When you are using `all-in-one` binary with in-memory storage, the graph is calculated on-demand from all the traces stored in memory. However, if you are using a real distributed storage like Cassandra or OpenSearch/Elasticsearch, it is too expensive to scan all the data in the database to build the service graph. Instead, the Jaeger project provides "big data" jobs that can be used to extract the service graph data from traces:
+The Dependencies page shows a graph of services traced by Jaeger and connections between them. When you are using `all-in-one` binary with in-memory storage, the graph is calculated on-demand from all the traces stored in memory. However, if you are using  real distributed storage like Cassandra or OpenSearch/Elasticsearch, it is too expensive to scan all the data in the database to build the service graph. Instead, the Jaeger project provides "big data" jobs that can be used to extract the service graph data from traces:
 
   * https://github.com/jaegertracing/spark-dependencies - the older Spark job that can be run periodically
   * https://github.com/jaegertracing/jaeger-analytics - the new (experimental) streaming Flink jobs that run continuously and builds the service graph in smaller time intervals
@@ -66,6 +66,6 @@ These are NOT the reasons to run multiple instances:
 
 ## How do I configure authentication for Jaeger UI
 
-Jaeger UI does not support any notion of accounts or roles, so it has no need to authenticate the users. If you need authentication in order to simply restrict who can access Jaeger UI, we recommend running a reverse proxy in front of it, such as HAProxy, NGINX, Keycloak, etc. The advantage of using standard reverse proxies is that they support a wide variety of integrations with various authentication and single sign-on services, something we would never be able to match in Jaeger UI.
+Jaeger UI does not support any notion of accounts or roles, so there is no need to authenticate the users. If you need authentication in order to simply restrict who can access Jaeger UI, we recommend running a reverse proxy in front of it, such as HAProxy, NGINX, Keycloak, etc. The advantage of using standard reverse proxies is that they support a wide variety of integrations with various authentication and single sign-on services, something we would never be able to match in Jaeger UI.
 
 For example, refer to this blog post for an example of [protecting Jaeger UI with Keycloak](https://medium.com/jaegertracing/protecting-jaeger-ui-with-an-oauth-sidecar-proxy-34205cca4bb1).

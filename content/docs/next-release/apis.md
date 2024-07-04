@@ -8,7 +8,7 @@ Jaeger components implement various APIs for saving or retrieving trace data.
 The following labels are used to describe API compatibility guarantees.
 
 * **stable** - the API guarantees backwards compatibility. If breaking changes are going to be made in the future, they will result in a new API version, e.g. `/api/v2` URL prefix or a different namespace in the IDL.
-* **internal** - the APIs intended for internal communications between Jaeger components and not recommended for use by external components.
+* **internal** - the APIs are intended for internal communications between Jaeger components and are not recommended for use by external components.
 * **deprecated** - the APIs that are only maintained for legacy reasons and will be phased out in the future.
 
 Since Jaeger v1.32, **jaeger-collector** and **jaeger-query** Service ports that serve gRPC endpoints enable [gRPC reflection][grpc-reflection]. Unfortunately, the internally used `gogo/protobuf` has a [compatibility issue][gogo-reflection] with the official `golang/protobuf`, and as a result only the `list` reflection command is currently working properly.
@@ -33,19 +33,19 @@ The OTLP data is accepted in these formats: (1) binary gRPC, (2) Protobuf over H
 
 ### Thrift over UDP (stable)
 
-**jaeger-agent** can only receive spans over UDP in Thrift format. The primary API is a UDP packet that contains a Thrift-encoded `Batch` struct defined in [jaeger.thrift] IDL file, located in the [jaeger-idl] repository. Most Jaeger Clients use Thrift's `compact` encoding, however some client libraries do not support it (notably, Node.js) and use Thrift's `binary` encoding (sent to  a different UDP port). **jaeger-agent**'s API is defined by [agent.thrift] IDL file.
+**jaeger-agent** can only receive spans over UDP in Thrift format. The primary API is a UDP packet that contains a Thrift-encoded `Batch` struct defined in the [jaeger.thrift] IDL file, located in the [jaeger-idl] repository. Most Jaeger Clients use Thrift's `compact` encoding, however some client libraries do not support it (notably, Node.js) and use Thrift's `binary` encoding (sent to  a different UDP port). **jaeger-agent**'s API is defined by the [agent.thrift] IDL file.
 
 For legacy reasons, **jaeger-agent** also accepts spans over UDP in Zipkin format, however, only very old versions of Jaeger clients can send data in that format and it is officially deprecated.
 
 ### Protobuf via gRPC (stable)
 
-In a typical Jaeger deployment, **jaeger-agent**s receive spans from Clients and forward them to **jaeger-collector**s. Since Jaeger v1.11 the official and recommended protocol between **jaeger-agent**s and **jaeger-collector**s is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto] IDL file. The same endpoint can be used to submit trace data from SDKs directly to **jaeger-collector**.
+In a typical Jaeger deployment, **jaeger-agent**s receive spans from Clients and forward them to **jaeger-collector**s. Since Jaeger v1.11, the official and recommended protocol between **jaeger-agent**s and **jaeger-collector**s is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto] IDL file. The same endpoint can be used to submit trace data from SDKs directly to **jaeger-collector**.
 
 ### Thrift over HTTP (stable)
 
 In some cases it is not feasible to deploy **jaeger-agent** next to the application, for example, when the application code is running as a serverless function. In these scenarios the SDKs can be configured to submit spans directly to **jaeger-collector**s over HTTP/HTTPS.
 
-The same [jaeger.thrift] payload can be submitted in HTTP POST request to `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
+The same [jaeger.thrift] payload can be submitted in an HTTP POST request to the  `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
 
 ```
 Content-Type: application/vnd.apache.thrift.binary
@@ -58,7 +58,7 @@ Jaeger does accept the OpenTelemetry protocol via JSON (see [above](#opentelemet
 
 ### Zipkin Formats (stable)
 
-**jaeger-collector** can also accept spans in several Zipkin data format, namely JSON v1/v2 and Thrift. **jaeger-collector** needs to be configured to enable Zipkin HTTP server, e.g. on port 9411 used by Zipkin collectors. The server enables two endpoints that expect POST requests:
+**jaeger-collector** can also accept spans in several Zipkin data formats, namely JSON v1/v2 and Thrift. **jaeger-collector** needs to be configured to enable Zipkin HTTP server, e.g. on port 9411 used by Zipkin collectors. The server enables two endpoints that expect POST requests:
 
 * `/api/v1/spans` for submitting spans in Zipkin JSON v1 or Zipkin Thrift format.
 * `/api/v2/spans` for submitting spans in Zipkin JSON v2.
@@ -69,11 +69,11 @@ Traces saved in the storage can be retrieved by calling **jaeger-query** Service
 
 ### gRPC/Protobuf (stable)
 
-The recommended way for programmatically retrieving traces and other data is via `jaeger.api_v2.QueryService` gRPC endpoint defined in [query.proto] IDL file. In the default configuration this endpoint is accessible from `jaeger-query:16685`.
+The recommended way for programmatically retrieving traces and other data is via the `jaeger.api_v2.QueryService` gRPC endpoint defined in [query.proto] IDL file. In the default configuration this endpoint is accessible from `jaeger-query:16685`.
 
 ### HTTP JSON (internal)
 
-Jaeger UI communicates with **jaeger-query** Service via JSON API. For example, a trace can be retrieved via GET request to `https://jaeger-query:16686/api/traces/{trace-id-hex-string}`. This JSON API is intentionally undocumented and subject to change.
+Jaeger UI communicates with **jaeger-query** Service via JSON API. For example, a trace can be retrieved via a GET request to `https://jaeger-query:16686/api/traces/{trace-id-hex-string}`. This JSON API is intentionally undocumented and subject to change.
 
 ## Remote Storage API (stable)
 
@@ -81,7 +81,7 @@ When using the `grpc` storage type (a.k.a. [remote storage](../deployment/#remot
 
 ## Remote Sampling Configuration (stable)
 
-This API supports Jaeger's [Remote Sampling](../sampling/#remote-sampling) protocol, defined in [sampling.proto] IDL file.
+This API supports Jaeger's [Remote Sampling](../sampling/#remote-sampling) protocol, defined in the [sampling.proto] IDL file.
 
 Both **jaeger-agent** and **jaeger-collector** implement the API. See [Remote Sampling](../sampling/#remote-sampling) for details on how to configure the Collector with sampling strategies. **jaeger-agent** is merely acting as a proxy to **jaeger-collector**.
 
@@ -126,7 +126,7 @@ Can be retrieved from**jaeger-query** Service at `/api/dependencies` endpoint. T
 
 The returned JSON is a list of edges represented as tuples `(caller, callee, count)`.
 
-For programmatic access to service graph, the recommended API is gRPC/Protobuf described above.
+For programmatic access to the service graph, the recommended API is gRPC/Protobuf described above.
 
 ## Service Performance Monitoring (internal)
 

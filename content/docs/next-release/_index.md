@@ -28,8 +28,8 @@ Uber published a blog post, [Evolving Distributed Tracing at Uber](https://eng.u
 
   * [OpenTracing](https://opentracing.io/)-inspired data model
   * [OpenTelemetry](https://opentelemetry.io/) compatible
-  * Multiple built-in storage backends: Cassandra, Elasticsearch, in-memory
-  * Community supported external storage backends via gRPC plugin: [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse)
+  * Multiple built-in storage backends: Cassandra, Elasticsearch and in-memory
+  * Community supported external storage backends via the gRPC plugin: [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse)
   * System topology graphs
   * Adaptive sampling
   * Service Performance Monitoring (SPM)
