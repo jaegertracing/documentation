@@ -317,6 +317,13 @@ using Cassandra's interactive shell [`cqlsh`][cqlsh]:
 MODE=test sh ./plugin/storage/cassandra/schema/create.sh | cqlsh
 ```
 
+Or using the published Docker image (make sure to provide the right IP address):
+```sh
+docker run \
+  -e CQLSH_HOST={server IP address}  \
+  jaegertracing/jaeger-cassandra-schema:{{< currentVersion >}}
+```
+
 For production deployment, pass `MODE=prod DATACENTER={datacenter}` arguments to the script,
 where `{datacenter}` is the name used in the Cassandra configuration / network topology.
 
