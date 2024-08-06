@@ -5,11 +5,6 @@
   "suppressNotifications": ["prEditedNotification"],
   "packageRules": [
     {
-      "matchManagers": ["npm"],
-      "matchUpdateTypes": ["patch", "digest"],
-      "enabled": false
-    },
-    {
       "matchManagers": ["github-actions"],
       "groupName": "github-actions deps"
     },
