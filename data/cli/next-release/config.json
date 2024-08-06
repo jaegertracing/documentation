@@ -11,8 +11,7 @@
             "cassandra",
             "elasticsearch",
             "memory",
-            "badger",
-            "grpc-plugin"
+            "badger"
         ],
         "sampling": [],
         "metrics-storage": [
@@ -23,8 +22,7 @@
         "storage": [
             "cassandra",
             "elasticsearch",
-            "kafka",
-            "grpc-plugin"
+            "kafka"
         ],
         "sampling": [
             "adaptive",
@@ -35,8 +33,7 @@
     "jaeger-ingester": {
         "storage": [
             "cassandra",
-            "elasticsearch",
-            "grpc-plugin"
+            "elasticsearch"
         ],
         "sampling": [],
         "metrics-storage": []
@@ -44,8 +41,7 @@
     "jaeger-query": {
         "storage": [
             "cassandra",
-            "elasticsearch",
-            "grpc-plugin"
+            "elasticsearch"
         ],
         "sampling": [],
         "metrics-storage": [
