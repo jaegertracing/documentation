@@ -3,7 +3,7 @@ HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
 
 client-libs-docs:
-	@for d in $(shell ls -d content/docs/*); do \
+	@for d in $(shell ls -d content/docs/* | grep -v next-release-v2); do \
 		cp content/_client_libs/client-libraries.md $$d/; \
 		cp content/_client_libs/client-features.md $$d/; \
 		echo "copied content/_client_libs/*.md -> $$d/"; \
