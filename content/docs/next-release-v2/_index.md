@@ -6,7 +6,7 @@ children:
   url: features
 ---
 
-Welcome to Jaeger v2 documentation portal! Below, you'll find information for beginners and experienced Jaeger users.
+Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.
 
 If you cannot find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch).
 
