@@ -10,7 +10,7 @@ If you are new to distributed tracing, please check the [Introduction](../) page
 
 Your applications must be instrumented before they can send tracing data to Jaeger. We recommend using the [OpenTelemetry][otel] instrumentation and SDKs.
 
-Historically, the Jaeger project supported its own SDKs (aka tracers, client libraries) that implemented the OpenTracing API. As of 2022, the Jaeger SDKs are no longer supported, and all users are advised to migrate to OpenTelemetry.
+The Jaeger SDKs are no longer supported, and all users must migrate to OpenTelemetry.
 
 ## All in One
 

@@ -4,9 +4,11 @@ weight: 1
 children:
 - title: Features
   url: features
+- title: Migration from v1 to v2
+  url: migration
 ---
 
-Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.
+Welcome to Jaeger's documentation! Below, you'll find information for beginners and experienced Jaeger users.
 
 If you cannot find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch).
 
@@ -28,7 +30,7 @@ Uber published a blog post, [Evolving Distributed Tracing at Uber](https://eng.u
 
   * [OpenTracing](https://opentracing.io/)-inspired data model
   * [OpenTelemetry](https://opentelemetry.io/) compatible
-  * Multiple built-in storage backends: Cassandra, Elasticsearch and in-memory
+  * Multiple built-in storage backends: Cassandra, Elasticsearch, OpenSearch, and in-memory
   * Community supported external storage backends via the gRPC plugin: [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse)
   * System topology graphs
   * Adaptive sampling
