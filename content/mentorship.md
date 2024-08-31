@@ -33,7 +33,7 @@ See also:
 
 ## Google Summer of Code 2023
 
-* [Ha Anh Vu](https://github.com/haanhvu) -- [ClickHouse as a core storage backend](https://github.com/jaegertracing/jaeger/issues/4196)
+* [Ha Anh Vu](https://github.com/haanhvu) -- [ClickHouse as a core storage backend](https://github.com/jaegertracing/jaeger/issues/4196) -- [blog post](https://medium.com/jaegertracing/making-design-decisions-for-clickhouse-as-a-core-storage-backend-in-jaeger-62bf90a979d)
 
 ## Outreachy Dec'20 - Mar'21
 
