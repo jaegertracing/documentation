@@ -10,7 +10,7 @@ See also:
 
 ## LFX Mentorship June-August 2024 (Term 2)
 
-* [Harshith Mente](https://github.com/joeyyy09) -- [Jaeger-V2 Kafka-based architecture](https://github.com/jaegertracing/jaeger/issues/4868)
+* [Harshith Mente](https://github.com/joeyyy09) -- [Jaeger-V2 Kafka-based architecture](https://github.com/jaegertracing/jaeger/issues/4868) -- [blog post](https://www.linkedin.com/posts/harshith-mente_lfxmentorship-jaeger-opentelemetry-activity-7235573030997934080-0Id1)
 * [Raghuram Kannan](https://github.com/FlamingSaint) -- [Jaeger-V2 Service Performance Monitoring](https://github.com/jaegertracing/jaeger/issues/5632)
 * [Saransh Shankar](https://github.com/Wise-Wizard) -- [Jaeger-V2 Observability and Health Checks](https://github.com/jaegertracing/jaeger/issues/5633) -- [blog post](https://medium.com/@saransh.shankar/my-journey-as-an-lfx-mentee-with-cncf-jaeger-b001f136ca0b)
 
