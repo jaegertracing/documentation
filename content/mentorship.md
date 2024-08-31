@@ -8,6 +8,11 @@ See also:
   * [For mentees](../mentorship-for-mentees/)
   * [For mentors](../mentorship-for-mentors/)
 
+## LFX Mentorship September-November 2024 (Term 3)
+
+* [Ankit Kurmi](https://github.com/Ankit152) -- [Jaeger v2 Kubernetes Operator](https://github.com/jaegertracing/jaeger/issues/5766)
+* [Mehul Gautam](https://github.com/hellspawn679) -- [Jaeger v2 Helm Chart](https://github.com/jaegertracing/jaeger/issues/5767)
+
 ## LFX Mentorship June-August 2024 (Term 2)
 
 * [Harshith Mente](https://github.com/joeyyy09) -- [Jaeger-V2 Kafka-based architecture](https://github.com/jaegertracing/jaeger/issues/4868) -- [blog post](https://www.linkedin.com/posts/harshith-mente_lfxmentorship-jaeger-opentelemetry-activity-7235573030997934080-0Id1)
