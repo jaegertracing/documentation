@@ -16,18 +16,6 @@ The Dependencies page shows a graph of services traced by Jaeger and connections
 
 Please refer to the [Troubleshooting](../troubleshooting/) guide.
 
-## Do I need to run jaeger-agent?
-
-{{< warning >}}
-Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
-{{< /warning >}}
-
-`jaeger-agent` is not always necessary. Jaeger client libraries can be configured to export trace data directly to `jaeger-collector`. However, the following are the reasons why running `jaeger-agent` is recommended:
-
-  * If we want Jaeger client libraries to send trace data directly to **jaeger-collector**s, we must provide them with a URL of the HTTP endpoint. It means that our applications require additional configuration containing this parameter, especially if we are running multiple Jaeger installations (e.g. in different availability zones or regions) and want the data sent to a nearby installation. In contrast, when using the agent, the libraries require no additional configuration because the agent is always accessible via `localhost`. It acts as a sidecar and proxies the requests to the appropriate **jaeger-collector**s.
-  * **jaeger-agent** can be configured to enrich the tracing data with infrastructure-specific metadata by adding extra tags to the spans, such as the current zone, region, etc. If **jaeger-agent** is running as a host daemon, it will be shared by all applications running on the same host. If **jaeger-agent** is running as a true sidecar, i.e. one per application, it can provide additional functionality such as strong authentication, multi-tenancy (see [this blog post](https://medium.com/jaegertracing/jaeger-and-multitenancy-99dfa1d49dc0)), pod name, etc.
-  * **jaeger-agent**s allow implementing traffic control to **jaeger-collector**s. If we have thousands of hosts in the data center, each running many applications, and each application sending data directly to **jaeger-collector**s, there may be too many open connections for each **jaeger-collector** to handle. The agents can load balance this traffic with fewer connections.
-
 ## What is the recommended storage backend?
 
 The Jaeger team recommends OpenSearch/Elasticsearch as the storage backend over Cassandra, for the following reasons:
@@ -58,11 +46,11 @@ Under the hood, at the data model level, the Jaeger trace IDs are a sequence of 
 > Does having high availability of **jaeger-collector** improve the overall system performance like decreasing the dropped span count and having the less outage for trace collection? Is it recommended? If yes, why?
 
 These are the reasons to run multiple instances:
-  * Your clients send so much data that a single **jaeger-collector** is not able to accept it fast enough.
-  * You want higher availability, e.g., when you do rolling restarts of **jaeger-collector**s for upgrade, to have some instances still running and able to process inbound data.
+  * Your clients send so much data that a single **jaeger collector role** is not able to accept it fast enough.
+  * You want higher availability, e.g., when you do rolling restarts of **jaeger collector role**s for upgrade, to have some instances still running and able to process inbound data.
 
 These are NOT the reasons to run multiple instances:
-  * To avoid data loss. **jaeger-collector** drops data when the backend storage is not able to save it fast enough. Increasing the number of **jaeger-collector**s, with more memory allocated to their internal queues, could provide a small, temporary relief, but does not remove the bottleneck of the storage backend.
+  * To avoid data loss. **jaeger** drops data when the backend storage is not able to save it fast enough. Increasing the number of **jaeger collector role** instances, with more memory allocated to their internal queues, could provide a small, temporary relief, but does not remove the bottleneck of the storage backend.
 
 ## How do I configure authentication for Jaeger UI
 

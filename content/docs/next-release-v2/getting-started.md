@@ -12,37 +12,19 @@ Your applications must be instrumented before they can send tracing data to Jaeg
 
 The Jaeger SDKs are no longer supported, and all users must migrate to OpenTelemetry.
 
-## All in One
+## Default configuration
 
-**all-in-one** is an executable designed for quick local testing. It includes the Jaeger UI, **jaeger-collector**, **jaeger-query**, and **jaeger-agent**, with an in memory storage component.
+**jaeger** is a single binary which can serve multiple purposes. It has a configuration embedded which provides full functionality for testing with an in memory storage component. If you would like to change the configuration you may create a YAML configuration file. 
 
-The simplest way to start the all-in-one is to use the pre-built image published to DockerHub (a single command line).
-
-```bash
-docker run --rm --name jaeger \
-  -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
-  -p 6831:6831/udp \
-  -p 6832:6832/udp \
-  -p 5778:5778 \
-  -p 16686:16686 \
-  -p 4317:4317 \
-  -p 4318:4318 \
-  -p 14250:14250 \
-  -p 14268:14268 \
-  -p 14269:14269 \
-  -p 9411:9411 \
-  jaegertracing/all-in-one:{{< currentVersion >}}
-```
-
-Or run the `jaeger-all-in-one(.exe)` executable from the [binary distribution archives][download]:
+Run the `jaeger-all-in-one(.exe)` executable from the [binary distribution archives][download]:
 
 ```bash
-jaeger-all-in-one --collector.zipkin.host-port=:9411
+jaeger
 ```
 
 You can then navigate to `http://localhost:16686` to access the Jaeger UI.
 
-The container exposes the following ports:
+The binary exposes the following ports:
 
 Port  | Protocol | Component | Function
 ----- | -------  | --------- | ---
@@ -58,7 +40,6 @@ Port  | Protocol | Component | Function
 14268 | HTTP     | collector | accept `jaeger.thrift` directly from clients
 14250 | HTTP     | collector | accept `model.proto`
 9411  | HTTP     | collector | Zipkin compatible endpoint (optional)
-
 
 ### With Service Performance Monitoring (SPM)
 
@@ -89,7 +70,6 @@ The HotROD app can be run standalone, but requires Jaeger backend to view the tr
 ### Running
 
 We recommend running Jaeger and HotROD together via `docker compose`.
-
 
 #### With Docker Compose
 

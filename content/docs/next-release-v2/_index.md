@@ -4,6 +4,8 @@ weight: 1
 children:
 - title: Features
   url: features
+- title: Architecture
+  url: architecture
 - title: Migration from v1 to v2
   url: migration
 ---

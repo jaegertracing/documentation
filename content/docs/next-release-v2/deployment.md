@@ -1,24 +1,21 @@
 ---
 title: Deployment
-weight: 4
+weight: 3
 children:
+- title: Configuration
+  url: configuration
 - title: Operator for Kubernetes
   navtitle: Kubernetes
   url: operator
-- title: Frontend/UI
+- title: User Interface
   url: frontend-ui
-- title: CLI Flags
-  url: cli
-- title: Security
-  url: security
 - title: On Windows
   url: windows
-- title: Service Performance Monitoring (SPM)
-  navtitle: SPM
-  url: spm
 ---
 
 The main Jaeger backend components are released as Docker images on [Docker Hub](https://hub.docker.com/r/jaegertracing) and [Quay](https://quay.io/organization/jaegertracing):
+
+!!!UPDATE HERE
 
 Component             | Docker Hub                                                                                                   | Quay
 --------------------- | -------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------
@@ -41,31 +38,13 @@ There are orchestration templates for running Jaeger with:
 
 ## Configuration Options
 
-Jaeger binaries can be configured in a number of ways (in the order of decreasing priority):
+Jaeger binaries are configured via configuration YAML file.
 
-  * command line arguments,
-  * environment variables,
-  * configuration files in JSON, TOML, YAML, HCL, or Java properties formats.
-
-To see the complete list of options, run the binary with the `help` command or refer to the [CLI Flags](../cli/) page for more information. Options that are specific to a certain storage backend are _only listed if the storage type is selected_. For example, to see all available options in the Collector with Cassandra storage:
-
-```sh
-$ docker run --rm \
-    -e SPAN_STORAGE_TYPE=cassandra \
-    jaegertracing/jaeger-collector:{{< currentVersion >}} \
-    help
-```
-
-In order to provide configuration parameters via environment variables, find the respective command line option and convert its name to UPPER_SNAKE_CASE, for example:
-
-Command line option                | Environment variable
------------------------------------|-------------------------------
-`--cassandra.connections-per-host` | `CASSANDRA_CONNECTIONS_PER_HOST`
-`--metrics-backend`                | `METRICS_BACKEND`
+!!!NEED TO WORK BELOW HERE
 
 ## All-in-one
 
-Jaeger all-in-one is a special distribution that combines three Jaeger components, [agent](#agent), [collector](#collector), and [query service/UI](#query-service--ui), in a single binary or container image. It is useful for single-node deployments where your trace volume is light enough to be handled by a single instance. By default, all-in-one starts with `memory` storage, meaning it will lose all data upon restart. All other [span storage backends](#span-storage-backends) can also be used with all-in-one, but `memory` and `badger` are exclusive to all-in-one because they cannot be shared between instances.
+Jaeger all-in-one is a special distribution that combines Jaeger components, [agent](#agent), [collector](#collector), and [query service/UI](#query-service--ui), in a single binary or container image. It is useful for single-node deployments where your trace volume is light enough to be handled by a single instance. By default, all-in-one starts with `memory` storage, meaning it will lose all data upon restart. All other [span storage backends](#span-storage-backends) can also be used with all-in-one, but `memory` and `badger` are exclusive to all-in-one because they cannot be shared between instances.
 
 All-in-one listens to the same ports as the components it contains (described below), with the exception of the admin port.
 
