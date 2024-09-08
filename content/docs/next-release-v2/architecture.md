@@ -1,7 +1,7 @@
 ---
 title: Architecture
 hasprent: true
-weight: 2
+weight: 3
 children:
 - title: APIs
   url: apis
