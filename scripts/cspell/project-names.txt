@@ -7,6 +7,10 @@ Juraci Paixão Kröhling
 # Other names (sometimes from github links)
 robbert
 
+## LFX Mentorship Sep-Nov 2024 (Term 3)
+Ankit Kurmi
+Mehul Gautam
+
 ## LFX Mentorship June-August 2024 (Term 2)
 Harshith Mente
 Raghuram Kannan
