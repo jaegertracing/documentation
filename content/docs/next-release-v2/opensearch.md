@@ -19,22 +19,9 @@ OpenSearch also has the following officially supported resources available from 
 - [Kubernetes Operator](https://github.com/opensearch-project/opensearch-k8s-operator)
 
 #### Configuration
-##### Minimal
-```sh
-docker run \
-  -e SPAN_STORAGE_TYPE=elasticsearch \
-  -e ES_SERVER_URLS=<...> \
-  jaegertracing/jaeger-collector:{{< currentVersion >}}
-```
 
-##### All options
-To view the full list of configuration options, you can run the following command:
-```sh
-docker run \
-  -e SPAN_STORAGE_TYPE=elasticsearch \
-  jaegertracing/jaeger-collector:{{< currentVersion >}} \
-  --help
-```
+Here is [example configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-opensearch.yaml) for OpenSearch.
+
 
 #### Shards and Replicas for OpenSearch indices
 

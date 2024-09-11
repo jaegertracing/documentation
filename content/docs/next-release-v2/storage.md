@@ -18,7 +18,7 @@ children:
   url: metrics.md
 ---
 
-Jaeger requires a persistent storage backend. Cassandra and Elasticsearch/OpenSearch are the primary supported distributed storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
+Jaeger requires a persistent storage backend. Cassandra, Elasticsearch, and OpenSearch are the primary supported distributed storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
 The storage type can be passed via `SPAN_STORAGE_TYPE` environment variable. Valid values are `cassandra`, `elasticsearch`, `kafka` (only as a buffer), `badger` and `memory`.
 
@@ -32,13 +32,7 @@ Jaeger supports a gRPC-based [Remote Storage API][storage.proto] that allows ext
 
 To use a remote storage as Jaeger storage backend, use `grpc` as the storage type and specify the remote gRPC server address. For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc).
 
-Example:
-```sh
-docker run \
-  -e SPAN_STORAGE_TYPE=grpc \
-  -e GRPC_STORAGE_SERVER=<...> \
-  jaegertracing/all-in-one:{{< currentVersion >}}
-```
+Example config for `jaeger` [can be found here](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-remote-storage.yaml).
 
 Known remote storage backends:
 
