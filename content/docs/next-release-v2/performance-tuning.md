@@ -2,7 +2,7 @@
 title: Performance Tuning Guide
 navtitle: Perf Tuning
 description: Tweaking your Jaeger instance to achieve a better performance
-weight: 10
+hasparent: true
 ---
 
 Jaeger was built from day 1 to be able to ingest huge amounts of data in a resilient way. To better utilize resources that might cause delays, such as storage or network communications, Jaeger buffers and batches data. When more spans are generated than Jaeger is able to safely process, spans might get dropped. However, the defaults might not fit all scenarios.

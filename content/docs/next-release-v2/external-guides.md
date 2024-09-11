@@ -1,7 +1,11 @@
 ---
 title: External Guides
 description: Guides hosted outside of the main Jaeger documentation.
-weight: 13
+weight: 8
+children:
+- title: Migration Guides
+  url: migration
+
 ---
 
 ## Using Jaeger

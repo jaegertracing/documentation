@@ -1,7 +1,7 @@
 ---
 title: Troubleshooting
 description: Solve commonly encountered issues
-weight: 10
+hasparent: true
 ---
 
 Jaeger backend is itself a distributed system, composed of different components, potentially running on many hosts. It might be the case that one of these moving parts is not working properly, causing spans to not be processed or stored. When something goes wrong, make sure to check the items listed here.
@@ -19,19 +19,6 @@ If you are using OpenTelemetry SDKs, they should default to `parentbased_always_
 #### Using stdout Exporter
 
 OpenTelemetry SDKs can be configured with an exporter that prints recorded spans to `stdout`. Enabling it allows you to verify if the spans are actually being recorded.
-
-### Jaeger SDKs (deprecated)
-
-If you are using one of the Jaeger SDKs, they default to a probabilistic sampling strategy with `1-in-1000` chance that the trace will be recorded. The strategy can be changed by setting these environment variables:
-
-```
-JAEGER_SAMPLER_TYPE=const
-JAEGER_SAMPLER_PARAM=1
-```
-
-For example, when using the Jaeger SDK for Java, the strategy is usually printed out via the logging facility provided by the instrumented application when creating the tracer:
-
-    2018-12-10 16:41:25 INFO  Configuration:236 - Initialized  tracer=JaegerTracer(..., sampler=ConstSampler(decision=true,  tags={sampler.type=const, sampler.param=true}), ...)
 
 #### Use the logging reporter
 

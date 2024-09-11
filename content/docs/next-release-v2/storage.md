@@ -14,7 +14,7 @@ children:
   url: kafka
 - title: OpenSearch
   url: opensearch
-- title: Metrics Backends
+- title: Metrics
   url: metrics.md
 ---
 

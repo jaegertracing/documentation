@@ -4,8 +4,7 @@ weight: 4
 children:
 - title: Configuration
   url: configuration
-- title: Operator for Kubernetes
-  navtitle: Kubernetes
+- title: Kubernetes Operator
   url: operator
 - title: User Interface
   url: frontend-ui

@@ -2,7 +2,7 @@
 title: Frequently Asked Questions
 navtitle: FAQs
 description: Answers to some frequently asked questions about Jaeger.
-weight: 11
+weight: 7
 ---
 
 ## Why is the Dependencies page empty?

@@ -2,7 +2,7 @@
 title: Tools
 navtitle: Tools
 description: Extra Jaeger utilities.
-weight: 12
+hasparent: true
 ---
 
 ## Tracegen
