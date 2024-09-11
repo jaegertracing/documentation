@@ -15,7 +15,7 @@ Elasticsearch does not require initialization other than
 [installing and running Elasticsearch](https://www.elastic.co/downloads/elasticsearch).
 Once it is running, pass the correct configuration values to **jaeger**.
 
-ElasticSearch also has the following offically supported resources available from the community and Elastic:
+ElasticSearch also has the following officially supported resources available from the community and Elastic:
 - [Docker container](https://hub.docker.com/_/elasticsearch) from Elastic for getting a single node up quickly
 - [Helm chart](https://artifacthub.io/packages/helm/elastic/elasticsearch) from Elastic
 - [Kubernetes Operator](https://github.com/openshift/elasticsearch-operator) from RedHat

@@ -8,7 +8,7 @@ hasparent: true
 Deploying Cassandra itself is out of scope for our documentation. One good
 source of documentation is the [Apache Cassandra Docs](https://cassandra.apache.org/doc/latest/).
 
-Cassandra also has the following offically supported resources available from the community:
+Cassandra also has the following officially supported resources available from the community:
 - [Docker container](https://hub.docker.com/_/cassandra) for getting a single node up quickly
 - [Helm chart](https://artifacthub.io/packages/helm/bitnami/cassandra) from Bitnami
 - [Kubernetes Operator](https://github.com/k8ssandra/cass-operator) from DataStax

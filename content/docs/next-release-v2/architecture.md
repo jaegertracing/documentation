@@ -1,6 +1,6 @@
 ---
 title: Architecture
-hasprent: true
+hasparent: true
 weight: 3
 children:
 - title: APIs

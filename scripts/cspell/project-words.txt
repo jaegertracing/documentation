@@ -1,6 +1,7 @@
 alertmanager
 autoscale
 autoscaler
+bitnami
 bootcamp
 certfile
 changeme
@@ -12,6 +13,7 @@ cqlshrc
 daemonset
 datacenter
 datasource
+datastax
 developercertificate
 downsampling
 dropwizard
@@ -93,8 +95,10 @@ shortcode
 spanmetrics
 stackoverflow
 statefulset
+strimzi
 strimzi's
 struct
+subpages
 tchannel
 telemtery
 thriftrw

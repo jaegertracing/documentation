@@ -13,7 +13,7 @@ Kafka and store spans in another storage backend (Elasticsearch or Cassandra).
 
 Writing to Kafka is particularly useful for building post-processing data pipelines.
 
-Kafka also has the following offically supported resources available from the community:
+Kafka also has the following officially supported resources available from the community:
 - [Docker container](https://hub.docker.com/r/apache/kafka) for getting a single node up quickly
 - [Helm chart](https://artifacthub.io/packages/helm/bitnami/kafka) by Bitnami
 - [Strimzi Kubernetes Operator](https://strimzi.io/)

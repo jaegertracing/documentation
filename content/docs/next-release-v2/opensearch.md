@@ -13,7 +13,7 @@ OpenSearch does not require initialization other than
 [installing and running OpenSearch](https://opensearch.org/downloads.html).
 Once it is running, pass the correct configuration values to **jaeger**.
 
-OpenSearch also has the following offically supported resources available from the community:
+OpenSearch also has the following officially supported resources available from the community:
 - [Docker container](https://hub.docker.com/r/opensearchproject/opensearch) for getting a single node up quickly
 - [Helm chart](https://artifacthub.io/packages/helm/opensearch-project-helm-charts/opensearch)
 - [Kubernetes Operator](https://github.com/opensearch-project/opensearch-k8s-operator)
