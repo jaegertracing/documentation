@@ -34,7 +34,7 @@ def generate(tool, **kwargs):
 
     volume = f'{output_path}/data/cli/{jaeger_ver}:/data'
     docker_img = 'all-in-one' if tool == 'jaeger-all-in-one' else tool
-    docker_image = f"jaegertracing/{docker_img}:{jaeger_ver}"
+    docker_image = f"jaegertracing/{docker_img}:{jaeger_ver}.0"
 
     cmd = " ".join([
         "docker run",
