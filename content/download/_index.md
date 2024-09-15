@@ -7,6 +7,10 @@ Jaeger components can be downloaded in two ways:
 * As [executable binaries](#binaries)
 * As [Docker images](#docker-images)
 
+## Try Jaeger v2
+
+The 2.x release candidate executable can be found in the latest [GitHub release](https://github.com/jaegertracing/jaeger/releases/) or as a Docker image `jaegertracing/jaeger` (https://hub.docker.com/r/jaegertracing/jaeger/tags). See also work in progress [v2&nbsp;documentation](/docs/next-release-v2/).
+
 ## Binaries
 
 Jaeger binaries are available for macOS, Linux, and Windows. The table below lists the available binaries:
