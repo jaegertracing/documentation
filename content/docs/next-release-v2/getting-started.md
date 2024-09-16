@@ -16,7 +16,7 @@ The Jaeger SDKs are no longer supported, and all users must migrate to OpenTelem
 
 **jaeger** is a single binary which can serve multiple purposes. It has a configuration embedded which provides full functionality for testing with an in memory storage component. If you would like to change the configuration you may create a YAML configuration file. 
 
-Run the `jaeger-all-in-one(.exe)` executable from the [binary distribution archives][download]:
+Run the `jaeger(.exe)` executable from the [binary distribution archives][download]:
 
 ```bash
 jaeger
@@ -116,7 +116,7 @@ Then navigate to `http://localhost:8080`.
 
 ## Migrating from Zipkin
 
-**jaeger-collector** service exposes Zipkin compatible REST API `/api/v1/spans` which accepts both Thrift and JSON. Also there is `/api/v2/spans` for JSON and Proto.
+The **jaeger collector role** service exposes Zipkin compatible REST API `/api/v1/spans` which accepts both Thrift and JSON. Also there is `/api/v2/spans` for JSON and Proto.
 By default it's disabled. It can be enabled with `--collector.zipkin.host-port=:9411`.
 
 Zipkin [Thrift](https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift) IDL and Zipkin [Proto](https://github.com/jaegertracing/jaeger-idl/blob/master/proto/zipkin.proto) IDL files can be found in [jaegertracing/jaeger-idl](https://github.com/jaegertracing/jaeger-idl) repository.
