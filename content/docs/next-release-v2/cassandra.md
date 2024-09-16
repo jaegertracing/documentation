@@ -14,24 +14,8 @@ Cassandra also has the following officially supported resources available from t
 - [Kubernetes Operator](https://github.com/k8ssandra/cass-operator) from DataStax
 
 #### Configuration
-##### Minimal
-```sh
-docker run \
-  -e SPAN_STORAGE_TYPE=cassandra \
-  -e CASSANDRA_SERVERS=<...> \
-  jaegertracing/jaeger-collector:{{< currentVersion >}}
-```
 
-Note: White space characters are allowed in `CASSANDRA_SERVERS`. For Example: Servers can be passed as `CASSANDRA_SERVERS="1.2.3.4, 5.6.7.8" for better readability.
-
-##### All options
-To view the full list of configuration options, you can run the following command:
-```sh
-docker run \
-  -e SPAN_STORAGE_TYPE=cassandra  \
-  jaegertracing/jaeger-collector:{{< currentVersion >}} \
-  --help
-```
+Configuration example for [Jaeger writing to Cassandra](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-cassandra.yaml).
 
 #### Schema script
 

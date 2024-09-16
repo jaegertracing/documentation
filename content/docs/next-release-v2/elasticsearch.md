@@ -21,22 +21,8 @@ ElasticSearch also has the following officially supported resources available fr
 - [Kubernetes Operator](https://github.com/openshift/elasticsearch-operator) from RedHat
 
 #### Configuration
-##### Minimal
-```sh
-docker run \
-  -e SPAN_STORAGE_TYPE=elasticsearch \
-  -e ES_SERVER_URLS=<...> \
-  jaegertracing/jaeger-collector:{{< currentVersion >}}
-```
 
-##### All options
-To view the full list of configuration options, you can run the following command:
-```sh
-docker run \
-  -e SPAN_STORAGE_TYPE=elasticsearch \
-  jaegertracing/jaeger-collector:{{< currentVersion >}} \
-  --help
-```
+Here is [example configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-elasticsearch.yaml) for ElasticSearch.
 
 #### Shards and Replicas for Elasticsearch indices
 
