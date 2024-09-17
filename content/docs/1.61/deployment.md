@@ -283,7 +283,7 @@ docker run \
 * [Badger file permissions as non-root service](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/badger/docs/storage-file-non-root-permission.md)
 
 ### Cassandra
-* Supported versions: 3.4+
+* Supported versions: 4.0+
 
 Deploying Cassandra itself is out of scope for our documentation. One good
 source of documentation is the [Apache Cassandra Docs](https://cassandra.apache.org/doc/latest/).
