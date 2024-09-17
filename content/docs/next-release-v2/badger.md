@@ -3,8 +3,8 @@ title: Badger
 hasparent: true
 ---
 
-[Badger](https://github.com/dgraph-io/badger) is an embedded local storage, only available
-with **all-in-one** distribution. By default, it acts as ephemeral storage using a temporary file system.
+[Badger](https://github.com/dgraph-io/badger) is an embedded local storage, available
+with `jaeger`. By default, it acts as span storage using a file system.
 
 For [additional configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-badger.yaml)
 
