@@ -5,8 +5,8 @@
 {{ else }}
   {{ $path = .Path }}
 {{ end }}
-{{ $currentVersion := index (split $path "/") 1 }}
-{{ $versionDocsPath := printf "content/docs/%s" $currentVersion }}
+{{ $majorMinorVersion := index (split $path "/") 1 }}
+{{ $versionDocsPath := printf "content/docs/%s" $majorMinorVersion }}
 {{ $url := .RelPermalink }}
 <div class="nav-wrapper">
   <aside class="nav">
@@ -18,7 +18,7 @@
         {{ $pagePath = .Path }}
       {{ end }}
       {{ $docVersion := index (split $pagePath "/") 1 }}
-      {{ if and (eq $docVersion $currentVersion) (not .Params.hasParent) }}
+      {{ if and (eq $docVersion $majorMinorVersion) (not .Params.hasParent) }}
         {{ $isCurrentPage := eq $url .RelPermalink }}
         <div class="nav-link">
           <a href="{{ .Permalink }}"{{ if $isCurrentPage }} class="is-active"{{ end }}>
@@ -27,7 +27,7 @@
 
           {{ with .Params.children }}
             {{ range . }}
-              {{ $url := printf "/docs/%s/%s/" $currentVersion .url }}
+              {{ $url := printf "/docs/%s/%s/" $majorMinorVersion .url }}
               {{ $isCurrentPage := eq $url $.RelPermalink }}
               <br />
               <a class="nav-sublink{{ if $isCurrentPage }} is-active{{ end }}" href="{{ $url }}">
