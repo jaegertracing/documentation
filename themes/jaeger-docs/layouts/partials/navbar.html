@@ -77,7 +77,7 @@
                 </a>
 
                 {{ with .Params.children }}
-                    {{ range . }}
+                  {{ range . }}
                     {{ $url := cond $isDocsPage (printf "/docs/%s/%s" $majorMinorVersion .url) (printf "/docs/%s/%s" $latest .url) }}
                     <a class="navbar-item is-small is-hidden-desktop" href="{{ $url }}">
                       &cir; {{ if .navtitle }}{{ .navtitle }}{{ else }}{{ .title }}{{ end }}
