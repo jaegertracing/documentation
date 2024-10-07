@@ -1,0 +1,16 @@
+name: jaeger-ingester completion
+synopsis: Generate the autocompletion script for the specified shell
+description: |
+    Generate the autocompletion script for jaeger-ingester for the specified shell.
+    See each sub-command's help for details on how to use the generated script.
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for completion
+see_also:
+    - jaeger-ingester - Jaeger ingester consumes from Kafka and writes to storage.
+    - jaeger-ingester completion bash - Generate the autocompletion script for bash
+    - jaeger-ingester completion fish - Generate the autocompletion script for fish
+    - jaeger-ingester completion powershell - Generate the autocompletion script for powershell
+    - jaeger-ingester completion zsh - Generate the autocompletion script for zsh
