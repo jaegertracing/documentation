@@ -1,4 +1,5 @@
 /* Rules for the main "article" sections of page domains (docs, download, taxonomies, etc.) */
+@import "bulma/sass/utilities/mixins"
 @import "variables"
 
 .notification .content
@@ -39,11 +40,11 @@
       // Scroll to the right position from anchors
       // https://tscanlin.github.io/tocbot/#fixed-headers
       h1::before, h2::before, h3::before, h4::before, h5::before, h6::before
-        display: block;
-        content: " ";
-        height: 120px;
-        margin-top: -120px;
-        visibility: hidden;
+        display: block
+        content: " "
+        height: 120px
+        margin-top: -120px
+        visibility: hidden
 
       // Styling for code samples inside normal text
       p, h1, h2, h3, h4 ,h5, h6, li, a
