@@ -822,16 +822,16 @@ The following snippet shows the manual definition you can include in your `conta
   imagePullPolicy: IfNotPresent
   ports:
     - containerPort: 5775
-      name: zk-compact-trft
+      name: zk-compact-thrift
       protocol: UDP
     - containerPort: 5778
       name: config-rest
       protocol: TCP
     - containerPort: 6831
-      name: jg-compact-trft
+      name: jg-compact-thrift
       protocol: UDP
     - containerPort: 6832
-      name: jg-binary-trft
+      name: jg-binary-thrift
       protocol: UDP
     - containerPort: 14271
       name: admin-http
@@ -1375,7 +1375,7 @@ Starting from version 1.16.0, the Jaeger Operator is able to generate spans rela
         - --reporter.grpc.host-port=dns:///jaeger-collector-headless.$(POD_NAMESPACE).svc.cluster.local:14250
         ports:
         - containerPort: 6831
-          name: jg-compact-trft
+          name: jg-compact-thrift
           protocol: UDP
 ```
 
