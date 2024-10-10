@@ -36,8 +36,8 @@ hostnames
 hostport
 htpasswd
 ingester
-ingester's
 ingesters
+ingester's
 istio
 istio's
 jaegertracing
@@ -100,11 +100,9 @@ strimzi's
 struct
 subpages
 tchannel
-telemtery
 thriftrw
 tolerations
 tracegen
-trft
 uberctx
 unmarshaling
 upsample
