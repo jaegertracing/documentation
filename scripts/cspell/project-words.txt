@@ -100,11 +100,9 @@ strimzi's
 struct
 subpages
 tchannel
-telemtery
 thriftrw
 tolerations
 tracegen
-trft
 uberctx
 unmarshaling
 upsample
