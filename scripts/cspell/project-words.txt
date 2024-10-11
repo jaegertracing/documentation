@@ -36,8 +36,8 @@ hostnames
 hostport
 htpasswd
 ingester
-ingesters
 ingester's
+ingesters
 istio
 istio's
 jaegertracing
