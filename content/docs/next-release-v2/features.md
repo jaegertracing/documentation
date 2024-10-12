@@ -233,7 +233,7 @@ graph
     TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_CONN[SpanMetrics Connector]
     TRACE_RECEIVER --> |spans| TRACE_EXPORTER[Trace Exporter]
     TRACE_EXPORTER --> |spans| COLLECTOR[Jaeger Collector]
-    SPANMETRICS_CONN --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PromethesusRemoteWrite Exporter]
+    SPANMETRICS_CONN --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PrometheusRemoteWrite Exporter]
     PROMETHEUS_EXPORTER --> |metrics| METRICS_STORE[(Metrics Storage)]
 
     COLLECTOR --> |spans| SPAN_STORE[(Span Storage)]

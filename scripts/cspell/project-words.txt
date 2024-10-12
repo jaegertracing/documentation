@@ -78,7 +78,6 @@ otlp
 outreachy
 parentbased
 potpose
-promethesus
 prometheusexporter
 promscale
 proto

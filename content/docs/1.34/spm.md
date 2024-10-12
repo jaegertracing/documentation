@@ -77,7 +77,7 @@ as such, is only relevant to the Jaeger Query component (and All In One).
 graph
     TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_PROC[Spanmetrics Processor]
     TRACE_RECEIVER --> |spans| TRACE_EXPORTER[Trace Exporter]
-    SPANMETRICS_PROC --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PromethesusRemoteWrite Exporter]
+    SPANMETRICS_PROC --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PrometheusRemoteWrite Exporter]
     UI[Jaeger UI] --> QUERY
     QUERY[Jaeger Query Service] --> METRICS_STORE[Metrics Storage]
     PROMETHEUS_EXPORTER --> |metrics| METRICS_STORE
