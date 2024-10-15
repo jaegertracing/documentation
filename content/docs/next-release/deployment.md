@@ -23,7 +23,6 @@ The main Jaeger backend components are released as Docker images on [Docker Hub]
 Component             | Docker Hub                                                                                                   | Quay
 --------------------- | -------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------
 **jaeger-all-in-one**      | [hub.docker.com/r/jaegertracing/all-in-one/](https://hub.docker.com/r/jaegertracing/all-in-one/)         | [quay.io/repository/jaegertracing/all-in-one](https://quay.io/repository/jaegertracing/all-in-one)
-**jaeger-agent**      | [hub.docker.com/r/jaegertracing/jaeger-agent/](https://hub.docker.com/r/jaegertracing/jaeger-agent/)         | [quay.io/repository/jaegertracing/jaeger-agent](https://quay.io/repository/jaegertracing/jaeger-agent)
 **jaeger-collector**  | [hub.docker.com/r/jaegertracing/jaeger-collector/](https://hub.docker.com/r/jaegertracing/jaeger-collector/) | [quay.io/repository/jaegertracing/jaeger-collector](https://quay.io/repository/jaegertracing/jaeger-collector)
 **jaeger-query**      | [hub.docker.com/r/jaegertracing/jaeger-query/](https://hub.docker.com/r/jaegertracing/jaeger-query/)         | [quay.io/repository/jaegertracing/jaeger-query](https://quay.io/repository/jaegertracing/jaeger-query)
 **jaeger-ingester**   | [hub.docker.com/r/jaegertracing/jaeger-ingester/](https://hub.docker.com/r/jaegertracing/jaeger-ingester/)   | [quay.io/repository/jaegertracing/jaeger-ingester](https://quay.io/repository/jaegertracing/jaeger-ingester)
@@ -65,7 +64,7 @@ Command line option                | Environment variable
 
 ## All-in-one
 
-Jaeger all-in-one is a special distribution that combines three Jaeger components, [agent](#agent), [collector](#collector), and [query service/UI](#query-service--ui), in a single binary or container image. It is useful for single-node deployments where your trace volume is light enough to be handled by a single instance. By default, all-in-one starts with `memory` storage, meaning it will lose all data upon restart. All other [span storage backends](#span-storage-backends) can also be used with all-in-one, but `memory` and `badger` are exclusive to all-in-one because they cannot be shared between instances.
+Jaeger all-in-one is a special distribution that combines three Jaeger components, [collector](#collector), and [query service/UI](#query-service--ui), in a single binary or container image. It is useful for single-node deployments where your trace volume is light enough to be handled by a single instance. By default, all-in-one starts with `memory` storage, meaning it will lose all data upon restart. All other [span storage backends](#span-storage-backends) can also be used with all-in-one, but `memory` and `badger` are exclusive to all-in-one because they cannot be shared between instances.
 
 All-in-one listens to the same ports as the components it contains (described below), with the exception of the admin port.
 
@@ -94,64 +93,6 @@ docker run -d --name jaeger \
 
 You can navigate to `http://localhost:16686` to access the Jaeger UI.
 
-## Agent
-
-{{< warning >}}
-**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equipped with OTLP exporters) directly to **jaeger-collector**. See the [Architecture](../architecture) page for alternative deployment options.
-{{< /warning >}}
-
-**jaeger-agent** is designed to receive tracing data in Thrift format over UDP and run locally on each host, either as a host agent / daemon or as an application sidecar. **jaeger-agent** exposes the following ports:
-
-Port  | Protocol | Function
------ | -------  | ---
-6831  | UDP      | Accepts [jaeger.thrift][jaeger-thrift] in `compact` Thrift protocol used by most current Jaeger clients.
-6832  | UDP      | Accepts [jaeger.thrift][jaeger-thrift] in `binary` Thrift protocol used by Node.js Jaeger client (because [thriftrw][thriftrw] npm package does not support `compact` protocol).
-5778  | HTTP     | Serves SDK configs, namely sampling strategies at `/sampling` (see [Remote Sampling](../sampling/#remote-sampling)).
-5775  | UDP      | Accepts [zipkin.thrift][zipkin-thrift] in `compact` Thrift protocol (deprecated; only used by very old Jaeger clients, circa 2016).
-14271 | HTTP     | Admin port: health check at `/` and metrics at `/metrics`.
-
-It can be executed directly on the host or via Docker, as follows:
-
-```sh
-## make sure to expose only the ports you use in your deployment scenario!
-docker run \
-  --rm \
-  -p6831:6831/udp \
-  -p6832:6832/udp \
-  -p5778:5778/tcp \
-  -p5775:5775/udp \
-  jaegertracing/jaeger-agent:{{< currentVersion >}}
-```
-
-### Discovery System Integration
-
-**jaeger-agent**s can connect point-to-point to a single **jaeger-collector** address, which could be
-load balanced by another infrastructure component (e.g. DNS) across multiple **jaeger-collector**s.
-**jaeger-agent** can also be configured with a static list of **jaeger-collector** addresses.
-
-On Docker, a command like the following can be used:
-
-```sh
-docker run \
-  --rm \
-  -p5775:5775/udp \
-  -p6831:6831/udp \
-  -p6832:6832/udp \
-  -p5778:5778/tcp \
-  jaegertracing/jaeger-agent:{{< currentVersion >}} \
-  --reporter.grpc.host-port=jaeger-collector.jaeger-infra.svc:14250
-```
-
-When using gRPC, you have several options for load balancing and name resolution:
-
-* Single connection and no load balancing. This is the default if you specify a single `host:port`. (example: `--reporter.grpc.host-port=jaeger-collector.jaeger-infra.svc:14250`)
-* Static list of hostnames and round-robin load balancing. This is what you get with a comma-separated list of addresses. (example: `reporter.grpc.host-port=jaeger-collector1:14250,jaeger-collector2:14250,jaeger-collector3:14250`)
-* Dynamic DNS resolution and round-robin load balancing. To get this behavior, prefix the address with `dns:///` and gRPC will attempt to resolve the hostname using SRV records (for [external load balancing](https://github.com/grpc/grpc/blob/master/doc/load-balancing.md)), TXT records (for [service configs](https://github.com/grpc/grpc/blob/master/doc/service_config.md)), and A records. Refer to the [gRPC Name Resolution docs](https://github.com/grpc/grpc/blob/master/doc/naming.md) and the [dns_resolver.go implementation](https://github.com/grpc/grpc-go/blob/master/resolver/dns/dns_resolver.go) for more info. (example: `--reporter.grpc.host-port=dns:///jaeger-collector.jaeger-infra.svc:14250`)
-
-### Agent level tags
-
-Jaeger supports agent level tags, that can be added to the process tags of all spans passing through **jaeger-agent**. This is supported through the command line flag `--agent.tags=key1=value1,key2=value2,...,keyn=valuen`. Tags can also be set through an environment flag like so - `--agent.tags=key=${envFlag:defaultValue}` - The tag value will be set to the value of the `envFlag` environment key and `defaultValue` if not set.
-
 ## Collector
 
 **jaeger-collector**s are stateless and thus many instances of **jaeger-collector** can be run in parallel.
@@ -171,7 +112,7 @@ At default settings **jaeger-collector** exposes the following ports:
 | 14269 | HTTP     | `/`      | Admin port: health check (`GET`).
 |       |          | `/metrics` | Prometheus-style metrics (`GET`).
 | 9411  | HTTP     | `/api/v1/spans` and `/api/v2/spans` | Accepts Zipkin spans in Thrift, JSON and Proto (disabled by default).
-| 14250 | gRPC     | n/a      | Used by **jaeger-agent** to send spans in [model.proto][] Protobuf format.
+| 14250 | gRPC     | n/a      | Accepts spans in [model.proto][] Protobuf format.
 
 ## Ingester
 

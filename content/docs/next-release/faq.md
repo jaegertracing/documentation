@@ -16,17 +16,17 @@ The Dependencies page shows a graph of services traced by Jaeger and connections
 
 Please refer to the [Troubleshooting](../troubleshooting/) guide.
 
-## Do I need to run jaeger-agent?
+## What happened to jaeger-agent?
 
-{{< warning >}}
-Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
-{{< /warning >}}
+Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required and no longer supported. See the [Architecture](../architecture) page for alternative deployment options.
 
-`jaeger-agent` is not always necessary. Jaeger client libraries can be configured to export trace data directly to `jaeger-collector`. However, the following are the reasons why running `jaeger-agent` is recommended:
+Sometimes it is still desireable to run a **host agent**:
 
-  * If we want Jaeger client libraries to send trace data directly to **jaeger-collector**s, we must provide them with a URL of the HTTP endpoint. It means that our applications require additional configuration containing this parameter, especially if we are running multiple Jaeger installations (e.g. in different availability zones or regions) and want the data sent to a nearby installation. In contrast, when using the agent, the libraries require no additional configuration because the agent is always accessible via `localhost`. It acts as a sidecar and proxies the requests to the appropriate **jaeger-collector**s.
-  * **jaeger-agent** can be configured to enrich the tracing data with infrastructure-specific metadata by adding extra tags to the spans, such as the current zone, region, etc. If **jaeger-agent** is running as a host daemon, it will be shared by all applications running on the same host. If **jaeger-agent** is running as a true sidecar, i.e. one per application, it can provide additional functionality such as strong authentication, multi-tenancy (see [this blog post](https://medium.com/jaegertracing/jaeger-and-multitenancy-99dfa1d49dc0)), pod name, etc.
-  * **jaeger-agent**s allow implementing traffic control to **jaeger-collector**s. If we have thousands of hosts in the data center, each running many applications, and each application sending data directly to **jaeger-collector**s, there may be too many open connections for each **jaeger-collector** to handle. The agents can load balance this traffic with fewer connections.
+  * If we want SDKs to send trace data directly to **jaeger-collector**s, we must provide them with a URL of the HTTP endpoint. It means that our applications require additional configuration containing this parameter, especially if we are running multiple Jaeger installations (e.g. in different availability zones or regions) and want the data sent to a nearby installation. In contrast, when using the host agent, the libraries require no additional configuration because the agent is always accessible via `localhost`. It acts as a sidecar and proxies the requests to the appropriate **jaeger-collector**s.
+  * A host agent can be configured to enrich the tracing data with infrastructure-specific metadata by adding extra tags to the spans, such as the current zone, region, etc. If the host agent is running as a host daemon, it will be shared by all applications running on the same host. If the host agent is running as a true sidecar, i.e. one per application, it can provide additional functionality such as strong authentication, multi-tenancy (see [this blog post](https://medium.com/jaegertracing/jaeger-and-multitenancy-99dfa1d49dc0)), pod name, etc.
+  * Host agents allow implementing traffic control to **jaeger-collector**s. If we have thousands of hosts in the data center, each running many applications, and each application sending data directly to **jaeger-collector**s, there may be too many open connections for each **jaeger-collector** to handle. The agents can load balance this traffic with fewer connections.
+
+If your circumstances requires a host agent, you can deploy OpenTelemetry Collector in that capacity.
 
 ## What is the recommended storage backend?
 

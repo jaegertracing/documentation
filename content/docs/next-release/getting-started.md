@@ -14,16 +14,13 @@ Historically, the Jaeger project supported its own SDKs (aka tracers, client lib
 
 ## All in One
 
-**all-in-one** is an executable designed for quick local testing. It includes the Jaeger UI, **jaeger-collector**, **jaeger-query**, and **jaeger-agent**, with an in memory storage component.
+**all-in-one** is an executable designed for quick local testing. It includes the Jaeger UI, **jaeger-collector**, and **jaeger-query**, with an in memory storage component.
 
 The simplest way to start the all-in-one is to use the pre-built image published to DockerHub (a single command line).
 
 ```bash
 docker run --rm --name jaeger \
   -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
-  -p 6831:6831/udp \
-  -p 6832:6832/udp \
-  -p 5778:5778 \
   -p 16686:16686 \
   -p 4317:4317 \
   -p 4318:4318 \
@@ -46,11 +43,6 @@ The container exposes the following ports:
 
 Port  | Protocol | Component | Function
 ----- | -------  | --------- | ---
-6831  | UDP      | agent     | accept `jaeger.thrift` over Thrift-compact protocol (used by most SDKs)
-6832  | UDP      | agent     | accept `jaeger.thrift` over Thrift-binary protocol (used by Node.js SDK)
-5775  | UDP      | agent     | (deprecated) accept `zipkin.thrift` over compact Thrift protocol (used by legacy clients only)
-5778  | HTTP     | agent     | serve configs (sampling, etc.)
-      |          |           |
 16686 | HTTP     | query     | serve frontend
       |          |           |
 4317  | HTTP     | collector | accept OpenTelemetry Protocol (OTLP) over gRPC

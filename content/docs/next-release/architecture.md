@@ -104,14 +104,6 @@ Instrumentation typically should not depend on specific tracing SDKs, but only o
 
 The instrumentation is designed to be always on in production. To minimize  overhead, the SDKs employ various sampling strategies. When a trace is sampled, the profiling span data is captured and transmitted to the Jaeger backend. When a trace is not sampled, no profiling data is collected at all, and the calls to the tracing API are short-circuited to incur a minimal amount of overhead. For more information, please refer to the [Sampling](../sampling/) page.
 
-### Agent
-
-{{< warning >}}
-**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equipped with OTLP exporters) directly to **jaeger-collector**. Alternatively, use the OpenTelemetry Collector as a local agent.
-{{< /warning >}}
-
-**jaeger-agent** is a network daemon that listens for spans sent over UDP, which are batched and sent to the collector. It is designed to be deployed to all hosts as an infrastructure component. The agent abstracts the routing and discovery of the collectors away from the client. **jaeger-agent** is **not** a required component.
-
 ### Collector
 
 **jaeger-collector** receives traces, runs them through a processing pipeline for validation and clean-up/enrichment, and stores them in a storage backend. Jaeger comes with built-in support for several storage backends (see [Deployment](../deployment)), as well as extensible plugin framework for implementing custom storage plugins.

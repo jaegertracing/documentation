@@ -20,7 +20,7 @@ While we intend to have the Jaeger Operator working for as many Kubernetes versi
 While multiple operators might coexist watching the same set of namespaces, which operator will succeed in setting itself as the owner of the CR is undefined behavior. Automatic injection of the sidecars might also result in undefined behavior. Therefore, it's highly recommended to have at most one operator watching each namespace. Note that namespaces might contain any number of Jaeger instances (CRs).
 
 {{< info >}}
-The Jaeger Operator version tracks one version of the Jaeger components (**jaeger-query**, **jaeger-collector**, **jaeger-agent**). When a new version of the Jaeger components is released, a new version of the operator will be released that understands how running instances of the previous version can be upgraded to the new version.
+The Jaeger Operator version tracks one version of the Jaeger components (**jaeger-query**, **jaeger-collector**). When a new version of the Jaeger components is released, a new version of the operator will be released that understands how running instances of the previous version can be upgraded to the new version.
 {{< /info >}}
 
 ## Prerequisite
@@ -119,7 +119,7 @@ After the role is granted, switch back to a non-privileged user.
 
 # Quick Start - Deploying the AllInOne image
 
-The simplest possible way to create a Jaeger instance is by creating a YAML file like the following example.  This will install the default AllInOne strategy, which deploys the **all-in-one** image (combining **jaeger-agent**, **jaeger-collector**, **jaeger-query**, and Jaeger UI) in a single pod, using in-memory storage by default.
+The simplest possible way to create a Jaeger instance is by creating a YAML file like the following example.  This will install the default AllInOne strategy, which deploys the **all-in-one** image (combining **jaeger-collector**, **jaeger-query**, and Jaeger UI) in a single pod, using in-memory storage by default.
 
 {{< info >}}
 This default strategy is intended for development, testing, and demo purposes, not for production.
@@ -240,7 +240,7 @@ The available strategies are described in the following sections.
 
 This strategy is intended for development, testing, and demo purposes.
 
-The main backend components,**jaeger-agent**, **jaeger-collector** and **jaeger-query** service, are all packaged into a single executable which is configured (by default) to use in-memory storage. This strategy cannot be scaled beyond one replica.
+The main backend components, **jaeger-collector** and **jaeger-query** service, are all packaged into a single executable which is configured (by default) to use in-memory storage. This strategy cannot be scaled beyond one replica.
 
 ## Production strategy
 

@@ -15,7 +15,7 @@ Since Jaeger v1.32, **jaeger-collector** and **jaeger-query** Service ports that
 
 ## Span reporting APIs
 
-**jaeger-agent** and **jaeger-collector** are the two components of the Jaeger backend that can receive spans. At this time they support two sets of non-overlapping APIs.
+**jaeger-collector** is the component of the Jaeger backend that can receive spans. At this time it supports two sets of non-overlapping APIs.
 
 ### OpenTelemetry Protocol (stable)
 
@@ -31,21 +31,17 @@ The OTLP data is accepted in these formats: (1) binary gRPC, (2) Protobuf over H
 [otlp-rcvr]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
 [otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md
 
-### Thrift over UDP (stable)
-
-**jaeger-agent** can only receive spans over UDP in Thrift format. The primary API is a UDP packet that contains a Thrift-encoded `Batch` struct defined in the [jaeger.thrift] IDL file, located in the [jaeger-idl] repository. Most Jaeger Clients use Thrift's `compact` encoding, however some client libraries do not support it (notably, Node.js) and use Thrift's `binary` encoding (sent to  a different UDP port). **jaeger-agent**'s API is defined by the [agent.thrift] IDL file.
-
-For legacy reasons, **jaeger-agent** also accepts spans over UDP in Zipkin format, however, only very old versions of Jaeger clients can send data in that format and it is officially deprecated.
-
 ### Protobuf via gRPC (stable)
 
-In a typical Jaeger deployment, **jaeger-agent**s receive spans from Clients and forward them to **jaeger-collector**s. Since Jaeger v1.11, the official and recommended protocol between **jaeger-agent**s and **jaeger-collector**s is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto] IDL file. The same endpoint can be used to submit trace data from SDKs directly to **jaeger-collector**.
+**Deprecated**: we recommend the OpenTelemetry protocol.
+
+Since Jaeger v1.11, the official protocol between applicationss and **jaeger-collector**s is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto] IDL file. The same endpoint can be used to submit trace data from SDKs directly to **jaeger-collector**.
 
 ### Thrift over HTTP (stable)
 
-In some cases it is not feasible to deploy **jaeger-agent** next to the application, for example, when the application code is running as a serverless function. In these scenarios the SDKs can be configured to submit spans directly to **jaeger-collector**s over HTTP/HTTPS.
+**Deprecated**: we recommend the OpenTelemetry protocol.
 
-The same [jaeger.thrift] payload can be submitted in an HTTP POST request to the  `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
+The payload in [jaeger.thrift] format can be submitted in an HTTP POST request to the  `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
 
 ```
 Content-Type: application/vnd.apache.thrift.binary
@@ -83,7 +79,7 @@ When using the `grpc` storage type (a.k.a. [remote storage](../deployment/#remot
 
 This API supports Jaeger's [Remote Sampling](../sampling/#remote-sampling) protocol, defined in the [sampling.proto] IDL file.
 
-Both **jaeger-agent** and **jaeger-collector** implement the API. See [Remote Sampling](../sampling/#remote-sampling) for details on how to configure the Collector with sampling strategies. **jaeger-agent** is merely acting as a proxy to **jaeger-collector**.
+**jaeger-collector** implements this API. See [Remote Sampling](../sampling/#remote-sampling) for details on how to configure the Collector with sampling strategies.
 
 The following table lists different endpoints and formats that can be used to query for sampling strategies. The official HTTP/JSON endpoints use standard [Protobuf-to-JSON mapping](https://developers.google.com/protocol-buffers/docs/proto3#json).
 
@@ -91,8 +87,6 @@ Component | Port  | Endpoint          | Format    | Notes
 --------- | ----- | ----------------- | --------- | -----
 Collector | 14268 | `/api/sampling`   | HTTP/JSON | Recommended for most SDKs
 Collector | 14250 | [sampling.proto]  | gRPC      | For SDKs that want to use gRPC (e.g. OpenTelemetry Java SDK)
-Agent     | 5778  | `/sampling`       | HTTP/JSON | Recommended for most SDKs if the Agent is used in a deployment
-Agent     | 5778  | `/` (deprecated)  | HTTP/JSON | Legacy format, with enums encoded as numbers. **Not recommended.**
 
 **Examples**
 
@@ -102,19 +96,10 @@ $ go run ./cmd/all-in-one \
   --sampling.strategies-file=cmd/all-in-one/sampling_strategies.json
 ```
 
-Query different endpoints in another terminal:
+Query the endpoint in another terminal:
 ```shell
-# Collector
 $ curl "http://localhost:14268/api/sampling?service=foo"
 {"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":1}}
-
-# Agent
-$ curl "http://localhost:5778/sampling?service=foo"
-{"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":1}}
-
-# Agent, legacy endpoint / (not recommended)
-$ curl "http://localhost:5778/?service=foo"
-{"strategyType":0,"probabilisticSampling":{"samplingRate":1}}
 ```
 
 ## Service dependencies graph (internal)
@@ -134,7 +119,6 @@ Please refer to the [SPM Documentation](../spm#api)
 
 [jaeger-idl]: https://github.com/jaegertracing/jaeger-idl/
 [jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift
-[agent.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/agent.thrift
 [sampling.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/sampling.thrift
 [collector.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/collector.proto
 [query.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/query.proto
