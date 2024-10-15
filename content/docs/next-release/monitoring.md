@@ -18,7 +18,6 @@ Each Jaeger component exposes the metrics scraping endpoint on the admin port:
 
 Component             | Port
 --------------------- | ---
-**jaeger-agent**      | 14271
 **jaeger-collector**  | 14269
 **jaeger-query**      | 16687
 **jaeger-ingester**   | 14270

@@ -17,7 +17,7 @@ When using configuration object to instantiate the tracer, the type of sampling 
 * **Constant** (`sampler.type=const`) sampler always makes the same decision for all traces. It either samples all traces (`sampler.param=1`) or none of them (`sampler.param=0`).
 * **Probabilistic** (`sampler.type=probabilistic`) sampler makes a random sampling decision with the probability of sampling equal to the value of `sampler.param` property. For example, with `sampler.param=0.1` approximately 1 in 10 traces will be sampled.
 * **Rate Limiting** (`sampler.type=ratelimiting`) sampler uses a leaky bucket rate limiter to ensure that traces are sampled with a certain constant rate. For example, when `sampler.param=2.0` it will sample requests with the rate of 2 traces per second.
-* **Remote** (`sampler.type=remote`, which is also the default) sampler consults **jaeger-agent** for the appropriate sampling strategy to use in the current service. This allows controlling the sampling strategies in the services from a central configuration in Jaeger backend (see [Remote Sampling](#remote-sampling)), or even dynamically (see [Adaptive Sampling](#adaptive-sampling)).
+* **Remote** (`sampler.type=remote`, which is also the default) sampler consults **jaeger-collector** for the appropriate sampling strategy to use in the current service. This allows controlling the sampling strategies in the services from a central configuration in Jaeger backend (see [Remote Sampling](#remote-sampling)), or even dynamically (see [Adaptive Sampling](#adaptive-sampling)).
 
 ## Remote Sampling
 

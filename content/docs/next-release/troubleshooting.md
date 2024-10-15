@@ -57,33 +57,16 @@ If you suspect the remote sampling is not working correctly, try these steps:
     {"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":0.001}}
 ```
 
-## Bypass the Jaeger Agent
-
-{{< warning >}}
-This only applies when using Jaeger SDKs. The use of **jaeger-agent** [is deprecated](../deployment/#agent) when using OpenTelemetry SDKs.
-{{< /warning >}}
-
-By default, the Jaeger SDK is configured to send spans via UDP to a **jaeger-agent** running on `localhost`. As some networking setups might drop or block UDP packets, or impose size limits, the Jaeger SDK can be configured to bypass **jaeger-agent**, sending spans directly to **jaeger-collector**. Some SDKs, such as the Jaeger SDK for Java, support the environment variable `JAEGER_ENDPOINT` which can be used to specify **jaeger-collector**'s location, such as `http://jaeger-collector:14268/api/traces`. Refer to the Jaeger SDK documentation for the language you are using. For example, when you have configured the `JAEGER_ENDPOINT` property in the Jaeger SDK for Java, it logs the following when the tracer is created (notice `sender=HttpSender`):
-
-    2018-12-10 17:06:30 INFO  Configuration:236 - Initialized  tracer=JaegerTracer(...,  reporter=CompositeReporter(reporters=[RemoteReporter(sender=HttpSender(),  ...), ...]), ...)
-
-Note: the Jaeger SDK for Java will not fail when a connection to **jaeger-collector** cannot be established. Spans will be collected and placed in an internal buffer. They might eventually reach **jaeger-collector** once a connection is established, or get dropped in case the buffer reaches its maximum size.
-
 ## Networking Namespace
 
 If your Jaeger backend is still not able to receive spans (see the following sections on how to check logs and metrics for that), then the issue is most likely with your networking namespace configuration. When running the Jaeger backend components as Docker containers, the typical mistakes are:
 
   * Not exposing the appropriate ports outside of the container. For example, the collector may be listening on `:14268` inside the container network namespace, but the port is not reachable from the outside.
-  * Not making **jaeger-agent**'s or **jaeger-collector**'s host name visible from the application's network namespace. For example, if you run both your application and Jaeger backend in separate containers in Docker, they either need to be in the same namespace, or the application's container needs to be given access to Jaeger backend using the `--link` option of the `docker` command.
+  * Not making **jaeger-collector**'s host name visible from the application's network namespace. For example, if you run both your application and Jaeger backend in separate containers in Docker, they either need to be in the same namespace, or the application's container needs to be given access to Jaeger backend using the `--link` option of the `docker` command.
 
 ## Increase the logging in the backend components
 
-**jaeger-agent** and **jaeger-collector** provide useful debugging information when the log level is set to `debug`. Every UDP packet that is received by **jaeger-agent** is logged, as well as every batch that is sent by **jaeger-agent** to **jaeger-collector**. **jaeger-collector** also logs every batch it receives and logs every span that is stored in the permanent storage.
-
-Here's what to expect when **jaeger-agent** is started with the `--log-level=debug` flag:
-
-    {"level":"debug","ts":1544458854.5367086,"caller":"processors/thrift_processor.go:113","msg":"Span(s) received by the agent","bytes-received":359}
-    {"level":"debug","ts":1544458854.5408711,"caller":"tchannel/reporter.go:133","msg":"Span batch submitted by the agent","span-count":3}
+**jaeger-collector** provides useful debugging information when the log level is set to `debug`. **jaeger-collector** logs every batch it receives and logs every span that is stored in the permanent storage.
 
 On the **jaeger-collector** side, these are the expected log entries when the flag `--log-level=debug` is specified:
 

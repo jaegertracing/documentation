@@ -23,10 +23,8 @@ weight: 13
 
 ## Deployment
 
-* [Running Jaeger on bare metal](https://medium.com/jaegertracing/running-jaeger-agent-on-bare-metal-d1fc47d31fab) by Juraci Paixão Kröhling
 * [Protecting Jaeger UI with an OAuth sidecar Proxy](https://medium.com/jaegertracing/protecting-jaeger-ui-with-an-oauth-sidecar-proxy-34205cca4bb1) by Juraci Paixão Kröhling
 * [Jaeger and multi-tenancy](https://medium.com/jaegertracing/jaeger-and-multitenancy-99dfa1d49dc0) by Juraci Paixão Kröhling
-* [Deployment strategies for the Jaeger Agent](https://medium.com/jaegertracing/deployment-strategies-for-the-jaeger-agent-1d6f91796d09) by Juraci Paixão Kröhling
 * [How to deploy Jaeger on AWS: a comprehensive step-by-step guide](https://www.aspecto.io/blog/how-to-deploy-jaeger-on-aws-a-comprehensive-step-by-step-guide/) by Tom Zach
 
 ## Jaeger Performance Tuning
