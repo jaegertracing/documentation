@@ -35,7 +35,7 @@ The OTLP data is accepted in these formats: (1) binary gRPC, (2) Protobuf over H
 
 **Deprecated**: we recommend the OpenTelemetry protocol.
 
-Since Jaeger v1.11, the official protocol between applicationss and **jaeger-collector**s is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto] IDL file. The same endpoint can be used to submit trace data from SDKs directly to **jaeger-collector**.
+Since Jaeger v1.11, the official protocol between user applications and **jaeger-collector**s is `jaeger.api_v2.CollectorService` gRPC endpoint defined in [collector.proto] IDL file. The same endpoint can be used to submit trace data from SDKs directly to **jaeger-collector**.
 
 ### Thrift over HTTP (stable)
 
