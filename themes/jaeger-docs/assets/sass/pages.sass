@@ -49,13 +49,14 @@
   &--docs
     /* Left-hand documentation nav */
     .nav-wrapper
-      position: fixed
-      bottom: 0%
-      top: 9rem
-      left: 3rem 
+      position: sticky
+      top: 25vh
+      padding: 0
+      height : 70vh
+      padding-left: 2rem
 
       .nav
-        position: absolute
+        position: unset
         z-index: 10
         min-width: 15rem
         max-width: 25rem
@@ -63,6 +64,7 @@
         overflow-y: scroll
         overflow-x: hidden
         height: 100%
+        margin-left : -7rem
 
         .nav-link
           a

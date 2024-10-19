@@ -10,14 +10,27 @@
       li a
         font-size: 1.5rem
 
+    &.article--docs
+    .container
+      &.is-fluid
+        position: relative
+        top: 0
+        padding: 0
+        margin: auto
+       
+  &.is-2.is-hidden-touch
+    position: sticky
+    top: 0vh
+    height: 100vh
+    padding: 0
+    width: fit-content
+
   &.article--docs, &.article--download, &.article--terms
     .is-size-1
       line-height: 125%
 
     +touch
       padding: 0 7%
-
-    margin-top: 2rem
 
     .is-8
       padding: 0 1rem
@@ -64,3 +77,10 @@
 
   &.article--docs, &.article--download
     margin: 3rem 0 10rem 0
+
+// Changed 2 - *2 merged
+.container
+  &.is-fluid
+    position: relative
+    top: 0
+    padding: 0
