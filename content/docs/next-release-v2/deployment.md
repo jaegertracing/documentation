@@ -84,7 +84,8 @@ ElasticSearch:
           index_prefix: "jaeger-archive"
 ```
 
-!!! MAYBE NOT NEEDED ANYMORE?
+The following ports can also be used by **jaeger** for varous types of integrations
+
 | Port  | Protocol | Endpoint | Function
 | ----- | -------  | -------- | ----
 | 4317  | gRPC     | n/a      | Accepts traces in [OpenTelemetry OTLP format][otlp] (Protobuf).
@@ -94,22 +95,36 @@ ElasticSearch:
 | 14269 | HTTP     | `/`      | Admin port: health check (`GET`).
 |       |          | `/metrics` | Prometheus-style metrics (`GET`).
 | 9411  | HTTP     | `/api/v1/spans` and `/api/v2/spans` | Accepts Zipkin spans in Thrift, JSON and Proto (disabled by default).
-| 14250 | gRPC     | n/a      | Used by **jaeger-agent** to send spans in [model.proto][] Protobuf format.
 
-!!! NEED TO FIX 2 sections BELOW
 ### Clock Skew Adjustment
 
-Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. **jaeger-query** service implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/master/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to their timestamps.
+Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. **jaeger** query extension implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/master/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to their timestamps.
 
 Sometimes these adjustments themselves make the trace hard to understand. For example, when repositioning the server span within the bounds of its parent span, Jaeger does not know the exact relationship between the request and response latencies, so it assumes they are equal and places the child span in the middle of the parent span (see [issue #961](https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244)).
 
-**jaeger-query** service supports a configuration flag `--query.max-clock-skew-adjustment` that controls how much clock skew adjustment should be allowed. Setting this parameter to zero (`0s`) disables clock skew adjustment completely. This setting applies to all traces retrieved from the given query service. There is an open [ticket #197](https://github.com/jaegertracing/jaeger-ui/issues/197) to support toggling the adjustment on and off directly in the UI.
+**jaeger** query extension supports configuration in the config file
+
+```
+query:
+  max-clock-skew-adjustment: 30s
+```
+
+ that controls how much clock skew adjustment should be allowed. Setting this parameter to zero (`0s`) disables clock skew adjustment completely. This setting applies to all traces retrieved from the given query service. There is an open [ticket #197](https://github.com/jaegertracing/jaeger-ui/issues/197) to support toggling the adjustment on and off directly in the UI.
 
 ### UI Base Path
 
-The base path for all **jaeger-query** HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running **jaeger-query** behind a reverse proxy.
+The base path for all **jaeger** query extension HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running **jaeger** behind a reverse proxy. Here is example code to set the base path.
 
-The base path can be configured via the `--query.base-path` command line parameter or the `QUERY_BASE_PATH` environment variable.
+```
+query:
+  base-path: /
+  static-files: /go/bin/jaeger-ui-build/build
+  ui-config: /etc/jaeger/ui-config.json
+  grpc-server:
+    host-port: 0.0.0.0:16685
+  http-server:
+    host-port: 0.0.0.0:16686
+```
 
 ### UI Customization and Embedding
 
