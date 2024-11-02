@@ -16,7 +16,8 @@ If you are new to distributed tracing, please take a look at the [Related Links]
 
 ## About
 
-Jaeger is a distributed tracing platform released as open source by [Uber Technologies][ubeross].
+Jaeger is a distributed tracing platform released as open source by [Uber Technologies][ubeross] and donated to [Cloud Native Computing Foundation](https://cncf.io/) where it is a graduated project.
+
 With Jaeger you can:
 
 * Monitor and troubleshoot distributed workflows
@@ -44,7 +45,7 @@ See [Features](./features/) page for more details.
   * Backend components implemented in Go
   * React/Javascript UI
   * Supported storage backends:
-    * [Cassandra 3.4+](./deployment/#cassandra)
+    * [Cassandra 4+](./deployment/#cassandra)
     * [Elasticsearch 7.x, 8.x](./deployment/#elasticsearch)
     * [Badger](./deployment/#badger---local-storage)
     * [Kafka](./deployment/#kafka) - as an intermediate buffer
@@ -70,11 +71,5 @@ See [Getting Started](./getting-started).
 - [Take Jaeger for a HotROD ride](https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2) (blog)
 - [Evolving Distributed tracing At Uber Engineering](https://eng.uber.com/distributed-tracing/) (blog)
 - [Mastering Distributed Tracing](https://shkuro.com/books/2019-mastering-distributed-tracing/) (book)
-- [OpenTracing Tutorial (Java, Go, Python, Node.js, C#)](https://github.com/yurishkuro/opentracing-tutorial/) (tutorials)
-- [Learning Distributed Tracing 101](https://tracing.cloudnative101.dev/docs/index.html) (tutorials)
-- [Tracing HTTP request latency in Go with OpenTracing](https://medium.com/opentracing/tracing-http-request-latency-in-go-with-opentracing-7cc1282a100a) (blog)
-- [Distributed Tracing with Jaeger & Prometheus on Kubernetes](https://blog.openshift.com/openshift-commons-briefing-82-distributed-tracing-with-jaeger-prometheus-on-kubernetes/) (blog)
-- [Using Jaeger with Istio](https://istio.io/latest/docs/tasks/observability/distributed-tracing/jaeger/) (docs)
-- [Using Jaeger with Envoy](https://www.envoyproxy.io/docs/envoy/latest/start/sandboxes/jaeger_tracing.html) (docs)
 
 [ubeross]: http://uber.github.io
