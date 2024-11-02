@@ -10,7 +10,7 @@ If you are new to distributed tracing, please check the [Introduction](../) page
 
 Your applications must be instrumented before they can send tracing data to Jaeger. We recommend using the [OpenTelemetry][otel] instrumentation and SDKs.
 
-The Jaeger SDKs are no longer supported, and all users must migrate to OpenTelemetry.
+The Jaeger SDKs are no longer supported by the Jaeger project, the legacy Jaeger format is still supported for receiving traces.
 
 ## Default configuration
 
@@ -28,18 +28,15 @@ The binary exposes the following ports:
 
 Port  | Protocol | Component | Function
 ----- | -------  | --------- | ---
-6831  | UDP      | agent     | accept `jaeger.thrift` over Thrift-compact protocol (used by most SDKs)
-6832  | UDP      | agent     | accept `jaeger.thrift` over Thrift-binary protocol (used by Node.js SDK)
-5775  | UDP      | agent     | (deprecated) accept `zipkin.thrift` over compact Thrift protocol (used by legacy clients only)
-5778  | HTTP     | agent     | serve configs (sampling, etc.)
-      |          |           |
-16686 | HTTP     | query     | serve frontend
-      |          |           |
+(used by legacy clients only)
+5778  | HTTP     | collector | serve configs (sampling, etc.)
 4317  | HTTP     | collector | accept OpenTelemetry Protocol (OTLP) over gRPC
 4318  | HTTP     | collector | accept OpenTelemetry Protocol (OTLP) over HTTP
 14268 | HTTP     | collector | accept `jaeger.thrift` directly from clients
-14250 | HTTP     | collector | accept `model.proto`
+14250 | gRPC     | collector | accept `model.proto`
 9411  | HTTP     | collector | Zipkin compatible endpoint (optional)
+      |          |           |
+16686 | HTTP     | query     | serve frontend
 
 ### With Service Performance Monitoring (SPM)
 

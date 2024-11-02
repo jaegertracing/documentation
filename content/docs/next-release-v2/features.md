@@ -20,14 +20,14 @@ Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SD
 ## Multiple storage backends
 
 Jaeger can be used with a growing number of storage backends:
-* It natively supports popular open source NoSQL databases as trace storage backends: Cassandra 3.4+, Elasticsearch 7.x/8.x, and OpenSearch 1.0+.
+* It natively supports popular open source NoSQL databases as trace storage backends: Cassandra 4.0+, Elasticsearch 7.x/8.x, and OpenSearch 1.0+.
 * It integrates via a gRPC API with other well known databases that have been certified to be Jaeger compliant: [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse).
 * There is embedded database support using [Badger](https://github.com/dgraph-io/badger) and simple in-memory storage for testing setups.
 * There are ongoing community experiments using other databases; you can find more in [this issue](https://github.com/jaegertracing/jaeger/issues/638).
 
 ## Modern Web UI
 
-Jaeger Web UI is implemented in Javascript using popular open source frameworks like React. Several performance improvements have been released in v1.0 to allow the UI to efficiently deal with large volumes of data and display traces with tens of thousands of spans (e.g. we tried a trace with 80,000 spans).
+Jaeger Web UI is implemented in Javascript as a React application. Several performance improvements have been released in v1.0 to allow the UI to efficiently deal with large volumes of data and display traces with tens of thousands of spans (e.g. we tried a trace with 80,000 spans).
 
 ## Cloud Native Deployment
 
@@ -73,7 +73,9 @@ The support of Head based sampling comes from OpenTelemetry. The topic is covere
 
 ## Tail Based Sampling 
 
-Tail based sampling has advantages over head based sampling, but comes with additional impacts on load balancing spans along with a larger footprint of memory and CPU on the collectors. This will impact Jaeger as well. You can learn more about [tail based sampling in the OpenTelemetry documentation](https://opentelemetry.io/docs/concepts/sampling/#tail-sampling). 
+Tail based sampling has advantages over head based sampling, but comes with additional impacts on load balancing spans along with a larger footprint of memory and CPU on the collectors. This will impact Jaeger as well. You can learn more about [tail based sampling in the OpenTelemetry documentation](https://opentelemetry.io/docs/concepts/sampling/#tail-sampling).
+
+Jaeger v2 directly supports [tail sampling processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/tailsamplingprocessor).
 
 ### Remote Sampling
 
