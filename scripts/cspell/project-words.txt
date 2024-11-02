@@ -30,6 +30,7 @@ gobin
 gopath
 hasparent
 healthcheck
+healthcheckv2
 healthz
 healtz
 hostnames

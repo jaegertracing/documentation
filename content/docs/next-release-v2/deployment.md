@@ -84,7 +84,7 @@ ElasticSearch:
           index_prefix: "jaeger-archive"
 ```
 
-The following ports can also be used by **jaeger** for varous types of integrations
+The following ports can also be used by **jaeger** for various types of integrations:
 
 | Port  | Protocol | Endpoint | Function
 | ----- | -------  | -------- | ----
@@ -92,8 +92,7 @@ The following ports can also be used by **jaeger** for varous types of integrati
 | 4318  | HTTP     | `/v1/traces` | Accepts traces in [OpenTelemetry OTLP format][otlp] (Protobuf and JSON).
 | 14268 | HTTP     | `/api/sampling` | Serves sampling policies (see [Remote Sampling](../sampling/#remote-sampling)).
 |       |          | `/api/traces` | Accepts spans in [jaeger.thrift][jaeger-thrift] format with `binary` thrift protocol (`POST`).
-| 14269 | HTTP     | `/`      | Admin port: health check (`GET`).
-|       |          | `/metrics` | Prometheus-style metrics (`GET`).
+| 8888  | HTTP     | `/`      | Prometheus-style metrics (`GET`).
 | 9411  | HTTP     | `/api/v1/spans` and `/api/v2/spans` | Accepts Zipkin spans in Thrift, JSON and Proto (disabled by default).
 
 ### Clock Skew Adjustment
