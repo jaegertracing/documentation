@@ -77,8 +77,7 @@ for version in "${version_v1}" "${version_v2}"; do
     var_suffix="V2"
   else
     cp -r ./content/docs/next-release/ ./content/docs/${versionMajorMinor}
-    # @nocommit skip this
-    # gen_cli_docs_v1 ${versionMajorMinor}
+    gen_cli_docs_v1 ${versionMajorMinor}
   fi
 
   versions=$(grep -E "versions${var_suffix} *=" config.toml)
