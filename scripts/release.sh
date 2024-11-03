@@ -95,5 +95,5 @@ if [[ "$DRY_RUN" = "true" ]]; then
   echo "Not committing changes because DRY_RUN=$DRY_RUN"
   exit 0
 fi
-git add config.toml ./content/docs/${versionMajorMinor} ./data/cli/${versionMajorMinor}
+git add config.toml ./content/docs/ ./data/cli/
 git commit -m "Release ${version}" -s
