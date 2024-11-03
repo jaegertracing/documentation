@@ -21,13 +21,13 @@ fi
 if [[ "$1" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   version_v1="$1"
 else
-  echo "🔴 ERROR: Version $1 is not in in major.minor.patch format."
+  echo "🔴 ERROR: Version $1 is not in a major.minor.patch format."
   print_usage
 fi
 if [[ "$2" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   version_v2="$2"
 else
-  echo "🔴 ERROR: Version $2 is not in in major.minor.patch format."
+  echo "🔴 ERROR: Version $2 is not in a major.minor.patch format."
   print_usage
 fi
 
