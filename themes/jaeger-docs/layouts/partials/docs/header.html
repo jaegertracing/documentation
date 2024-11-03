@@ -1,4 +1,4 @@
-{{ $latest        := site.Params.latest }}
+{{ $latestV1        := site.Params.latest }}
 {{ $latestV2      := site.Params.latestV2 }}
 {{ $path := "" }}
 {{ with .File }}
@@ -17,13 +17,13 @@
   {{ $isNextRelease = true }}
 {{ end }}
 
-{{ $isLatest      := or (eq $version $latest) (eq $version $latestV2) }}
-{{ $latestUrlV1   := .RelPermalink | replaceRE $version $latest }}
+{{ $isLatest      := or (eq $version $latestV1) (eq $version $latestV2) }}
+{{ $latestUrlV1   := .RelPermalink | replaceRE $version $latestV1 }}
 {{ $latestUrlV2   := .RelPermalink | replaceRE $version $latestV2 }}
 
 {{ $latestUrl     := "" }}
 {{ if eq $vMajor "1" }}
-  {{ $latestUrl     = .RelPermalink | replaceRE $version $latest }}
+  {{ $latestUrl     = .RelPermalink | replaceRE $version $latestV1 }}
 {{ else if eq $vMajor "2" }}
   {{ $latestUrl     = .RelPermalink | replaceRE $version $latestV2 }}
 {{ end }}
@@ -39,24 +39,23 @@
       <span class="tag is-medium">
         Version&nbsp;&nbsp;<strong>{{ $version }}</strong>
       </span>
+      {{ if $isNextRelease }}
+      <span class="tag is-medium is-info">Preview</span>
+      {{ end }}
       {{ if $isLatest }}
       <span class="tag is-medium is-success">Latest</span>
-      {{ else if $isNextRelease }}
-      <span class="tag is-medium is-info">
-        Preview
-      </span>
       {{ else }}
       <a class="tag is-medium is-warning" href="{{ $latestUrl }}">
-        Go to the latest v{{ $vMajor }}.x version
+        Go to the latest {{ $vMajor }}.x version
       </a>
       {{ end }}
       {{ if eq $vMajor "1" }}
       <a class="tag is-medium" href="{{ $latestUrlV2 }}">
-        Go to the latest v2.x version
+        Go to the latest 2.x version
       </a>
       {{ else if eq $vMajor "2" }}
       <a class="tag is-medium" href="{{ $latestUrlV1 }}">
-        Go to the latest v1.x version
+        Go to the latest 1.x version
       </a>
       {{ end }}
         </div>
