@@ -1,13 +1,21 @@
 name: Release
 
 on:
-  push:
-    branches: [ main ]
-    tags: ["release-*.*.*"]
+  workflow_dispatch:
+    inputs:
+      version_v1:
+        required: true
+        type: string
+        description: "Version number for v1 docs, in #.#.# format"
+
+      version_v2:
+        required: true
+        type: string
+        description: "Version number for v2 docs, in #.#.# format"
 
 jobs:
-  release:
-    if: ${{ github.repository == 'jaegertracing/documentation' && startsWith(github.ref, 'refs/tags/release-') }}
+  prepare-release:
+    if: ${{ github.repository == 'jaegertracing/documentation' }}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -25,12 +33,11 @@ jobs:
         git config user.email "jaegertracingbot+jaeger-tracing@googlegroups.com"
         # git config credential.helper "store --file=.git/credentials"
         # echo "https://${{ secrets.JAEGERTRACINGBOT_GITHUB_TOKEN }}" > .git/credentials
-        export RELEASE_TAG=${GITHUB_REF##*/}
-        ./scripts/release.sh
+        ./scripts/release.sh ${{ inputs.version_v1 }} ${{ inputs.version_v2 }}
 
     - name: GH CLI create PR
       run: |
-        export TAG=${GITHUB_REF##*/}
+        export TAG="${{ inputs.version_v2 }}/${{ inputs.version_v1 }}"
         git checkout -b gen-release-${TAG} # branch is need for GH CLI
         git push origin gen-release-${TAG} # branch has to be on remote  before PR is opened
         gh pr create --base main --title "Release ${TAG}" --body "Release ${TAG}. This PR is created from CI and is part of the release process."
