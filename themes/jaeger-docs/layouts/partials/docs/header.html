@@ -1,15 +1,33 @@
-{{ $versions      := site.Params.versions }}
-{{ $latest        := site.Params.latest }}
-{{ $path := "" }}
+{{ $path     := "" }}
 {{ with .File }}
   {{ $path = .Path }}
 {{ else }}
   {{ $path = .Path }}
 {{ end }}
+{{ $latestV1      := site.Params.latest }}
+{{ $latestV2      := site.Params.latestV2 }}
 {{ $version       := index (split $path "/") 1 }}
-{{ $isLatest      := eq $version $latest }}
-{{ $isNextRelease := eq $version "next-release" }}
-{{ $latestUrl     := .RelPermalink | replaceRE $version $latest }}
+{{ $vMajor        := index (split $version ".") 0 }}
+{{ $isNextRelease := false }}
+{{ if eq $version "next-release" }}
+  {{ $vMajor = "1" }}
+  {{ $isNextRelease = true }}
+{{ else if eq $version "next-release-v2" }}
+  {{ $vMajor = "2" }}
+  {{ $isNextRelease = true }}
+{{ end }}
+
+{{ $isLatest      := or (eq $version $latestV1) (eq $version $latestV2) }}
+{{ $latestUrlV1   := .RelPermalink | replaceRE $version $latestV1 }}
+{{ $latestUrlV2   := .RelPermalink | replaceRE $version $latestV2 }}
+
+{{ $latestUrl     := "" }}
+{{ if eq $vMajor "1" }}
+  {{ $latestUrl     = .RelPermalink | replaceRE $version $latestV1 }}
+{{ else if eq $vMajor "2" }}
+  {{ $latestUrl     = .RelPermalink | replaceRE $version $latestV2 }}
+{{ end }}
+
 <header>
   <p class="title is-1">{{ .Title }}</p>
   {{ with .Params.description }}
@@ -21,18 +39,26 @@
       <span class="tag is-medium">
         Version&nbsp;&nbsp;<strong>{{ $version }}</strong>
       </span>
+      {{ if $isNextRelease }}
+      <span class="tag is-medium is-info">Preview</span>
+      {{ end }}
       {{ if $isLatest }}
       <span class="tag is-medium is-success">Latest</span>
-      {{ else if $isNextRelease }}
-      <a class="tag is-medium is-info">
-        Preview
-      </a>
       {{ else }}
       <a class="tag is-medium is-warning" href="{{ $latestUrl }}">
-        Click here for the latest version
+        Go to the latest {{ $vMajor }}.x version
       </a>
       {{ end }}
-    </div>
+      {{ if eq $vMajor "1" }}
+      <a class="tag is-medium" href="{{ $latestUrlV2 }}">
+        Go to the latest 2.x version
+      </a>
+      {{ else if eq $vMajor "2" }}
+      <a class="tag is-medium" href="{{ $latestUrlV1 }}">
+        Go to the latest 1.x version
+      </a>
+      {{ end }}
+        </div>
   {{ end }}
 
   <hr class="hr" />

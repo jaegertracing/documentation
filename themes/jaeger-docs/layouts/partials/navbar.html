@@ -1,12 +1,14 @@
 {{ $menuPages     := site.Menus.docs }}
 {{ $githubRepo    := site.Params.githubrepo }}
 {{ $twitterHandle := site.Params.twitterhandle }}
-{{ $versions      := site.Params.versions }}
-{{ $latest        := site.Params.latest }}
+{{ $versionsV1      := site.Params.versions }}
+{{ $versionsV2      := site.Params.versionsV2 }}
+{{ $versions      := append $versionsV1 $versionsV2 }}
+{{ $latestV1      := site.Params.latest }}
+{{ $latestV2      := site.Params.latestV2 }}
 {{ $docs          := where site.Pages "Section" "docs" }}
 {{ $isDocsPage    := eq .Section "docs" }}
-{{ $preview       := getenv "HUGO_PREVIEW" }}
-{{ $isPreview     := eq $preview "true" }}
+{{ $isPreview     := eq (getenv "HUGO_PREVIEW") "true" }}
 {{ $path := "" }}
 {{ with .File }}
   {{ $path = .Path }}
@@ -14,6 +16,13 @@
   {{ $path = .Path }}
 {{ end }}
 {{ $majorMinorVersion := index (split $path "/") 1 }}
+{{ $vMajor        := index (split $majorMinorVersion ".") 0 }}
+{{ if eq $majorMinorVersion "next-release" }}
+  {{ $vMajor = "1" }}
+{{ else if eq $majorMinorVersion "next-release-v2" }}
+  {{ $vMajor = "2" }}
+  {{ end }}
+{{ $isLatest := or (eq $majorMinorVersion $latestV1) (eq $majorMinorVersion $latestV2) }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
     <div class="navbar-brand">
@@ -31,8 +40,7 @@
 
     <div id="topNav" class="navbar-menu">
       <div class="navbar-end">
-        {{ if $isDocsPage }}
-        {{ if eq $latest $majorMinorVersion }}
+        {{ if and $isDocsPage $isLatest }}
         <div class="navbar-item">
           <div class="dropdown" id="search-dropdown">
             <div class="dropdown-trigger">
@@ -53,7 +61,6 @@
           </div>
         </div>
         {{ end }}
-        {{ end }}
 
         <div class="navbar-item has-dropdown is-hoverable" id="sandwich-popup-menu">
           <a class="navbar-link">
@@ -70,7 +77,8 @@
               {{ $docVersion := index (split $docPath "/") 1 }}
               <!-- When generating Docs menu for home page, use the latest version, -->
               <!-- when generating menu for pages inside docs/, use same version as the doc -->
-              {{ $matchVersion := cond ($isDocsPage) $majorMinorVersion $latest }}
+              <!-- TODO: replace with $latestV2 once 2.0 is released -->
+              {{ $matchVersion := cond ($isDocsPage) $majorMinorVersion $latestV1 }}
               {{ if and (eq $docVersion $matchVersion) (not .Params.hasparent) }}
                 <a class="navbar-item" href="{{ .RelPermalink }}">
                   {{ .Title }}
@@ -78,7 +86,8 @@
 
                 {{ with .Params.children }}
                   {{ range . }}
-                    {{ $url := cond $isDocsPage (printf "/docs/%s/%s" $majorMinorVersion .url) (printf "/docs/%s/%s" $latest .url) }}
+                    <!-- TODO: replace with $latestV2 once 2.0 is released -->
+                    {{ $url := cond $isDocsPage (printf "/docs/%s/%s" $majorMinorVersion .url) (printf "/docs/%s/%s" $latestV1 .url) }}
                     <a class="navbar-item is-small is-hidden-desktop" href="{{ $url }}">
                       &cir; {{ if .navtitle }}{{ .navtitle }}{{ else }}{{ .title }}{{ end }}
                     </a>
@@ -97,14 +106,17 @@
           <div class="navbar-dropdown">
             {{ range $versions }}
             {{ $version := . }}
-            {{ $isLatest := eq $version $latest }}
+            {{ $isLatest := or (eq $version $latestV1) (eq $version $latestV2) }}
             <a class="navbar-item" href="/docs/{{ $version }}">
               {{ $version }}{{ if $isLatest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end }}
             </a>
             {{ end }}
             {{ if $isPreview }}
+              <a class="navbar-item" href="/docs/next-release-v2">
+                next release 2.0&nbsp;&nbsp;(preview)
+              </a>
               <a class="navbar-item" href="/docs/next-release">
-                next-release&nbsp;&nbsp;(preview)
+                next release 1.0&nbsp;&nbsp;(preview)
               </a>
             {{ end }}
           </div>
