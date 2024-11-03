@@ -1,11 +1,11 @@
-{{ $latestV1        := site.Params.latest }}
-{{ $latestV2      := site.Params.latestV2 }}
-{{ $path := "" }}
+{{ $path     := "" }}
 {{ with .File }}
   {{ $path = .Path }}
 {{ else }}
   {{ $path = .Path }}
 {{ end }}
+{{ $latestV1      := site.Params.latest }}
+{{ $latestV2      := site.Params.latestV2 }}
 {{ $version       := index (split $path "/") 1 }}
 {{ $vMajor        := index (split $version ".") 0 }}
 {{ $isNextRelease := false }}

@@ -31,7 +31,7 @@ home = [ "HTML", "JSON", "REDIRECTS" ]
 
   latestV2 = "next-release-v2"
   binariesLatestV2 = "2.0.0-rc2"
-  versionsV2 = ["2.0"]
+  versionsV2 = []
 
   [navbar]
     [[links]]
