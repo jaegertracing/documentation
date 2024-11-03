@@ -68,7 +68,7 @@ gen_cli_docs_v1() {
 set -x
 safe_checkout_main
 
-for version in "${version_v1}" "${version_v1}"; do
+for version in "${version_v1}" "${version_v2}"; do
   versionMajorMinor=$(echo "${version}" | sed 's/\.[[:digit:]]$//')
   echo "Creating new documentation for ${version} (${versionMajorMinor})"
   var_suffix=""
