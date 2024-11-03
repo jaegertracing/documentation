@@ -2,33 +2,19 @@
 
 Each Jaeger version is documented in a separate directory e.g. [content/docs/1.8/](./content/docs/1.8/). A special directory [content/docs/next-release/](./content/docs/next-release/) is reserved for the changes to be published as the next version. If you are adding documentation for features that are not yet released in the main Jaeger repository, add your changes to the `next-release` directory. If you're adding documentation for already released features, you may need to make the same change twice, i.e. in the most recent release (e.g. `1.8`) and in the `next-release` directories.
 
+Jaeger v2 next-release documentation is in the `next-release-v2` directory.
+
 Before creating a new release:
 
   - Make sure all outstanding PRs for that version are merged to `next-release` directory.
   - Make sure the actual Jaeger release is done and Docker images for the new version are published.
   - If there are new Jaeger binaries or new storage options added to the release, make sure the CLI docs config file `data/cli/next-release/config.json` is updated accordingly (see below).
-  - Make sure you have git remote `upstream` pointing to the official repository, e.g.
-    `git remote add upstream git@github.com:jaegertracing/documentation.git`
-  - Make sure you are on your `main` branch.
 
-Then create a release by pushing a tag corresponding to the jaegertracing/jaeger version `release-X.Y.0`, e.g.
-
-```shell
-make start-release VERSION=1.12.0
-
-# or manually
-
-git tag release-1.12.0
-git push upstream release-1.12.0
-```
-
-  - Wait for the [CI job](https://github.com/jaegertracing/documentation/actions) to create a
-    [pull request](https://github.com/jaegertracing/documentation/pulls) with the documentation
-    changes for the new version.
+To create a new release:
+  - Manually trigger the [Release](https://github.com/jaegertracing/documentation/actions/workflows/ci-release.yml) workflow on GitHub. It will ask for v1 and v2 version numbers (same versions as in the main Jaeger repo), and create a
+[pull request](https://github.com/jaegertracing/documentation/pulls) with the documentation changes.
   - Approve and merge that pull request.
   - Because the site is statically generated, the release is completed after the merge.
-
-TODO: shouldn't the tag only specify major/minor, not patch? I don't think the process will work twice for the same major.minor
 
 ### Auto-generated documentation for CLI flags
 
