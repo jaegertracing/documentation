@@ -47,16 +47,16 @@
       </span>
       {{ else }}
       <a class="tag is-medium is-warning" href="{{ $latestUrl }}">
-        Click here for the latest v{{ $vMajor }}.x version
+        Go to the latest v{{ $vMajor }}.x version
       </a>
       {{ end }}
       {{ if eq $vMajor "1" }}
       <a class="tag is-medium" href="{{ $latestUrlV2 }}">
-        Click here for the latest v2.x version
+        Go to the latest v2.x version
       </a>
       {{ else if eq $vMajor "2" }}
       <a class="tag is-medium" href="{{ $latestUrlV1 }}">
-        Click here for the latest v1.x version
+        Go to the latest v1.x version
       </a>
       {{ end }}
         </div>
