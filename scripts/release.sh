@@ -96,4 +96,4 @@ if [[ "$DRY_RUN" = "true" ]]; then
   exit 0
 fi
 git add config.toml ./content/docs/ ./data/cli/
-git commit -m "Release ${version}" -s
+git commit -m "Release ${version_v2}/${version_v1}" -s
