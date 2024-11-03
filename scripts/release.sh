@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 # Prepares a pull request for the next release.
-# Set environment varibale DRY_RUN=true to skip committing the changes.
+# Set environment variable DRY_RUN=true to skip committing the changes.
 
 set -euf -o errexit -o pipefail
 
