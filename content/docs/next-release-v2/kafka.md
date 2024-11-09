@@ -3,7 +3,6 @@ title: Kafka
 hasparent: true
 ---
 
-* Supported in Jaeger since 1.6.0
 * Supported Kafka versions: 0.9+
 
 Kafka can be used as an intermediary buffer between collector and an actual storage.

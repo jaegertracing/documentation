@@ -3,9 +3,14 @@ title: ElasticSearch
 hasparent: true
 ---
 
-### Elasticsearch
-* Supported since Jaeger v0.6.0
+## Introduction
+
 * Supported ES versions: 7.x, 8.x (since Jaeger v1.52.0)
+
+{{< danger >}}
+TODO update examples to use config properties, not CLI flags.
+{{< /danger >}}
+
 
 Elasticsearch version is automatically retrieved from root/ping endpoint.
 Based on this version Jaeger uses compatible index mappings and Elasticsearch REST API.
@@ -20,17 +25,17 @@ ElasticSearch also has the following officially supported resources available fr
 - [Helm chart](https://artifacthub.io/packages/helm/elastic/elasticsearch) from Elastic
 - [Kubernetes Operator](https://github.com/openshift/elasticsearch-operator) from RedHat
 
-#### Configuration
+## Configuration
 
 Here is [example configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-elasticsearch.yaml) for ElasticSearch.
 
-#### Shards and Replicas for Elasticsearch indices
+### Shards and Replicas
 
 Shards and replicas are some configuration values to take special attention to, because this is decided upon
 index creation. [This article](https://www.elastic.co/blog/how-many-shards-should-i-have-in-my-elasticsearch-cluster) goes into
 more information about choosing how many shards should be chosen for optimization.
 
-#### Elasticsearch Rollover
+## Index Rollover
 
 [Elasticsearch rollover](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html) is an index management strategy that optimizes use of resources allocated to indices.
 For example, indices that do not contain any data still allocate shards, and conversely, a single index might contain significantly more data than the others.
@@ -48,7 +53,8 @@ To learn more about rollover index management in Jaeger refer to this
 [article](https://medium.com/jaegertracing/using-elasticsearch-rollover-to-manage-indices-8b3d0c77915d).
 
 For automated rollover, please refer to [Elasticsearch ILM support](#elasticsearch-ilm-support).
-##### Initialize
+
+### Initialize
 
 The following command prepares Elasticsearch for rollover deployment by creating index aliases, indices, and index templates:
 
@@ -60,7 +66,7 @@ If you need to initialize archive storage, add `-e ARCHIVE=true`.
 
 After the initialization Jaeger can be deployed with `--es.use-aliases=true`.
 
-##### Rolling over to a new index
+### Roll over
 
 The next step is to periodically execute the rollover API which rolls the write alias to a new index based on supplied conditions. The command also adds a new index to the read alias to make new data available for search.
 
@@ -78,7 +84,7 @@ docker run -it --rm --net=host -e UNIT=days -e UNIT_COUNT=7 jaegertracing/jaeger
 
 <1> Removes indices older than 7 days from read alias.
 
-##### Remove old data
+### Remove old data
 
 The historical data can be removed with the `jaeger-es-index-cleaner` that is also used for daily indices.
 
@@ -89,7 +95,8 @@ docker run -it --rm --net=host -e ROLLOVER=true jaegertracing/jaeger-es-index-cl
 <1> Remove indices older than 14 days.
 
 
-#### Elasticsearch ILM support
+## ILM support
+
 {{< warning >}}
 Experimental feature added in [release v1.22.0](https://github.com/jaegertracing/jaeger/releases/tag/v1.22.0).
 
@@ -101,7 +108,8 @@ For example:
 * Rollover to a new index by size (bytes or number of documents) or age, archiving previous indices
 * Delete stale indices to enforce data retention standards
 
-###### Enabling ILM support
+To enable ILM support:
+
 * Create an ILM policy in elasticsearch named jaeger-ilm-policy.
 
   For example, the following policy will rollover the "active" index when it is
@@ -152,7 +160,7 @@ For example:
   After the initialization, deploy Jaeger with `--es.use-ilm=true` and `--es.use-aliases=true`.
 
 
-#### Upgrade Elasticsearch version
+## Upgrading
 
 Elasticsearch defines wire and index compatibility versions. The index compatibility defines
 the minimal version a node can read data from. For example Elasticsearch 8 can read indices
@@ -164,7 +172,7 @@ until indices created by ES 6.x are removed or explicitly reindexed.
 Refer to the Elasticsearch [documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current//setup-upgrade.html)
 for wire and index compatibility versions. Generally this information can be retrieved from root/ping REST endpoint.
 
-##### Reindex
+### Reindex
 
 Manual reindexing can be used when upgrading from Elasticsearch 6 to 8 (through Elasticsearch 7)
 without waiting until indices created by Elasticsearch 6 are removed.

@@ -3,7 +3,11 @@ title: Cassandra
 hasparent: true
 ---
 
-* Supported versions: 3.4+
+* Supported versions: 4+
+
+{{< danger >}}
+TODO update examples to use config properties, not CLI flags.
+{{< /danger >}}
 
 Deploying Cassandra itself is out of scope for our documentation. One good
 source of documentation is the [Apache Cassandra Docs](https://cassandra.apache.org/doc/latest/).

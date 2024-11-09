@@ -3,11 +3,11 @@ title: OpenSearch
 hasparent: true
 ---
 
-* Supported since Jaeger v0.6.0
+## Introduction
+
 * Supported OpenSearch versions: 1.x, 2.x
 
-OpenSearch maintains API compatibility between versions and remains compatible primarily with Elasticsearch v7.10.2 this version compatibility is automatically retrieved from root/ping endpoint.
-Based on this version Jaeger uses compatible index mappings and OpenSearch REST API.
+OpenSearch maintains API compatibility between versions and remains compatible primarily with Elasticsearch v7.10.2 this version compatibility is automatically retrieved from root/ping endpoint. Based on this version Jaeger uses compatible index mappings and OpenSearch REST API.
 
 OpenSearch does not require initialization other than
 [installing and running OpenSearch](https://opensearch.org/downloads.html).
@@ -18,18 +18,18 @@ OpenSearch also has the following officially supported resources available from 
 - [Helm chart](https://artifacthub.io/packages/helm/opensearch-project-helm-charts/opensearch)
 - [Kubernetes Operator](https://github.com/opensearch-project/opensearch-k8s-operator)
 
-#### Configuration
+## Configuration
 
 Here is [example configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-opensearch.yaml) for OpenSearch.
 
 
-#### Shards and Replicas for OpenSearch indices
+### Shards and Replicas for OpenSearch indices
 
 Shards and replicas are some configuration values to take special attention to, because this is decided upon
 index creation. [This article](https://opster.com/guides/opensearch/opensearch-capacity-planning/how-to-choose-the-correct-number-of-shards-per-index-in-opensearch) goes into
 more information about choosing how many shards should be chosen for optimization.
 
-#### OpenSearch Rollover
+## Index Rollover
 
 [OpenSearch rollover](https://opensearch.org/docs/latest/api-reference/index-apis/rollover/) is an index management strategy that optimizes use of resources allocated to indices.
 For example, indices that do not contain any data still allocate shards, and conversely, a single index might contain significantly more data than the others.
@@ -46,7 +46,7 @@ Rollover index management strategy is more complex than using the default daily 
 To learn more about rollover index management in Jaeger refer to this
 [article](https://medium.com/jaegertracing/using-elasticsearch-rollover-to-manage-indices-8b3d0c77915d).
 
-##### Initialize
+### Initialize
 
 The following command prepares OpenSearch for rollover deployment by creating index aliases, indices, and index templates:
 
@@ -58,7 +58,7 @@ If you need to initialize archive storage, add `-e ARCHIVE=true`.
 
 After the initialization Jaeger can be deployed with `--es.use-aliases=true`.
 
-##### Rolling over to a new index
+### Roll over
 
 The next step is to periodically execute the rollover API which rolls the write alias to a new index based on supplied conditions. The command also adds a new index to the read alias to make new data available for search.
 
@@ -76,7 +76,7 @@ docker run -it --rm --net=host -e UNIT=days -e UNIT_COUNT=7 jaegertracing/jaeger
 
 <1> Removes indices older than 7 days from read alias.
 
-##### Remove old data
+### Remove old data
 
 The historical data can be removed with the `jaeger-es-index-cleaner` that is also used for daily indices.
 
