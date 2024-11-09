@@ -11,54 +11,56 @@ The following labels are used to describe API compatibility guarantees.
 * **internal** - the APIs are intended for internal communications between Jaeger components and are not recommended for use by external components.
 * **deprecated** - the APIs that are only maintained for legacy reasons and will be phased out in the future.
 
-## Trace receiving APIs
+## Default Ports
 
-Jaeger can receive trace data in multiple formats on different ports. The following tables shows the default ports used by Jaeger, unless the are overwritten by user via coniguration:
+The following table lists the default ports used by Jaeger components. They can be overwritten by user via configuration.
 
 | Port  | Protocol | Endpoint        | Format
 | ----- | -------  | --------------- | ----
 | 4317  | gRPC     | n/a             | OTLP Protobuf
 | 4318  | HTTP     | `/v1/traces`    | OTLP Protobuf or OTLP JSON
-| 9411  | HTTP     | `/api/v1/spans` | Zipkin JSON v1 or Zipkin Thrift
-|       |          | `/api/v2/spans` | Zipkin JSON v2
+| 9411  | HTTP     | `/api/v1/spans` | Zipkin v1 JSON or Thrift
+|       |          | `/api/v2/spans` | Zipkin v2 JSON or Protobuf
 | 14250 | gRPC     | `jaeger.api_v2.CollectorService` | Legacy Protobuf
 | 14268 | HTTP     | `/api/traces`   | Legacy Thrift
+| | | |
+| 16685 | gRPC     | `jaeger.api_v2.QueryService` | Legacy Protobuf
+| 16686 | HTTP     | `/api/*`   | Internal (unofficial) JSON API
 
-TODO: verify if Zipkin's `/api/v1/spans` actually still supported.
+## Trace receiving APIs
 
-TODO: confirm that Thrift is on 14268 and is actually supported
+Jaeger can receive trace data in multiple formats on different ports.
 
 ### OpenTelemetry Protocol (stable)
 
-Jaeger can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. The OTLP data is accepted in these formats: (1) binary gRPC, (2) Protobuf over HTTP, (3) JSON over HTTP. For more details on the OTLP receiver see the [official documentation][otlp-rcvr].
-
-Only tracing data is accepted, since Jaeger does not store other telemetry types.
+Jaeger can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. The OTLP data is accepted in these formats: 
+  * binary gRPC
+  * Protobuf over HTTP
+  * JSON over HTTP
+  
+Only tracing data is accepted, since Jaeger does not store other telemetry types. For more details on the OTLP receiver see the [official documentation][otlp-rcvr].
 
 [otlp-rcvr]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
 [otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md
 
-TODO: verify if 3 distinct formats are accepted.
-
 ### Legacy Protobuf via gRPC (stable)
 
-Jaeger's legacy Protobuf format defined in [collector.proto] IDL file. Support for this format has been removed from OpenTelemetry SDKs, it's only maintained for backwards compatibility.
+Jaeger's legacy Protobuf format is defined in [collector.proto] IDL file. Support for this format has been removed from OpenTelemetry SDKs, it's only maintained for backwards compatibility.
 
 ### Legacy Thrift over HTTP (stable)
 
-Jaeger's legacy Thrift defined in [jaeger.thrift] IDL file, only maintained for backwards compatibility. The Thrift payload can be submitted in an HTTP POST request to the  `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
+Jaeger's legacy Thrift format is defined in [jaeger.thrift] IDL file, and is only maintained for backwards compatibility. The Thrift payload can be submitted in an HTTP POST request to the  `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
 
 ```
 Content-Type: application/vnd.apache.thrift.binary
 ```
 
-TODO remove this format support
-
 ### Zipkin Formats (stable)
 
 Jqwaeger can accept spans in several Zipkin data formats, namely JSON v1/v2 and Thrift. **jaeger-collector** needs to be configured to enable Zipkin HTTP server, e.g. on port 9411 used by Zipkin collectors. The server enables two endpoints that expect POST requests:
 
-* `/api/v1/spans` for submitting spans in Zipkin JSON v1 or Zipkin Thrift format.
-* `/api/v2/spans` for submitting spans in Zipkin JSON v2.
+* `/api/v1/spans` for submitting spans in Zipkin v1 JSON or Thrift formats.
+* `/api/v2/spans` for submitting spans in Zipkin v2 JSON or Protobuf formats.
 
 ## Trace retrieval APIs
 
