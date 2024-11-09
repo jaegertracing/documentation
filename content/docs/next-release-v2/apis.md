@@ -13,19 +13,33 @@ The following labels are used to describe API compatibility guarantees.
 
 ## Default Ports
 
-The following table lists the default ports used by Jaeger components. They can be overwritten by user via configuration.
+The following tables list the default ports used by Jaeger components. They can be overwritten by user via configuration.
+
+### Write APIs
 
 | Port  | Protocol | Endpoint        | Format
 | ----- | -------  | --------------- | ----
-| 4317  | gRPC     | n/a             | OTLP Protobuf
-| 4318  | HTTP     | `/v1/traces`    | OTLP Protobuf or OTLP JSON
+| 4317  | gRPC     | 'ExportTraceServiceRequest' | [OTLP Protobuf][otlp.grpc]
+| 4318  | HTTP     | `/v1/traces`    | [OTLP Protobuf or OTLP JSON][otlp.http]
 | 9411  | HTTP     | `/api/v1/spans` | Zipkin v1 JSON or Thrift
-|       |          | `/api/v2/spans` | Zipkin v2 JSON or Protobuf
-| 14250 | gRPC     | `jaeger.api_v2.CollectorService` | Legacy Protobuf
-| 14268 | HTTP     | `/api/traces`   | Legacy Thrift
-| | | |
+|       | HTT      | `/api/v2/spans` | Zipkin v2 JSON or Protobuf
+| 14250 | gRPC     | `jaeger.api_v2.CollectorService` | [Legacy Protobuf][collector.proto]
+| 14268 | HTTP     | `/api/traces`   | [Legacy Thrift][jaeger.thrift]
+
+### Read APIs
+| Port  | Protocol | Endpoint        | Format
+| ----- | -------  | --------------- | ----
 | 16685 | gRPC     | `jaeger.api_v2.QueryService` | Legacy Protobuf
-| 16686 | HTTP     | `/api/*`   | Internal (unofficial) JSON API
+|       | gRPC     | `jaeger.api_v3.QueryService` | OTLP-based Protobuf
+| 16686 | HTTP     | `/api/*`        | Internal (unofficial) JSON API
+
+
+### Remote Sampling APIs
+
+| Port  | Protocol | Endpoint        | Format
+| ----- | -------  | --------------- | ----
+| 5778  | HTTP     | `/sampling`     | [sampling.proto] via [Protobuf-to-JSON mapping](https://developers.google.com/protocol-buffers/docs/proto3#json)
+| 5779  | gRPC     | `jaeger.api_v2.SamplingManager` | Protobuf
 
 ## Trace receiving APIs
 
@@ -68,7 +82,7 @@ Traces saved in the storage can be retrieved by calling **jaeger-query** Service
 
 ### gRPC/Protobuf (stable)
 
-The recommended way for programmatically retrieving traces and other data is via the `jaeger.api_v2.QueryService` gRPC endpoint defined in [query.proto] IDL file. In the default configuration this endpoint is accessible from `jaeger-query:16685`.
+The recommended way for programmatically retrieving traces and other data is via the `jaeger.api_v3.QueryService` gRPC endpoint defined in [api_v3/query_service.proto](https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v3/query_service.proto) IDL file. In the default configuration this endpoint is accessible on port `:16685`. The legacy [api_v2](https://github.com/jaegertracing/jaeger-idl/tree/main/proto/api_v2) is also supported.
 
 ### HTTP JSON (internal)
 
@@ -80,45 +94,11 @@ When using the `grpc` storage type (a.k.a. [remote storage](../deployment/#remot
 
 ## Remote Sampling Configuration (stable)
 
-This API supports Jaeger's [Remote Sampling](../sampling/#remote-sampling) protocol, defined in the [sampling.proto] IDL file.
-
-Both **jaeger-agent** and **jaeger-collector** implement the API. See [Remote Sampling](../sampling/#remote-sampling) for details on how to configure the Collector with sampling strategies. **jaeger-agent** is merely acting as a proxy to **jaeger-collector**.
-
-The following table lists different endpoints and formats that can be used to query for sampling strategies. The official HTTP/JSON endpoints use standard [Protobuf-to-JSON mapping](https://developers.google.com/protocol-buffers/docs/proto3#json).
-
-Component | Port  | Endpoint          | Format    | Notes
---------- | ----- | ----------------- | --------- | -----
-Collector | 14268 | `/api/sampling`   | HTTP/JSON | Recommended for most SDKs
-Collector | 14250 | [sampling.proto]  | gRPC      | For SDKs that want to use gRPC (e.g. OpenTelemetry Java SDK)
-Agent     | 5778  | `/sampling`       | HTTP/JSON | Recommended for most SDKs if the Agent is used in a deployment
-Agent     | 5778  | `/` (deprecated)  | HTTP/JSON | Legacy format, with enums encoded as numbers. **Not recommended.**
-
-**Examples**
-
-Run all-in-one in one terminal:
-```shell
-$ go run ./cmd/all-in-one \
-  --sampling.strategies-file=cmd/all-in-one/sampling_strategies.json
-```
-
-Query different endpoints in another terminal:
-```shell
-# Collector
-$ curl "http://localhost:14268/api/sampling?service=foo"
-{"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":1}}
-
-# Agent
-$ curl "http://localhost:5778/sampling?service=foo"
-{"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":1}}
-
-# Agent, legacy endpoint / (not recommended)
-$ curl "http://localhost:5778/?service=foo"
-{"strategyType":0,"probabilisticSampling":{"samplingRate":1}}
-```
+This API supports Jaeger's [Remote Sampling](../sampling/#remote-sampling) protocol, defined in the [sampling.proto] IDL file. See [Remote Sampling](../sampling/#remote-sampling) for details on how to configure Jaeger  with sampling strategies.
 
 ## Service dependencies graph (internal)
 
-Can be retrieved from**jaeger-query** Service at `/api/dependencies` endpoint. The GET request expects two parameters:
+Can be retrieved from `/api/dependencies` endpoint. The GET request expects two parameters:
 
 * `endTs` (number of milliseconds since epoch) - the end of the time interval
 * `lookback` (in milliseconds) - the length the time interval (i.e. start-time + lookback = end-time).
@@ -133,15 +113,24 @@ Please refer to the [SPM Documentation](../spm#api)
 
 ## gRPC Server Introspection
 
-Service ports that serve gRPC endpoints enable [gRPC reflection][grpc-reflection]. Unfortunately, the internally used `gogo/protobuf` has a [compatibility issue][gogo-reflection] with the official `golang/protobuf`, and as a result only the `list` reflection command is currently working properly.
+Service ports that serve gRPC endpoints enable [gRPC reflection][grpc-reflection]. Unfortunately, the internally used `gogo/protobuf` has a [compatibility issue][gogo-reflection] with the official `golang/protobuf`, and as a result only the `list` reflection command is currently working properly, for example:
 
-[jaeger-idl]: https://github.com/jaegertracing/jaeger-idl/
+```shell
+$ grpc_cli ls localhost:16685
+grpc.health.v1.Health
+grpc.reflection.v1.ServerReflection
+grpc.reflection.v1alpha.ServerReflection
+jaeger.api_v2.QueryService
+jaeger.api_v2.metrics.MetricsQueryService
+jaeger.api_v3.QueryService
+```
+
+[otlp.grpc]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlpgrpc
+[otlp.http]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlphttp
 [jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift
-[agent.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/agent.thrift
-[sampling.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/sampling.thrift
 [collector.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/collector.proto
-[query.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/query.proto
 [sampling.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/sampling.proto
 [grpc-reflection]: https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#enable-server-reflection
 [gogo-reflection]: https://jbrandhorst.com/post/gogoproto/#reflection
-[storage.proto]: https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/grpc/proto/storage.proto
+[storage.proto]: https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/grpc/proto/
+storage.proto
