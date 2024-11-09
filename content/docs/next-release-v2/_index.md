@@ -2,6 +2,8 @@
 title: Introduction
 weight: 1
 children:
+- title: Getting Started
+  url: getting-started
 - title: Features
   url: features
 - title: Migration

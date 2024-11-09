@@ -6,6 +6,8 @@ children:
   url: apis
 - title: Sampling
   url: sampling
+- title: SPM
+  url: SPM
 ---
 
 ## Terminology
