@@ -71,7 +71,7 @@ Content-Type: application/vnd.apache.thrift.binary
 
 ### Zipkin Formats (stable)
 
-Jqwaeger can accept spans in several Zipkin data formats, namely JSON v1/v2 and Thrift. **jaeger-collector** needs to be configured to enable Zipkin HTTP server, e.g. on port 9411 used by Zipkin collectors. The server enables two endpoints that expect POST requests:
+Jaeger can accept spans in several Zipkin data formats, namely JSON v1/v2 and Thrift. **jaeger-collector** needs to be configured to enable Zipkin HTTP server, e.g. on port 9411 used by Zipkin collectors. The server enables two endpoints that expect POST requests:
 
 * `/api/v1/spans` for submitting spans in Zipkin v1 JSON or Thrift formats.
 * `/api/v2/spans` for submitting spans in Zipkin v2 JSON or Protobuf formats.
