@@ -1,7 +1,6 @@
 {
     "tools": [
         "jaeger-all-in-one",
-        "jaeger-agent",
         "jaeger-collector",
         "jaeger-ingester",
         "jaeger-query"
@@ -47,10 +46,5 @@
         "metrics-storage": [
             "prometheus"
         ]
-    },
-    "jaeger-agent": {
-        "storage": [],
-        "sampling": [],
-        "metrics-storage": []
     }
 }
