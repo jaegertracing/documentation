@@ -9,7 +9,7 @@ Jaeger components can be downloaded in two ways:
 
 ## Try Jaeger v2
 
-Jaeger v2 executable can be found in the latest [GitHub release](https://github.com/jaegertracing/jaeger/releases/) or as a Docker image `jaegertracing/jaeger` (https://hub.docker.com/r/jaegertracing/jaeger/tags). 
+Jaeger v2 executable can be found in the latest [GitHub release](https://github.com/jaegertracing/jaeger/releases/) or as a Docker image [jaegertracing/jaeger](https://hub.docker.com/r/jaegertracing/jaeger/tags).
 
 ## Binaries
 
