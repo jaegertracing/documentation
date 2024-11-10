@@ -56,16 +56,12 @@ can be started via docker. Be sure to include `--net monitor_backend` in the `do
 
 ## Architecture
 
-The RED metrics queried by Jaeger for the Monitor tab are the result of span
-data collected by the [OpenTelemetry Collector][opentelemetry-collector] which
-is then aggregated by the [SpanMetrics Connector][spanmetrics-conn] component configured
-within its pipeline.
-
-These metrics are finally exported by the OpenTelemetry Collector (via prometheus
+The RED metrics queried by Jaeger for the Monitor tab are the result of processing the collected span data by the [SpanMetrics Connector][spanmetrics-conn] component configured
+within Jaeger pipeline. These metrics are exported (via prometheus
 exporters) to a Prometheus-compatible metrics store.
 
 It is important emphasize that this is a "read-only" feature and,
-as such, is only relevant to the Jaeger Query component (and All In One).
+as such, is only relevant to the Jaeger Query component.
 
 {{<mermaid align="center">}}
 graph
@@ -110,10 +106,15 @@ graph
     style COLLECTOR fill:#9AEBFE,color:black
 {{< /mermaid >}}
 
+### Metrics Storage
+
+Any PromQL-compatible backend is supported by Jaeger Query. A list of these have
+been compiled by Julius Volz in:
+https://promlabs.com/blog/2020/11/26/an-update-on-promql-compatibility-across-vendors
+
 ## Derived Time Series
 
-Though more in scope of the [OpenTelemetry Collector][opentelemetry-collector],
-it is worth understanding the additional metrics and time series that the
+It is worth understanding the additional metrics and time series that the
 [SpanMetrics Connector][spanmetrics-conn] will generate in metrics storage to help
 with capacity planning when deploying SPM.
 

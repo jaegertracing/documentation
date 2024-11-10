@@ -9,7 +9,7 @@ Jaeger components can be downloaded in two ways:
 
 ## Try Jaeger v2
 
-The 2.x release candidate executable can be found in the latest [GitHub release](https://github.com/jaegertracing/jaeger/releases/) or as a Docker image `jaegertracing/jaeger` (https://hub.docker.com/r/jaegertracing/jaeger/tags). See also work in progress [v2&nbsp;documentation](/docs/next-release-v2/).
+Jaeger v2 executable can be found in the latest [GitHub release](https://github.com/jaegertracing/jaeger/releases/) or as a Docker image `jaegertracing/jaeger` (https://hub.docker.com/r/jaegertracing/jaeger/tags). 
 
 ## Binaries
 
@@ -24,6 +24,13 @@ You can find the binaries for previous versions on the [GitHub releases page](ht
 The following Docker images are available for the Jaeger project via the `jaegertracing` organization on [Docker Hub](https://hub.docker.com/r/jaegertracing/) and [Quay.io](https://quay.io/organization/jaegertracing):
 
 {{< dockerImages >}}
+
+## Debug and Snapshot Images
+
+The images listed above are the primary release versions. Most components have additional images published:
+  * `${component}-debug` includes Delve debugger
+  * `${component}-snapshot` published from the tip of the main branch for every commit, allowing testing of unreleased versions
+  * `${component}-debug-snapshot` snapshot with debugger
 
 ## Artifact Checksums
 
