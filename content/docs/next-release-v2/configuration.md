@@ -10,13 +10,13 @@ We are currently working on expanding this section with more details. [Examples 
 
 ## Introduction
 
-Jaeger can be configured via a YAML configuration file that uses the same format as the [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/configuration/). The configuration defines the main ingestion pipeline as a collection of **receivers**, **processors**, **connectors**, and **exporters**. Jaeger implements many of these components, but also a number of **extentions** that provide Jaeger's unique capabilities.
+Jaeger can be configured via a YAML configuration file that uses the same format as the [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/configuration/). The configuration defines the main ingestion pipeline as a collection of **receivers**, **processors**, **connectors**, and **exporters**. Jaeger implements many of these components, but also a number of **extensions** that provide Jaeger's unique capabilities.
 
 ## Extensions
 
 ### Jaeger storage
 
-`jaeger_storage` extension is responsible for configuring all storage backends used by other parts of Jaeger. It may appear strange that we need it, considering that a typical pattern in the OpenTelemetry Collector is to have distrinct exporters for each of storage backends. However, the OpenTelemetry Collector is primarily converned with writing data, while Jaeger also allows to read the data via UI and query APIs, so we need a mechanism to share the storage configuration across different components. The `jaeger_storage` extension achieves that.
+`jaeger_storage` extension is responsible for configuring all storage backends used by other parts of Jaeger. It may appear strange that we need it, considering that a typical pattern in the OpenTelemetry Collector is to have distinct exporters for any specific destination. However, the OpenTelemetry Collector is primarily concerned with writing data, while Jaeger also allows to read the data via UI and query APIs, so we need a mechanism to share the storage configuration across different components. The `jaeger_storage` extension achieves that.
 
 Here is an example of how to configure the extension:
 
@@ -96,4 +96,4 @@ jaeger_storage_exporter:
 
 ### Adaptive sampling
 
-`adaptive_sampling` processor observes all the traces collected by Jaeger and dynamically calculates sampling probabilities for different services and endpoints in order to satisfy certain throuput targets (number of traces per second).
+`adaptive_sampling` processor observes all the traces collected by Jaeger and dynamically calculates sampling probabilities for different services and endpoints in order to satisfy certain throughput targets (number of traces per second).

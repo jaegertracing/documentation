@@ -112,7 +112,7 @@ Please refer to the [dedicated Frontend/UI page](../frontend-ui/).
 
 ## SPM
 
-Service Performance Monitoring (SPM) requires a depoyment of Prometheus-compatible metrics storage (see [SPM page](../spm/)).
+Service Performance Monitoring (SPM) requires a deployment of Prometheus-compatible metrics storage (see [SPM page](../spm/)).
 
 ### TLS support
 
