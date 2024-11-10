@@ -4,45 +4,33 @@ weight: 4
 children:
 - title: Configuration
   url: configuration
-- title: Kubernetes Operator
-  url: operator
 - title: User Interface
   url: frontend-ui
+- title: On Kubernetes
+  url: kubernetes
 - title: On Windows
   url: windows
 ---
 
-The main Jaeger backend components are released as Docker images on [Docker Hub](https://hub.docker.com/r/jaegertracing) and [Quay](https://quay.io/organization/jaegertracing):
+Jaeger backend is released as a single binary or container image (see [Downloads](../../../download/)). Despite that, it can be configured to operate in different roles, such as all-in-one, collector, query, and ingester (see [Architecture](../architecture/)).
 
-!!!UPDATE THE TABLE BELOW
-Component             | Docker Hub                                                                                                   | Quay
---------------------- | -------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------
-**jaeger-all-in-one**      | [hub.docker.com/r/jaegertracing/all-in-one/](https://hub.docker.com/r/jaegertracing/all-in-one/)         | [quay.io/repository/jaegertracing/all-in-one](https://quay.io/repository/jaegertracing/all-in-one)
-**jaeger-agent**      | [hub.docker.com/r/jaegertracing/jaeger-agent/](https://hub.docker.com/r/jaegertracing/jaeger-agent/)         | [quay.io/repository/jaegertracing/jaeger-agent](https://quay.io/repository/jaegertracing/jaeger-agent)
-**jaeger-collector**  | [hub.docker.com/r/jaegertracing/jaeger-collector/](https://hub.docker.com/r/jaegertracing/jaeger-collector/) | [quay.io/repository/jaegertracing/jaeger-collector](https://quay.io/repository/jaegertracing/jaeger-collector)
-**jaeger-query**      | [hub.docker.com/r/jaegertracing/jaeger-query/](https://hub.docker.com/r/jaegertracing/jaeger-query/)         | [quay.io/repository/jaegertracing/jaeger-query](https://quay.io/repository/jaegertracing/jaeger-query)
-**jaeger-ingester**   | [hub.docker.com/r/jaegertracing/jaeger-ingester/](https://hub.docker.com/r/jaegertracing/jaeger-ingester/)   | [quay.io/repository/jaegertracing/jaeger-ingester](https://quay.io/repository/jaegertracing/jaeger-ingester)
-**jaeger-remote-storage**   | [hub.docker.com/r/jaegertracing/jaeger-remote-storage/](https://hub.docker.com/r/jaegertracing/jaeger-remote-storage/)   | [quay.io/repository/jaegertracing/jaeger-remote-storage](https://quay.io/repository/jaegertracing/jaeger-remote-storage)
+## Management Ports
 
-The images listed above are the primary release versions. Most components have additional images published:
-  * `${component}-debug` images include Delve debugger
-  * `${component}-snapshot` images are published from the tip of the main branch for every commit, allowing testing of unreleased versions
-  * `${component}-debug-snapshot` snapshot images that include the Delve debugger
+The following intra-oriented ports are exposed by default (can be changed via configuration):
 
-There are orchestration templates for running Jaeger with:
-
-  * Kubernetes: [github.com/jaegertracing/jaeger-kubernetes](https://github.com/jaegertracing/jaeger-kubernetes),
-  * OpenShift: [github.com/jaegertracing/jaeger-openshift](https://github.com/jaegertracing/jaeger-openshift).
-
-## Configuration Options
-
-**jaeger** binaries are configured via configuration YAML file. The following ports are exposed by default:
 Port  | Protocol | Function
 ----- | -------  | ---
-2777  | HTTP     | expvar port for process level metrics per the Go standards
 8888  | HTTP     | metrics port for exposing metrics which can be scraped with Prometheus compatible systems at `/metrics`
 8889  | HTTP     | ingester port for reading data from Kafka topics and writing to a supported backend
 13133 | HTTP     | Healthcheck port via the `healthcheckv2` extension
+27777 | HTTP     | expvar port for process level metrics per the Go standards
+
+See [APIs](../apis/) for the list of all API ports.
+
+## Configuration
+
+Jaeger can be customized via configuration YAML file (see [Configuration](../configuration/)). 
+
 
 **jaeger** is stateless and thus many instances of **jaeger** can be run in parallel. **jaeger** instances require almost no configuration, except for storage location, such as:
 
@@ -84,20 +72,13 @@ ElasticSearch:
           index_prefix: "jaeger-archive"
 ```
 
-The following ports can also be used by **jaeger** for various types of integrations:
+## Query Configuration
 
-| Port  | Protocol | Endpoint | Function
-| ----- | -------  | -------- | ----
-| 4317  | gRPC     | n/a      | Accepts traces in [OpenTelemetry OTLP format][otlp] (Protobuf).
-| 4318  | HTTP     | `/v1/traces` | Accepts traces in [OpenTelemetry OTLP format][otlp] (Protobuf and JSON).
-| 14268 | HTTP     | `/api/sampling` | Serves sampling policies (see [Remote Sampling](../sampling/#remote-sampling)).
-|       |          | `/api/traces` | Accepts spans in [jaeger.thrift][jaeger-thrift] format with `binary` thrift protocol (`POST`).
-| 8888  | HTTP     | `/`      | Prometheus-style metrics (`GET`).
-| 9411  | HTTP     | `/api/v1/spans` and `/api/v2/spans` | Accepts Zipkin spans in Thrift, JSON and Proto (disabled by default).
+The `jaeger_query` extension has a few deployment-related configuration options.
 
 ### Clock Skew Adjustment
 
-Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. **jaeger** query extension implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/master/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to their timestamps.
+Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. `jaeger_query` extension implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/master/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to their timestamps.
 
 Sometimes these adjustments themselves make the trace hard to understand. For example, when repositioning the server span within the bounds of its parent span, Jaeger does not know the exact relationship between the request and response latencies, so it assumes they are equal and places the child span in the middle of the parent span (see [issue #961](https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244)).
 
@@ -119,19 +100,26 @@ query:
   base-path: /
   static-files: /go/bin/jaeger-ui-build/build
   ui-config: /etc/jaeger/ui-config.json
-  grpc-server:
-    host-port: 0.0.0.0:16685
-  http-server:
-    host-port: 0.0.0.0:16686
+  grpc:
+  http:
 ```
 
 ### UI Customization and Embedding
 
 Please refer to the [dedicated Frontend/UI page](../frontend-ui/).
 
-## Aggregation Jobs for Service Dependencies
+## SPM
 
-Production deployments need an external process that aggregates data and creates dependency links between services. Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives dependency links and writes them directly to the storage.
+Service Performance Monitoring (SPM) requires a deployment of Prometheus-compatible metrics storage (see [SPM page](../spm/)).
+
+### TLS support
+
+Jaeger supports TLS connections to Prometheus server as long as you've [configured
+your Prometheus server](https://prometheus.io/docs/guides/tls-encryption/) correctly.
+
+## Service Maps
+
+In order to display service dependency diagrams, production deployments need an external process that aggregates data and computes dependency links between services. Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives dependency links and writes them directly to the storage.
 
 [cqlsh]: http://cassandra.apache.org/doc/latest/tools/cqlsh.html
 [zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift
