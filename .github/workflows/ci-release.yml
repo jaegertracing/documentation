@@ -13,6 +13,11 @@ on:
         type: string
         description: "Version number for v2 docs, in #.#.# format"
 
+      dry_run:
+        required: true
+        type: boolean
+        description: Do a dry run.
+
 jobs:
   prepare-release:
     if: ${{ github.repository == 'jaegertracing/documentation' }}
@@ -33,6 +38,7 @@ jobs:
         git config user.email "jaegertracingbot+jaeger-tracing@googlegroups.com"
         # git config credential.helper "store --file=.git/credentials"
         # echo "https://${{ secrets.JAEGERTRACINGBOT_GITHUB_TOKEN }}" > .git/credentials
+        export DRY_RUN=${{ inputs.dry_run }}
         ./scripts/release.sh ${{ inputs.version_v1 }} ${{ inputs.version_v2 }}
 
     - name: GH CLI create PR

@@ -8,6 +8,8 @@
 
 set -euf -o errexit -o pipefail
 
+DRY_RUN=${DRY_RUN:-false}
+
 print_usage() {
   echo "Usage: $0 <version_v1> <version_v2>"
   echo "  Both versions must be in #.#.# format (major, minor, patch)"
