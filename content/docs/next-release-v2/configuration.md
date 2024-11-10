@@ -54,10 +54,10 @@ jaeger_query:
   ui:
     config_file: /etc/jaeger/ui-config.json
     log_access: true
-  grpc-server:
-    host-port: 0.0.0.0:16685
-  http-server:
-    host-port: 0.0.0.0:16686
+  grpc:
+    endpoint: 0.0.0.0:16685
+  http:
+    endpoint: 0.0.0.0:16686
 ```
 
 Of note here is the `storage` section, which references by name the storage backends configured in the `jaeger_storage` extension.

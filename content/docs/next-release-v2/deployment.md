@@ -100,10 +100,8 @@ query:
   base-path: /
   static-files: /go/bin/jaeger-ui-build/build
   ui-config: /etc/jaeger/ui-config.json
-  grpc-server:
-    host-port: 0.0.0.0:16685
-  http-server:
-    host-port: 0.0.0.0:16686
+  grpc:
+  http:
 ```
 
 ### UI Customization and Embedding
