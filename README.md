@@ -77,6 +77,16 @@ You can check internal links by running `make check-internal-links` and all link
 
 When new pages are added to the documentation, please add a corresponding entry to [themes/jaeger-docs/layouts/index.redirects](./themes/jaeger-docs/layouts/index.redirects).
 
+## Generating Roadmap page
+
+To generate the `content/roadmap.md` document, run the script
+
+```bash
+python3 scripts/generate_roadmap.py
+```
+
+This script fetches issues from the [GitHub project board](https://github.com/orgs/jaegertracing/projects/4/views/1?layout=table), extracts the required information, and generates the roadmap document. Make sure to set the `GITHUB_TOKEN` environment variable with your GitHub API token before running the script, or save the token in `~/.github_token` file (protect the file so only you can read it: `chmod 0600 <file>`). Personal tokens can be created at https://github.com/settings/tokens/.
+
 ## License
 
 [Apache 2.0 License](./LICENSE).
