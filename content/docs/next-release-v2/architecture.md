@@ -55,3 +55,52 @@ Benefits:
 Downsides:
 
 * An extra layer of marshaling/unmarshaling the data.
+
+## Jaeger binary components
+
+The Jaeger binary consists of several components, some of which are derived from OpenTelemetry and some are internal. The following diagram has the major components.
+
+!!!DIAGRAM HERE!!!
+
+Aside from these components there are sevral other components from OpenTelemetry you can use in the config of the Jaeger binary. Here is the full list of components:
+
+### OpenTelemetry Components
+
+#### Recievers
+* [Jaeger](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/jaegerreceiver)
+
+* [Kafka}](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/kafkareceiver)
+
+* [Zipkin](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/zipkinreceiver)
+
+* [OTLP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver)	
+
+#### Processors
+* [Batch](https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor)
+
+* [Tail Sampling](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/tailsamplingprocessor)
+
+* [Memory Limiter](https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/memorylimiterprocessor)	
+
+* [Attributes](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/attributesprocessor)
+	
+#### Exporters
+* [OTLP HTTP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter)
+
+* [OTLP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlpexporter)
+
+* [Kafka](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/kafkaexporter/)
+
+* [Prometheus](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/prometheusexporter)
+
+* [Debug](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/debugexporter)	
+
+#### Connectors
+* [Span Metrics](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/)"
+
+* [Forward](https://github.com/open-telemetry/opentelemetry-collector/blob/main/connector/forwardconnector/)
+
+#### Extensions
+* [Health Check v2](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/healthcheckv2extension)
+
+* [zPages](https://github.com/open-telemetry/opentelemetry-collector/tree/main/extension/zpagesextension)
