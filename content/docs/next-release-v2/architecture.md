@@ -64,6 +64,17 @@ The Jaeger binary consists of several components, some of which are derived from
 
 Aside from these components there are sevral other components from OpenTelemetry you can use in the config of the Jaeger binary. Here is the full list of components:
 
+### Jaeger Components
+
+* [Adaptive Sampling Processor](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/processors/adaptivesampling)
+
+* [Jaeger Storage Exporter](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerstorage)
+
+* [Jaeger Query Extension](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerquery)
+
+* [Jaeger Remote Sampling Extension](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/remotesampling)
+
+
 ### OpenTelemetry Components
 
 #### Recievers
