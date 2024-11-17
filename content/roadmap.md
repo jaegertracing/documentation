@@ -35,6 +35,14 @@ Benefits to the users:
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/4196).
 
+## Add the ability to store/retrieve incomplete/partial spans
+
+Allow clients to export partial spans, to support two use cases:
+  * Flush a long running span before it is finished, in case the process crashes before finishing it
+  * Enrich existing span with information from other sources, e.g. to record log events not captured via tracing SDK
+
+For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/729).
+
 ## Renovate Streaming Support
 
 Bring streaming analytics support directly into Jaeger backend, instead of requiring separate Spark/Flink data pipelines.
