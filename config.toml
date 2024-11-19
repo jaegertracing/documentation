@@ -5,7 +5,7 @@ pygmentsCodeFences = true
 pygmentsUseClasses = true
 disableKinds       = ["taxonomy"]
 canonifyURLs       = true
-theme              = "jaeger-docs"
+theme              = ["basetheme", "jaeger-docs"]
 googleAnalytics    = "UA-148208642-1"
 
 [mediaTypes."text/netlify"]
