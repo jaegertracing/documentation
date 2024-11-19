@@ -95,7 +95,7 @@ Aside from these components there are several other components from OpenTelemetr
 * [Attributes](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/attributesprocessor) - Filtering spans based on attributes to redact or reduce data volume
 	
 #### Exporters
-* [OTLP HTTP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter) - Send data via OLTP over HTTP
+* [OTLP HTTP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter) - Send data via OTLP over HTTP
 
 * [OTLP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlpexporter) - Send data over OTLP via gRPC
 
