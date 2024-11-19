@@ -62,18 +62,17 @@ The Jaeger binary consists of several components, some of which are derived from
 
 ![Architecture](/img/architecture-v2-binary.png)
 
-Aside from these components there are sevral other components from OpenTelemetry you can use in the config of the Jaeger binary. Here is the full list of components:
+Aside from these components there are several other components from OpenTelemetry you can use in the config of the Jaeger binary. Here is the full list of components:
 
 ### Jaeger Components
 
 * [Adaptive Sampling Processor](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/processors/adaptivesampling) Used for [adaptive sampling](../sampling/#adaptive-sampling).
 
+* [Jaeger Remote Sampling Extension](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/remotesampling) - Creates an endpoint for [Remote Sampling](../sampling/#remote-sampling)
+
 * [Jaeger Storage Exporter](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerstorage) - Writes spans to storage.
 
 * [Jaeger Query Extension](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerquery) - Run the query API and the Jaeger UI.
-
-* [Jaeger Remote Sampling Extension](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/remotesampling) - Creates an endpoint for [Remote Sampling](../sampling/#remote-sampling)
-
 
 ### OpenTelemetry Components
 
@@ -112,6 +111,8 @@ Aside from these components there are sevral other components from OpenTelemetry
 * [Forward](https://github.com/open-telemetry/opentelemetry-collector/blob/main/connector/forwardconnector/) - Redirect telemetry between pipelines in the collector (ex: span to metric / span to log)
 
 #### Extensions
+* [Jaeger Storage](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerstorage) - Extensible storage for Jaeger using V1 APIs
+
 * [Health Check v2](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/healthcheckv2extension) - Check the health of the collector
 
 * [zPages](https://github.com/open-telemetry/opentelemetry-collector/tree/main/extension/zpagesextension) - Debugging tool for the collector
