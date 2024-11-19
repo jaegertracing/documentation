@@ -60,7 +60,7 @@ Downsides:
 
 The Jaeger binary consists of several components, some of which are derived from OpenTelemetry and some are internal. The following diagram has the major components.
 
-!!!DIAGRAM HERE!!!
+![Architecture](/img/architecture-v2-binary.png)
 
 Aside from these components there are sevral other components from OpenTelemetry you can use in the config of the Jaeger binary. Here is the full list of components:
 
