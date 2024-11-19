@@ -76,14 +76,14 @@ Aside from these components there are several other components from OpenTelemetr
 
 ### OpenTelemetry Components
 
-#### Recievers
-* [OTLP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver)	- Recieve spans sent via OpenTelemetry Line Protocol (OTLP)
+#### Receivers
+* [OTLP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver)	- Receive spans sent via OpenTelemetry Line Protocol (OTLP)
 
-* [Jaeger](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/jaegerreceiver) - Recieve Jaeger formatted traces transported via grpc or thrift protocols
+* [Jaeger](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/jaegerreceiver) - Receive Jaeger formatted traces transported via grpc or thrift protocols
 
-* [Kafka](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/kafkareceiver) - Recieve spans from Kafka formatted with OpenTelemetry formatting
+* [Kafka](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/kafkareceiver) - Receive spans from Kafka formatted with OpenTelemetry formatting
 
-* [Zipkin](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/zipkinreceiver) - Recieve spans using Zipkin v1 or v2 protocol
+* [Zipkin](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/zipkinreceiver) - Receive spans using Zipkin v1 or v2 protocol
 
 #### Processors
 * [Batch](https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor) - Batching spans for better efficiency
@@ -97,7 +97,7 @@ Aside from these components there are several other components from OpenTelemetr
 #### Exporters
 * [OTLP HTTP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter) - Send data via OLTP over HTTP
 
-* [OTLP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlpexporter) - Send data over OLTP via gRPC
+* [OTLP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlpexporter) - Send data over OTLP via gRPC
 
 * [Kafka](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/kafkaexporter/) - Send data to Kafka
 
