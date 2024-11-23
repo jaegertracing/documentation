@@ -1,8 +1,5 @@
-{{ $latest        := .Site.Params.binariesLatest }}
+{{ $latestXXX        := .Site.Params.binariesLatest }}
 {{ $binaries      := .Site.Data.download.binaries }}
-{{ $releaseUrl    := printf "https://github.com/jaegertracing/jaeger/releases/tag/v%s" $latest }}
-{{ $zipUrl        := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $latest }}
-{{ $tarUrl        := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $latest }}
 {{ $platforms     := $binaries.platforms }}
 <table class="table is-striped">
   <thead>
@@ -16,6 +13,11 @@
     </tr>
   </thead>
   <tbody>
+  {{ $versions := slice .Site.Params.binariesLatestV2 .Site.Params.binariesLatest }}
+  {{ range $latest := $versions }}
+    {{ $releaseUrl    := printf "https://github.com/jaegertracing/jaeger/releases/tag/v%s" $latest }}
+    {{ $zipUrl        := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $latest }}
+    {{ $tarUrl        := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $latest }}
     <tr>
       <td>
         <strong>
@@ -63,5 +65,6 @@
         </p>
       </td>
     </tr>
+  {{ end }}
   </tbody>
 </table>

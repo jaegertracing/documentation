@@ -5,11 +5,11 @@ title: Download Jaeger
 Jaeger components can be downloaded in two ways:
 
 * As [executable binaries](#binaries)
-* As [Docker images](#docker-images)
+* As [container images](#docker-images)
 
-## Try Jaeger v2
+## Try Jaeger v2 🎉
 
-Jaeger v2 executable can be found in the latest [GitHub release](https://github.com/jaegertracing/jaeger/releases/) or as a Docker image [jaegertracing/jaeger](https://hub.docker.com/r/jaegertracing/jaeger/tags).
+_November 12, 2024_: Jaeger v2 is a new major release based on the OpenTelemetry Collector framework. Read [the blog post](https://medium.com/jaegertracing/jaeger-v2-released-09a6033d1b10) for more details.
 
 ## Binaries
 
@@ -19,9 +19,9 @@ Jaeger binaries are available for macOS, Linux, and Windows. The table below lis
 
 You can find the binaries for previous versions on the [GitHub releases page](https://github.com/jaegertracing/jaeger/releases/).
 
-## Docker images
+## Container images
 
-The following Docker images are available for the Jaeger project via the `jaegertracing` organization on [Docker Hub](https://hub.docker.com/r/jaegertracing/) and [Quay.io](https://quay.io/organization/jaegertracing):
+The following container images are available for the Jaeger project via the `jaegertracing` organization on [Docker Hub](https://hub.docker.com/r/jaegertracing/) and [Quay.io](https://quay.io/organization/jaegertracing):
 
 {{< dockerImages >}}
 

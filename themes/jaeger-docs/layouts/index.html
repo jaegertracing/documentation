@@ -32,7 +32,7 @@
   {{ warnf "Post: %v" $v.title }}
 {{ end }}
 
-{{ partial "home/hero.html" (dict "posts" $posts "title" site.Title "tagline" site.Params.tagline "latestVersion" site.Params.latest) }}
+{{ partial "home/hero.html" (dict "posts" $posts "title" site.Title "tagline" site.Params.tagline "latestVersion" site.Params.latestV2) }}
 {{ partial "home/why.html" . }}
 {{ partial "home/features.html" . }}
 {{ partial "home/articles.html" (dict "posts" $posts "imgLinks" $imgLinks) }}
