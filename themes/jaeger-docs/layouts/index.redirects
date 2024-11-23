@@ -1,5 +1,7 @@
 {{ $versions := site.Params.versions }}
-{{ $latest   := site.Params.latest }}
+{{ $latestV1 := site.Params.latest }}
+{{ $latestV2 := site.Params.latestv2 }}
+{{ $latest   := $latestV2 }}
 /docs    /docs/{{ $latest }}     301!
 /docs/latest     /docs/{{ $latest }}
 /docs/latest/*     /docs/{{ $latest }}/:splat
@@ -10,16 +12,16 @@
 /docs/report-security-issue     /report-security-issue
 /docs/apis     /docs/{{ $latest }}/apis
 /docs/architecture     /docs/{{ $latest }}/architecture
-/docs/cli     /docs/{{ $latest }}/cli
-/docs/client-features     /docs/{{ $latest }}/client-features
-/docs/client-libraries     /docs/{{ $latest }}/client-libraries
+/docs/cli     /docs/{{ $latestV1 }}/cli
+/docs/client-features     /docs/{{ $latestV1 }}/client-features
+/docs/client-libraries     /docs/{{ $latestV1 }}/client-libraries
 /docs/deployment     /docs/{{ $latest }}/deployment
 /docs/faq     /docs/{{ $latest }}/faq
 /docs/features     /docs/{{ $latest }}/features
 /docs/frontend-ui     /docs/{{ $latest }}/frontend-ui
 /docs/getting-started     /docs/{{ $latest }}/getting-started
 /docs/monitoring     /docs/{{ $latest }}/monitoring
-/docs/opentelemetry     /docs/{{ $latest }}/opentelemetry
+/docs/opentelemetry     /docs/{{ $latestV1 }}/opentelemetry
 /docs/operator     /docs/{{ $latest }}/operator
 /docs/performance-tuning     /docs/{{ $latest }}/performance-tuning
 /docs/sampling     /docs/{{ $latest }}/sampling
