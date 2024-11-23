@@ -77,8 +77,7 @@
               {{ $docVersion := index (split $docPath "/") 1 }}
               <!-- When generating Docs menu for home page, use the latest version, -->
               <!-- when generating menu for pages inside docs/, use same version as the doc -->
-              <!-- TODO: replace with $latestV2 once 2.0 is released -->
-              {{ $matchVersion := cond ($isDocsPage) $majorMinorVersion $latestV1 }}
+              {{ $matchVersion := cond ($isDocsPage) $majorMinorVersion $latestV2 }}
               {{ if and (eq $docVersion $matchVersion) (not .Params.hasparent) }}
                 <a class="navbar-item" href="{{ .RelPermalink }}">
                   {{ .Title }}
@@ -86,8 +85,7 @@
 
                 {{ with .Params.children }}
                   {{ range . }}
-                    <!-- TODO: replace with $latestV2 once 2.0 is released -->
-                    {{ $url := cond $isDocsPage (printf "/docs/%s/%s" $majorMinorVersion .url) (printf "/docs/%s/%s" $latestV1 .url) }}
+                    {{ $url := cond $isDocsPage (printf "/docs/%s/%s" $majorMinorVersion .url) (printf "/docs/%s/%s" $latestV2 .url) }}
                     <a class="navbar-item is-small is-hidden-desktop" href="{{ $url }}">
                       &cir; {{ if .navtitle }}{{ .navtitle }}{{ else }}{{ .title }}{{ end }}
                     </a>

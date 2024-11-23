@@ -10,37 +10,53 @@ binaries:
       name: Windows
       icon: fa-windows
 docker:
+- image: jaeger
+  description: The only binary you need to run Jaeger v2.
+  since: "2.0"
+  major: v2
 - image: all-in-one
   description: Designed for quick local testing. It launches the Jaeger UI, collector, query, and agent, with an in-memory storage component.
   since: 0.8
+  major: v1
 - image: example-hotrod
   description: Sample application "[HotROD](https://github.com/jaegertracing/jaeger/tree/main/examples/hotrod)" that demonstrates features of distributed tracing ([blog post](https://medium.com/@YuriShkuro/take-opentracing-for-a-hotrod-ride-f6e3141f7941)).
   since: 1.6
-- image: jaeger-agent
-  description: (deprecated) Receives spans from Jaeger clients and forwards to collector. Designed to run as a sidecar or a host agent. **jaeger-agent** is deprecated and no longer recommended for use, see https://github.com/jaegertracing/jaeger/issues/4739.
-  since: 0.8
+  major: v1
 - image: jaeger-collector
   description: Receives spans from agents or directly from clients and saves them in persistent storage.
   since: 0.8
+  major: v1
 - image: jaeger-query
   description: Serves Jaeger UI and an API that retrieves traces from storage.
   since: 0.8
+  major: v1
 - image: jaeger-ingester
   description: An alternative to collector; reads spans from Kafka topic and saves them to storage.
   since: 1.7
+  major: v1
 - image: jaeger-remote-storage
   description: A service that implements the Remote Storage API on top of another supported backend. Can be used to share a single-node storage backend, like `memory`, across multiple Jaeger processes.
   since: 1.37
+  major: v1
 - image: spark-dependencies
   description: An [Apache Spark](http://spark.apache.org/) job that collects Jaeger spans from storage, analyzes links between services, and stores them for later presentation in the Jaeger UI
   latest: latest
   since: 1.3
+  major: v1
 - image: jaeger-operator
   description: A [Kubernetes Operator](https://github.com/operator-framework) for packaging, deploying, and managing Jaeger installation.
   since: 1.6
+  major: v1
 - image: jaeger-cassandra-schema
   description: A utility script used to initialize Cassandra keyspace and schema.
   since: 0.8
+  major: v1
 - image: jaeger-es-index-cleaner
   description: A utility script used to purge old indices from Elasticsearch, since ES does not support data TTL.
   since: 1.3
+  major: v1
+- image: jaeger-agent
+  description: Receives spans from Jaeger clients and forwards to collector. Designed to run as a sidecar or a host agent. **jaeger-agent** is deprecated and no longer recommended for use, see https://github.com/jaegertracing/jaeger/issues/4739.
+  since: 0.8
+  until: 1.62
+  major: v1

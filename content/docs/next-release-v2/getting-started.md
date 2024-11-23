@@ -17,14 +17,10 @@ docker run --rm --name jaeger \
   -p 14250:14250 \
   -p 14268:14268 \
   -p 9411:9411 \
-  jaegertracing/jaeger:{{< currentVersion >}} \
-  --set receivers.otlp.protocols.http.endpoint=0.0.0.0:4318 \
-  --set receivers.otlp.protocols.grpc.endpoint=0.0.0.0:4317
+  jaegertracing/jaeger:{{< currentVersion >}}
 ```
 
 This runs the "all-in-one" configuration of Jaeger (using a configuration file embedded in the binary) that combines collector and query components in a single process and uses a transient in-memory storage for trace data. You can navigate to `http://localhost:16686` to access the Jaeger UI. See the [APIs page](../apis/) for a list of other exposed ports.
-
-Note: the `--set` flags are necessary because by default OTLP receiver listens on `localhost` and therefore is not accessible from the host network even with port mappings. In the future versions the default will be changed to `0.0.0.0`.
 
 ## Instrumentation
 

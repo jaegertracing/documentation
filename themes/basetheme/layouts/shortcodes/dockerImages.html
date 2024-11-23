@@ -1,23 +1,25 @@
 {{ $dockerImages := site.Data.download.docker }}
-{{ $latest       := site.Params.binariesLatest }}
+{{ $latestV1       := site.Params.binariesLatest }}
+{{ $latestV2       := site.Params.binariesLatestV2 }}
 <table>
   <thead>
     <tr>
       <th>Image</th>
+      <th>Major</th>
       <th>Description</th>
       <th>Since version</th>
     </tr>
   </thead>
   <tbody>
     {{ range $dockerImages }}
-    {{ $org         := "jaegertracing" }}
-    {{ $image       := .image }}
-    {{ $fullImage   := printf "%s/%s" $org $image }}
-    {{ $link        := printf "https://hub.docker.com/r/%s/%s" $org $image }}
-    {{ $description := .description | markdownify }}
-    {{ $since       := .since }}
-    {{ $latestImg   := .latest | default $latest }}
-    {{ $pullCmd     := printf "<code><span class=\"is-dollar\">$</span> docker pull %s:%s</code>" $fullImage $latestImg | safeHTML }}
+    {{ $org       := "jaegertracing" }}
+    {{ $image     := .image }}
+    {{ $major     := .major }}
+    {{ $fullImage := printf "%s/%s" $org $image }}
+    {{ $link      := printf "https://hub.docker.com/r/%s/%s" $org $image }}
+    {{ $since     := .since }}
+    {{ $latest    := cond (eq $major "v2") $latestV2 $latestV1}}
+    {{ $latestImg := .until | default $latest }}
     <tr>
       <td>
         <a href="{{ $link }}">
@@ -25,13 +27,18 @@
         </a>
       </td>
       <td>
-        {{ with $description }}
-        <p>
-          {{ . }}
-        </p>
+        {{ $major }}
+      </td>
+      <td>
+        {{ if .until }}
+          <p>Deprecated 💀💤❌. Latest available version is {{ $latestImg }}.</p>
         {{ end }}
+        <p>{{ .description | markdownify }}</p>
         <div>
-          {{ $pullCmd }}
+          <code><span class="is-dollar">$</span> docker run {{ $fullImage }}:{{ $latestImg }} --help</code>
+        </div>
+        <div>
+          <code><span class="is-dollar">$</span> podman run quay.io/{{ $fullImage }}:{{ $latestImg }} --help</code>
         </div>
       </td>
       <td>
