@@ -21,11 +21,14 @@
 {{ $latestUrlV1   := .RelPermalink | replaceRE $version $latestV1 }}
 {{ $latestUrlV2   := .RelPermalink | replaceRE $version $latestV2 }}
 
-{{ $latestUrl     := "" }}
+{{ $latestUrl := "" }}
 {{ if eq $vMajor "1" }}
-  {{ $latestUrl     = .RelPermalink | replaceRE $version $latestV1 }}
+  {{ $latestUrl = .RelPermalink | replaceRE $version $latestV1 }}
 {{ else if eq $vMajor "2" }}
-  {{ $latestUrl     = .RelPermalink | replaceRE $version $latestV2 }}
+  {{ $latestUrl = .RelPermalink | replaceRE $version $latestV2 }}
+{{ else if eq $vMajor "docs" }}
+  {{ $latestUrl = .RelPermalink | replaceRE $version $latestV2 }}
+  {{ $vMajor    = "2" }}
 {{ end }}
 
 <header>
