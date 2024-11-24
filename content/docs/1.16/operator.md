@@ -241,13 +241,6 @@ To create _Custom Resource_ (CR) objects, cluster administrators must first crea
 While only cluster administrators can create CRDs, developers can create the CR from an existing CRD if they have read and write permission to it.
 {{< /info >}}
 
-<!--
-## Jaeger Custom Resource Parameters
-
-TODO Create a TABLE  with all the parameters, descriptions/notes, valid values, and defaults.
-Figure out if we can generate the options?  Can we filter them in any way?
-https://github.com/jaegertracing/jaeger/issues/1537
-https://github.com/jaegertracing/documentation/issues/250-->
 
 For reference, here's how you can create a more complex all-in-one instance:
 
@@ -299,10 +292,6 @@ You can view example custom resources for different Jaeger configurations [on Gi
 
 # Configuring the Custom Resource
 
-<!--TODO
-esIndexCleaner
-Spark dependencies
--->
 
 You can use the simplest example (shown above) and create a Jaeger instance using the defaults, or you can create your own custom resource file.
 
