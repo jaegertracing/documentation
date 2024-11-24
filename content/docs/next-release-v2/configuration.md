@@ -64,7 +64,7 @@ Of note here is the `storage` section, which references by name the storage back
 
 ### Remote sampling
 
-`remote_sampling` extension is responsible for running HTTP/gRPC servers that expose the [Remote Sampling API](../apis/#remote-sampling-configuration-stable).
+`remote_sampling` extension is responsible for running HTTP/gRPC servers that expose the [Remote Sampling API](../apis/#remote-sampling-configuration).
 
 ```yaml
 remote_sampling:

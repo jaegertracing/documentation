@@ -16,7 +16,7 @@ If you are new to distributed tracing, please take a look at the [Related Links]
 
 ## About
 
-Jaeger is a distributed tracing platform released as open source by [Uber Technologies][ubeross] and donated to [Cloud Native Computing Foundation](https://cncf.io/) where it is a graduated project.
+Jaeger is a distributed tracing platform released as open source by [Uber Technologies][ubeross] in 2016 and donated to [Cloud Native Computing Foundation](https://cncf.io/) where it is a graduated project.
 
 With Jaeger you can:
 
@@ -31,26 +31,19 @@ Uber published a blog post, [Evolving Distributed Tracing at Uber](https://eng.u
 
   * [OpenTracing](https://opentracing.io/)-inspired data model
   * [OpenTelemetry](https://opentelemetry.io/) compatible
-  * Multiple built-in storage backends: Cassandra, Elasticsearch, OpenSearch, and in-memory
-  * Community supported external storage backends via the gRPC plugin: [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse)
-  * System topology graphs
-  * Adaptive sampling
-  * Service Performance Monitoring (SPM)
-  * Post-collection data processing
-
-See [Features](./features/) page for more details.
-
-## Technical Specs
-
-  * Backend components implemented in Go
-  * React/Javascript UI
-  * Supported storage backends:
+  * Multiple built-in storage backends:
     * [Cassandra 4+](./cassandra/)
     * [Elasticsearch 7.x, 8.x](./elasticsearch/)
     * [Badger](./badger/)
     * [Kafka](./kafka/) - as an intermediate buffer
     * [Memory storage](./memory/)
-    * Custom backends via [Remote Storage API](./storage/#remote-storage)
+  * Extensibility with custom backends via [Remote Storage API](./storage/#remote-storage)
+  * System topology / service dependencies graphs
+  * Adaptive sampling
+  * Service Performance Monitoring (SPM)
+  * Post-collection data processing
+
+See [Features](./features/) page for more details.
 
 ## Quick Start
 

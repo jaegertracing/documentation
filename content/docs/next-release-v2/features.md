@@ -5,11 +5,11 @@ hasparent: true
 
 ## High Scalability
 
-Jaeger backend is designed to have no single points of failure and to scale with the business needs. For example, any given Jaeger installation at Uber is typically processing several billion spans per day.
+Jaeger backend is designed to have no single points of failure and to scale with the business needs. For example, Jaeger installation at Uber is typically processing several billion spans per day.
 
 ## Cloud Native
 
-Jaeger backend is distributed as a Docker image or a raw binary, available for multiple platforms. The behavior of the binary can be customized via YAML configuration file. Deployment to Kubernetes clusters is assisted by a [Kubernetes operator](https://github.com/jaegertracing/jaeger-operator) and a [Helm chart](https://github.com/kubernetes/charts/tree/master/incubator/jaeger).
+Jaeger backend is distributed as a container image or a raw binary, available for multiple platforms. The behavior of the binary can be customized via YAML configuration file. Deployment to Kubernetes clusters is assisted by a [Kubernetes operator](https://github.com/jaegertracing/jaeger-operator) and a [Helm chart](https://github.com/kubernetes/charts/tree/master/incubator/jaeger).
 
 ##  OpenTelemetry
 
@@ -18,13 +18,13 @@ Jaeger backend and Web UI have been designed from ground up to support the OpenT
 * Represent traces as directed acyclic graphs (not just trees) via [span references](https://github.com/opentracing/specification/blob/master/specification.md#references-between-spans)
 * Support strongly typed span _tags_ and _structured logs_
 
-Jaeger can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. However, the internal data representation and the UI still follow the OpenTracing specification's model.
+Jaeger can receive trace data in the standard [OpenTelemetry Protocol (OTLP)](https://opentelemetry.io/docs/specs/otel/protocol/). However, the internal data representation and the UI still follow the OpenTracing specification's model.
 
 ## Multiple storage backends
 
 Jaeger can be used with a growing number of storage backends:
 * It natively supports popular open source NoSQL databases as trace storage backends: Cassandra 4.0+, Elasticsearch 7.x/8.x, and OpenSearch 1.0+.
-* It integrates via a gRPC API with other well known databases that have been certified to be Jaeger compliant: [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse).
+* It is extensible via a [Remote Storage gRPC API](../apis/#remote-storage-api) with other well known databases that have been certified to be Jaeger compliant: [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse).
 * There is embedded database support using [Badger](https://github.com/dgraph-io/badger) and simple in-memory storage for testing setups.
 * There are ongoing community experiments using other databases; you can find more in [this issue](https://github.com/jaegertracing/jaeger/issues/638).
 

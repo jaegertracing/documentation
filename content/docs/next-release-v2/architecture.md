@@ -12,24 +12,36 @@ children:
   url: terminology
 ---
 
-Jaeger can be deployed either as an **all-in-one** binary, where all Jaeger backend components
-run in a single process, or as a scalable distributed system. There are two main deployment options discussed below.
+Jaeger v2 is designed to be a versatile and flexible tracing platform. It can be deployed as a single binary that can be configured to perform different roles within the Jaeger architecture, such as:
+  * **collector**: Receives incoming trace data from applications and writes it into a storage backend.
+  * **query**: Serves the APIs and the user interface for querying and visualizing traces.
+  * **ingester**: Ingests spans from Kafka and writes them into a storage backend; useful when running in a [split collector-Kafka-ingester configuration](./#via-kafka).
+  * **all-in-one**: Collector and query roles in a single process.
+  * **agent**: A host agent or a sidecar that runs next to the application and forwards trace data to the collector. While Jaeger can be configured for this role, we recommend using the standard [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) instead because you may likely need it to process other types of telemetry (metrics & logs).
 
-## Direct to storage
+Choosing between the **all-in-one** and the **collector**/**query** configurations is a matter of preference. When using external storage backend, both configurations are horizontally scalable, but the **collector**/**query** configuration allows to separate the read and write traffic and to scale them independently, as well as to apply different access and security policies.
 
-In this deployment Jaeger receives the data from traced applications and writes it directly to storage. The storage must be able to handle both average and peak traffic. Collectors use an in-memory queue to smooth short-term traffic peaks, but a sustained traffic spike may result in dropped data if the storage is not able to keep up.
+The **all-in-one** configuration with in-memory storage is most suitable for development and testing, but it is not recommended for production since the data is lost on restarts. **all-in-one** with the [Badger](../badger/) backend _can_ be used in production, but only for modest data volumes since it is limited to a single instance and cannot be scaled horizontantally.
+
+## Architecture choices
+
+The two most common deployment options for a scalable Jaeger backend are direct-to-storage and using Kafka as a buffer.
+
+### Direct to storage
+
+In this deployment the **collector**s receive the data from traced applications and write it directly to storage. The storage must be able to handle both average and peak traffic. The **collector**s may use an in-memory queue to smooth short-term traffic peaks, but a sustained traffic spike may result in dropped data if the storage is not able to keep up.
 
 ![Architecture](/img/architecture-v2-2024.png)
 
-## Via Kafka
+### Via Kafka
 
-To prevent data loss between collectors and storage, Kafka can be used as an intermediary, persistent queue. Jaeger can be deployed with OpenTelemetry to handle writing the data to Kafka and pulling it off the queue and writing the data to the storage. Multiple Jaeger instances can be deployed to scale up ingestion; they will automatically partition the load across them.
+To prevent data loss between **collector**s and storage, Kafka can be used as an intermediary, persistent queue. The **collector**s are configured with Kafka exporters. An additional component, **ingester**, needs to be deployed to read data from Kafka and save it to storage. Multiple **ingester**s can be deployed to scale up ingestion; they will automatically partition the load across them. In practice, an **ingester** is very similar to a **collector**, only configured with a Kafka receiver instead of RPC-based receivers.
 
 ![Architecture](/img/architecture-v2-kafka-2024.png)
 
 ## With OpenTelemetry Collector
 
-You **do not need to use OpenTelemetry Collector**, because **Jaeger** is a customized distribution of the OpenTelemetry Collector with different roles. However, if you already use the OpenTelemetry Collectors, for gathering other types of telemetry or for pre-processing / enriching the tracing data, it __can be placed before__  **Jaeger**. The OpenTelemetry Collectors can be run as an application sidecar, as a host agent / daemon, or as a central cluster.
+You **do not need** to use the OpenTelemetry Collector to operate Jaeger, because Jaeger is a customized distribution of the OpenTelemetry Collector with different roles. However, if you already use the OpenTelemetry Collectors, for gathering other types of telemetry or for pre-processing / enriching the tracing data, it can be placed _in front of_ Jaeger in the pipeline. The OpenTelemetry Collectors can be run as an application sidecar, as a host agent / daemon, or as a central cluster.
 
 The OpenTelemetry Collector supports Jaeger's Remote Sampling protocol and can either serve static configurations from config files directly, or proxy the requests to the Jaeger backend (e.g., when using adaptive sampling).
 

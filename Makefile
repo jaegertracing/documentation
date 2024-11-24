@@ -4,6 +4,7 @@
 HTMLPROOFER  = bundle exec htmlproofer
 HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
+HTMLTEST     := htmltest
 
 # generate currently doesn't do anything, but can be useful in the future.
 generate:
@@ -40,13 +41,16 @@ build: clean generate
 link-checker-setup:
 	curl https://raw.githubusercontent.com/wjdp/htmltest/master/godownloader.sh | bash
 
-run-link-checker:
-	bin/htmltest
+check-links:
+	$(HTMLTEST) --conf .htmltest.yml
 
-check-internal-links: clean build link-checker-setup run-link-checker
+check-links-older:
+	$(HTMLTEST) --conf .htmltest.old-versions.yml
 
-check-all-links: clean build link-checker-setup
-	bin/htmltest --conf .htmltest.external.yml
+check-links-external:
+	$(HTMLTEST) --conf .htmltest.external.yml
+
+check-links-all: check-links check-links-older check-links-external
 
 spellcheck:
 	cat scripts/cspell/project-names.txt | grep -v '^#' | grep -v '^\s*$$' | tr ' ' '\n' > scripts/cspell/project-names-parsed.txt
