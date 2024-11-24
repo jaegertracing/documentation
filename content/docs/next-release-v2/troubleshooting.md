@@ -44,17 +44,9 @@ If you suspect the remote sampling is not working correctly, try these steps:
     {"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":0.001}}
 ```
 
-## Bypass the Jaeger Agent
+## Bypass intermediate collectors
 
-{{< warning >}}
-This only applies when using Jaeger SDKs. The use of **jaeger-agent** [is deprecated](../deployment/#agent) when using OpenTelemetry SDKs.
-{{< /warning >}}
-
-By default, the Jaeger SDK is configured to send spans via UDP to a **jaeger-agent** running on `localhost`. As some networking setups might drop or block UDP packets, or impose size limits, the Jaeger SDK can be configured to bypass **jaeger-agent**, sending spans directly to **jaeger-collector**. Some SDKs, such as the Jaeger SDK for Java, support the environment variable `JAEGER_ENDPOINT` which can be used to specify **jaeger-collector**'s location, such as `http://jaeger-collector:14268/api/traces`. Refer to the Jaeger SDK documentation for the language you are using. For example, when you have configured the `JAEGER_ENDPOINT` property in the Jaeger SDK for Java, it logs the following when the tracer is created (notice `sender=HttpSender`):
-
-    2018-12-10 17:06:30 INFO  Configuration:236 - Initialized  tracer=JaegerTracer(...,  reporter=CompositeReporter(reporters=[RemoteReporter(sender=HttpSender(),  ...), ...]), ...)
-
-Note: the Jaeger SDK for Java will not fail when a connection to **jaeger-collector** cannot be established. Spans will be collected and placed in an internal buffer. They might eventually reach **jaeger-collector** once a connection is established, or get dropped in case the buffer reaches its maximum size.
+If your applications are not sending data directly to Jaeger but to intermediate layers, for example an OpenTelemetry Collector running as a host agent, try configuring the SDK to send data directly to Jaeger to narrow down the problem space.
 
 ## Networking Namespace
 
