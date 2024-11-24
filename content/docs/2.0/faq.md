@@ -24,7 +24,7 @@ The Jaeger team recommends Elasticsearch or OpenSearch as the storage backend ov
 
   * Based on past performance experiments we observed single writes to be much faster in Cassandra than OpenSearch, which might suggest that it may sustain higher write throughput. However, because the Jaeger backend needs to implement search capability on top of k-v storage, writing spans to Cassandra is actually subject to large write amplification: in addition to writing a record for the span itself, Jaeger performs extra writes for service name and operation name indexing, as well as extra index writes for every tag. In contrast, saving a span to OpenSearch is a single write, and all indexing takes place inside the OpenSearch node. As a result, the overall throughput to Cassandra is comparable with OpenSearch.
 
-One benefit of Cassandra backend is simplified maintenance due to its native support for data TTL. In OpenSearch the data expiration is managed through index rotation, which requires additional setup (see [Elasticsearch Rollover](../deployment/#elasticsearch-rollover)).
+One benefit of Cassandra backend is simplified maintenance due to its native support for data TTL. In OpenSearch the data expiration is managed through index rotation, which requires additional setup (see [Elasticsearch Rollover](../elasticsearch/#index-rollover)).
 
 [issue-166]: https://github.com/jaegertracing/jaeger/issues/166
 

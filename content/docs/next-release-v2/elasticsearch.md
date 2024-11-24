@@ -52,7 +52,7 @@ Rollover index management strategy is more complex than using the default daily 
 To learn more about rollover index management in Jaeger refer to this
 [article](https://medium.com/jaegertracing/using-elasticsearch-rollover-to-manage-indices-8b3d0c77915d).
 
-For automated rollover, please refer to [Elasticsearch ILM support](#elasticsearch-ilm-support).
+For automated rollover, please refer to [Elasticsearch ILM support](#ilm-support).
 
 ### Initialize
 

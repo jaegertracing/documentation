@@ -90,7 +90,7 @@ Jaeger UI communicates with **jaeger-query** Service via JSON API. For example, 
 
 ## Remote Storage API (stable)
 
-When using the `grpc` storage type (a.k.a. [remote storage](../deployment/#remote-storage)), Jaeger components can use custom storage backends as long as those backends implement the gRPC [Remote Storage API][storage.proto].
+When using the `grpc` storage type (a.k.a. [remote storage](../storage/#remote-storage)), Jaeger components can use custom storage backends as long as those backends implement the gRPC [Remote Storage API][storage.proto].
 
 ## Remote Sampling Configuration (stable)
 
