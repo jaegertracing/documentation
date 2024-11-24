@@ -40,12 +40,10 @@ jobs:
         go install github.com/wjdp/htmltest@latest
 
     - name: Strict link check for newer versions
-      run: |
-        htmltest -c .htmltest.yml
+      run: make check-links
 
     - name: Relaxed link check for newer versions
-      run: |
-        htmltest -c .htmltest.old-versions.yml
+      run: make check-links-older
 
   spellcheck:
     runs-on: ubuntu-latest
