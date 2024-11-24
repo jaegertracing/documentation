@@ -37,7 +37,7 @@ In addition to the performance aspects, having spans written to Kafka is useful 
 Jaeger clients have been retired. Please use the OpenTelemetry SDKs.
 {{< /warning >}}
 
-The Jaeger Clients are built to have minimal effect to the instrumented application. As such, it has conservative defaults that might not be suitable for all cases. Note that Jaeger Clients can be configured programmatically or via [environment variables](../client-features/).
+The Jaeger Clients are built to have minimal effect to the instrumented application. As such, it has conservative defaults that might not be suitable for all cases. Note that Jaeger Clients can be configured programmatically or via environment variables.
 
 ### Adjust the sampling configuration
 
