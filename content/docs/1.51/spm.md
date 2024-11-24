@@ -343,7 +343,7 @@ Some questions to ask while troubleshooting are:
   - See: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/spanmetricsconnector
 - Is the Prometheus server reachable by the OpenTelemetry Collector?
 - Are the services sending spans to the OpenTelemetry Collector?
-  - See: https://github.com/open-telemetry/opentelemetry-collector/blob/main/docs/troubleshooting.md
+  - See: https://opentelemetry.io/docs/collector/troubleshooting/
 
 ### Service/Operation missing in Monitor Tab
 

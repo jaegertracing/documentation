@@ -1,3 +1,6 @@
+# Copyright (c) The Jaeger Authors.
+# SPDX-License-Identifier: Apache-2.0
+
 HTMLPROOFER  = bundle exec htmlproofer
 HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
