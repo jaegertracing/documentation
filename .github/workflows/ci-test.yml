@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -26,13 +26,40 @@ jobs:
         sudo mv hugo /usr/local/bin
         hugo version
 
+    - name: Build
+      run: |
+        make build
+    
+    - name: Setup Go to install htmltest
+      uses: actions/setup-go@41dfa10bad2bb2ae585af6ee5bb4d7d973ad74ed # v5.1.0
+      with:
+        go-version: 1.23.x
+
+    - name: Install htmltest
+      run: |
+        go install github.com/wjdp/htmltest@latest
+
+    - name: Strict link check for newer versions
+      run: |
+        htmltest -c .htmltest.yml
+
+    - name: Relaxed link check for newer versions
+      run: |
+        htmltest -c .htmltest.old-versions.yml
+
+  spellcheck:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: true
+
     - name: Spellcheck
       run: |
         make spellcheck
 
-    - name: Build
-      run: |
-        make build
-
+  block-pr-from-main-branch:
+    runs-on: ubuntu-latest
+    steps:
     - name: Ensure PR is not on main branch
       uses: jaegertracing/jaeger/.github/actions/block-pr-from-main-branch@main
