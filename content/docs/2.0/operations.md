@@ -12,4 +12,4 @@ children:
   url: tools
 ---
 
-Jaeger provides the foundational components to operate your installation. Please note that backups and lifecycle of the datastores must be handled outside of Jaeger. We provide pointers to components within the [storage backends](../architecture) guides. 
+Jaeger provides the foundational components to operate your installation. Please note that backups and lifecycle of the datastores must be handled outside of Jaeger. We provide pointers to components within the [storage backends](../architecture/) guides. 

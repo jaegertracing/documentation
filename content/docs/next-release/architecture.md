@@ -102,11 +102,11 @@ The instrumentation is designed to be always on in production. To minimize  over
 
 ### Collector
 
-**jaeger-collector** receives traces, runs them through a processing pipeline for validation and clean-up/enrichment, and stores them in a storage backend. Jaeger comes with built-in support for several storage backends (see [Deployment](../deployment)), as well as extensible plugin framework for implementing custom storage plugins.
+**jaeger-collector** receives traces, runs them through a processing pipeline for validation and clean-up/enrichment, and stores them in a storage backend. Jaeger comes with built-in support for several storage backends (see [Deployment](../deployment/)), as well as extensible plugin framework for implementing custom storage plugins.
 
 ### Query
 
-**jaeger-query** is a service that exposes the [APIs](../apis) for retrieving traces from storage and hosts a Web UI for searching and analyzing traces.
+**jaeger-query** is a service that exposes the [APIs](../apis/) for retrieving traces from storage and hosts a Web UI for searching and analyzing traces.
 
 ### Ingester
 

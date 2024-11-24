@@ -7,8 +7,8 @@ CNCF guide on [how to start contributing to open source and figure out where to 
 
 ## No-coding involvement
 
-* Join the [online chat room](../get-in-touch) and help answering questions from the rest of the community.
-* Join our [bi-weekly video calls](../get-in-touch) to discuss issues, large initiatives, or present case studies.
+* Join the [online chat room](../get-in-touch/) and help answering questions from the rest of the community.
+* Join our [bi-weekly video calls](../get-in-touch/) to discuss issues, large initiatives, or present case studies.
 * Help documenting answers to common questions, either in [Jaeger documentation](https://github.com/jaegertracing/documentation) or [Stackoverflow](https://stackoverflow.com/questions/tagged/jaeger).
 * Help improving [Jaeger documentation](https://github.com/jaegertracing/documentation), especially if you yourself run into issues where something is not clear or not working.
 * Publish blog posts or tutorials about Jaeger, for example:

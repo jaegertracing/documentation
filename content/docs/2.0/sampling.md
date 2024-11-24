@@ -31,7 +31,7 @@ These are two basic types of head samplers that are used by the remote sampling:
 * **Probabilistic** sampler makes a random sampling decision with a pre-configured probability. For example, with `probability=0.1` approximately 1 in 10 traces will be sampled.
 * **Rate Limiting** sampler uses a leaky bucket rate limiter to ensure that traces are sampled with a certain constant rate. For example, when `rate=2.0` it will sample requests with the rate of 2 traces per second.
 
-[remote-sampling-api]: ../apis#remote-sampling-configuration-stable
+[remote-sampling-api]: ../apis/#remote-sampling-configuration-stable
 
 ### File-based Sampling Configuration
 

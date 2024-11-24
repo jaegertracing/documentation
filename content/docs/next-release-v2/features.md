@@ -65,7 +65,7 @@ At this time the transitive graph can only be constructed from traces in the sea
 
 SPM allows monitoring and investigating trends in the performance of the services by computing aggregate metrics from traces and visualizing them as time series charts. It is a powerful tool to identify and investigate performance issues,
 
-See [Service Performance Monitoring (SPM)](../spm) for more details.
+See [Service Performance Monitoring (SPM)](../spm/) for more details.
 
 ## Zipkin Compatibility
 

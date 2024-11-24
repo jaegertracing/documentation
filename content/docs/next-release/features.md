@@ -72,6 +72,6 @@ to highlight services and/or operations with statistically significant request/e
 latencies, then leveraging Jaeger's Trace Search capabilities to pinpoint specific
 traces belonging to these services/operations.
 
-See [Service Performance Monitoring (SPM)](../spm) for more details.
+See [Service Performance Monitoring (SPM)](../spm/) for more details.
 
 [otlp]: https://opentelemetry.io/docs/reference/specification/protocol/

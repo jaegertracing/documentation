@@ -109,7 +109,7 @@ For programmatic access to the service graph, the recommended API is gRPC/Protob
 
 ## Service Performance Monitoring (internal)
 
-Please refer to the [SPM Documentation](../spm#api)
+Please refer to the [SPM Documentation](../spm/#api)
 
 ## gRPC Server Introspection
 

@@ -54,7 +54,7 @@ See [Features](./features/) page for more details.
 
 ## Quick Start
 
-See [Getting Started](./getting-started).
+See [Getting Started](./getting-started/).
 
 ## Screenshots
 

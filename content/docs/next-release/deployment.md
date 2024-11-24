@@ -601,7 +601,7 @@ Known remote storage backends:
 ## Metrics Storage Backends
 
 Jaeger Query is capable of querying aggregated R.E.D metrics from a storage backend,
-visualizing them on the [Monitor tab](../spm). It should be emphasized that the
+visualizing them on the [Monitor tab](../spm/). It should be emphasized that the
 configured metrics storage type is for reading _only_ and therefore, only applies
 to the Jaeger Query component (and All In One, which contains Jaeger Query).
 

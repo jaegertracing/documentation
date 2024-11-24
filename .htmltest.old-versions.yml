@@ -1,8 +1,6 @@
 DirectoryPath: public
+IgnoreDirectoryMissingTrailingSlash: true
 CheckExternal: false
-IgnoreDirectoryMissingTrailingSlash: false
 IgnoreAltMissing: true
 IgnoreURLs:
   - /livereload.js
-IgnoreDirs:
-  - docs/1.*

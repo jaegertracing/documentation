@@ -55,7 +55,7 @@ Then navigate to `http://localhost:8080`. See the [README](https://github.com/ja
 
 ## SPM
 
-The Service Performance Monitoring (SPM) page has its own [Quick Start](../spm#getting-started) that shows how to explore that aspect of Jaeger.
+The Service Performance Monitoring (SPM) page has its own [Quick Start](../spm/#getting-started) that shows how to explore that aspect of Jaeger.
 
 [hotrod-tutorial]: https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2
 [otel]: https://opentelemetry.io
