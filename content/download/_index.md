@@ -5,7 +5,7 @@ title: Download Jaeger
 Jaeger components can be downloaded in two ways:
 
 * As [executable binaries](#binaries)
-* As [container images](#docker-images)
+* As [container images](#container-images)
 
 ## Try Jaeger v2 🎉
 
