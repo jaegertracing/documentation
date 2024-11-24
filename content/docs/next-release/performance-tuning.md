@@ -31,38 +31,6 @@ In addition to the performance aspects, having spans written to Kafka is useful 
 
 **jaeger-ingester**s can also be scaled as needed to sustain the throughput. They will automatically negotiate and rebalance Kafka partitions among them. However, it does not make sense to run more **jaeger-ingester**s than there are partitions in the Kafka topic, as in this case some of **jaeger-ingester**s will be idle.
 
-## Client (Tracer) settings
-
-{{< warning >}}
-Jaeger clients have been retired. Please use the OpenTelemetry SDKs.
-{{< /warning >}}
-
-The Jaeger Clients are built to have minimal effect to the instrumented application. As such, it has conservative defaults that might not be suitable for all cases. Note that Jaeger Clients can be configured programmatically or via environment variables.
-
-### Adjust the sampling configuration
-
-Together, the `JAEGER_SAMPLER_TYPE` and `JAEGER_SAMPLER_PARAM` specify how often traces should be "sampled", ie, recorded and sent to the Jaeger backend. For applications generating many spans, setting the sampling type to `probabilistic` and the value to `0.001` (the default) will cause traces to be reported with a 1/1000th chance. Note that the sampling decision is made at the root span and propagated down to all child spans.
-
-For applications with low to medium traffic, setting the sampling type to `const` and value to `1` will cause all spans to be reported. Similarly, tracing can be disabled by setting the value to `0`, while context propagation will continue to work.
-
-Some Clients support the setting `JAEGER_DISABLED` to completely disable the Jaeger Tracer. This is recommended only if the Tracer is behaving in a way that causes problems to the instrumented application, as it will not propagate the context to the downstream services.
-
-{{< info >}}
-We recommend setting your clients/SDKs to use the [`remote` sampling strategy](../sampling/#remote-sampling), so that admins can centrally set the concrete sampling strategy for each service.
-{{< /info >}}
-
-### Increase in-memory queue size
-
-Most of the SDKs buffer spans in memory before sending them to **jaeger-collector**. The maximum size of this buffer is configurable (see respective OpenTelemetry SDK documentation): the larger the size, the higher the potential memory consumption. When the instrumented application is generating a large number of spans, it’s possible that the queue will be full causing the SDK to discard the new spans.
-
-In most common scenarios, the queue will be close to empty, as spans are flushed to **jaeger-collector** at regular intervals or when a certain size of the batch is reached.
-
-### Modify the batched spans flush interval
-
-The SDKs allow the customization of the flush interval used by the exporters. The lower the flush interval is set to, the more frequent the flush operations happen. As most exporters will wait until enough data is in the queue, this setting will force a flush operation at periodic intervals, so that spans are sent to the backend in a timely fashion.
-
-When the instrumented application is generating a large number of spans and **jaeger-collector** is close to the application, the networking overhead might be low, justifying a higher number of flush operations. When the `HttpSender` is being used and the **jaeger-collector** is not close enough to the application, the networking overhead might be too high so that a higher value for this property makes sense.
-
 ## Collector settings
 
 **jaeger-collector** receives data from SDKs. When not properly configured, it might process less data than what would be possible on the same host, or it might overload the host by consuming more memory than permitted.

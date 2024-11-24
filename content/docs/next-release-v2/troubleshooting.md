@@ -32,7 +32,7 @@ The logging reporter follows the sampling decision made by the sampler, meaning 
 
 ### Remote Sampling
 
-The Jaeger backend supports [Remote Sampling](../sampling/#remote-sampling), i.e., configuring sampling strategies centrally and making them available to the SDKs. All Jaeger SDKs support it by setting `JAEGER_SAMPLER_TYPE=remote`. Some, but not all, OpenTelemetry SDKs also support remote sampling, often via extensions (refer to [Migration to OpenTelemetry](../client-libraries/#migration-to-opentelemetry) for details).
+The Jaeger backend supports [Remote Sampling](../sampling/#remote-sampling), i.e., configuring sampling strategies centrally and making them available to the SDKs. Some, but not all, OpenTelemetry SDKs support remote sampling, often via extensions (refer to [Migration to OpenTelemetry](../../../sdk-migration/#migration-to-opentelemetry) for details).
 
 If you suspect the remote sampling is not working correctly, try these steps:
 
