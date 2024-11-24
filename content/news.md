@@ -2,6 +2,14 @@
 title: News
 ---
 
+## Announcing Jaeger v2.0
+
+**2024-11-12**
+
+Jaeger has had a successful 9 year history as being one of the first graduated projects in the Cloud Native Computing Foundation (CNCF). After over 60 releases, Jaeger is celebrating a major milestone with the release of Jaeger v2. This new version is a new architecture for Jaeger components that utilizes OpenTelemetry Collector framework as the base and extends it to implement Jaeger’s unique features. It brings significant improvements and changes, making Jaeger more flexible, extensible, and better aligned with the OpenTelemetry project.
+
+Read [full post here](https://medium.com/jaegertracing/jaeger-v2-released-09a6033d1b10).
+
 ## Jaeger Graduates to a Top-Level CNCF Project
 
 **2019-10-31**
@@ -42,7 +50,6 @@ News coverage:
 
 **2017-04-14**
 
-<!-- <img align="right" src="/img/jaeger-vector.svg"> -->
 Uber is pleased to announce the open source release of Jaeger, a distributed tracing system, used to monitor, profile, and troubleshoot microservices.
 
 Jaeger is written in Go, with OpenTracing compatible client libraries in [Go](https://github.com/jaegertracing/jaeger-client-go), [Java](https://github.com/jaegertracing/jaeger-client-java), [Node](https://github.com/jaegertracing/jaeger-client-node), and [Python](https://github.com/jaegertracing/jaeger-client-python). It allows service owners to instrument their services to get insights into what their architecture is doing.

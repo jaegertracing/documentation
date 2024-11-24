@@ -160,7 +160,7 @@ http://localhost:16686/trace/abc123?uiEmbed=v0
 
 `uiEmbed=v0` is required.
 
-Further, each page supported has an <img src="/img/frontend-ui/embed-open-icon.png" style="width: 20px; height:20px;display:inline;" alt="Embed open window"> button added that will open the non-embedded page in a new tab.
+Further, each page supported has an {{< rawhtml >}}<img src="/img/frontend-ui/embed-open-icon.png" style="width: 20px; height:20px;display:inline;" alt="Embed open window">{{< /rawhtml >}} button added that will open the non-embedded page in a new tab.
 
 The following pages support embedded mode:
 
