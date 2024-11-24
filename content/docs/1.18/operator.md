@@ -88,7 +88,7 @@ The operator is now ready to create Jaeger instances.
 
 ## Installing the Operator on OKD/OpenShift
 
-<!-- TODO: Add instructions for installing via the operatorhub? -->
+
 
 The instructions from the previous section also work for installing the operator on OKD or OpenShift. Make sure you are logged in as a privileged user, when you install the role based access control (RBAC) rules, the custom resource definition, and the operator.
 
@@ -141,7 +141,7 @@ metadata:
 ```
 
 The YAML file can then be used with `kubectl`:
-<!-- TODO - Add OKD commands and tabs shortcode. -->
+
 
 ```bash
 kubectl apply -f simplest.yaml
@@ -972,7 +972,7 @@ spec:
 ```
 
 # Accessing the Jaeger Console (UI)
-<!-- TODO Add tabs shortcode -->
+
 
 ## Kubernetes
 
@@ -1119,7 +1119,7 @@ Simpler changes such as changing the replica sizes can be applied without much c
 While changing the backing storage is supported, migration of the data is not.
 
 # Removing a Jaeger instance
-<!-- TODO Add OKD/OpenShift commands and tabs shortcode-->
+
 
 To remove an instance, use the `delete` command with the custom resource file used when you created the instance:
 
@@ -1235,7 +1235,7 @@ The Jaeger Operator does not yet publish its own metrics. Rather, it makes avail
 {{< /info >}}
 
 # Uninstalling the operator
-<!-- TODO Add OKD/OpenShift commands and tabs shortcode -->
+
 
 To uninstall the operator, run the following commands:
 
