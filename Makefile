@@ -2,16 +2,10 @@ HTMLPROOFER  = bundle exec htmlproofer
 HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
 
-client-libs-docs:
-	@for d in $(shell ls -d content/docs/* | grep -v next-release-v2 | grep -vE '2\.[0-9]+'); do \
-		cp content/_client_libs/client-libraries.md $$d/; \
-		cp content/_client_libs/client-features.md $$d/; \
-		echo "copied content/_client_libs/*.md -> $$d/"; \
-	done
+# generate currently doesn't do anything, but can be useful in the future.
+generate:
 
-generate:	client-libs-docs
-
-develop:	generate
+develop: generate
 	HUGO_PREVIEW=true hugo server \
 		--buildDrafts \
 		--buildFuture \
@@ -20,9 +14,8 @@ develop:	generate
 clean:
 	rm -rf public
 
-netlify-production-build:	generate
+netlify-production-build: generate
 	hugo --minify
-	rm -rf public/_client_libs
 
 netlify-deploy-preview:	generate
 	HUGO_PREVIEW=true hugo \
@@ -30,19 +23,16 @@ netlify-deploy-preview:	generate
 	--buildFuture \
 	--baseURL $(DEPLOY_PRIME_URL) \
 	--minify
-	rm -rf public/_client_libs
 
-netlify-branch-deploy:	generate
+netlify-branch-deploy: generate
 	hugo \
 	--buildDrafts \
 	--buildFuture \
 	--baseURL $(DEPLOY_PRIME_URL) \
 	--minify
-	rm -rf public/_client_libs
 
 build: clean generate
 	hugo --logLevel info
-	rm -rf public/_client_libs
 
 link-checker-setup:
 	curl https://raw.githubusercontent.com/wjdp/htmltest/master/godownloader.sh | bash

@@ -18,7 +18,7 @@ Please refer to the [Troubleshooting](../troubleshooting/) guide.
 
 ## What happened to jaeger-agent?
 
-Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required and no longer supported. See the [Architecture](../architecture) page for alternative deployment options.
+Since the Jaeger client libraries [are deprecated](../../../sdk-migration) and the OpenTelemetry SDKs phased out support for Jaeger Thrift format, the **jaeger-agent** is no longer required and no longer supported. See the [Architecture](../architecture) page for alternative deployment options.
 
 Sometimes it is still desirable to run a **host agent**:
 

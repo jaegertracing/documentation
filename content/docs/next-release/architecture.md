@@ -87,11 +87,7 @@ This section details the constituent parts of Jaeger and how they relate to each
 
 ### Tracing SDKs
 
-{{< warning >}}
-The Jaeger project historically provided a collection of tracing SDKs, called [Jaeger clients](../client-libraries). These libraries have been retired in favor of the [OpenTelemetry SDKs](https://opentelemetry.io).
-{{< /warning >}}
-
-In order to generate tracing data, the applications must be instrumented. An instrumented application creates spans when receiving new requests and attaches context information (trace id, span id, and baggage) to outgoing requests. Only the ids and baggage are propagated with requests; all other profiling data, like operation name, timing, tags and logs, is not propagated. Instead, it is exported out of process to the Jaeger backend asynchronously, in the background.
+In order to generate tracing data, the applications must be instrumented with tracing SDK such as [OpenTelemetry SDKs](https://opentelemetry.io). An instrumented application creates spans when receiving new requests and attaches context information (trace id, span id, and baggage) to outgoing requests. Only the ids and baggage are propagated with requests; all other profiling data, like operation name, timing, tags and logs, is not propagated. Instead, it is exported out of process to the Jaeger backend asynchronously, in the background.
 
 ![Context propagation explained](/img/context-prop-2023.png)
 
