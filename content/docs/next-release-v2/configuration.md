@@ -23,7 +23,7 @@ Here is an example of how to configure the extension:
 ```yaml
 jaeger_storage:
   backends:
-    some_storage:
+    some_trace_storage:
       memory:
         max_traces: 100000
   metric_backends:
@@ -48,7 +48,7 @@ In this example:
 ```yaml
 jaeger_query:
   storage:
-    traces: some_storage
+    traces: some_trace_storage
     metrics: some_metrics_storage
   base-path: /
   ui:
@@ -86,7 +86,7 @@ remote_sampling:
 
 ```yaml
 jaeger_storage_exporter:
-  trace_storage: some_store
+  trace_storage: some_trace_storage
   queue:
     num_consumers: 10
     queue_size: 100
