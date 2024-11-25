@@ -21,7 +21,7 @@
   {{ $vMajor = "1" }}
 {{ else if eq $majorMinorVersion "next-release-v2" }}
   {{ $vMajor = "2" }}
-  {{ end }}
+{{ end }}
 {{ $isLatest := or (eq $majorMinorVersion $latestV1) (eq $majorMinorVersion $latestV2) }}
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">

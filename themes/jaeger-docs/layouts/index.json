@@ -1,4 +1,5 @@
-{{ $latestVersion := site.Params.latest }}
+{{ $latestVersionV1 := site.Params.latest }}
+{{ $latestVersionV2 := site.Params.latestV2 }}
 {{ $index := newScratch }}
 {{ $index.Add "index" slice }}
 {{ range where site.Pages "Section" "docs" }}
@@ -9,7 +10,7 @@
     {{ $versionPath = .Path }}
   {{ end }}
   {{ $version := index (split $versionPath "/") 1 }}
-  {{ if eq $version $latestVersion }}
+  {{ if or (eq $version $latestVersionV1) (eq $version $latestVersionV2) }}
     {{ $index.Add "index" (dict "title" .Title "url" .Permalink "body" (.Content | plainify | jsonify) "summary" .Summary "version" $version) }}
   {{ end }}{{ end }}
 {{ $index.Get "index" | jsonify }}
