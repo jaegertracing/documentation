@@ -167,7 +167,7 @@ Note:
 The following configuration is required to enable the SPM feature:
 
 - Set the `monitor.menuEnabled=true` property in [Jaeger UI configuration](../frontend-ui/#monitor)
-- Define the configuration for a Prometheus-compatible storage under `metric_backends:` in `jaeger_storage` extension, for eexample:
+- Define the configuration for a Prometheus-compatible storage under `metric_backends:` in `jaeger_storage` extension, for example:
 ```yaml
   jaeger_storage:
     backends:
