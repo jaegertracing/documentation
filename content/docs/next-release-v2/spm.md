@@ -166,13 +166,26 @@ Note:
 
 The following configuration is required to enable the SPM feature:
 
-- [Jaeger UI](../frontend-ui/#monitor)
-- Jaeger Query (TODO: these instructions need to be updated for config file)
-  - Set the `METRICS_STORAGE_TYPE` environment variable to `prometheus`.
-  - Optional: Set `--prometheus.server-url` (or `PROMETHEUS_SERVER_URL` environment variable)
-    to the URL of the prometheus server. Default: http://localhost:9090.
-  - Optional: Set `--prometheus.query.support-spanmetrics-connector=true` to explicitly enable the [SpanMetrics Connector][spanmetrics-conn] if you intend to use it. This will become the default behavior in the future.
-
+- Set the `monitor.menuEnabled=true` property in [Jaeger UI configuration](../frontend-ui/#monitor)
+- Define the configuration for a Prometheus-compatible storage under `metric_backends:` in `jaeger_storage` extension, for eexample:
+```yaml
+  jaeger_storage:
+    backends:
+      some_trace_storage:
+        ...
+    metric_backends:
+      some_metrics_storage:
+        prometheus:
+          endpoint: http://prometheus:9090
+          normalize_calls: true
+          normalize_duration: true
+```
+- Reference this metrics store in the `jaeger_query` extension:
+```yaml
+  jaeger_query:
+    traces: some_trace_storage
+    metrics_storage: some_metrics_storage
+```
 
 ## API
 

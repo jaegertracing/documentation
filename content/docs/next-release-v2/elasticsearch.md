@@ -1,33 +1,24 @@
 ---
-title: ElasticSearch
+title: Elasticsearch
 hasparent: true
 ---
 
 ## Introduction
 
-* Supported ES versions: 7.x, 8.x (since Jaeger v1.52.0)
+* Supported ES versions: 7.x, 8.x
 
-{{< danger >}}
-TODO update examples to use config properties, not CLI flags.
-{{< /danger >}}
+Elasticsearch version is automatically retrieved from root/ping endpoint. Based on this version Jaeger uses compatible index mappings and Elasticsearch REST API. The version can be explicitly provided via `version:` config property.
 
+Elasticsearch does not require initialization other than [installing and running Elasticsearch](https://www.elastic.co/downloads/elasticsearch). Once it is running, pass the correct configuration values to Jaeger.
 
-Elasticsearch version is automatically retrieved from root/ping endpoint.
-Based on this version Jaeger uses compatible index mappings and Elasticsearch REST API.
-The version can be explicitly provided via `--es.version=` flag.
-
-Elasticsearch does not require initialization other than
-[installing and running Elasticsearch](https://www.elastic.co/downloads/elasticsearch).
-Once it is running, pass the correct configuration values to **jaeger**.
-
-ElasticSearch also has the following officially supported resources available from the community and Elastic:
+Elasticsearch also has the following officially supported resources available from the community and Elastic:
 - [Docker container](https://hub.docker.com/_/elasticsearch) from Elastic for getting a single node up quickly
 - [Helm chart](https://artifacthub.io/packages/helm/elastic/elasticsearch) from Elastic
 - [Kubernetes Operator](https://github.com/openshift/elasticsearch-operator) from RedHat
 
 ## Configuration
 
-Here is [example configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-elasticsearch.yaml) for ElasticSearch.
+A sample configuration for Jaeger with Elasticsearch backend is available in the Jaeger repository: [config-elasticsearch.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-elasticsearch.yaml). In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go](https://github.com/jaegertracing/jaeger/blob/main/pkg/es/config/config.go#L86) as the authoritative source.
 
 ### Shards and Replicas
 
@@ -39,7 +30,7 @@ more information about choosing how many shards should be chosen for optimizatio
 
 [Elasticsearch rollover](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html) is an index management strategy that optimizes use of resources allocated to indices.
 For example, indices that do not contain any data still allocate shards, and conversely, a single index might contain significantly more data than the others.
-Jaeger by default stores data in daily indices which might not optimally utilize resources. Rollover feature can be enabled by `--es.use-aliases=true`.
+Jaeger by default stores data in daily indices which might not optimally utilize resources. Rollover feature can be enabled by `use_aliases: true` config property.
 
 Rollover lets you configure when to roll over to a new index based on one or more of the following criteria:
 
@@ -59,27 +50,35 @@ For automated rollover, please refer to [Elasticsearch ILM support](#ilm-support
 The following command prepares Elasticsearch for rollover deployment by creating index aliases, indices, and index templates:
 
 ```sh
-docker run -it --rm --net=host jaegertracing/jaeger-es-rollover:latest init http://localhost:9200 # <1>
+docker run -it --rm --net=host \
+  jaegertracing/jaeger-es-rollover:latest \
+  init http://localhost:9200 # <1>
 ```
 
 If you need to initialize archive storage, add `-e ARCHIVE=true`.
 
-After the initialization Jaeger can be deployed with `--es.use-aliases=true`.
+After the initialization Jaeger can be deployed with `use-aliases: true`.
 
 ### Roll over
 
 The next step is to periodically execute the rollover API which rolls the write alias to a new index based on supplied conditions. The command also adds a new index to the read alias to make new data available for search.
 
 ```shell
-docker run -it --rm --net=host -e CONDITIONS='{"max_age": "2d"}' jaegertracing/jaeger-es-rollover:latest rollover  http://localhost:9200 # <1>
+docker run -it --rm --net=host \
+  -e CONDITIONS='{"max_age": "2d"}' \
+  jaegertracing/jaeger-es-rollover:latest \
+  rollover  http://localhost:9200 # <1>
 ```
 
 <1> The command rolls the alias over to a new index if the age of the current write index is older than 2 days. For more conditions see [Elasticsearch docs](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html).
 
-The next step is to remove old indices from read aliases. It means that old data will not be available for search. This imitates the behavior of `--es.max-span-age` flag used in the default index-per-day deployment. This step could be optional and old indices could be simply removed by index cleaner in the next step.
+The next step is to remove old indices from read aliases. It means that old data will not be available for search. This imitates the behavior of `max_span_age:` config property used in the default index-per-day deployment. This step could be optional and old indices could be simply removed by index cleaner in the next step.
 
 ```sh
-docker run -it --rm --net=host -e UNIT=days -e UNIT_COUNT=7 jaegertracing/jaeger-es-rollover:latest lookback  http://localhost:9200 # <1>
+docker run -it --rm --net=host \
+  -e UNIT=days -e UNIT_COUNT=7 \
+  jaegertracing/jaeger-es-rollover:latest \
+  lookback http://localhost:9200 # <1>
 ```
 
 <1> Removes indices older than 7 days from read alias.
@@ -89,7 +88,10 @@ docker run -it --rm --net=host -e UNIT=days -e UNIT_COUNT=7 jaegertracing/jaeger
 The historical data can be removed with the `jaeger-es-index-cleaner` that is also used for daily indices.
 
 ```shell
-docker run -it --rm --net=host -e ROLLOVER=true jaegertracing/jaeger-es-index-cleaner:latest 14 http://localhost:9200 # <1>
+docker run -it --rm --net=host \
+  -e ROLLOVER=true \
+  jaegertracing/jaeger-es-index-cleaner:latest \
+  14 http://localhost:9200 # <1>
 ```
 
 <1> Remove indices older than 14 days.
@@ -97,11 +99,6 @@ docker run -it --rm --net=host -e ROLLOVER=true jaegertracing/jaeger-es-index-cl
 
 ## ILM support
 
-{{< warning >}}
-Experimental feature added in [release v1.22.0](https://github.com/jaegertracing/jaeger/releases/tag/v1.22.0).
-
-Supported Elasticsearch versions: 7.x
-{{< /warning >}}
 [Elasticsearch ILM](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-lifecycle-management.html) automatically manages indices according to performance, resiliency, and retention requirements.
 
 For example:
@@ -116,7 +113,8 @@ To enable ILM support:
   older than 1m and delete indices that are older than 2m.
 
   ```shell
-  curl -X PUT http://localhost:9200/_ilm/policy/jaeger-ilm-policy \
+  curl -X PUT \
+  http://localhost:9200/_ilm/policy/jaeger-ilm-policy \
   -H 'Content-Type: application/json; charset=utf-8' \
   --data-binary @- << EOF
   {
@@ -147,7 +145,10 @@ To enable ILM support:
 * Run elasticsearch initializer with `ES_USE_ILM=true`:
 
   ```shell
-  docker run -it --rm --net=host -e ES_USE_ILM=true jaegertracing/jaeger-es-rollover:latest init http://localhost:9200 # <1>
+  docker run -it --rm --net=host\
+    -e ES_USE_ILM=true \
+    jaegertracing/jaeger-es-rollover:latest \
+    init http://localhost:9200 # <1>
   ```
   <1> If you need to initialize archive storage, add `-e ARCHIVE=true`.
 
@@ -157,7 +158,7 @@ To enable ILM support:
   "ILM policy jaeger-ilm-policy doesn't exist in Elasticsearch. Please create it and rerun init"
   {{< /info >}}
 
-  After the initialization, deploy Jaeger with `--es.use-ilm=true` and `--es.use-aliases=true`.
+  After the initialization, deploy Jaeger with `use_ilm: true` and `use_aliases: true`.
 
 
 ## Upgrading
@@ -179,32 +180,35 @@ without waiting until indices created by Elasticsearch 6 are removed.
 
 1. Reindex all span indices to new indices with suffix `-1`:
 
-    ```bash
-    curl -ivX POST -H "Content-Type: application/json" http://localhost:9200/_reindex -d @reindex.json
-    {
-      "source": {
-        "index": "jaeger-span-*"
-      },
-      "dest": {
-        "index": "jaeger-span"
-      },
-      "script": {
-        "lang": "painless",
-        "source": "ctx._index = 'jaeger-span-' + (ctx._index.substring('jaeger-span-'.length(), ctx._index.length())) + '-1'"
-      }
-    }
-    ```
+```bash
+curl -ivX POST -H "Content-Type: application/json" \
+  http://localhost:9200/_reindex -d @reindex.json
+{
+  "source": {
+    "index": "jaeger-span-*"
+  },
+  "dest": {
+    "index": "jaeger-span"
+  },
+  "script": {
+    "lang": "painless",
+    "source": "ctx._index = 'jaeger-span-' + (ctx._index.substring('jaeger-span-'.length(), ctx._index.length())) + '-1'"
+  }
+}
+```
 
 2. Delete indices with old mapping:
 
     ```bash
-    curl -ivX DELETE -H "Content-Type: application/json" http://localhost:9200/jaeger-span-\*,-\*-1
+    curl -ivX DELETE -H "Content-Type: application/json" \
+      http://localhost:9200/jaeger-span-\*,-\*-1
     ```
 
 3. Create indices without `-1` suffix:
 
     ```bash
-    curl -ivX POST -H "Content-Type: application/json" http://localhost:9200/_reindex -d @reindex.json
+    curl -ivX POST -H "Content-Type: application/json" \
+      http://localhost:9200/_reindex -d @reindex.json
     {
       "source": {
         "index": "jaeger-span-*"
@@ -222,7 +226,8 @@ without waiting until indices created by Elasticsearch 6 are removed.
 4. Remove suffixed indices:
 
     ```bash
-    curl -ivX DELETE -H "Content-Type: application/json" http://localhost:9200/jaeger-span-\*-1
+    curl -ivX DELETE -H "Content-Type: application/json" \
+      http://localhost:9200/jaeger-span-\*-1
     ```
 
 Run the commands analogically for other Jaeger indices.

@@ -46,11 +46,11 @@ Under the hood, at the data model level, the Jaeger trace IDs are a sequence of 
 > Does having high availability of **jaeger-collector** improve the overall system performance like decreasing the dropped span count and having the less outage for trace collection? Is it recommended? If yes, why?
 
 These are the reasons to run multiple instances:
-  * Your clients send so much data that a single **jaeger collector role** is not able to accept it fast enough.
-  * You want higher availability, e.g., when you do rolling restarts of **jaeger collector role**s for upgrade, to have some instances still running and able to process inbound data.
+  * Your clients send so much data that a single **jaeger-collector** is not able to accept it fast enough.
+  * You want higher availability, e.g., when you do rolling restarts of **jaeger-collector**s for upgrade, to have some instances still running and able to process inbound data.
 
 These are NOT the reasons to run multiple instances:
-  * To avoid data loss. **jaeger** drops data when the backend storage is not able to save it fast enough. Increasing the number of **jaeger collector role** instances, with more memory allocated to their internal queues, could provide a small, temporary relief, but does not remove the bottleneck of the storage backend.
+  * To avoid data loss. Jaeger drops data when the backend storage is not able to save it fast enough. Increasing the number of **jaeger-collector** instances, with more memory allocated to their internal queues, could provide a small, temporary relief, but does not remove the bottleneck of the storage backend.
 
 ## How do I configure authentication for Jaeger UI
 

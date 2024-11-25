@@ -31,50 +31,11 @@ See [APIs](../apis/) for the list of all API ports.
 
 Jaeger can be customized via configuration YAML file (see [Configuration](../configuration/)). 
 
-
-**jaeger** is stateless and thus many instances of **jaeger** can be run in parallel. **jaeger** instances require almost no configuration, except for storage location, such as:
-
-Cassandra:
-```
-  jaeger_storage:
-    backends:
-      some_storage:
-        cassandra:
-          schema: 
-            keyspace: "jaeger_v1_dc1"
-          connection:
-            auth: 
-              basic:
-                username: "cassandra"
-                password: "cassandra"
-            tls:
-              insecure: true
-```
-
-OpenSearch:
-```
-  jaeger_storage:
-    backends:
-      some_storage:
-        opensearch:
-          index_prefix: "jaeger-main"
-```
-
-ElasticSearch:
-```
-  jaeger_storage:
-    backends:
-      some_storage:
-        elasticsearch:
-          index_prefix: "jaeger-main"
-      another_storage:
-        elasticsearch:
-          index_prefix: "jaeger-archive"
-```
+Jaeger **collector** is stateless and thus many instances of **collector** can be run in parallel. **collector** instances require almost no configuration, except for storage location, such as [Cassandra](../cassandra/#configuration) or [Elasticsearch](../elasticsearch/#configuration).
 
 ## Query Configuration
 
-The `jaeger_query` extension has a few deployment-related configuration options.
+The `jaeger_query` extension has a few deployment-related configuration options. In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/config.go#L16) as the authoritative source.
 
 ### Clock Skew Adjustment
 
@@ -82,26 +43,28 @@ Jaeger backend combines trace data from applications that are usually running on
 
 Sometimes these adjustments themselves make the trace hard to understand. For example, when repositioning the server span within the bounds of its parent span, Jaeger does not know the exact relationship between the request and response latencies, so it assumes they are equal and places the child span in the middle of the parent span (see [issue #961](https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244)).
 
-**jaeger** query extension supports configuration in the config file
+The `jaeger_query` extension supports a configuration property that controls how much clock skew adjustment should be allowed.
 
 ```
-query:
-  max-clock-skew-adjustment: 30s
+extensions:
+  jaeger_query:
+    max-clock-skew-adjustment: 30s
 ```
 
- that controls how much clock skew adjustment should be allowed. Setting this parameter to zero (`0s`) disables clock skew adjustment completely. This setting applies to all traces retrieved from the given query service. There is an open [ticket #197](https://github.com/jaegertracing/jaeger-ui/issues/197) to support toggling the adjustment on and off directly in the UI.
+ Setting this parameter to zero (`0s`) disables clock skew adjustment completely. This setting applies to all traces retrieved from the given query service. There is an open [ticket #197](https://github.com/jaegertracing/jaeger-ui/issues/197) to support toggling the adjustment on and off directly in the UI.
 
 ### UI Base Path
 
-The base path for all **jaeger** query extension HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running **jaeger** behind a reverse proxy. Here is example code to set the base path.
+The base path for all `jaeger_query` extension HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running Jaeger behind a reverse proxy. Here is example code to set the base path.
 
 ```
-query:
-  base-path: /
-  static-files: /go/bin/jaeger-ui-build/build
-  ui-config: /etc/jaeger/ui-config.json
-  grpc:
-  http:
+extensions:
+  jaeger_query:
+    base-path: /
+    ui:
+      config_file: /etc/jaeger/ui-config.json
+    grpc:
+    http:
 ```
 
 ### UI Customization and Embedding

@@ -3,37 +3,33 @@ title: Cassandra
 hasparent: true
 ---
 
-* Supported versions: 4+
+* Supported Cassandra versions: 4.x, 5.x
 
-{{< danger >}}
-TODO update examples to use config properties, not CLI flags.
-{{< /danger >}}
-
-Deploying Cassandra itself is out of scope for our documentation. One good
-source of documentation is the [Apache Cassandra Docs](https://cassandra.apache.org/doc/latest/).
+This page describes how to configure Jaeger to use an existing Cassandra cluster as a storage backend for traces. For instructions on how to deploy a Cassandra cluster, please refer to [Apache Cassandra Documentation](https://cassandra.apache.org/doc/latest/).
 
 Cassandra also has the following officially supported resources available from the community:
 - [Docker container](https://hub.docker.com/_/cassandra) for getting a single node up quickly
 - [Helm chart](https://artifacthub.io/packages/helm/bitnami/cassandra) from Bitnami
 - [Kubernetes Operator](https://github.com/k8ssandra/cass-operator) from DataStax
 
-#### Configuration
+## Configuration
 
-Configuration example for [Jaeger writing to Cassandra](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-cassandra.yaml).
+A sample configuration for Jaeger with Cassandra backend is available in the Jaeger repository: [config-cassandra.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-cassandra.yaml). In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go](https://github.com/jaegertracing/jaeger/blob/main/pkg/cassandra/config/config.go#L21) as the authoritative source.
 
-#### Schema script
+## Initializing Schema
 
-A script is provided to initialize Cassandra keyspace and schema
-using Cassandra's interactive shell [`cqlsh`][cqlsh]:
+Before Jaeger can use a Cassandra cluster as storage backend, a keyspace and database schema
+must be created. There is a script in the [jaeger](https://github.com/jaegertracing/jaeger) repository that generates the initialization instruction that can be executed using Cassandra's interactive shell [`cqlsh`][cqlsh]:
 
 ```sh
 MODE=test sh ./plugin/storage/cassandra/schema/create.sh | cqlsh
 ```
 
-Or using the published Docker image (make sure to provide the right IP address):
+The same script is packaged as a container image (make sure to provide the right IP address):
 ```sh
 docker run \
   -e CQLSH_HOST={server IP address}  \
+  -e MODE=prod \
   jaegertracing/jaeger-cassandra-schema:{{< currentVersion >}}
 ```
 
@@ -43,24 +39,15 @@ where `{datacenter}` is the name used in the Cassandra configuration / network t
 The script also allows overriding TTL, keyspace name, replication factor, etc.
 Run the script without arguments to see the full list of recognized parameters.
 
-**Note**: See [README](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/cassandra/schema/README.md) for more details on Cassandra schema management.
+* **Note 1**: See [README](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/cassandra/schema/README.md) for more details on Cassandra schema management.
+* **Note 2**: In the near future the logic for schema initialization will be moved to the Jaeger binary directly (subscribe to [Issue #5797](https://github.com/jaegertracing/jaeger/issues/5797) for updates).
 
-#### TLS support
+## TLS support
 
-Jaeger supports TLS client to node connections as long as you've configured
-your Cassandra cluster correctly. After verifying with e.g. `cqlsh`, you can
-configure the collector and query like this:
+Jaeger supports TLS client-to-node connections as long as you've configured
+your Cassandra cluster correctly. You can specify paths to the TLS certificates (`.pem` files) un the `tls:` section under `connection:`. See [configtls.ClientConfig](https://github.com/open-telemetry/opentelemetry-collector/blob/main/config/configtls/README.md#client-configuration) in the OpenTelemetry Collector repository for available properties.
 
-```sh
-docker run \
-  -e CASSANDRA_SERVERS=<...> \
-  -e CASSANDRA_TLS=true \
-  -e CASSANDRA_TLS_SERVER_NAME="CN-in-certificate" \
-  -e CASSANDRA_TLS_KEY=<path to client key file> \
-  -e CASSANDRA_TLS_CERT=<path to client cert file> \
-  -e CASSANDRA_TLS_CA=<path to your CA cert file> \
-  jaegertracing/jaeger-collector:{{< currentVersion >}}
-```
+**Tip**: verify the correctness of your TLS certificates using `cqlsh` first.
 
 The schema tool also supports TLS. You need to make a custom cqlshrc file like
 so:
@@ -86,6 +73,6 @@ usercert = ~/.cassandra/client-cert
 # validate = false
 ```
 
-#### Compatible Backends
+## Compatible Backends
 
 * ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
