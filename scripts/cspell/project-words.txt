@@ -20,7 +20,6 @@ dropwizard
 dsoie
 eddsa
 emsgsize
-equipped
 expvar
 fargate
 flink
@@ -32,7 +31,6 @@ hasparent
 healthcheck
 healthcheckv2
 healthz
-healtz
 hostnames
 hostport
 htpasswd
@@ -79,7 +77,6 @@ otel
 otlp
 outreachy
 parentbased
-potpose
 prometheusexporter
 promscale
 proto
@@ -112,7 +109,6 @@ usercert
 userkey
 valuen
 vlog
-volz
 weaveworks
 workqueue
 xvzf
