@@ -53,20 +53,73 @@ simulator to generate trace data.
 
 If generating traces manually is preferred, the [Sample App: HotROD](../getting-started/#-hotrod-demo) can be started via docker. Be sure to include `--net monitor_backend` in the `docker run` command.
 
+## Configuration
+
+An example configuration is available in the Jaeger repository: [config-spm.yaml](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm.yaml). The following steps are required to enable the SPM feature:
+
+* Enable the [SpanMetrics Connector][spanmetrics-conn] in the pipeline:
+```yaml
+# Declare an exporter for metrics produced by the connector.
+# For example, a Prometheus server may be configured to scrape 
+# the metrics from this endpoint.
+exporters:
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+
+# Declare spanmetrics connector.
+connectors:
+  spanmetrics:
+    # any connector configuration options
+    ...
+
+# Enable the spanmetrics connector to bridge 
+# the traces pipeline into the metrics pipeline.
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [jaeger_storage_exporter, spanmetrics]
+    metrics/spanmetrics:
+      receivers: [spanmetrics]
+      exporters: [prometheus]
+```
+* Define a remote PromQL-compatible storage under `metric_backends:` in the `jaeger_storage` extension:
+```yaml
+extensions:
+  jaeger_storage:
+    backends:
+      some_trace_storage:
+        ...
+    metric_backends:
+      some_metrics_storage:
+        prometheus:
+          endpoint: http://prometheus:9090
+```
+* Reference this metrics store in the `jaeger_query` extension:
+```yaml
+extensions:
+  jaeger_query:
+    traces: some_trace_storage
+    metrics_storage: some_metrics_storage
+```
+* Set the `monitor.menuEnabled=true` property in the [Jaeger UI configuration](../frontend-ui/#monitor).
+
 ## Architecture
 
-The RED metrics queried by Jaeger for the Monitor tab are the result of processing the collected span data by the [SpanMetrics Connector][spanmetrics-conn] component configured
-within Jaeger pipeline. These metrics are exported (via prometheus
-exporters) to a Prometheus-compatible metrics store.
+In addition to the standard Jaeger architecture, the SPM feature requires
+the following additional components:
 
-It is important emphasize that this is a "read-only" feature and,
-as such, is only relevant to the Jaeger Query component.
+- A [SpanMetrics Connector][spanmetrics-conn] is introduced in the pipeline that receives trace data (spans) and generates RED metrics.
+- The generated metrics are exported to a Prometheus-compatible metrics store. In the provided example this is achieved by defining a `prometheus` exporter that opens an HTTP endpoint, and configuring a Prometheus server to scape the metrics from that endpoint. An alternative approach could be a push-style exporter that writes to a remote metrics store.
+- An external Metrics Store that supports PromQL queries.
+- A configuration in the `jaeger_query` extension to reference the external metrics store.
 
 {{<mermaid align="center">}}
 graph
     OTLP_EXPORTER[OTLP Exporter] --> TRACE_RECEIVER
 
-    subgraph Service
+    subgraph Application
         subgraph OpenTelemetry SDK
             OTLP_EXPORTER
         end
@@ -74,25 +127,26 @@ graph
 
     TRACE_RECEIVER[Trace Receiver] --> |spans| SPANMETRICS_CONN[SpanMetrics Connector]
     TRACE_RECEIVER --> |spans| TRACE_EXPORTER[Trace Exporter]
-    TRACE_EXPORTER --> |spans| COLLECTOR[Jaeger Collector]
-    SPANMETRICS_CONN --> |metrics| PROMETHEUS_EXPORTER[Prometheus/PrometheusRemoteWrite Exporter]
+    TRACE_EXPORTER --> |spans| SPAN_STORE[(Trace Storage)]
+    SPANMETRICS_CONN --> |metrics| PROMETHEUS_EXPORTER[Prometheus Exporter]
     PROMETHEUS_EXPORTER --> |metrics| METRICS_STORE[(Metrics Storage)]
 
-    COLLECTOR --> |spans| SPAN_STORE[(Span Storage)]
     SPAN_STORE --> QUERY[Jaeger Query]
     METRICS_STORE --> QUERY
     QUERY --> UI[Jaeger UI]
 
-    subgraph OpenTelemetry Collector
+    subgraph Jaeger all-in-one
         subgraph Pipeline
             TRACE_RECEIVER
             SPANMETRICS_CONN
             TRACE_EXPORTER
             PROMETHEUS_EXPORTER
+            QUERY
+            UI
         end
     end
 
-    style Service fill:#DFDFDF,color:black
+    style Application fill:#DFDFDF,color:black
 
     style OTLP_EXPORTER fill:#404CA8,color:white
     style TRACE_RECEIVER fill:#404CA8,color:white
@@ -102,7 +156,6 @@ graph
 
     style UI fill:#9AEBFE,color:black
     style QUERY fill:#9AEBFE,color:black
-    style COLLECTOR fill:#9AEBFE,color:black
 {{< /mermaid >}}
 
 ### Metrics Storage
@@ -111,7 +164,7 @@ Any PromQL-compatible backend is supported by Jaeger Query. A list of these have
 been compiled by Julius Volz in:
 https://promlabs.com/blog/2020/11/26/an-update-on-promql-compatibility-across-vendors
 
-## Derived Time Series
+### Derived Time Series
 
 It is worth understanding the additional metrics and time series that the
 [SpanMetrics Connector][spanmetrics-conn] will generate in metrics storage to help
@@ -160,33 +213,6 @@ Note:
   configured in the spanmetrics connector will alter the calculation above.
 - Querying custom dimensions are not supported by SPM and will be aggregated over.
 
-## Configuration
-
-### Enabling SPM
-
-The following configuration is required to enable the SPM feature:
-
-- Set the `monitor.menuEnabled=true` property in [Jaeger UI configuration](../frontend-ui/#monitor)
-- Define the configuration for a Prometheus-compatible storage under `metric_backends:` in `jaeger_storage` extension, for example:
-```yaml
-  jaeger_storage:
-    backends:
-      some_trace_storage:
-        ...
-    metric_backends:
-      some_metrics_storage:
-        prometheus:
-          endpoint: http://prometheus:9090
-          normalize_calls: true
-          normalize_duration: true
-```
-- Reference this metrics store in the `jaeger_query` extension:
-```yaml
-  jaeger_query:
-    traces: some_trace_storage
-    metrics_storage: some_metrics_storage
-```
-
 ## API
 
 ### gRPC/Protobuf
@@ -202,65 +228,65 @@ the HTTP API.
 
 ## Troubleshooting
 
-### Check the /metrics endpoint
+### Check Jaeger-Prometheus connectivity
 
-The `/metrics` endpoint can be used to check if spans for specific services were received.
-The `/metrics` endpoint is served from the admin port.
-Assuming that Jaeger all-in-one and query are available under hosts named `all-in-one`
-and `jaeger-query` respectively, here are sample `curl` calls to obtain the metrics:
+Verify that Jaeger *query** can connect to Prometheus-compatible metric store by inspecting Jaeger's internal telemetry.
+
+The Jaeger configuration needs to have a metrics endpoint enabled in the `telemetry:` section. Note that the internal telemetry should be exposed on a different port (e.g. `8888`) than the port used to export metrics from the `spanmetrics` connector (e.g. `8889`).
+
+```yaml
+service:
+  ...
+  telemetry:
+    resource:
+      service.name: jaeger
+    metrics:
+      level: detailed
+      address: 0.0.0.0:8888
+```
+
+The `/metrics` endpoint on this port can be used to check if UI queries for SPM data are successful: 
 
 ```shell
-$ curl http://all-in-one:14269/metrics
-
-$ curl http://jaeger-query:16687/metrics
+$ curl -s http://jaeger:8888/metrics | grep jaeger_metricstore
 ```
 
 The following metrics are of most interest:
-
-```shell
-# all-in-one
-jaeger_requests_total
-jaeger_latency_bucket
-
-# jaeger-query
-jaeger_query_requests_total
-jaeger_query_latency_bucket
-```
+  * `jaeger_metricstore_requests_total`
+  * `jaeger_metricstore_latency_bucket`
 
 Each of these metrics will have a label for each of the following operations:
-```shell
-get_call_rates
-get_error_rates
-get_latencies
-get_min_step_duration
-```
+  * `get_call_rates`
+  * `get_error_rates`
+  * `get_latencies`
+  * `get_min_step_duration`
 
 If things are working as expected, the metrics with label `result="ok"` should
 be incrementing, and `result="err"` being static. For example:
 ```shell
-jaeger_query_requests_total{operation="get_call_rates",result="ok"} 18
-jaeger_query_requests_total{operation="get_error_rates",result="ok"} 18
-jaeger_query_requests_total{operation="get_latencies",result="ok"} 36
+jaeger_metricstore_requests_total{operation="get_call_rates",result="ok"} 18
+jaeger_metricstore_requests_total{operation="get_error_rates",result="ok"} 18
+jaeger_metricstore_requests_total{operation="get_latencies",result="ok"} 36
 
-jaeger_query_latency_bucket{operation="get_call_rates",result="ok",le="0.005"} 5
-jaeger_query_latency_bucket{operation="get_call_rates",result="ok",le="0.01"} 13
-jaeger_query_latency_bucket{operation="get_call_rates",result="ok",le="0.025"} 18
+jaeger_metricstore_latency_bucket{operation="get_call_rates",result="ok",le="0.005"} 5
+jaeger_metricstore_latency_bucket{operation="get_call_rates",result="ok",le="0.01"} 13
+jaeger_metricstore_latency_bucket{operation="get_call_rates",result="ok",le="0.025"} 18
 
-jaeger_query_latency_bucket{operation="get_error_rates",result="ok",le="0.005"} 7
-jaeger_query_latency_bucket{operation="get_error_rates",result="ok",le="0.01"} 13
-jaeger_query_latency_bucket{operation="get_error_rates",result="ok",le="0.025"} 18
+jaeger_metricstore_latency_bucket{operation="get_error_rates",result="ok",le="0.005"} 7
+jaeger_metricstore_latency_bucket{operation="get_error_rates",result="ok",le="0.01"} 13
+jaeger_metricstore_latency_bucket{operation="get_error_rates",result="ok",le="0.025"} 18
 
-jaeger_query_latency_bucket{operation="get_latencies",result="ok",le="0.005"} 7
-jaeger_query_latency_bucket{operation="get_latencies",result="ok",le="0.01"} 25
-jaeger_query_latency_bucket{operation="get_latencies",result="ok",le="0.025"} 36
+jaeger_metricstore_latency_bucket{operation="get_latencies",result="ok",le="0.005"} 7
+jaeger_metricstore_latency_bucket{operation="get_latencies",result="ok",le="0.01"} 25
+jaeger_metricstore_latency_bucket{operation="get_latencies",result="ok",le="0.025"} 36
 ```
 
 If there are issues reading metrics from Prometheus such as a failure to reach
 the Prometheus server, then the `result="err"` metrics will be incremented. For example:
 ```shell
-jaeger_query_requests_total{operation="get_call_rates",result="err"} 4
-jaeger_query_requests_total{operation="get_error_rates",result="err"} 4
-jaeger_query_requests_total{operation="get_latencies",result="err"} 8
+jaeger_metricstore_requests_total{operation="get_call_rates",result="err"} 4
+jaeger_metricstore_requests_total{operation="get_error_rates",result="err"} 4
+jaeger_metricstore_requests_total{operation="get_latencies",result="err"} 8
 ```
 
 At this point, checking the logs will provide more insight towards root causing
@@ -269,45 +295,42 @@ the problem.
 ### Query Prometheus
 
 Graphs may still appear empty even when the above Jaeger metrics indicate successful reads
-from Prometheus. In this case, query Prometheus directly on any of these metrics:
+from Prometheus. In this case, query Prometheus directly on any of the metrics that should be generated by the `spanmetrics` connector:
 
-- `duration_bucket`
-- `duration_milliseconds_bucket`
-- `duration_seconds_bucket`
-- `calls`
-- `calls_total`
+- `traces_span_metrics_duration_milliseconds_bucket`
+- `traces_span_metrics_calls_total`
 
-You should expect to see these counters increasing as spans are being emitted
-by services to the OpenTelemetry Collector.
+You should expect to see these counters increasing as traces are being received by Jaeger.
 
-### Viewing Logs
+### Check the Logs
 
 If the above metrics are present in Prometheus, but not appearing in the Monitor
 tab, it means there is a discrepancy between what metrics Jaeger expects to see in
 Prometheus and what metrics are actually available.
 
-This can be confirmed by increasing the log level by setting the following
-environment variable:
+This can be confirmed by increasing the log level:
 
-```shell
-LOG_LEVEL=debug
+```yaml
+service:
+  telemetry:
+    ...
+    logs:
+      level: debug
 ```
 
-Outputting logs that resemble the following:
-```json
+Outputting logs that resemble the following (formatted for readability):
+```
+2024-11-26T19:09:43.152Z debug metricsstore/reader.go:258 Prometheus query results	
 {
-    "level": "debug",
-    "ts": 1688042343.4464543,
-    "caller": "metricsstore/reader.go:245",
-    "msg": "Prometheus query results",
-    "results": "",
-    "query": "sum(rate(calls{service_name =~ \"driver\", span_kind =~ \"SPAN_KIND_SERVER\"}[10m])) by (service_name,span_name)",
-    "range":
-    {
-        "Start": "2023-06-29T12:34:03.081Z",
-        "End": "2023-06-29T12:39:03.081Z",
-        "Step": 60000000000
-    }
+  "kind": "extension",
+  "name": "jaeger_storage",
+  "results": "",
+  "query": "sum(rate(traces_span_metrics_calls_total{service_name =~ \"redis\", span_kind =~ \"SPAN_KIND_SERVER\"}[10m])) by (service_name,span_name)",
+  "range": {
+    "Start": "2024-11-26T19:04:43.14Z",
+    "End": "2024-11-26T19:09:43.14Z",
+    "Step": 60000000000
+  }
 }
 ```
 
@@ -317,13 +340,21 @@ histogram metrics (e.g. `duration_milliseconds_bucket`). As we discovered,
 Jaeger is looking for the `calls` (and `duration_bucket`) metric names,
 while the OpenTelemetry Collector is writing `calls_total` (and `duration_milliseconds_bucket`).
 
-The resolution, in this specific case, is to set environment variables telling Jaeger
+The resolution, in this specific case, is to pass parameters to the metrics backend configuration telling Jaeger
 to normalize the metric names such that it knows to search for `calls_total` and
 `duration_milliseconds_bucket` instead, like so:
 
 ```shell
-PROMETHEUS_QUERY_NORMALIZE_CALLS=true
-PROMETHEUS_QUERY_NORMALIZE_DURATION=true
+extensions:
+  jaeger_storage:
+    backends:
+      ...
+    metric_backends:
+      some_metrics_storage:
+        prometheus:
+          endpoint: http://prometheus:9090
+          normalize_calls: true
+          normalize_duration: true
 ```
 
 ### Checking OpenTelemetry Collector Config
@@ -369,8 +400,7 @@ both ingress and egress spans in the `server` and `client` span kinds, respectiv
 [metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto
 [openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53
 [opentelemetry-collector]: https://opentelemetry.io/docs/collector/
-[spanmetrics]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanmetricsprocessor#section-readme
-[spanmetrics-conn]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector#section-readme
+[spanmetrics-conn]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/README.md
 [prom-metric-labels]: https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels
 [http-api-readme]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api
 [spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L23
@@ -381,7 +411,16 @@ both ingress and egress spans in the `server` and `client` span kinds, respectiv
 If logs contain the error resembling: `failed executing metrics query: client_error: client error: 403`,
 it is possible that the Prometheus server is expecting a bearer token.
 
-Jaeger Query (and all-in-one) can be configured to pass the bearer token in
-metrics queries via the `--prometheus.token-file` command-line parameter
-(or the `PROMETHEUS_TOKEN_FILE` environment variable), with its value set to
-the path of the file containing the bearer token.
+Jaeger can be configured to pass the bearer token in the metrics queries. The token can be defined via the `token_file_path:` property:
+```yaml
+extensions:
+  jaeger_storage:
+    backends:
+      ...
+    metric_backends:
+      some_metrics_storage:
+        prometheus:
+          endpoint: http://prometheus:9090
+          token_file_path: /path/to/token/file
+          token_override_from_context: true
+```
