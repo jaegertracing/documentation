@@ -59,6 +59,7 @@ mentee
 mentees
 mentorships
 metricsquery
+metricstore
 metricsstore
 microsim
 myapp

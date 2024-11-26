@@ -111,7 +111,7 @@ In addition to the standard Jaeger architecture, the SPM feature requires
 the following additional components:
 
 - A [SpanMetrics Connector][spanmetrics-conn] is introduced in the pipeline that receives trace data (spans) and generates RED metrics.
-- The generated metrics are exported to a Prometheus-compatible metrics store. In the provided example this is achieved by defining a `prometheus` exporter that opens an HTTP endpoint, and configuring a Prometheus server to scape the metrics from that endpoint. An alternative approeach could be a push-style exporter that writes to a remote metrics store.
+- The generated metrics are exported to a Prometheus-compatible metrics store. In the provided example this is achieved by defining a `prometheus` exporter that opens an HTTP endpoint, and configuring a Prometheus server to scape the metrics from that endpoint. An alternative approach could be a push-style exporter that writes to a remote metrics store.
 - An external Metrics Store that supports PromQL queries.
 - A configuration in the `jaeger_query` extension to reference the external metrics store.
 
