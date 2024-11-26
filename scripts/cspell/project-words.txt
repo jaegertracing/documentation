@@ -4,7 +4,6 @@ autoscaler
 bitnami
 bootcamp
 certfile
-changeme
 clickhouse
 cncf
 configtls
