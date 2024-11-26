@@ -18,6 +18,8 @@ developercertificate
 downsampling
 dropwizard
 dsoie
+eddsa
+emsgsize
 expvar
 fargate
 flink
