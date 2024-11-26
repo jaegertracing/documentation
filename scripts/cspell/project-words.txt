@@ -59,8 +59,8 @@ mentee
 mentees
 mentorships
 metricsquery
-metricstore
 metricsstore
+metricstore
 microsim
 myapp
 myappnamespace
