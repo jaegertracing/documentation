@@ -958,7 +958,7 @@ Error from server (InternalError): Internal error occurred: failed calling webho
 In order to workaround that issue:
 
 - set `hostNetwork:true` on `jaeger-operator` deployment
-- change `/healtz` and `/readyz` ports from 8081 to other value
+- change `/healthz` and `/readyz` ports from 8081 to other value
 - change `kube-rbac-proxy` secure port from 8443 to other value
 - change `webhook-server` port from 9443 to other value
   - this setting is controlled by `webhook-bind-port` flag

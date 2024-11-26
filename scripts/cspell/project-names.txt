@@ -4,6 +4,9 @@ Pavol Loffay pavolloffay
 Joe Farro
 Juraci Paixão Kröhling
 
+# Prometheus
+Julius Volz
+
 # Other names (sometimes from github links)
 robbert
 
