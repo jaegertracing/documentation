@@ -16,7 +16,7 @@ Jaeger represents tracing data in a data model inspired by the [OpenTracing Spec
 
 A **span** represents a logical unit of work that has an operation name, the start time of the operation, and the duration. Spans may be nested and ordered to model causal relationships.
 
-![Traces And Spans](/img/spans-traces.png)
+[![Traces And Spans](/img/spans-traces.png)](/img/spans-traces.png)
 
 ### Trace
 

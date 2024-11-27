@@ -31,13 +31,13 @@ The two most common deployment options for a scalable Jaeger backend are direct-
 
 In this deployment the **collector**s receive the data from traced applications and write it directly to storage. The storage must be able to handle both average and peak traffic. The **collector**s may use an in-memory queue to smooth short-term traffic peaks, but a sustained traffic spike may result in dropped data if the storage is not able to keep up.
 
-![Architecture](/img/architecture-v2-2024.png)
+[![Architecture](/img/architecture-v2-2024.png)](/img/architecture-v2-2024.png)
 
 ### Via Kafka
 
 To prevent data loss between **collector**s and storage, Kafka can be used as an intermediary, persistent queue. The **collector**s are configured with Kafka exporters. An additional component, **ingester**, needs to be deployed to read data from Kafka and save it to storage. Multiple **ingester**s can be deployed to scale up ingestion; they will automatically partition the load across them. In practice, an **ingester** is very similar to a **collector**, only configured with a Kafka receiver instead of RPC-based receivers.
 
-![Architecture](/img/architecture-v2-kafka-2024.png)
+[![Architecture](/img/architecture-v2-kafka-2024.png)](/img/architecture-v2-kafka-2024.png)
 
 ## With OpenTelemetry Collector
 
@@ -45,7 +45,7 @@ You **do not need** to use the OpenTelemetry Collector to operate Jaeger, becaus
 
 The OpenTelemetry Collector supports Jaeger's Remote Sampling protocol and can either serve static configurations from config files directly, or proxy the requests to the Jaeger backend (e.g., when using adaptive sampling).
 
-![Architecture](/img/architecture-v2-otel.png)
+[![Architecture](/img/architecture-v2-otel.png)](/img/architecture-v2-otel.png)
 
 ### OpenTelemetry Collector as a sidecar / host agent
 
@@ -75,7 +75,7 @@ The Jaeger binary is build on top of the OpenTelemetry Collector framework and i
   * Upstream components from `opentelemetry-collector-contrib`, such as Kafka Exporter and Receiver, Tail Sampling Processor, etc.
   * Jaeger own components, such as Jaeger Storage Exporter, Jaeger Query Extension, etc.
 
-![Architecture](/img/architecture-v2-binary.png)
+[![Architecture](/img/architecture-v2-binary.png)](/img/architecture-v2-binary.png)
 
 ### Jaeger Components
 

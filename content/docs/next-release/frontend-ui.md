@@ -185,7 +185,7 @@ http://localhost:16686/search?
     uiEmbed=v0
 ```
 
-![Embed Search Traces](/img/frontend-ui/embed-search-traces.png)
+[![Embed Search Traces](/img/frontend-ui/embed-search-traces.png)](/img/frontend-ui/embed-search-traces.png)
 
 #### Configuration options
 
@@ -206,7 +206,7 @@ http://localhost:16686/search?
     uiSearchHideGraph=1
 ```
 
-![Embed Search Traces without Graph](/img/frontend-ui/embed-search-traces-hide-graph.png)
+[![Embed Search Traces without Graph](/img/frontend-ui/embed-search-traces-hide-graph.png)](/img/frontend-ui/embed-search-traces-hide-graph.png)
 
 ### Trace Page
 
@@ -218,11 +218,11 @@ For example:
 ```sh
 http://localhost:16686/trace/{trace-id}?uiEmbed=v0
 ```
-![Embed Trace view](/img/frontend-ui/embed-trace-view.png)
+[![Embed Trace view](/img/frontend-ui/embed-trace-view.png)](/img/frontend-ui/embed-trace-view.png)
 
 If we have navigated to this view from the search traces page we'll have a button to go back to the results page.
 
-![Embed Trace view](/img/frontend-ui/embed-trace-view-with-back-button.png)
+[![Embed Trace view](/img/frontend-ui/embed-trace-view-with-back-button.png)](/img/frontend-ui/embed-trace-view-with-back-button.png)
 
 #### Configuration options
 
@@ -235,7 +235,7 @@ http://localhost:16686/trace/{trace-id}?
     uiEmbed=v0&
     uiTimelineCollapseTitle=1
 ```
-![Embed Trace view](/img/frontend-ui/embed-trace-view-with-collapse.png)
+[![Embed Trace view](/img/frontend-ui/embed-trace-view-with-collapse.png)](/img/frontend-ui/embed-trace-view-with-collapse.png)
 
 * `uiTimelineHideMinimap=1` removes the minimap, entirely, regardless of whether the trace header is expanded or not.
 
@@ -244,7 +244,7 @@ http://localhost:16686/trace/{trace-id}?
     uiEmbed=v0&
     uiTimelineHideMinimap=1
 ```
-![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-minimap.png)
+[![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-minimap.png)](/img/frontend-ui/embed-trace-view-with-hide-minimap.png)
 
 * `uiTimelineHideSummary=1` - removes the trace summary information (number of services, etc.) entirely, regardless of whether the trace header is expanded or not.
 
@@ -253,7 +253,7 @@ http://localhost:16686/trace/{trace-id}?
     uiEmbed=v0&
     uiTimelineHideSummary=1
 ```
-![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-summary.png)
+[![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-summary.png)](/img/frontend-ui/embed-trace-view-with-hide-summary.png)
 
 We can also combine the options:
 ```
@@ -262,4 +262,4 @@ http://localhost:16686/trace/{trace-id}?
     uiTimelineHideMinimap=1&
     uiTimelineHideSummary=1
 ```
-![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-details-and-hide-minimap.png)
+[![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-details-and-hide-minimap.png)](/img/frontend-ui/embed-trace-view-with-hide-details-and-hide-minimap.png)
