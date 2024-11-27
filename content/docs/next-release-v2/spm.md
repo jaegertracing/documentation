@@ -248,7 +248,7 @@ service:
 The `/metrics` endpoint on this port can be used to check if UI queries for SPM data are successful: 
 
 ```shell
-$ curl -s http://jaeger:8888/metrics | grep jaeger_metricstore
+curl -s http://jaeger:8888/metrics | grep jaeger_metricstore
 ```
 
 The following metrics are of most interest:
