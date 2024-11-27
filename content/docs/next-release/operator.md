@@ -9,6 +9,10 @@ The Jaeger Operator is an implementation of a [Kubernetes Operator](https://kube
 
 A Kubernetes application is an application that is both deployed on Kubernetes and managed using the Kubernetes APIs and `kubectl` (kubernetes) or `oc` (OKD) tooling. To be able to make the most of Kubernetes, you need a set of cohesive APIs to extend in order to service and manage your apps that run on Kubernetes. Think of Operators as the runtime that manages this type of app on Kubernetes.
 
+{{< warning >}}
+This document assumes that version `v{{< currentVersion >}}` of the Jaeger Operator has been released, which may not be the case since the operator releases are not synchronized with the main Jaeger releases. Please check the [jaeger-operator](https://github.com/jaegertracing/jaeger-operator/releases/) repository for available releases and adjust the installation commands accordingly.
+{{< /warning >}}
+
 # Installing the Operator
 
 The Jaeger Operator can be installed in Kubernetes-based clusters and is able to watch for new Jaeger custom resources (CR) in specific namespaces, or across the entire cluster. There is typically only one Jaeger Operator per cluster, but there might be at most one Jaeger Operator per namespace in multi-tenant scenarios. When a new Jaeger CR is detected, an operator will attempt to set itself as the owner of the resource, setting a label `jaegertracing.io/operated-by` to the new CR, with the operator's namespace and name as the label's value.
