@@ -1,36 +1,26 @@
 ---
 title: Windows Service Deployment
 hasparent: true
+widescreen: true
 ---
 
-In Windows environments, Jaeger processes can be hosted and managed as Windows services controlled via the `sc` utility.  To configure such services on Windows, download [nssm.exe](https://nssm.cc/download) for the appropriate architecture, and issue commands similar to how Jaeger is typically run.  The example below showcases a basic Elasticsearch setup, configured using both environment variables and process arguments.
+In Windows environments, Jaeger processes can be hosted and managed as Windows services controlled via the `nssm` utility. To configure such services on Windows, download [nssm.exe](https://nssm.cc/download) for the appropriate architecture, and issue commands similar to how Jaeger is typically run.
 
-{{< danger >}}
-This page has not yet been updated to use the new configuration file required by Jaeger v2.
-{{< /danger >}}
+It is easiest to run Jaeger in the **all-in-mode** mode. You can run it without a configuration file, and it will use the default in-memory storage. To customize its behavior or to connect to a more resilient storage, a configuration file is required. See [Configuration](../configuration/) for more details.
 
-## Collector
+Here's how to set Jaeger up as a Windows service:
+
+1. Create a configuration file, e.g., `C:\Jaeger\config.yaml`.
+2. Install and configure the Jaeger service:
+
 ```bat
-nssm install JaegerCollector C:\Jaeger\jaeger.exe --es.server-urls=http://localhost:9200 --es.username=jaeger --es.password=PASSWORD
+nssm install Jaeger C:\Jaeger\jaeger.exe --config=C:\Jaeger\config.yaml
 
-nssm set JaegerCollector AppStdout C:\Jaeger\jaeger.out.log
-nssm set JaegerCollector AppStderr C:\Jaeger\jaeger.err.log
-nssm set JaegerCollector Description Jaeger Collector service
-nssm set JaegerCollector AppEnvironmentExtra SPAN_STORAGE_TYPE=elasticsearch
+nssm set Jaeger AppStdout C:\Jaeger\jaeger.out.log
+nssm set Jaeger AppStderr C:\Jaeger\jaeger.err.log
+nssm set Jaeger Description Jaeger All-in-One
 
-nssm start JaegerCollector
+nssm start Jaeger
 ```
 
-## Query UI
-```bat
-nssm install JaegerUI C:\Jaeger\jaeger-query.exe --es.server-urls=http://localhost:9200 --es.username=jaeger --es.password=PASSWORD
-
-nssm set JaegerUI AppStdout C:\Jaeger\jaeger-ui.out.log
-nssm set JaegerUI AppStderr C:\Jaeger\jaeger-ui.err.log
-nssm set JaegerUI Description Jaeger Query service
-nssm set JaegerUI AppEnvironmentExtra SPAN_STORAGE_TYPE=elasticsearch
-
-nssm start JaegerUI
-```
-
-For additional information & docs, please see [the NSSM usage guide.](https://nssm.cc/usage)
+For additional information & docs, please see [the NSSM usage guide](https://nssm.cc/usage) and [Jaeger Configuration](../configuration/).
