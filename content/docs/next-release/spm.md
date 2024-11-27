@@ -3,7 +3,7 @@ title: Service Performance Monitoring (SPM)
 hasparent: true
 ---
 
-![Service Performance Monitoring](/img/frontend-ui/spm.png)
+[![Service Performance Monitoring](/img/frontend-ui/spm.png)](/img/frontend-ui/spm.png)
 
 Surfaced in Jaeger UI as the "Monitor" tab, the motivation for this feature is
 to help identify interesting traces (e.g. high QPS, slow or erroneous requests)

@@ -23,7 +23,7 @@ Jaeger represents tracing data in a data model inspired by the [OpenTracing Spec
 
 A **span** represents a logical unit of work that has an operation name, the start time of the operation, and the duration. Spans may be nested and ordered to model causal relationships.
 
-![Traces And Spans](/img/spans-traces.png)
+[![Traces And Spans](/img/spans-traces.png)](/img/spans-traces.png)
 
 ### Trace
 
@@ -44,13 +44,13 @@ In this deployment the collectors receive the data from traced applications and 
 
 Collectors are able to centrally serve sampling configuration to the SDKs, known as [remote sampling mode](../sampling/#remote-sampling). They can also enable automatic sampling configuration calculation, known as [adaptive sampling](../sampling/#adaptive-sampling).
 
-![Architecture](/img/architecture-v1-2023.png)
+[![Architecture](/img/architecture-v1-2023.png)](/img/architecture-v1-2023.png)
 
 ### Via Kafka
 
 To prevent data loss between collectors and storage, Kafka can be used as an intermediary, persistent queue. An additional component, **jaeger-ingester**, needs to be deployed to read data from Kafka and save to the database. Multiple **jaeger-ingester**s can be deployed to scale up ingestion; they will automatically partition the load across them.
 
-![Architecture](/img/architecture-v2-2023.png)
+[![Architecture](/img/architecture-v2-2023.png)](/img/architecture-v2-2023.png)
 
 ### With OpenTelemetry Collector
 
@@ -58,7 +58,7 @@ You **do not need to use OpenTelemetry Collector**, because **jaeger-collector**
 
 The OpenTelemetry Collector supports Jaeger's Remote Sampling protocol and can either serve static configurations from config files directly, or proxy the requests to the Jaeger backend (e.g., when using adaptive sampling).
 
-![Architecture](/img/architecture-otel.png)
+[![Architecture](/img/architecture-otel.png)](/img/architecture-otel.png)
 
 #### OpenTelemetry Collector as a sidecar / host agent
 
@@ -89,7 +89,7 @@ This section details the constituent parts of Jaeger and how they relate to each
 
 In order to generate tracing data, the applications must be instrumented with tracing SDK such as [OpenTelemetry SDKs](https://opentelemetry.io). An instrumented application creates spans when receiving new requests and attaches context information (trace id, span id, and baggage) to outgoing requests. Only the ids and baggage are propagated with requests; all other profiling data, like operation name, timing, tags and logs, is not propagated. Instead, it is exported out of process to the Jaeger backend asynchronously, in the background.
 
-![Context propagation explained](/img/context-prop-2023.png)
+[![Context propagation explained](/img/context-prop-2023.png)](/img/context-prop-2023.png)
 
 There are many ways to instrument an application:
   * manually, using the tracing APIs directly,
