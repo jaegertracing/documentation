@@ -77,11 +77,6 @@ Please refer to the [dedicated Frontend/UI page](../frontend-ui/).
 
 Service Performance Monitoring (SPM) requires a deployment of Prometheus-compatible metrics storage (see [SPM page](../spm/)).
 
-### TLS support
-
-Jaeger supports TLS connections to Prometheus server as long as you've [configured
-your Prometheus server](https://prometheus.io/docs/guides/tls-encryption/) correctly.
-
 ## Service Maps
 
 In order to display service dependency diagrams, production deployments need an external process that aggregates data and computes dependency links between services. Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives dependency links and writes them directly to the storage.

@@ -18,6 +18,7 @@ OpenTelemetry SDKs can be configured to communicate directly with Jaeger Collect
 * {{< check_yes >}} Cassandra - TLS with mTLS (client cert authentication) supported.
 * {{< check_yes >}} Elasticsearch - TLS with mTLS (client cert authentication) supported; bearer token propagation.
 * {{< check_yes >}} Kafka - TLS with various authentication mechanisms supported (mTLS, Kerberos, plaintext).
+* {{< check_yes >}} Prometheus (for [SPM](../spm/)) - TLS with mTLS (client cert authentication) supported, as long as you've [configured your Prometheus server](https://prometheus.io/docs/guides/tls-encryption/) correctly.
 
 ## Browser to UI
 
