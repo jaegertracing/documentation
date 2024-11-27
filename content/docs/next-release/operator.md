@@ -3,15 +3,15 @@ title: Operator for Kubernetes
 hasparent: true
 ---
 
+{{< warning >}}
+This document assumes that version `v{{< currentVersion >}}` of the Jaeger Operator has been released, which may not be the case since the operator releases are _not synchronized_ with the main Jaeger releases. Please check the [jaeger-operator](https://github.com/jaegertracing/jaeger-operator/releases/) repository for available releases and adjust the installation commands accordingly.
+{{< /warning >}}
+
 # Understanding Operators
 
 The Jaeger Operator is an implementation of a [Kubernetes Operator](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/).  Operators are pieces of software that ease the operational complexity of running another piece of software. More technically, _Operators_ are a method of packaging, deploying, and managing a Kubernetes application.
 
 A Kubernetes application is an application that is both deployed on Kubernetes and managed using the Kubernetes APIs and `kubectl` (kubernetes) or `oc` (OKD) tooling. To be able to make the most of Kubernetes, you need a set of cohesive APIs to extend in order to service and manage your apps that run on Kubernetes. Think of Operators as the runtime that manages this type of app on Kubernetes.
-
-{{< warning >}}
-This document assumes that version `v{{< currentVersion >}}` of the Jaeger Operator has been released, which may not be the case since the operator releases are not synchronized with the main Jaeger releases. Please check the [jaeger-operator](https://github.com/jaegertracing/jaeger-operator/releases/) repository for available releases and adjust the installation commands accordingly.
-{{< /warning >}}
 
 # Installing the Operator
 
