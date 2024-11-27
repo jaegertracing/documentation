@@ -21,7 +21,7 @@ OpenTelemetry SDKs can be configured to communicate directly with **jaeger-colle
 
 ## Browser to UI
 
-* {{< check_no >}} HTTP - no TLS; bearer token authentication (pass-through to storage).
+* {{< check_yes >}} HTTP - TLS and bearer token authentication (pass-through to storage).
   * Blog post: [Protecting Jaeger UI with an OAuth sidecar Proxy](https://medium.com/jaegertracing/protecting-jaeger-ui-with-an-oauth-sidecar-proxy-34205cca4bb1).
   * Blog post: [Secure architecture for Jaeger with Apache httpd reverse proxy on OpenShift](https://medium.com/@larsmilland01/secure-architecture-for-jaeger-with-apache-httpd-reverse-proxy-on-openshift-f31983fad400).
 
