@@ -6,8 +6,6 @@ children:
   url: getting-started
 - title: Features
   url: features
-- title: Migration
-  url: migration
 ---
 
 Welcome to Jaeger's documentation! Below, you'll find information for beginners and experienced Jaeger users. If you cannot find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch).
@@ -30,6 +28,12 @@ If you are new to distributed tracing, we recommend the following external resou
   * [Take Jaeger for a HotROD ride](https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2), a step-by-step tutorial that demonstrates how to use Jaeger to solve application performance problems.
   * [Introducing Jaeger](https://www.shkuro.com/talks/2018-01-16-introducing-jaeger-1.0/), an (old) webinar that introduces Jaeger and its capabilities.
   * [Evolving Distributed Tracing at Uber](https://eng.uber.com/distributed-tracing/), a blog post that explains the history and reasons for the architectural choices made in Jaeger.
+
+### Jaeger v2
+
+(2024-11-12) Jaeger has had a successful 9 year history as the leading open source distributed tracing platform strongly aligned with industry standardization efforts such as OpenTracing and OpenTelemetry. Jaeger is one of the first graduated projects in the Cloud Native Computing Foundation (CNCF). After over 60 releases, Jaeger is celebrating a major milestone with the release of **Jaeger v2**. This is a new architecture that utilizes OpenTelemetry Collector framework as the base and extends it to implement Jaeger’s unique features. It brings significant improvements and changes, making Jaeger more flexible, extensible, and better aligned with the OpenTelemetry project. Read [full post here](https://medium.com/jaegertracing/jaeger-v2-released-09a6033d1b10).
+
+Please refer to [Migration guide](./migration/) for details on migrating from Jaeger v1.
 
 ## Features
 
