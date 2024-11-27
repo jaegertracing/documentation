@@ -136,13 +136,13 @@ Please refer to the [SPM Documentation](../spm/#api)
 Service ports that serve gRPC endpoints enable [gRPC reflection][grpc-reflection]. Unfortunately, the internally used `gogo/protobuf` has a [compatibility issue][gogo-reflection] with the official `golang/protobuf`, and as a result only the `list` reflection command is currently working properly, for example:
 
 ```shell
-$ grpc_cli ls localhost:16685
-grpc.health.v1.Health
-grpc.reflection.v1.ServerReflection
-grpc.reflection.v1alpha.ServerReflection
-jaeger.api_v2.QueryService
-jaeger.api_v2.metrics.MetricsQueryService
-jaeger.api_v3.QueryService
+grpc_cli ls localhost:16685
+  grpc.health.v1.Health
+  grpc.reflection.v1.ServerReflection
+  grpc.reflection.v1alpha.ServerReflection
+  jaeger.api_v2.QueryService
+  jaeger.api_v2.metrics.MetricsQueryService
+  jaeger.api_v3.QueryService
 ```
 
 [otlp.grpc]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlpgrpc
