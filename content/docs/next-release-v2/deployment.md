@@ -10,6 +10,8 @@ children:
   url: kubernetes
 - title: On Windows
   url: windows
+- title: Security
+  url: security
 ---
 
 Jaeger backend is released as a single binary or container image (see [Downloads](../../../download/)). Despite that, it can be configured to operate in different roles, such as all-in-one, collector, query, and ingester (see [Architecture](../architecture/)).

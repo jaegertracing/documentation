@@ -3,17 +3,17 @@ title: Securing Jaeger Installation
 hasparent: true
 ---
 
-This page documents the existing security mechanisms in Jaeger, organized by the pairwise connections between Jaeger components. We ask for community help with implementing additional security measures (see [issue-1718][]).
+This page documents the existing security mechanisms in Jaeger, organized by the pairwise connections between Jaeger components.
 
 ## SDK to Collector
 
-OpenTelemetry SDKs can be configured to communicate directly with **jaeger-collector** via gRPC or HTTP, with optional TLS enabled.
+OpenTelemetry SDKs can be configured to communicate directly with Jaeger Collectors via gRPC or HTTP, with optional TLS enabled.
 
 * {{< check_yes >}} HTTP - TLS with mTLS (client cert authentication) supported.
 * {{< check_yes >}} gRPC - TLS with mTLS (client cert authentication) supported.
   * Covers both span export and sampling configuration querying.
 
-## Collector/Ingester/Query-Service to Storage
+## Collector/Ingester/Query to Storage
 
 * {{< check_yes >}} Cassandra - TLS with mTLS (client cert authentication) supported.
 * {{< check_yes >}} Elasticsearch - TLS with mTLS (client cert authentication) supported; bearer token propagation.
@@ -25,7 +25,7 @@ OpenTelemetry SDKs can be configured to communicate directly with **jaeger-colle
   * Blog post: [Protecting Jaeger UI with an OAuth sidecar Proxy](https://medium.com/jaegertracing/protecting-jaeger-ui-with-an-oauth-sidecar-proxy-34205cca4bb1).
   * Blog post: [Secure architecture for Jaeger with Apache httpd reverse proxy on OpenShift](https://medium.com/@larsmilland01/secure-architecture-for-jaeger-with-apache-httpd-reverse-proxy-on-openshift-f31983fad400).
 
-## Consumers to Query Service
+## Consumers to Query
 
 * {{< check_yes >}} HTTP - TLS with mTLS (client cert authentication) supported.
 * {{< check_yes >}} gRPC - TLS with mTLS (client cert authentication) supported.
