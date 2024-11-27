@@ -4,6 +4,8 @@ hasparent: true
 weight: 2
 ---
 
+If you are new to distributed tracing, please check the [Introduction](../) page.
+
 ## All-in-one
 
 The easiest way to run Jaeger is by starting it in a container:
