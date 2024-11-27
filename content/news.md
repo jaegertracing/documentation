@@ -6,7 +6,7 @@ title: News
 
 **2024-11-12**
 
-Jaeger has had a successful 9 year history as being one of the first graduated projects in the Cloud Native Computing Foundation (CNCF). After over 60 releases, Jaeger is celebrating a major milestone with the release of Jaeger v2. This new version is a new architecture for Jaeger components that utilizes OpenTelemetry Collector framework as the base and extends it to implement Jaeger’s unique features. It brings significant improvements and changes, making Jaeger more flexible, extensible, and better aligned with the OpenTelemetry project.
+Jaeger has had a successful 9 year history as the leading open source distributed tracing platform strongly aligned with industry standardization efforts such as OpenTracing and OpenTelemetry. Jaeger is one of the first graduated projects in the Cloud Native Computing Foundation (CNCF). After over 60 releases, Jaeger is celebrating a major milestone with the release of **Jaeger v2**. This is a new architecture that utilizes OpenTelemetry Collector framework as the base and extends it to implement Jaeger’s unique features. It brings significant improvements and changes, making Jaeger more flexible, extensible, and better aligned with the OpenTelemetry project.
 
 Read [full post here](https://medium.com/jaegertracing/jaeger-v2-released-09a6033d1b10).
 
