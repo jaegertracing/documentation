@@ -26,7 +26,7 @@ The Jaeger backend supports [Remote Sampling](../sampling/#remote-sampling), i.e
 
 If you suspect the remote sampling is not working correctly, try these steps:
 
-1. Make sure that the SDK is actually configured to use remote sampling, points to the correct sampling service address (see [APIs](../apis/#remote-sampling-configuration)), and that address is reachable from your application's [networking namespace](#networking-namespace).
+1. Make sure that the SDK is actually configured to use remote sampling, points to the correct sampling service address (see [APIs](../apis/#remote-sampling-configuration)), and that address is reachable from your application's [networking namespace](#network-connectivity).
 1. Verify that the server is returning the appropriate sampling strategy for your service:
 ```
     $ curl "jaeger-collector:14268/api/sampling?service=foobar"
