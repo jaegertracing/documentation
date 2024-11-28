@@ -6,43 +6,44 @@ hasparent: true
 
 Jaeger itself is a distributed, microservices based system. If you run it in production, you will likely want to setup adequate monitoring for different components, e.g. to ensure that the backend is not saturated by too much tracing data.
 
+Please refer to [OpenTelemetry Collector documentation](https://opentelemetry.io/docs/collector/internal-telemetry/) for details on configuring the internal telemetry.
+
 ## Metrics
 
-By default Jaeger microservices expose metrics in Prometheus format. It is controlled by the following command line options:
+Here's a sample `curl` call to obtain the metrics:
 
-* `--admin.http.host-port` the port number where the HTTP admin server is running
-* `--metrics-backend` controls how the measurements are exposed. The default value is `prometheus`, another option is `expvar`, the Go standard mechanism for exposing process level statistics.
-* `--metrics-http-route` specifies the name of the HTTP endpoint used to scrape the metrics (`/metrics` by default).
+```
+curl -s http://jaeger-collector:8888/metrics
+```
 
-Each Jaeger component exposes the metrics scraping endpoint on the admin port:
+The following metrics are of special interest:
 
-Component             | Port
---------------------- | ---
-**jaeger-agent**      | 14271
-**jaeger-collector**  | 14269
-**jaeger-query**      | 16687
-**jaeger-ingester**   | 14270
-**all-in-one**        | 14269
+```
+otelcol_receiver_accepted_spans
+otelcol_receiver_refused_spans
 
-### Prometheus monitoring mixin for Jaeger
+otelcol_exporter_sent_spans
+otelcol_exporter_send_failed_spans
+```
 
-The Prometheus monitoring mixin for Jaeger provides a starting point for people wanting to monitor Jaeger using Prometheus, Alertmanager, and Grafana. This includes a prebuilt [dashboard](https://github.com/jaegertracing/jaeger/blob/master/monitoring/jaeger-mixin/dashboard-for-grafana.json). For more information, see [the documentation](https://github.com/jaegertracing/jaeger/tree/master/monitoring/jaeger-mixin).
+The first two metrics describe how many spans are being received by Jaeger. The last two metrics indicate how many spans are being sent to the storage. Under normal conditions the `accepted` and `sent_spans` counters should be close to each other.
+
+The labels on the metrics allow to separate different receivers and exporters. For example, the first metric with all labels might look like this (formatted for readability):
+
+```
+otelcol_receiver_accepted_spans{
+    receiver="otlp",
+    service_instance_id="f91d66c2-0445-42bf-a062-32aaed09facf",
+    service_name="jaeger",
+    service_version="2.0.0",
+    transport="http"
+} 44
+```
 
 ## Logging
 
-Jaeger components only log to standard out, using structured logging library [go.uber.org/zap](https://github.com/uber-go/zap) configured to write log lines as JSON encoded strings, for example:
-
-```json
-{"level":"info","ts":1615914981.7914007,"caller":"flags/admin.go:111","msg":"Starting admin HTTP server","http-addr":":14269"}
-{"level":"info","ts":1615914981.7914548,"caller":"flags/admin.go:97","msg":"Admin server started","http.host-port":"[::]:14269","health-status":"unavailable"}
-```
-
-The log level can be adjusted via `--log-level` command line switch; default level is `info`.
+Logs by default go to `stderr` in plain text format. For production deployment log verbosity of `info` or `warning` is recommended.
 
 ## Traces
 
-Jaeger has the ability to trace some of its own components, namely the requests to the Query service. For example, if you start `all-in-one` as described in [Getting Started](../getting-started/), and refresh the UI screen a few times, you will see `jaeger-all-in-one` populated in the Services dropdown. If you prefer not to see these traces in the Jaeger UI, you can disable them by running Jaeger backend components with `OTEL_TRACES_SAMPLER=always_off` environment variable, for example:
-
-```
-docker run -e OTEL_TRACES_SAMPLER=always_off -p 16686:16686 jaegertracing/all-in-one:{{< currentVersion >}}
-```
+Jaeger has the ability to trace some of its own components, namely the requests to the Query service. For example, if you start `all-in-one` as described in [Getting Started](../getting-started/), and refresh the UI screen a few times, you will see `jaeger` populated in the Services dropdown.

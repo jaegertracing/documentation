@@ -74,6 +74,7 @@ opentracing
 openzipkin
 operatorhub
 otel
+otelcol
 otlp
 outreachy
 parentbased

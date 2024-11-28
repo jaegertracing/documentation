@@ -33,16 +33,6 @@ For example, when using the Jaeger SDK for Java, the strategy is usually printed
 
     2018-12-10 16:41:25 INFO  Configuration:236 - Initialized  tracer=JaegerTracer(..., sampler=ConstSampler(decision=true,  tags={sampler.type=const, sampler.param=true}), ...)
 
-#### Use the logging reporter
-
-Most Jaeger SDKs are able to log the spans that are being reported to the logging facility provided by the instrumented application. Typically, this can be done by setting the environment variable `JAEGER_REPORTER_LOG_SPANS` to `true`, but refer to the Jaeger SDK's documentation for the language you are using. In some languages, specifically in Go and Node.js, there are no de-facto standard logging facilities, so you need to explicitly pass a logger to the SDK that implements a very narrow `Logger` interface defined by the Jaeger SDKs. When using the Jaeger SDK for Java, spans are reported like the following:
-
-    2018-12-10 17:20:54 INFO  LoggingReporter:43 - Span reported:  e66dc77b8a1e813b:6b39b9c18f8ef082:a56f41e38ca449a4:1 -  getAccountFromCache
-
-The log entry above contains three IDs: the trace ID `e66dc77b8a1e813b`, the span ID `6b39b9c18f8ef082` and the span's parent ID `a56f41e38ca449a4`. When the backend components have the log level set to `debug`, the span and trace IDs should be visible on their standard output (see [Increase the logging in the backend components](#increase-the-logging-in-the-backend-components) below).
-
-The logging reporter follows the sampling decision made by the sampler, meaning that if the span is logged, it should also reach the backend.
-
 ### Remote Sampling
 
 The Jaeger backend supports [Remote Sampling](../sampling/#remote-sampling), i.e., configuring sampling strategies centrally and making them available to the SDKs. Some, but not all, OpenTelemetry SDKs support remote sampling, often via extensions (refer to [Migration to OpenTelemetry](../../../sdk-migration/#migration-to-opentelemetry) for details).
@@ -50,7 +40,6 @@ The Jaeger backend supports [Remote Sampling](../sampling/#remote-sampling), i.e
 If you suspect the remote sampling is not working correctly, try these steps:
 
 1. Make sure that the SDK is actually configured to use remote sampling, points to the correct sampling service address (see [APIs](../apis/#remote-sampling-configuration-stable)), and that address is reachable from your application's [networking namespace](#networking-namespace).
-1. Look at the root span of the traces that are captured in Jaeger. If you are using Jaeger SDKs, the root span will contain the tags `sampler.type` and `sampler.param`, which indicate which strategy was used. (TBD - do OpenTelemetry SDKs record that?)
 1. Verify that the server is returning the appropriate sampling strategy for your service:
 ```
     $ curl "jaeger-collector:14268/api/sampling?service=foobar"
@@ -61,12 +50,12 @@ If you suspect the remote sampling is not working correctly, try these steps:
 
 If your Jaeger backend is still not able to receive spans (see the following sections on how to check logs and metrics for that), then the issue is most likely with your networking namespace configuration. When running the Jaeger backend components as Docker containers, the typical mistakes are:
 
-  * Not exposing the appropriate ports outside of the container. For example, the collector may be listening on `:14268` inside the container network namespace, but the port is not reachable from the outside.
+  * Not exposing the appropriate ports outside of the container. For example, the collector may be listening on `:4317` inside the container network namespace, but the port is not reachable from the outside.
   * Not making **jaeger-collector**'s host name visible from the application's network namespace. For example, if you run both your application and Jaeger backend in separate containers in Docker, they either need to be in the same namespace, or the application's container needs to be given access to Jaeger backend using the `--link` option of the `docker` command.
 
 ## Increase the logging in the backend components
 
-**jaeger-collector** provides useful debugging information when the log level is set to `debug`. **jaeger-collector** logs every batch it receives and logs every span that is stored in the permanent storage.
+Jaeger provides useful debugging information when the log level is set to `debug`. **jaeger-collector** logs information of every batch it receives and every span that is stored in the permanent storage.
 
 On the **jaeger-collector** side, these are the expected log entries when the flag `--log-level=debug` is specified:
 
@@ -77,7 +66,7 @@ On the **jaeger-collector** side, these are the expected log entries when the fl
 
 ## Check the /metrics endpoint
 
-For the cases where it's not possible or desirable to increase the logging on the **jaeger-collector** side, the `/metrics` endpoint can be used to check if spans for specific services are being received. The `/metrics` endpoint is served from the admin port, which is different for each binary (see [Deployment](../deployment/)). Assuming that **jaeger-collector** is available under a host named `jaeger-collector`, here's a sample `curl` call to obtain the metrics:
+For the cases where it's not possible or desirable to increase the logging in the Jaeger backend, the `/metrics` endpoint can be used to check if spans for specific services are being received. The `/metrics` endpoint is served from the admin port, which is different for each binary (see [Deployment](../deployment/)). Assuming that **jaeger-collector** is available under a host named `jaeger-collector`, here's a sample `curl` call to obtain the metrics:
 
     curl http://jaeger-collector:14269/metrics
 
