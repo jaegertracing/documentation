@@ -36,5 +36,5 @@ At default settings the service listens on the following port(s):
 
 Port  | Protocol | Function
 ----- | -------  | ---
-17271 | gRPC     | [Remote Storage API][storage.proto]
+17271 | gRPC     | [Remote Storage API](../apis/#remote-storage-api)
 17270 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
