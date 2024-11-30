@@ -19,7 +19,7 @@ A sample configuration for Jaeger with Cassandra backend is available in the Jae
 ## Initializing Schema
 
 Before Jaeger can use a Cassandra cluster as a storage backend, a keyspace and database schema
-must be initilized. As of v2.1.0, Jaeger can automatically create the schema on start-up. It defaults to the equivalent of the following configuration:
+must be initialized. As of v2.1.0, Jaeger can automatically create the schema on start-up. It defaults to the equivalent of the following configuration:
 
 ```yaml
 extensions:
