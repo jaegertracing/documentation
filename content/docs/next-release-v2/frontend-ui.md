@@ -66,6 +66,11 @@ An example configuration file (see [complete schema here](https://github.com/jae
     "key": "uniqueId",
     "url": "https://mykibana.com/uniqueId=#{uniqueId}&traceId=#{trace.traceID}",
     "text": "Redirect to kibana to view log"
+  },
+  {
+    "type": "traces",
+    "url": "https://mykibana.com/_dashboards/app/discover#/?_g=(time:(from:'#{startTime | epoch_micros_to_date_iso}',to:'#{endTime | epoch_micros_to_date_iso}'))&_a=(index:filebeat-all,query:(language:kuery,query:'#{traceID}'))",
+    "text": "Redirect to kibana to view log with formatted dates"
   }]
 }
 ```
@@ -145,6 +150,13 @@ Both `url` and `text` can be defined as templates (i.e. using `#{field-name}`) w
 For traces, the supported template fields are: `duration`, `endTime`, `startTime`, `traceName` and `traceID`.
 
 Further, the trace template fields are available for substitution in process/logs/tags type when the trace template fields are prefixed with `trace.`. For example: `trace.traceID`, `trace.startTime`.
+
+#### Formatting
+
+In addition to interpolating fields into links, formatting functions can be used. The syntax is `#{field | function}` (eg `#{endTime | epoch_micros_to_date_iso}'`). The available formatting functions and a description of their behavior are:
+| Function | Description | Example |
+| -------- | ----------- | ------- |
+| `epoch_micros_to_date_iso` | Format a date in microseconds since epoch to an ISO date time | `#{endTime \| epoch_micros_to_date_iso}` |
 
 ## Embedded Mode
 
