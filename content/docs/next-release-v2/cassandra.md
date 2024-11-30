@@ -18,8 +18,28 @@ A sample configuration for Jaeger with Cassandra backend is available in the Jae
 
 ## Initializing Schema
 
-Before Jaeger can use a Cassandra cluster as storage backend, a keyspace and database schema
-must be created. There is a script in the [jaeger](https://github.com/jaegertracing/jaeger) repository that generates the initialization instruction that can be executed using Cassandra's interactive shell [`cqlsh`][cqlsh]:
+Before Jaeger can use a Cassandra cluster as a storage backend, a keyspace and database schema
+must be initialized. As of v2.1.0, Jaeger can automatically create the schema on start-up. It defaults to the equivalent of the following configuration:
+
+```yaml
+extensions:
+  jaeger_storage:
+    backends:
+      some_storage:
+        cassandra:
+          schema:
+            create: true
+            keyspace: jaeger_dc1
+            datacenter: dc1
+            trace_ttl: 48h
+            dependencies_ttl: 48d
+            compaction_window: 2h
+            replication_factor: 1
+```
+
+It is recommended to customize these values to match your needs, for example, for longer retention or higher replication factor.
+
+If `schema.create` is set to `false`, the schema must be initialized manually. There is a script in the [jaeger](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/cassandra/schema/create.sh) repository that generates the initialization instruction that can be executed using Cassandra's interactive shell [cqlsh][cqlsh]:
 
 ```sh
 MODE=test sh ./plugin/storage/cassandra/schema/create.sh | cqlsh
@@ -39,8 +59,7 @@ where `{datacenter}` is the name used in the Cassandra configuration / network t
 The script also allows overriding TTL, keyspace name, replication factor, etc.
 Run the script without arguments to see the full list of recognized parameters.
 
-* **Note 1**: See [README](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/cassandra/schema/README.md) for more details on Cassandra schema management.
-* **Note 2**: In the near future the logic for schema initialization will be moved to the Jaeger binary directly (subscribe to [Issue #5797](https://github.com/jaegertracing/jaeger/issues/5797) for updates).
+See [this README](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/cassandra/schema/README.md) for more details on Cassandra schema management.
 
 ## TLS support
 
@@ -76,3 +95,5 @@ usercert = ~/.cassandra/client-cert
 ## Compatible Backends
 
 * ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
+
+[cqlsh]: http://cassandra.apache.org/doc/latest/tools/cqlsh.html
