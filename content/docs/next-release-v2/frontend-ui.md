@@ -69,7 +69,7 @@ An example configuration file (see [complete schema here](https://github.com/jae
   },
   {
     "type": "traces",
-    "url": "https://mykibana.com/_dashboards/app/discover#/?_g=(time:(from:'#{startTime | epoch_micros_to_date_iso}',to:'#{endTime | epoch_micros_to_date_iso}'))&_a=(index:filebeat-all,query:(language:kuery,query:'#{traceID}'))",
+    "url": "https://mykibana.com/_dashboards/app/discover#/?_g=(time:(from:'#{startTime | epoch_micros_to_date_iso}',to:'#{endTime | epoch_micros_to_date_iso}'))",
     "text": "Redirect to kibana to view log with formatted dates"
   }]
 }
@@ -154,9 +154,13 @@ Further, the trace template fields are available for substitution in process/log
 #### Formatting
 
 In addition to interpolating fields into links, formatting functions can be used. The syntax is `#{field | function}` (eg `#{endTime | epoch_micros_to_date_iso}'`). The available formatting functions and a description of their behavior are:
-| Function | Description | Example |
-| -------- | ----------- | ------- |
-| `epoch_micros_to_date_iso` | Format a date in microseconds since epoch to an ISO date time | `#{endTime \| epoch_micros_to_date_iso}` |
+| Function name | Arguments | Description | Example |
+| ------------- | --------- | ----------- | ------- |
+| `epoch_micros_to_date_iso` | - | Format a date in microseconds since epoch to an ISO date time | `#{endTime \| epoch_micros_to_date_iso}` |
+| `pad_start` | 1.`targetLength`(integer) 2.`padCharacter`(string) | Pad the start of a string with a given character until the resulting string reaches the given length. Behavior is implemented by and thus matches javascript's [String.padStart](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart) | `#{traceID \| pad_start 32 0}`|
+| `add` | 1.`offset`(integer) | Add a value to another number. Can be positive or negative | `#{startTime \| add 1000000}`|
+
+Formatting functions can be chained together. For example `#{startTime | add 60000000 | epoch_micros_to_date_iso}`.
 
 ## Embedded Mode
 
