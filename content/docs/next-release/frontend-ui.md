@@ -66,6 +66,11 @@ An example configuration file (see [complete schema here](https://github.com/jae
     "key": "uniqueId",
     "url": "https://mykibana.com/uniqueId=#{uniqueId}&traceId=#{trace.traceID}",
     "text": "Redirect to kibana to view log"
+  },
+  {
+    "type": "traces",
+    "url": "https://my-logs.server?from=#{startTime | add -60000000 | epoch_micros_to_date_iso}&to=#{endTime | add 60000000 | epoch_micros_to_date_iso}'",
+    "text": "Redirect to kibana to view log with formatted dates"
   }]
 }
 ```
@@ -145,6 +150,40 @@ Both `url` and `text` can be defined as templates (i.e. using `#{field-name}`) w
 For traces, the supported template fields are: `duration`, `endTime`, `startTime`, `traceName` and `traceID`.
 
 Further, the trace template fields are available for substitution in process/logs/tags type when the trace template fields are prefixed with `trace.`. For example: `trace.traceID`, `trace.startTime`.
+
+#### Formatting
+
+In addition to interpolating fields into links, formatting functions can be used. The syntax is `#{field | function}` (eg `#{endTime | epoch_micros_to_date_iso}'`). Formatting functions can be chained together (eg `#{startTime | add 60000000 | epoch_micros_to_date_iso}`).
+
+The available formatting functions and a description of their behavior are:
+
+##### `epoch_micros_to_date_iso`
+
+Format a date in microseconds since epoch to an ISO date time.
+
+Example:
+`#{endTime | epoch_micros_to_date_iso}`
+
+##### `pad_start`
+
+Pad the start of a string with a given character until the resulting string reaches the given length. Behavior is implemented by and thus matches javascript's [String.padStart](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
+
+Arguments:
+
+- `targetLength` (integer) - Desired length of the string after padding
+- `padCharacter` (string) - String to pad the start of the input string with
+
+Example: `#{traceID | pad_start 32 0}`
+
+##### `add`
+
+Add a value to another number. Can be positive or negative.
+
+Arguments:
+
+- `offset` (integer) - Value to add to the input number
+
+Example: `#{startTime | add 1000000}`
 
 ## Embedded Mode
 
