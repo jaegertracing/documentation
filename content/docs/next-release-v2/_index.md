@@ -53,6 +53,18 @@ Please refer to [Migration guide](./migration/) for details on migrating from Ja
 
 See [Features](./features/) page for more details.
 
+### Relationship with OpenTelemetry
+
+The Jaeger and [OpenTelemetry](https://opentelemetry.io) projects have different goals. OpenTelemetry aims to provide APIs and SDKs in multiple languages to allow applications to export various telemetry data out of the process, to any number of metrics and tracing backends. The Jaeger project is primarily the tracing backend that receives tracing telemetry data and provides processing, aggregation, data mining, and visualizations of that data. For more information please refer to a blog post [Jaeger and OpenTelemetry](https://medium.com/jaegertracing/jaeger-and-opentelemetry-1846f701d9f2).
+
+Jaeger was originally designed to support the [OpenTracing standard](https://opentracing.io/specification/). The terminology is still used in Jaeger UI, but the concepts have direct mapping to the OpenTelemetry data model of traces.
+
+| Capability    | OpenTracing concept | OpenTelemetry concept |
+| ------------- | ------------------- | --------------------- |
+| Represent traces as directed acyclic graphs (not just trees)  | [span references](https://github.com/opentracing/specification/blob/master/specification.md#references-between-spans) | [span links](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/api.md#span) |
+| Strongly typed span attributes  | span tags | span attributes |
+| Strongly typed events/logs  | span logs | span events |
+
 ## Quick Start
 
 See [Getting Started](./getting-started/).
