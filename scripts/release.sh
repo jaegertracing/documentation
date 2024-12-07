@@ -9,6 +9,7 @@
 set -euf -o errexit -o pipefail
 
 DRY_RUN=${DRY_RUN:-false}
+config_file=hugo.yaml
 
 print_usage() {
   echo "Usage: $0 <version_v1> <version_v2>"
@@ -82,20 +83,20 @@ for version in "${version_v1}" "${version_v2}"; do
     gen_cli_docs_v1 ${versionMajorMinor}
   fi
 
-  versions=$(grep -E "versions${var_suffix} *=" config.toml)
+  versions=$(grep -E "versions${var_suffix} *=" "${config_file}")
   if [[ "$versions" == *"$versionMajorMinor"* ]]; then
     echo "🔴 ERROR: Version ${versionMajorMinor} is already included in the versions list."
     exit 1
   fi
 
-  sed -i -e "s/latest${var_suffix} *=.*$/latest${var_suffix} = \"${versionMajorMinor}\"/" config.toml
-  sed -i -e "s/binariesLatest${var_suffix} *=.*$/binariesLatest${var_suffix} = \"${version}\"/" config.toml
-  sed -i -e "s/versions${var_suffix} *= *\[/versions${var_suffix} = \[\"${versionMajorMinor}\"\,/" config.toml
+  sed -i -e "s/latest${var_suffix} *=.*$/latest${var_suffix} = \"${versionMajorMinor}\"/" "${config_file}"
+  sed -i -e "s/binariesLatest${var_suffix} *=.*$/binariesLatest${var_suffix} = \"${version}\"/" "${config_file}"
+  sed -i -e "s/versions${var_suffix} *= *\[/versions${var_suffix} = \[\"${versionMajorMinor}\"\,/" "${config_file}"
 done
 
 if [[ "$DRY_RUN" = "true" ]]; then
   echo "Not committing changes because DRY_RUN=$DRY_RUN"
   exit 0
 fi
-git add config.toml ./content/docs/ ./data/cli/
+git add ${config_file} ./content/docs/ ./data/cli/
 git commit -m "Release ${version_v2}/${version_v1}" -s
