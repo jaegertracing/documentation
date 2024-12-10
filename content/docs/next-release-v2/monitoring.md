@@ -47,3 +47,5 @@ Logs by default go to `stderr` in plain text format. For production deployment l
 ## Traces
 
 Jaeger has the ability to trace some of its own components, namely the requests to the Query service. For example, if you start `all-in-one` as described in [Getting Started](../getting-started/), and refresh the UI screen a few times, you will see `jaeger` populated in the Services dropdown.
+
+Self-tracing can be disabled by setting `OTEL_TRACES_SAMPLER=always_off` environment variable.
