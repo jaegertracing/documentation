@@ -5,6 +5,17 @@ title: Get Involved
 Jaeger is an open source project with [open governance](https://github.com/jaegertracing/jaeger/blob/main/GOVERNANCE.md). We welcome contributions from the community, and we'd love your help to improve and extend the project. Below you will find some ideas for how to get involved with the project. Some of them don't even require any coding. There is also a good
 CNCF guide on [how to start contributing to open source and figure out where to begin](https://contribute.cncf.io/contributors/getting-started/).
 
+## Bootcamp
+
+In order to understand the project better and come up with reasonable solutions, it's always helpful to become familiar with Jaeger and its code base. We strongly recommend these steps:
+
+* Go through some Jaeger tutorials, such as [this blog post](https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2) or [this video](https://youtu.be/s7IrYt1igSM?si=B3NI6ruohKfSPUCl&t=445).
+* Run the [HotROD demo yourself](https://github.com/jaegertracing/jaeger/blob/main/examples/hotrod/README.md). The blogs and videos may be outdated, it's good to get hands on.
+* Review the [Jaeger architecture](https://www.jaegertracing.io/docs/latest/architecture/) and understand the components.
+* Fork and clone the respective repositories to be able to [build and run the project locally](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING.md#getting-started).
+* Learn about contributing with the best practices, including how to [sign your code and contribute](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md#creating-a-pull-request).
+* Try to solve some of the [simple open issues](./#help-with-coding) that you can find across Jaeger repositories.
+
 ## No-coding involvement
 
 * Join the [online chat room](../get-in-touch/) and help answering questions from the rest of the community.
