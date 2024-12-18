@@ -26,14 +26,7 @@ It does not mean that the longer the proposal the better. It's about the quality
 
 ### Bootcamp
 
-In order to understand the project better and come up with reasonable solutions, it's always helpful to become familiar with Jaeger and its code base. We strongly recommend these steps:
-
-* Go through some Jaeger tutorials, such as [this blog post][hotrod] or [this video](https://youtu.be/s7IrYt1igSM?si=B3NI6ruohKfSPUCl&t=445).
-* Run the [HotROD demo yourself](https://github.com/jaegertracing/jaeger/blob/main/examples/hotrod/README.md). The blogs and videos may be outdated, it's good to get hands on.
-* Review the [Jaeger architecture](https://www.jaegertracing.io/docs/latest/architecture/) and understand the components.
-* Fork and clone the respective repositories to be able to [build and run the project locally](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING.md#getting-started).
-* Learn about contributing with the best practices, including how to [sign your code and contribute](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md#creating-a-pull-request).
-* Try to solve some of the [simple open issues](../get-involved/) that you can find across Jaeger repositories.
+In order to understand the project better and come up with reasonable solutions, it's always helpful to become familiar with Jaeger and its code base. We strongly recommend going through the [Bootcamp](../get-involved/#bootcamp).
 
 ### Evaluation criteria
 
@@ -123,5 +116,4 @@ Why the log is important:
 
 [gsoc]: https://summerofcode.withgoogle.com/
 [lfxm]: https://mentorship.lfx.linuxfoundation.org/
-[hotrod]: https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2
 [template]: https://docs.google.com/document/d/1lAL0iHHozXZoIL4W0qiOWyXVPo9a6lUTeH9cz95O6Kg/edit#
