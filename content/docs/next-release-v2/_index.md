@@ -40,10 +40,10 @@ Please refer to [Migration guide](./migration/) for details on migrating from Ja
   * [OpenTracing](https://opentracing.io/)-inspired data model
   * [OpenTelemetry](https://opentelemetry.io/) compatible
   * Multiple built-in storage backends:
-    * [Cassandra 4+](./cassandra/)
-    * [Elasticsearch 7.x, 8.x](./elasticsearch/)
+    * [Cassandra](./cassandra/)
+    * [Elasticsearch](./elasticsearch/) and [OpenSearch](./opensearch/)
     * [Badger](./badger/)
-    * [Kafka](./kafka/) - as an intermediate buffer
+    * [Kafka](./kafka/) (as an intermediate buffer)
     * [Memory storage](./memory/)
   * Extensibility with custom backends via [Remote Storage API](./storage/#remote-storage)
   * System topology / service dependencies graphs
