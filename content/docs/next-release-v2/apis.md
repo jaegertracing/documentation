@@ -19,20 +19,23 @@ The following tables list the default ports used by Jaeger components. They can 
 
 | Port  | Protocol | Endpoint        | Format
 | ----- | -------  | --------------- | ----
-| 4317  | gRPC     | 'ExportTraceServiceRequest' | [OTLP Protobuf][otlp.grpc]
-| 4318  | HTTP     | `/v1/traces`    | [OTLP Protobuf or OTLP JSON][otlp.http]
-| 9411  | HTTP     | `/api/v1/spans` | Zipkin v1 JSON or Thrift
-|       | HTT      | `/api/v2/spans` | Zipkin v2 JSON or Protobuf
-| 14250 | gRPC     | `jaeger.api_v2.CollectorService` | [Legacy Protobuf][collector.proto]
-| 14268 | HTTP     | `/api/traces`   | [Legacy Thrift][jaeger.thrift]
+| 4317  | gRPC     | `ExportTraceServiceRequest` | [OTLP Protobuf](#opentelemetry-protocol)
+| 4318  | HTTP     | `/v1/traces`    | [OTLP Protobuf or OTLP JSON](#opentelemetry-protocol)
+| 6831  | UDP      | raw port        | [Legacy Thrift in `compact` Thrift protocol](#legacy-thrift-over-udp)
+| 6832  | UDP      | raw port        | [Legacy Thrift in `binary` Thrift protocol](#legacy-thrift-over-udp)
+| 9411  | HTTP     | `/api/v1/spans` | [Zipkin v1 JSON or Thrift](#zipkin-formats)
+|       | HTTP     | `/api/v2/spans` | [Zipkin v2 JSON or Protobuf](#zipkin-formats)
+| 14250 | gRPC     | `jaeger.api_v2.CollectorService` | [Legacy Protobuf](#legacy-protobuf-via-grpc)
+| 14268 | HTTP     | `/api/traces`   | [Legacy Thrift](#legacy-thrift-over-http)
 
 ### Read APIs
+
 | Port  | Protocol | Endpoint        | Format
 | ----- | -------  | --------------- | ----
-| 16685 | gRPC     | `jaeger.api_v2.QueryService` | Legacy Protobuf
-|       | gRPC     | `jaeger.api_v3.QueryService` | OTLP-based Protobuf
-| 16686 | HTTP     | `/api/*`        | Internal (unofficial) JSON API
-
+| 16685 | gRPC     | `jaeger.api_v3.QueryService` | [OTLP-based Protobuf](#query-protobuf-via-grpc)
+|       | gRPC     | `jaeger.api_v2.QueryService` | [Legacy Protobuf](#query-protobuf-via-grpc)
+| 16686 | HTTP     | `/api/v3/*`     | [OTLP-based JSON over HTTP](#query-json-over-http)
+|       | HTTP     | `/api/*`        | [Internal (unofficial) JSON API](#internal-http-json)
 
 ### Remote Sampling APIs
 
@@ -50,9 +53,9 @@ Jaeger can receive trace data in multiple formats on different ports.
 **Status**: Stable
 
 Jaeger can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. The OTLP data is accepted in these formats: 
-  * binary gRPC
-  * Protobuf over HTTP
-  * JSON over HTTP
+  * [Protobuf via gRPC][otlp.grpc]
+  * [Protobuf over HTTP][otlp.http]
+  * [JSON over HTTP][otlp.http]
   
 Only tracing data is accepted, since Jaeger does not store other telemetry types. For more details on the OTLP receiver see the [official documentation][otlp-rcvr].
 
@@ -75,6 +78,14 @@ Jaeger's legacy Thrift format is defined in [jaeger.thrift] IDL file, and is onl
 Content-Type: application/vnd.apache.thrift.binary
 ```
 
+### Legacy Thrift over UDP
+
+**Status**: Stable, Deprecated
+
+This API is kept for backwards compatibility with legacy Jaeger clients.
+
+The primary API is a UDP packet that contains a Thrift-encoded `Batch` struct defined in the [jaeger.thrift] IDL file, located in the [jaeger-idl] repository. Most Jaeger Clients use Thrift's `compact` encoding, however some client libraries do not support it (notably, Node.js) and use Thrift's `binary` encoding (sent to  a different UDP port).
+
 ### Zipkin Formats
 
 **Status**: Stable
@@ -88,13 +99,19 @@ Jaeger can accept spans in several Zipkin data formats, namely JSON v1/v2 and Th
 
 Traces saved in the storage can be retrieved by calling **jaeger-query** Service.
 
-### gRPC/Protobuf
+### Query Protobuf via gRPC
 
 **Status**: Stable
 
-The recommended way for programmatically retrieving traces and other data is via the `jaeger.api_v3.QueryService` gRPC endpoint defined in [api_v3/query_service.proto](https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v3/query_service.proto) IDL file. In the default configuration this endpoint is accessible on port `:16685`. The legacy [api_v2](https://github.com/jaegertracing/jaeger-idl/tree/main/proto/api_v2) is also supported.
+The recommended way for programmatically retrieving traces and other data is via the `jaeger.api_v3.QueryService` gRPC endpoint defined in [api_v3/query_service.proto][query.proto] IDL file. In the default configuration this endpoint is accessible on port `:16685`. The legacy [api_v2](https://github.com/jaegertracing/jaeger-idl/tree/main/proto/api_v2) is also supported.
 
-### HTTP JSON
+### Query JSON over HTTP
+
+**Status**: Stable
+
+This is a JSON/HTTP version (see [Swagger][query.swagger] file) of [api_v3/query_service.proto][query.proto] above.
+
+### Internal HTTP JSON
 
 **Status**: Internal
 
@@ -148,6 +165,8 @@ grpc_cli ls localhost:16685
 [otlp.grpc]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlpgrpc
 [otlp.http]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlphttp
 [jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift
+[query.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v3/query_service.proto
+[query.swagger]: https://github.com/jaegertracing/jaeger-idl/blob/main/swagger/api_v3/query_service.swagger.json
 [collector.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/collector.proto
 [sampling.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/sampling.proto
 [grpc-reflection]: https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#enable-server-reflection
