@@ -48,9 +48,18 @@ Another label to look for is [help-wanted][], which we use to tag tickets that i
 
 Please refer to the [Contributing Guidelines](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md) on how to make code contributions. And make sure to follow the [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/master/code-of-conduct.md).
 
+### What if someone is already working on a issue?
+
+We have a [policy][not-assigning] of not explicitly assigning the issues to anyone. However, you may find that someone has already created a pull request (it will show in the comments section and/or right below the title of the issue). In such situation, the issue is typically in one of these three states:
+  * The PR has recent updates (within a week) from the author, meaning the author is actively working on it. In this case it is best to wait for the author to finish their work.
+  * The most recent comments on the PR are from the maintainers recommending some changes, and those comments are not addressed by the author such that the PR appears to be stale. In this case it's good to tag the author in the PR and ask if they are still working on it or if they would like to hand it over to someone else.
+  * Sometimes things fall through the cracks and maintainers miss the recent changes on the PR. If these latest changes look good (e.g. the CI checks are all green) but the maintainers have not reviewed them it's good to ping the maintainers in the PR asking for a review. Even better if you can help with the review.
+
+
 ## Mentorship programs
 
 The Jaeger project regularly participates in mentorship programs via CNCF. See [Mentorships](../mentorship/).
 
 [good-first-issue]: https://github.com/search?q=org%3Ajaegertracing+label%3A%22good+first+issue%22&type=issues&state=open
 [help-wanted]: https://github.com/search?q=org%3Ajaegertracing+label%3A%22help+wanted%22&type=issues&state=open
+[not-assigning]: https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md#assigning-issues
