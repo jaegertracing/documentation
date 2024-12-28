@@ -8,7 +8,34 @@ hasparent: true
 Kafka can be used as an intermediary buffer between **collector** and an actual storage.
 Jaeger can be configured to act both as the **collector** that exports trace data into a Kafka topic as well as the **ingester** to read data from Kafka and write it to a storage backend.
 
+{{<mermaid align="center">}}
+flowchart LR
+    A(Application) --> C@{ shape: procs, label: "Jaeger
+      collectors"}
+    C --> K@{ img: "/img/kafka.png", w: 120, h: 60 }
+    K --> I@{ shape: procs, label: "Jaeger
+      ingesters"}
+    I --> S[(Storage)]
+
+    style C fill:#9AEBFE,color:black
+    style I fill:#9AEBFE,color:black
+{{< /mermaid >}}
+
 Writing to Kafka is particularly useful for building post-processing data pipelines.
+
+{{<mermaid align="center">}}
+flowchart LR
+    A(Application) --> C@{ shape: procs, label: "Jaeger
+      collectors"}
+    C --> K@{ img: "/img/kafka.png", w: 120, h: 60 }
+    K --> I@{ shape: procs, label: "Jaeger
+      ingesters"}
+    I --> S[(Storage)]
+    K --> P@{ shape: stadium, label: "Post-processing" }
+
+    style C fill:#9AEBFE,color:black
+    style I fill:#9AEBFE,color:black
+{{< /mermaid >}}
 
 Kafka also has the following officially supported resources available from the community:
 - [Docker container](https://hub.docker.com/r/apache/kafka) for getting a single node up quickly
