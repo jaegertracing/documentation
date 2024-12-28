@@ -11,8 +11,7 @@ hasparent: true
   
 **Cons**:
   * It is only suitable for a _single-node deployment_, so it cannot scale horizontally for higher data volumes.
-  * It is not possible to share a single Badger instance between multiple Jaeger processes, such as **jaeger-collector** and **jaeger-query**, therefore it is usually only used in the **all-in-one** configuration.
-    * NB: it is possible to share a single Badger instance between multiple processes if you use Badger with the [remote storage](../tools/#remote-storage-component) component.
+  * If Badger backend is enabled in **jaeger-collector**, it cannot be accessed from **jaeger-query**, and vice versa. Therefore, Badger can only used either in the **all-in-one** configuration or with the [remote storage](../tools/#remote-storage-component) component.
 
 ## Configuration
 
