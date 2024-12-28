@@ -30,7 +30,7 @@ docker run \
 
 ## Remote Storage (component)
 
-**jaeger-remote-storage** implements the [Remote Storage gRPC API][storage.proto] and proxies it into one of the regular Jaeger backends. It can be useful in the situation when we want to run a full deployment of Jaeger components, e.g., separate collector and query services, but use a single-node storage backend like the memory store or Badger. Without the remote storage, the single-node backends can only be used with all-in-one since they cannot be shared between multiple processes.
+**jaeger-remote-storage** implements the [Remote Storage gRPC API](../apis/#remote-storage-api) and proxies it into one of the regular Jaeger backends. It can be useful in the situation when we want to run a full deployment of Jaeger components, e.g., separate collector and query services, but use a single-node storage backend like the memory store or Badger. Without the remote storage, the single-node backends can only be used with all-in-one since they cannot be shared between multiple processes.
 
 At default settings the service listens on the following port(s):
 
