@@ -14,7 +14,7 @@ flowchart LR
       collectors"}
     C --> K@{ img: "/img/kafka.png", w: 120, h: 60 }
     K --> I@{ shape: procs, label: "Jaeger
-      injesters"}
+      ingesters"}
     I --> S[(Storage)]
 
     style C fill:#9AEBFE,color:black
@@ -29,7 +29,7 @@ flowchart LR
       collectors"}
     C --> K@{ img: "/img/kafka.png", w: 120, h: 60 }
     K --> I@{ shape: procs, label: "Jaeger
-      injesters"}
+      ingesters"}
     I --> S[(Storage)]
     K --> P@{ shape: stadium, label: "Post-processing" }
 
