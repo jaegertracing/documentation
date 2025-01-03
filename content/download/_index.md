@@ -11,7 +11,7 @@ Jaeger components can be downloaded in two ways:
 
 _November 12, 2024_: **Jaeger v2** is a new major release based on the OpenTelemetry Collector framework. Read [the blog post](https://medium.com/jaegertracing/jaeger-v2-released-09a6033d1b10) for more details.
 
-**Jaeger v1** [end-of-life is scheduled](https://github.com/jaegertracing/jaeger/issues/6321) for **December 31, 2025**.
+🌆 **Jaeger v1** [end-of-life is scheduled](https://github.com/jaegertracing/jaeger/issues/6321) for **December 31, 2025**.
 
 ## Binaries
 
