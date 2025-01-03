@@ -34,12 +34,14 @@
           <p>Deprecated 💀💤❌. Latest available version is {{ $latestImg }}.</p>
         {{ end }}
         <p>{{ .description | markdownify }}</p>
+        {{ if not .external }}
         <div>
           <code><span class="is-dollar">$</span> docker run {{ $fullImage }}:{{ $latestImg }} --help</code>
         </div>
         <div>
           <code><span class="is-dollar">$</span> podman run quay.io/{{ $fullImage }}:{{ $latestImg }} --help</code>
         </div>
+        {{ end }}
       </td>
       <td>
         {{ $since }}
