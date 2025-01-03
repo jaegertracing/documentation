@@ -50,7 +50,7 @@ jaeger_query:
   storage:
     traces: some_trace_storage
     metrics: some_metrics_storage
-  base-path: /
+  base_path: /
   ui:
     config_file: /etc/jaeger/ui-config.json
     log_access: true
