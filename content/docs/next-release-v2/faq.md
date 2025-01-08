@@ -28,6 +28,10 @@ One benefit of Cassandra backend is simplified maintenance due to its native sup
 
 [issue-166]: https://github.com/jaegertracing/jaeger/issues/166
 
+## How should I upgrade to a new version?
+
+Jaeger is stateless for the services themselves, the state all lives in the data store. We try to avoid any kinds of breaking changes in our upgrades, so typically the order does not matter. However, upgrades should be done with the following order of operations. If you are running Jaeger in a fully distributed environment you should upgrade the Jaeger query role first, followed by the collector role. You should note that upgrading both sides of the Kafka data flow should be done as close to simultaneous as possible to avoid issues with data being written and read by different binaries.  
+
 ## Why do Jaeger trace IDs look differently in Kafka and in the UI?
 
 Under the hood, at the data model level, the Jaeger trace IDs are a sequence of 16 bytes. However, these 16 bytes can be represented in many different ways:
