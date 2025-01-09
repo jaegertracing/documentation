@@ -27,13 +27,13 @@ params:
   mediumhandle: jaegertracing
   opengraphimage: img/jaeger-icon-color.png
 
-  latest: "1.64"
-  binariesLatest: "1.64.0"
-  versions: ["1.64","1.63", "1.62", "1.61", "1.60", "1.59", "1.58", "1.57"]
+  latest: "1.65"
+  binariesLatest: "1.65.0"
+  versions: ["1.65","1.64","1.63", "1.62", "1.61", "1.60", "1.59", "1.58", "1.57"]
 
-  latestV2: "2.1"
-  binariesLatestV2: "2.1.0"
-  versionsV2: ["2.1","2.0"]
+  latestV2: "2.2"
+  binariesLatestV2: "2.2.0"
+  versionsV2: ["2.2","2.1","2.0"]
 
   navbar:
     links:
