@@ -20,18 +20,18 @@ Jaeger backend is released as a single binary or container image (see [Downloads
 
 The following intra-oriented ports are exposed by default (can be changed via configuration):
 
-Port  | Protocol | Function
------ | -------  | ---
-8888  | HTTP     | metrics port for exposing metrics which can be scraped with Prometheus compatible systems at `/metrics`
-8889  | HTTP     | ingester port for reading data from Kafka topics and writing to a supported backend
-13133 | HTTP     | Healthcheck port via the `healthcheckv2` extension
-27777 | HTTP     | expvar port for process level metrics per the Go standards
+Port  | Protocol | Endpoint   | Function
+----- | -------  | ---------- | --------
+8888  | HTTP     | `/metrics` | metrics port for exposing metrics which can be scraped with Prometheus compatible systems
+8889  | HTTP     | `/metrics` | ingester port for reading data from Kafka topics and writing to a supported backend
+13133 | HTTP     | `/status`  | Healthcheck port via the `healthcheckv2` extension
+27777 | HTTP     | `/`        | expvar port for process level metrics per the Go standards
 
 See [APIs](../apis/) for the list of all API ports.
 
 ## Configuration
 
-Jaeger can be customized via configuration YAML file (see [Configuration](../configuration/)). 
+Jaeger can be customized via configuration YAML file (see [Configuration](../configuration/)).
 
 Jaeger **collector** is stateless and thus many instances of **collector** can be run in parallel. **collector** instances require almost no configuration, except for storage location, such as [Cassandra](../cassandra/#configuration) or [Elasticsearch](../elasticsearch/#configuration).
 
