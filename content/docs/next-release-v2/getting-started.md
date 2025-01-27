@@ -22,6 +22,20 @@ docker run --rm --name jaeger \
 
 This runs the **all-in-one** configuration of Jaeger ([see Architecture](../architecture/)) that combines collector and query components in a single process and uses a transient in-memory storage for trace data. You can navigate to `http://localhost:16686` to access the Jaeger UI. See the [APIs page](../apis/) for a full list of exposed ports.
 
+In order to run Jaeger in other roles ([see Architecture](../architecture/)), an explicit configuration file ([see Configuration](../configuration/)) must be provided via the `--config` command line argument. When running in a container, the path to the config file must be mapped into the container file system (the `-v ...` mapping below):
+
+```
+docker run --rm --name jaeger \
+  -p 16686:16686 \
+  -p 4317:4317 \
+  -p 4318:4318 \
+  -p 5778:5778 \
+  -p 9411:9411 \
+  -v /path/to/local/config.yaml:/jaeger/config.yaml \
+  jaegertracing/jaeger:{{< currentVersion >}} \
+  --config /jaeger/config.yaml
+```
+
 {{< warning >}}
 Your applications must be instrumented before they can send tracing data to Jaeger. We recommend using the [OpenTelemetry](https://opentelemetry.io/) instrumentation and SDKs.
 {{< /warning >}}
@@ -37,7 +51,7 @@ Using this application you can:
 - Find sources of latency and lack of concurrency.
 - Explore highly contextualized logging.
 - Use baggage propagation to diagnose inter-request contention (queueing) and time spent in a service.
-- Use open source libraries from `opentelemetry-contrib` to get vendor-neutral instrumentation 
+- Use open source libraries from `opentelemetry-contrib` to get vendor-neutral instrumentation
 for free.
 
 We recommend running Jaeger and HotROD together via `docker compose`:
