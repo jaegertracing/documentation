@@ -14,7 +14,19 @@ children:
   url: security
 ---
 
-Jaeger backend is released as a single binary or container image (see [Downloads](../../../download/)). Despite that, it can be configured to operate in different roles, such as all-in-one, collector, query, and ingester (see [Architecture](../architecture/)).
+Jaeger backend is released as a single binary or container image (see [Downloads](../../../download/)). Despite that, it can be configured to operate in different **roles**, such as all-in-one, collector, query, and ingester (see [Architecture](../architecture/)). An explicit configuration file can be provided via the `--config` command line argument. When running in a container, the path to the config file must be mapped into the container file system (the `-v ...` mapping below):
+
+```
+docker run --rm --name jaeger \
+  -p 16686:16686 \
+  -p 4317:4317 \
+  -p 4318:4318 \
+  -p 5778:5778 \
+  -p 9411:9411 \
+  -v /path/to/local/config.yaml:/jaeger/config.yaml \
+  jaegertracing/jaeger:{{< currentVersion >}} \
+  --config /jaeger/config.yaml
+```
 
 ## Management Ports
 
