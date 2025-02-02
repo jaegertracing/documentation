@@ -24,6 +24,12 @@ We are looking for the following topics to be covered by the proposal:
 
 It does not mean that the longer the proposal the better. It's about the quality and demonstrating which candidate better understands the problem and has a handle on how to solve it. You do not need to explain what Jaeger does and how. Instead, focus on the specific problem of the project, and think about the challenges and the solutions.
 
+#### Level playing field
+
+To ensure a fair and consistent evaluation process for all applicants, we cannot provide individual feedback on proposals before the submission deadline.  Providing feedback to some applicants and not others would create an unequal opportunity.  All proposals will receive thorough consideration by the selection committee after the deadline.  We encourage all interested individuals to submit their best work.
+
+If you need to ask specific questions / clarifications about the project, please ask them in the comments on the tracking issue, where they will be visible to all applicants.
+
 ### Bootcamp
 
 In order to understand the project better and come up with reasonable solutions, it's always helpful to become familiar with Jaeger and its code base. We strongly recommend going through the [Bootcamp](../get-involved/#bootcamp).
