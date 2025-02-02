@@ -28,7 +28,7 @@ It does not mean that the longer the proposal the better. It's about the quality
 
 To ensure a fair and consistent evaluation process for all applicants, we cannot provide individual feedback on proposals before the submission deadline.  Providing feedback to some applicants and not others would create an unequal opportunity.  All proposals will receive thorough consideration by the selection committee after the deadline.  We encourage all interested individuals to submit their best work.
 
-If you need to ask specific questions / clarifications about the project, please ask them in coimments on the tracking issue, where they will be visible to all applicants.
+If you need to ask specific questions / clarifications about the project, please ask them in the comments on the tracking issue, where they will be visible to all applicants.
 
 ### Bootcamp
 
