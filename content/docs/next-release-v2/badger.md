@@ -19,4 +19,4 @@ See [sample configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd
 
 ## Troubleshooting
 
-* [Badger file permissions as non-root service](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/badger/docs/storage-file-non-root-permission.md)
+* [Badger file permissions as non-root service](https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/badger/docs/storage-file-non-root-permission.md)
