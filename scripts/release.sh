@@ -55,6 +55,12 @@ safe_checkout_main() {
   fi
 }
 
+update_links() {
+  local version=$1
+  local versionTag="v${version}"
+  find ./content/docs/${version} -type f -exec sed -i "s|https://github.com/jaegertracing/jaeger/tree/main|https://github.com/jaegertracing/jaeger/tree/${versionTag}|g" {} \;
+}
+
 gen_cli_docs_v1() {
   local versionMajorMinor=$1
   # we set this as a temp dir with write permissions to everyone to overcome #441
@@ -82,6 +88,8 @@ for version in "${version_v1}" "${version_v2}"; do
     cp -r ./content/docs/next-release/ ./content/docs/${versionMajorMinor}
     gen_cli_docs_v1 ${versionMajorMinor}
   fi
+
+  update_links "${version}"
 
   versions=$(grep -E "versions${var_suffix} *:" "${config_file}")
   if [[ "$versions" == *"$versionMajorMinor"* ]]; then
