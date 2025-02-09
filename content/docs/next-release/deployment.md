@@ -220,8 +220,8 @@ docker run \
   jaegertracing/all-in-one:{{< currentVersion >}}
 ```
 
-* [Upgrade Badger v1 to v3](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/badger/docs/upgrade-v1-to-v3.md)
-* [Badger file permissions as non-root service](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/badger/docs/storage-file-non-root-permission.md)
+* [Upgrade Badger v1 to v3](https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/badger/docs/upgrade-v1-to-v3.md)
+* [Badger file permissions as non-root service](https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/badger/docs/storage-file-non-root-permission.md)
 
 ### Cassandra
 * Supported versions: 4.x, 5.x
@@ -255,7 +255,7 @@ A script is provided to initialize Cassandra keyspace and schema
 using Cassandra's interactive shell [`cqlsh`][cqlsh]:
 
 ```sh
-MODE=test sh ./plugin/storage/cassandra/schema/create.sh | cqlsh
+MODE=test sh ./internal/storage/v1/cassandra/schema/create.sh | cqlsh
 ```
 
 Or using the published Docker image (make sure to provide the right IP address):
@@ -271,7 +271,7 @@ where `{datacenter}` is the name used in the Cassandra configuration / network t
 The script also allows overriding TTL, keyspace name, replication factor, etc.
 Run the script without arguments to see the full list of recognized parameters.
 
-**Note**: See [README](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/cassandra/schema/README.md) for more details on Cassandra schema management.
+**Note**: See [README](https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/cassandra/schema/README.md) for more details on Cassandra schema management.
 
 #### TLS support
 
@@ -316,7 +316,7 @@ usercert = ~/.cassandra/client-cert
 
 #### Compatible Backends
 
-* ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
+* ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
 
 ### Elasticsearch
 * Supported since Jaeger v0.6.0
@@ -584,7 +584,7 @@ You can find more information about topics and partitions in general in the [off
 
 Jaeger supports a gRPC-based [Remote Storage API][storage.proto] that allows extending the Jaeger ecosystem with custom storage backends, not directly supported by the project. These storage backends can be deployed as a remote gRPC server (since Jaeger v1.30). Older deployment mode as sidecar plugin will not be supported starting from v1.58.
 
-To use a remote storage as Jaeger storage backend, use `grpc` as the storage type and specify the remote gRPC server address. For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc).
+To use a remote storage as Jaeger storage backend, use `grpc` as the storage type and specify the remote gRPC server address. For more information, please refer to [internal/storage/v1/grpc](https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v1/grpc).
 
 Example:
 ```sh
@@ -655,5 +655,5 @@ Production deployments need an external process that aggregates data and creates
 [jaeger-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
 [model.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/model.proto
 [thriftrw]: https://www.npmjs.com/package/thriftrw
-[storage.proto]: https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/grpc/proto/storage.proto
+[storage.proto]: https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/grpc/proto/storage.proto
 [otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md
