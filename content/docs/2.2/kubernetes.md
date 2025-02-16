@@ -3,10 +3,10 @@ title: Deploying on Kubernetes
 hasparent: true
 ---
 
-## Kubernetes Operator Coming Soon
+## Kubernetes Operator
 
-The Kubernetes Operator for Jaeger v2 is [being developed](https://github.com/jaegertracing/jaeger-operator/issues/2717).
+The [OpenTelemetry Collector Operator](https://github.com/jaegertracing/jaeger-operator#jager-v2-operator) can be used to manage Jaeger v2.
 
-## Helm Chart Coming Soon
+## Helm Chart
 
-The Helm Chart for Jaeger v2 is [being developed](https://github.com/jaegertracing/helm-charts/issues/610). The all-in-one mode is available in `v2` branch.
+The Helm Chart for Jaeger v2 is available in the `v2` branch: https://github.com/jaegertracing/helm-charts/tree/v2.
