@@ -57,7 +57,7 @@ can be started via docker. Be sure to include `--net monitor_backend` in the `do
 ## Architecture
 
 {{< info >}}
-Starting with v1.46.0, Jaeger supports the OpenTelemetry [SpanMetrics Connector](https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector#section-readme), which is replacing the deprecated [SpanMetrics Processor](https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/). Please refer to the [migration guide](https://github.com/jaegertracing/jaeger/blob/main/docker-compose/monitor/README.md#migrating-to-span-metrics-connector).
+Starting with v1.46.0, Jaeger supports the OpenTelemetry [SpanMetrics Connector](https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector#section-readme), which is replacing the deprecated [SpanMetrics Processor](https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/). Please refer to the [migration guide](https://github.com/jaegertracing/jaeger/blob/v1.50.0/docker-compose/monitor/README.md#migrating-to-span-metrics-connector).
 
 NB: Use `--prometheus.query.support-spanmetrics-connector=true` to explicitly enable the SpanMetrics Connector. This will become the default behavior in the future.
 {{< /info >}}
@@ -359,8 +359,8 @@ The reason for defaulting to `server` span kinds is to avoid double-counting
 both ingress and egress spans in the `server` and `client` span kinds, respectively.
 
 [spm-demo]: https://github.com/jaegertracing/jaeger/tree/v1.50.0/docker-compose/monitor
-[metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto
-[openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53
+[metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/v1.50.0/model/proto/metrics/metricsquery.proto
+[openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/v1.50.0/model/proto/metrics/openmetrics.proto#L53
 [opentelemetry-collector]: https://opentelemetry.io/docs/collector/
 [spanmetrics]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanmetricsprocessor#section-readme
 [spanmetrics-conn]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector#section-readme

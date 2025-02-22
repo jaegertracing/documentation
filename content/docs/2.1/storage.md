@@ -30,7 +30,7 @@ Jaeger supports a gRPC-based [Remote Storage API][storage.proto] that allows ext
 
 To use a remote storage as Jaeger storage backend, use `grpc` as the storage type and specify the remote gRPC server address. For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc).
 
-Example config for remote storage [can be found here](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-remote-storage.yaml).
+Example config for remote storage [can be found here](https://github.com/jaegertracing/jaeger/blob/v2.1.0/cmd/jaeger/config-remote-storage.yaml).
 
 Known remote storage backends:
 

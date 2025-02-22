@@ -274,8 +274,8 @@ both ingress and egress spans in the `server` and `client` span kinds, respectiv
 
 
 [spm-demo]: https://github.com/jaegertracing/jaeger/tree/v1.35.0/docker-compose/monitor
-[metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto
-[openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53
+[metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/v1.35.0/model/proto/metrics/metricsquery.proto
+[openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/v1.35.0/model/proto/metrics/openmetrics.proto#L53
 [opentelemetry-collector]: https://opentelemetry.io/docs/collector/
 [spanmetrics]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanmetricsprocessor#section-readme
 [prom-metric-labels]: https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels

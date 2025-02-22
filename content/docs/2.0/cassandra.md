@@ -19,7 +19,7 @@ Cassandra also has the following officially supported resources available from t
 
 #### Configuration
 
-Configuration example for [Jaeger writing to Cassandra](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-cassandra.yaml).
+Configuration example for [Jaeger writing to Cassandra](https://github.com/jaegertracing/jaeger/blob/v2.0.0/cmd/jaeger/config-cassandra.yaml).
 
 #### Schema script
 
@@ -43,7 +43,7 @@ where `{datacenter}` is the name used in the Cassandra configuration / network t
 The script also allows overriding TTL, keyspace name, replication factor, etc.
 Run the script without arguments to see the full list of recognized parameters.
 
-**Note**: See [README](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/cassandra/schema/README.md) for more details on Cassandra schema management.
+**Note**: See [README](https://github.com/jaegertracing/jaeger/blob/v2.0.0/plugin/storage/cassandra/schema/README.md) for more details on Cassandra schema management.
 
 #### TLS support
 
@@ -88,4 +88,4 @@ usercert = ~/.cassandra/client-cert
 
 #### Compatible Backends
 
-* ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
+* ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/v2.0.0/plugin/storage/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.

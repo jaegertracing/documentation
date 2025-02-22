@@ -37,7 +37,7 @@ Jaeger **collector** is stateless and thus many instances of **collector** can b
 
 ## Query Configuration
 
-The `jaeger_query` extension has a few deployment-related configuration options. In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/config.go#L16) as the authoritative source.
+The `jaeger_query` extension has a few deployment-related configuration options. In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go](https://github.com/jaegertracing/jaeger/blob/v2.2.0/cmd/jaeger/internal/extension/jaegerquery/config.go#L16) as the authoritative source.
 
 ### Clock Skew Adjustment
 
@@ -85,5 +85,5 @@ In order to display service dependency diagrams, production deployments need an 
 [jaeger-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
 [model.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/model.proto
 [thriftrw]: https://www.npmjs.com/package/thriftrw
-[storage.proto]: https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/grpc/proto/storage.proto
+[storage.proto]: https://github.com/jaegertracing/jaeger/blob/v2.2.0/plugin/storage/grpc/proto/storage.proto
 [otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md

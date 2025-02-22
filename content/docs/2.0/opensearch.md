@@ -20,7 +20,7 @@ OpenSearch also has the following officially supported resources available from 
 
 ## Configuration
 
-Here is [example configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-opensearch.yaml) for OpenSearch.
+Here is [example configuration](https://github.com/jaegertracing/jaeger/blob/v2.0.0/cmd/jaeger/config-opensearch.yaml) for OpenSearch.
 
 
 ### Shards and Replicas for OpenSearch indices

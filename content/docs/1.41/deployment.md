@@ -826,4 +826,4 @@ Production deployments need an external process which aggregates data and create
 [zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift
 [jaeger-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
 [thriftrw]: https://www.npmjs.com/package/thriftrw
-[storage.proto]: https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/grpc/proto/storage.proto
+[storage.proto]: https://github.com/jaegertracing/jaeger/blob/v1.41.0/plugin/storage/grpc/proto/storage.proto

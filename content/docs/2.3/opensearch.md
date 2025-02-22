@@ -20,4 +20,4 @@ OpenSearch also has the following officially supported resources available from 
 
 ## Configuration
 
-Here is [example configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-opensearch.yaml) for OpenSearch. Overall Jaeger uses the same implementation for OpenSearch as for Elasticsearch, so most of the discussion on the [Elasticsearch page](../elasticsearch/#configuration) applies.
+Here is [example configuration](https://github.com/jaegertracing/jaeger/blob/v2.3.0/cmd/jaeger/config-opensearch.yaml) for OpenSearch. Overall Jaeger uses the same implementation for OpenSearch as for Elasticsearch, so most of the discussion on the [Elasticsearch page](../elasticsearch/#configuration) applies.

@@ -45,8 +45,8 @@ Kafka also has the following officially supported resources available from the c
 ## Configuration
 
 Please refer to these sample configuration files:
-  * **collector**: [config-kafka-collector.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-collector.yaml)
-  * **ingester**: [config-kafka-ingester.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester.yaml)
+  * **collector**: [config-kafka-collector.yaml](https://github.com/jaegertracing/jaeger/blob/v2.2.0/cmd/jaeger/config-kafka-collector.yaml)
+  * **ingester**: [config-kafka-ingester.yaml](https://github.com/jaegertracing/jaeger/blob/v2.2.0/cmd/jaeger/config-kafka-ingester.yaml)
 
 Jaeger uses Kafka exporter and receiver from `opentelemetry-collector-contrib` repository. Please refer to their respective README's for configuration details.
   * [Kafka exporter](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/kafkaexporter/README.md)

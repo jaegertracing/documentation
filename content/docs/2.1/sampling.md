@@ -17,8 +17,8 @@ Head based sampling is when the sampling decision is made at the beginning of a 
 Tail based sampling allows for the sampling decisions to be made after the trace is complete and all spans have been collected. This provides more granular control over which traces and kept and which are discarded. The downsides to this are (a) the runtime overhead on the application that must record and export all traces, and (b) the higher memory and processing costs for the Jaeger backend. You can learn more about tail based sampling in the [OpenTelemetry documentation](https://opentelemetry.io/docs/concepts/sampling/#tail-sampling).
 
 Jaeger supports tail based sampling via a [tail sampling processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/tailsamplingprocessor).
-  * This [configuration allows for the sampling of everything observed](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-tail-sampling-always-sample.yaml) by Jaeger with debug logging to diagnose problems.
-  * The second configuration of [samples for a specific service name](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-tail-sampling-service-name-policy.yaml).
+  * This [configuration allows for the sampling of everything observed](https://github.com/jaegertracing/jaeger/blob/v2.1.0/cmd/jaeger/config-tail-sampling-always-sample.yaml) by Jaeger with debug logging to diagnose problems.
+  * The second configuration of [samples for a specific service name](https://github.com/jaegertracing/jaeger/blob/v2.1.0/cmd/jaeger/config-tail-sampling-service-name-policy.yaml).
 
 ## Remote Sampling
 
@@ -104,6 +104,6 @@ In the above example:
 
 Another way to configure `remote_sampling` extension is to use Adaptive Sampling, which works by observing received spans and recalculating sampling probabilities for each service/endpoint combination to ensure that the volume of collected traces matches `target_samples_per_second`. When a new service or endpoint is detected, it is sampled with `initial_sampling_probability` until enough data is collected to calculate the rate appropriate for the traffic going through the endpoint.
 
-Adaptive sampling requires a `sampling_store` storage backend to store the observed traffic data and computed probabilities. At the moment `memory` (for all-in-one deployment), `cassandra`, `badger`, `elasticsearch` and `opensearch` are supported as sampling storage backends. This [sample configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config.yaml) illustrates the use of adaptive sampling.
+Adaptive sampling requires a `sampling_store` storage backend to store the observed traffic data and computed probabilities. At the moment `memory` (for all-in-one deployment), `cassandra`, `badger`, `elasticsearch` and `opensearch` are supported as sampling storage backends. This [sample configuration](https://github.com/jaegertracing/jaeger/blob/v2.1.0/cmd/jaeger/config.yaml) illustrates the use of adaptive sampling.
 
 Read [this blog post](https://medium.com/jaegertracing/adaptive-sampling-in-jaeger-50f336f4334) for more details on adaptive sampling engine.

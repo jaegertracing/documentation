@@ -17,10 +17,10 @@ Kafka also has the following officially supported resources available from the c
 
 #### Configuration
 ##### Collector
-In order to collect tracing data and add it to a Kafka topic this [configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-collector.yaml) is what should be used.
+In order to collect tracing data and add it to a Kafka topic this [configuration](https://github.com/jaegertracing/jaeger/blob/v2.0.0/cmd/jaeger/config-kafka-collector.yaml) is what should be used.
 
 ##### Ingester
-In order to write tracing data which is added to a Kafka topic this [configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester.yaml) is what should be used.
+In order to write tracing data which is added to a Kafka topic this [configuration](https://github.com/jaegertracing/jaeger/blob/v2.0.0/cmd/jaeger/config-kafka-ingester.yaml) is what should be used.
 
 #### Topic & partitions
 Unless your Kafka cluster is configured to automatically create topics, you will need to create it ahead of time. You can refer to [the Kafka quickstart documentation](https://kafka.apache.org/documentation/#quickstart_createtopic) to learn how.
