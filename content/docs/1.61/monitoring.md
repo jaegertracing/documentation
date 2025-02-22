@@ -26,7 +26,7 @@ Component             | Port
 
 ### Prometheus monitoring mixin for Jaeger
 
-The Prometheus monitoring mixin for Jaeger provides a starting point for people wanting to monitor Jaeger using Prometheus, Alertmanager, and Grafana. This includes a prebuilt [dashboard](https://github.com/jaegertracing/jaeger/blob/v1.61.0/monitoring/jaeger-mixin/dashboard-for-grafana.json). For more information, see [the documentation](https://github.com/jaegertracing/jaeger/tree/master/monitoring/jaeger-mixin).
+The Prometheus monitoring mixin for Jaeger provides a starting point for people wanting to monitor Jaeger using Prometheus, Alertmanager, and Grafana. This includes a prebuilt [dashboard](https://github.com/jaegertracing/jaeger/blob/v1.61.0/monitoring/jaeger-mixin/dashboard-for-grafana.json). For more information, see [the documentation](https://github.com/jaegertracing/jaeger/tree/v1.61.0/monitoring/jaeger-mixin).
 
 ## Logging
 

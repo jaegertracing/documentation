@@ -731,7 +731,7 @@ You can find more information about topics and partitions in general in the [off
 
 Jaeger supports a gRPC-based [Remote Storage API][storage.proto] that allows extending the Jaeger ecosystem with other storage backends, or "plugins", not directly supported by the project. These storage backends can be deployed in two modes: as a sidecar or as a remote gRPC server (since Jaeger v1.30).
 
-To use a storage plugin as Jaeger storage backend, use `grpc-plugin` as the storage type and specify either the binary name for the sidecar mode, or the remote gRPC server address. For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc).
+To use a storage plugin as Jaeger storage backend, use `grpc-plugin` as the storage type and specify either the binary name for the sidecar mode, or the remote gRPC server address. For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/v1.37.0/plugin/storage/grpc).
 
 #### Sidecar model
 

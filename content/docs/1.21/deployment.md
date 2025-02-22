@@ -452,7 +452,7 @@ You can find more information about topics and partitions in general in the [off
 
 ### Storage plugin
 
-Jaeger supports gRPC based storage plugins. For more information refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc)
+Jaeger supports gRPC based storage plugins. For more information refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/v1.21.0/plugin/storage/grpc)
 
 Available plugins:
 

@@ -648,7 +648,7 @@ You can find more information about topics and partitions in general in the [off
 
 ### Storage plugin
 
-Jaeger supports an extension mechanism that allows the storage to be implemented as a gRPC server. The server can run either as a child process of Jaeger components (the Hashicorp go-plugin model), or as a remote gRPC service (since Jaeger v1.30). For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc).
+Jaeger supports an extension mechanism that allows the storage to be implemented as a gRPC server. The server can run either as a child process of Jaeger components (the Hashicorp go-plugin model), or as a remote gRPC service (since Jaeger v1.30). For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/v1.32.0/plugin/storage/grpc).
 
 Available plugins:
 
