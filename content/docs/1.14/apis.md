@@ -83,5 +83,5 @@ For programmatic access to service graph, the recommended API is gRPC/Protobuf d
 [jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
 [agent.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/agent.thrift
 [sampling.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/sampling.thrift
-[collector.proto]: https://github.com/jaegertracing/jaeger/blob/master/model/proto/api_v2/collector.proto
-[query.proto]: https://github.com/jaegertracing/jaeger/blob/master/model/proto/api_v2/query.proto
+[collector.proto]: https://github.com/jaegertracing/jaeger/blob/v1.14.0/model/proto/api_v2/collector.proto
+[query.proto]: https://github.com/jaegertracing/jaeger/blob/v1.14.0/model/proto/api_v2/query.proto
