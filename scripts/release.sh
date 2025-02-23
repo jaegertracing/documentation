@@ -60,6 +60,7 @@ update_links() {
   local version=$2
   local versionTag="v${version}"
   find ./content/docs/${versionMajorMinor} -type f -exec sed -i "s|https://github.com/jaegertracing/jaeger/tree/main|https://github.com/jaegertracing/jaeger/tree/${versionTag}|g" {} \;
+  find ./content/docs/${versionMajorMinor} -type f -exec sed -i "s|https://github.com/jaegertracing/jaeger/blob/main|https://github.com/jaegertracing/jaeger/blob/${versionTag}|g" {} \;
 }
 
 gen_cli_docs_v1() {

@@ -482,7 +482,7 @@ spec:
 <3> The options for the `create-schema` job.
 
 {{< info >}}
-The default create-schema job uses `MODE=prod`, which implies a replication factor of `2`, using `NetworkTopologyStrategy` as the class, effectively meaning that at least 3 nodes are required in the Cassandra cluster. If a `SimpleStrategy` is desired, set the mode to `test`, which then sets the replication factor of `1`. Refer to the [create-schema script](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/cassandra/schema/create.sh) for more details.
+The default create-schema job uses `MODE=prod`, which implies a replication factor of `2`, using `NetworkTopologyStrategy` as the class, effectively meaning that at least 3 nodes are required in the Cassandra cluster. If a `SimpleStrategy` is desired, set the mode to `test`, which then sets the replication factor of `1`. Refer to the [create-schema script](https://github.com/jaegertracing/jaeger/blob/v1.27.0/plugin/storage/cassandra/schema/create.sh) for more details.
 {{< /info >}}
 
 ### Elasticsearch storage

@@ -107,7 +107,7 @@ docker run --rm -it --link jaeger \
 In order to run from source you need:
 
 - [Go toolchain](https://golang.org/doc/install) installed on your machine
-  (see [go.mod](https://github.com/jaegertracing/jaeger/blob/master/go.mod) file for minimum required Go version).
+  (see [go.mod](https://github.com/jaegertracing/jaeger/blob/v1.65.0/go.mod) file for minimum required Go version).
 - A [running Jaeger backend](#all-in-one) to view the traces.
 
 ```bash

@@ -27,7 +27,7 @@ ElasticSearch also has the following officially supported resources available fr
 
 ## Configuration
 
-Here is [example configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-elasticsearch.yaml) for ElasticSearch.
+Here is [example configuration](https://github.com/jaegertracing/jaeger/blob/v2.0.0/cmd/jaeger/config-elasticsearch.yaml) for ElasticSearch.
 
 ### Shards and Replicas
 

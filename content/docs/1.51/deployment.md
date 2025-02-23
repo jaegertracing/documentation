@@ -215,7 +215,7 @@ docker run -d --rm \
 
 ### Clock Skew Adjustment
 
-Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. **jaeger-query** service implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/master/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to its timestamps.
+Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. **jaeger-query** service implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/v1.51.0/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to its timestamps.
 
 Sometimes these adjustments themselves make the trace hard to understand. For example, when repositioning the server span within the bounds of its parent span, Jaeger does not know the exact relationship between the request and response latencies, so it assumes then to be equal and places the child span in the middle of the parent span (see [issue #961](https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244)).
 
@@ -431,7 +431,7 @@ where `{datacenter}` is the name used in the Cassandra configuration / network t
 The script also allows overriding TTL, keyspace name, replication factor, etc.
 Run the script without arguments to see the full list of recognized parameters.
 
-**Note**: See [README](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/cassandra/schema/README.md) for more details on Cassandra schema management.
+**Note**: See [README](https://github.com/jaegertracing/jaeger/blob/v1.51.0/plugin/storage/cassandra/schema/README.md) for more details on Cassandra schema management.
 
 #### TLS support
 
@@ -744,7 +744,7 @@ You can find more information about topics and partitions in general in the [off
 
 Jaeger supports a gRPC-based [Remote Storage API][storage.proto] that allows extending the Jaeger ecosystem with other storage backends, or "plugins", not directly supported by the project. These storage backends can be deployed in two modes: as a sidecar or as a remote gRPC server (since Jaeger v1.30).
 
-To use a storage plugin as Jaeger storage backend, use `grpc-plugin` as the storage type and specify either the binary name for the sidecar mode, or the remote gRPC server address. For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/grpc).
+To use a storage plugin as Jaeger storage backend, use `grpc-plugin` as the storage type and specify either the binary name for the sidecar mode, or the remote gRPC server address. For more information, please refer to [jaeger/plugin/storage/grpc](https://github.com/jaegertracing/jaeger/tree/v1.51.0/plugin/storage/grpc).
 
 #### Sidecar model
 
@@ -767,7 +767,7 @@ Available sidecar plugins:
 
 ### Compatible Backends
 
-* ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
+* ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/v1.51.0/plugin/storage/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
 
 #### Remote storage model
 
@@ -842,5 +842,5 @@ Production deployments need an external process which aggregates data and create
 [jaeger-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
 [model.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/model.proto
 [thriftrw]: https://www.npmjs.com/package/thriftrw
-[storage.proto]: https://github.com/jaegertracing/jaeger/blob/main/plugin/storage/grpc/proto/storage.proto
+[storage.proto]: https://github.com/jaegertracing/jaeger/blob/v1.51.0/plugin/storage/grpc/proto/storage.proto
 [otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md

@@ -251,7 +251,7 @@ docker run \
   --help
 ```
 
-See the [README](https://github.com/jaegertracing/jaeger/tree/master/plugin/storage/es/README.md) for an in-depth overview of how Jaeger uses Elasticsearch for storage.
+See the [README](https://github.com/jaegertracing/jaeger/tree/v1.10.0/plugin/storage/es/README.md) for an in-depth overview of how Jaeger uses Elasticsearch for storage.
 
 #### Shards and Replicas for Elasticsearch indices
 

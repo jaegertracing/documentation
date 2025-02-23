@@ -63,7 +63,7 @@ docker compose -f docker-compose-v2.yml up
 # press Ctrl-C to exit
 ```
 
-Then navigate to `http://localhost:8080`. See the [README](https://github.com/jaegertracing/jaeger/blob/main/examples/hotrod/README.md) for other ways to run the demo.
+Then navigate to `http://localhost:8080`. See the [README](https://github.com/jaegertracing/jaeger/blob/v2.3.0/examples/hotrod/README.md) for other ways to run the demo.
 
 ## SPM
 
