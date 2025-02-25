@@ -3,7 +3,8 @@ publish = "public"
 command = "make netlify-production-build"
 
 [build.environment]
-HUGO_VERSION = "0.123.6"
+# should match one from .github/workflows/ci-test.yml
+HUGO_VERSION = "0.143.1"
 
 [context.deploy-preview]
 command = "make netlify-deploy-preview"
