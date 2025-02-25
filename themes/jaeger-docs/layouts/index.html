@@ -2,7 +2,7 @@
 {{ $rss := dict }}
 {{ with try (resources.GetRemote "https://medium.com/feed/jaegertracing") }}
   {{ with .Err }}
-    {{ warnf "%s" . }}
+    {{ errorf "%s" . }}
   {{ else with .Value }}
     {{ $rss = . | transform.Unmarshal }}
   {{ else }}
