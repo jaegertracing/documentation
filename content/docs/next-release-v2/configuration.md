@@ -12,6 +12,30 @@ We are currently working on expanding this section with more details. [Examples 
 
 Jaeger can be configured via a YAML configuration file that uses the same format as the [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/configuration/). The configuration defines the main ingestion pipeline as a collection of **receivers**, **processors**, **connectors**, and **exporters**. Jaeger implements many of these components, but also a number of **extensions** that provide Jaeger's unique capabilities.
 
+### Environment Variables
+
+Note that Jaeger v2 does not recognize environment variables in the same way as Jaeger v1 used to do for configuration, it only reads the YAML config file. However, the format of that YAML config does allow referring to environment variables, that provides some additional flexibility when needed. For example, in the config snippet below the hostname is `localhost` by default but it can be overwritten via `JAEGER_LISTEN_HOST` environment variable, which is useful when running Jaeger in a container and it needs to be `0.0.0.0`:
+
+```yaml
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: "${env:JAEGER_LISTEN_HOST:-localhost}:4317"
+      http:
+        endpoint: "${env:JAEGER_LISTEN_HOST:-localhost}:4318"
+```
+
+One category of environment variables that Jaeger v2 does recognize automatically is those that control the behavior of the OpenTelemetry Go SDK, such as `OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4318`.
+
+### Config Overrides
+
+Another way to override certain config values is by passing them via `--set` command line flags:
+```
+--set=receivers.otlp.protocols.grpc.endpoint=0.0.0.0:4317
+```
+
+
 ## Extensions
 
 ### Jaeger storage
@@ -36,7 +60,7 @@ jaeger_storage:
 
 In this example:
   * `backends` is a dictionary of backends for tracing data
-  * `metric_backends` is a dictionary of backends for metrics 
+  * `metric_backends` is a dictionary of backends for metrics
   * `some_storage` and `some_metrics_storage` are some names given to certain backends that can be referenced from other components
   * `memory` is a type of the backend, in this case in-memory storage
   * `prometheus` is a type of the backend, in this case Prometheus-compatible remote server
