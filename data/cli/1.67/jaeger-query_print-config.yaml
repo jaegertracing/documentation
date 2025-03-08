@@ -1,0 +1,17 @@
+name: jaeger-query print-config
+synopsis: Print names and values of configuration options
+description: |
+    Print names and values of configuration options, distinguishing between default and user-assigned values
+usage: jaeger-query print-config [flags]
+options:
+    - name: all
+      shorthand: a
+      default_value: "false"
+      usage: |
+        Print all configuration options including those with empty values
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for print-config
+see_also:
+    - jaeger-query - Jaeger query service provides a Web UI and an API for accessing trace data.
