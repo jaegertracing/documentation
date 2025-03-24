@@ -86,7 +86,7 @@ Sometimes these adjustments themselves make the trace hard to understand. For ex
 
 ```
 query:
-  max-clock-skew-adjustment: 30s
+  max_clock_skew_adjust: 30s
 ```
 
  that controls how much clock skew adjustment should be allowed. Setting this parameter to zero (`0s`) disables clock skew adjustment completely. This setting applies to all traces retrieved from the given query service. There is an open [ticket #197](https://github.com/jaegertracing/jaeger-ui/issues/197) to support toggling the adjustment on and off directly in the UI.
