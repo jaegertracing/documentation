@@ -1,0 +1,342 @@
+name: jaeger-ingester
+synopsis: Jaeger ingester consumes from Kafka and writes to storage.
+description: |
+    Jaeger ingester consumes spans from a particular Kafka topic and writes them to a configured storage.
+usage: jaeger-ingester [flags]
+options:
+    - name: admin.http.host-port
+      default_value: :14270
+      usage: |
+        The host:port (e.g. 127.0.0.1:14270 or :14270) for the admin server, including health check, /metrics, etc.
+    - name: admin.http.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this server to clients
+    - name: admin.http.tls.cipher-suites
+      usage: |
+        Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+    - name: admin.http.tls.client-ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+    - name: admin.http.tls.enabled
+      default_value: "false"
+      usage: Enable TLS on the server
+    - name: admin.http.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this server to clients
+    - name: admin.http.tls.max-version
+      usage: |
+        Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: admin.http.tls.min-version
+      usage: |
+        Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: admin.http.tls.reload-interval
+      default_value: 0s
+      usage: |
+        The duration after which the certificate will be reloaded (0s means will not be reloaded)
+    - name: cassandra-archive.basic.allowed-authenticators
+      usage: |
+        The comma-separated list of allowed password authenticators for Cassandra.If none are specified, there is a default 'approved' list that is used (https://github.com/gocql/gocql/blob/34fdeebefcbf183ed7f916f931aa0586fdaa1b40/conn.go#L27). If a non-empty list is provided, only specified authenticators are allowed.
+    - name: cassandra-archive.connect-timeout
+      default_value: 0s
+      usage: Timeout used for connections to Cassandra Servers
+    - name: cassandra-archive.connections-per-host
+      default_value: "2"
+      usage: |
+        The number of Cassandra connections from a single backend instance
+    - name: cassandra-archive.consistency
+      usage: |
+        The Cassandra consistency level, e.g. ANY, ONE, TWO, THREE, QUORUM, ALL, LOCAL_QUORUM, EACH_QUORUM, LOCAL_ONE (default LOCAL_ONE)
+    - name: cassandra-archive.disable-compression
+      default_value: "false"
+      usage: |
+        Disables the use of the default Snappy Compression while connecting to the Cassandra Cluster if set to true. This is useful for connecting to Cassandra Clusters(like Azure Cosmos Db with Cassandra API) that do not support SnappyCompression
+    - name: cassandra-archive.enabled
+      default_value: "false"
+      usage: Enable extra storage
+    - name: cassandra-archive.index.logs
+      default_value: "true"
+      usage: Controls log field indexing. Set to false to disable.
+    - name: cassandra-archive.index.process-tags
+      default_value: "true"
+      usage: Controls process tag indexing. Set to false to disable.
+    - name: cassandra-archive.index.tag-blacklist
+      usage: |
+        The comma-separated list of span tags to blacklist from being indexed. All other tags will be indexed. Mutually exclusive with the whitelist option.
+    - name: cassandra-archive.index.tag-whitelist
+      usage: |
+        The comma-separated list of span tags to whitelist for being indexed. All other tags will not be indexed. Mutually exclusive with the blacklist option.
+    - name: cassandra-archive.index.tags
+      default_value: "true"
+      usage: Controls tag indexing. Set to false to disable.
+    - name: cassandra-archive.keyspace
+      default_value: jaeger_dc1
+      usage: The Cassandra keyspace for Jaeger data
+    - name: cassandra-archive.local-dc
+      usage: |
+        The name of the Cassandra local data center for DC Aware host selection
+    - name: cassandra-archive.max-retry-attempts
+      default_value: "3"
+      usage: The number of attempts when reading from Cassandra
+    - name: cassandra-archive.password
+      usage: Password for password authentication for Cassandra
+    - name: cassandra-archive.port
+      default_value: "9042"
+      usage: The port for cassandra
+    - name: cassandra-archive.proto-version
+      default_value: "4"
+      usage: The Cassandra protocol version
+    - name: cassandra-archive.reconnect-interval
+      default_value: 1m0s
+      usage: Reconnect interval to retry connecting to downed hosts
+    - name: cassandra-archive.servers
+      default_value: 127.0.0.1
+      usage: The comma-separated list of Cassandra servers
+    - name: cassandra-archive.socket-keep-alive
+      default_value: 0s
+      usage: Cassandra's keepalive period to use, enabled if > 0
+    - name: cassandra-archive.span-store-write-cache-ttl
+      default_value: 12h0m0s
+      usage: |
+        The duration to wait before rewriting an existing service or operation name
+    - name: cassandra-archive.timeout
+      default_value: 0s
+      usage: Timeout used for queries. A Timeout of zero means no timeout
+    - name: cassandra-archive.tls.ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
+    - name: cassandra-archive.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this process to the remote server(s)
+    - name: cassandra-archive.tls.enabled
+      default_value: "false"
+      usage: Enable TLS when talking to the remote server(s)
+    - name: cassandra-archive.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this process to the remote server(s)
+    - name: cassandra-archive.tls.server-name
+      usage: |
+        Override the TLS server name we expect in the certificate of the remote server(s)
+    - name: cassandra-archive.tls.skip-host-verify
+      default_value: "false"
+      usage: |
+        (insecure) Skip server's certificate chain and host name verification
+    - name: cassandra-archive.username
+      usage: Username for password authentication for Cassandra
+    - name: cassandra.basic.allowed-authenticators
+      usage: |
+        The comma-separated list of allowed password authenticators for Cassandra.If none are specified, there is a default 'approved' list that is used (https://github.com/gocql/gocql/blob/34fdeebefcbf183ed7f916f931aa0586fdaa1b40/conn.go#L27). If a non-empty list is provided, only specified authenticators are allowed.
+    - name: cassandra.connect-timeout
+      default_value: 0s
+      usage: Timeout used for connections to Cassandra Servers
+    - name: cassandra.connections-per-host
+      default_value: "2"
+      usage: |
+        The number of Cassandra connections from a single backend instance
+    - name: cassandra.consistency
+      usage: |
+        The Cassandra consistency level, e.g. ANY, ONE, TWO, THREE, QUORUM, ALL, LOCAL_QUORUM, EACH_QUORUM, LOCAL_ONE (default LOCAL_ONE)
+    - name: cassandra.disable-compression
+      default_value: "false"
+      usage: |
+        Disables the use of the default Snappy Compression while connecting to the Cassandra Cluster if set to true. This is useful for connecting to Cassandra Clusters(like Azure Cosmos Db with Cassandra API) that do not support SnappyCompression
+    - name: cassandra.index.logs
+      default_value: "true"
+      usage: Controls log field indexing. Set to false to disable.
+    - name: cassandra.index.process-tags
+      default_value: "true"
+      usage: Controls process tag indexing. Set to false to disable.
+    - name: cassandra.index.tag-blacklist
+      usage: |
+        The comma-separated list of span tags to blacklist from being indexed. All other tags will be indexed. Mutually exclusive with the whitelist option.
+    - name: cassandra.index.tag-whitelist
+      usage: |
+        The comma-separated list of span tags to whitelist for being indexed. All other tags will not be indexed. Mutually exclusive with the blacklist option.
+    - name: cassandra.index.tags
+      default_value: "true"
+      usage: Controls tag indexing. Set to false to disable.
+    - name: cassandra.keyspace
+      default_value: jaeger_dc1
+      usage: The Cassandra keyspace for Jaeger data
+    - name: cassandra.local-dc
+      usage: |
+        The name of the Cassandra local data center for DC Aware host selection
+    - name: cassandra.max-retry-attempts
+      default_value: "3"
+      usage: The number of attempts when reading from Cassandra
+    - name: cassandra.password
+      usage: Password for password authentication for Cassandra
+    - name: cassandra.port
+      default_value: "9042"
+      usage: The port for cassandra
+    - name: cassandra.proto-version
+      default_value: "4"
+      usage: The Cassandra protocol version
+    - name: cassandra.reconnect-interval
+      default_value: 1m0s
+      usage: Reconnect interval to retry connecting to downed hosts
+    - name: cassandra.servers
+      default_value: 127.0.0.1
+      usage: The comma-separated list of Cassandra servers
+    - name: cassandra.socket-keep-alive
+      default_value: 0s
+      usage: Cassandra's keepalive period to use, enabled if > 0
+    - name: cassandra.span-store-write-cache-ttl
+      default_value: 12h0m0s
+      usage: |
+        The duration to wait before rewriting an existing service or operation name
+    - name: cassandra.timeout
+      default_value: 0s
+      usage: Timeout used for queries. A Timeout of zero means no timeout
+    - name: cassandra.tls.ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
+    - name: cassandra.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this process to the remote server(s)
+    - name: cassandra.tls.enabled
+      default_value: "false"
+      usage: Enable TLS when talking to the remote server(s)
+    - name: cassandra.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this process to the remote server(s)
+    - name: cassandra.tls.server-name
+      usage: |
+        Override the TLS server name we expect in the certificate of the remote server(s)
+    - name: cassandra.tls.skip-host-verify
+      default_value: "false"
+      usage: |
+        (insecure) Skip server's certificate chain and host name verification
+    - name: cassandra.username
+      usage: Username for password authentication for Cassandra
+    - name: config-file
+      usage: |
+        Configuration file in JSON, TOML, YAML, HCL, or Java properties formats (default none). See spf13/viper for precedence.
+    - name: downsampling.hashsalt
+      usage: Salt used when hashing trace id for downsampling.
+    - name: downsampling.ratio
+      default_value: "1"
+      usage: |
+        Ratio of spans passed to storage after downsampling (between 0 and 1), e.g ratio = 0.3 means we are keeping 30% of spans and dropping 70% of spans; ratio = 1.0 disables downsampling.
+    - name: feature-gates
+      default_value: |
+        -confmap.enableMergeAppendOption,jaeger.es.disableLegacyId,-otelcol.printInitialConfig,-service.AllowNoPipelines,-service.noopTracerProvider,-service.profilesSupport,telemetry.UseLocalHostAsDefaultMetricsAddress,telemetry.disableAddressFieldForInternalTelemetry,-telemetry.disableHighCardinalityMetrics,-telemetry.newPipelineTelemetry,telemetry.useOtelWithSDKConfigurationForInternalTelemetry
+      usage: |
+        Comma-delimited list of feature gate identifiers. Prefix with '-' to disable the feature. '+' or no prefix will enable the feature.
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for jaeger-ingester
+    - name: ingester.deadlockInterval
+      default_value: 0s
+      usage: |
+        Interval to check for deadlocks. If no messages gets processed in given time, ingester app will exit. Value of 0 disables deadlock check.
+    - name: ingester.parallelism
+      default_value: "1000"
+      usage: The number of messages to process in parallel
+    - name: kafka.consumer.authentication
+      default_value: none
+      usage: |
+        Authentication type used to authenticate with kafka cluster. e.g. none, kerberos, tls, plaintext
+    - name: kafka.consumer.brokers
+      default_value: 127.0.0.1:9092
+      usage: |
+        The comma-separated list of kafka brokers. i.e. '127.0.0.1:9092,0.0.0:1234'
+    - name: kafka.consumer.client-id
+      default_value: jaeger-ingester
+      usage: The Consumer Client ID that ingester will use
+    - name: kafka.consumer.encoding
+      default_value: protobuf
+      usage: |
+        The encoding of spans ("json", "protobuf", "zipkin-thrift") consumed from kafka
+    - name: kafka.consumer.fetch-max-message-bytes
+      default_value: "1048576"
+      usage: |
+        The maximum number of message bytes to fetch from the broker in a single request. So you must be sure this is at least as large as your largest message.
+    - name: kafka.consumer.group-id
+      default_value: jaeger-ingester
+      usage: |
+        The Consumer Group that ingester will be consuming on behalf of
+    - name: kafka.consumer.kerberos.config-file
+      default_value: /etc/krb5.conf
+      usage: Path to Kerberos configuration. i.e /etc/krb5.conf
+    - name: kafka.consumer.kerberos.disable-fast-negotiation
+      default_value: "false"
+      usage: |
+        Disable FAST negotiation when not supported by KDC's like Active Directory. See https://github.com/jcmturner/gokrb5/blob/master/USAGE.md#active-directory-kdc-and-fast-negotiation.
+    - name: kafka.consumer.kerberos.keytab-file
+      default_value: /etc/security/kafka.keytab
+      usage: Path to keytab file. i.e /etc/security/kafka.keytab
+    - name: kafka.consumer.kerberos.password
+      usage: The Kerberos password used for authenticate with KDC
+    - name: kafka.consumer.kerberos.realm
+      usage: Kerberos realm
+    - name: kafka.consumer.kerberos.service-name
+      default_value: kafka
+      usage: Kerberos service name
+    - name: kafka.consumer.kerberos.use-keytab
+      default_value: "false"
+      usage: |
+        Use of keytab instead of password, if this is true, keytab file will be used instead of password
+    - name: kafka.consumer.kerberos.username
+      usage: The Kerberos username used for authenticate with KDC
+    - name: kafka.consumer.plaintext.mechanism
+      default_value: PLAIN
+      usage: |
+        The plaintext Mechanism for SASL/PLAIN authentication, e.g. 'SCRAM-SHA-256' or 'SCRAM-SHA-512' or 'PLAIN'
+    - name: kafka.consumer.plaintext.password
+      usage: The plaintext Password for SASL/PLAIN authentication
+    - name: kafka.consumer.plaintext.username
+      usage: The plaintext Username for SASL/PLAIN authentication
+    - name: kafka.consumer.protocol-version
+      usage: Kafka protocol version - must be supported by kafka server
+    - name: kafka.consumer.rack-id
+      usage: |
+        Rack identifier for this client. This can be any string value which indicates where this client is located. It corresponds with the broker config `broker.rack`
+    - name: kafka.consumer.tls.ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
+    - name: kafka.consumer.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this process to the remote server(s)
+    - name: kafka.consumer.tls.enabled
+      default_value: "false"
+      usage: Enable TLS when talking to the remote server(s)
+    - name: kafka.consumer.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this process to the remote server(s)
+    - name: kafka.consumer.tls.server-name
+      usage: |
+        Override the TLS server name we expect in the certificate of the remote server(s)
+    - name: kafka.consumer.tls.skip-host-verify
+      default_value: "false"
+      usage: |
+        (insecure) Skip server's certificate chain and host name verification
+    - name: kafka.consumer.topic
+      default_value: jaeger-spans
+      usage: The name of the kafka topic to consume from
+    - name: log-encoding
+      default_value: json
+      usage: Log encoding. Supported values are 'json' and 'console'.
+    - name: log-level
+      default_value: info
+      usage: |
+        Minimal allowed log Level. For more levels see https://github.com/uber-go/zap
+    - name: metrics-backend
+      default_value: prometheus
+      usage: |
+        Defines which metrics backend to use for metrics reporting: prometheus or none
+    - name: metrics-http-route
+      default_value: /metrics
+      usage: |
+        Defines the route of HTTP endpoint for metrics backends that support scraping
+    - name: span-storage.type
+      usage: |
+        (deprecated) please use SPAN_STORAGE_TYPE environment variable. Run this binary with the 'env' command for help.
+see_also:
+    - jaeger-ingester completion - Generate the autocompletion script for the specified shell
+    - jaeger-ingester docs - Generates documentation
+    - jaeger-ingester env - Help about environment variables.
+    - jaeger-ingester featuregate - Display feature gates information
+    - jaeger-ingester print-config - Print names and values of configuration options
+    - jaeger-ingester status - Print the status.
+    - jaeger-ingester version - Print the version.

@@ -1,0 +1,12 @@
+name: jaeger-ingester featuregate
+synopsis: Display feature gates information
+description: |
+    Display information about available feature gates and their status
+usage: jaeger-ingester featuregate [feature-id] [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for featuregate
+see_also:
+    - jaeger-ingester - Jaeger ingester consumes from Kafka and writes to storage.

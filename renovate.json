@@ -9,7 +9,8 @@
       "groupName": "github-actions deps"
     },
     {
-      "matchManagers": ["github-actions"],
+      "groupName": "disable patches",
+      "matchManagers": ["github-actions", "npm"],
       "matchUpdateTypes": ["patch", "digest"],
       "enabled": false
     }
