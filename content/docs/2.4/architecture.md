@@ -101,7 +101,7 @@ The Jaeger binary is build on top of the OpenTelemetry Collector framework and i
 
 * [Zipkin](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/zipkinreceiver) - Accepts spans using Zipkin v1 and v2 protocols.
 
-* [No-op](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/nopreceiver) - Disables ingestion pipeline .e.g. in case you want to use only Jaeger query
+* [No-op](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/nopreceiver) - Used for Jaeger UI / query service deployment that does not require an ingestion pipeline.
 
 #### Processors
 * [Batch](https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor) - Batches spans for better efficiency.
@@ -123,7 +123,7 @@ The Jaeger binary is build on top of the OpenTelemetry Collector framework and i
 
 * [Debug](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/debugexporter)	- Debugging tool for pipelines.
 
-* [No-op](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/nopexporter) - Disables the ingestion pipeline, .e.g. in case you want to use only Jaeger query
+* [No-op](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/nopexporter) - Used for Jaeger UI / query service deployment that does not require an ingestion pipeline.
 
 #### Connectors
 * [Span Metrics](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/) - Generates metrics from span data.
