@@ -18,7 +18,7 @@ Elasticsearch also has the following officially supported resources available fr
 
 ## Configuration
 
-A sample configuration for Jaeger with Elasticsearch backend is available in the Jaeger repository: [config-elasticsearch.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-elasticsearch.yaml). In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go](https://github.com/jaegertracing/jaeger/blob/main/pkg/es/config/config.go#L86) as the authoritative source.
+A sample configuration for Jaeger with Elasticsearch backend is available in the Jaeger repository: [config-elasticsearch.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-elasticsearch.yaml). In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go](https://github.com/jaegertracing/jaeger/blob/main/internal/storage/elasticsearch/config/config.go#L86) as the authoritative source.
 
 ### Shards and Replicas
 
