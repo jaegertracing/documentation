@@ -97,7 +97,7 @@ The base path for all **jaeger** query extension HTTP routes can be set to a non
 
 ```
 query:
-  base-path: /
+  base_path: /
   static-files: /go/bin/jaeger-ui-build/build
   ui-config: /etc/jaeger/ui-config.json
   grpc:

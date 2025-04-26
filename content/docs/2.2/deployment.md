@@ -62,7 +62,7 @@ The base path for all `jaeger_query` extension HTTP routes can be set to a non-r
 ```
 extensions:
   jaeger_query:
-    base-path: /
+    base_path: /
     ui:
       config_file: /etc/jaeger/ui-config.json
     grpc:
