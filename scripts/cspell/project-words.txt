@@ -76,6 +76,7 @@ operatorhub
 otel
 otelcol
 otlp
+otlphttp
 outreachy
 parentbased
 procs
