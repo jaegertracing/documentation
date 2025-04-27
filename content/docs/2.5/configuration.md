@@ -102,6 +102,44 @@ remote_sampling:
   grpc:
 ```
 
+## Receivers
+
+### No-op
+
+`nop` can be used for Jaeger UI / query service deployment that does not require ingestion pipeline.
+
+### OTLP
+
+`otlp` receives data via gRPC or HTTP using OTLP format. Example configuration below:
+
+```yaml
+otlp:
+    protocols:
+      grpc:
+      http:
+```
+
+### Jaeger
+
+`jaeger` accepts Jaeger formatted traces transported via gRPC or Thrift protocols.
+
+```yaml
+jaeger:
+  protocols:
+    grpc:
+    thrift_binary:
+    thrift_compact:
+    thrift_http:
+```
+
+### Kafka
+
+`kafka` accepts spans from Kafka in various formats (OTLP, Jaeger, Zipkin).
+
+### Zipkin
+
+`zipkin` accepts spans using Zipkin v1 and v2 protocols.
+
 ## Exporters
 
 ### Jaeger storage
@@ -114,6 +152,63 @@ jaeger_storage_exporter:
   queue:
     num_consumers: 10
     queue_size: 100
+```
+
+### No-op
+
+`nop` can be used for Jaeger UI / query service deployment that does not require ingestion pipeline.
+
+### Prometheus
+
+`prometheus` sends metrics to Prometheus. Sample configuration:
+
+```yaml
+prometheus:
+  endpoint: "1.2.3.4:1234"
+```
+
+### OTLP
+
+`otlp` export data via gRPC using OTLP format. Sample configuration:
+
+```yaml
+otlp:
+  endpoint: otelcol2:4317
+  tls:
+    cert_file: file.cert
+    key_file: file.key
+```
+
+### OTLP_HTTP
+
+`otlphttp` exports traces and/or metrics via HTTP using OTLP format. Sample configuration:
+
+```yaml
+otlphttp:
+  endpoint: https://example.com:4318
+```
+
+### Debug
+
+`debug` outputs telemetry data to the console for debugging purposes. Sample configuration:
+
+```yaml
+debug:
+  verbosity: detailed
+  sampling_initial: 5
+  sampling_thereafter: 200
+```
+
+### Kafka
+
+`kafka` sends data to Kafka in various formats (OTLP, Jaeger, Zipkin). Here's an example of how to configure the extension:
+
+```yaml
+kafka:
+    brokers:
+      - localhost:9092
+    topic: ${env:KAFKA_TOPIC:-jaeger-spans}
+    encoding: ${env:KAFKA_ENCODING:-otlp_proto}
 ```
 
 ## Processors
