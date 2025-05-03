@@ -12,9 +12,17 @@ We are currently working on expanding this section with more details. [Examples 
 
 Jaeger can be configured via a YAML configuration file that uses the same format as the [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/configuration/). The configuration defines the main ingestion pipeline as a collection of **receivers**, **processors**, **connectors**, and **exporters**. Jaeger implements many of these components, but also a number of **extensions** that provide Jaeger's unique capabilities.
 
+### Configuration Examples
+
+[Examples of working configuration files](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger) are available in the Jaeger GitHub repository:
+  * `config-{storage}.yaml` are examples of running Jaeger as `collector` role with different storage backends.
+  * `config-query.yaml` is an example of running Jaeger in a standalone `query` role (with UI).
+  * `cmd/jaeger/internal/all-in-one.yaml` is bundled in the Jaeger binary for `all-in-one` role.
+  * Other examples demonstrate additional features like SPM, tail sampling, adaptive sampling, etc.
+
 ### Environment Variables
 
-Note that Jaeger v2 does not recognize environment variables in the same way as Jaeger v1 used to do for configuration, it only reads the YAML config file. However, the format of that YAML config does allow referring to environment variables, that provides some additional flexibility when needed. For example, in the config snippet below the hostname is `localhost` by default but it can be overwritten via `JAEGER_LISTEN_HOST` environment variable, which is useful when running Jaeger in a container and it needs to be `0.0.0.0`:
+Jaeger v2 can only be configured via a config file, it does not recognize environment variables in the same way as Jaeger v1 used to do. However, the format of that YAML config does allow referring to environment variables, which provides some additional flexibility when needed. For example, in the config snippet below the hostname is `localhost` by default but it can be overwritten via `JAEGER_LISTEN_HOST` environment variable, which is useful when running Jaeger in a container and it needs to be `0.0.0.0`:
 
 ```yaml
 receivers:
@@ -35,6 +43,7 @@ Another way to override certain config values is by passing them via `--set` com
 --set=receivers.otlp.protocols.grpc.endpoint=0.0.0.0:4317
 ```
 
+This can be handy when running the `all-in-one` role that relies on a built-in config.
 
 ## Extensions
 
