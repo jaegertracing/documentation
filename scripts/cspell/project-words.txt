@@ -78,6 +78,7 @@ otelcol
 otlp
 outreachy
 parentbased
+pprof
 procs
 prometheusexporter
 promscale
