@@ -44,7 +44,7 @@ To prevent data loss between **collector**s and storage, Kafka can be used as an
 
 ## With OpenTelemetry Collector
 
-You **do not need** to use the OpenTelemetry Collector to operate Jaeger, because Jaeger is a customized distribution of the OpenTelemetry Collector with different roles. However, if you already use the OpenTelemetry Collectors, for gathering other types of telemetry or for pre-processing / enriching the tracing data, it can be placed _in front of_ Jaeger in the collection pipeline. The OpenTelemetry Collectors can be run as an application sidecar, as a host agent / daemon, or as a central cluster.
+You **do not need** to use the OpenTelemetry Collector to operate Jaeger, because Jaeger is a customized distribution of the OpenTelemetry Collector with different roles. However, if you already use the OpenTelemetry Collectors, for gathering other types of telemetry or for pre-processing / enriching the tracing data, it can be placed _in front of_ Jaeger in the collection pipeline. The OpenTelemetry Collectors can be run as an application sidecar, as a host agent / daemon, or as a remote service cluster.
 
 The OpenTelemetry Collector supports Jaeger's Remote Sampling protocol and can either serve static configurations from config files directly, or proxy the requests to the Jaeger backend (e.g., when using adaptive sampling).
 
@@ -107,13 +107,15 @@ The Jaeger binary is build on top of the OpenTelemetry Collector framework and i
 * [No-op](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/nopreceiver) - Used for Jaeger UI / query service deployment that does not require an ingestion pipeline.
 
 #### Processors
-* [Batch](https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor) - Batches spans for better efficiency.
+* [Batch Processor](https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor) - Batches spans for better efficiency.
 
 * [Tail Sampling](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/tailsamplingprocessor) - Supports advanced post-collection sampling.
 
 * [Memory Limiter](https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/memorylimiterprocessor) - Supports back-pressure when the collector is overloaded.
 
-* [Attributes](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/attributesprocessor) - Allows filtering, rewriting, and enriching spans with attributes. Can be used to redact sensitive data, reduce data volume, or attach environment information.
+* [Attributes Processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/attributesprocessor) - Allows filtering, rewriting, and enriching spans with attributes. Can be used to redact sensitive data, reduce data volume, or attach environment information.
+
+* [Filter Processor](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/filterprocessor) - Allows dropping spans and span events from the collector (⚠️ may cause broken traces).
 
 #### Exporters
 * [OTLP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlpexporter) - Send data in OTLP format via gRPC.
@@ -137,3 +139,5 @@ The Jaeger binary is build on top of the OpenTelemetry Collector framework and i
 * [Health Check v2](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/healthcheckv2extension) - Supports health checks.
 
 * [zPages](https://github.com/open-telemetry/opentelemetry-collector/tree/main/extension/zpagesextension) - Exposes internal state of the collector for debugging.
+
+* [Performance Profiler (pprof)](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/pprofextension) - enables Go's `net/http/pprof` endpoint, typically used by developers to collect performance profiles and investigate issues with the collector.
