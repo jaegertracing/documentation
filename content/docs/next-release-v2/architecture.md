@@ -12,7 +12,10 @@ children:
   url: terminology
 ---
 
-Jaeger v2 is designed to be a versatile and flexible tracing platform. It can be deployed as a single binary that can be configured to perform different **roles** within the Jaeger architecture, such as:
+Jaeger v2 is designed to be a versatile and flexible tracing platform. It can be deployed as a single binary that can be configured to perform different **roles** within the Jaeger architecture.
+
+## Roles
+
   * **collector**: Receives incoming trace data from applications and writes it into a storage backend.
   * **query**: Serves the APIs and the user interface for querying and visualizing traces.
   * **ingester**: Ingests spans from Kafka and writes them into a storage backend; useful when running in a [split collector-Kafka-ingester configuration](./#via-kafka).
