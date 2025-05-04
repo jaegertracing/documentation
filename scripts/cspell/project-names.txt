@@ -10,6 +10,10 @@ Julius Volz
 # Other names (sometimes from github links)
 robbert
 
+## LFX Mentorship March-May 2025 (Term 1)
+Manik Mehta
+Hariom Gupta
+
 ## LFX Mentorship Sep-Nov 2024 (Term 3)
 Ankit Kurmi
 Mehul Gautam
