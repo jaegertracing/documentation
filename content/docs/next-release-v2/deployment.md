@@ -14,7 +14,11 @@ children:
   url: security
 ---
 
-Jaeger backend is released as a single binary or container image (see [Downloads](../../../download/)). Despite that, it can be configured to operate in different **roles**, such as all-in-one, collector, query, and ingester (see [Architecture](../architecture/)). An explicit configuration file can be provided via the `--config` command line argument. When running in a container, the path to the config file must be mapped into the container file system (the `-v ...` mapping below):
+Jaeger backend is released as a single binary or container image (see [Downloads](../../../download/)). Despite that, it can be configured to operate in different **roles**, such as **all-in-one**, **collector**, **query**, and **ingester** (see [Architecture](../architecture/)).
+
+## Configuration
+
+An explicit YAML configuration file must be provided via the `--config` command line argument (see [Configuration](../configuration/)). When running in a container, the path to the config file must be mapped into the container file system (the `-v ...` mapping below):
 
 ```
 docker run --rm --name jaeger \
@@ -28,6 +32,18 @@ docker run --rm --name jaeger \
   --config /jaeger/config.yaml
 ```
 
+## Scaling
+
+Both Jaeger **collector**  and **query** are stateless and thus many instances can be run in parallel.
+
+## Upgrades
+
+Since Jaeger microservices (components) are stateless, all the state lives in the data store(s). When no breaking changes are introduced in a release, the order of upgrades for individual Jaeger components does not matter.
+
+We try to avoid any kinds of breaking changes in new versions, but sometimes they are unavoidable and will be clearly called out in the release notes. In those cases the safest upgrade order is by starting from the end of the ingestion pipeline: first **query**, then **ingester** if using Kafka, then **collector**. This order ensures that the receiving component is running on a newer version and is capable of understanding any protocol changes from the other components earlier in the pipeline before those are upgraded.
+
+Finally, sometimes we introduce storage schema changes that may require some proactive steps before upgrading Jaeger components. Such changes will always be marked as breaking changes in the release notes and contain specific instructions for upgrading.
+
 ## Management Ports
 
 The following intra-oriented ports are exposed by default (can be changed via configuration):
@@ -40,50 +56,6 @@ Port  | Protocol | Endpoint   | Function
 27777 | HTTP     | `/`        | expvar port for process level metrics per the Go standards
 
 See [APIs](../apis/) for the list of all API ports.
-
-## Configuration
-
-Jaeger can be customized via configuration YAML file (see [Configuration](../configuration/)).
-
-Jaeger **collector** is stateless and thus many instances of **collector** can be run in parallel. **collector** instances require almost no configuration, except for storage location, such as [Cassandra](../cassandra/#configuration) or [Elasticsearch](../elasticsearch/#configuration).
-
-## Query Configuration
-
-The `jaeger_query` extension has a few deployment-related configuration options. In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/config.go#L16) as the authoritative source.
-
-### Clock Skew Adjustment
-
-Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. `jaeger_query` extension implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/main/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to their timestamps.
-
-Sometimes these adjustments themselves make the trace hard to understand. For example, when repositioning the server span within the bounds of its parent span, Jaeger does not know the exact relationship between the request and response latencies, so it assumes they are equal and places the child span in the middle of the parent span (see [issue #961](https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244)).
-
-The `jaeger_query` extension supports a configuration property that controls how much clock skew adjustment should be allowed.
-
-```
-extensions:
-  jaeger_query:
-    max_clock_skew_adjust: 30s
-```
-
- Setting this parameter to zero (`0s`) disables clock skew adjustment completely. This setting applies to all traces retrieved from the given query service. There is an open [ticket #197](https://github.com/jaegertracing/jaeger-ui/issues/197) to support toggling the adjustment on and off directly in the UI.
-
-### UI Base Path
-
-The base path for all `jaeger_query` extension HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running Jaeger behind a reverse proxy. Here is example code to set the base path.
-
-```
-extensions:
-  jaeger_query:
-    base_path: /
-    ui:
-      config_file: /etc/jaeger/ui-config.json
-    grpc:
-    http:
-```
-
-### UI Customization and Embedding
-
-Please refer to the [dedicated Frontend/UI page](../frontend-ui/).
 
 ## SPM
 
