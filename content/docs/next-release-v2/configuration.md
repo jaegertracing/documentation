@@ -76,7 +76,9 @@ In this example:
 
 ### Jaeger query
 
-`jaeger_query` extension is responsible for running HTTP and gRPC servers that expose trace query APIs and the UI frontend. Here's an example of how to configure the extension:
+`jaeger_query` extension is responsible for running HTTP and gRPC servers that expose trace query APIs and the UI frontend. In the future the configuration documentation will be [auto-generated](https://github.com/jaegertracing/jaeger/issues/6628) from the schema. Meanwhile, please refer to [config.go](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/config.go#L16) as the authoritative source.
+
+Here's an example of how to configure the extension:
 
 ```yaml
 jaeger_query:
@@ -94,6 +96,40 @@ jaeger_query:
 ```
 
 Of note here is the `storage` section, which references by name the storage backends configured in the `jaeger_storage` extension.
+
+#### Clock Skew Adjustment
+
+Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. `jaeger_query` extension implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/main/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to their timestamps.
+
+Sometimes these adjustments themselves make the trace hard to understand. For example, when repositioning the server span within the bounds of its parent span, Jaeger does not know the exact relationship between the request and response latencies, so it assumes they are equal and places the child span in the middle of the parent span (see [issue #961](https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244)).
+
+The `jaeger_query` extension supports a configuration property that controls how much clock skew adjustment should be allowed.
+
+```
+extensions:
+  jaeger_query:
+    max_clock_skew_adjust: 30s
+```
+
+ Setting this parameter to zero (`0s`) disables clock skew adjustment completely. This setting applies to all traces retrieved from the given query service. There is an open [ticket #197](https://github.com/jaegertracing/jaeger-ui/issues/197) to support toggling the adjustment on and off directly in the UI.
+
+#### UI Base Path
+
+The base path for all `jaeger_query` extension HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running Jaeger behind a reverse proxy. Here is example code to set the base path.
+
+```
+extensions:
+  jaeger_query:
+    base_path: /
+    ui:
+      config_file: /etc/jaeger/ui-config.json
+    grpc:
+    http:
+```
+
+#### UI Customization
+
+Several aspects of the UI can be customized. Please refer to the dedicated [User Interface](../frontend-ui/) page.
 
 ### Remote sampling
 
