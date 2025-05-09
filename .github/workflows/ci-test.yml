@@ -1,6 +1,7 @@
 name: Test
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
@@ -29,7 +30,7 @@ jobs:
     - name: Build
       run: |
         make build
-    
+
     - name: Setup Go to install htmltest
       uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5.5.0
       with:
