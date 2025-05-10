@@ -10,6 +10,9 @@ Julius Volz
 # Other names (sometimes from github links)
 robbert
 
+## GSOC 2025
+Minh Nguyen
+
 ## LFX Mentorship March-May 2025 (Term 1)
 Manik Mehta
 Hariom Gupta

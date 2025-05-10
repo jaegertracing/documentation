@@ -8,6 +8,10 @@ See also:
   * [For mentees](../mentorship-for-mentees/)
   * [For mentors](../mentorship-for-mentors/)
 
+## Google Summer of Code 2025
+
+* [Minh Nguyen](https://github.com/pipiland2612) -- [Native SPM support in Elasticsearch](https://github.com/jaegertracing/jaeger/issues/6641)
+
 ## LFX Mentorship March-May 2025 (Term 1)
 
 * [Manik Mehta](https://github.com/Manik2708) -- [Upgrade Storage Backends to V2 Storage API](https://github.com/jaegertracing/jaeger/issues/6458)
