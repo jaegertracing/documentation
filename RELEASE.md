@@ -10,11 +10,9 @@ Before creating a new release:
 
   - Make sure all outstanding PRs for that version are merged to `next-release` directory.
   - Make sure the actual Jaeger release is done and Docker images for the new version are published.
-  - If there are new Jaeger binaries or new storage options added to the release, make sure the CLI docs config file `data/cli/next-release/config.json` is updated accordingly (see below).
 
 To create a new release:
-  - Manually trigger the [Release](https://github.com/jaegertracing/documentation/actions/workflows/ci-release.yml) workflow on GitHub. It will ask for v1 and v2 version numbers (same versions as in the main Jaeger repo), and create a
-[pull request](https://github.com/jaegertracing/documentation/pulls) with the documentation changes.
+  - Manually trigger the [Release](https://github.com/jaegertracing/documentation/actions/workflows/ci-release.yml) workflow on GitHub. It will ask for v1 and v2 version numbers (same versions as in the main Jaeger repo), and create a [pull request](https://github.com/jaegertracing/documentation/pulls) with the documentation changes.
   - Approve and merge that pull request.
   - Because the site is statically generated, the release is completed after the merge.
 

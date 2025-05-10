@@ -1,0 +1,709 @@
+name: jaeger-all-in-one
+synopsis: |
+    Jaeger all-in-one distribution with collector and query in one process.
+description: |-
+    Jaeger all-in-one distribution with collector and query. Use with caution: this version
+    by default uses only in-memory database.
+usage: jaeger-all-in-one [flags]
+options:
+    - name: admin.http.host-port
+      default_value: :14269
+      usage: |
+        The host:port (e.g. 127.0.0.1:14269 or :14269) for the admin server, including health check, /metrics, etc.
+    - name: admin.http.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this server to clients
+    - name: admin.http.tls.cipher-suites
+      usage: |
+        Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+    - name: admin.http.tls.client-ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+    - name: admin.http.tls.enabled
+      default_value: "false"
+      usage: Enable TLS on the server
+    - name: admin.http.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this server to clients
+    - name: admin.http.tls.max-version
+      usage: |
+        Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: admin.http.tls.min-version
+      usage: |
+        Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: admin.http.tls.reload-interval
+      default_value: 0s
+      usage: |
+        The duration after which the certificate will be reloaded (0s means will not be reloaded)
+    - name: collector.enable-span-size-metrics
+      default_value: "false"
+      usage: |
+        Enables metrics based on processed span size, which are more expensive to calculate.
+    - name: collector.grpc-server.host-port
+      default_value: :14250
+      usage: |
+        The host:port (e.g. 127.0.0.1:12345 or :12345) of the collector's gRPC server
+    - name: collector.grpc-server.max-connection-age
+      default_value: 0s
+      usage: |
+        The maximum amount of time a connection may exist. Set this value to a few seconds or minutes on highly elastic environments, so that clients discover new collector nodes frequently. See https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters
+    - name: collector.grpc-server.max-connection-age-grace
+      default_value: 0s
+      usage: |
+        The additive period after MaxConnectionAge after which the connection will be forcibly closed. See https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters
+    - name: collector.grpc-server.max-message-size
+      default_value: "4194304"
+      usage: |
+        The maximum receivable message size for the collector's gRPC server
+    - name: collector.grpc.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this server to clients
+    - name: collector.grpc.tls.cipher-suites
+      usage: |
+        Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+    - name: collector.grpc.tls.client-ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+    - name: collector.grpc.tls.enabled
+      default_value: "false"
+      usage: Enable TLS on the server
+    - name: collector.grpc.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this server to clients
+    - name: collector.grpc.tls.max-version
+      usage: |
+        Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: collector.grpc.tls.min-version
+      usage: |
+        Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: collector.grpc.tls.reload-interval
+      default_value: 0s
+      usage: |
+        The duration after which the certificate will be reloaded (0s means will not be reloaded)
+    - name: collector.http-server.host-port
+      default_value: :14268
+      usage: |
+        The host:port (e.g. 127.0.0.1:12345 or :12345) of the collector's HTTP server
+    - name: collector.http-server.idle-timeout
+      default_value: 0s
+      usage: See https://pkg.go.dev/net/http#Server
+    - name: collector.http-server.read-header-timeout
+      default_value: 2s
+      usage: See https://pkg.go.dev/net/http#Server
+    - name: collector.http-server.read-timeout
+      default_value: 0s
+      usage: See https://pkg.go.dev/net/http#Server
+    - name: collector.http.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this server to clients
+    - name: collector.http.tls.cipher-suites
+      usage: |
+        Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+    - name: collector.http.tls.client-ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+    - name: collector.http.tls.enabled
+      default_value: "false"
+      usage: Enable TLS on the server
+    - name: collector.http.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this server to clients
+    - name: collector.http.tls.max-version
+      usage: |
+        Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: collector.http.tls.min-version
+      usage: |
+        Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: collector.http.tls.reload-interval
+      default_value: 0s
+      usage: |
+        The duration after which the certificate will be reloaded (0s means will not be reloaded)
+    - name: collector.num-workers
+      default_value: "50"
+      usage: The number of workers pulling items from the queue
+    - name: collector.otlp.enabled
+      default_value: "true"
+      usage: |
+        Enables OpenTelemetry OTLP receiver on dedicated HTTP and gRPC ports
+    - name: collector.otlp.grpc.host-port
+      default_value: :4317
+      usage: |
+        The host:port (e.g. 127.0.0.1:12345 or :12345) of the collector's gRPC server
+    - name: collector.otlp.grpc.max-connection-age
+      default_value: 0s
+      usage: |
+        The maximum amount of time a connection may exist. Set this value to a few seconds or minutes on highly elastic environments, so that clients discover new collector nodes frequently. See https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters
+    - name: collector.otlp.grpc.max-connection-age-grace
+      default_value: 0s
+      usage: |
+        The additive period after MaxConnectionAge after which the connection will be forcibly closed. See https://pkg.go.dev/google.golang.org/grpc/keepalive#ServerParameters
+    - name: collector.otlp.grpc.max-message-size
+      default_value: "4194304"
+      usage: |
+        The maximum receivable message size for the collector's gRPC server
+    - name: collector.otlp.grpc.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this server to clients
+    - name: collector.otlp.grpc.tls.cipher-suites
+      usage: |
+        Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+    - name: collector.otlp.grpc.tls.client-ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+    - name: collector.otlp.grpc.tls.enabled
+      default_value: "false"
+      usage: Enable TLS on the server
+    - name: collector.otlp.grpc.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this server to clients
+    - name: collector.otlp.grpc.tls.max-version
+      usage: |
+        Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: collector.otlp.grpc.tls.min-version
+      usage: |
+        Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: collector.otlp.grpc.tls.reload-interval
+      default_value: 0s
+      usage: |
+        The duration after which the certificate will be reloaded (0s means will not be reloaded)
+    - name: collector.otlp.http.cors.allowed-headers
+      usage: |
+        Comma-separated CORS allowed headers. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
+    - name: collector.otlp.http.cors.allowed-origins
+      usage: |
+        Comma-separated CORS allowed origins. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
+    - name: collector.otlp.http.host-port
+      default_value: :4318
+      usage: |
+        The host:port (e.g. 127.0.0.1:12345 or :12345) of the collector's HTTP server
+    - name: collector.otlp.http.idle-timeout
+      default_value: 0s
+      usage: See https://pkg.go.dev/net/http#Server
+    - name: collector.otlp.http.read-header-timeout
+      default_value: 2s
+      usage: See https://pkg.go.dev/net/http#Server
+    - name: collector.otlp.http.read-timeout
+      default_value: 0s
+      usage: See https://pkg.go.dev/net/http#Server
+    - name: collector.otlp.http.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this server to clients
+    - name: collector.otlp.http.tls.cipher-suites
+      usage: |
+        Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+    - name: collector.otlp.http.tls.client-ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+    - name: collector.otlp.http.tls.enabled
+      default_value: "false"
+      usage: Enable TLS on the server
+    - name: collector.otlp.http.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this server to clients
+    - name: collector.otlp.http.tls.max-version
+      usage: |
+        Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: collector.otlp.http.tls.min-version
+      usage: |
+        Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: collector.otlp.http.tls.reload-interval
+      default_value: 0s
+      usage: |
+        The duration after which the certificate will be reloaded (0s means will not be reloaded)
+    - name: collector.queue-size
+      default_value: "2000"
+      usage: The queue size of the collector
+    - name: collector.queue-size-memory
+      default_value: "0"
+      usage: |
+        (experimental) The max memory size in MiB to use for the dynamic queue.
+    - name: collector.tags
+      usage: |
+        One or more tags to be added to the Process tags of all spans passing through this collector. Ex: key1=value1,key2=${envVar:defaultValue}
+    - name: collector.zipkin.cors.allowed-headers
+      usage: |
+        Comma-separated CORS allowed headers. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
+    - name: collector.zipkin.cors.allowed-origins
+      usage: |
+        Comma-separated CORS allowed origins. See https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin
+    - name: collector.zipkin.host-port
+      usage: |
+        The host:port (e.g. 127.0.0.1:9411 or :9411) of the collector's Zipkin server (disabled by default)
+    - name: collector.zipkin.keep-alive
+      default_value: "true"
+      usage: |
+        KeepAlive configures allow Keep-Alive for Zipkin HTTP server (enabled by default)
+    - name: collector.zipkin.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this server to clients
+    - name: collector.zipkin.tls.cipher-suites
+      usage: |
+        Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+    - name: collector.zipkin.tls.client-ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+    - name: collector.zipkin.tls.enabled
+      default_value: "false"
+      usage: Enable TLS on the server
+    - name: collector.zipkin.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this server to clients
+    - name: collector.zipkin.tls.max-version
+      usage: |
+        Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: collector.zipkin.tls.min-version
+      usage: |
+        Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: collector.zipkin.tls.reload-interval
+      default_value: 0s
+      usage: |
+        The duration after which the certificate will be reloaded (0s means will not be reloaded)
+    - name: config-file
+      usage: |
+        Configuration file in JSON, TOML, YAML, HCL, or Java properties formats (default none). See spf13/viper for precedence.
+    - name: downsampling.hashsalt
+      usage: Salt used when hashing trace id for downsampling.
+    - name: downsampling.ratio
+      default_value: "1"
+      usage: |
+        Ratio of spans passed to storage after downsampling (between 0 and 1), e.g ratio = 0.3 means we are keeping 30% of spans and dropping 70% of spans; ratio = 1.0 disables downsampling.
+    - name: es-archive.adaptive-sampling.lookback
+      default_value: 72h0m0s
+      usage: |
+        How far back to look for the latest adaptive sampling probabilities
+    - name: es-archive.bulk.actions
+      default_value: "1000"
+      usage: |
+        The number of requests that can be enqueued before the bulk processor decides to commit
+    - name: es-archive.bulk.flush-interval
+      default_value: 200ms
+      usage: |
+        A time.Duration after which bulk requests are committed, regardless of other thresholds. Set to zero to disable. By default, this is disabled.
+    - name: es-archive.bulk.size
+      default_value: "5000000"
+      usage: |
+        The number of bytes that the bulk requests can take up before the bulk processor decides to commit
+    - name: es-archive.bulk.workers
+      default_value: "1"
+      usage: |
+        The number of workers that are able to receive bulk requests and eventually commit them to Elasticsearch
+    - name: es-archive.create-index-templates
+      default_value: "true"
+      usage: |
+        Create index templates at application startup. Set to false when templates are installed manually.
+    - name: es-archive.enabled
+      default_value: "false"
+      usage: Enable extra storage
+    - name: es-archive.http-compression
+      default_value: "true"
+      usage: Use gzip compression for requests to ElasticSearch.
+    - name: es-archive.index-date-separator
+      default_value: '-'
+      usage: |
+        Optional date separator of Jaeger indices. For example "." creates "jaeger-span-2020.11.20".
+    - name: es-archive.index-prefix
+      usage: |
+        Optional prefix of Jaeger indices. For example "production" creates "production-jaeger-*".
+    - name: es-archive.index-rollover-frequency-adaptive-sampling
+      default_value: day
+      usage: |
+        Rotates jaeger-sampling indices over the given period. For example "day" creates "jaeger-sampling-yyyy-MM-dd" every day after UTC 12AM. Valid options: [hour, day]. This does not delete old indices. For details on complete index management solutions supported by Jaeger, refer to: https://www.jaegertracing.io/docs/deployment/#elasticsearch-rollover
+    - name: es-archive.index-rollover-frequency-services
+      default_value: day
+      usage: |
+        Rotates jaeger-service indices over the given period. For example "day" creates "jaeger-service-yyyy-MM-dd" every day after UTC 12AM. Valid options: [hour, day]. This does not delete old indices. For details on complete index management solutions supported by Jaeger, refer to: https://www.jaegertracing.io/docs/deployment/#elasticsearch-rollover
+    - name: es-archive.index-rollover-frequency-spans
+      default_value: day
+      usage: |
+        Rotates jaeger-span indices over the given period. For example "day" creates "jaeger-span-yyyy-MM-dd" every day after UTC 12AM. Valid options: [hour, day]. This does not delete old indices. For details on complete index management solutions supported by Jaeger, refer to: https://www.jaegertracing.io/docs/deployment/#elasticsearch-rollover
+    - name: es-archive.log-level
+      default_value: error
+      usage: |
+        The Elasticsearch client log-level. Valid levels: [debug, info, error]
+    - name: es-archive.max-doc-count
+      default_value: "10000"
+      usage: |
+        The maximum document count to return from an Elasticsearch query. This will also apply to aggregations.
+    - name: es-archive.num-replicas
+      default_value: "1"
+      usage: The number of replicas per index in Elasticsearch
+    - name: es-archive.num-shards
+      default_value: "5"
+      usage: The number of shards per index in Elasticsearch
+    - name: es-archive.password
+      usage: The password required by Elasticsearch
+    - name: es-archive.password-file
+      usage: |
+        Path to a file containing password. This file is watched for changes.
+    - name: es-archive.prioirity-dependencies-template
+      default_value: "0"
+      usage: Priority of jaeger-dependecies index template (ESv8 only)
+    - name: es-archive.prioirity-service-template
+      default_value: "0"
+      usage: Priority of jaeger-service index template (ESv8 only)
+    - name: es-archive.prioirity-span-template
+      default_value: "0"
+      usage: Priority of jaeger-span index template (ESv8 only)
+    - name: es-archive.remote-read-clusters
+      usage: |
+        Comma-separated list of Elasticsearch remote cluster names for cross-cluster querying.See Elasticsearch remote clusters and cross-cluster query api.
+    - name: es-archive.send-get-body-as
+      usage: HTTP verb for requests that contain a body [GET, POST].
+    - name: es-archive.server-urls
+      default_value: http://127.0.0.1:9200
+      usage: |
+        The comma-separated list of Elasticsearch servers, must be full url i.e. http://localhost:9200
+    - name: es-archive.service-cache-ttl
+      default_value: 0s
+      usage: The TTL for the cache of known service names
+    - name: es-archive.sniffer
+      default_value: "false"
+      usage: |
+        The sniffer config for Elasticsearch; client uses sniffing process to find all nodes automatically, disable if not required
+    - name: es-archive.sniffer-tls-enabled
+      default_value: "false"
+      usage: |
+        Option to enable TLS when sniffing an Elasticsearch Cluster ; client uses sniffing process to find all nodes automatically, disabled by default
+    - name: es-archive.tags-as-fields.all
+      default_value: "false"
+      usage: |
+        (experimental) Store all span and process tags as object fields. If true .tags-as-fields.config-file and .tags-as-fields.include is ignored. Binary tags are always stored as nested objects.
+    - name: es-archive.tags-as-fields.config-file
+      usage: |
+        (experimental) Optional path to a file containing tag keys which will be stored as object fields. Each key should be on a separate line.  Merged with .tags-as-fields.include
+    - name: es-archive.tags-as-fields.dot-replacement
+      default_value: '@'
+      usage: |
+        (experimental) The character used to replace dots (".") in tag keys stored as object fields.
+    - name: es-archive.tags-as-fields.include
+      usage: |
+        (experimental) Comma delimited list of tag keys which will be stored as object fields. Merged with the contents of .tags-as-fields.config-file
+    - name: es-archive.timeout
+      default_value: 0s
+      usage: Timeout used for queries. A Timeout of zero means no timeout
+    - name: es-archive.tls.ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
+    - name: es-archive.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this process to the remote server(s)
+    - name: es-archive.tls.enabled
+      default_value: "false"
+      usage: Enable TLS when talking to the remote server(s)
+    - name: es-archive.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this process to the remote server(s)
+    - name: es-archive.tls.server-name
+      usage: |
+        Override the TLS server name we expect in the certificate of the remote server(s)
+    - name: es-archive.tls.skip-host-verify
+      default_value: "false"
+      usage: |
+        (insecure) Skip server's certificate chain and host name verification
+    - name: es-archive.token-file
+      usage: |
+        Path to a file containing bearer token. This flag also loads CA if it is specified.
+    - name: es-archive.use-aliases
+      default_value: "false"
+      usage: |
+        Use read and write aliases for indices. Use this option with Elasticsearch rollover API. It requires an external component to create aliases before startup and then performing its management. Note that es.max-span-age will influence trace search window start times.
+    - name: es-archive.use-ilm
+      default_value: "false"
+      usage: |
+        (experimental) Option to enable ILM for jaeger span & service indices. Use this option with  es-archive.use-aliases. It requires an external component to create aliases before startup and then performing its management. ILM policy must be manually created in ES before startup. Supported only for elasticsearch version 7+.
+    - name: es-archive.username
+      usage: |
+        The username required by Elasticsearch. The basic authentication also loads CA if it is specified.
+    - name: es-archive.version
+      default_value: "0"
+      usage: |
+        The major Elasticsearch version. If not specified, the value will be auto-detected from Elasticsearch.
+    - name: es.adaptive-sampling.lookback
+      default_value: 72h0m0s
+      usage: |
+        How far back to look for the latest adaptive sampling probabilities
+    - name: es.bulk.actions
+      default_value: "1000"
+      usage: |
+        The number of requests that can be enqueued before the bulk processor decides to commit
+    - name: es.bulk.flush-interval
+      default_value: 200ms
+      usage: |
+        A time.Duration after which bulk requests are committed, regardless of other thresholds. Set to zero to disable. By default, this is disabled.
+    - name: es.bulk.size
+      default_value: "5000000"
+      usage: |
+        The number of bytes that the bulk requests can take up before the bulk processor decides to commit
+    - name: es.bulk.workers
+      default_value: "1"
+      usage: |
+        The number of workers that are able to receive bulk requests and eventually commit them to Elasticsearch
+    - name: es.create-index-templates
+      default_value: "true"
+      usage: |
+        Create index templates at application startup. Set to false when templates are installed manually.
+    - name: es.http-compression
+      default_value: "true"
+      usage: Use gzip compression for requests to ElasticSearch.
+    - name: es.index-date-separator
+      default_value: '-'
+      usage: |
+        Optional date separator of Jaeger indices. For example "." creates "jaeger-span-2020.11.20".
+    - name: es.index-prefix
+      usage: |
+        Optional prefix of Jaeger indices. For example "production" creates "production-jaeger-*".
+    - name: es.index-rollover-frequency-adaptive-sampling
+      default_value: day
+      usage: |
+        Rotates jaeger-sampling indices over the given period. For example "day" creates "jaeger-sampling-yyyy-MM-dd" every day after UTC 12AM. Valid options: [hour, day]. This does not delete old indices. For details on complete index management solutions supported by Jaeger, refer to: https://www.jaegertracing.io/docs/deployment/#elasticsearch-rollover
+    - name: es.index-rollover-frequency-services
+      default_value: day
+      usage: |
+        Rotates jaeger-service indices over the given period. For example "day" creates "jaeger-service-yyyy-MM-dd" every day after UTC 12AM. Valid options: [hour, day]. This does not delete old indices. For details on complete index management solutions supported by Jaeger, refer to: https://www.jaegertracing.io/docs/deployment/#elasticsearch-rollover
+    - name: es.index-rollover-frequency-spans
+      default_value: day
+      usage: |
+        Rotates jaeger-span indices over the given period. For example "day" creates "jaeger-span-yyyy-MM-dd" every day after UTC 12AM. Valid options: [hour, day]. This does not delete old indices. For details on complete index management solutions supported by Jaeger, refer to: https://www.jaegertracing.io/docs/deployment/#elasticsearch-rollover
+    - name: es.log-level
+      default_value: error
+      usage: |
+        The Elasticsearch client log-level. Valid levels: [debug, info, error]
+    - name: es.max-doc-count
+      default_value: "10000"
+      usage: |
+        The maximum document count to return from an Elasticsearch query. This will also apply to aggregations.
+    - name: es.max-span-age
+      default_value: 72h0m0s
+      usage: The maximum lookback for spans in Elasticsearch
+    - name: es.num-replicas
+      default_value: "1"
+      usage: The number of replicas per index in Elasticsearch
+    - name: es.num-shards
+      default_value: "5"
+      usage: The number of shards per index in Elasticsearch
+    - name: es.password
+      usage: The password required by Elasticsearch
+    - name: es.password-file
+      usage: |
+        Path to a file containing password. This file is watched for changes.
+    - name: es.prioirity-dependencies-template
+      default_value: "0"
+      usage: Priority of jaeger-dependecies index template (ESv8 only)
+    - name: es.prioirity-service-template
+      default_value: "0"
+      usage: Priority of jaeger-service index template (ESv8 only)
+    - name: es.prioirity-span-template
+      default_value: "0"
+      usage: Priority of jaeger-span index template (ESv8 only)
+    - name: es.remote-read-clusters
+      usage: |
+        Comma-separated list of Elasticsearch remote cluster names for cross-cluster querying.See Elasticsearch remote clusters and cross-cluster query api.
+    - name: es.send-get-body-as
+      usage: HTTP verb for requests that contain a body [GET, POST].
+    - name: es.server-urls
+      default_value: http://127.0.0.1:9200
+      usage: |
+        The comma-separated list of Elasticsearch servers, must be full url i.e. http://localhost:9200
+    - name: es.service-cache-ttl
+      default_value: 0s
+      usage: The TTL for the cache of known service names
+    - name: es.sniffer
+      default_value: "false"
+      usage: |
+        The sniffer config for Elasticsearch; client uses sniffing process to find all nodes automatically, disable if not required
+    - name: es.sniffer-tls-enabled
+      default_value: "false"
+      usage: |
+        Option to enable TLS when sniffing an Elasticsearch Cluster ; client uses sniffing process to find all nodes automatically, disabled by default
+    - name: es.tags-as-fields.all
+      default_value: "false"
+      usage: |
+        (experimental) Store all span and process tags as object fields. If true .tags-as-fields.config-file and .tags-as-fields.include is ignored. Binary tags are always stored as nested objects.
+    - name: es.tags-as-fields.config-file
+      usage: |
+        (experimental) Optional path to a file containing tag keys which will be stored as object fields. Each key should be on a separate line.  Merged with .tags-as-fields.include
+    - name: es.tags-as-fields.dot-replacement
+      default_value: '@'
+      usage: |
+        (experimental) The character used to replace dots (".") in tag keys stored as object fields.
+    - name: es.tags-as-fields.include
+      usage: |
+        (experimental) Comma delimited list of tag keys which will be stored as object fields. Merged with the contents of .tags-as-fields.config-file
+    - name: es.timeout
+      default_value: 0s
+      usage: Timeout used for queries. A Timeout of zero means no timeout
+    - name: es.tls.ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify the remote server(s) (by default will use the system truststore)
+    - name: es.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this process to the remote server(s)
+    - name: es.tls.enabled
+      default_value: "false"
+      usage: Enable TLS when talking to the remote server(s)
+    - name: es.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this process to the remote server(s)
+    - name: es.tls.server-name
+      usage: |
+        Override the TLS server name we expect in the certificate of the remote server(s)
+    - name: es.tls.skip-host-verify
+      default_value: "false"
+      usage: |
+        (insecure) Skip server's certificate chain and host name verification
+    - name: es.token-file
+      usage: |
+        Path to a file containing bearer token. This flag also loads CA if it is specified.
+    - name: es.use-aliases
+      default_value: "false"
+      usage: |
+        Use read and write aliases for indices. Use this option with Elasticsearch rollover API. It requires an external component to create aliases before startup and then performing its management. Note that es.max-span-age will influence trace search window start times.
+    - name: es.use-ilm
+      default_value: "false"
+      usage: |
+        (experimental) Option to enable ILM for jaeger span & service indices. Use this option with  es.use-aliases. It requires an external component to create aliases before startup and then performing its management. ILM policy must be manually created in ES before startup. Supported only for elasticsearch version 7+.
+    - name: es.username
+      usage: |
+        The username required by Elasticsearch. The basic authentication also loads CA if it is specified.
+    - name: es.version
+      default_value: "0"
+      usage: |
+        The major Elasticsearch version. If not specified, the value will be auto-detected from Elasticsearch.
+    - name: feature-gates
+      default_value: |
+        -confmap.enableMergeAppendOption,jaeger.es.disableLegacyId,-telemetry.newPipelineTelemetry
+      usage: |
+        Comma-delimited list of feature gate identifiers. Prefix with '-' to disable the feature. '+' or no prefix will enable the feature.
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for jaeger-all-in-one
+    - name: log-encoding
+      default_value: json
+      usage: Log encoding. Supported values are 'json' and 'console'.
+    - name: log-level
+      default_value: info
+      usage: |
+        Minimal allowed log Level. For more levels see https://github.com/uber-go/zap
+    - name: metrics-backend
+      default_value: prometheus
+      usage: |
+        Defines which metrics backend to use for metrics reporting: prometheus or none
+    - name: metrics-http-route
+      default_value: /metrics
+      usage: |
+        Defines the route of HTTP endpoint for metrics backends that support scraping
+    - name: multi-tenancy.enabled
+      default_value: "false"
+      usage: Enable tenancy header when receiving or querying
+    - name: multi-tenancy.header
+      default_value: x-tenant
+      usage: HTTP header carrying tenant
+    - name: multi-tenancy.tenants
+      usage: |
+        comma-separated list of allowed values for --multi-tenancy.header header.  (If not supplied, tenants are not restricted)
+    - name: query.additional-headers
+      default_value: '[]'
+      usage: |
+        Additional HTTP response headers.  Can be specified multiple times.  Format: "Key: Value"
+    - name: query.base-path
+      default_value: /
+      usage: |
+        The base path for all HTTP routes, e.g. /jaeger; useful when running behind a reverse proxy. See https://github.com/jaegertracing/jaeger/blob/main/examples/reverse-proxy/README.md
+    - name: query.bearer-token-propagation
+      default_value: "false"
+      usage: |
+        Allow propagation of bearer token to be used by storage plugins
+    - name: query.enable-tracing
+      default_value: "false"
+      usage: Enables emitting jaeger-query traces
+    - name: query.grpc-server.host-port
+      default_value: :16685
+      usage: |
+        The host:port (e.g. 127.0.0.1:14250 or :14250) of the query's gRPC server
+    - name: query.grpc.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this server to clients
+    - name: query.grpc.tls.cipher-suites
+      usage: |
+        Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+    - name: query.grpc.tls.client-ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+    - name: query.grpc.tls.enabled
+      default_value: "false"
+      usage: Enable TLS on the server
+    - name: query.grpc.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this server to clients
+    - name: query.grpc.tls.max-version
+      usage: |
+        Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: query.grpc.tls.min-version
+      usage: |
+        Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: query.grpc.tls.reload-interval
+      default_value: 0s
+      usage: |
+        The duration after which the certificate will be reloaded (0s means will not be reloaded)
+    - name: query.http-server.host-port
+      default_value: :16686
+      usage: |
+        The host:port (e.g. 127.0.0.1:14268 or :14268) of the query's HTTP server
+    - name: query.http.tls.cert
+      usage: |
+        Path to a TLS Certificate file, used to identify this server to clients
+    - name: query.http.tls.cipher-suites
+      usage: |
+        Comma-separated list of cipher suites for the server, values are from tls package constants (https://golang.org/pkg/crypto/tls/#pkg-constants).
+    - name: query.http.tls.client-ca
+      usage: |
+        Path to a TLS CA (Certification Authority) file used to verify certificates presented by clients (if unset, all clients are permitted)
+    - name: query.http.tls.enabled
+      default_value: "false"
+      usage: Enable TLS on the server
+    - name: query.http.tls.key
+      usage: |
+        Path to a TLS Private Key file, used to identify this server to clients
+    - name: query.http.tls.max-version
+      usage: |
+        Maximum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: query.http.tls.min-version
+      usage: |
+        Minimum TLS version supported (Possible values: 1.0, 1.1, 1.2, 1.3)
+    - name: query.http.tls.reload-interval
+      default_value: 0s
+      usage: |
+        The duration after which the certificate will be reloaded (0s means will not be reloaded)
+    - name: query.log-static-assets-access
+      default_value: "false"
+      usage: Log when static assets are accessed (for debugging)
+    - name: query.max-clock-skew-adjustment
+      default_value: 0s
+      usage: |
+        The maximum delta by which span timestamps may be adjusted in the UI due to clock skew; set to 0s to disable clock skew adjustments
+    - name: query.static-files
+      usage: The directory path override for the static assets for the UI
+    - name: query.ui-config
+      usage: The path to the UI configuration file in JSON format
+    - name: sampling.default-sampling-probability
+      default_value: "0.001"
+      usage: |
+        Sampling probability used by the Strategy Store for static sampling. Value must be between 0 and 1.
+    - name: sampling.strategies-file
+      usage: |
+        The path for the sampling strategies file in JSON format. See sampling documentation to see format of the file
+    - name: sampling.strategies-reload-interval
+      default_value: 0s
+      usage: |
+        Reload interval to check and reload sampling strategies file. Zero value means no reloading
+    - name: span-storage.type
+      usage: |
+        (deprecated) please use SPAN_STORAGE_TYPE environment variable. Run this binary with the 'env' command for help.
+see_also:
+    - jaeger-all-in-one completion - Generate the autocompletion script for the specified shell
+    - jaeger-all-in-one docs - Generates documentation
+    - jaeger-all-in-one env - Help about environment variables.
+    - jaeger-all-in-one print-config - Print names and values of configuration options
+    - jaeger-all-in-one status - Print the status.
+    - jaeger-all-in-one version - Print the version.
