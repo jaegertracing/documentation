@@ -123,7 +123,19 @@ Jaeger UI communicates with **jaeger-query** Service via JSON API. For example, 
 
 When using the `grpc` storage type (a.k.a. [remote storage](../storage/#remote-storage)),
 Jaeger can use custom storage backends as long as those backends implement
-the gRPC Remote Storage API. For more information, please refer to
+the gRPC Remote Storage API.
+
+To use a remote storage backend, you must deploy a gRPC server that implements
+the following services:
+
+* **[TraceReader](https://github.com/jaegertracing/jaeger-idl/tree/main/proto/storage/v2/trace_storage.proto)**  
+  Enables Jaeger to read traces from the storage backend.
+* **[DependencyReader](https://github.com/jaegertracing/jaeger-idl/tree/main/proto/storage/v2/dependency_storage.proto)**  
+  Used to load service dependency graphs from storage.
+* **[TraceService](https://github.com/open-telemetry/opentelemetry-proto/blob/main/opentelemetry/proto/collector/trace/v1/trace_service.proto)**  
+  Allows trace data to be pushed to the storage. This service can run on a separate port if needed.
+
+For more information, please refer to
 [jaeger/internal/storage/v2/grpc](https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/grpc).
 
 ## Remote Sampling Configuration
