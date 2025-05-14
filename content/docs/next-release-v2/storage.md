@@ -26,9 +26,14 @@ For large scale production deployment the Jaeger team [recommends OpenSearch bac
 
 ## Remote Storage
 
-Jaeger supports a gRPC-based [Remote Storage API][storage.proto] that allows extending the Jaeger ecosystem with custom storage backends, not directly supported by the project. These storage backends can be deployed as a remote gRPC server.
+Jaeger supports a gRPC-based Remote Storage API v2 that allows extending the Jaeger
+ecosystem with custom storage backends, not directly supported by the project.
+These storage backends can be deployed as a remote gRPC server.
 
-To use a remote storage as Jaeger storage backend, use `grpc` as the storage type and specify the remote gRPC server address. For more information, please refer to [jaeger/internal/storage/v1/grpc](https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v1/grpc).
+To use a remote storage as Jaeger storage backend, use `grpc` as the storage type
+and specify the remote gRPC server address. For more information,
+please refer to
+[jaeger/internal/storage/v2/grpc](https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/grpc).
 
 Example config for remote storage [can be found here](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-remote-storage.yaml).
 
