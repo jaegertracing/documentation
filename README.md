@@ -87,6 +87,45 @@ python3 scripts/generate_roadmap.py
 
 This script fetches issues from the [GitHub project board](https://github.com/orgs/jaegertracing/projects/4/views/1?layout=table), extracts the required information, and generates the roadmap document. Make sure to set the `GITHUB_TOKEN` environment variable with your GitHub API token before running the script, or save the token in `~/.github_token` file (protect the file so only you can read it: `chmod 0600 <file>`). Personal tokens can be created at https://github.com/settings/tokens/.
 
+## Updating Medium blog feed
+
+The homepage displays the latest Medium blog posts from the Jaeger blog. To avoid unnecessary network requests during development and builds, the blog feed is fetched manually and stored as static data.
+
+## Prerequisites
+
+Make sure you have [`yq`](https://github.com/mikefarah/yq) installed on your system to convert the Medium RSS XML feed into JSON.
+
+- **Install via Snap (on Ubuntu/Debian):**
+
+```bash
+sudo snap install yq
+```
+
+### To update the Medium blog feed:
+
+Run the following command to fetch and save the feed locally:
+
+```bash
+make fetch-blog-feed
+```
+
+This will download the RSS feed from Medium and convert it into JSON format, saving it to `data/medium.json`.
+
+After running the command, commit the changes:
+
+```bash
+git add data/medium.json
+git commit -m "chore: update Medium blog feed"
+```
+
+### How it's used
+
+The Hugo site reads from the static `data/medium.json` file instead of fetching from Medium directly. This approach provides:
+
+- Faster local development
+- No network dependency for RSS
+- Full control over displayed blog content
+
 ## License
 
 [Apache 2.0 License](./LICENSE).
