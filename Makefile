@@ -56,6 +56,9 @@ spellcheck:
 	cat scripts/cspell/project-names.txt | grep -v '^#' | grep -v '^\s*$$' | tr ' ' '\n' > scripts/cspell/project-names-parsed.txt
 	cd scripts/cspell && ./spellcheck.sh
 
+fetch-blog-feed:
+	curl -s -o assets/data/medium.xml https://medium.com/feed/jaegertracing
+
 # only x.y.0 semver values are valid for kicking off a new release.
 SEMVER_REGEX := ^([0-9]+\.){2}0$$
 VALID_VERSION := $(shell echo "$(VERSION)" | grep -E "$(SEMVER_REGEX)")

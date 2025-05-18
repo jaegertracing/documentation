@@ -1,18 +1,21 @@
 {{ define "main" }}
-{{ $rss := dict }}
-{{ with try (resources.GetRemote "https://medium.com/feed/jaegertracing") }}
-  {{ with .Err }}
-    {{ errorf "%s" . }}
-  {{ else with .Value }}
-    {{ $rss = . | transform.Unmarshal }}
-  {{ else }}
-    {{ warnf "Unable to fetch RSS feed" }}
-  {{ end }}
-{{ end }}
 
-{{/* Parse image links */}}
+  {{ $rss := resources.Get "data/medium.xml" | transform.Unmarshal }}
+  {{ $channel := dict }}
+
+  {{ if not $rss }}
+    {{ warnf "Medium feed is nil or failed to load." }}
+    {{ $channel = dict "title" "No data" "item" (slice) }}
+  {{ else if not ($rss.channel) }}
+    {{ warnf "Medium feed found but missing 'channel'" }}
+    {{ $channel = dict "title" "No data" "item" (slice) }}
+  {{ else }}
+    {{ $channel = $rss.channel }}
+    {{ warnf "Loaded Medium feed for: %v" $channel.title }}
+  {{ end }}
+  
 {{ $defaultImgLink := "/img/jaeger-icon-color.png" }}
-{{ warnf "Downloaded RSS feed for: %v" $rss.channel.title }}
+{{ warnf "Loaded RSS feed for: %v" $rss.channel.title }}
 {{ $posts := first 20 $rss.channel.item }}
 {{ $imgLinks := slice }}
 
