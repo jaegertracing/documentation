@@ -87,44 +87,43 @@ python3 scripts/generate_roadmap.py
 
 This script fetches issues from the [GitHub project board](https://github.com/orgs/jaegertracing/projects/4/views/1?layout=table), extracts the required information, and generates the roadmap document. Make sure to set the `GITHUB_TOKEN` environment variable with your GitHub API token before running the script, or save the token in `~/.github_token` file (protect the file so only you can read it: `chmod 0600 <file>`). Personal tokens can be created at https://github.com/settings/tokens/.
 
-## Updating Medium blog feed
+## Updating Medium Blog Feed
 
-The homepage displays the latest Medium blog posts from the Jaeger blog. To avoid unnecessary network requests during development and builds, the blog feed is fetched manually and stored as static data.
+The homepage displays the latest blog posts from the [Jaeger Medium blog](https://medium.com/jaegertracing).  
+To avoid network calls during builds and to ensure fast, reliable local development, the Medium RSS feed is downloaded and stored as a static XML file.
 
-## Prerequisites
+### Prerequisites
 
-Make sure you have [`yq`](https://github.com/mikefarah/yq) installed on your system to convert the Medium RSS XML feed into JSON.
+Ensure you have [`curl`](https://curl.se/) installed on your system to download the RSS feed.
 
-- **Install via Snap (on Ubuntu/Debian):**
+Most Linux and macOS systems already have `curl` pre-installed.  
+You can verify installation by running:
 
 ```bash
-sudo snap install yq
+curl --version
 ```
 
-### To update the Medium blog feed:
-
-Run the following command to fetch and save the feed locally:
+### To update the Medium blog feed
+Run the following command to fetch and save the feed locally as XML:
 
 ```bash
 make fetch-blog-feed
 ```
 
-This will download the RSS feed from Medium and convert it into JSON format, saving it to `data/medium.json`.
-
-After running the command, commit the changes:
-
+This will download the RSS feed from Medium and save it to:
 ```bash
-git add data/medium.json
+assets/data/medium.xml
+```
+
+After updating, commit the changes:
+```bash
+git add assets/data/medium.xml
 git commit -m "chore: update Medium blog feed"
 ```
 
 ### How it's used
-
-The Hugo site reads from the static `data/medium.json` file instead of fetching from Medium directly. This approach provides:
-
-- Faster local development
-- No network dependency for RSS
-- Full control over displayed blog content
+The Hugo site reads and parses data/medium.xml using resources.Get and transform.Unmarshal.
+This converts the XML into structured data at build time, allowing full control over the content without relying on live network requests.
 
 ## License
 

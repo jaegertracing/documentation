@@ -57,7 +57,7 @@ spellcheck:
 	cd scripts/cspell && ./spellcheck.sh
 
 fetch-blog-feed:
-	curl -s https://medium.com/feed/jaegertracing | yq -p xml -o json -P > data/medium.json
+	curl -s https://medium.com/feed/jaegertracing > assets/data/medium.xml
 
 # only x.y.0 semver values are valid for kicking off a new release.
 SEMVER_REGEX := ^([0-9]+\.){2}0$$

@@ -1,11 +1,19 @@
 {{ define "main" }}
-{{ $rss := site.Data.medium.rss }}
 
-{{ if or (not $rss) (not $rss.channel) }}
-  {{ warnf "Medium feed data not found, empty, or missing channel" }}
-  {{ $rss = dict "channel" (dict "title" "No data" "item" (slice)) }}
-{{ end }}
+  {{ $rss := resources.Get "data/medium.xml" | transform.Unmarshal }}
+  {{ $channel := dict }}
 
+  {{ if not $rss }}
+    {{ warnf "Medium feed is nil or failed to load." }}
+    {{ $channel = dict "title" "No data" "item" (slice) }}
+  {{ else if not ($rss.channel) }}
+    {{ warnf "Medium feed found but missing 'channel'" }}
+    {{ $channel = dict "title" "No data" "item" (slice) }}
+  {{ else }}
+    {{ $channel = $rss.channel }}
+    {{ warnf "Loaded Medium feed for: %v" $channel.title }}
+  {{ end }}
+  
 {{ $defaultImgLink := "/img/jaeger-icon-color.png" }}
 {{ warnf "Loaded RSS feed for: %v" $rss.channel.title }}
 {{ $posts := first 20 $rss.channel.item }}
