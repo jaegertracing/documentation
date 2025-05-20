@@ -14,7 +14,7 @@ This is a project proposed as part of LFX Mentorship term https://github.com/jae
 
 Currently, Jaeger uses a **[v1 Storage API](https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/api/spanstore/interface.go)**, which operates on a data model specific to Jaeger. Each storage backend implements this API, requiring transformations between Jaeger's proprietary model and the OpenTelemetry Protocol (OTLP) data model, which is now the industry standard.
 
-As part of #5079, Jaeger has introduced the more efficient **[v2 Storage API](https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/api/tracestore)**, which natively supports the OpenTelemetry data model (OTLP), allows batching of writes and streaming of resultes. This effort is part of a broader alignment with the [OpenTelemetry Collector framework](https://github.com/open-telemetry/opentelemetry-collector), tracked under #4843.
+As part of #5079, Jaeger has introduced the more efficient **[v2 Storage API](https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/api/tracestore)**, which natively supports the OpenTelemetry data model (OTLP), allows batching of writes and streaming of results. This effort is part of a broader alignment with the [OpenTelemetry Collector framework](https://github.com/open-telemetry/opentelemetry-collector), tracked under #4843.
 
 ## Objective
 
