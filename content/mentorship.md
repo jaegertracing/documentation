@@ -15,7 +15,7 @@ See also:
 ## LFX Mentorship March-May 2025 (Term 1)
 
 * [Manik Mehta](https://github.com/Manik2708) -- [Upgrade Storage Backends to V2 Storage API](https://github.com/jaegertracing/jaeger/issues/6458)
-* [Hariom Gupta](https://github.com/hari45678) -- [Upgrade charts and graphs in Jaeger UI](https://github.com/jaegertracing/jaeger/issues/2534)
+* [Hariom Gupta](https://github.com/hari45678) -- [Upgrade charts and graphs in Jaeger UI](https://github.com/jaegertracing/jaeger/issues/2534) -- [blog post](https://medium.com/jaegertracing/learning-from-lfx-mentorship-cncf-jaeger-3fc3463adcea)
 
 ## LFX Mentorship September-November 2024 (Term 3)
 
