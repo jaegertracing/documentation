@@ -71,7 +71,8 @@ An example configuration file (see [complete schema here](https://github.com/jae
     "type": "traces",
     "url": "https://my-logs.server?from=#{startTime | add -60000000 | epoch_micros_to_date_iso}&to=#{endTime | add 60000000 | epoch_micros_to_date_iso}'",
     "text": "Redirect to kibana to view log with formatted dates"
-  }]
+  }],
+  "traceIdDisplayLength": 12
 }
 ```
 
@@ -184,6 +185,24 @@ Arguments:
 - `offset` (integer) - Value to add to the input number
 
 Example: `#{startTime | add 1000000}`
+
+### Trace ID Display Length
+
+The `traceIdDisplayLength` setting controls how many characters of the trace ID are displayed in the Jaeger UI (e.g., in the trace list or trace detail header). This is useful for improving readability or aligning with trace IDs in other systems like logs or dashboards.
+
+Field | Description
+------|------------
+`traceIdDisplayLength` | Optional. Integer value that determines the number of characters shown from the trace ID. Default is `7`.
+
+**Example:**
+
+```json
+{
+  "traceIdDisplayLength": 12
+}
+```
+
+This will display trace IDs like: `1a2b3c4d5e6f` (instead of the full 32-character ID or default 7-character).
 
 ## Embedded Mode
 
