@@ -7,43 +7,9 @@ For more details, see the [Roadmap on GitHub](https://github.com/orgs/jaegertrac
 
 ## Upgrade Storage Backends to V2 Storage API
 
-This is a project proposed as part of LFX Mentorship term https://github.com/jaegertracing/jaeger/issues/6470 ⬅ **read this first**.
-
-## Background
-[Jaeger](https://www.jaegertracing.io/) is an open-source, distributed tracing platform designed to monitor and troubleshoot microservices-based systems. A critical component of Jaeger is its storage backends, where traces captured by Jaeger are persisted for querying.
-
 Currently, Jaeger uses a **[v1 Storage API](https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/api/spanstore/interface.go)**, which operates on a data model specific to Jaeger. Each storage backend implements this API, requiring transformations between Jaeger's proprietary model and the OpenTelemetry Protocol (OTLP) data model, which is now the industry standard.
 
 As part of #5079, Jaeger has introduced the more efficient **[v2 Storage API](https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/api/tracestore)**, which natively supports the OpenTelemetry data model (OTLP), allows batching of writes and streaming of results. This effort is part of a broader alignment with the [OpenTelemetry Collector framework](https://github.com/open-telemetry/opentelemetry-collector), tracked under #4843.
-
-## Objective
-
-Upgrade Jaeger storage backends to natively implement the v2 Storage API.
-- [ ] Memory
-- [ ] Elasticsearch / OpenSearch
-- [ ] Badger
-- [ ] Cassandra
-- [x] gRPC / Remote
-
-The chosen storage backend should be upgraded to fully implement the v2 Storage API in place. For a rough idea of how to upgrade from the v1 model to the OTLP data model, take a look at the PRs in the following issues that do a similar upgrade for other components of Jaeger: 
-- https://github.com/jaegertracing/jaeger/issues/5545
-- https://github.com/jaegertracing/jaeger/issues/6344
-
-## Desired Outcomes
-
-### Upgrade Memory and Elasticsearch backends
-
-We prioritize these two backends as they are the mostly frequently used with Jaeger and upgrading them paves a path for upgrading other backends.
-
-### Testing
-- The storage implementations should be fully covered by unit tests 
-- There are already integration tests for the storage backend so all of them should pass without needing to be modified
-
-### Bonus: Upgrade Other Backends
-If time permits, upgrade Badger and Cassandra storage backends.
-
-## Risks / Open Questions
-- The v2 storage API doesn't have a distinction between primary and archive storage but v1 does. The ultimate plan is to remove the archive storage from the v1 implementation as well. That work effort is being tracked in #6065. We may want to think about how to handle the upgrades for the storages that implement the archive storage in v1 while we work on removing it. We may want to simply ignore the archive part of the storage while we resolve the aforementioned issue if that is possible. 
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/6458).
 
@@ -61,18 +27,7 @@ For more information see the [issue description](https://github.com/jaegertracin
 
 ## [Feature]: Support Elasticsearch data stream
 
-### Requirement
-
-* https://www.elastic.co/guide/en/elasticsearch/reference/current/data-streams.html
-* https://opensearch.org/docs/latest/dashboards/im-dashboards/datastream/
-
-### Proposal
-
-_No response_
-
-### Related issues
-
-* #7150
+Data streams are the new hotness in Elasticsearch & OpenSearch to store append-only observability data. Data streams are well-suited for logs, events, metrics, and other continuously generated data.
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/4708).
 

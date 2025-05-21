@@ -78,7 +78,7 @@ def fetch_issues():
 def extract_summary(body):
     summary_index = body.find("## Summary")
     if summary_index == -1:
-        logger.info("summary not found")
+        logger.info("🔴 summary not found")
         return None
     summary_start = summary_index + len("## Summary")
     next_section_index = body.find("##", summary_start)
