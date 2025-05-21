@@ -72,7 +72,7 @@ An example configuration file (see [complete schema here](https://github.com/jae
     "url": "https://my-logs.server?from=#{startTime | add -60000000 | epoch_micros_to_date_iso}&to=#{endTime | add 60000000 | epoch_micros_to_date_iso}'",
     "text": "Redirect to kibana to view log with formatted dates"
   }],
-  "traceIdDisplayLength": 12
+  "traceIdDisplayLength": 20
 }
 ```
 
