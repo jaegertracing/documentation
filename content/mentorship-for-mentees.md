@@ -8,7 +8,7 @@ Applications are submitted via respective program websites, such as [Google Summ
 
 ### Proposal
 
-Jaeger mentorship projects are getting a lot of applications (up to 150 per project), therefore we require applicants to submit a proposal for the project, which allows us to find most suitable candidates. Even if a specific program's guidelines do not require submitting a proposal, please include it in the other application documents, such as a cover letter (PDF documents are preferred over hyperlinks).
+Jaeger mentorship projects are getting a lot of applications (up to 150 per project), therefore we require applicants to submit a **proposal** for the project, which allows us to find most suitable candidates. Even if a specific program's guidelines do not require submitting a proposal, please include it in the other application documents, such as a **cover letter** (PDF documents are preferred over hyperlinks).
 
 We are looking for the following topics to be covered by the proposal:
 
