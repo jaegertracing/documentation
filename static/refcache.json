@@ -2447,10 +2447,6 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:44:21.880033-04:00"
   },
-  "https://www.elastic.co/guide/en/elasticsearch/reference/current//setup-upgrade.html": {
-    "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:48.494641-04:00"
-  },
   "https://www.elastic.co/guide/en/elasticsearch/reference/current/index-lifecycle-management.html": {
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:42:36.531606-04:00"
