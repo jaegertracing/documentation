@@ -4,7 +4,7 @@
 HTMLPROOFER  = bundle exec htmlproofer
 HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
-HTMLTEST     := htmltest
+HTMLTEST     ?= htmltest
 
 # generate currently doesn't do anything, but can be useful in the future.
 generate:
