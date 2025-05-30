@@ -1,10 +1,13 @@
 # Copyright (c) The Jaeger Authors.
 # SPDX-License-Identifier: Apache-2.0
+#
+# cSpell:ignore htmlproofer htmltest refcache
 
 HTMLPROOFER  = bundle exec htmlproofer
 HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
 HTMLTEST     ?= htmltest
+HTMLTEST_DIR ?= tmp/.htmltest
 
 # generate currently doesn't do anything, but can be useful in the future.
 generate:
@@ -48,7 +51,9 @@ check-links-older:
 	$(HTMLTEST) --conf .htmltest.old-versions.yml
 
 check-links-external:
+	cp data/refcache.json $(HTMLTEST_DIR)/refcache.json
 	$(HTMLTEST) --conf .htmltest.external.yml
+	jq . $(HTMLTEST_DIR)/refcache.json > data/refcache.json \
 
 check-links-all: check-links check-links-older check-links-external
 

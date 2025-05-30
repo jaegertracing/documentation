@@ -1,7 +1,7 @@
 {
   "http://cassandra.apache.org/doc/latest/tools/cqlsh.html": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:46.406804-04:00"
+    "LastSeen": "2025-05-29T20:16:43.843546-04:00"
   },
   "http://cncf.io": {
     "StatusCode": 200,
@@ -13,11 +13,11 @@
   },
   "http://jaeger.readthedocs.io/en/latest/getting_started/#all-in-one-docker-image": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:46:06.524221-04:00"
+    "LastSeen": "2025-05-29T20:21:16.149491-04:00"
   },
   "http://jaeger.readthedocs.io/en/latest/getting_started/#sample-application": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:46:06.632183-04:00"
+    "LastSeen": "2025-05-29T20:21:16.239057-04:00"
   },
   "http://uber.github.io": {
     "StatusCode": 206,
@@ -62,6 +62,10 @@
   "https://cassandra.apache.org/doc/latest/": {
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:41:52.997564-04:00"
+  },
+  "https://cassandra.apache.org/doc/latest/cassandra/managing/tools/cqlsh.html": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-29T20:21:09.095549-04:00"
   },
   "https://cdn-images-1.medium.com/max/1000/1*jJm7BHkMListmocakAMcqA.png": {
     "StatusCode": 206,
@@ -239,9 +243,9 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:40:50.024364-04:00"
   },
-  "https://github.com/cncf/toc/blob/master/reviews/graduation-jaeger.md": {
-    "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:49.638912-04:00"
+  "https://github.com/cncf/toc/blob/main/projects/jaeger/jaeger-graduation-proposal.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-29T20:16:44.82433-04:00"
   },
   "https://github.com/dgraph-io/badger": {
     "StatusCode": 206,
@@ -589,15 +593,15 @@
   },
   "https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/scylladb/README.md": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:43:46.949079-04:00"
+    "LastSeen": "2025-05-29T20:21:10.849711-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/model/adjuster/clockskew.go": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:44:04.570381-04:00"
+    "LastSeen": "2025-05-29T20:21:11.219045-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:43:53.507493-04:00"
+    "LastSeen": "2025-05-29T20:21:10.990652-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/monitoring/jaeger-mixin/dashboard-for-grafana.json": {
     "StatusCode": 206,
@@ -605,7 +609,7 @@
   },
   "https://github.com/jaegertracing/jaeger/blob/main/pkg/cassandra/config/config.go#L21": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:43:45.983561-04:00"
+    "LastSeen": "2025-05-29T20:21:10.552952-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.0.0/cmd/jaeger/config-badger.yaml": {
     "StatusCode": 206,
@@ -631,6 +635,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:41:19.896563-04:00"
   },
+  "https://github.com/jaegertracing/jaeger/blob/v2.0.0/cmd/jaeger/config-remote-storage.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-29T19:49:44.086253-04:00"
+  },
   "https://github.com/jaegertracing/jaeger/blob/v2.0.0/cmd/jaeger/config-tail-sampling-always-sample.yaml": {
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:41:26.420087-04:00"
@@ -654,6 +662,10 @@
   "https://github.com/jaegertracing/jaeger/blob/v2.0.0/model/proto/metrics/metricsquery.proto": {
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:41:02.451648-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.0.0/monitoring/jaeger-mixin/dashboard-for-grafana.json": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-29T19:49:44.513711-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.0.0/plugin/storage/badger/docs/storage-file-non-root-permission.md": {
     "StatusCode": 206,
@@ -893,7 +905,7 @@
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.3.0/model/proto/metrics/metricsquery.proto": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:03.537893-04:00"
+    "LastSeen": "2025-05-29T20:21:12.32761-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.3.0/pkg/cassandra/config/config.go#L21": {
     "StatusCode": 206,
@@ -905,23 +917,23 @@
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.3.0/plugin/storage/badger/docs/storage-file-non-root-permission.md": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:12.357626-04:00"
+    "LastSeen": "2025-05-29T20:21:14.144486-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.3.0/plugin/storage/cassandra/schema/README.md": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:09.391511-04:00"
+    "LastSeen": "2025-05-29T20:21:13.573746-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.3.0/plugin/storage/cassandra/schema/create.sh": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:08.9733-04:00"
+    "LastSeen": "2025-05-29T20:21:13.338432-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.3.0/plugin/storage/grpc/proto/storage.proto": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:03.866965-04:00"
+    "LastSeen": "2025-05-29T20:21:12.62944-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.3.0/plugin/storage/scylladb/README.md": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:09.662011-04:00"
+    "LastSeen": "2025-05-29T20:21:13.827396-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.4.0/cmd/jaeger/config-badger.yaml": {
     "StatusCode": 206,
@@ -989,7 +1001,7 @@
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.4.0/internal/storage/v1/scylladb/README.md": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:44:52.181018-04:00"
+    "LastSeen": "2025-05-29T20:21:11.967434-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.4.0/model/adjuster/clockskew.go": {
     "StatusCode": 206,
@@ -997,7 +1009,7 @@
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.4.0/model/proto/metrics/metricsquery.proto": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:44:45.608738-04:00"
+    "LastSeen": "2025-05-29T20:21:11.570911-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.4.0/pkg/cassandra/config/config.go#L21": {
     "StatusCode": 206,
@@ -1077,19 +1089,19 @@
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.5.0/internal/storage/v1/scylladb/README.md": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:46.972133-04:00"
+    "LastSeen": "2025-05-29T20:21:15.561605-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.5.0/model/adjuster/clockskew.go": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:47.559871-04:00"
+    "LastSeen": "2025-05-29T20:21:15.828035-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.5.0/model/proto/metrics/metricsquery.proto": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:40.933989-04:00"
+    "LastSeen": "2025-05-29T20:21:14.729644-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.5.0/pkg/cassandra/config/config.go#L21": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:45.943206-04:00"
+    "LastSeen": "2025-05-29T20:21:15.240906-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.6.0/cmd/jaeger/config-badger.yaml": {
     "StatusCode": 206,
@@ -1157,19 +1169,19 @@
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.6.0/internal/storage/v1/scylladb/README.md": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:43:11.244552-04:00"
+    "LastSeen": "2025-05-29T20:21:09.358248-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.6.0/model/adjuster/clockskew.go": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:42:38.933909-04:00"
+    "LastSeen": "2025-05-29T20:21:07.907641-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.6.0/model/proto/metrics/metricsquery.proto": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:42:40.394776-04:00"
+    "LastSeen": "2025-05-29T20:21:08.302058-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/v2.6.0/pkg/cassandra/config/config.go#L21": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:43:10.004956-04:00"
+    "LastSeen": "2025-05-29T20:21:08.902697-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues": {
     "StatusCode": 206,
@@ -1513,7 +1525,7 @@
   },
   "https://github.com/jaegertracing/jaeger/tree/v2.3.0/plugin/storage/grpc": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:05.498965-04:00"
+    "LastSeen": "2025-05-29T20:21:13.007718-04:00"
   },
   "https://github.com/jaegertracing/jaeger/tree/v2.4.0/cmd/jaeger": {
     "StatusCode": 206,
@@ -2385,7 +2397,7 @@
   },
   "https://spark.apache.org/docs/2.4.4/hardware-provisioning.html#memory": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:44:22.008756-04:00"
+    "LastSeen": "2025-05-29T20:21:11.301993-04:00"
   },
   "https://strimzi.io/": {
     "StatusCode": 206,
@@ -2397,15 +2409,23 @@
   },
   "https://thenewstack.io/cncf-adds-oracle-onboards-envoy-jaeger-projects/": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:46:01.390847-04:00"
+    "LastSeen": "2025-05-29T20:01:33.247151-04:00"
   },
   "https://thenewstack.io/jaeger-graduates-cncf-sees-a-future-without-native-jaeger-clients/": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:45:52.57247-04:00"
+    "LastSeen": "2025-05-29T20:01:32.894386-04:00"
   },
   "https://use.fontawesome.com/releases/v5.0.7/js/all.js": {
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:40:19.099459-04:00"
+  },
+  "https://web.archive.org/web/20241212124714/https://thenewstack.io/cncf-adds-oracle-onboards-envoy-jaeger-projects/": {
+    "StatusCode": 200,
+    "LastSeen": "2025-05-29T20:16:47.589808-04:00"
+  },
+  "https://web.archive.org/web/20250426221351/https://thenewstack.io/jaeger-graduates-cncf-sees-a-future-without-native-jaeger-clients//": {
+    "StatusCode": 200,
+    "LastSeen": "2025-05-29T20:16:46.400447-04:00"
   },
   "https://www.aspecto.io/blog/how-to-deploy-jaeger-on-aws-a-comprehensive-step-by-step-guide/": {
     "StatusCode": 200,
@@ -2439,6 +2459,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:42:35.735426-04:00"
   },
+  "https://www.elastic.co/docs/deploy-manage/upgrade/deployment-or-cluster": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-29T19:55:04.814092-04:00"
+  },
   "https://www.elastic.co/downloads/elasticsearch": {
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:42:34.646322-04:00"
@@ -2446,6 +2470,10 @@
   "https://www.elastic.co/guide/en/elasticsearch/reference/5.6/heap-size.html": {
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:44:21.880033-04:00"
+  },
+  "https://www.elastic.co/guide/en/elasticsearch/reference/current//setup-upgrade.html": {
+    "StatusCode": 404,
+    "LastSeen": "2025-05-29T19:54:03.88622-04:00"
   },
   "https://www.elastic.co/guide/en/elasticsearch/reference/current/index-lifecycle-management.html": {
     "StatusCode": 206,
@@ -3989,7 +4017,7 @@
   },
   "https://www.jaegertracing.io/docs/2.6/cli/": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:43:56.705643-04:00"
+    "LastSeen": "2025-05-29T20:21:11.123259-04:00"
   },
   "https://www.jaegertracing.io/docs/2.6/configuration": {
     "StatusCode": 206,
@@ -4097,7 +4125,7 @@
   },
   "https://www.jaegertracing.io/docs/2.6/operator/": {
     "StatusCode": 404,
-    "LastSeen": "2025-05-29T19:44:06.541633-04:00"
+    "LastSeen": "2025-05-29T20:21:11.271105-04:00"
   },
   "https://www.jaegertracing.io/docs/2.6/performance-tuning": {
     "StatusCode": 206,
