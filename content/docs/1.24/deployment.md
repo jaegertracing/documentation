@@ -703,7 +703,7 @@ Please refer to the [dedicated Frontend/UI page](../frontend-ui/).
 
 Production deployments need an external process which aggregates data and creates dependency links between services. Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives dependency links and stores them directly to the storage.
 
-[cqlsh]: http://cassandra.apache.org/doc/latest/tools/cqlsh.html
+[cqlsh]: https://cassandra.apache.org/doc/latest/cassandra/managing/tools/cqlsh.html
 [zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift
 [jaeger-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
 [thriftrw]: https://www.npmjs.com/package/thriftrw

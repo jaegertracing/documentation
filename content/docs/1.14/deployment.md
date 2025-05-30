@@ -461,7 +461,7 @@ Production deployments need an external process which aggregates data and create
 
 All binaries accepts command line properties and environmental variables, power by [viper](https://github.com/spf13/viper) and [cobra](https://github.com/spf13/cobra) libraries. Please refer to the [CLI Flags](../cli/) page for more information.
 
-[cqlsh]: http://cassandra.apache.org/doc/latest/tools/cqlsh.html
+[cqlsh]: https://cassandra.apache.org/doc/latest/cassandra/managing/tools/cqlsh.html
 [zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift
 [jaeger-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
 [thriftrw]: https://www.npmjs.com/package/thriftrw
