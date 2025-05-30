@@ -69,7 +69,7 @@ Congratulations on being selected as a Jaeger Mentee! It can be daunting when st
 - Read our contributing guides ([#1](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING.md),
   [#2](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md)),
   containing instructions on the development workflow.
-- Familiarize yourself with the [Jaeger documentation](https://www.jaegertracing.io/docs/latest/),
+- Familiarize yourself with the [Jaeger documentation](/docs/latest/),
   which provides an architecture overview of Jaeger, a comprehensive list of all
   CLI flags, among others.
 - Carefully read through the Github issue to get a firm understanding of the requirements.

@@ -92,7 +92,7 @@ The queue size for the Agent is about _span batches_, whereas the queue size for
 
 Given that the queue size should be close to empty most of the time, this setting should be as high as the available memory for the Collector, to provide maximum protection against sudden traffic spikes. However, if your storage layer is under-provisioned and cannot keep up, even a large queue will quickly fill up and start dropping data.
 
-Experimental: starting from Jaeger 1.17, the Jaeger Collector can adjust the queue size automatically based on the memory requirements and average span size. Set the flag `collector.queue-size-memory` to the maximum memory size in MiB that the collector should use, and Jaeger will periodically calculate the ideal queue size based on the average span size it has seen. For safety reasons, the maximum queue size is hard-coded to 1 million records. If you are using this feature, [give us your feedback](https://www.jaegertracing.io/get-in-touch/)!
+Experimental: starting from Jaeger 1.17, the Jaeger Collector can adjust the queue size automatically based on the memory requirements and average span size. Set the flag `collector.queue-size-memory` to the maximum memory size in MiB that the collector should use, and Jaeger will periodically calculate the ideal queue size based on the average span size it has seen. For safety reasons, the maximum queue size is hard-coded to 1 million records. If you are using this feature, [give us your feedback](/get-in-touch/)!
 
 ### Adjust processor workers
 
