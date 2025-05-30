@@ -50,6 +50,7 @@ check-links-older:
 	$(HTMLTEST) --conf .htmltest.old-versions.yml
 
 check-links-external:
+	mkdir -p $(HTMLTEST_DIR)
 	cp data/refcache.json $(HTMLTEST_DIR)/refcache.json
 	$(HTMLTEST) --conf .htmltest.external.yml
 	jq . $(HTMLTEST_DIR)/refcache.json > data/refcache.json
