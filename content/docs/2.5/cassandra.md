@@ -96,4 +96,4 @@ usercert = ~/.cassandra/client-cert
 
 * ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/v2.5.0/internal/storage/v1/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
 
-[cqlsh]: http://cassandra.apache.org/doc/latest/tools/cqlsh.html
+[cqlsh]: https://cassandra.apache.org/doc/latest/cassandra/managing/tools/cqlsh.html

@@ -11,7 +11,7 @@ In order to understand the project better and come up with reasonable solutions,
 
 * Go through some Jaeger tutorials, such as [this blog post](https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2) or [this video](https://youtu.be/s7IrYt1igSM?si=B3NI6ruohKfSPUCl&t=445).
 * Run the [HotROD demo yourself](https://github.com/jaegertracing/jaeger/blob/main/examples/hotrod/README.md). The blogs and videos may be outdated, it's good to get hands on.
-* Review the [Jaeger architecture](https://www.jaegertracing.io/docs/latest/architecture/) and understand the components.
+* Review the [Jaeger architecture](/docs/latest/architecture/) and understand the components.
 * Fork and clone the respective repositories to be able to [build and run the project locally](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING.md#getting-started).
 * Learn about contributing with the best practices, including how to [sign your code and contribute](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md#creating-a-pull-request).
 * Try to solve some of the [simple open issues](./#help-with-coding) that you can find across Jaeger repositories.

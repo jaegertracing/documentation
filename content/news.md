@@ -17,10 +17,10 @@ Read [full post here](https://medium.com/jaegertracing/jaeger-v2-released-09a603
 After two years of hard work and contributions from the community, Jaeger has graduated to be the 7th top-level project in the Cloud Native Computing
 Foundation, lining up alongside Kubernetes, Prometheus, Envoy, CoreDNS, containerd, and Fluentd.
 
-* [Graduation application](https://github.com/cncf/toc/blob/master/reviews/graduation-jaeger.md) to CNCF Technical Oversight Committee
+* [Graduation application](https://github.com/cncf/toc/blob/main/projects/jaeger/jaeger-graduation-proposal.md) to CNCF Technical Oversight Committee
 * CNCF blog: [official announcement](https://www.cncf.io/announcement/2019/10/31/cloud-native-computing-foundation-announces-jaeger-graduation/)
 * DevOps.com: [CNCF Advances Jaeger Distributed Tracing Project](https://devops.com/cncf-advances-jaeger-distributed-tracing-project/)
-* TheNewStack: [Jaeger Graduates CNCF, Sees a Future Without Native Jaeger Clients](https://thenewstack.io/jaeger-graduates-cncf-sees-a-future-without-native-jaeger-clients/)
+* TheNewStack: [Jaeger Graduates CNCF, Sees a Future Without Native Jaeger Clients](https://web.archive.org/web/20250426221351/https://thenewstack.io/jaeger-graduates-cncf-sees-a-future-without-native-jaeger-clients//)
 
 ## Announcing Jaeger v1.0
 
@@ -42,7 +42,7 @@ News coverage:
   * [CNCF blog: CNCF Hosts Jaeger](https://www.cncf.io/blog/2017/09/13/cncf-hosts-jaeger/)
   * [Linux Foundation blog: Lyft and Uber on Stage Together at Open Source Summit in L.A.](https://www.linuxfoundation.org/blog/blog/lyft-and-uber-on-stage-together-at-open-source-summit-in-l-a)
   * [Silicon Angle: Ride-hailing firms Lyft and Uber open-source microservices technology](https://siliconangle.com/2017/09/13/ride-sharing-firms-lyft-uber-donate-microservices-tech-open-source-community/)
-  * [The New Stack: CNCF Adds Oracle, Onboards the Envoy and Jaeger Projects](https://thenewstack.io/cncf-adds-oracle-onboards-envoy-jaeger-projects/)
+  * [The New Stack: CNCF Adds Oracle, Onboards the Envoy and Jaeger Projects](https://web.archive.org/web/20241212124714/https://thenewstack.io/cncf-adds-oracle-onboards-envoy-jaeger-projects/)
   * [eWeek: Uber and Lyft Bring Open-Source Cloud Projects to CNCF](http://www.eweek.com/cloud/uber-and-lyft-bring-open-source-cloud-projects-to-cncf)
   * [ZDNet: Lyft and Uber travel the same open-source road](http://www.zdnet.com/article/lyft-and-uber-travel-the-same-open-source-road/)
 

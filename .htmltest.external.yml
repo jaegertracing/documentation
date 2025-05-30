@@ -1,3 +1,15 @@
+CacheExpires: 13300h # ~ 18 months
 DirectoryPath: public
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreAltMissing: true
+IgnoreDirs:
+  - docs/1.*
+IgnoreURLs:
+  - /livereload.js
+  # Valid URLs, but servers yield 403 or similar errors
+  - ^https://(twitter|x).com/[Jj]aeger[Tt]racing
+  - ^https://calendar.google.com/
+  - ^https://eng.uber.com/(distributed-tracing/)?
+  - ^https://war.ukraine.ua/support-ukraine/
+  - ^https://www.oracle.com/cloud
+  - ^https://stackoverflow.com/questions/tagged/jaeger

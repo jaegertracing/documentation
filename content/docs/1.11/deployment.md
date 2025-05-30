@@ -352,4 +352,4 @@ by [viper](https://github.com/spf13/viper) and [cobra](https://github.com/spf13/
 The names of environmental properties are capital letters and characters `-` and `.` are replaced with `_`.
 To list all configuration properties call `jaeger-binary -h`.
 
-[cqlsh]: http://cassandra.apache.org/doc/latest/tools/cqlsh.html
+[cqlsh]: https://cassandra.apache.org/doc/latest/cassandra/managing/tools/cqlsh.html

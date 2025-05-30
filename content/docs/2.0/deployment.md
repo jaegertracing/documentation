@@ -29,7 +29,7 @@ See [APIs](../apis/) for the list of all API ports.
 
 ## Configuration
 
-Jaeger can be customized via configuration YAML file (see [Configuration](../configuration/)). 
+Jaeger can be customized via configuration YAML file (see [Configuration](../configuration/)).
 
 
 **jaeger** is stateless and thus many instances of **jaeger** can be run in parallel. **jaeger** instances require almost no configuration, except for storage location, such as:
@@ -40,10 +40,10 @@ Cassandra:
     backends:
       some_storage:
         cassandra:
-          schema: 
+          schema:
             keyspace: "jaeger_v1_dc1"
           connection:
-            auth: 
+            auth:
               basic:
                 username: "cassandra"
                 password: "cassandra"
@@ -121,7 +121,7 @@ your Prometheus server](https://prometheus.io/docs/guides/tls-encryption/) corre
 
 In order to display service dependency diagrams, production deployments need an external process that aggregates data and computes dependency links between services. Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives dependency links and writes them directly to the storage.
 
-[cqlsh]: http://cassandra.apache.org/doc/latest/tools/cqlsh.html
+[cqlsh]: https://cassandra.apache.org/doc/latest/cassandra/managing/tools/cqlsh.html
 [zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift
 [jaeger-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
 [model.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/model.proto

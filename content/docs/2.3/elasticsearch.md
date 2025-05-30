@@ -170,7 +170,7 @@ though they use the same index mappings. Therefore upgrade from Elasticsearch 7 
 data migration. However, upgrade from Elasticsearch 6 to 8 has to be done through Elasticsearch 7 and wait
 until indices created by ES 6.x are removed or explicitly reindexed.
 
-Refer to the Elasticsearch [documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current//setup-upgrade.html)
+Refer to the Elasticsearch [documentation](https://www.elastic.co/docs/deploy-manage/upgrade/deployment-or-cluster)
 for wire and index compatibility versions. Generally this information can be retrieved from root/ping REST endpoint.
 
 ### Reindex

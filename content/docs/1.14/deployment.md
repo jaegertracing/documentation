@@ -295,7 +295,7 @@ though they use the same index mappings. Therefore upgrade from Elasticsearch 6 
 data migration. However, upgrade from Elasticsearch 5 to 7 has to be done through Elasticsearch 6 and wait
 until indices created by ES 5.x are removed or explicitly reindexed.
 
-Refer to the Elasticsearch [documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current//setup-upgrade.html)
+Refer to the Elasticsearch [documentation](https://www.elastic.co/docs/deploy-manage/upgrade/deployment-or-cluster)
 for wire and index compatibility versions. Generally this information can be retrieved from root/ping REST endpoint.
 
 ##### Reindex
@@ -461,7 +461,7 @@ Production deployments need an external process which aggregates data and create
 
 All binaries accepts command line properties and environmental variables, power by [viper](https://github.com/spf13/viper) and [cobra](https://github.com/spf13/cobra) libraries. Please refer to the [CLI Flags](../cli/) page for more information.
 
-[cqlsh]: http://cassandra.apache.org/doc/latest/tools/cqlsh.html
+[cqlsh]: https://cassandra.apache.org/doc/latest/cassandra/managing/tools/cqlsh.html
 [zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift
 [jaeger-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
 [thriftrw]: https://www.npmjs.com/package/thriftrw
