@@ -17,4 +17,3 @@ IgnoreURLs:
   # Temporary: invalid URLs for which replacements need to be found
   # Temporary: as we work on https://github.com/jaegertracing/documentation/issues/889
   - ^https://github.com/jaegertracing/jaeger/(blob|tree)/(v2|main/(internal|model|pkg))
-  - ^https://spark.apache.org/docs/2.4.4/hardware-provisioning.html#memory

@@ -23,6 +23,10 @@
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:48:55.951926-04:00"
   },
+  "https://archive.apache.org/dist/spark/docs/2.4.4/hardware-provisioning.html#memory": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-31T12:36:31.041616-04:00"
+  },
   "https://artifacthub.io/packages/helm/bitnami/cassandra": {
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:49:42.482668-04:00"
