@@ -4,9 +4,10 @@
 {{ $jsFiles := (slice "jquery-ui-1.9.1.custom.min.js" "anchor.min.js" "tocbot.min.js" "app.js") }}
 {{ range $jsFiles }}
 {{ $js := resources.Get (printf "js/%s" .) | minify | fingerprint }}
-<script src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
 {{ end }}
 
+{{/*
 {{ if $isDocsPage }}
     {{ $jsFiles := (slice "lunr-2.3.6.min.js") }}
     {{ range $jsFiles }}
@@ -14,3 +15,4 @@
     <script src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}"></script>
     {{ end }}
 {{ end }}
+*/ -}}

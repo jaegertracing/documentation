@@ -38,7 +38,7 @@ netlify-branch-deploy: generate
 	--minify
 
 build: clean generate
-	hugo --logLevel info
+	hugo --cleanDestinationDir -e dev --logLevel info
 
 link-checker-setup:
 	curl https://raw.githubusercontent.com/wjdp/htmltest/master/godownloader.sh | bash

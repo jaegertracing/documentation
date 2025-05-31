@@ -1,10 +1,9 @@
-baseURL: "https://www.jaegertracing.io"
+baseURL: https://www.jaegertracing.io
 title: "Jaeger: open source, distributed tracing platform"
 languageCode: en
 pygmentsCodeFences: true
 pygmentsUseClasses: true
 disableKinds: ["taxonomy"]
-canonifyURLs: true
 theme: ["basetheme", "jaeger-docs"]
 
 mediaTypes:
@@ -38,4 +37,4 @@ params:
     links:
       - title: "Docs"
         url: "/docs"
-  
+

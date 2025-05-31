@@ -4535,13 +4535,13 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:40:19.249095-04:00"
   },
+  "https://www.jaegertracing.io/get-in-touch/#open-issue-or-discussion-on-github": {
+    "StatusCode": 206,
+    "LastSeen": "2025-05-29T19:40:18.763058-04:00"
+  },
   "https://www.jaegertracing.io/get-in-touch/#project-video-meetings": {
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:40:18.732783-04:00"
-  },
-  "https://www.jaegertracing.io/get-in-touch/#report-issues-on-github": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-29T19:40:18.763058-04:00"
   },
   "https://www.jaegertracing.io/get-in-touch/#via-chat": {
     "StatusCode": 206,
