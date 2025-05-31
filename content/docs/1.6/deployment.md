@@ -329,7 +329,7 @@ An example configuration file:
         },
         {
           "label": "Docs",
-          "url": "http://jaeger.readthedocs.io/en/latest/"
+          "url": "https://www.jaegertracing.io/docs/latest/"
         }
       ]
     }

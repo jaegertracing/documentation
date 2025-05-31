@@ -37,7 +37,7 @@ An example configuration file:
         },
         {
           "label": "Docs",
-          "url": "http://jaeger.readthedocs.io/en/latest/"
+          "url": "https://www.jaegertracing.io/docs/latest/"
         }
       ]
     }
@@ -100,7 +100,7 @@ The following pages support embedded mode:
 
 ### Search Page
 
-To integrate the Search Trace Page to our application we have to indicate to the Jaeger UI that we want to use the embed mode with `uiEmbed=v0`. 
+To integrate the Search Trace Page to our application we have to indicate to the Jaeger UI that we want to use the embed mode with `uiEmbed=v0`.
 
 For example:
 
@@ -142,7 +142,7 @@ http://localhost:16686/search?
 ### Trace Page
 
 
-To integrate the Trace Page to our application we have to indicate to the Jaeger UI that we want to use the embed mode with `uiEmbed=v0`. 
+To integrate the Trace Page to our application we have to indicate to the Jaeger UI that we want to use the embed mode with `uiEmbed=v0`.
 
 For example:
 
@@ -160,7 +160,7 @@ If we have navigated to this view from the search traces page we'll have a butto
 The following query parameters can be used to configure the layout of the trace page :
 
 * `uiTimelineCollapseTitle=1` causes the trace header to start out collapsed, which hides the summary and the minimap.
-  
+
 ```
 http://localhost:16686/trace/{trace-id}?
     uiEmbed=v0&
@@ -183,7 +183,7 @@ http://localhost:16686/trace/{trace-id}?
 http://localhost:16686/trace/{trace-id}?
     uiEmbed=v0&
     uiTimelineHideSummary=1
-```  
+```
 ![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-summary.png)
 
 We can also combine the options:

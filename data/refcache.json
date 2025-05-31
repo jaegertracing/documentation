@@ -11,14 +11,6 @@
     "StatusCode": 200,
     "LastSeen": "2025-05-29T19:45:58.088876-04:00"
   },
-  "http://jaeger.readthedocs.io/en/latest/getting_started/#all-in-one-docker-image": {
-    "StatusCode": 404,
-    "LastSeen": "2025-05-29T20:21:16.149491-04:00"
-  },
-  "http://jaeger.readthedocs.io/en/latest/getting_started/#sample-application": {
-    "StatusCode": 404,
-    "LastSeen": "2025-05-29T20:21:16.239057-04:00"
-  },
   "http://uber.github.io": {
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:41:09.641622-04:00"

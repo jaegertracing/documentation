@@ -13,7 +13,7 @@ Several aspects of the UI can be configured:
   * Google Analytics tracking can be enabled / configured
   * Additional menu options can be added to the global nav
   * Search input limits can be configured
-  
+
 These options can be configured by a JSON configuration file. The `--query.ui-config` command line parameter of the query service must then be set to the path to the JSON file when the query service is started.
 
 An example configuration file:
@@ -39,7 +39,7 @@ An example configuration file:
         },
         {
           "label": "Docs",
-          "url": "http://jaeger.readthedocs.io/en/latest/"
+          "url": "https://www.jaegertracing.io/docs/latest/"
         }
       ]
     }
@@ -122,7 +122,7 @@ key   | The name of tag/process/log attribute which value will be displayed as a
 url   | The URL where the link should point to, it can be an external site or relative path in Jaeger UI
 text  | The text displayed in the tooltip for the link
 
-Both `url` and `text` can be defined as templates (i.e. using `#{field-name}`) where Jaeger UI will dynamically substitute values based on tags/logs/traces data. 
+Both `url` and `text` can be defined as templates (i.e. using `#{field-name}`) where Jaeger UI will dynamically substitute values based on tags/logs/traces data.
 
 For traces, the supported template fields are: `duration`, `endTime`, `startTime`, `traceName` and `traceID`.
 
