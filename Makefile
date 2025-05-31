@@ -47,12 +47,12 @@ check-links:
 	$(HTMLTEST) --conf .htmltest.yml
 
 check-links-older:
-	$(HTMLTEST) --conf .htmltest.old-versions.yml
+	$(HTMLTEST) --log-level 1 --conf .htmltest.old-versions.yml
 
 check-links-external:
 	mkdir -p $(HTMLTEST_DIR)
 	cp data/refcache.json $(HTMLTEST_DIR)/refcache.json
-	$(HTMLTEST) --conf .htmltest.external.yml
+	$(HTMLTEST) --log-level 1 --conf .htmltest.external.yml
 	jq . $(HTMLTEST_DIR)/refcache.json > data/refcache.json
 
 check-links-all: check-links check-links-older check-links-external
