@@ -1,1962 +1,1650 @@
 {
   "http://cncf.io": {
-    "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:45.695273-04:00"
+    "StatusCode": 206,
+    "LastSeen": "2025-05-31T11:50:30.926116-04:00"
   },
   "http://events.linuxfoundation.org/events/open-source-summit-north-america": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:45.541192-04:00"
+    "LastSeen": "2025-05-31T11:50:30.876086-04:00"
   },
   "http://uber.github.io": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:06.435472-04:00"
+    "LastSeen": "2025-05-31T11:49:20.771871-04:00"
   },
   "http://www.eweek.com/cloud/uber-and-lyft-bring-open-source-cloud-projects-to-cncf": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:50.136912-04:00"
+    "LastSeen": "2025-05-31T11:50:32.77285-04:00"
   },
   "http://www.zdnet.com/article/lyft-and-uber-travel-the-same-open-source-road/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:52.204922-04:00"
+    "LastSeen": "2025-05-31T11:50:32.95222-04:00"
   },
   "https://1password.com/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:36.169148-04:00"
+    "LastSeen": "2025-05-31T11:48:55.951926-04:00"
   },
   "https://artifacthub.io/packages/helm/bitnami/cassandra": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:33.695704-04:00"
+    "LastSeen": "2025-05-31T11:49:42.482668-04:00"
   },
   "https://artifacthub.io/packages/helm/bitnami/kafka": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:31.619009-04:00"
+    "LastSeen": "2025-05-31T11:49:41.716453-04:00"
   },
   "https://artifacthub.io/packages/helm/elastic/elasticsearch": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:37.692796-04:00"
+    "LastSeen": "2025-05-31T11:49:46.484222-04:00"
   },
   "https://artifacthub.io/packages/helm/opensearch-project-helm-charts/opensearch": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:14.927814-04:00"
+    "LastSeen": "2025-05-31T11:49:28.325149-04:00"
   },
   "https://base64.guru/converter/encode/hex": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:13.668184-04:00"
+    "LastSeen": "2025-05-31T11:49:27.151985-04:00"
   },
   "https://blog.openshift.com/openshift-commons-briefing-82-distributed-tracing-with-jaeger-prometheus-on-kubernetes/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:06.945019-04:00"
+    "LastSeen": "2025-05-31T11:50:06.462235-04:00"
   },
   "https://cassandra.apache.org/doc/latest/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:33.478234-04:00"
+    "LastSeen": "2025-05-31T11:49:42.236926-04:00"
   },
   "https://cassandra.apache.org/doc/latest/cassandra/managing/tools/cqlsh.html": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:52.804955-04:00"
+    "LastSeen": "2025-05-31T11:49:58.523025-04:00"
   },
   "https://cdn-images-1.medium.com/max/1000/1*jJm7BHkMListmocakAMcqA.png": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:33.523768-04:00"
+    "LastSeen": "2025-05-31T11:48:53.06915-04:00"
   },
   "https://cdn-images-1.medium.com/max/1024/0*iu_PaG5VWUVR2vRz": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:30.833114-04:00"
+    "LastSeen": "2025-05-31T11:48:50.587292-04:00"
   },
   "https://cdn-images-1.medium.com/max/1024/1*NKMqp96KpCm1hyhDyGP7fg.jpeg": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:34.89259-04:00"
+    "LastSeen": "2025-05-31T11:48:54.417564-04:00"
   },
   "https://cdn-images-1.medium.com/max/1024/1*T1FPdT_GcTo_2loOgrLyUA.png": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:34.289296-04:00"
+    "LastSeen": "2025-05-31T11:48:53.775158-04:00"
   },
   "https://cdn-images-1.medium.com/max/1024/1*b-RsMFPGcTtpxKaL2oRMEg.png": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:32.285226-04:00"
+    "LastSeen": "2025-05-31T11:48:52.044907-04:00"
   },
   "https://cdn-images-1.medium.com/max/1024/1*ccqn-B5CfJhwNkjFjqAFLg.jpeg": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:29.505939-04:00"
+    "LastSeen": "2025-05-31T11:48:49.355485-04:00"
   },
   "https://cdn-images-1.medium.com/max/1024/1*iFJFYZsdPvaFuwaAoZ1HRQ.jpeg": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:32.895128-04:00"
+    "LastSeen": "2025-05-31T11:48:52.533352-04:00"
   },
   "https://cdn-images-1.medium.com/max/1024/1*kHD8sLyWsbEcR0lqMhFFNA.png": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:35.588248-04:00"
+    "LastSeen": "2025-05-31T11:48:55.086626-04:00"
   },
   "https://cdn-images-1.medium.com/max/1024/1*nrY-UQFxXoQEjKKXDzHwSw.png": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:31.591364-04:00"
+    "LastSeen": "2025-05-31T11:48:51.238322-04:00"
   },
   "https://cdn-images-1.medium.com/max/1024/1*z0FkGABfi6lK35ojlFqLjQ.png": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:28.900171-04:00"
+    "LastSeen": "2025-05-31T11:48:48.804083-04:00"
   },
   "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:01.499347-04:00"
+    "LastSeen": "2025-05-31T11:49:16.450811-04:00"
   },
   "https://cert-manager.io/docs/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:17.76616-04:00"
+    "LastSeen": "2025-05-31T11:50:16.300858-04:00"
   },
   "https://cert-manager.io/v1.6-docs/installation/#default-static-install": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:18.428956-04:00"
+    "LastSeen": "2025-05-31T11:50:16.736629-04:00"
   },
   "https://cloud-native.slack.com/archives/CGG7NFUJ3": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:22.89823-04:00"
+    "LastSeen": "2025-05-31T11:48:43.710244-04:00"
   },
   "https://cncf.io/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:06.625885-04:00"
+    "LastSeen": "2025-05-31T11:49:21.005717-04:00"
   },
   "https://code.jquery.com/jquery-3.3.1.min.js": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:24.750524-04:00"
+    "LastSeen": "2025-05-31T11:48:44.905019-04:00"
   },
   "https://code.visualstudio.com/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:24.47204-04:00"
+    "LastSeen": "2025-05-31T11:49:34.852334-04:00"
   },
   "https://contribute.cncf.io/contributors/getting-started/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:52.432668-04:00"
+    "LastSeen": "2025-05-31T11:49:10.270789-04:00"
   },
   "https://creativecommons.org/licenses/by/4.0": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:24.256698-04:00"
+    "LastSeen": "2025-05-31T11:48:44.632643-04:00"
   },
   "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:44.987964-04:00"
+    "LastSeen": "2025-05-31T11:49:51.397464-04:00"
   },
   "https://developers.google.com/protocol-buffers/docs/proto3#json": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:04.74352-04:00"
+    "LastSeen": "2025-05-31T11:49:19.241579-04:00"
   },
   "https://devops.com/cncf-advances-jaeger-distributed-tracing-project/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:40.189667-04:00"
+    "LastSeen": "2025-05-31T11:50:27.801922-04:00"
   },
   "https://docs.google.com/document/d/1ZuBAwTJvQN7xkWVvEFXj5WU9_JmS5TPiNbxCJSvPqX0/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:28.64766-04:00"
+    "LastSeen": "2025-05-31T11:48:48.60732-04:00"
   },
   "https://docs.google.com/document/d/1lAL0iHHozXZoIL4W0qiOWyXVPo9a6lUTeH9cz95O6Kg/edit": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:26.751714-04:00"
+    "LastSeen": "2025-05-31T11:51:03.908868-04:00"
   },
   "https://docs.google.com/document/d/1z4QrNtB9dMgT5SHNx-7Vc38XPLqnjmM2jFIupvkAEHo/view": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:37.354602-04:00"
+    "LastSeen": "2025-05-31T11:49:46.170485-04:00"
   },
   "https://docs.openshift.com/container-platform/4.2/logging/config/cluster-logging-elasticsearch.html": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:26.579858-04:00"
+    "LastSeen": "2025-05-31T11:50:21.769709-04:00"
   },
   "https://en.wikipedia.org/wiki/Clock_skew": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:34.339698-04:00"
+    "LastSeen": "2025-05-31T11:49:42.955992-04:00"
   },
   "https://fonts.googleapis.com/icon?family=Material+Icons": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:20.545997-04:00"
+    "LastSeen": "2025-05-31T11:48:41.359894-04:00"
   },
   "https://github.com/Ankit152": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:08.181135-04:00"
+    "LastSeen": "2025-05-31T11:50:46.573546-04:00"
   },
   "https://github.com/Ashmita152": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:24.232523-04:00"
+    "LastSeen": "2025-05-31T11:51:01.657426-04:00"
   },
   "https://github.com/ClickHouse/ClickHouse": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:47.605413-04:00"
+    "LastSeen": "2025-05-31T11:49:05.516663-04:00"
   },
   "https://github.com/FlamingSaint": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:11.9746-04:00"
+    "LastSeen": "2025-05-31T11:50:50.597499-04:00"
   },
   "https://github.com/GLVSKiriti": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:22.046243-04:00"
+    "LastSeen": "2025-05-31T11:50:59.88141-04:00"
   },
   "https://github.com/Manik2708": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:06.757198-04:00"
+    "LastSeen": "2025-05-31T11:50:45.479189-04:00"
   },
   "https://github.com/MarckK": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:25.023695-04:00"
+    "LastSeen": "2025-05-31T11:51:02.359911-04:00"
   },
   "https://github.com/PikBot": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:24.73132-04:00"
+    "LastSeen": "2025-05-31T11:51:02.170445-04:00"
   },
   "https://github.com/Pushkarm029": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:16.958653-04:00"
+    "LastSeen": "2025-05-31T11:50:54.473972-04:00"
   },
   "https://github.com/Wise-Wizard": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:13.218136-04:00"
+    "LastSeen": "2025-05-31T11:50:51.740773-04:00"
   },
   "https://github.com/afzal442": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:20.607363-04:00"
+    "LastSeen": "2025-05-31T11:50:58.785763-04:00"
   },
   "https://github.com/akagami-harsh": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:15.752247-04:00"
+    "LastSeen": "2025-05-31T11:50:53.271552-04:00"
   },
   "https://github.com/anshgoyalevil": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:17.30579-04:00"
+    "LastSeen": "2025-05-31T11:50:54.789927-04:00"
   },
   "https://github.com/cncf/artwork/tree/master/projects/jaeger": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:21.420942-04:00"
+    "LastSeen": "2025-05-31T11:48:42.18698-04:00"
   },
   "https://github.com/cncf/foundation/blob/main/code-of-conduct.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:25.519779-04:00"
+    "LastSeen": "2025-05-31T11:51:02.690599-04:00"
   },
   "https://github.com/cncf/foundation/blob/master/code-of-conduct.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:57.418555-04:00"
+    "LastSeen": "2025-05-31T11:49:14.894655-04:00"
   },
   "https://github.com/cncf/toc/blob/main/projects/jaeger/jaeger-graduation-proposal.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:38.624865-04:00"
+    "LastSeen": "2025-05-31T11:50:27.396517-04:00"
   },
   "https://github.com/dgraph-io/badger": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:21.217642-04:00"
+    "LastSeen": "2025-05-31T11:49:32.187446-04:00"
   },
   "https://github.com/go-delve/delve": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:24.402415-04:00"
+    "LastSeen": "2025-05-31T11:49:34.798768-04:00"
   },
   "https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#enable-server-reflection": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:05.925285-04:00"
+    "LastSeen": "2025-05-31T11:49:20.339155-04:00"
   },
   "https://github.com/gsoria": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:24.477849-04:00"
+    "LastSeen": "2025-05-31T11:51:01.913462-04:00"
   },
   "https://github.com/haanhvu": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:23.014995-04:00"
+    "LastSeen": "2025-05-31T11:51:00.817229-04:00"
   },
   "https://github.com/hari45678": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:07.289007-04:00"
+    "LastSeen": "2025-05-31T11:50:45.888177-04:00"
   },
   "https://github.com/hellspawn679": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:09.225815-04:00"
+    "LastSeen": "2025-05-31T11:50:47.61643-04:00"
   },
   "https://github.com/jaegertracing/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:54.804342-04:00"
+    "LastSeen": "2025-05-31T11:49:12.615286-04:00"
   },
   "https://github.com/jaegertracing/documentation": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:22.312104-04:00"
+    "LastSeen": "2025-05-31T11:48:43.134197-04:00"
   },
   "https://github.com/jaegertracing/documentation/issues/250": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:19.788792-04:00"
+    "LastSeen": "2025-05-31T11:50:18.089894-04:00"
   },
   "https://github.com/jaegertracing/helm-charts/tree/v2": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:37.029201-04:00"
+    "LastSeen": "2025-05-31T11:49:45.676975-04:00"
   },
   "https://github.com/jaegertracing/jaeger": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:21.871383-04:00"
+    "LastSeen": "2025-05-31T11:48:42.574708-04:00"
   },
   "https://github.com/jaegertracing/jaeger-analytics": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:11.252197-04:00"
+    "LastSeen": "2025-05-31T11:49:24.392795-04:00"
   },
   "https://github.com/jaegertracing/jaeger-clickhouse": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:08.355986-04:00"
+    "LastSeen": "2025-05-31T11:49:22.129046-04:00"
   },
   "https://github.com/jaegertracing/jaeger-client-go": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:52.850533-04:00"
+    "LastSeen": "2025-05-31T11:50:33.439446-04:00"
   },
   "https://github.com/jaegertracing/jaeger-client-java": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:53.448604-04:00"
+    "LastSeen": "2025-05-31T11:50:33.864648-04:00"
   },
   "https://github.com/jaegertracing/jaeger-client-node": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:53.935354-04:00"
+    "LastSeen": "2025-05-31T11:50:34.535708-04:00"
   },
   "https://github.com/jaegertracing/jaeger-client-python": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:54.547552-04:00"
+    "LastSeen": "2025-05-31T11:50:35.016149-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:10.104626-04:00"
+    "LastSeen": "2025-05-31T11:50:09.114345-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/blob/05fe64e9c305526901f70ff692030b388787e388/proto/api_v2/model.proto#L97": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:12.925281-04:00"
+    "LastSeen": "2025-05-31T11:49:26.469394-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/blob/05fe64e9c305526901f70ff692030b388787e388/thrift/jaeger.thrift#L53": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:12.622313-04:00"
+    "LastSeen": "2025-05-31T11:49:26.206903-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/collector.proto": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:03.557364-04:00"
+    "LastSeen": "2025-05-31T11:49:18.121463-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/model.proto": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:14.638013-04:00"
+    "LastSeen": "2025-05-31T11:50:13.320004-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/query.proto": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:05.142248-04:00"
+    "LastSeen": "2025-05-31T11:50:05.226923-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/sampling.proto": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:04.322624-04:00"
+    "LastSeen": "2025-05-31T11:49:18.725136-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v3/query_service.proto": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:05.395124-04:00"
+    "LastSeen": "2025-05-31T11:49:19.831371-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/blob/main/swagger/api_v3/query_service.swagger.json": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:42.827816-04:00"
+    "LastSeen": "2025-05-31T11:49:49.583603-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:03.922287-04:00"
+    "LastSeen": "2025-05-31T11:49:18.42571-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/blob/master/proto/api_v2/query.proto": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:15.853736-04:00"
+    "LastSeen": "2025-05-31T11:50:14.285208-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/blob/master/proto/zipkin.proto": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:09.697364-04:00"
+    "LastSeen": "2025-05-31T11:50:08.747992-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:14.311248-04:00"
+    "LastSeen": "2025-05-31T11:50:13.10976-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:09.296487-04:00"
+    "LastSeen": "2025-05-31T11:50:08.397953-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/tree/main/proto/api_v2": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:05.638884-04:00"
+    "LastSeen": "2025-05-31T11:49:20.057441-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/tree/main/proto/storage/v2/dependency_storage.proto": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:43.546171-04:00"
+    "LastSeen": "2025-05-31T11:49:50.240547-04:00"
   },
   "https://github.com/jaegertracing/jaeger-idl/tree/main/proto/storage/v2/trace_storage.proto": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:43.188961-04:00"
+    "LastSeen": "2025-05-31T11:49:49.920952-04:00"
   },
   "https://github.com/jaegertracing/jaeger-kubernetes": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:13.446751-04:00"
+    "LastSeen": "2025-05-31T11:50:12.182079-04:00"
   },
   "https://github.com/jaegertracing/jaeger-openshift": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:13.950904-04:00"
+    "LastSeen": "2025-05-31T11:50:12.751318-04:00"
   },
   "https://github.com/jaegertracing/jaeger-operator": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:20.3511-04:00"
+    "LastSeen": "2025-05-31T11:49:31.131248-04:00"
   },
   "https://github.com/jaegertracing/jaeger-operator#compatibility-matrix": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:18.209842-04:00"
+    "LastSeen": "2025-05-31T11:50:16.675018-04:00"
   },
   "https://github.com/jaegertracing/jaeger-operator#jager-v2-operator": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:36.568317-04:00"
+    "LastSeen": "2025-05-31T11:49:45.133686-04:00"
   },
   "https://github.com/jaegertracing/jaeger-operator/blob/main/examples/business-application-injected-sidecar.yaml": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:28.778783-04:00"
+    "LastSeen": "2025-05-31T11:50:23.572513-04:00"
   },
   "https://github.com/jaegertracing/jaeger-operator/issues/294": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:27.229561-04:00"
+    "LastSeen": "2025-05-31T11:50:22.43806-04:00"
   },
   "https://github.com/jaegertracing/jaeger-operator/issues/750": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:28.429723-04:00"
+    "LastSeen": "2025-05-31T11:50:23.316547-04:00"
   },
   "https://github.com/jaegertracing/jaeger-operator/releases/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:17.275843-04:00"
+    "LastSeen": "2025-05-31T11:50:15.758006-04:00"
   },
   "https://github.com/jaegertracing/jaeger-operator/tree/main/examples": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:20.023644-04:00"
+    "LastSeen": "2025-05-31T11:50:18.369407-04:00"
   },
   "https://github.com/jaegertracing/jaeger-operator/tree/main/examples/statefulset-manual-sidecar.yaml": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:29.290786-04:00"
+    "LastSeen": "2025-05-31T11:50:23.871931-04:00"
   },
   "https://github.com/jaegertracing/jaeger-ui/blob/main/packages/jaeger-ui/src/types/config.tsx": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:09.681365-04:00"
+    "LastSeen": "2025-05-31T11:49:23.040133-04:00"
   },
   "https://github.com/jaegertracing/jaeger-ui/blob/master/packages/jaeger-ui/src/utils/tracking/README.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:10.137599-04:00"
+    "LastSeen": "2025-05-31T11:49:23.383859-04:00"
   },
   "https://github.com/jaegertracing/jaeger-ui/issues": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:26.812465-04:00"
+    "LastSeen": "2025-05-31T11:48:46.657472-04:00"
   },
   "https://github.com/jaegertracing/jaeger-ui/issues/1288": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:22.724768-04:00"
+    "LastSeen": "2025-05-31T11:51:00.559078-04:00"
   },
   "https://github.com/jaegertracing/jaeger-ui/issues/1466": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:19.481702-04:00"
+    "LastSeen": "2025-05-31T11:50:56.564772-04:00"
   },
   "https://github.com/jaegertracing/jaeger-ui/issues/197": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:35.741805-04:00"
+    "LastSeen": "2025-05-31T11:49:44.230785-04:00"
   },
   "https://github.com/jaegertracing/jaeger-ui/issues/998": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:18.590693-04:00"
+    "LastSeen": "2025-05-31T11:50:55.651471-04:00"
   },
   "https://github.com/jaegertracing/jaeger-ui/labels/good%20first%20issue": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:56.410793-04:00"
+    "LastSeen": "2025-05-31T11:49:13.953647-04:00"
   },
   "https://github.com/jaegertracing/jaeger-ui/labels/help%20wanted": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:56.945091-04:00"
+    "LastSeen": "2025-05-31T11:49:14.440371-04:00"
   },
   "https://github.com/jaegertracing/jaeger/archive/v1.69.0.tar.gz": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:57.312974-04:00"
+    "LastSeen": "2025-05-31T11:50:37.228517-04:00"
   },
   "https://github.com/jaegertracing/jaeger/archive/v1.69.0.zip": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:57.045474-04:00"
+    "LastSeen": "2025-05-31T11:50:36.992258-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/7872d1b07439c3f2d316065b1fd53e885b26a66f/model/ids.go#L82": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:12.265708-04:00"
+    "LastSeen": "2025-05-31T11:49:25.933268-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:26.385537-04:00"
+    "LastSeen": "2025-05-31T11:51:03.556289-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING.md#getting-started": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:53.82935-04:00"
+    "LastSeen": "2025-05-31T11:49:11.718206-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:57.018227-04:00"
+    "LastSeen": "2025-05-31T11:49:14.515233-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md#assigning-issues": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:57.496924-04:00"
+    "LastSeen": "2025-05-31T11:49:14.97758-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md#creating-a-pull-request": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:54.108977-04:00"
+    "LastSeen": "2025-05-31T11:49:12.02868-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/GOVERNANCE.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:35.828301-04:00"
+    "LastSeen": "2025-05-31T11:48:55.486766-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/GOVERNANCE.md#becoming-a-maintainer": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:35.904605-04:00"
+    "LastSeen": "2025-05-31T11:48:55.556343-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-badger.yaml": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:02.983903-04:00"
+    "LastSeen": "2025-05-31T11:50:04.934272-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-cassandra.yaml": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:02.352491-04:00"
+    "LastSeen": "2025-05-31T11:50:04.258827-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-elasticsearch.yaml": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:02.646913-04:00"
+    "LastSeen": "2025-05-31T11:50:04.604994-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-collector.yaml": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:01.655113-04:00"
+    "LastSeen": "2025-05-31T11:50:03.652758-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester.yaml": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:01.988422-04:00"
+    "LastSeen": "2025-05-31T11:50:03.91518-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-opensearch.yaml": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:58.674059-04:00"
+    "LastSeen": "2025-05-31T11:50:00.964817-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-remote-storage.yaml": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:59.908378-04:00"
+    "LastSeen": "2025-05-31T11:50:02.264744-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-tail-sampling-always-sample.yaml": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:58.989031-04:00"
+    "LastSeen": "2025-05-31T11:50:01.348214-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-tail-sampling-service-name-policy.yaml": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:59.254038-04:00"
+    "LastSeen": "2025-05-31T11:50:01.673737-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config.yaml": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:59.560753-04:00"
+    "LastSeen": "2025-05-31T11:50:01.935181-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/config.go#L16": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:57.200757-04:00"
+    "LastSeen": "2025-05-31T11:49:59.948892-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/docker-compose/scylladb/README.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:16.155404-04:00"
+    "LastSeen": "2025-05-31T11:50:14.61138-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/examples/hotrod/README.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:53.515722-04:00"
+    "LastSeen": "2025-05-31T11:49:11.405683-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/go.mod": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:08.80692-04:00"
+    "LastSeen": "2025-05-31T11:50:07.922827-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/monitoring/jaeger-mixin/dashboard-for-grafana.json": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:16.616166-04:00"
+    "LastSeen": "2025-05-31T11:50:15.028713-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:23.744028-04:00"
+    "LastSeen": "2025-05-31T11:48:44.346555-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/1537": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:19.33749-04:00"
+    "LastSeen": "2025-05-31T11:50:17.569433-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/1639": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:51.408473-04:00"
+    "LastSeen": "2025-05-31T11:49:09.346402-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/166": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:11.958429-04:00"
+    "LastSeen": "2025-05-31T11:49:25.645964-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/1718": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:07.943446-04:00"
+    "LastSeen": "2025-05-31T11:50:07.273746-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/2534": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:07.77856-04:00"
+    "LastSeen": "2025-05-31T11:50:46.27684-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/3381": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:21.527144-04:00"
+    "LastSeen": "2025-05-31T11:50:59.394872-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/355": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:51.943814-04:00"
+    "LastSeen": "2025-05-31T11:49:09.992637-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/4196": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:23.996203-04:00"
+    "LastSeen": "2025-05-31T11:51:01.395643-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/4600": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:20.315968-04:00"
+    "LastSeen": "2025-05-31T11:50:58.43033-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/4708": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:49.179704-04:00"
+    "LastSeen": "2025-05-31T11:49:07.045735-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/4739": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:03.154884-04:00"
+    "LastSeen": "2025-05-31T11:50:42.428413-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/4868": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:11.014374-04:00"
+    "LastSeen": "2025-05-31T11:50:49.618258-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/5058": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:48.465922-04:00"
+    "LastSeen": "2025-05-31T11:49:06.382673-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/5084": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:16.447803-04:00"
+    "LastSeen": "2025-05-31T11:50:53.887226-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/5632": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:12.874933-04:00"
+    "LastSeen": "2025-05-31T11:50:51.430141-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/5633": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:14.977607-04:00"
+    "LastSeen": "2025-05-31T11:50:52.594193-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/5766": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:08.943948-04:00"
+    "LastSeen": "2025-05-31T11:50:47.327786-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/5767": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:09.956814-04:00"
+    "LastSeen": "2025-05-31T11:50:48.748569-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/5910": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:49.709294-04:00"
+    "LastSeen": "2025-05-31T11:49:07.634196-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/6186": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:00.069553-04:00"
+    "LastSeen": "2025-05-31T11:49:15.601671-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/6321": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:55.625844-04:00"
+    "LastSeen": "2025-05-31T11:50:35.724213-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/638": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:22.028094-04:00"
+    "LastSeen": "2025-05-31T11:49:32.876689-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/6458": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:47.280784-04:00"
+    "LastSeen": "2025-05-31T11:49:05.116522-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/6628": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:42.132631-04:00"
+    "LastSeen": "2025-05-31T11:49:48.982248-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/6641": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:06.492219-04:00"
+    "LastSeen": "2025-05-31T11:50:45.145981-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/729": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:50.73533-04:00"
+    "LastSeen": "2025-05-31T11:49:08.661115-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:34.998874-04:00"
+    "LastSeen": "2025-05-31T11:49:43.581447-04:00"
   },
   "https://github.com/jaegertracing/jaeger/labels/good%20first%20issue": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:55.413302-04:00"
+    "LastSeen": "2025-05-31T11:49:13.104153-04:00"
   },
   "https://github.com/jaegertracing/jaeger/labels/help%20wanted": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:55.874193-04:00"
+    "LastSeen": "2025-05-31T11:49:13.517411-04:00"
   },
   "https://github.com/jaegertracing/jaeger/releases/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:58.91335-04:00"
+    "LastSeen": "2025-05-31T11:50:38.527032-04:00"
   },
   "https://github.com/jaegertracing/jaeger/releases/download/v1.69.0/jaeger-1.69.0-darwin-amd64.tar.gz": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:57.623656-04:00"
+    "LastSeen": "2025-05-31T11:50:37.415618-04:00"
   },
   "https://github.com/jaegertracing/jaeger/releases/download/v1.69.0/jaeger-1.69.0-linux-amd64.tar.gz": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:57.951819-04:00"
+    "LastSeen": "2025-05-31T11:50:37.626816-04:00"
   },
   "https://github.com/jaegertracing/jaeger/releases/download/v1.69.0/jaeger-1.69.0-windows-amd64.tar.gz": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:58.178996-04:00"
+    "LastSeen": "2025-05-31T11:50:37.828786-04:00"
   },
   "https://github.com/jaegertracing/jaeger/releases/download/v1.69.0/jaeger-2.6.0-darwin-amd64.tar.gz": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:56.311955-04:00"
+    "LastSeen": "2025-05-31T11:50:36.347013-04:00"
   },
   "https://github.com/jaegertracing/jaeger/releases/download/v1.69.0/jaeger-2.6.0-linux-amd64.tar.gz": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:56.533224-04:00"
+    "LastSeen": "2025-05-31T11:50:36.559804-04:00"
   },
   "https://github.com/jaegertracing/jaeger/releases/download/v1.69.0/jaeger-2.6.0-windows-amd64.tar.gz": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:56.738984-04:00"
+    "LastSeen": "2025-05-31T11:50:36.754673-04:00"
   },
   "https://github.com/jaegertracing/jaeger/releases/tag/v1.22.0": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:39.511882-04:00"
+    "LastSeen": "2025-05-31T11:49:48.055124-04:00"
   },
   "https://github.com/jaegertracing/jaeger/releases/tag/v1.39.0": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:03.638054-04:00"
+    "LastSeen": "2025-05-31T11:50:42.767659-04:00"
   },
   "https://github.com/jaegertracing/jaeger/releases/tag/v1.69.0": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:56.023416-04:00"
+    "LastSeen": "2025-05-31T11:50:36.087416-04:00"
   },
   "https://github.com/jaegertracing/jaeger/security/advisories": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:22.570571-04:00"
+    "LastSeen": "2025-05-31T11:48:43.328403-04:00"
   },
   "https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:56.857361-04:00"
+    "LastSeen": "2025-05-31T11:49:59.588821-04:00"
   },
   "https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm.yaml": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:58.046126-04:00"
+    "LastSeen": "2025-05-31T11:50:00.571491-04:00"
   },
   "https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerquery": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:00.613028-04:00"
+    "LastSeen": "2025-05-31T11:50:02.884024-04:00"
   },
   "https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerstorage": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:00.244406-04:00"
+    "LastSeen": "2025-05-31T11:50:02.568993-04:00"
   },
   "https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/remotesampling": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:01.336249-04:00"
+    "LastSeen": "2025-05-31T11:50:03.394233-04:00"
   },
   "https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/processors/adaptivesampling": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:00.921266-04:00"
+    "LastSeen": "2025-05-31T11:50:03.16043-04:00"
   },
   "https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:57.535262-04:00"
+    "LastSeen": "2025-05-31T11:50:00.223725-04:00"
   },
   "https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:58.127574-04:00"
+    "LastSeen": "2025-05-31T11:50:00.651581-04:00"
   },
   "https://github.com/jaegertracing/jaeger/tree/main/examples/hotrod": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:59.805268-04:00"
+    "LastSeen": "2025-05-31T11:50:39.409933-04:00"
   },
   "https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:16.876109-04:00"
+    "LastSeen": "2025-05-31T11:50:15.328087-04:00"
   },
   "https://github.com/jaegertracing/spark-dependencies": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:10.585283-04:00"
+    "LastSeen": "2025-05-31T11:49:23.807186-04:00"
   },
   "https://github.com/james-ryans": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:16.671636-04:00"
+    "LastSeen": "2025-05-31T11:50:54.136474-04:00"
   },
   "https://github.com/joeyyy09": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:10.274188-04:00"
+    "LastSeen": "2025-05-31T11:50:49.040095-04:00"
   },
   "https://github.com/k8ssandra/cass-operator": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:34.088948-04:00"
+    "LastSeen": "2025-05-31T11:49:42.866643-04:00"
   },
   "https://github.com/kubernetes/charts/tree/master/incubator/jaeger": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:20.645734-04:00"
+    "LastSeen": "2025-05-31T11:49:31.548154-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:46.232379-04:00"
+    "LastSeen": "2025-05-31T11:49:04.219593-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:50.639345-04:00"
+    "LastSeen": "2025-05-31T11:49:56.5614-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/README.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:42.513085-04:00"
+    "LastSeen": "2025-05-31T11:49:49.265741-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L14": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:02.216961-04:00"
+    "LastSeen": "2025-05-31T11:49:17.09544-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L23": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:02.294191-04:00"
+    "LastSeen": "2025-05-31T11:49:17.171326-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/kafkaexporter/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:49.537601-04:00"
+    "LastSeen": "2025-05-31T11:49:55.476868-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/tailsamplingprocessor/README.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:31.354979-04:00"
+    "LastSeen": "2025-05-31T11:49:41.459593-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/spanmetricsconnector": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:02.601114-04:00"
+    "LastSeen": "2025-05-31T11:49:17.443452-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/kafkaexporter/README.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:52.263523-04:00"
+    "LastSeen": "2025-05-31T11:49:58.103395-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/prometheusexporter": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:49.796596-04:00"
+    "LastSeen": "2025-05-31T11:49:55.728834-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/healthcheckv2extension": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:51.294525-04:00"
+    "LastSeen": "2025-05-31T11:49:57.228047-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/pprofextension": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:51.852584-04:00"
+    "LastSeen": "2025-05-31T11:49:57.772715-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/attributesprocessor": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:48.364823-04:00"
+    "LastSeen": "2025-05-31T11:49:54.339387-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/filterprocessor": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:48.590816-04:00"
+    "LastSeen": "2025-05-31T11:49:54.595097-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/tailsamplingprocessor": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:23.45405-04:00"
+    "LastSeen": "2025-05-31T11:49:33.758442-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/jaegerreceiver": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:46.434654-04:00"
+    "LastSeen": "2025-05-31T11:49:52.614703-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/kafkareceiver": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:46.735403-04:00"
+    "LastSeen": "2025-05-31T11:49:52.862872-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/kafkareceiver/README.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:52.657133-04:00"
+    "LastSeen": "2025-05-31T11:49:58.484905-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/zipkinreceiver": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:47.116005-04:00"
+    "LastSeen": "2025-05-31T11:49:53.200011-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector/blob/main/config/configtls/README.md#client-configuration": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:53.101627-04:00"
+    "LastSeen": "2025-05-31T11:49:58.864052-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector/blob/main/connector/forwardconnector/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:50.971435-04:00"
+    "LastSeen": "2025-05-31T11:49:56.941923-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:05.120935-04:00"
+    "LastSeen": "2025-05-31T11:49:19.571224-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/debugexporter": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:50.023872-04:00"
+    "LastSeen": "2025-05-31T11:49:55.962347-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/nopexporter": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:50.302042-04:00"
+    "LastSeen": "2025-05-31T11:49:56.230106-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlpexporter": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:48.877648-04:00"
+    "LastSeen": "2025-05-31T11:49:54.904735-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:49.088589-04:00"
+    "LastSeen": "2025-05-31T11:49:55.158982-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector/tree/main/extension/zpagesextension": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:51.612363-04:00"
+    "LastSeen": "2025-05-31T11:49:57.51144-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/batchprocessor": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:47.69827-04:00"
+    "LastSeen": "2025-05-31T11:49:53.738412-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector/tree/main/processor/memorylimiterprocessor": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:47.966056-04:00"
+    "LastSeen": "2025-05-31T11:49:54.048022-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/nopreceiver": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:47.428865-04:00"
+    "LastSeen": "2025-05-31T11:49:53.473162-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:46.194626-04:00"
+    "LastSeen": "2025-05-31T11:49:52.306147-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-cpp": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:44.509207-04:00"
+    "LastSeen": "2025-05-31T11:49:02.851643-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-dotnet": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:43.798897-04:00"
+    "LastSeen": "2025-05-31T11:49:02.2711-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-dotnet/tree/main/src/OpenTelemetry.Shims.OpenTracing": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:44.104326-04:00"
+    "LastSeen": "2025-05-31T11:49:02.498281-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-go": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:41.060786-04:00"
+    "LastSeen": "2025-05-31T11:49:00.352699-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-go-contrib/pull/936": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:43.063112-04:00"
+    "LastSeen": "2025-05-31T11:49:01.610175-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-go/tree/main/bridge/opentracing": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:43.41132-04:00"
+    "LastSeen": "2025-05-31T11:49:01.915651-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-java": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:38.66836-04:00"
+    "LastSeen": "2025-05-31T11:48:57.970069-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-java/tree/main/opentracing-shim": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:39.19469-04:00"
+    "LastSeen": "2025-05-31T11:48:58.492205-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-java/tree/main/sdk-extensions/jaeger-remote-sampler": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:38.962518-04:00"
+    "LastSeen": "2025-05-31T11:48:58.252214-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-js": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:40.415015-04:00"
+    "LastSeen": "2025-05-31T11:48:59.663739-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-shim-opentracing": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:40.720458-04:00"
+    "LastSeen": "2025-05-31T11:48:59.889551-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:04.81851-04:00"
+    "LastSeen": "2025-05-31T11:49:19.311372-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlpgrpc": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:03.102055-04:00"
+    "LastSeen": "2025-05-31T11:49:17.75066-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlphttp": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:03.179552-04:00"
+    "LastSeen": "2025-05-31T11:49:17.832562-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-proto/blob/main/opentelemetry/proto/collector/trace/v1/trace_service.proto": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:43.903087-04:00"
+    "LastSeen": "2025-05-31T11:49:50.458842-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-python": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:39.653683-04:00"
+    "LastSeen": "2025-05-31T11:48:58.872871-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-python/tree/main/shim/opentelemetry-opentracing-shim": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:39.966323-04:00"
+    "LastSeen": "2025-05-31T11:48:59.271517-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/configuration/sdk-environment-variables.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:23.750114-04:00"
+    "LastSeen": "2025-05-31T11:49:34.082896-04:00"
   },
   "https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/api.md#span": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:44.632423-04:00"
+    "LastSeen": "2025-05-31T11:49:51.06665-04:00"
   },
   "https://github.com/opensearch-project/opensearch-k8s-operator": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:15.332157-04:00"
+    "LastSeen": "2025-05-31T11:49:28.713877-04:00"
   },
   "https://github.com/openshift/elasticsearch-operator": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:38.117125-04:00"
+    "LastSeen": "2025-05-31T11:49:47.10734-04:00"
   },
   "https://github.com/opentracing/specification/blob/master/specification.md": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:08.829387-04:00"
+    "LastSeen": "2025-05-31T11:49:22.488966-04:00"
   },
   "https://github.com/opentracing/specification/blob/master/specification.md#references-between-spans": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:20.722065-04:00"
+    "LastSeen": "2025-05-31T11:49:31.619028-04:00"
   },
   "https://github.com/openzipkin/zipkin-api": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:10.542741-04:00"
+    "LastSeen": "2025-05-31T11:50:09.517933-04:00"
   },
   "https://github.com/openzipkin/zipkin-api/blob/master/thrift/zipkinCore.thrift": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:10.891939-04:00"
+    "LastSeen": "2025-05-31T11:50:09.774685-04:00"
   },
   "https://github.com/openzipkin/zipkin-api/blob/master/zipkin.proto": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:11.154511-04:00"
+    "LastSeen": "2025-05-31T11:50:10.034043-04:00"
   },
   "https://github.com/operator-framework/operator-lifecycle-manager": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:31.537258-04:00"
+    "LastSeen": "2025-05-31T11:50:26.01933-04:00"
   },
   "https://github.com/orgs/jaegertracing/discussions": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:26.259836-04:00"
+    "LastSeen": "2025-05-31T11:48:46.005312-04:00"
   },
   "https://github.com/orgs/jaegertracing/projects/4/views/1": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:45.884372-04:00"
+    "LastSeen": "2025-05-31T11:49:03.807271-04:00"
   },
   "https://github.com/orgs/jaegertracing/repositories": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:27.218529-04:00"
+    "LastSeen": "2025-05-31T11:48:47.078003-04:00"
   },
   "https://github.com/pipiland2612": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:05.803509-04:00"
+    "LastSeen": "2025-05-31T11:50:44.583632-04:00"
   },
   "https://github.com/pmuls99": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:19.709348-04:00"
+    "LastSeen": "2025-05-31T11:50:56.867429-04:00"
   },
   "https://github.com/prathamesh-mutkure": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:18.891198-04:00"
+    "LastSeen": "2025-05-31T11:50:55.902153-04:00"
   },
   "https://github.com/robbert229/jaeger-postgresql": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:25.557886-04:00"
+    "LastSeen": "2025-05-31T11:49:35.496517-04:00"
   },
   "https://github.com/search": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:54.368612-04:00"
+    "LastSeen": "2025-05-31T11:49:12.195398-04:00"
   },
   "https://github.com/uber-go/zap": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:22.570462-04:00"
+    "LastSeen": "2025-05-31T11:49:33.34759-04:00"
   },
   "https://github.com/w3c/distributed-tracing": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:45.200287-04:00"
+    "LastSeen": "2025-05-31T11:49:03.481447-04:00"
   },
   "https://github.com/yurishkuro/microsim": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:00.587333-04:00"
+    "LastSeen": "2025-05-31T11:49:16.003473-04:00"
   },
   "https://github.com/yurishkuro/opentracing-tutorial/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:05.59347-04:00"
+    "LastSeen": "2025-05-31T11:50:05.721925-04:00"
   },
   "https://golang.org/doc/install": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:08.471418-04:00"
+    "LastSeen": "2025-05-31T11:50:07.694644-04:00"
   },
   "https://golangforall.com/en/post/go-docker-delve-remote-debug.html": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:24.972585-04:00"
+    "LastSeen": "2025-05-31T11:49:35.026101-04:00"
   },
   "https://groups.google.com/forum/#!forum/jaeger-tracing": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:23.068057-04:00"
+    "LastSeen": "2025-05-31T11:48:43.856238-04:00"
   },
   "https://hub.docker.com/_/cassandra": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:33.619626-04:00"
+    "LastSeen": "2025-05-31T11:49:42.385234-04:00"
   },
   "https://hub.docker.com/_/elasticsearch": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:37.621642-04:00"
+    "LastSeen": "2025-05-31T11:49:46.412483-04:00"
   },
   "https://hub.docker.com/r/apache/kafka": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:31.538195-04:00"
+    "LastSeen": "2025-05-31T11:49:41.634308-04:00"
   },
   "https://hub.docker.com/r/jaegertracing": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:11.373086-04:00"
+    "LastSeen": "2025-05-31T11:50:10.215127-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:59.10542-04:00"
+    "LastSeen": "2025-05-31T11:50:38.727174-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/all-in-one": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:59.345327-04:00"
+    "LastSeen": "2025-05-31T11:50:39.013948-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/all-in-one/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:11.891187-04:00"
+    "LastSeen": "2025-05-31T11:50:10.56197-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/example-hotrod": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:59.472205-04:00"
+    "LastSeen": "2025-05-31T11:50:39.15061-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/jaeger": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:59.256171-04:00"
+    "LastSeen": "2025-05-31T11:50:38.874821-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/jaeger-agent": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:01.645764-04:00"
+    "LastSeen": "2025-05-31T11:50:41.328597-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/jaeger-cassandra-schema": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:01.379754-04:00"
+    "LastSeen": "2025-05-31T11:50:41.085402-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/jaeger-collector": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:00.578199-04:00"
+    "LastSeen": "2025-05-31T11:50:40.278344-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/jaeger-collector/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:12.095372-04:00"
+    "LastSeen": "2025-05-31T11:50:10.774796-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/jaeger-es-index-cleaner": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:01.51746-04:00"
+    "LastSeen": "2025-05-31T11:50:41.200515-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/jaeger-ingester": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:00.836544-04:00"
+    "LastSeen": "2025-05-31T11:50:40.498386-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/jaeger-ingester/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:12.560954-04:00"
+    "LastSeen": "2025-05-31T11:50:11.248393-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/jaeger-operator": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:01.245601-04:00"
+    "LastSeen": "2025-05-31T11:50:40.894518-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/jaeger-query": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:00.703567-04:00"
+    "LastSeen": "2025-05-31T11:50:40.38759-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/jaeger-query/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:12.319674-04:00"
+    "LastSeen": "2025-05-31T11:50:10.999516-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/jaeger-remote-storage": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:00.974793-04:00"
+    "LastSeen": "2025-05-31T11:50:40.634277-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/jaeger-remote-storage/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:12.795119-04:00"
+    "LastSeen": "2025-05-31T11:50:11.497532-04:00"
   },
   "https://hub.docker.com/r/jaegertracing/spark-dependencies": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:01.116099-04:00"
+    "LastSeen": "2025-05-31T11:50:40.748444-04:00"
   },
   "https://hub.docker.com/r/opensearchproject/opensearch": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:14.755115-04:00"
+    "LastSeen": "2025-05-31T11:49:28.155278-04:00"
   },
   "https://istio.io/faq/distributed-tracing/#no-tracing": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:24.005962-04:00"
+    "LastSeen": "2025-05-31T11:49:34.417342-04:00"
   },
   "https://istio.io/latest/docs/tasks/observability/distributed-tracing/jaeger/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:07.18078-04:00"
+    "LastSeen": "2025-05-31T11:50:06.528241-04:00"
   },
   "https://jbrandhorst.com/post/gogoproto/#reflection": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:06.285823-04:00"
+    "LastSeen": "2025-05-31T11:49:20.677283-04:00"
   },
   "https://kafka.apache.org/documentation/#intro_topics": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:32.724472-04:00"
+    "LastSeen": "2025-05-31T11:49:41.910491-04:00"
   },
   "https://kafka.apache.org/documentation/#quickstart_createtopic": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:32.695609-04:00"
+    "LastSeen": "2025-05-31T11:49:41.88019-04:00"
   },
   "https://kubernetes.github.io/ingress-nginx/deploy/#verify-installation": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:30.981205-04:00"
+    "LastSeen": "2025-05-31T11:50:25.511205-04:00"
   },
   "https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:29.480953-04:00"
+    "LastSeen": "2025-05-31T11:50:24.0587-04:00"
   },
   "https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:29.967775-04:00"
+    "LastSeen": "2025-05-31T11:50:24.533771-04:00"
   },
   "https://kubernetes.io/docs/concepts/configuration/secret/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:31.125519-04:00"
+    "LastSeen": "2025-05-31T11:50:25.660751-04:00"
   },
   "https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:30.154359-04:00"
+    "LastSeen": "2025-05-31T11:50:24.723606-04:00"
   },
   "https://kubernetes.io/docs/concepts/extend-kubernetes/operator/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:17.560848-04:00"
+    "LastSeen": "2025-05-31T11:50:16.068635-04:00"
   },
   "https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:29.626598-04:00"
+    "LastSeen": "2025-05-31T11:50:24.203134-04:00"
   },
   "https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:29.77873-04:00"
+    "LastSeen": "2025-05-31T11:50:24.346135-04:00"
   },
   "https://kubernetes.io/docs/concepts/services-networking/ingress/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:30.886481-04:00"
+    "LastSeen": "2025-05-31T11:50:25.450631-04:00"
   },
   "https://kubernetes.io/docs/concepts/storage/volumes/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:30.300126-04:00"
+    "LastSeen": "2025-05-31T11:50:24.867984-04:00"
   },
   "https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:30.445688-04:00"
+    "LastSeen": "2025-05-31T11:50:25.012368-04:00"
   },
   "https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-image-pull-secret-to-service-account%29": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:30.741125-04:00"
+    "LastSeen": "2025-05-31T11:50:25.305065-04:00"
   },
   "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:30.587528-04:00"
+    "LastSeen": "2025-05-31T11:50:25.158118-04:00"
   },
   "https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:18.787774-04:00"
+    "LastSeen": "2025-05-31T11:50:17.03648-04:00"
   },
   "https://kubernetes.io/docs/tasks/tools/install-minikube/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:18.740577-04:00"
+    "LastSeen": "2025-05-31T11:50:16.98921-04:00"
   },
   "https://medium.com/@YuriShkuro/take-opentracing-for-a-hotrod-ride-f6e3141f7941": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:00.443629-04:00"
+    "LastSeen": "2025-05-31T11:50:40.141108-04:00"
   },
   "https://medium.com/@larsmilland01/secure-architecture-for-jaeger-with-apache-httpd-reverse-proxy-on-openshift-f31983fad400": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:45.615492-04:00"
+    "LastSeen": "2025-05-31T11:49:51.890029-04:00"
   },
   "https://medium.com/@saransh.shankar/my-journey-as-an-lfx-mentee-with-cncf-jaeger-b001f136ca0b": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:15.454854-04:00"
+    "LastSeen": "2025-05-31T11:50:52.937678-04:00"
   },
   "https://medium.com/jaegertracing": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:24.050956-04:00"
+    "LastSeen": "2025-05-31T11:48:44.542359-04:00"
   },
   "https://medium.com/jaegertracing/adaptive-sampling-in-jaeger-50f336f4334": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:34.804898-04:00"
+    "LastSeen": "2025-05-31T11:48:54.303573-04:00"
   },
   "https://medium.com/jaegertracing/announcing-jaeger-1-0-37b5990cc59b": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:42.246841-04:00"
+    "LastSeen": "2025-05-31T11:50:29.267133-04:00"
   },
   "https://medium.com/jaegertracing/better-alignment-with-opentelemetry-by-focusing-on-otlp-f3688939073f": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:32.831953-04:00"
+    "LastSeen": "2025-05-31T11:48:52.464012-04:00"
   },
   "https://medium.com/jaegertracing/deployment-strategies-for-the-jaeger-agent-1d6f91796d09": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:28.600521-04:00"
+    "LastSeen": "2025-05-31T11:49:38.908496-04:00"
   },
   "https://medium.com/jaegertracing/experiment-migrating-opentracing-based-application-in-go-to-use-the-opentelemetry-sdk-29b09fe2fbc4": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:32.199881-04:00"
+    "LastSeen": "2025-05-31T11:48:51.963616-04:00"
   },
   "https://medium.com/jaegertracing/grafana-labs-teams-observed-query-performance-improvements-up-to-10x-with-jaeger-cec84b0e3609": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:26.402923-04:00"
+    "LastSeen": "2025-05-31T11:49:36.198182-04:00"
   },
   "https://medium.com/jaegertracing/how-to-maximize-span-ingestion-while-limiting-writes-per-second-to-scylla-with-jaeger-3bcda5608841": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:30.310768-04:00"
+    "LastSeen": "2025-05-31T11:49:40.558313-04:00"
   },
   "https://medium.com/jaegertracing/introducing-native-support-for-opentelemetry-in-jaeger-eb661be8183c": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:33.448959-04:00"
+    "LastSeen": "2025-05-31T11:48:52.979551-04:00"
   },
   "https://medium.com/jaegertracing/jaeger-and-multitenancy-99dfa1d49dc0": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:28.147851-04:00"
+    "LastSeen": "2025-05-31T11:49:38.318473-04:00"
   },
   "https://medium.com/jaegertracing/jaeger-and-opentelemetry-1846f701d9f2": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:44.283867-04:00"
+    "LastSeen": "2025-05-31T11:49:50.674049-04:00"
   },
   "https://medium.com/jaegertracing/jaeger-tracing-a-friendly-guide-for-beginners-7b53a4a568ca": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:34.204199-04:00"
+    "LastSeen": "2025-05-31T11:48:53.687344-04:00"
   },
   "https://medium.com/jaegertracing/jaeger-v2-released-09a6033d1b10": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:29.41848-04:00"
+    "LastSeen": "2025-05-31T11:48:49.284592-04:00"
   },
   "https://medium.com/jaegertracing/latest": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:21.001488-04:00"
+    "LastSeen": "2025-05-31T11:48:41.728169-04:00"
   },
   "https://medium.com/jaegertracing/learning-from-lfx-mentorship-cncf-jaeger-3fc3463adcea": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:28.820201-04:00"
+    "LastSeen": "2025-05-31T11:48:48.708831-04:00"
   },
   "https://medium.com/jaegertracing/making-design-decisions-for-clickhouse-as-a-core-storage-backend-in-jaeger-62bf90a979d": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:31.514915-04:00"
+    "LastSeen": "2025-05-31T11:48:51.145623-04:00"
   },
   "https://medium.com/jaegertracing/migrating-from-jaeger-client-to-opentelemetry-sdk-bd337d796759": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:35.508919-04:00"
+    "LastSeen": "2025-05-31T11:48:55.010083-04:00"
   },
   "https://medium.com/jaegertracing/protecting-jaeger-ui-with-an-oauth-sidecar-proxy-34205cca4bb1": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:14.25971-04:00"
+    "LastSeen": "2025-05-31T11:49:27.752061-04:00"
   },
   "https://medium.com/jaegertracing/running-jaeger-agent-on-bare-metal-d1fc47d31fab": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:27.634439-04:00"
+    "LastSeen": "2025-05-31T11:49:37.728768-04:00"
   },
   "https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:52.939124-04:00"
+    "LastSeen": "2025-05-31T11:49:10.888013-04:00"
   },
   "https://medium.com/jaegertracing/the-life-of-a-span-ee508410200b": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:27.530644-04:00"
+    "LastSeen": "2025-05-31T11:49:37.656915-04:00"
   },
   "https://medium.com/jaegertracing/ticketmaster-traces-100-million-transactions-per-day-with-jaeger-38ec6cf599f0": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:27.012989-04:00"
+    "LastSeen": "2025-05-31T11:49:36.861981-04:00"
   },
   "https://medium.com/jaegertracing/towards-jaeger-v2-moar-opentelemetry-2f8239bee48e": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:30.462401-04:00"
+    "LastSeen": "2025-05-31T11:48:50.223805-04:00"
   },
   "https://medium.com/jaegertracing/trace-comparisons-arrive-in-jaeger-1-7-a97ad5e2d05d": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:25.697909-04:00"
+    "LastSeen": "2025-05-31T11:49:35.572179-04:00"
   },
   "https://medium.com/jaegertracing/using-elasticsearch-rollover-to-manage-indices-8b3d0c77915d": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:19.801534-04:00"
+    "LastSeen": "2025-05-31T11:49:30.762625-04:00"
   },
   "https://medium.com/jaegertracing/weaveworks-combines-jaeger-tracing-with-logs-and-metrics-for-a-troubleshooting-swiss-army-knife-5afc0f42b22e": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:26.314371-04:00"
+    "LastSeen": "2025-05-31T11:49:36.120402-04:00"
   },
   "https://medium.com/jaegertracing/where-did-all-my-spans-go-a-guide-to-diagnosing-dropped-spans-in-jaeger-10d9697f8182": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:31.063482-04:00"
+    "LastSeen": "2025-05-31T11:49:41.186602-04:00"
   },
   "https://medium.com/opentracing/tracing-http-request-latency-in-go-with-opentracing-7cc1282a100a": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:05.686287-04:00"
+    "LastSeen": "2025-05-31T11:50:05.795496-04:00"
   },
   "https://mentorship.lfx.linuxfoundation.org/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:05.563702-04:00"
+    "LastSeen": "2025-05-31T11:50:44.340485-04:00"
   },
   "https://nssm.cc/download": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:36.254593-04:00"
+    "LastSeen": "2025-05-31T11:49:44.808478-04:00"
   },
   "https://nssm.cc/usage": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:36.476755-04:00"
+    "LastSeen": "2025-05-31T11:49:45.03709-04:00"
   },
   "https://opensearch.org/docs/latest/api-reference/index-apis/rollover/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:17.734964-04:00"
+    "LastSeen": "2025-05-31T11:49:29.473393-04:00"
   },
   "https://opensearch.org/downloads.html": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:14.5463-04:00"
+    "LastSeen": "2025-05-31T11:49:28.017754-04:00"
   },
   "https://opentelemetry.io": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:31.392171-04:00"
+    "LastSeen": "2025-05-31T11:49:41.497699-04:00"
   },
   "https://opentelemetry.io/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:37.857372-04:00"
+    "LastSeen": "2025-05-31T11:48:57.375102-04:00"
   },
   "https://opentelemetry.io/docs/collector/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:45.908336-04:00"
+    "LastSeen": "2025-05-31T11:49:52.030319-04:00"
   },
   "https://opentelemetry.io/docs/collector/configuration/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:00.145202-04:00"
+    "LastSeen": "2025-05-31T11:49:15.631836-04:00"
   },
   "https://opentelemetry.io/docs/collector/internal-telemetry/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:53.289429-04:00"
+    "LastSeen": "2025-05-31T11:49:58.922018-04:00"
   },
   "https://opentelemetry.io/docs/collector/scaling/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:08.535273-04:00"
+    "LastSeen": "2025-05-31T11:49:22.178705-04:00"
   },
   "https://opentelemetry.io/docs/collector/troubleshooting/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:02.732237-04:00"
+    "LastSeen": "2025-05-31T11:49:17.472142-04:00"
   },
   "https://opentelemetry.io/docs/concepts/sampling/#head-sampling": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:22.937127-04:00"
+    "LastSeen": "2025-05-31T11:49:33.481262-04:00"
   },
   "https://opentelemetry.io/docs/concepts/sampling/#tail-sampling": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:23.082694-04:00"
+    "LastSeen": "2025-05-31T11:49:33.514043-04:00"
   },
   "https://opentelemetry.io/docs/concepts/signals/traces/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:09.031264-04:00"
+    "LastSeen": "2025-05-31T11:49:22.524314-04:00"
   },
   "https://opentelemetry.io/docs/migration/opentracing/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:38.068648-04:00"
+    "LastSeen": "2025-05-31T11:48:57.444655-04:00"
   },
   "https://opentelemetry.io/docs/reference/specification/protocol/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:37.971505-04:00"
+    "LastSeen": "2025-05-31T11:48:57.415879-04:00"
   },
   "https://opentelemetry.io/docs/specs/otel/protocol/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:45.770452-04:00"
+    "LastSeen": "2025-05-31T11:49:51.947658-04:00"
   },
   "https://opentracing.io/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:07.879451-04:00"
+    "LastSeen": "2025-05-31T11:49:21.683843-04:00"
   },
   "https://opentracing.io/specification/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:44.351399-04:00"
+    "LastSeen": "2025-05-31T11:49:50.766001-04:00"
   },
   "https://operatorhub.io/operator/elastic-cloud-eck": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:20.404343-04:00"
+    "LastSeen": "2025-05-31T11:50:18.742618-04:00"
   },
   "https://opster.com/guides/opensearch/opensearch-capacity-planning/how-to-choose-the-correct-number-of-shards-per-index-in-opensearch": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:17.129616-04:00"
+    "LastSeen": "2025-05-31T11:49:29.085581-04:00"
   },
   "https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector#section-readme": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:00.88012-04:00"
+    "LastSeen": "2025-05-31T11:49:16.41256-04:00"
   },
   "https://prometheus.io/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:22.104181-04:00"
+    "LastSeen": "2025-05-31T11:49:32.946044-04:00"
   },
   "https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:01.95583-04:00"
+    "StatusCode": 200,
+    "LastSeen": "2025-05-31T11:49:16.820719-04:00"
   },
   "https://prometheus.io/docs/guides/tls-encryption/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:35.909583-04:00"
+    "LastSeen": "2025-05-31T11:49:44.535151-04:00"
   },
   "https://promlabs.com/blog/2020/11/26/an-update-on-promql-compatibility-across-vendors": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:01.742262-04:00"
+    "LastSeen": "2025-05-31T11:49:16.675469-04:00"
   },
   "https://quay.io/organization/jaegertracing": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:11.758424-04:00"
+    "LastSeen": "2025-05-31T11:50:10.416045-04:00"
   },
   "https://quay.io/repository/jaegertracing/all-in-one": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:11.990921-04:00"
+    "LastSeen": "2025-05-31T11:50:10.672905-04:00"
   },
   "https://quay.io/repository/jaegertracing/jaeger-collector": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:12.191323-04:00"
+    "LastSeen": "2025-05-31T11:50:10.872856-04:00"
   },
   "https://quay.io/repository/jaegertracing/jaeger-ingester": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:12.678081-04:00"
+    "LastSeen": "2025-05-31T11:50:11.358273-04:00"
   },
   "https://quay.io/repository/jaegertracing/jaeger-query": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:12.421883-04:00"
+    "LastSeen": "2025-05-31T11:50:11.111092-04:00"
   },
   "https://quay.io/repository/jaegertracing/jaeger-remote-storage": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:12.886421-04:00"
+    "LastSeen": "2025-05-31T11:50:11.599145-04:00"
   },
   "https://shkuro.com": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:07.502819-04:00"
+    "LastSeen": "2025-05-31T11:49:21.304743-04:00"
   },
   "https://shkuro.com/books/2019-mastering-distributed-tracing/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:07.705004-04:00"
+    "LastSeen": "2025-05-31T11:49:21.542942-04:00"
   },
   "https://siliconangle.com/2017/09/13/ride-sharing-firms-lyft-uber-donate-microservices-tech-open-source-community/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:47.569727-04:00"
+    "LastSeen": "2025-05-31T11:50:31.431292-04:00"
   },
   "https://slack.cncf.io": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:25.783542-04:00"
+    "LastSeen": "2025-05-31T11:48:45.700611-04:00"
   },
   "https://slack.cncf.io/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:26.149293-04:00"
+    "LastSeen": "2025-05-31T11:51:03.262353-04:00"
   },
   "https://strimzi.io/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:31.873517-04:00"
+    "LastSeen": "2025-05-31T11:49:41.851309-04:00"
   },
   "https://summerofcode.withgoogle.com/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:04.328726-04:00"
+    "LastSeen": "2025-05-31T11:50:43.029969-04:00"
   },
   "https://use.fontawesome.com/releases/v5.0.7/js/all.js": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:24.81626-04:00"
+    "LastSeen": "2025-05-31T11:48:44.968149-04:00"
   },
   "https://web.archive.org/web/20241212124714/https://thenewstack.io/cncf-adds-oracle-onboards-envoy-jaeger-projects/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:48.681827-04:00"
+    "LastSeen": "2025-05-31T11:50:32.497267-04:00"
   },
   "https://web.archive.org/web/20250426221351/https://thenewstack.io/jaeger-graduates-cncf-sees-a-future-without-native-jaeger-clients//": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:41.415761-04:00"
+    "LastSeen": "2025-05-31T11:50:28.800063-04:00"
   },
   "https://www.aspecto.io/blog/how-to-deploy-jaeger-on-aws-a-comprehensive-step-by-step-guide/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:29.732443-04:00"
+    "LastSeen": "2025-05-31T11:49:40.086449-04:00"
   },
   "https://www.cncf.io/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:36.097019-04:00"
+    "LastSeen": "2025-05-31T11:48:55.858449-04:00"
   },
   "https://www.cncf.io/announcement/2019/10/31/cloud-native-computing-foundation-announces-jaeger-graduation/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:38.909986-04:00"
+    "LastSeen": "2025-05-31T11:50:27.524977-04:00"
   },
   "https://www.cncf.io/blog/2017/09/13/cncf-hosts-jaeger/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:46.777783-04:00"
+    "LastSeen": "2025-05-31T11:50:30.963022-04:00"
   },
   "https://www.codecov.io/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:36.565196-04:00"
+    "LastSeen": "2025-05-31T11:48:56.320038-04:00"
   },
   "https://www.confluent.io/blog/how-to-choose-the-number-of-topicspartitions-in-a-kafka-cluster/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:33.298481-04:00"
+    "LastSeen": "2025-05-31T11:49:42.20049-04:00"
   },
   "https://www.dosu.dev/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:37.276084-04:00"
+    "LastSeen": "2025-05-31T11:48:56.868107-04:00"
   },
   "https://www.elastic.co/blog/how-many-shards-should-i-have-in-my-elasticsearch-cluster": {
-    "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:38.244684-04:00"
+    "StatusCode": 206,
+    "LastSeen": "2025-05-31T11:49:47.209879-04:00"
   },
   "https://www.elastic.co/docs/deploy-manage/upgrade/deployment-or-cluster": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:40.36581-04:00"
+    "LastSeen": "2025-05-31T11:49:48.358647-04:00"
   },
   "https://www.elastic.co/downloads/elasticsearch": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:26:37.491357-04:00"
+    "LastSeen": "2025-05-31T11:49:46.284658-04:00"
   },
   "https://www.elastic.co/guide/en/elasticsearch/reference/5.6/heap-size.html": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:27.55241-04:00"
+    "LastSeen": "2025-05-31T11:50:22.701774-04:00"
   },
   "https://www.elastic.co/guide/en/elasticsearch/reference/current/index-lifecycle-management.html": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:40.108463-04:00"
+    "LastSeen": "2025-05-31T11:49:48.321824-04:00"
   },
   "https://www.elastic.co/guide/en/elasticsearch/reference/master/common-options.html#byte-units": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:19.224025-04:00"
+    "LastSeen": "2025-05-31T11:49:30.155041-04:00"
   },
   "https://www.elastic.co/guide/en/elasticsearch/reference/master/common-options.html#time-units": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:18.811569-04:00"
+    "LastSeen": "2025-05-31T11:49:29.814846-04:00"
   },
   "https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:39.016963-04:00"
+    "LastSeen": "2025-05-31T11:49:47.558774-04:00"
   },
   "https://www.github.com/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:37.453131-04:00"
+    "LastSeen": "2025-05-31T11:48:57.034355-04:00"
   },
   "https://www.google.com/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:37.55558-04:00"
-  },
-  "https://www.jaegertracing.io/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:28.718973-04:00"
-  },
-  "https://www.jaegertracing.io/docs/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:58.086374-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.0/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:58.275344-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.0/architecture/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:58.420685-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.0/deployment/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:58.622809-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.0/external-guides/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:59.322601-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.0/faq/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:59.147965-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.0/operations/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:58.949569-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.0/storage/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:58.789506-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.1/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:53.591247-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.1/architecture/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:53.86419-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.1/deployment/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:54.076727-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.1/external-guides/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:54.892513-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.1/faq/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:54.678497-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.1/operations/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:54.513047-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.1/storage/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:54.337338-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.2/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:35.065468-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.2/architecture/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:35.254501-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.2/deployment/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:35.436773-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.2/external-guides/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:36.066294-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.2/faq/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:35.919191-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.2/operations/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:35.761796-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.2/storage/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:35.610133-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.3/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:33.377179-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.3/architecture/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:33.538542-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.3/deployment/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:33.69239-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.3/external-guides/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:34.586946-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.3/faq/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:34.357373-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.3/operations/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:34.174942-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.3/storage/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:33.962161-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.4/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:31.806397-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.4/architecture/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:31.966382-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.4/deployment/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:32.206867-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.4/external-guides/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:32.893868-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.4/faq/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:32.727196-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.4/operations/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:32.536561-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.4/storage/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:32.370966-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.5/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:36.598979-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.5/architecture/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:36.76948-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.5/deployment/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:37.025876-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.5/external-guides/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:37.750615-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.5/faq/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:37.586301-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.5/operations/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:37.41686-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.5/storage/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:37.23588-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.6/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:40.502226-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.6/architecture/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:40.723204-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.6/deployment/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:40.79161-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.6/external-guides/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:41.524938-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.6/faq/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:41.278303-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.6/operations/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:41.112837-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.6/storage/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:40.952693-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release-v2/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:55.373965-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release-v2/architecture/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:55.535892-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release-v2/deployment/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:55.70258-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release-v2/external-guides/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:56.589313-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release-v2/faq/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:56.417457-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release-v2/operations/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:56.144865-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release-v2/storage/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:55.996536-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:03.166109-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release/architecture/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:03.50168-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release/deployment/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:03.722116-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release/external-guides/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:04.856109-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release/faq/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:04.52532-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release/getting-started/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:03.335584-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release/monitoring/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:03.939977-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release/performance-tuning/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:04.176205-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release/tools/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:04.692041-04:00"
-  },
-  "https://www.jaegertracing.io/docs/next-release/troubleshooting/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:04.357527-04:00"
-  },
-  "https://www.jaegertracing.io/download/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:54.710517-04:00"
-  },
-  "https://www.jaegertracing.io/get-in-touch/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:24.992053-04:00"
-  },
-  "https://www.jaegertracing.io/get-involved/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:52.14917-04:00"
-  },
-  "https://www.jaegertracing.io/mentorship-for-mentees/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:25.28604-04:00"
-  },
-  "https://www.jaegertracing.io/mentorship-for-mentors/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:57.750324-04:00"
-  },
-  "https://www.jaegertracing.io/mentorship/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:28:03.914818-04:00"
-  },
-  "https://www.jaegertracing.io/news/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:38.245542-04:00"
-  },
-  "https://www.jaegertracing.io/report-security-issue/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:20.457984-04:00"
-  },
-  "https://www.jaegertracing.io/roadmap/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:45.614215-04:00"
-  },
-  "https://www.jaegertracing.io/sdk-migration/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:37.779868-04:00"
+    "LastSeen": "2025-05-31T11:48:57.19048-04:00"
   },
   "https://www.jetbrains.com/go/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:24.818044-04:00"
+    "LastSeen": "2025-05-31T11:49:34.890603-04:00"
   },
   "https://www.linkedin.com/posts/harshith-mente_lfxmentorship-jaeger-opentelemetry-activity-7235573030997934080-0Id1": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:11.722101-04:00"
+    "LastSeen": "2025-05-31T11:50:50.340201-04:00"
   },
   "https://www.linuxfoundation.org/blog/blog/lyft-and-uber-on-stage-together-at-open-source-summit-in-l-a": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:27:46.967493-04:00"
+    "LastSeen": "2025-05-31T11:50:31.087901-04:00"
   },
   "https://www.linuxfoundation.org/trademark-usage": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:24.712371-04:00"
+    "LastSeen": "2025-05-31T11:48:44.857689-04:00"
   },
   "https://www.netlify.com/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:25:37.619602-04:00"
+    "LastSeen": "2025-05-31T11:48:57.242585-04:00"
   },
   "https://www.nginx.com/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:27:15.682242-04:00"
+    "LastSeen": "2025-05-31T11:50:14.125055-04:00"
   },
   "https://www.outreachy.org/": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:28:04.211681-04:00"
+    "LastSeen": "2025-05-31T11:50:42.905443-04:00"
   },
   "https://www.shkuro.com/talks/2018-01-16-introducing-jaeger-1.0/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:44.193197-04:00"
+    "LastSeen": "2025-05-31T11:49:50.579318-04:00"
   },
   "https://www.w3.org/TR/baggage/": {
     "StatusCode": 206,
-    "LastSeen": "2025-05-31T11:26:09.233028-04:00"
+    "LastSeen": "2025-05-31T11:49:22.708294-04:00"
   },
   "https://youtu.be/s7IrYt1igSM": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:25:53.188221-04:00"
+    "LastSeen": "2025-05-31T11:49:11.130704-04:00"
   }
 }

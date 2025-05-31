@@ -49,10 +49,20 @@ check-links:
 check-links-older:
 	$(HTMLTEST) --log-level 1 --conf .htmltest.old-versions.yml
 
+# Use --keep-going to ensure that the refcache gets saved even if there are
+# link-checking errors.
 check-links-external:
+	$(MAKE) --keep-going _restore-refcache _check-links-external _save-refcache
+
+_restore-refcache:
 	mkdir -p $(HTMLTEST_DIR)
 	cp data/refcache.json $(HTMLTEST_DIR)/refcache.json
+
+_check-links-external:
 	$(HTMLTEST) --log-level 1 --conf .htmltest.external.yml
+
+_save-refcache:
+	@echo "Saving refcache.json to data/refcache.json"
 	jq . $(HTMLTEST_DIR)/refcache.json > data/refcache.json
 
 check-links-all: check-links check-links-older check-links-external

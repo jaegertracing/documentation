@@ -4,7 +4,7 @@
 {{ $isDoc := eq .Section "docs" }}
 {{ $type := cond $isHome "website" "article" }}
 {{ $twitterHandle := site.Params.twitterHandle }}
-{{ $imageUrl := printf "%s/%s" site.BaseURL site.Params.openGraphImage }}
+{{ $imageUrl := printf "%s%s" site.BaseURL site.Params.openGraphImage }}
 <meta charset="utf-8" />
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 {{ with $description }}
@@ -14,7 +14,7 @@
 
 <!-- OpenGraph metadata -->
 <meta property="og:title" content="{{ $title }}" />
-<meta property="og:url" content="{{ .Permalink }}" />
+<meta property="og:url" content="{{ .Permalink }}" data-proofer-ignore>
 {{ if $isDoc }}
 <meta property="og:type" content="documentation" />
 {{ $path := "" }}
@@ -31,7 +31,7 @@
 {{ end }}
 <link rel="canonical" href="{{ $url }}" />
 {{ else }}
-<link rel="canonical" href="{{ .Permalink }}" />
+<link rel="canonical" href="{{ .Permalink }}" data-proofer-ignore>
 {{ end }}
 <meta property="og:locale" content="en_US" />
 {{ if not $isHome }}
@@ -41,7 +41,7 @@
 <meta property="og:description" content="{{ . }}" />
 {{ end }}
 <meta name="og:type" content="{{ $type }}" />
-<meta name="og:image" content="{{ $imageUrl }}" />
+<meta name="og:image" content="{{ $imageUrl }}" data-proofer-ignore>
 <meta name="og:image:alt" content="Jaeger tracing project logo" />
 <meta name="og:image:type" content="image/png" />
 <meta name="og:image:width" content="1801" />
