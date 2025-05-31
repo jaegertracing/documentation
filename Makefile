@@ -18,7 +18,7 @@ develop: generate
 		--ignoreCache
 
 clean:
-	rm -rf public
+	rm -rf public/*
 
 netlify-production-build: generate
 	hugo --minify
