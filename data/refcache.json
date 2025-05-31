@@ -3971,14 +3971,6 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:40:14.097927-04:00"
   },
-  "https://www.jaegertracing.io/docs/2.6/SPM": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-29T19:40:14.320058-04:00"
-  },
-  "https://www.jaegertracing.io/docs/2.6/SPM/": {
-    "StatusCode": 206,
-    "LastSeen": "2025-05-29T19:42:37.480527-04:00"
-  },
   "https://www.jaegertracing.io/docs/2.6/apis": {
     "StatusCode": 206,
     "LastSeen": "2025-05-29T19:40:14.245142-04:00"
