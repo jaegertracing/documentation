@@ -4,3 +4,5 @@ CheckExternal: false
 IgnoreAltMissing: true
 IgnoreURLs:
   - /livereload.js
+  - ^/docs/latest/ # ignore redirect of latest
+  - ^/docs/1.69/client-(features|libraries)/

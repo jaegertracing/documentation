@@ -47,16 +47,16 @@
       {{ end }}
       {{ if $isLatest }}
       <span class="tag is-medium is-success">Latest</span>
-      {{ else }}
+      {{ else if .GetPage $latestUrl}}
       <a class="tag is-medium is-warning" href="{{ $latestUrl }}">
         Go to the latest {{ $vMajor }}.x version
       </a>
       {{ end }}
-      {{ if eq $vMajor "1" }}
+      {{ if and (eq $vMajor "1") (.GetPage $latestUrlV2) }}
       <a class="tag is-medium" href="{{ $latestUrlV2 }}">
         Go to the latest 2.x version
       </a>
-      {{ else if eq $vMajor "2" }}
+      {{ else if and (eq $vMajor "2") (.GetPage $latestUrlV1) }}
       <a class="tag is-medium" href="{{ $latestUrlV1 }}">
         Go to the latest 1.x version
       </a>

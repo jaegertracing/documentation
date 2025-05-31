@@ -6,6 +6,7 @@ IgnoreDirs:
   - docs/1.*
 IgnoreURLs:
   - /livereload.js # cSpell:disable-line
+  - ^https://www.jaegertracing.io/js/lunr
   # Valid URLs, but servers yield 403 or similar errors
   - ^https://(twitter|x).com/[Jj]aeger[Tt]racing
   - ^https://calendar.google.com/
@@ -17,4 +18,3 @@ IgnoreURLs:
   # Temporary: as we work on https://github.com/jaegertracing/documentation/issues/889
   - ^https://github.com/jaegertracing/jaeger/(blob|tree)/(v2|main/(internal|model|pkg))
   - ^https://spark.apache.org/docs/2.4.4/hardware-provisioning.html#memory
-  - ^https://www.jaegertracing.io/docs/2.6/(cli|operator)/

@@ -38,7 +38,7 @@ netlify-branch-deploy: generate
 	--minify
 
 build: clean generate
-	hugo --logLevel info
+	hugo --cleanDestinationDir -e dev --logLevel info
 
 link-checker-setup:
 	curl https://raw.githubusercontent.com/wjdp/htmltest/master/godownloader.sh | bash
@@ -47,12 +47,22 @@ check-links:
 	$(HTMLTEST) --conf .htmltest.yml
 
 check-links-older:
-	$(HTMLTEST) --conf .htmltest.old-versions.yml
+	$(HTMLTEST) --log-level 1 --conf .htmltest.old-versions.yml
 
+# Use --keep-going to ensure that the refcache gets saved even if there are
+# link-checking errors.
 check-links-external:
+	$(MAKE) --keep-going _restore-refcache _check-links-external _save-refcache
+
+_restore-refcache:
 	mkdir -p $(HTMLTEST_DIR)
 	cp data/refcache.json $(HTMLTEST_DIR)/refcache.json
-	$(HTMLTEST) --conf .htmltest.external.yml
+
+_check-links-external:
+	$(HTMLTEST) --log-level 1 --conf .htmltest.external.yml
+
+_save-refcache:
+	@echo "Saving refcache.json to data/refcache.json"
 	jq . $(HTMLTEST_DIR)/refcache.json > data/refcache.json
 
 check-links-all: check-links check-links-older check-links-external

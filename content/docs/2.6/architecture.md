@@ -7,7 +7,7 @@ children:
 - title: Sampling
   url: sampling
 - title: SPM
-  url: SPM
+  url: spm
 - title: Terminology
   url: terminology
 ---
