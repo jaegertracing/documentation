@@ -24,7 +24,7 @@ If you are new to PGP, you can run the following command to encrypt a file calle
 
 ```shell
 # Receive our keys from a key server:
-gpg --keyserver keyserver.ubuntu.com --recv-keys C043A4D2B3F2AC31
+gpg --keyserver keys.openpgp.org --recv-keys C043A4D2B3F2AC31
 
 # Alternatively, copy the key below to file C043A4D2B3F2AC31.asc and import it:
 gpg --import C043A4D2B3F2AC31.asc
