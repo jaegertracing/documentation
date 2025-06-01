@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top" lang="{{ site.LanguageCode }}" prefix="og: http://ogp.me/ns#">
   <head>
-    <title>{{ block "title" . }}{{ site.Title }}{{ end }}</title>
+    <title>{{ block "title" . }}{{ .Title }}{{ end }}</title>
     {{ partial "meta.html" . }}
     <link rel="shortcut icon" href="/favicon.ico">
     {{ partial "css.html" . }}
