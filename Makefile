@@ -3,6 +3,7 @@
 #
 # cSpell:ignore htmltest refcache
 
+DEPLOY_PRIME_URL ?= http://localhost
 HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
 HTMLTEST     ?= htmltest
@@ -38,7 +39,7 @@ netlify-branch-deploy: generate
 	--minify
 
 build: clean generate
-	hugo --cleanDestinationDir -e dev --logLevel info
+	hugo --cleanDestinationDir -e dev -DFE --logLevel info
 
 link-checker-setup:
 	curl https://raw.githubusercontent.com/wjdp/htmltest/master/godownloader.sh | bash
