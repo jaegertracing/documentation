@@ -68,10 +68,10 @@ _save-refcache:
 
 check-links-all: check-links check-links-older check-links-external
 
-spellcheck-prep:
+.cspell/project-names.g.txt: .cspell/project-names-src.txt
 	cat .cspell/project-names-src.txt | grep -v '^#' | grep -v '^\s*$$' | tr ' ' '\n' > .cspell/project-names.g.txt
 
-spellcheck: spellcheck-prep
+spellcheck: .cspell/project-names.g.txt
 	./scripts/spellcheck.sh
 
 fetch-blog-feed:
