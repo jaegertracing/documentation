@@ -1,8 +1,20 @@
-public/
-resources/
-.DS_Store
-.idea
+# Generated files
+.cspell/*.g.txt
+
+# npm assets
+node_modules/
+package-lock.json
+
+# Hugo-generated assets
 .hugo_build.lock
+/public
+/resources
+
+/.netlify
+
+.DS_Store
+
 bin/
 tmp/
+.idea
 .vscode/

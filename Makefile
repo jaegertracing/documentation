@@ -67,9 +67,11 @@ _save-refcache:
 
 check-links-all: check-links check-links-older check-links-external
 
-spellcheck:
-	cat scripts/cspell/project-names.txt | grep -v '^#' | grep -v '^\s*$$' | tr ' ' '\n' > scripts/cspell/project-names-parsed.txt
-	cd scripts/cspell && ./spellcheck.sh
+spellcheck-prep:
+	cat .cspell/project-names-src.txt | grep -v '^#' | grep -v '^\s*$$' | tr ' ' '\n' > .cspell/project-names.g.txt
+
+spellcheck: spellcheck-prep
+	./scripts/spellcheck.sh
 
 fetch-blog-feed:
 	curl -s -o assets/data/medium.xml https://medium.com/feed/jaegertracing

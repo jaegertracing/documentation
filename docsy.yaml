@@ -1,0 +1,16 @@
+theme: [docsy, basetheme, jaeger-docs]
+
+menu:
+  main:
+    - name: Docs
+      url: /docs/latest/
+      weight: -10
+    - name: Blog
+      url: https://medium.com/jaegertracing/latest
+    - name: Download
+      pageRef: /download/
+
+module:
+  mounts:
+    - source: content
+      target: content
