@@ -1,21 +1,34 @@
 # cSpell:ignore basetheme jaegertracing pygments githubrepo twitterhandle mediumhandle opengraphimage
 
 baseURL: https://www.jaegertracing.io
-title: "Jaeger: open source, distributed tracing platform"
-languageCode: en
-pygmentsCodeFences: true
-pygmentsUseClasses: true
+title: Jaeger
 disableKinds: [taxonomy]
 theme: [basetheme, jaeger-docs]
+pygmentsCodeFences: true
+pygmentsUseClasses: true
+
+#
+# Language settings
+#
+
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+
+languages:
+  en:
+    languageName: English
+    # languageCode: en-US
+    params:
+      description: Open source, distributed tracing platform
 
 mediaTypes:
   text/netlify:
-    delimiter: ""
 
 outputFormats:
   REDIRECTS:
     mediaType: text/netlify
     baseName: _redirects
+    notAlternative: true
 
 outputs:
   home: [HTML, JSON, REDIRECTS]
