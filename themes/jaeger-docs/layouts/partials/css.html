@@ -1,4 +1,4 @@
-{{ $inServerMode := hugo.IsServer }}
+{{ $inProduction := hugo.IsProduction -}}
 {{ $sass         := "sass/style.sass" }}
 {{ $target       := "css/style.css" }}
 {{ $includePaths := (slice "node_modules") }}
@@ -9,9 +9,9 @@
 <link rel="stylesheet" href="/css/tocbot.css">
 {{ end }}
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-{{ $cssOpts := cond ($inServerMode) $cssDevOpts $cssProdOpts }}
+{{ $cssOpts := cond $inProduction $cssProdOpts $cssDevOpts -}}
 {{ $css := resources.Get "sass/style.sass" | toCSS $cssOpts }}
-{{ if $inServerMode }}
+{{ if not $inProduction -}}
 <link rel="stylesheet" media="screen" href="{{ $css.RelPermalink }}">
 {{ else }}
 {{ $prodCss := $css | fingerprint }}

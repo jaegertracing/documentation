@@ -4,7 +4,7 @@ command = "make netlify-production-build"
 
 [build.environment]
 # should match one from .github/workflows/ci-test.yml
-HUGO_VERSION = "0.143.1"
+HUGO_VERSION = "0.147.6"
 
 [context.deploy-preview]
 command = "make netlify-deploy-preview"
