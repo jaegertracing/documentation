@@ -17,9 +17,6 @@ patterns:
           [\s\S]*?         # content
           \1               # code-block end - cSpell:disable-next-line
       /igmx
-  # Temporary until we've removed the `children` entries from front matter
-  - pattern: '^url:\s+(cassandra|openshift|podman|kubernetes$'
-    description: Ignore url fields in front matter (and elsewhere)
 languageSettings:
   - languageId: markdown
     ignoreRegExpList:
@@ -32,6 +29,3 @@ dictionaryDefinitions:
 dictionaries:
   - project-words
   - project-names
-words:
-  - CNCF
-  - Docsy

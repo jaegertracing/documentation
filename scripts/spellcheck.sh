@@ -6,7 +6,7 @@ if [ ! -f "$PROJ_WORDS" ]; then
     echo "project-words.txt file not found."
     exit 1
 fi
-if ! sort -c "$PROJ_WORDS"; then
+if ! sort -c --ignore-case "$PROJ_WORDS"; then
     echo "project-words.txt is not sorted."
     exit 1
 fi

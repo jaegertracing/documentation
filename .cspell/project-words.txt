@@ -3,6 +3,7 @@ autoscale
 autoscaler
 bitnami
 bootcamp
+cassandra
 certfile
 clickhouse
 cncf
@@ -11,10 +12,12 @@ containerd
 cqlsh
 cqlshrc
 daemonset
+darwin
 datacenter
 datasource
 datastax
 developercertificate
+Docsy
 downsampling
 dropwizard
 dsoie
@@ -27,6 +30,7 @@ fluentd
 glvs
 gobin
 gopath
+Hashicorp
 hasparent
 healthcheck
 healthcheckv2
@@ -34,6 +38,7 @@ healthz
 hostnames
 hostport
 htpasswd
+hugo
 ingester
 ingester's
 ingesters
@@ -48,6 +53,8 @@ keyn
 keyregistry
 keyserver
 keyspace
+kube
+kubernetes
 logtostderr
 logz
 lookback
@@ -66,10 +73,12 @@ myproject
 myservice
 myversion
 navtitle
+nginx
 nssm
 olap
 openpgp
 opensearch
+openshift
 opentelemetry
 opentracing
 openzipkin
@@ -79,8 +88,10 @@ otelcol
 otlp
 outreachy
 parentbased
+podman
 pprof
 procs
+prometheus
 prometheusexporter
 promscale
 proto
@@ -106,7 +117,9 @@ tchannel
 thriftrw
 tolerations
 tracegen
+uber
 uberctx
+unmarshal
 unmarshaling
 upsample
 usercert
