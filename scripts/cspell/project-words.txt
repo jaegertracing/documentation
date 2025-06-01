@@ -68,6 +68,7 @@ myversion
 navtitle
 nssm
 olap
+openpgp
 opensearch
 opentelemetry
 opentracing
