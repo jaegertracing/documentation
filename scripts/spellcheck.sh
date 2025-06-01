@@ -11,8 +11,6 @@ if ! sort -c --ignore-case "$PROJ_WORDS"; then
     exit 1
 fi
 
-./scripts/npx-helper.sh cspell --version
-
 npm run check:spelling
 if [ $? -ne 0 ]; then
     echo "Misspelling(s) found."
