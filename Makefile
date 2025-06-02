@@ -44,29 +44,29 @@ build: clean generate
 link-checker-setup:
 	curl https://raw.githubusercontent.com/wjdp/htmltest/master/godownloader.sh | bash
 
-check-links:
-	$(HTMLTEST) --conf .htmltest.yml
-
-check-links-older:
-	$(HTMLTEST) --log-level 1 --conf .htmltest.old-versions.yml
-
 # Use --keep-going to ensure that the refcache gets saved even if there are
 # link-checking errors.
-check-links-external:
-	$(MAKE) --keep-going _restore-refcache _check-links-external _save-refcache
+check-links:
+	$(MAKE) --keep-going _restore-refcache _check-links _save-refcache
 
 _restore-refcache:
 	mkdir -p $(HTMLTEST_DIR)
 	cp data/refcache.json $(HTMLTEST_DIR)/refcache.json
 
-_check-links-external:
-	$(HTMLTEST) --log-level 1 --conf .htmltest.external.yml
+_check-links:
+	$(HTMLTEST) --log-level 1 --conf .htmltest.yml
 
 _save-refcache:
 	@echo "Saving refcache.json to data/refcache.json"
 	jq . $(HTMLTEST_DIR)/refcache.json > data/refcache.json
 
-check-links-all: check-links check-links-older check-links-external
+check-links-all: check-links check-links-older
+
+check-links-older:
+	$(HTMLTEST) --log-level 1 --conf .htmltest.old-versions.yml
+
+check-links-internal:
+	$(HTMLTEST) --log-level 1 --skip-external --conf .htmltest.yml
 
 .cspell/project-names.g.txt: .cspell/project-names-src.txt
 	cat .cspell/project-names-src.txt | grep -v '^#' | grep -v '^\s*$$' | tr ' ' '\n' > .cspell/project-names.g.txt

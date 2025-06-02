@@ -1,8 +1,18 @@
+CacheExpires: 13300h # ~ 18 months
 DirectoryPath: public
-CheckExternal: false
-IgnoreDirectoryMissingTrailingSlash: false
 IgnoreAltMissing: true
-IgnoreURLs:
-  - /livereload.js
 IgnoreDirs:
   - docs/1.*
+IgnoreURLs:
+  - /livereload.js # cSpell:disable-line
+  - ^https://www.jaegertracing.io/js/lunr
+  # Valid URLs, but servers yield 403 or similar errors
+  - ^https://(twitter|x).com/[Jj]aeger[Tt]racing
+  - ^https://calendar.google.com/
+  - ^https://eng.uber.com/(distributed-tracing/)?
+  - ^https://war.ukraine.ua/support-ukraine/
+  - ^https://www.oracle.com/cloud
+  - ^https://stackoverflow.com/questions/tagged/jaeger
+  # Temporary: invalid URLs for which replacements need to be found
+  # Temporary: as we work on https://github.com/jaegertracing/documentation/issues/889
+  - ^https://github.com/jaegertracing/jaeger/(blob|tree)/(v2|main/(internal|model|pkg))
