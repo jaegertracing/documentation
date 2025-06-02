@@ -24,6 +24,7 @@
   {{ $vMajor = "2" -}}
 {{ end -}}
 {{ $isLatest := or (eq $majorMinorVersion $latestV1) (eq $majorMinorVersion $latestV2) -}}
+
 <nav class="navbar is-fixed-top">
   <div class="container is-fluid">
     <div class="navbar-brand">
@@ -54,7 +55,7 @@
             </div>
             <div class="dropdown-menu" id="search-menu">
               <div class="dropdown-content" id="search-content">
-                <!-- dropdown items are generated here -->
+                {{/* dropdown items are generated here */ -}}
               </div>
             </div>
           </div>
@@ -72,18 +73,20 @@
                 {{ $docPath = .Path -}}
               {{ end -}}
               {{ $docVersion := index (split $docPath "/") 1 -}}
-              <!-- When generating Docs menu for home page, use the latest version, -->
-              <!-- when generating menu for pages inside docs/, use same version as the doc -->
+              {{/* <!--
+                When generating Docs menu for home page, use the latest version,
+                when generating menu for pages inside docs/, use same version as the doc.
+               --> */ -}}
               {{ $matchVersion := cond ($isDocsPage) $majorMinorVersion $latestV2 -}}
               {{ if and (eq $docVersion $matchVersion) (not .Params.hasparent) -}}
                 <a class="navbar-item" href="{{ .RelPermalink }}">
-                  {{- .Title }}
+                  {{- .Title -}}
                 </a>
                 {{ with .Params.children -}}
                   {{ range . -}}
                     {{ $url := cond $isDocsPage (printf "/docs/%s/%s" $majorMinorVersion .url) (printf "/docs/%s/%s" $latestV2 .url) -}}
-                    <a class="navbar-item is-small is-hidden-desktop" href="{{ relref $page $url }}">
-                      &cir; {{ .navtitle | default .title }}
+                    <a class="navbar-item is-small is-hidden-desktop" href="{{ relref $page $url }}"> {{/* */ -}}
+                      &cir; {{ .navtitle | default .title -}}
                     </a>
                   {{ end -}}
                 {{ end -}}
@@ -99,7 +102,7 @@
             {{ $version := . -}}
             {{ $isLatest := or (eq $version $latestV1) (eq $version $latestV2) -}}
             <a class="navbar-item" href="/docs/{{ $version }}/">
-              {{- $version }}{{ if $isLatest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end }}
+              {{- $version }}{{ if $isLatest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end -}}
             </a>
             {{ end -}}
             {{ if $isPreview -}}
@@ -109,68 +112,36 @@
           </div>
         </div>
         {{ end -}}
-        <a class="navbar-item" href="/download/">
-          Download
-        </a>
+        <a class="navbar-item" href="/download/">Download</a>
 
-        <a class="navbar-item" href="https://medium.com/jaegertracing/latest" target="_blank">
-          Blog
-        </a>
+        <a class="navbar-item" href="https://medium.com/jaegertracing/latest" target="_blank">Blog</a>
 
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link">
-            Project
-          </a>
+          <a class="navbar-link">Project</a>
           <div class="navbar-dropdown is-right">
-            <a class="navbar-item" href="/get-involved/">
-                Get involved
-            </a>
-            <a class="navbar-item" href="/get-in-touch/">
-              Get in touch
-            </a>
-            <a class="navbar-item" href="/mentorship/">
-              Mentorships
-            </a>
-            <a class="navbar-item" href="/mentorship-for-mentees/">
-              Mentorships - For Mentees
-            </a>
-            <a class="navbar-item" href="/mentorship-for-mentors/">
-              Mentorships - For Mentors
-            </a>
-            <a class="navbar-item" href="/news/">
-              News
-            </a>
-            <a class="navbar-item" href="/roadmap/">
-              Roadmap
-            </a>
-            <a class="navbar-item" href="https://github.com/cncf/artwork/tree/master/projects/jaeger">
-              Branding
-            </a>
-            <a class="navbar-item" href="/report-security-issue/">
-              Report security issue
-            </a>
-            <a class="navbar-item" href="https://github.com/jaegertracing/jaeger">
-              Main GitHub repo
-            </a>
-            <a class="navbar-item" href="https://github.com/jaegertracing/documentation">
-              Docs GitHub repo
-            </a>
+            <a class="navbar-item" href="/get-involved/">Get involved</a>
+            <a class="navbar-item" href="/get-in-touch/">Get in touch</a>
+            <a class="navbar-item" href="/mentorship/">Mentorships</a>
+            <a class="navbar-item" href="/mentorship-for-mentees/">Mentorships - For Mentees</a>
+            <a class="navbar-item" href="/mentorship-for-mentors/">Mentorships - For Mentors</a>
+            <a class="navbar-item" href="/news/">News</a>
+            <a class="navbar-item" href="/roadmap/">Roadmap</a>
+            <a class="navbar-item" href="https://github.com/cncf/artwork/tree/master/projects/jaeger">Branding</a>
+            <a class="navbar-item" href="/report-security-issue/">Report security issue</a>
+            <a class="navbar-item" href="https://github.com/jaegertracing/jaeger">Main GitHub repo</a>
+            <a class="navbar-item" href="https://github.com/jaegertracing/documentation">Docs GitHub repo</a>
           </div>
         </div>
         {{ with $githubRepo -}}
         <a class="navbar-item" href="https://github.com/{{ . }}" target="_blank">
-          <span class="icon">
-            <i class="fab fa-github" style="color: #333;"></i>
-          </span>
+          <span class="icon"><i class="fab fa-github" style="color: #333;"></i></span>
         </a>
-        {{ end -}}
+        {{- end -}}
         {{ with $twitterHandle -}}
         <a class="navbar-item" href="https://twitter.com/{{ . }}" target="_blank">
-          <span class="icon" style="color: #55acee;">
-            <i class="fab fa-twitter"></i>
-          </span>
+          <span class="icon" style="color: #55acee;"><i class="fab fa-twitter"></i></span>
         </a>
-        {{ end -}}
+        {{- end -}}
       </div>
     </div>
   </div>
