@@ -45,7 +45,7 @@
   },
   "optionalDependencies": {
     "bulma": "0.7.1",
-    "bulma-tooltip": "2.0.2"
+    "bulma-tooltip": "3.0.2"
   },
   "peerDependencies": {
     "netlify-cli": "^21.5.0",
