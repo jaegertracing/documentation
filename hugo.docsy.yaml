@@ -1,9 +1,30 @@
+# Docsy config
+# cSpell:ignore basetheme docsy github
+
 theme: [docsy, basetheme, jaeger-docs]
+
+params:
+  copyright:
+    authors: >-
+      OpenTelemetry Authors | Docs [CC BY
+      4.0](https://creativecommons.org/licenses/by/4.0)
+    from_year: 2019
+
+  github_repo: https://github.com/jaegertracing/documentation
+  github_branch: main
+
+  ui:
+    navbar_logo: true
+    navbar_translucent_over_cover_disable: true
+    showLightDarkModeMenu: true
+    sidebar_menu_compact: true
+    sidebar_menu_foldable: true
+    sidebar_search_disable: true
 
 menu:
   main:
     - name: Docs
-      url: /docs/latest/
+      url: /docs/ # Eventually /docs/latest/
       weight: -10
     - name: Blog
       url: https://medium.com/jaegertracing/latest

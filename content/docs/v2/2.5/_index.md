@@ -1,6 +1,7 @@
 ---
 title: Introduction
-weight: 1
+linkTitle: 2.5
+weight: -205
 children:
 - title: Getting Started
   url: getting-started

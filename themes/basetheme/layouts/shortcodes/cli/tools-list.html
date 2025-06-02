@@ -1,4 +1,4 @@
-{{ $versionFromPath := index (split $.Page.File.Path "/") 1 }}
+{{ $versionFromPath := index (split .Page.RelPermalink "/") 2 }}
 {{ $isNextRelease := eq $versionFromPath "next-release" }}
 {{ $version := cond ($isNextRelease) site.Params.latest $versionFromPath }}
 {{ $data    := index site.Data.cli $version }}
