@@ -1,6 +1,7 @@
 ---
 title: Introduction
-weight: 1
+linkTitle: 2.X # Set to 2.X when publishing
+weight: -200 # Set to 200 + X * 10 when publishing
 children:
 - title: Getting Started
   url: getting-started

@@ -1,0 +1,19 @@
+# Pre-Docsy config
+
+module:
+  mounts:
+    - excludeFiles: docs/v?
+      source: content
+      target: content
+
+    - excludeFiles: _*
+      source: content/docs/v1
+      target: content/docs
+    - source: content/docs/v1/_dev
+      target: content/docs/next-release
+
+    - excludeFiles: _*
+      source: content/docs/v2
+      target: content/docs
+    - source: content/docs/v2/_dev
+      target: content/docs/next-release-v2

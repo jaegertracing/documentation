@@ -85,7 +85,7 @@
                 {{ with .Params.children -}}
                   {{ range . -}}
                     {{ $url := cond $isDocsPage (printf "/docs/%s/%s" $majorMinorVersion .url) (printf "/docs/%s/%s" $latestV2 .url) -}}
-                    <a class="navbar-item is-small is-hidden-desktop" href="{{ relref $page $url }}"> {{/* */ -}}
+                    <a class="navbar-item is-small is-hidden-desktop" href="{{ ($page.GetPage $url).RelPermalink }}"> {{/* */ -}}
                       &cir; {{ .navtitle | default .title -}}
                     </a>
                   {{ end -}}

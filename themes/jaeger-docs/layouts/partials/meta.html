@@ -5,6 +5,9 @@
 {{ $twitterHandle := site.Params.twitterHandle }}
 {{ $imageUrl := printf "%s%s" site.BaseURL site.Params.openGraphImage }}
 <meta charset="utf-8" />
+{{ if $isHome -}}
+<meta name="build-timestamp" content="{{ now.Format "2006-01-02 15:04 MST" }}" />
+{{ end -}}
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 {{ with $description }}
 <meta name="description" content="{{ . }}" />
