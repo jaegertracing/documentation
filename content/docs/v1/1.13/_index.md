@@ -1,7 +1,7 @@
 ---
 title: Docs (1.13)
 linkTitle: '1.13'
-weight: -213
+weight: -113
 children:
 - title: Features
   url: features

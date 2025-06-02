@@ -1,7 +1,7 @@
 ---
 title: Docs (1.7)
 linkTitle: '1.7'
-weight: -207
+weight: -107
 ---
 
 Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.
