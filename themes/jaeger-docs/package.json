@@ -1,7 +1,7 @@
 {
   "private": true,
   "devDependencies": {
-    "bulma": "^0.7.1",
+    "bulma": "^1.0.0",
     "bulma-tooltip": "^2.0.2"
   }
 }
