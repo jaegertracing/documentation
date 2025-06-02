@@ -24,7 +24,7 @@ Each span is written to the storage by **jaeger-collector** using one worker, bl
 ### Place the Agents close to your applications
 
 {{< warning >}}
-Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
+Since the Jaeger client libraries [are deprecated](../client-libraries/) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture/) page for alternative deployment options.
 {{< /warning >}}
 
 **jaeger-agent** is meant to be placed on the same host as the instrumented application, in order to avoid UDP packet loss over the network. This is typically accomplished by having one **jaeger-agent** per bare metal host for traditional applications, or as a sidecar in container environments like Kubernetes, as this helps spread the load handled by **jaeger-agent**s with the additional advantage of allowing each **jaeger-agent** to be tweaked individually, according to the application’s needs and importance.
@@ -76,7 +76,7 @@ When the instrumented application is generating a large number of spans and **ja
 ## Agent settings
 
 {{< warning >}}
-Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
+Since the Jaeger client libraries [are deprecated](../client-libraries/) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture/) page for alternative deployment options.
 {{< /warning >}}
 
 **jaeger-agent**s receive data from Clients, sending them in batches to **jaeger-collector**. When not properly configured, it might end up discarding data even if the host machine has plenty of resources.

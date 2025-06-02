@@ -24,7 +24,7 @@ Each span is written to the storage by the Collector using one worker, blocking 
 ### Place the Agents close to your applications
 
 {{< warning >}}
-Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
+Since the Jaeger client libraries [are deprecated](../client-libraries/) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture/) page for alternative deployment options.
 {{< /warning >}}
 
 The Agent is meant to be placed on the same host as the instrumented application, in order to avoid UDP packet loss over the network. This is typically accomplished by having one Agent per bare metal host for traditional applications, or as a sidecar in container environments like Kubernetes, as this helps spread the load handled by Agents with the additional advantage of allowing each Agent to be tweaked individually, according to the application’s needs and importance.
@@ -76,7 +76,7 @@ When the instrumented application is generating a large number of spans and the 
 ## Agent settings
 
 {{< warning >}}
-Since the Jaeger client libraries [are deprecated](../client-libraries) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture) page for alternative deployment options.
+Since the Jaeger client libraries [are deprecated](../client-libraries/) and the OpenTelemetry SDKs are phasing out support for Jaeger Thrift format, the **jaeger-agent** is no longer required or recommended. See the [Architecture](../architecture/) page for alternative deployment options.
 {{< /warning >}}
 
 Jaeger Agents receive data from Clients, sending them in batches to the Collector. When not properly configured, it might end up discarding data even if the host machine has plenty of resources.

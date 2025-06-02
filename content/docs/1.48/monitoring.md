@@ -41,7 +41,7 @@ The log level can be adjusted via `--log-level` command line switch; default lev
 
 ## Traces
 
-Jaeger has the ability to trace some of its own components, namely the requests to the Query service. For example, if you start `all-in-one` as described in [Getting Started](../getting-started), and refresh the UI screen a few times, you will see `jaeger-all-in-one` populated in the Services dropdown. If you prefer not to see these traces in the Jaeger UI, you can disable them by running Jaeger backend components with `OTEL_TRACES_SAMPLER=always_off` environment variable, for example:
+Jaeger has the ability to trace some of its own components, namely the requests to the Query service. For example, if you start `all-in-one` as described in [Getting Started](../getting-started/), and refresh the UI screen a few times, you will see `jaeger-all-in-one` populated in the Services dropdown. If you prefer not to see these traces in the Jaeger UI, you can disable them by running Jaeger backend components with `OTEL_TRACES_SAMPLER=always_off` environment variable, for example:
 
 ```
 docker run -e OTEL_TRACES_SAMPLER=always_off -p 16686:16686 jaegertracing/all-in-one:{{< currentVersion >}}

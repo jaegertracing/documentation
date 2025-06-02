@@ -88,7 +88,7 @@ This section details the constituent parts of Jaeger and how they relate to each
 ### Tracing SDKs
 
 {{< warning >}}
-The Jaeger project historically provided a collection of tracing SDKs, called [Jaeger clients](../client-libraries). These libraries have been retired in favor of the [OpenTelemetry SDKs](https://opentelemetry.io).
+The Jaeger project historically provided a collection of tracing SDKs, called [Jaeger clients](../client-libraries/). These libraries have been retired in favor of the [OpenTelemetry SDKs](https://opentelemetry.io).
 {{< /warning >}}
 
 In order to generate tracing data, the applications must be instrumented. An instrumented application creates spans when receiving new requests and attaches context information (trace id, span id, and baggage) to outgoing requests. Only the ids and baggage are propagated with requests; all other profiling data, like operation name, timing, tags and logs, is not propagated. Instead, it is exported out of process to the Jaeger backend asynchronously, in the background.
@@ -116,11 +116,11 @@ The instrumentation is designed to be always on in production. To minimize the o
 
 ### Collector
 
-**jaeger-collector** receives traces, runs them through a processing pipeline for validation and clean-up/enrichment, and stores them in a storage backend. Jaeger comes with built-in support for several storage backends (see [Deployment](../deployment)), as well as extensible plugin framework for implementing custom storage plugins.
+**jaeger-collector** receives traces, runs them through a processing pipeline for validation and clean-up/enrichment, and stores them in a storage backend. Jaeger comes with built-in support for several storage backends (see [Deployment](../deployment/)), as well as extensible plugin framework for implementing custom storage plugins.
 
 ### Query
 
-**jaeger-query** is a service that exposes the [APIs](../apis) for retrieving traces from storage and hosts a Web UI for searching and analyzing traces.
+**jaeger-query** is a service that exposes the [APIs](../apis/) for retrieving traces from storage and hosts a Web UI for searching and analyzing traces.
 
 ### Ingester
 

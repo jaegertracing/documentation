@@ -769,12 +769,12 @@ Available remote storage backends:
 * [Promscale](https://github.com/timescale/promscale#promscale-for-jaeger-and-opentelemetry) - Jaeger and Prometheus storage backend built on PostgreSQL.
   * Implements the read path of Jaeger's Remote Storage API, thus can be used as a backend with Jaeger Query.
   * Currently does not implement the write path of Jaeger's Remote Storage API. Trace ingestion must be done via the OpenTelemetry Collector using the OpenTelemetry Protocol (OTLP).
-  * Supports remote storage API for Prometheus, thus can be used as a metrics storage backend for [SPM](../spm).
+  * Supports remote storage API for Prometheus, thus can be used as a metrics storage backend for [SPM](../spm/).
 
 ## Metrics Storage Backends
 
 Jaeger Query is capable of querying aggregated R.E.D metrics from a storage backend,
-visualizing them on the [Monitor tab](../spm). It should be emphasized that the
+visualizing them on the [Monitor tab](../spm/). It should be emphasized that the
 configured metrics storage type is for reading _only_ and therefore, only applies
 to the Jaeger Query component (and All In One, which contains Jaeger Query).
 

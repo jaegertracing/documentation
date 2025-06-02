@@ -8,7 +8,7 @@ If you are new to distributed tracing, please check the [Introduction](../) page
 
 ## Instrumentation
 
-Your applications must be instrumented before they can send tracing data to Jaeger backend. Check the [Client Libraries](../client-libraries) section for information about how to use the OpenTracing API and how to initialize and configure Jaeger tracers.
+Your applications must be instrumented before they can send tracing data to Jaeger backend. Check the [Client Libraries](../client-libraries/) section for information about how to use the OpenTracing API and how to initialize and configure Jaeger tracers.
 
 ## All in One
 
@@ -54,7 +54,7 @@ Port  | Protocol | Component | Function
 
 ### With Service Performance Monitoring (SPM)
 
-Please refer to [Service Performance Monitoring (SPM)](../spm#getting-started).
+Please refer to [Service Performance Monitoring (SPM)](../spm/#getting-started).
 
 ## Kubernetes and OpenShift
 

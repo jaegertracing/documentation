@@ -46,7 +46,7 @@ This section details the constituent parts of Jaeger and how they relate to each
 ### Jaeger client libraries (deprecated)
 
 {{< warning >}}
-Jaeger clients are [being retired](../client-libraries). Please use OpenTelemetry.
+Jaeger clients are [being retired](../client-libraries/). Please use OpenTelemetry.
 {{< /warning >}}
 
 
@@ -67,13 +67,13 @@ The agent is **not** a required component. For example, when your applications a
 
 ### Collector
 
-The Jaeger **collector** receives traces from the SDKs or Jaeger [agents](../architecture#agent), runs them through a processing pipeline for validation and clean-up/enrichment, and stores them in a storage backend.
+The Jaeger **collector** receives traces from the SDKs or Jaeger [agents](../architecture/#agent), runs them through a processing pipeline for validation and clean-up/enrichment, and stores them in a storage backend.
 
-Jaeger comes with built-in support for several storage backends (see [Deployment](../deployment)), as well as extensible plugin framework for implementing custom storage plugins.
+Jaeger comes with built-in support for several storage backends (see [Deployment](../deployment/)), as well as extensible plugin framework for implementing custom storage plugins.
 
 ### Query
 
-The Jaeger **query** is a service that exposes the [APIs](../apis) for retrieving traces from storage and hosts a Web UI for searching and analyzing traces.
+The Jaeger **query** is a service that exposes the [APIs](../apis/) for retrieving traces from storage and hosts a Web UI for searching and analyzing traces.
 
 ### Ingester
 

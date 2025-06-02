@@ -62,7 +62,7 @@ Port  | Protocol | Component | Function
 
 ### With Service Performance Monitoring (SPM)
 
-Please refer to [Service Performance Monitoring (SPM)](../spm#getting-started).
+Please refer to [Service Performance Monitoring (SPM)](../spm/#getting-started).
 
 ## On Kubernetes
 

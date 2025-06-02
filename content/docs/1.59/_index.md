@@ -8,7 +8,7 @@ children:
 
 Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.
 
-If you cannot find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch).
+If you cannot find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch/).
 
 If you are new to distributed tracing, please take a look at the [Related Links](#related-links) section below.
 
@@ -51,7 +51,7 @@ See [Features](./features/) page for more details.
 
 ## Quick Start
 
-See [Getting Started](./getting-started).
+See [Getting Started](./getting-started/).
 
 ## Screenshots
 
