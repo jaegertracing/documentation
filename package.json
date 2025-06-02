@@ -26,8 +26,6 @@
     "fix:filenames": "npm run _filenames-to-kebab-case",
     "fix:format": "npm run _check:format -- --write",
     "make:public": "git init public",
-    "postbuild:preview": "npm run _check:links--warn",
-    "postbuild:production": "npm run _check:links--warn",
     "precheck:links:all": "npm run build",
     "precheck:links": "npm run build",
     "precheck:spelling": "make .cspell/project-names.g.txt",

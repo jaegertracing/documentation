@@ -1,7 +1,7 @@
 # Copyright (c) The Jaeger Authors.
 # SPDX-License-Identifier: Apache-2.0
 #
-# cSpell:ignore htmltest refcache
+# cSpell:ignore docsy htmltest refcache
 
 DEPLOY_PRIME_URL ?= http://localhost
 HUGO_THEME   = jaeger-docs
@@ -13,7 +13,7 @@ HTMLTEST_DIR ?= tmp/.htmltest
 generate:
 
 develop: generate
-	HUGO_PREVIEW=true hugo server \
+	HUGO_PREVIEW=true hugo --config hugo.yaml,hugo.pre-docsy.yaml server \
 		--buildDrafts \
 		--buildFuture \
 		--ignoreCache
@@ -22,24 +22,24 @@ clean:
 	rm -rf public/*
 
 netlify-production-build: generate
-	hugo --minify
+	hugo --config hugo.yaml,hugo.pre-docsy.yaml --minify
 
 netlify-deploy-preview:	generate
-	HUGO_PREVIEW=true hugo \
+	HUGO_PREVIEW=true hugo --config hugo.yaml,hugo.pre-docsy.yaml \
 	--buildDrafts \
 	--buildFuture \
 	--baseURL $(DEPLOY_PRIME_URL) \
 	--minify
 
 netlify-branch-deploy: generate
-	hugo \
+	hugo --config hugo.yaml,hugo.pre-docsy.yaml \
 	--buildDrafts \
 	--buildFuture \
 	--baseURL $(DEPLOY_PRIME_URL) \
 	--minify
 
 build: clean generate
-	hugo --cleanDestinationDir -e dev -DFE --logLevel info
+	hugo --config hugo.yaml,hugo.pre-docsy.yaml --cleanDestinationDir -e dev -DFE --logLevel info
 
 link-checker-setup:
 	curl https://raw.githubusercontent.com/wjdp/htmltest/master/godownloader.sh | bash
