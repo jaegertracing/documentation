@@ -3,6 +3,7 @@
 #
 # cSpell:ignore htmltest refcache
 
+DEPLOY_PRIME_URL ?= http://localhost
 HUGO_THEME   = jaeger-docs
 THEME_DIR    := themes/$(HUGO_THEME)
 HTMLTEST     ?= htmltest
@@ -38,7 +39,7 @@ netlify-branch-deploy: generate
 	--minify
 
 build: clean generate
-	hugo --cleanDestinationDir -e dev --logLevel info
+	hugo --cleanDestinationDir -e dev -DFE --logLevel info
 
 link-checker-setup:
 	curl https://raw.githubusercontent.com/wjdp/htmltest/master/godownloader.sh | bash
@@ -67,9 +68,11 @@ _save-refcache:
 
 check-links-all: check-links check-links-older check-links-external
 
-spellcheck:
-	cat scripts/cspell/project-names.txt | grep -v '^#' | grep -v '^\s*$$' | tr ' ' '\n' > scripts/cspell/project-names-parsed.txt
-	cd scripts/cspell && ./spellcheck.sh
+.cspell/project-names.g.txt: .cspell/project-names-src.txt
+	cat .cspell/project-names-src.txt | grep -v '^#' | grep -v '^\s*$$' | tr ' ' '\n' > .cspell/project-names.g.txt
+
+spellcheck: .cspell/project-names.g.txt
+	./scripts/spellcheck.sh
 
 fetch-blog-feed:
 	curl -s -o assets/data/medium.xml https://medium.com/feed/jaegertracing

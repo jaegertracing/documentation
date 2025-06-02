@@ -1,0 +1,65 @@
+{
+  "name": "jaegertracing.io",
+  "scripts": {
+    "_build": "npm run _hugo-dev --",
+    "_check:format": "npx prettier --check .",
+    "_check:links--warn": "npm run _check:links || (echo; echo 'WARNING: see link-checker output for issues.'; echo)",
+    "_check:links": "make --keep-going check-links",
+    "_commit:public": "HASH=$(git rev-parse --short main); cd public && git add -A && git commit -m \"Site at $HASH\"",
+    "_diff:check": "git diff --name-only --exit-code",
+    "_filename-error": "echo 'ERROR: the following files violate naming conventions; fix using: `npm run fix:filenames`'; echo; npm run -s _ls-bad-filenames; exit 1",
+    "_filenames-to-kebab-case": "find assets content -name '*_*' ! -name '[_.]*' -exec sh -c 'mv \"$1\" \"${1//_/-}\"' _ {} \\;",
+    "_hugo-dev": "npm run _hugo -- -e dev -DFE",
+    "_hugo": "hugo --cleanDestinationDir --config hugo.yaml${WKSP-,docsy.yaml}",
+    "_ls-bad-filenames": "find assets content -name '*_*' ! -name '[_.]*'",
+    "_serve": "npm run _hugo-dev -- serve --minify --disableFastRender --renderToMemory",
+    "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
+    "build:production": "npm run _hugo -- --minify",
+    "build": "npm run _build --",
+    "check:filenames": "test -z \"$(npm run -s _ls-bad-filenames)\" || npm run -s _filename-error",
+    "check:format": "npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
+    "check:links:internal": "HTMLTEST_ARGS='--skip-external' npm run _check:links",
+    "check:links": "npm run _check:links",
+    "check:spelling": "npx --no-install cspell --no-progress -c .cspell.yml content 'layouts/**/*.md'",
+    "clean": "rm -Rf public/",
+    "diff:check": "npm run _diff:check || (echo; echo 'WARNING: the files above have not been committed'; echo)",
+    "fix:filenames": "npm run _filenames-to-kebab-case",
+    "fix:format": "npm run _check:format -- --write",
+    "make:public": "git init public",
+    "postbuild:preview": "npm run _check:links--warn",
+    "postbuild:production": "npm run _check:links--warn",
+    "precheck:links:all": "npm run build",
+    "precheck:links": "npm run build",
+    "precheck:spelling": "make .cspell/project-names.g.txt",
+    "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
+    "serve": "npm run _serve",
+    "test": "npm run check:format && npm run check:links",
+    "update:pkgs": "npx npm-check-updates -u"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "cspell": "^9.0.2",
+    "docsy": "github:google/docsy",
+    "postcss-cli": "^11.0.1",
+    "prettier": "^3.5.3"
+  },
+  "optionalDependencies": {
+    "bulma": "0.7.1",
+    "bulma-tooltip": "2.0.2"
+  },
+  "peerDependencies": {
+    "netlify-cli": "^21.5.0",
+    "npm-check-updates": "^18.0.1"
+  },
+  "enginesComment": "Ensure that engines.node value stays consistent with the project's .nvmrc",
+  "engines": {
+    "node": "22.x"
+  },
+  "gitHubActionCacheKey": "2024-07-02 - change this key to force cache refresh",
+  "private": true,
+  "prettier": {
+    "proseWrap": "always",
+    "singleQuote": true
+  },
+  "spelling": "cSpell:ignore docsy hugo HTMLTEST pkgs netlify precheck postbuild WKSP -"
+}

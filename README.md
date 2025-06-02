@@ -15,12 +15,18 @@ use a package manager if it is available for your operating system.
 
 The currently used version of Hugo is defined in the [`netlify.toml`](./netlify.toml) configuration file.
 
+Install the active LTS version of Node.js, then run the following command from the directory of this repo's clone:
+
+```bash
+npm install
+```
+
 ## Running the site locally
 
 If you want to develop the site locally, you can run a single command (assuming that you've run the [setup](#setup)):
 
 ```bash
-$ make develop
+make develop
 ```
 
 This will start up a local server on localhost port 1313. When you make changes to either the content of the website (in [`content`](content)) *or* to the Sass and JavaScript assets of the page (in [`themes/jaeger-docs/assets`](themes/jaeger-docs/assets)), the browser will automatically update to reflect those changes (usually in under one second).
