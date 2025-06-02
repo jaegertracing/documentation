@@ -8,7 +8,7 @@ children:
 
 Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.
 
-If you can't find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch).
+If you can't find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch/).
 
 If you are new to distributed tracing, please take a look at the [Related Links](#related-links) section below.
 
@@ -52,7 +52,7 @@ See [Features](./features/) page for more details.
       * [PostgreSQL with Promscale](./deployment/#remote-storage-model)
       * [ClickHouse](./deployment/#sidecar-model)
 ## Quick Start
-See [running a docker all in one image](getting-started#all-in-one).
+See [running a docker all in one image](getting-started/#all-in-one).
 
 ## Screenshots
 

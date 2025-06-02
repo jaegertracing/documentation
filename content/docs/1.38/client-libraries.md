@@ -119,7 +119,7 @@ simpler parameterization of the Tracer, such as changing the default sampler or 
 
 ### Sampling
 
-See [Architecture | Sampling](../sampling#client-sampling-configuration).
+See [Architecture | Sampling](../sampling/#client-sampling-configuration).
 
 ### Reporters
 

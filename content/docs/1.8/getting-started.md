@@ -6,7 +6,7 @@ weight: 2
 
 ## Instrumentation
 
-Your applications must be instrumented before they can send tracing data to Jaeger backend. Check the [Client Libraries](../client-libraries) section for information about how to use the OpenTracing API and how to initialize and configure Jaeger tracers.
+Your applications must be instrumented before they can send tracing data to Jaeger backend. Check the [Client Libraries](../client-libraries/) section for information about how to use the OpenTracing API and how to initialize and configure Jaeger tracers.
 
 ## All in One
 
@@ -118,7 +118,7 @@ Then navigate to `http://localhost:8080`.
 
 ## Client Libraries
 
-Look [here](../client-libraries).
+Look [here](../client-libraries/).
 
 ## Running Individual Jaeger Components
 Individual Jaeger backend components can be run from source.

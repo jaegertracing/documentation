@@ -172,8 +172,8 @@ Note:
 
 The following configuration is required to enable the SPM feature:
 
-- [Jaeger UI](../frontend-ui#monitor)
-- [Jaeger Query](../cli#jaeger-query-prometheus)
+- [Jaeger UI](../frontend-ui/#monitor)
+- [Jaeger Query](../cli/#jaeger-query-prometheus)
   - Set the `METRICS_STORAGE_TYPE` environment variable to `prometheus`.
   - Optional: Set `--prometheus.server-url` (or `PROMETHEUS_SERVER_URL` environment variable)
     to the URL of the prometheus server. Default: http://localhost:9090.

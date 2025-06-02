@@ -97,7 +97,7 @@ You can navigate to `http://localhost:16686` to access the Jaeger UI.
 ## Agent
 
 {{< warning >}}
-**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equipped with OTLP exporters) directly to **jaeger-collector**. See the [Architecture](../architecture) page for alternative deployment options.
+**jaeger-agent** is [deprecated](https://github.com/jaegertracing/jaeger/issues/4739). The OpenTelemetry data can be sent from the OpenTelemetry SDKs (equipped with OTLP exporters) directly to **jaeger-collector**. See the [Architecture](../architecture/) page for alternative deployment options.
 {{< /warning >}}
 
 **jaeger-agent** is designed to receive tracing data in Thrift format over UDP and run locally on each host, either as a host agent / daemon or as an application sidecar. **jaeger-agent** exposes the following ports:
@@ -788,7 +788,7 @@ Known remote storage backends:
 ## Metrics Storage Backends
 
 Jaeger Query is capable of querying aggregated R.E.D metrics from a storage backend,
-visualizing them on the [Monitor tab](../spm). It should be emphasized that the
+visualizing them on the [Monitor tab](../spm/). It should be emphasized that the
 configured metrics storage type is for reading _only_ and therefore, only applies
 to the Jaeger Query component (and All In One, which contains Jaeger Query).
 

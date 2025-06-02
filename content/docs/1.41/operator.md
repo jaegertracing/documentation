@@ -699,7 +699,7 @@ spec:
 
 Setting `spec.metricsStorage.type` to `prometheus` enables using Jaeger with
 PromQL-compatible storage implementations to query R.E.D metrics for the
-[Service Performance Monitoring](../spm) feature.
+[Service Performance Monitoring](../spm/) feature.
 
 The following is an example of a Jaeger CR using the `allInOne` deployment strategy,
 an in-memory span storage and prometheus metrics storage.
@@ -729,7 +729,7 @@ spec:
 
 <1> Beginning of `prometheus`-namespaced configuration, defined as a simple `key: value` map.
     All available options are documented in the
-    [Jaeger All-In-One with Prometheus CLI section](../cli#jaeger-all-in-one-prometheus)
+    [Jaeger All-In-One with Prometheus CLI section](../cli/#jaeger-all-in-one-prometheus)
 
 <2> Overrides the default `http://localhost:9090` prometheus server URL with `http://prometheus:9090`.
 
