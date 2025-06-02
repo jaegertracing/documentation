@@ -1,10 +1,10 @@
 ---
 title: Docs (1.53)
+linkTitle: '1.53'
 weight: -253
 children:
 - title: Features
   url: features
-linkTitle: '1.53'
 ---
 
 Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.
