@@ -43,7 +43,7 @@ featureGroups:
     - name: remote_sampler
       description: Allow remote configuration of samplers
     - name: adaptive_sampler
-      description: Remotely configurable [per-endpoint sampler](../sampling)
+      description: Remotely configurable [per-endpoint sampler](../sampling/)
     - name: baggage_restriction
       description: Remotely configurable baggage restrictions
 

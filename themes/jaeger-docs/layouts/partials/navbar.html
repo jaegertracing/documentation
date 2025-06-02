@@ -1,3 +1,4 @@
+{{ $page := . -}}
 {{ $menuPages     := site.Menus.docs -}}
 {{ $githubRepo    := site.Params.githubrepo -}}
 {{ $twitterHandle := site.Params.twitterhandle -}}
@@ -81,7 +82,7 @@
                 {{ with .Params.children -}}
                   {{ range . -}}
                     {{ $url := cond $isDocsPage (printf "/docs/%s/%s" $majorMinorVersion .url) (printf "/docs/%s/%s" $latestV2 .url) -}}
-                    <a class="navbar-item is-small is-hidden-desktop" href="{{ $url }}">
+                    <a class="navbar-item is-small is-hidden-desktop" href="{{ relref $page $url }}">
                       &cir; {{ .navtitle | default .title }}
                     </a>
                   {{ end -}}
@@ -97,18 +98,18 @@
             {{ range $versions -}}
             {{ $version := . -}}
             {{ $isLatest := or (eq $version $latestV1) (eq $version $latestV2) -}}
-            <a class="navbar-item" href="/docs/{{ $version }}">
+            <a class="navbar-item" href="/docs/{{ $version }}/">
               {{- $version }}{{ if $isLatest }}&nbsp;&nbsp;(<strong>latest</strong>){{ end }}
             </a>
             {{ end -}}
             {{ if $isPreview -}}
-              <a class="navbar-item" href="/docs/next-release-v2">next 2.x&nbsp;release&nbsp;(preview)</a>
-              <a class="navbar-item" href="/docs/next-release">next 1.x&nbsp;release&nbsp;(preview)</a>
+              <a class="navbar-item" href="/docs/next-release-v2/">next 2.x&nbsp;release&nbsp;(preview)</a>
+              <a class="navbar-item" href="/docs/next-release/">next 1.x&nbsp;release&nbsp;(preview)</a>
             {{ end -}}
           </div>
         </div>
         {{ end -}}
-        <a class="navbar-item" href="/download">
+        <a class="navbar-item" href="/download/">
           Download
         </a>
 
@@ -121,31 +122,31 @@
             Project
           </a>
           <div class="navbar-dropdown is-right">
-            <a class="navbar-item" href="/get-involved">
+            <a class="navbar-item" href="/get-involved/">
                 Get involved
             </a>
-            <a class="navbar-item" href="/get-in-touch">
+            <a class="navbar-item" href="/get-in-touch/">
               Get in touch
             </a>
-            <a class="navbar-item" href="/mentorship">
+            <a class="navbar-item" href="/mentorship/">
               Mentorships
             </a>
-            <a class="navbar-item" href="/mentorship-for-mentees">
+            <a class="navbar-item" href="/mentorship-for-mentees/">
               Mentorships - For Mentees
             </a>
-            <a class="navbar-item" href="/mentorship-for-mentors">
+            <a class="navbar-item" href="/mentorship-for-mentors/">
               Mentorships - For Mentors
             </a>
-            <a class="navbar-item" href="/news">
+            <a class="navbar-item" href="/news/">
               News
             </a>
-            <a class="navbar-item" href="/roadmap">
+            <a class="navbar-item" href="/roadmap/">
               Roadmap
             </a>
             <a class="navbar-item" href="https://github.com/cncf/artwork/tree/master/projects/jaeger">
               Branding
             </a>
-            <a class="navbar-item" href="/report-security-issue">
+            <a class="navbar-item" href="/report-security-issue/">
               Report security issue
             </a>
             <a class="navbar-item" href="https://github.com/jaegertracing/jaeger">

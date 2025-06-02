@@ -1,15 +1,15 @@
 span: |
   A **span** represents a logical unit of work in Jaeger that has an operation name, the start time of the operation, and the duration. Spans may be nested and ordered to model causal relationships.
 trace: |
-  A **trace** is a data/execution path through the system, and can be thought of as a directed acyclic graph of [spans](../architecture#span).
+  A **trace** is a data/execution path through the system, and can be thought of as a directed acyclic graph of [spans](../architecture/#span).
 baggage: |
   **Baggage** is arbitrary user-defined metadata (key-value pairs) that can be attached to distributed context propagated by the Jaeger clients. See [OpenTracing documentation](https://opentracing.io/docs/overview/tags-logs-baggage/) for more information.
 agent: |
   The Jaeger **agent** is a network daemon that listens for spans sent over UDP, which it batches and sends to the collector. It is designed to be deployed to all hosts as an infrastructure component. The agent abstracts the routing and discovery of the collectors away from the client.
 collector: |
-  The Jaeger **collector** receives traces from Jaeger [agents](../architecture#agent) and runs them through a processing pipeline. Currently our pipeline validates traces, indexes them, performs any transformations, and finally stores them.
+  The Jaeger **collector** receives traces from Jaeger [agents](../architecture/#agent) and runs them through a processing pipeline. Currently our pipeline validates traces, indexes them, performs any transformations, and finally stores them.
 
-  Jaeger's storage is a pluggable component which currently supports [Cassandra](../deployment#cassandra), [Elasticsearch](../deployment#elasticsearch) and [Kafka](../deployment#kafka).
+  Jaeger's storage is a pluggable component which currently supports [Cassandra](../deployment/#cassandra), [Elasticsearch](../deployment/#elasticsearch) and [Kafka](../deployment/#kafka).
 query: |
   **Query** is a service that retrieves traces from storage and hosts a UI to display them.
 ingester: |
