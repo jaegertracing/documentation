@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 hasparent: true
-weight: 2
+weight: 1
 ---
 
 ## In Docker

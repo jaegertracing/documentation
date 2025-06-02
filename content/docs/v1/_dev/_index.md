@@ -1,6 +1,9 @@
 ---
-title: Introduction
-weight: 1
+# TODO when cloning for a new release:
+# - Replace 99 and DEV below with actual MINOR version number
+title: Docs (1.DEV)
+linkTitle: 1.DEV
+weight: -199
 children:
 - title: Features
   url: features

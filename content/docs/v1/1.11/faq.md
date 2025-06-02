@@ -2,6 +2,7 @@
 title: Frequently Asked Questions
 description: Answers to some frequently asked questions about Jaeger.
 weight: 11
+linkTitle: FAQ
 ---
 
 ## Why is the Dependencies page empty?

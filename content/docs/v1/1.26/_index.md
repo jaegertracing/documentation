@@ -1,9 +1,10 @@
 ---
-title: Introduction
-weight: 1
+title: Docs (1.26)
+weight: -226
 children:
 - title: Features
   url: features
+linkTitle: '1.26'
 ---
 
 Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.

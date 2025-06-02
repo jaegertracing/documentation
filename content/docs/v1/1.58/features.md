@@ -1,6 +1,7 @@
 ---
 title: Features
 hasparent: true
+weight: 2
 ---
 
 ## High Scalability

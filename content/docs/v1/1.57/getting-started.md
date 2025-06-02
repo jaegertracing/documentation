@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 description: Get up and running with Jaeger in your local environment
-weight: 2
+weight: 1
 ---
 
 If you are new to distributed tracing, please check the [Introduction](../) page.

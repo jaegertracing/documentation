@@ -4,7 +4,7 @@
     "_build": "npm run _hugo-dev --",
     "_check:format": "npx prettier --check .",
     "_check:links--warn": "npm run _check:links || (echo; echo 'WARNING: see link-checker output for issues.'; echo)",
-    "_check:links": "make --keep-going check-links",
+    "_check:links": "make --keep-going check-links-all",
     "_commit:public": "HASH=$(git rev-parse --short main); cd public && git add -A && git commit -m \"Site at $HASH\"",
     "_diff:check": "git diff --name-only --exit-code",
     "_filename-error": "echo 'ERROR: the following files violate naming conventions; fix using: `npm run fix:filenames`'; echo; npm run -s _ls-bad-filenames; exit 1",
