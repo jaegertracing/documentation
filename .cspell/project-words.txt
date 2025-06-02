@@ -37,6 +37,7 @@ healthcheckv2
 healthz
 hostnames
 hostport
+htmltest
 htpasswd
 hugo
 ingester
@@ -75,6 +76,7 @@ myversion
 navtitle
 nginx
 nssm
+nvmrc
 olap
 openpgp
 opensearch
