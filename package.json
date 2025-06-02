@@ -44,7 +44,7 @@
     "prettier": "^3.5.3"
   },
   "optionalDependencies": {
-    "bulma": "0.7.1",
+    "bulma": "0.9.4",
     "bulma-tooltip": "2.0.2"
   },
   "peerDependencies": {
