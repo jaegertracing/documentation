@@ -1,7 +1,9 @@
 ---
-title: Introduction
-linkTitle: 2.X # Set to 2.X when publishing
-weight: -200 # Set to 200 + X * 10 when publishing
+# TODO when cloning for a new release:
+# - Replace 99 and DEV below with actual MINOR version number
+title: Docs (2.DEV)
+linkTitle: 2.DEV
+weight: -299
 children:
 - title: Getting Started
   url: getting-started

@@ -1,6 +1,7 @@
 ---
-title: Introduction
-weight: 1
+title: Docs (1.22)
+linkTitle: '1.22'
+weight: -122
 children:
 - title: Features
   url: features

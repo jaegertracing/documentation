@@ -78,9 +78,10 @@
                 when generating menu for pages inside docs/, use same version as the doc.
                --> */ -}}
               {{ $matchVersion := cond ($isDocsPage) $majorMinorVersion $latestV2 -}}
+              {{ $title := cond (hasPrefix .Title "Docs") "Introduction" .Title -}}
               {{ if and (eq $docVersion $matchVersion) (not .Params.hasparent) -}}
                 <a class="navbar-item" href="{{ .RelPermalink }}">
-                  {{- .Title -}}
+                  {{- $title -}}
                 </a>
                 {{ with .Params.children -}}
                   {{ range . -}}

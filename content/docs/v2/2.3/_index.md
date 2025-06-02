@@ -1,6 +1,6 @@
 ---
-title: Introduction
-linkTitle: 2.3
+title: Docs (2.3)
+linkTitle: '2.3'
 weight: -203
 children:
 - title: Getting Started
