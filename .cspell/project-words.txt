@@ -23,6 +23,7 @@ dropwizard
 dsoie
 eddsa
 emsgsize
+errorf
 expvar
 fargate
 flink
@@ -128,6 +129,7 @@ usercert
 userkey
 valuen
 vlog
+warnf
 weaveworks
 workqueue
 xvzf
