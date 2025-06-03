@@ -1,3 +1,4 @@
+{{ $page := . -}}
 {{ $path     := "" }}
 {{ with .File }}
   {{ $path = .Path }}
@@ -67,10 +68,21 @@
   <hr class="hr" />
 
   {{ if .Params.children }}
+    {{ $relPermalink := .RelPermalink -}}
     <p>See also:</p>
     <ul>
       {{ range .Params.children }}
       {{ $url := printf "/docs/%s/%s/" $version .url }}
+      {{ with $page.GetPage $url -}}
+        {{ $url = .RelPermalink -}}
+      {{ else -}}
+        {{ $url = (printf "%s%s" $relPermalink .url) -}}
+        {{ with $page.GetPage $url -}}
+          {{ $url = .RelPermalink -}}
+        {{ else -}}
+          {{ warnf "[panel.html]Page %s (%s) not found: %s, from %s" .title .url $url $relPermalink -}}
+        {{ end -}}
+      {{ end -}}
       <li>
         <a href="{{ $url }}">
           {{ .title }}

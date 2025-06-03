@@ -1,9 +1,9 @@
 ---
 # TODO when cloning for a new release:
-# - Replace 99 and DEV below with actual MINOR version number
+# - Replace 00 and DEV below with actual MINOR version number
 title: Docs (2.DEV)
 linkTitle: 2.DEV
-weight: -299
+weight: -200 # == -200 - MINOR
 children:
 - title: Getting Started
   url: getting-started

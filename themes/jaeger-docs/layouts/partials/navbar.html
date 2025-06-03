@@ -79,6 +79,7 @@
                --> */ -}}
               {{ $matchVersion := cond ($isDocsPage) $majorMinorVersion $latestV2 -}}
               {{ $title := cond (hasPrefix .Title "Docs") "Introduction" .Title -}}
+              {{ $relPermalink := .RelPermalink -}}
               {{ if and (eq $docVersion $matchVersion) (not .Params.hasparent) -}}
                 <a class="navbar-item" href="{{ .RelPermalink }}">
                   {{- $title -}}
@@ -86,7 +87,17 @@
                 {{ with .Params.children -}}
                   {{ range . -}}
                     {{ $url := cond $isDocsPage (printf "/docs/%s/%s" $majorMinorVersion .url) (printf "/docs/%s/%s" $latestV2 .url) -}}
-                    <a class="navbar-item is-small is-hidden-desktop" href="{{ ($page.GetPage $url).RelPermalink }}"> {{/* */ -}}
+                    {{ with $page.GetPage $url -}}
+                      {{ $url = .RelPermalink -}}
+                    {{ else -}}
+                      {{ $url = (printf "%s%s" $relPermalink .url) -}}
+                      {{ with $page.GetPage $url -}}
+                        {{ $url = .RelPermalink -}}
+                      {{ else -}}
+                        {{ warnf "[navbar.html] Page %s (%s) not found: %s, from %s" .title .url $url $relPermalink -}}
+                      {{ end -}}
+                    {{ end -}}
+                    <a class="navbar-item is-small is-hidden-desktop" href="{{ $url }}"> {{/* */ -}}
                       &cir; {{ .navtitle | default .title -}}
                     </a>
                   {{ end -}}
