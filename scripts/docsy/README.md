@@ -29,18 +29,22 @@ Root `_index.md` uses relative links starting with `./`:
   [Memory](./memory/) → [Memory](./storage/memory/)
   ```
 - When target became _index.md: Link preserved
+  (tested in `scripts/reorg-docs/tests/FileMover/link_updates.test.ts`)
   ```markdown
   [Architecture](./architecture/) → [Architecture](./architecture/)
   ```
 
-#### 2. Links in Unmoved Files
+#### 2. Links in top-level non-index files not affected by reorg
 
-Files that weren't moved use single-level parent references:
+Top-level non-index files that weren't moved.
+
 - When target moved to subdirectory:
+  (tested in `scripts/reorg-docs/tests/FileMover/integration.test.ts`)
   ```markdown
-  [Memory](../memory/) → [Memory](../storage/memory/)
+  [APIs](../apis/) → [APIs](../architecture/apis/)
   ```
 - When target became _index.md: Link preserved
+  (tested in `scripts/reorg-docs/tests/FileMover/integration.test.ts`)
   ```markdown
   [Architecture](../architecture/) → [Architecture](../architecture/)
   ```
@@ -49,10 +53,11 @@ Files that weren't moved use single-level parent references:
 
 Files that were moved have different handling based on target location:
 
-a. **Same Directory Target**
+a. From an (new) _index.md, to a page that was moved into the same folder:
+
    - Uses `./` for files in the same directory:
    ```markdown
-   [Memory](../memory/) → [Memory](./memory/)
+   [Sampling](../sampling/) → [Memory](./sampling/)
    ```
 
 b. **Different Directory Target**
@@ -61,6 +66,10 @@ b. **Different Directory Target**
    [Architecture](../architecture/) → [Architecture](../../architecture/)
    [Deploy](../deployment/) → [Deploy](../../deployment/)
    ```
+c. Linked to top-level non-index file that was not moved.
+   Test: 'for non-index page to unmoved page'
+
+   > Note: Integration tests for these link transformations can be found in `scripts/reorg-docs/tests/FileMover/integration.test.ts` under the "link transformations from README examples" describe block.
 
 #### 4. Special Cases
 
