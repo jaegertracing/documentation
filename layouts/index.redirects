@@ -1,0 +1,6 @@
+{{/* Netlify redirects. See https://www.netlify.com/docs/redirects/ */ -}}
+
+{{ $redirects := partial "redirects.txt" . -}}
+{{ $lines := split $redirects "\n" -}}
+{{ $sorted := sort $lines | uniq -}}
+{{ delimit $sorted "\n" }}
