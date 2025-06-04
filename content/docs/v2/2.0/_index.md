@@ -7,8 +7,6 @@ children:
   url: getting-started
 - title: Features
   url: features
-- title: Migration
-  url: migration
 ---
 
 Welcome to Jaeger's documentation! Below, you'll find information for beginners and experienced Jaeger users. If you cannot find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch/).
