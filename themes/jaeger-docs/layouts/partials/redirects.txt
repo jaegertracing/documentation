@@ -1,0 +1,23 @@
+{{ $versions := site.Params.versions -}}
+{{ $latestV1 := site.Params.latest -}}
+{{ $latestV2 := site.Params.latestv2 -}}
+{{ $latest   := $latestV2 -}}
+
+/docs    /docs/{{ $latest }}     301!
+/docs/latest     /docs/{{ $latest }}
+/docs/latest/*     /docs/{{ $latest }}/:splat
+
+{{ $pages := slice "download" "get-in-touch" "roadmap" "news" "report-security-issue" -}}
+{{ range $pages }}
+/docs/{{ . }}     /{{ . }}
+{{ end -}}
+
+{{ $v1Pages := slice "cli" "client-features" "client-libraries" "opentelemetry" -}}
+{{ range $v1Pages }}
+/docs/{{ . }}     /docs/{{ $latestV1 }}/{{ . }}
+{{ end -}}
+
+{{ $v2Pages := slice "apis" "architecture" "deployment" "faq" "features" "frontend-ui" "getting-started" "monitoring" "operator" "performance-tuning" "sampling" "security" "troubleshooting" "windows" -}}
+{{ range $v2Pages }}
+/docs/{{ . }}     /docs/{{ $latest }}/{{ . }}
+{{ end -}}
