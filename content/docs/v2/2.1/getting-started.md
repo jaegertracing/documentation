@@ -20,7 +20,7 @@ docker run --rm --name jaeger \
   jaegertracing/jaeger:{{< currentVersion >}}
 ```
 
-This runs the **all-in-one** configuration of Jaeger ([see Architecture](../architecture/)) that combines collector and query components in a single process and uses a transient in-memory storage for trace data. You can navigate to `http://localhost:16686` to access the Jaeger UI. See the [APIs page](../apis/) for a full list of exposed ports.
+This runs the **all-in-one** configuration of Jaeger ([see Architecture](../architecture/)) that combines collector and query components in a single process and uses a transient in-memory storage for trace data. You can navigate to `http://localhost:16686` to access the Jaeger UI. See the [APIs page](../architecture/apis/) for a full list of exposed ports.
 
 {{< warning >}}
 Your applications must be instrumented before they can send tracing data to Jaeger. We recommend using the [OpenTelemetry](https://opentelemetry.io/) instrumentation and SDKs.
@@ -53,7 +53,7 @@ Then navigate to `http://localhost:8080`. See the [README](https://github.com/ja
 
 ## SPM
 
-The Service Performance Monitoring (SPM) page has its own [Quick Start](../spm/#getting-started) that shows how to explore that aspect of Jaeger.
+The Service Performance Monitoring (SPM) page has its own [Quick Start](../architecture/spm/#getting-started) that shows how to explore that aspect of Jaeger.
 
 [hotrod-tutorial]: https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2
 [otel]: https://opentelemetry.io

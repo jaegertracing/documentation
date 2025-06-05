@@ -34,18 +34,18 @@ If you are new to distributed tracing, we recommend the following external resou
 
 (2024-11-12) Jaeger has had a successful 9 year history as the leading open source distributed tracing platform strongly aligned with industry standardization efforts such as OpenTracing and OpenTelemetry. Jaeger is one of the first graduated projects in the Cloud Native Computing Foundation (CNCF). After over 60 releases, Jaeger is celebrating a major milestone with the release of **Jaeger v2**. This is a new architecture that utilizes OpenTelemetry Collector framework as the base and extends it to implement Jaeger’s unique features. It brings significant improvements and changes, making Jaeger more flexible, extensible, and better aligned with the OpenTelemetry project. Read [full post here](https://medium.com/jaegertracing/jaeger-v2-released-09a6033d1b10).
 
-Please refer to [Migration guide](./migration/) for details on migrating from Jaeger v1.
+Please refer to [Migration guide](./external-guides/migration/) for details on migrating from Jaeger v1.
 
 ## Features
 
   * [OpenTracing](https://opentracing.io/)-inspired data model
   * [OpenTelemetry](https://opentelemetry.io/) compatible
   * Multiple built-in storage backends:
-    * [Cassandra](./cassandra/)
-    * [Elasticsearch](./elasticsearch/) and [OpenSearch](./opensearch/)
-    * [Badger](./badger/)
-    * [Kafka](./kafka/) (as an intermediate buffer)
-    * [Memory storage](./memory/)
+    * [Cassandra](./storage/cassandra/)
+    * [Elasticsearch](./storage/elasticsearch/) and [OpenSearch](./storage/opensearch/)
+    * [Badger](./storage/badger/)
+    * [Kafka](./storage/kafka/) (as an intermediate buffer)
+    * [Memory storage](./storage/memory/)
   * Extensibility with custom backends via [Remote Storage API](./storage/#remote-storage)
   * System topology / service dependencies graphs
   * Adaptive sampling
