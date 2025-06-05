@@ -4,6 +4,7 @@ baseURL: https://www.jaegertracing.io
 title: Jaeger
 disableKinds: [taxonomy]
 theme: [basetheme, jaeger-docs]
+disableAliases: true # We do redirects via Netlify's _redirects file
 pygmentsCodeFences: true
 pygmentsUseClasses: true
 

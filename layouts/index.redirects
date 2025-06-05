@@ -4,3 +4,4 @@
 {{ $lines := split $redirects "\n" -}}
 {{ $sorted := sort $lines | uniq -}}
 {{ delimit $sorted "\n" }}
+{{ partial "redirects/pages.txt" . | partial "func/trim-lines.html" -}}
