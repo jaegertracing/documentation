@@ -1,5 +1,7 @@
 ---
 title: Download Jaeger
+linkTitle: Download
+aliases: [/docs/download]
 ---
 
 Jaeger components can be downloaded in two ways:

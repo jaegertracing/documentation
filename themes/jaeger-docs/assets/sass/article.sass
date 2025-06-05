@@ -1,4 +1,6 @@
-/* Rules for the main "article" sections of page domains (docs, download, taxonomies, etc.) */
+// Rules for the main "article" sections of page domains (docs, download, taxonomies, etc.)
+// cSpell:ignore: linux
+
 @import "variables"
 
 .notification .content
@@ -8,7 +10,7 @@
   &.article--terms
     .content
       li a
-        font-size: 1.5rem
+      font-size: 1.5rem
 
     &.article--docs
     .container
@@ -17,7 +19,7 @@
         top: 0
         padding: 0
         margin: auto
-       
+
   &.is-2.is-hidden-touch
     position: sticky
     top: 0vh
@@ -42,7 +44,6 @@
       a
         font-weight: $link-font-weight
 
-
   &.article--docs, &.article--download
     .content
       // Remove the focus outline when clicking TOC items
@@ -52,11 +53,11 @@
       // Scroll to the right position from anchors
       // https://tscanlin.github.io/tocbot/#fixed-headers
       h1::before, h2::before, h3::before, h4::before, h5::before, h6::before
-        display: block;
-        content: " ";
-        height: 120px;
-        margin-top: -120px;
-        visibility: hidden;
+        display: block
+        content: " "
+        height: 120px
+        margin-top: -120px
+        visibility: hidden
 
       // Styling for code samples inside normal text
       p, h1, h2, h3, h4 ,h5, h6, li, a
@@ -84,3 +85,6 @@
     position: relative
     top: 0
     padding: 0
+
+.article--download
+  @extend .page--download
