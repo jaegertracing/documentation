@@ -32,6 +32,10 @@
   {{ $vMajor    = "2" }}
 {{ end }}
 
+{{ $latestUrl = partial "docs/lookup-page" (slice . $latestUrl) -}}
+{{ $latestUrlV1 = partial "docs/lookup-page" (slice . $latestUrlV1) -}}
+{{ $latestUrlV2 = partial "docs/lookup-page" (slice . $latestUrlV2) -}}
+
 <header>
   <p class="title is-1">{{ .Title }}</p>
   {{ with .Params.description }}
@@ -48,16 +52,16 @@
       {{ end }}
       {{ if $isLatest }}
       <span class="tag is-medium is-success">Latest</span>
-      {{ else if .GetPage $latestUrl}}
+      {{ else if $latestUrl }}
       <a class="tag is-medium is-warning" href="{{ $latestUrl }}">
         Go to the latest {{ $vMajor }}.x version
       </a>
       {{ end }}
-      {{ if and (eq $vMajor "1") (.GetPage $latestUrlV2) }}
+      {{ if and (eq $vMajor "1") $latestUrlV2 }}
       <a class="tag is-medium" href="{{ $latestUrlV2 }}">
         Go to the latest 2.x version
       </a>
-      {{ else if and (eq $vMajor "2") (.GetPage $latestUrlV1) }}
+      {{ else if and (eq $vMajor "2") $latestUrlV1 }}
       <a class="tag is-medium" href="{{ $latestUrlV1 }}">
         Go to the latest 1.x version
       </a>

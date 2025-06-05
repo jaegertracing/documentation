@@ -1,5 +1,6 @@
 ---
 title: CLI flags
+aliases: [../cli]
 widescreen: true
 hasparent: true
 ---

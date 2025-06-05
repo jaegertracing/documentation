@@ -1,5 +1,6 @@
 ---
 title: Service Performance Monitoring (SPM)
+aliases: [../spm]
 hasparent: true
 ---
 
@@ -51,7 +52,7 @@ The feature can be accessed from the "Monitor" tab along the top menu.
 This demo includes [Microsim](https://github.com/yurishkuro/microsim); a microservices
 simulator to generate trace data.
 
-If generating traces manually is preferred, the [Sample App: HotROD](../getting-started/#sample-app-hotrod)
+If generating traces manually is preferred, the [Sample App: HotROD](../../getting-started/#sample-app-hotrod)
 can be started via docker. Be sure to include `--net monitor_backend` in the `docker run` command.
 
 ## Architecture
@@ -350,14 +351,14 @@ data quality issue, and the instrumentation should set the span kind.
 The reason for defaulting to `server` span kinds is to avoid double-counting
 both ingress and egress spans in the `server` and `client` span kinds, respectively.
 
-[spm-demo]: https://github.com/jaegertracing/jaeger/tree/v1.69.0/docker-compose/monitor
-[metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/v1.69.0/model/proto/metrics/metricsquery.proto
-[openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/v1.69.0/model/proto/metrics/openmetrics.proto#L53
+[spm-demo]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor
+[metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto
+[openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53
 [opentelemetry-collector]: https://opentelemetry.io/docs/collector/
 [spanmetrics]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/spanmetricsprocessor#section-readme
 [spanmetrics-conn]: https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/connector/spanmetricsconnector#section-readme
 [prom-metric-labels]: https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels
-[http-api-readme]: https://github.com/jaegertracing/jaeger/tree/v1.69.0/docker-compose/monitor#http-api
+[http-api-readme]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api
 [spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L23
 [spanmetrics-config-duration]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L14
 

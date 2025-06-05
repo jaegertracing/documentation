@@ -42,7 +42,7 @@ run in a single process, or as a scalable distributed system. There are two main
 
 In this deployment the collectors receive the data from traced applications and write it directly to storage. The storage must be able to handle both average and peak traffic. Collectors use an in-memory queue to smooth short-term traffic peaks, but a sustained traffic spike may result in dropped data if the storage is not able to keep up.
 
-Collectors are able to centrally serve sampling configuration to the SDKs, known as [remote sampling mode](../sampling/#remote-sampling). They can also enable automatic sampling configuration calculation, known as [adaptive sampling](../sampling/#adaptive-sampling).
+Collectors are able to centrally serve sampling configuration to the SDKs, known as [remote sampling mode](./sampling/#remote-sampling). They can also enable automatic sampling configuration calculation, known as [adaptive sampling](./sampling/#adaptive-sampling).
 
 [![Architecture](/img/architecture-v1-2023.png)](/img/architecture-v1-2023.png)
 
@@ -98,7 +98,7 @@ There are many ways to instrument an application:
 
 Instrumentation typically should not depend on specific tracing SDKs, but only on abstract tracing APIs like the OpenTelemetry API. The tracing SDKs implement the tracing APIs and take care of data export.
 
-The instrumentation is designed to be always on in production. To minimize  overhead, the SDKs employ various sampling strategies. When a trace is sampled, the profiling span data is captured and transmitted to the Jaeger backend. When a trace is not sampled, no profiling data is collected at all, and the calls to the tracing API are short-circuited to incur a minimal amount of overhead. For more information, please refer to the [Sampling](../sampling/) page.
+The instrumentation is designed to be always on in production. To minimize  overhead, the SDKs employ various sampling strategies. When a trace is sampled, the profiling span data is captured and transmitted to the Jaeger backend. When a trace is not sampled, no profiling data is collected at all, and the calls to the tracing API are short-circuited to incur a minimal amount of overhead. For more information, please refer to the [Sampling](./sampling/) page.
 
 ### Collector
 
@@ -106,7 +106,7 @@ The instrumentation is designed to be always on in production. To minimize  over
 
 ### Query
 
-**jaeger-query** is a service that exposes the [APIs](../apis/) for retrieving traces from storage and hosts a Web UI for searching and analyzing traces.
+**jaeger-query** is a service that exposes the [APIs](./apis/) for retrieving traces from storage and hosts a Web UI for searching and analyzing traces.
 
 ### Ingester
 

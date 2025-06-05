@@ -1,5 +1,6 @@
 ---
 title: Operator for Kubernetes
+aliases: [../operator]
 hasparent: true
 ---
 
@@ -486,7 +487,7 @@ spec:
 <3> The options for the `create-schema` job.
 
 {{< info >}}
-The default create-schema job uses `MODE=prod`, which implies a replication factor of `2`, using `NetworkTopologyStrategy` as the class, effectively meaning that at least 3 nodes are required in the Cassandra cluster. If a `SimpleStrategy` is desired, set the mode to `test`, which then sets the replication factor of `1`. Refer to the [create-schema script](https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/cassandra/schema/create.sh) for more details.
+The default create-schema job uses `MODE=prod`, which implies a replication factor of `2`, using `NetworkTopologyStrategy` as the class, effectively meaning that at least 3 nodes are required in the Cassandra cluster. If a `SimpleStrategy` is desired, set the mode to `test`, which then sets the replication factor of `1`. Refer to the [create-schema script](https://github.com/jaegertracing/jaeger/blob/v1.69.0/internal/storage/v1/cassandra/schema/create.sh) for more details.
 {{< /info >}}
 
 ### Elasticsearch storage
@@ -1100,7 +1101,7 @@ spec:
 
 This example defines a default sampling strategy that is probabilistic, with a 50% chance of the trace instances being sampled.
 
-Refer to the Jaeger documentation on [Sampling Configuration](</docs/{{% param latest %}}/sampling/>) to see how service and endpoint sampling can be configured. The JSON representation described in that documentation can be used in the operator by converting to YAML.
+Refer to the Jaeger documentation on [Collector Sampling Configuration](/docs/latest/sampling/#collector-sampling-configuration) to see how service and endpoint sampling can be configured. The JSON representation described in that documentation can be used in the operator by converting to YAML.
 
 ## Finer grained configuration
 
