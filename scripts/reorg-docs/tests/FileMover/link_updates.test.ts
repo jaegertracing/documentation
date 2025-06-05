@@ -45,7 +45,8 @@ const newLocal = {
   '/docs/architecture.md': ARCHITECTURE_CONTENT,
   '/docs/features.md': '# Features',
   '/docs/deployment.md': DEPLOYMENT_CONTENT,
-  '/docs/production-setup.md': PRODUCTION_SETUP_CONTENT
+  '/docs/production-setup.md': PRODUCTION_SETUP_CONTENT,
+  '/docs/components.md': '# Components'
 };
 
 describe('FileMover: link updates', () => {

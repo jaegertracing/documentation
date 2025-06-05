@@ -2,7 +2,7 @@ import { Volume } from 'memfs';
 import { FileMover } from '../../src/FileMover.js';
 import type { FileSystem } from '../../src/types.js';
 
-describe('FileMover: sanity checks', () => {
+describe('Sanity checks', () => {
   let vol: any;
   let fs: FileSystem;
   let mover: FileMover;

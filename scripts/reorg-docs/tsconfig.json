@@ -10,9 +10,10 @@
     "outDir": "dist",
     "sourceMap": true,
     "declaration": true,
-    "rootDir": "src",
-    "isolatedModules": true
+    "rootDir": ".",
+    "isolatedModules": true,
+    "types": ["node", "jest"]
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "tests"]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
