@@ -1,6 +1,6 @@
 import { Volume } from 'memfs';
-import { FileMover } from '../../src/FileMover.js';
-import type { FileSystem } from '../../src/types.js';
+import { FileMover } from '../src/FileMover.js';
+import type { FileSystem } from '../src/types.js';
 import * as fs from 'fs/promises';
 import path from 'path';
 
@@ -8,7 +8,7 @@ const DOCS_VERSION = '2.6';
 const DOCS_MAJOR_VERSION = DOCS_VERSION[0];
 const DOCS_VERSION_PATH = `v${DOCS_MAJOR_VERSION}/${DOCS_VERSION}`;
 
-describe('FileMover: integration tests with real docs', () => {
+describe('Integration tests with real docs', () => {
   const REPO_ROOT = path.resolve(process.cwd(), '../..');
   const TMP_ROOT = path.join(REPO_ROOT, 'tmp');
   const TEST_DATA_ROOT = path.join(TMP_ROOT, 'test-data');
@@ -113,8 +113,6 @@ describe('FileMover: integration tests with real docs', () => {
     });
   });
 
-
-
   describe('preserves external links in root _index.md', () => {
     let rootIndex: string;
 
@@ -201,6 +199,38 @@ describe('FileMover: integration tests with real docs', () => {
     });
   });
 
+  describe('adds aliases to front matter when necessary', () => {
+    it('does not add aliases to unmoved files like getting-started', async () => {
+      const content = await _readFile('getting-started.md');
+      expect(content).not.toContain('aliases:');
+    });
+
+    it('does not add aliases to files moved to become an index page', async () => {
+      const content = await _readFile('architecture/_index.md');
+      expect(content).not.toContain('aliases:');
+    });
+
+    it('adds aliases in monitoring.md', async () => {
+      const monitoringContent = await _readFile('operations/monitoring.md');
+      expect(monitoringContent).toContain('aliases: [../monitoring]');
+    });
+
+    it('adds aliases in the right place', async () => {
+      const monitoringContent = await _readFile('operations/monitoring.md');
+      const expectedFrontMatter = [
+        '---',
+        'title: Monitoring Jaeger',
+        'navtitle: Monitoring',
+        'aliases: [../monitoring]',
+        'hasparent: true',
+        '---'
+      ].join('\n');
+      const frontMatterMatch = monitoringContent.match(/^---([\s\S]*?)---/);
+      expect(frontMatterMatch?.[0]).toBe(expectedFrontMatter);
+    });
+
+
+  });
 });
 
 async function copyDirectory(src: string, dest: string): Promise<void> {

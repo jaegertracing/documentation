@@ -6,6 +6,10 @@ import { FileWalker } from './FileWalker.js';
 
 interface FrontMatter {
   title?: string;
+  linkTitle?: string;
+  navTitle?: string;
+  description?: string;
+  aliases?: string[];
   children?: Array<{
     title: string;
     url: string;
@@ -35,12 +39,23 @@ export class FileMover {
    * Process all files in the docs directory
    */
   async processDirectory(): Promise<void> {
-    // First pass: Move all files (non-recursive since we only move from top level)
+    await this.moveFiles();
+    await this.updateLinks();
+  }
+
+  /**
+   * First pass: Move all files (non-recursive since we only move from top level)
+   */
+  async moveFiles(): Promise<void> {
     for await (const filePath of this.walker.walkFiles(this.docsDir, false)) {
       await this.testAndMove(filePath);
     }
+  }
 
-    // Second pass: Update links in all files (recursive to find moved files)
+  /**
+   * Second pass: Update links in all files (recursive to find moved files)
+   */
+  private async updateLinks(): Promise<void> {
     for await (const filePath of this.walker.walkFiles(this.docsDir, true)) {
       await this.linkFixer.updateLinksInFile(filePath, this.movedFiles);
     }
@@ -59,6 +74,7 @@ export class FileMover {
       const children = await this.getChildren(filePath);
       await this.moveParentFile(filePath);
       await this.moveChildrenFromList(filePath, children);
+      await this.addAliasesToMovedChildren(filePath, children);
     }
     return this.movedFiles.size > initialMoveCount;
   }
@@ -110,7 +126,7 @@ export class FileMover {
    * Move a parent file to _index.md in its own directory and update any links to moved files
    * @param parentFile - Path to the parent file
    */
-  private async moveParentFile(parentFile: string): Promise<void> {
+  /*private*/ async moveParentFile(parentFile: string): Promise<void> {
     try {
       // Create parent directory
       const parentDir = path.join(path.dirname(parentFile), path.basename(parentFile, '.md'));
@@ -171,5 +187,82 @@ export class FileMover {
    */
   getMovedFiles(): ReadonlyMap<string, string> {
     return this.movedFiles;
+  }
+
+  /**
+   * Adds aliases to moved child files pointing to their original locations
+   * @param parentFile - Path to the parent file
+   * @param children - List of child URLs that were moved
+   */
+  private async addAliasesToMovedChildren(parentFile: string, children: string[]): Promise<void> {
+    const parentDir = path.join(path.dirname(parentFile), path.basename(parentFile, '.md'));
+
+    for (const childUrl of children) {
+      const oldPath = path.join(path.dirname(parentFile), `${childUrl}.md`);
+      const newPath = path.join(parentDir, path.basename(oldPath));
+
+      const content = await this.fs.readFile(newPath, 'utf8');
+      const alias = this.calculateAlias(oldPath, newPath);
+      const modifiedContent = this.addAliasToFrontMatter(content, alias);
+      await this.fs.writeFile(newPath, modifiedContent);
+    }
+  }
+
+  /**
+   * Adds an alias to the front matter of a file
+   * @param content - The file content
+   * @param alias - The alias to add
+   * @returns The modified content
+   */
+  private addAliasToFrontMatter(content: string, alias: string): string {
+    const matches = content.match(/^---\n([\s\S]*?)\n---/);
+    if (!matches) return content;
+
+    const frontMatter = yaml.load(matches[1]) as FrontMatter;
+    const orderedFrontMatter: Record<string, any> = {};
+
+    // Track if we've added the aliases field
+    let aliasesAdded = false;
+    let lastTargetField = '';
+
+    // First pass: copy fields and track the last target field
+    for (const [key, value] of Object.entries(frontMatter)) {
+      if (['description', 'linkTitle', 'navtitle', 'title'].includes(key)) {
+        lastTargetField = key;
+      }
+    }
+
+    // Second pass: copy fields and add aliases after the last target field
+    for (const [key, value] of Object.entries(frontMatter)) {
+      orderedFrontMatter[key] = value;
+      if (!aliasesAdded && key === lastTargetField) {
+        orderedFrontMatter.aliases = [alias];
+        aliasesAdded = true;
+      }
+    }
+
+    // If we haven't added aliases yet (none of the target fields existed), add it at the end
+    if (!aliasesAdded) {
+      orderedFrontMatter.aliases = [alias];
+    }
+
+    const newFrontMatter = yaml.dump(orderedFrontMatter, {
+      flowLevel: 1  // Force flow style (array syntax) for arrays
+    });
+    return content.replace(matches[0], `---\n${newFrontMatter}---`);
+  }
+
+  /**
+   * Calculates the relative path from a new file location to its old location
+   * @param oldPath - The original file path
+   * @param newPath - The new file path
+   * @returns The relative path to use as an alias
+   */
+  private calculateAlias(oldPath: string, newPath: string): string {
+    const oldDir = path.dirname(oldPath);
+    const newDir = path.dirname(newPath);
+    const relPath = path.relative(newDir, oldDir);
+    const oldBase = path.basename(oldPath, '.md');
+    return path.join(relPath, oldBase);
   }
 }

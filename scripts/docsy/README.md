@@ -163,3 +163,57 @@ The script will:
    - Handle cases where child files might already be in their target location
    - Preserve all content and front matter during moves
    - Report actions taken and any issues encountered
+
+   ---
+
+## Correspondence between v1 and v2 pages
+
+Docs (1.69)
+Features
+Getting Started
+Architecture
+○ APIs
+○ Sampling
+Deployment
+○ Kubernetes
+○ Frontend/UI
+○ CLI Flags
+○ Security
+○ On Windows
+○ SPM
+Monitoring
+Perf Tuning
+Troubleshooting
+FAQs
+Tools
+External Guides
+
+Docs (2.6)
+○ Getting Started
+○ Features
+Architecture
+○ APIs
+○ Sampling
+○ SPM
+○ Terminology
+Deployment
+○ Configuration
+○ User Interface
+○ On Kubernetes
+○ On Windows
+○ Security
+Storage Backends
+○ Memory
+○ Badger
+○ Cassandra
+○ ElasticSearch
+○ Kafka
+○ OpenSearch
+Operations
+○ Monitoring
+○ Troubleshooting
+○ Performance Tuning
+○ Tools
+FAQs
+External Guides
+○ Migration Guides
