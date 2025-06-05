@@ -6,6 +6,9 @@ IgnoreDirs:
 IgnoreURLs:
   - /livereload.js # cSpell:disable-line
   - ^https://www.jaegertracing.io/js/lunr
+  # Valid URL, whether canonical (before reorg) or not (and handled via a redirect)
+  - ^/docs/1.[6-9]\d/sampling/
+  - ^/docs/latest/architecture/
   # Valid URLs, but servers yield 403 or similar errors
   - ^https://(twitter|x).com/[Jj]aeger[Tt]racing
   - ^https://calendar.google.com/

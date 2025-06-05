@@ -1,5 +1,6 @@
 ---
 title: Sampling
+aliases: [../sampling]
 hasparent: true
 ---
 

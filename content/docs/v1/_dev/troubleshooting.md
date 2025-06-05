@@ -35,11 +35,11 @@ For example, when using the Jaeger SDK for Java, the strategy is usually printed
 
 ### Remote Sampling
 
-The Jaeger backend supports [Remote Sampling](../sampling/#remote-sampling), i.e., configuring sampling strategies centrally and making them available to the SDKs. Some, but not all, OpenTelemetry SDKs support remote sampling, often via extensions (refer to [Migration to OpenTelemetry](/sdk-migration/#migration-to-opentelemetry) for details).
+The Jaeger backend supports [Remote Sampling](../architecture/sampling/#remote-sampling), i.e., configuring sampling strategies centrally and making them available to the SDKs. Some, but not all, OpenTelemetry SDKs support remote sampling, often via extensions (refer to [Migration to OpenTelemetry](/sdk-migration/#migration-to-opentelemetry) for details).
 
 If you suspect the remote sampling is not working correctly, try these steps:
 
-1. Make sure that the SDK is actually configured to use remote sampling, points to the correct sampling service address (see [APIs](../apis/#remote-sampling-configuration-stable)), and that address is reachable from your application's [networking namespace](#networking-namespace).
+1. Make sure that the SDK is actually configured to use remote sampling, points to the correct sampling service address (see [APIs](../architecture/apis/#remote-sampling-configuration-stable)), and that address is reachable from your application's [networking namespace](#networking-namespace).
 1. Verify that the server is returning the appropriate sampling strategy for your service:
 ```
     $ curl "jaeger-collector:14268/api/sampling?service=foobar"

@@ -1,5 +1,6 @@
 ---
 title: Windows Service Deployment
+aliases: [../windows]
 hasparent: true
 ---
 

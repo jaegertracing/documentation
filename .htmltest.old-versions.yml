@@ -4,4 +4,5 @@ IgnoreAltMissing: true
 IgnoreURLs:
   - /livereload.js
   - ^/docs/latest/ # ignore redirect of latest
-  - ^/docs/1.69/client-(features|libraries)/
+  # Valid URL, whether canonical (before reorg) or not (and handled via a redirect)
+  - ^/docs/1.[6-9]\d/

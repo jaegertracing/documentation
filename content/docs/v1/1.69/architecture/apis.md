@@ -1,5 +1,6 @@
 ---
 title: APIs
+aliases: [../apis]
 hasparent: true
 ---
 
@@ -21,7 +22,7 @@ Since Jaeger v1.32, **jaeger-collector** and **jaeger-query** Service ports that
 
 Since v1.35, the Jaeger backend can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. It is no longer necessary to configure the OpenTelemetry SDKs with Jaeger exporters, nor deploy the OpenTelemetry Collector between the OpenTelemetry SDKs and the Jaeger backend.
 
-The OTLP data is accepted in these formats: (1) binary gRPC, (2) Protobuf over HTTP, (3) JSON over HTTP. For more details on the OTLP receiver see the [official documentation][otlp-rcvr]. Note that not all configuration options are supported in **jaeger-collector** (see `--collector.otlp.*` [CLI Flags](../cli/#jaeger-collector)), and only tracing data is accepted, since Jaeger does not store other telemetry types.
+The OTLP data is accepted in these formats: (1) binary gRPC, (2) Protobuf over HTTP, (3) JSON over HTTP. For more details on the OTLP receiver see the [official documentation][otlp-rcvr]. Note that not all configuration options are supported in **jaeger-collector** (see `--collector.otlp.*` [CLI Flags](../../deployment/cli/#jaeger-collector)), and only tracing data is accepted, since Jaeger does not store other telemetry types.
 
 | Port  | Protocol | Endpoint     | Format
 | ----- | -------  | ------------ | ----
@@ -73,7 +74,7 @@ Jaeger UI communicates with **jaeger-query** Service via JSON API. For example, 
 
 ## Remote Storage API (stable)
 
-When using the `grpc` storage type (a.k.a. [remote storage](../deployment/#remote-storage)), Jaeger components can use custom storage backends as long as those backends implement the gRPC [Remote Storage API][storage.proto].
+When using the `grpc` storage type (a.k.a. [remote storage](../../deployment/#remote-storage)), Jaeger components can use custom storage backends as long as those backends implement the gRPC [Remote Storage API][storage.proto].
 
 ## Remote Sampling Configuration (stable)
 
@@ -115,7 +116,7 @@ For programmatic access to the service graph, the recommended API is gRPC/Protob
 
 ## Service Performance Monitoring (internal)
 
-Please refer to the [SPM Documentation](../spm/#api)
+Please refer to the [SPM Documentation](../../deployment/spm/#api)
 
 [jaeger-idl]: https://github.com/jaegertracing/jaeger-idl/
 [jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift

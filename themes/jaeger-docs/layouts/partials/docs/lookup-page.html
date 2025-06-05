@@ -1,0 +1,40 @@
+{{/* Page lookup helper for inter-version links. */ -}}
+
+{{ $page := index . 0 -}}
+{{ $url := index . 1 -}}
+{{ $result := $url -}}
+{{ $segments := split (trim $url "/") "/" -}}
+
+{{ if lt (len $segments) 3 -}}
+  {{ if not ($page.GetPage $url) -}}
+    {{ $result = "" -}}
+  {{ end -}}
+{{ else -}}
+  {{ $version := index $segments 1 -}}
+  {{ $targetPage := index $segments (cond (eq (len $segments) 4) 3 2) -}}
+
+  {{ if not ($page.GetPage $url) -}}
+    {{/* Look for page in the version directory. */ -}}
+    {{ $rootedUrl := printf "/docs/%s/%s/" $version $targetPage -}}
+    {{ if $page.GetPage $rootedUrl -}}
+      {{ $result = $rootedUrl -}}
+    {{ else -}}
+      {{/* Look for page in a subdirectory of the version directory. */ -}}
+      {{ $versDir := printf "/docs/%s/" $version -}}
+      {{/*
+        {{ warnf "[header.html] Page %s: looking for %s in %s" $page.RelPermalink $url $versDir -}}
+      */ -}}
+      {{ $result = "" -}}
+      {{ with $page.GetPage $versDir -}}
+        {{ range .RegularPagesRecursive -}}
+          {{ if in .RelPermalink (printf "/%s/" $targetPage) -}}
+            {{ $result = .RelPermalink -}}
+          {{ end -}}
+        {{ end -}}
+      {{ end -}}
+    {{ end -}}
+  {{ end -}}
+
+{{ end -}}
+
+{{ return $result -}}

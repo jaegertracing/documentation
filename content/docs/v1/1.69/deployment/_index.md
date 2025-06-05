@@ -46,7 +46,7 @@ Jaeger binaries can be configured in a number of ways (in the order of decreasin
   * environment variables,
   * configuration files in JSON, TOML, YAML, HCL, or Java properties formats.
 
-To see the complete list of options, run the binary with the `help` command or refer to the [CLI Flags](../cli/) page for more information. Options that are specific to a certain storage backend are _only listed if the storage type is selected_. For example, to see all available options in the Collector with Cassandra storage:
+To see the complete list of options, run the binary with the `help` command or refer to the [CLI Flags](./cli/) page for more information. Options that are specific to a certain storage backend are _only listed if the storage type is selected_. For example, to see all available options in the Collector with Cassandra storage:
 
 ```sh
 $ docker run --rm \
@@ -98,7 +98,7 @@ You can navigate to `http://localhost:16686` to access the Jaeger UI.
 **jaeger-collector**s are stateless and thus many instances of **jaeger-collector** can be run in parallel.
 **jaeger-collector**s require almost no configuration, except for storage location, such as
 `--cassandra.keyspace` and `--cassandra.servers` options, or the location of Elasticsearch cluster,
-via `--es.server-urls`, depending on which storage is specified. See the [CLI Flags](../cli/) for all
+via `--es.server-urls`, depending on which storage is specified. See the [CLI Flags](./cli/) for all
 command line options.
 
 At default settings **jaeger-collector** exposes the following ports:
@@ -107,7 +107,7 @@ At default settings **jaeger-collector** exposes the following ports:
 | ----- | -------  | -------- | ----
 | 4317  | gRPC     | n/a      | Accepts traces in [OpenTelemetry OTLP format][otlp] (Protobuf).
 | 4318  | HTTP     | `/v1/traces` | Accepts traces in [OpenTelemetry OTLP format][otlp] (Protobuf and JSON).
-| 14268 | HTTP     | `/api/sampling` | Serves sampling policies (see [Remote Sampling](../sampling/#remote-sampling)).
+| 14268 | HTTP     | `/api/sampling` | Serves sampling policies (see [Remote Sampling](../architecture/sampling/#remote-sampling)).
 |       |          | `/api/traces` | Accepts spans in [jaeger.thrift][jaeger-thrift] format with `binary` thrift protocol (`POST`).
 | 14269 | HTTP     | `/`      | Admin port: health check (`GET`).
 |       |          | `/metrics` | Prometheus-style metrics (`GET`).
@@ -170,7 +170,7 @@ The base path can be configured via the `--query.base-path` command line paramet
 
 ### UI Customization and Embedding
 
-Please refer to the [dedicated Frontend/UI page](../frontend-ui/).
+Please refer to the [dedicated Frontend/UI page](./frontend-ui/).
 
 ## Remote Storage (component)
 
@@ -601,7 +601,7 @@ Known remote storage backends:
 ## Metrics Storage Backends
 
 Jaeger Query is capable of querying aggregated R.E.D metrics from a storage backend,
-visualizing them on the [Monitor tab](../spm/). It should be emphasized that the
+visualizing them on the [Monitor tab](./spm/). It should be emphasized that the
 configured metrics storage type is for reading _only_ and therefore, only applies
 to the Jaeger Query component (and All In One, which contains Jaeger Query).
 
