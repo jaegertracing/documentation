@@ -25,13 +25,13 @@ Jaeger can receive trace data in the standard [OpenTelemetry Protocol (OTLP)](ht
 
 Jaeger can be used with a growing number of storage backends:
 * It natively supports popular open source NoSQL databases as trace storage backends: Cassandra 4.0+, Elasticsearch 7.x/8.x, and OpenSearch 1.0+.
-* It is extensible via the [Remote Storage API](../apis/#remote-storage-api) with other well known databases that have been certified to be Jaeger compliant: [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse).
+* It is extensible via the [Remote Storage API](../architecture/apis/#remote-storage-api) with other well known databases that have been certified to be Jaeger compliant: [ClickHouse](https://github.com/jaegertracing/jaeger-clickhouse).
 * There is embedded database support using [Badger](https://github.com/dgraph-io/badger) and simple in-memory storage for testing setups.
 * There are ongoing community experiments using other databases; you can find more in [this issue](https://github.com/jaegertracing/jaeger/issues/638).
 
 ## Sampling
 
-To control the overhead on the applications and the storage costs, Jaeger supports multiple forms of sampling: head-based with centralized remote configuration (static or adaptive) and tail-based sampling. For more information, please refer to the [Sampling](../sampling/) page.
+To control the overhead on the applications and the storage costs, Jaeger supports multiple forms of sampling: head-based with centralized remote configuration (static or adaptive) and tail-based sampling. For more information, please refer to the [Sampling](../architecture/sampling/) page.
 
 ## Modern Web UI
 
@@ -66,7 +66,7 @@ At this time the transitive graph can only be constructed from traces in the sea
 
 SPM allows monitoring and investigating trends in the performance of the services by computing aggregate metrics from traces and visualizing them as time series charts. It is a powerful tool to identify and investigate performance issues,
 
-See [Service Performance Monitoring (SPM)](../spm/) for more details.
+See [Service Performance Monitoring (SPM)](../architecture/spm/) for more details.
 
 ## Zipkin Compatibility
 

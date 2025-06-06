@@ -31,7 +31,7 @@ Jaeger can be used with a growing number of storage backends:
 
 ## Sampling
 
-To control the overhead on the applications and the storage costs, Jaeger supports multiple forms of sampling: head-based with centralized remote configuration (static or adaptive) and tail-based sampling. For more information, please refer to the [Sampling](../sampling/) page.
+To control the overhead on the applications and the storage costs, Jaeger supports multiple forms of sampling: head-based with centralized remote configuration (static or adaptive) and tail-based sampling. For more information, please refer to the [Sampling](../architecture/sampling/) page.
 
 ## Modern Web UI
 
@@ -66,7 +66,7 @@ At this time the transitive graph can only be constructed from traces in the sea
 
 SPM allows monitoring and investigating trends in the performance of the services by computing aggregate metrics from traces and visualizing them as time series charts. It is a powerful tool to identify and investigate performance issues,
 
-See [Service Performance Monitoring (SPM)](../spm/) for more details.
+See [Service Performance Monitoring (SPM)](../architecture/spm/) for more details.
 
 ## Zipkin Compatibility
 

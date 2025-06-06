@@ -44,11 +44,11 @@ See [Features](./features/) page for more details.
   * Backend components implemented in Go
   * React/Javascript UI
   * Supported storage backends:
-    * [Cassandra 4+](./cassandra/)
-    * [Elasticsearch 7.x, 8.x](./elasticsearch/)
-    * [Badger](./badger/)
-    * [Kafka](./kafka/) - as an intermediate buffer
-    * [Memory storage](./memory/)
+    * [Cassandra 4+](./storage/cassandra/)
+    * [Elasticsearch 7.x, 8.x](./storage/elasticsearch/)
+    * [Badger](./storage/badger/)
+    * [Kafka](./storage/kafka/) - as an intermediate buffer
+    * [Memory storage](./storage/memory/)
     * Custom backends via [Remote Storage API](./storage/#remote-storage)
 
 ## Quick Start
