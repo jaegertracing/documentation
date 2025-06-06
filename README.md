@@ -2,34 +2,30 @@
 
 # Jaeger website
 
-This repo houses all the assets used to build the Jaeger website, available at https://jaegertracing.io.
+This repo houses all the assets used to build the Jaeger website, available at <https://jaegertracing.io>.
 
 The site is built with [Hugo](https://gohugo.io/) and hosted by [Netlify](https://www.netlify.com/).
 
 ## Setup
 
-Install the "extended" Hugo binary from [hugo/releases](https://github.com/gohugoio/hugo/releases) (use one of the `hugo_extended_*` binaries) or
-use a package manager if it is available for your operating system.
-
->  The "extended" version of Hugo supports [Sass](https://sass-lang.org), which is necessary to build the site locally.
-
-The currently used version of Hugo is defined in the [`netlify.toml`](./netlify.toml) configuration file.
-
-Install the active LTS version of Node.js, then run the following command from the directory of this repo's clone:
+Install the active LTS version of Node.js, then run the following command from
+the directory of this repo's clone:
 
 ```bash
 npm install
 ```
+
+This will also install the required version of Hugo.
 
 ## Running the site locally
 
 If you want to develop the site locally, you can run a single command (assuming that you've run the [setup](#setup)):
 
 ```bash
-make develop
+npm run serve
 ```
 
-This will start up a local server on localhost port 1313. When you make changes to either the content of the website (in [`content`](content)) *or* to the Sass and JavaScript assets of the page (in [`themes/jaeger-docs/assets`](themes/jaeger-docs/assets)), the browser will automatically update to reflect those changes (usually in under one second).
+This will start up a local server on [localhost:1313](http://localhost:1313). When you make changes to either the content of the website (in [`content`](content)) *or* to the Sass and JavaScript assets of the page (in [`themes/jaeger-docs/assets`](themes/jaeger-docs/assets)), the browser will automatically update to reflect those changes (usually in under one second).
 
 ## Publishing the site
 

@@ -11,7 +11,8 @@ if ! sort -c --ignore-case "$PROJ_WORDS"; then
     exit 1
 fi
 
-npm run check:spelling
+npx --no-install cspell --no-progress -c .cspell.yml content 'layouts/**/*.md'
+
 if [ $? -ne 0 ]; then
     echo "Misspelling(s) found."
     exit 1

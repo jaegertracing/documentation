@@ -1,53 +1,36 @@
 # Copyright (c) The Jaeger Authors.
 # SPDX-License-Identifier: Apache-2.0
 #
-# cSpell:ignore docsy htmltest refcache
+# cSpell:ignore refcache
 
-DEPLOY_PRIME_URL ?= http://localhost
-HUGO_THEME   = jaeger-docs
-THEME_DIR    := themes/$(HUGO_THEME)
 HTMLTEST     ?= htmltest
 HTMLTEST_DIR ?= tmp/.htmltest
+
+# Use $(HTMLTEST) in PATH, if available; otherwise, we'll get a copy
+ifeq (, $(shell which $(HTMLTEST)))
+override HTMLTEST=$(HTMLTEST_DIR)/bin/htmltest
+ifeq (, $(shell which $(HTMLTEST)))
+GET_LINK_CHECKER_IF_NEEDED=get-link-checker
+endif
+endif
 
 # generate currently doesn't do anything, but can be useful in the future.
 generate:
 
-develop: generate
-	HUGO_PREVIEW=true hugo --config hugo.yaml,hugo.pre-docsy.yaml server \
-		--buildDrafts \
-		--buildFuture \
-		--ignoreCache
 
 clean:
-	rm -rf public/*
+	rm -rf $(HTMLTEST_DIR) public/* resources
 
-netlify-production-build: generate
-	hugo --config hugo.yaml,hugo.pre-docsy.yaml --minify
-
-netlify-deploy-preview:	generate
-	HUGO_PREVIEW=true hugo --config hugo.yaml,hugo.pre-docsy.yaml \
-	--buildDrafts \
-	--buildFuture \
-	--baseURL $(DEPLOY_PRIME_URL) \
-	--minify
-
-netlify-branch-deploy: generate
-	hugo --config hugo.yaml,hugo.pre-docsy.yaml \
-	--buildDrafts \
-	--buildFuture \
-	--baseURL $(DEPLOY_PRIME_URL) \
-	--minify
-
-build: clean generate
-	hugo --config hugo.yaml,hugo.pre-docsy.yaml --cleanDestinationDir -e dev -DFE --logLevel info
-
-link-checker-setup:
-	curl https://raw.githubusercontent.com/wjdp/htmltest/master/godownloader.sh | bash
+get-link-checker:
+	rm -Rf $(HTMLTEST_DIR)/bin
+	curl https://raw.githubusercontent.com/wjdp/htmltest/master/godownloader.sh \
+		| bash -s -- -b $(HTMLTEST_DIR)/bin
 
 # Use --keep-going to ensure that the refcache gets saved even if there are
 # link-checking errors.
-check-links:
-	$(MAKE) --keep-going _restore-refcache _check-links _save-refcache
+check-links: $(GET_LINK_CHECKER_IF_NEEDED)
+	$(MAKE) --keep-going GET_LINK_CHECKER_IF_NEEDED= \
+		_restore-refcache _check-links _save-refcache
 
 _restore-refcache:
 	mkdir -p $(HTMLTEST_DIR)
@@ -62,7 +45,7 @@ _save-refcache:
 
 check-links-all: check-links check-links-older
 
-check-links-older:
+check-links-older: $(GET_LINK_CHECKER_IF_NEEDED)
 	$(HTMLTEST) --log-level 1 --conf .htmltest.old-versions.yml
 
 check-links-internal:
@@ -71,7 +54,7 @@ check-links-internal:
 .cspell/project-names.g.txt: .cspell/project-names-src.txt
 	cat .cspell/project-names-src.txt | grep -v '^#' | grep -v '^\s*$$' | tr ' ' '\n' > .cspell/project-names.g.txt
 
-spellcheck: .cspell/project-names.g.txt
+_spellcheck: .cspell/project-names.g.txt
 	./scripts/spellcheck.sh
 
 fetch-blog-feed:

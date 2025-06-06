@@ -1,13 +1,6 @@
 [build]
 publish = "public"
-command = "make netlify-production-build"
+command = "npm run build:preview"
 
-[build.environment]
-# should match one from .github/workflows/ci-test.yml
-HUGO_VERSION = "0.147.6"
-
-[context.deploy-preview]
-command = "make netlify-deploy-preview"
-
-[context.branch-deploy]
-command = "make netlify-branch-deploy"
+[context.production]
+command = "npm run build:production"
