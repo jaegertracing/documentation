@@ -1,7 +1,5 @@
 {{/* Netlify redirects. See https://www.netlify.com/docs/redirects/ */ -}}
 
 {{ $redirects := partial "redirects.txt" . -}}
-{{ $lines := split $redirects "\n" -}}
-{{ $sorted := sort $lines | uniq -}}
-{{ delimit $sorted "\n" }}
-{{ partial "redirects/pages.txt" . | partial "func/trim-lines.html" -}}
+{{ $lines := split $redirects "\n" | complement (slice "") | sort -}}
+{{ delimit $lines "\n" }}

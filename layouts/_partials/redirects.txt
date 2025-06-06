@@ -1,3 +1,5 @@
+{{/* Jaeger website specific redirects */ -}}
+
 {{ $versions := site.Params.versions -}}
 {{ $latestV1 := site.Params.latest -}}
 {{ $latestV2 := site.Params.latestv2 -}}
@@ -21,3 +23,7 @@
 {{ range $v2Pages }}
 /docs/{{ . }}     /docs/{{ $latest }}/{{ . }}
 {{ end -}}
+
+{{/* Generic redirect rule generation */ -}}
+
+{{ partial "redirects/pages.txt" . | partial "func/trim-lines.html" -}}

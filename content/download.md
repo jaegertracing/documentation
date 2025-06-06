@@ -1,6 +1,5 @@
 ---
-title: Download Jaeger
-linkTitle: Download
+title: Download
 aliases: [/docs/download]
 ---
 
