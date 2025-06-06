@@ -1,5 +1,39 @@
 {{/* Netlify redirects. See https://www.netlify.com/docs/redirects/ */ -}}
 
+{{/*
+
+This section is for redirect rules that are order dependent, and must come
+before other rules:
+
+*/ -}}
+
+{{/* No order-dependent rules at the moment */ -}}
+
+{{/*
+
+All other site redirect rules will get formatted and sorted so make it easier to
+detect duplicates and other errors.
+
+*/ -}}
+
 {{ $redirects := partial "redirects.txt" . -}}
-{{ $lines := split $redirects "\n" | complement (slice "") | sort -}}
-{{ delimit $lines "\n" }}
+{{ $rawLines := split $redirects "\n" | complement (slice "") -}}
+{{ $lines := slice -}}
+{{ $prevRedirectRule := "" -}}
+{{ range $line := $rawLines -}}
+  {{ $matches := findRESubmatch `^\s*(\S+)\s+(.+)\s*$` (trim $line " \t") -}}
+  {{ with index $matches 0 -}}
+    {{ $fromURL := index . 1 -}}
+    {{ $toURLwithOptionalModifiers := index . 2 -}}
+    {{ $redirectRule := printf "%-35s %s" $fromURL $toURLwithOptionalModifiers -}}
+    {{ if eq $prevRedirectRule $redirectRule -}}
+      {{ warnf "Duplicate redirect rule: %s" $redirectRule -}}
+    {{ end -}}
+    {{ $lines = $lines | append $redirectRule -}}
+    {{ $prevRedirectRule = $redirectRule -}}
+  {{ else -}}
+    {{ errorf "Redirect rule with unexpected format: %s" $line -}}
+  {{ end -}}
+{{ end -}}
+
+{{ delimit (sort $lines) "\n" }}

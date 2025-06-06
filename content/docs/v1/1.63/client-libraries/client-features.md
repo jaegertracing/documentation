@@ -1,6 +1,8 @@
 ---
 title: Client Library Features
-aliases: [../client-features]
+aliases:
+  - ../client-features
+  - /docs/client-features
 widescreen: true
 hasparent: true
 weight: 5

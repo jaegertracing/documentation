@@ -1,5 +1,6 @@
 ---
 title: Client Libraries
+aliases: [/docs/client-libraries]
 weight: 5
 children:
 - title: Client Features
