@@ -7,7 +7,7 @@
 /docs/latest     /docs/{{ $latest }}
 /docs/latest/*     /docs/{{ $latest }}/:splat
 
-{{ $pages := slice "download" "get-in-touch" "roadmap" "news" "report-security-issue" -}}
+{{ $pages := slice "get-in-touch" "roadmap" "news" "report-security-issue" -}}
 {{ range $pages }}
 /docs/{{ . }}     /{{ . }}
 {{ end -}}

@@ -1,10 +1,4 @@
-{{ define "title" }}
-Jaeger &ndash; {{ .Title }}
-{{ end }}
-
-{{ define "main" }}
-{{ $binaries     := site.Data.download.binaries }}
-{{ $dockerImages := site.Data.download.docker }}
+{{ define "main" -}}
 <article class="article article--download">
   <div class="container">
     <header>
@@ -20,4 +14,4 @@ Jaeger &ndash; {{ .Title }}
     </section>
   </div>
 </article>
-{{ end }}
+{{- end }}
