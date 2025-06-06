@@ -13,7 +13,7 @@ featureGroups:
   - description: Inter-process propagation wire format (headers)
     features:
     - name: propagation_uber
-      description: "[Uber's original headers](../client-libraries/#propagation-format)"
+      description: "[Uber's original headers](../#propagation-format)"
     - name: propagation_b3
       description: Zipkin's [B3 headers](https://github.com/openzipkin/b3-propagation)
     - name: propagation_w3c
@@ -43,7 +43,7 @@ featureGroups:
     - name: remote_sampler
       description: Allow remote configuration of samplers
     - name: adaptive_sampler
-      description: Remotely configurable [per-endpoint sampler](../sampling/)
+      description: Remotely configurable [per-endpoint sampler](../../sampling/)
     - name: baggage_restriction
       description: Remotely configurable baggage restrictions
 
@@ -86,7 +86,7 @@ featureGroups:
         `JAEGER_PASSWORD` can be used for basic authentication when using reporting over HTTP.
     - name: env_JAEGER_REPORTER_LOG_SPANS
       description: >
-        `JAEGER_REPORTER_LOG_SPANS` instructs the [Reporter](../client-libraries/#reporters)
+        `JAEGER_REPORTER_LOG_SPANS` instructs the [Reporter](../#reporters)
         to log finished span IDs. The reporter may need to be given a Logger for this option to take effect.
     - name: env_JAEGER_REPORTER_MAX_QUEUE_SIZE
       description: >
@@ -99,11 +99,11 @@ featureGroups:
     - name: env_JAEGER_SAMPLER_TYPE
       description: >
         `JAEGER_SAMPLER_TYPE` defines the type of sampler to use, e.g. `probabilistic`, or `const`
-        (see [Sampling](../client-libraries/#sampling)).
+        (see [Sampling](../#sampling)).
     - name: env_JAEGER_SAMPLER_PARAM
       description: >
         `JAEGER_SAMPLER_PARAM` provides configuration value to the sampler, e.g. `probability=0.001`
-        (see [Sampling](../client-libraries/#sampling)).
+        (see [Sampling](../#sampling)).
     - name: env_JAEGER_SAMPLER_MANAGER_HOST_PORT
       description: >
         `JAEGER_SAMPLER_MANAGER_HOST_PORT` defines the address of HTTP server that services client
@@ -121,7 +121,7 @@ featureGroups:
     - name: env_JAEGER_PROPAGATION
       description: >
         `JAEGER_PROPAGATION` defines the propagation format used by the tracer.
-        Supported values are `jaeger` (defined [here](../client-libraries/#propagation-format)),
+        Supported values are `jaeger` (defined [here](../#propagation-format)),
         `b3` (defined [here](https://github.com/openzipkin/b3-propagation))
         and `w3c` (defined [here](https://github.com/w3c/distributed-tracing))
     - name: JAEGER_TRACEID_128BIT

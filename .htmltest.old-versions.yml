@@ -2,7 +2,8 @@ DirectoryPath: public
 CheckExternal: false
 IgnoreAltMissing: true
 IgnoreURLs:
-  - /livereload.js
+  - /livereload.js # cSpell:disable-line
   - ^/docs/latest/ # ignore redirect of latest
   # Valid URL, whether canonical (before reorg) or not (and handled via a redirect)
   - ^/docs/1.[6-9]\d/
+  - ^\.\./\.\./sampling/

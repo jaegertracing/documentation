@@ -91,7 +91,7 @@ When deploying your application as part of a service mesh like Istio, the number
 Experienced on Kubernetes v1.16.8 and reproducible in both `minikube` and EKS. See [#1109](https://github.com/jaegertracing/jaeger-operator/issues/1109) for more context.
 {{< /info >}}
 
-When you deploy the Jaeger instance with `configMap` volumes (see [finer grained configurations](/docs/1.18/operator/#finer-grained-configuration)) on Kubernetes **v1.16.8**, you'll get `invalid: type: Required value` which means the [CRD validation check failed](https://github.com/jaegertracing/jaeger-operator/blob/1dce126cdc3aa0f1582d53a6d62fcb359c34586c/pkg/apis/jaegertracing/v1/zz_generated.openapi.go#L1755).
+When you deploy the Jaeger instance with `configMap` volumes (see [finer grained configurations](../deployment/operator/#finer-grained-configuration)) on Kubernetes **v1.16.8**, you'll get `invalid: type: Required value` which means the [CRD validation check failed](https://github.com/jaegertracing/jaeger-operator/blob/1dce126cdc3aa0f1582d53a6d62fcb359c34586c/pkg/apis/jaegertracing/v1/zz_generated.openapi.go#L1755).
 
     volumeMounts:
     - name: config-vol

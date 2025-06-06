@@ -33,7 +33,7 @@ In addition to the performance aspects, having spans written to Kafka is useful 
 
 ## Client (Tracer) settings
 
-The Jaeger Clients are built to have minimal effect to the instrumented application. As such, it has conservative defaults that might not be suitable for all cases. Note that Jaeger Clients can be configured programmatically or via [environment variables](../client-features/).
+The Jaeger Clients are built to have minimal effect to the instrumented application. As such, it has conservative defaults that might not be suitable for all cases. Note that Jaeger Clients can be configured programmatically or via [environment variables](../client-libraries/client-features/).
 
 ### Adjust the sampling configuration
 
@@ -44,7 +44,7 @@ For applications with low to medium traffic, setting the sampling type to `const
 Some Clients support the setting `JAEGER_DISABLED` to completely disable the Jaeger Tracer. This is recommended only if the Tracer is behaving in a way that causes problems to the instrumented application, as it will not propagate the context to the downstream services.
 
 {{< info >}}
-We recommend to set your clients to use the [`remote` sampling strategy](../sampling/#collector-sampling-configuration), so that admins can centrally set the concrete sampling strategy for each service.
+We recommend to set your clients to use the [`remote` sampling strategy](../architecture/sampling/#collector-sampling-configuration), so that admins can centrally set the concrete sampling strategy for each service.
 {{< /info >}}
 
 ### Increase in-memory queue size
