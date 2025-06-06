@@ -26,6 +26,7 @@ emsgsize
 errorf
 expvar
 fargate
+findRESubmatch
 flink
 fluentd
 glvs

@@ -1,6 +1,8 @@
 ---
 title: OpenTelemetry
-aliases: [../opentelemetry]
+aliases:
+  - ../opentelemetry
+  - /docs/opentelemetry
 hasparent: true
 ---
 

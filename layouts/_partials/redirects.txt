@@ -5,25 +5,34 @@
 {{ $latestV2 := site.Params.latestv2 -}}
 {{ $latest   := $latestV2 -}}
 
-/docs    /docs/{{ $latest }}     301!
 /docs/latest     /docs/{{ $latest }}
-/docs/latest/*     /docs/{{ $latest }}/:splat
+/docs/latest/*   /docs/{{ $latest }}/:splat
 
-{{ $pages := slice "get-in-touch" "roadmap" "news" "report-security-issue" -}}
-{{ range $pages }}
+{{ range (slice "get-in-touch" "roadmap" "news" "report-security-issue") }}
 /docs/{{ . }}     /{{ . }}
 {{ end -}}
 
-{{ $v1Pages := slice "cli" "client-features" "client-libraries" "opentelemetry" -}}
-{{ range $v1Pages }}
+{{ range (slice "cli" "operator") }}
 /docs/{{ . }}     /docs/{{ $latestV1 }}/{{ . }}
 {{ end -}}
 
-{{ $v2Pages := slice "apis" "architecture" "deployment" "faq" "features" "frontend-ui" "getting-started" "monitoring" "operator" "performance-tuning" "sampling" "security" "troubleshooting" "windows" -}}
-{{ range $v2Pages }}
+{{/* Get all sections and pages directly under v2/_dev */}}
+{{ $pages := slice -}}
+{{ with site.GetPage (printf "/docs/%s" $latest) -}}
+  {{ $docDir := path.Dir .File.Path -}}
+  {{ range (union .RegularPagesRecursive .Sections) -}}
+    {{ $dir := strings.TrimPrefix (add $docDir "/") (path.Dir .File.Path) -}}
+    {{ $entry := strings.TrimSuffix ".md" (path.Base .File.Path) -}}
+    {{ $pages = $pages | append (cond (ne $entry "_index") $entry $dir) -}}
+  {{ end }}
+{{ end -}}
+{{ $pages = $pages | uniq | sort -}}
+
+{{ range $pages }}
 /docs/{{ . }}     /docs/{{ $latest }}/{{ . }}
 {{ end -}}
 
 {{/* Generic redirect rule generation */ -}}
 
-{{ partial "redirects/pages.txt" . | partial "func/trim-lines.html" -}}
+{{ partial "redirects/pages.txt" . }}
+{{ partial "redirects/redirect.txt" . }}
