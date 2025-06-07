@@ -59,7 +59,7 @@ We recommend running Jaeger and HotROD together via `docker compose`:
 ```bash
 git clone https://github.com/jaegertracing/jaeger.git jaeger
 cd jaeger/examples/hotrod
-docker compose -f docker-compose.yml up
+docker compose up
 # press Ctrl-C to exit
 ```
 
