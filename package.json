@@ -48,7 +48,7 @@
   },
   "peerDependencies": {
     "hugo-extended": "0.147.6",
-    "netlify-cli": "^21.5.0",
+    "netlify-cli": "^21.5.0 || ^22.0.0",
     "npm-check-updates": "^18.0.1"
   },
   "enginesComment": "Ensure that engines.node value stays consistent with the project's .nvmrc",
