@@ -22,10 +22,12 @@ This will also install the required version of Hugo.
 If you want to develop the site locally, you can run a single command (assuming that you've run the [setup](#setup)):
 
 ```bash
-npm run serve
+make develop
 ```
 
-This will start up a local server on [localhost:1313](http://localhost:1313). When you make changes to either the content of the website (in [`content`](content)) *or* to the Sass and JavaScript assets of the page (in [`themes/jaeger-docs/assets`](themes/jaeger-docs/assets)), the browser will automatically update to reflect those changes (usually in under one second).
+Alternatively, you can run `npm run serve`.
+
+These commands will start up a local server on [localhost:1313](http://localhost:1313). When you make changes to either the content of the website (in [`content`](content)) *or* to the Sass and JavaScript assets of the page (in [`themes/jaeger-docs/assets`](themes/jaeger-docs/assets)), the browser will automatically update to reflect those changes (usually in under one second).
 
 ## Publishing the site
 

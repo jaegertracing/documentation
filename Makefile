@@ -17,6 +17,8 @@ endif
 # generate currently doesn't do anything, but can be useful in the future.
 generate:
 
+develop: generate
+	npm run serve
 
 clean:
 	rm -rf $(HTMLTEST_DIR) public/* resources
