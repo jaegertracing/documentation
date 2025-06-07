@@ -9,7 +9,7 @@
 {{ $latestV2      := site.Params.latestV2 -}}
 {{ $docs          := where site.Pages "Section" "docs" -}}
 {{ $isDocsPage    := eq .Section "docs" -}}
-{{ $isPreview     := eq (getenv "HUGO_PREVIEW") "true" -}}
+{{ $isPreview     := not hugo.IsProduction -}}
 {{ $path := "" -}}
 {{ with .File -}}
   {{ $path = .Path -}}

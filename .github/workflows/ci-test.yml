@@ -9,7 +9,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  build-and-check-links:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -17,37 +17,8 @@ jobs:
     - uses: actions/setup-node@v4
       with: { node-version-file: .nvmrc }
     - run: npm install
-
-    - name: ✨ Setup Hugo
-      env:
-        # should match one from netlify.toml
-        HUGO_VERSION: 0.147.6
-      run: |
-        mkdir ~/hugo
-        cd ~/hugo
-        curl -L "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.tar.gz" --output hugo.tar.gz
-        tar -xvzf hugo.tar.gz
-        sudo mv hugo /usr/local/bin
-        hugo version
-
-    - name: Build
-      run: |
-        make build
-
-    - name: Setup Go to install htmltest
-      uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5.5.0
-      with:
-        go-version: 1.24.x
-
-    - name: Install htmltest
-      run: |
-        go install github.com/wjdp/htmltest@latest
-
-    - name: Strict link checking for newer versions
-      run: make check-links
-
-    - name: Relaxed link checking for older versions
-      run: make check-links-older
+    - name: Build and check links
+      run: npm run check:links:all # command also builds the site
 
   spellcheck:
     runs-on: ubuntu-latest
@@ -56,9 +27,7 @@ jobs:
     - uses: actions/setup-node@v4
       with: { node-version-file: .nvmrc }
     - run: npm install
-    - name: Spellcheck
-      run: |
-        make spellcheck
+    - run: npm run check:spelling
 
   block-pr-from-main-branch:
     runs-on: ubuntu-latest
