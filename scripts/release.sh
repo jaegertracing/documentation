@@ -61,8 +61,17 @@ update_links() {
   local version=$2
   local versionTag="v${version}"
   versionMajor=$(echo "${versionMajorMinor}" | ${SED} 's/\.[[:digit:]]*$//')
-  find ./content/docs/v${versionMajor}/${versionMajorMinor} -type f -exec ${SED} -i "s|https://github.com/jaegertracing/jaeger/tree/main|https://github.com/jaegertracing/jaeger/tree/${versionTag}|g" {} \;
-  find ./content/docs/v${versionMajor}/${versionMajorMinor} -type f -exec ${SED} -i "s|https://github.com/jaegertracing/jaeger/blob/main|https://github.com/jaegertracing/jaeger/blob/${versionTag}|g" {} \;
+  versionMinor=$(echo "${versionMajorMinor}" | ${SED} 's/[[:digit:]]\.//')
+  weight=$(printf "%d%02d\n" "$versionMajor" "$versionMinor")
+  # loop over a collection of string patterns
+  for pattern in \
+    "s|https://github.com/jaegertracing/jaeger/tree/main|https://github.com/jaegertracing/jaeger/tree/${versionTag}|g" \
+    "s|https://github.com/jaegertracing/jaeger/blob/main|https://github.com/jaegertracing/jaeger/blob/${versionTag}|g" \
+    "s|^linkTitle: [12].DEV.*$|linkTitle: ${versionMajorMinor}|g" \
+    "s|^weight: -[12]00.*$|weight: -${weight}|g"
+  do
+    find ./content/docs/v${versionMajor}/${versionMajorMinor} -type f -exec ${SED} -i -e "${pattern}" {} \;
+  done
 }
 
 gen_cli_docs_v1() {
@@ -90,7 +99,7 @@ for version in "${version_v1}" "${version_v2}"; do
     var_suffix="V2"
   else
     cp -r ./content/docs/v1/_dev/ ./content/docs/v1/${versionMajorMinor}
-    # gen_cli_docs_v1 ${versionMajorMinor}
+    gen_cli_docs_v1 ${versionMajorMinor}
   fi
 
   update_links "${versionMajorMinor}" "${version}"
