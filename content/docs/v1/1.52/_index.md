@@ -1,5 +1,5 @@
 ---
-title: Docs (1.52)
+title: Introduction
 linkTitle: '1.52'
 weight: -152
 children:
