@@ -9,6 +9,7 @@
 set -euf -o errexit -o pipefail
 
 DRY_RUN=${DRY_RUN:-false}
+SED=${SED:-sed}
 config_file=hugo.yaml
 
 print_usage() {
@@ -59,8 +60,9 @@ update_links() {
   local versionMajorMinor=$1
   local version=$2
   local versionTag="v${version}"
-  find ./content/docs/${versionMajorMinor} -type f -exec sed -i "s|https://github.com/jaegertracing/jaeger/tree/main|https://github.com/jaegertracing/jaeger/tree/${versionTag}|g" {} \;
-  find ./content/docs/${versionMajorMinor} -type f -exec sed -i "s|https://github.com/jaegertracing/jaeger/blob/main|https://github.com/jaegertracing/jaeger/blob/${versionTag}|g" {} \;
+  versionMajor=$(echo "${versionMajorMinor}" | ${SED} 's/\.[[:digit:]]*$//')
+  find ./content/docs/v${versionMajor}/${versionMajorMinor} -type f -exec ${SED} -i "s|https://github.com/jaegertracing/jaeger/tree/main|https://github.com/jaegertracing/jaeger/tree/${versionTag}|g" {} \;
+  find ./content/docs/v${versionMajor}/${versionMajorMinor} -type f -exec ${SED} -i "s|https://github.com/jaegertracing/jaeger/blob/main|https://github.com/jaegertracing/jaeger/blob/${versionTag}|g" {} \;
 }
 
 gen_cli_docs_v1() {
@@ -71,7 +73,7 @@ gen_cli_docs_v1() {
   mkdir -p ${cliDocsTempDir}/data/cli
   cp -r ./data/cli/next-release/ ${cliDocsTempDir}/data/cli/${versionMajorMinor}
   chmod -R a+w ${cliDocsTempDir}
-  python ./scripts/gen-cli-data.py ${versionMajorMinor} ${cliDocsTempDir}
+  python3 ./scripts/gen-cli-data.py ${versionMajorMinor} ${cliDocsTempDir}
   rm -f ${cliDocsTempDir}/data/cli/${versionMajorMinor}/*_completion_*.yaml
   mv ${cliDocsTempDir}/data/cli/${versionMajorMinor} ./data/cli/
 }
@@ -80,15 +82,15 @@ set -x
 safe_checkout_main
 
 for version in "${version_v1}" "${version_v2}"; do
-  versionMajorMinor=$(echo "${version}" | sed 's/\.[[:digit:]]$//')
+  versionMajorMinor=$(echo "${version}" | ${SED} 's/\.[[:digit:]]$//')
   echo "Creating new documentation for ${version} (${versionMajorMinor})"
   var_suffix=""
   if [[ "${versionMajorMinor}" == 2* ]]; then
-    cp -r ./content/docs/next-release-v2/ ./content/docs/${versionMajorMinor}
+    cp -r ./content/docs/v2/_dev/ ./content/docs/v2/${versionMajorMinor}
     var_suffix="V2"
   else
-    cp -r ./content/docs/next-release/ ./content/docs/${versionMajorMinor}
-    gen_cli_docs_v1 ${versionMajorMinor}
+    cp -r ./content/docs/v1/_dev/ ./content/docs/v1/${versionMajorMinor}
+    # gen_cli_docs_v1 ${versionMajorMinor}
   fi
 
   update_links "${versionMajorMinor}" "${version}"
@@ -99,9 +101,9 @@ for version in "${version_v1}" "${version_v2}"; do
     exit 1
   fi
 
-  sed -i -e "s/latest${var_suffix} *:.*$/latest${var_suffix}: \"${versionMajorMinor}\"/" "${config_file}"
-  sed -i -e "s/binariesLatest${var_suffix} *:.*$/binariesLatest${var_suffix}: \"${version}\"/" "${config_file}"
-  sed -i -e "s/versions${var_suffix} *: *\[/versions${var_suffix}: \[\"${versionMajorMinor}\"\,/" "${config_file}"
+  ${SED} -i -e "s/latest${var_suffix} *:.*$/latest${var_suffix}: \"${versionMajorMinor}\"/" "${config_file}"
+  ${SED} -i -e "s/binariesLatest${var_suffix} *:.*$/binariesLatest${var_suffix}: \"${version}\"/" "${config_file}"
+  ${SED} -i -e "s/versions${var_suffix} *: *\[/versions${var_suffix}: \[\"${versionMajorMinor}\"\,/" "${config_file}"
 done
 
 if [[ "$DRY_RUN" = "true" ]]; then
