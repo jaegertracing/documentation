@@ -467,6 +467,14 @@
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:50:36.992258-04:00"
   },
+  "https://github.com/jaegertracing/jaeger/archive/v1.70.0.tar.gz": {
+    "StatusCode": 200,
+    "LastSeen": "2025-06-16T13:43:55.853952-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/archive/v1.70.0.zip": {
+    "StatusCode": 200,
+    "LastSeen": "2025-06-16T13:43:55.591537-04:00"
+  },
   "https://github.com/jaegertracing/jaeger/blob/7872d1b07439c3f2d316065b1fd53e885b26a66f/model/ids.go#L82": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:25.933268-04:00"
@@ -707,6 +715,30 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:36.754673-04:00"
   },
+  "https://github.com/jaegertracing/jaeger/releases/download/v1.70.0/jaeger-1.70.0-darwin-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-16T13:43:56.088297-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/releases/download/v1.70.0/jaeger-1.70.0-linux-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-16T13:43:56.316626-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/releases/download/v1.70.0/jaeger-1.70.0-windows-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-16T13:43:56.535183-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/releases/download/v1.70.0/jaeger-2.7.0-darwin-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-16T13:43:54.84799-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/releases/download/v1.70.0/jaeger-2.7.0-linux-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-16T13:43:55.102814-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/releases/download/v1.70.0/jaeger-2.7.0-windows-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-16T13:43:55.341804-04:00"
+  },
   "https://github.com/jaegertracing/jaeger/releases/tag/v1.22.0": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:48.055124-04:00"
@@ -718,6 +750,10 @@
   "https://github.com/jaegertracing/jaeger/releases/tag/v1.69.0": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:36.087416-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/releases/tag/v1.70.0": {
+    "StatusCode": 206,
+    "LastSeen": "2025-06-16T13:43:54.49413-04:00"
   },
   "https://github.com/jaegertracing/jaeger/security/advisories": {
     "StatusCode": 206,
