@@ -36,10 +36,10 @@
         <p>{{ .description | markdownify }}</p>
         {{ if not .external }}
         <div>
-          <code><span class="is-dollar">$</span> docker run {{ $fullImage }}:{{ $latestImg }} --help</code>
+          <code><span class="is-dollar">$</span> docker run cr.jaegertracing.io/{{ $fullImage }}:{{ $latestImg }} --help</code>
         </div>
         <div>
-          <code><span class="is-dollar">$</span> podman run quay.io/{{ $fullImage }}:{{ $latestImg }} --help</code>
+          <code><span class="is-dollar">$</span> podman run cr.jaegertracing.io/{{ $fullImage }}:{{ $latestImg }} --help</code>
         </div>
         {{ end }}
       </td>

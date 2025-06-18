@@ -17,7 +17,7 @@ docker run --rm --name jaeger \
   -p 4318:4318 \
   -p 5778:5778 \
   -p 9411:9411 \
-  jaegertracing/jaeger:{{< currentVersion >}}
+  cr.jaegertracing.io/jaegertracing/jaeger:{{< currentVersion >}}
 ```
 
 This runs the **all-in-one** configuration of Jaeger ([see Architecture](../architecture/)) that combines collector and query components in a single process and uses a transient in-memory storage for trace data. You can navigate to `http://localhost:16686` to access the Jaeger UI. See the [APIs page](../architecture/apis/) for a full list of exposed ports.
@@ -32,7 +32,7 @@ docker run --rm --name jaeger \
   -p 5778:5778 \
   -p 9411:9411 \
   -v /path/to/local/config.yaml:/jaeger/config.yaml \
-  jaegertracing/jaeger:{{< currentVersion >}} \
+  cr.jaegertracing.io/jaegertracing/jaeger:{{< currentVersion >}} \
   --config /jaeger/config.yaml
 ```
 
