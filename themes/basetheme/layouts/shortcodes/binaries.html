@@ -17,8 +17,8 @@
   {{ $versions := slice .Site.Params.binariesLatestV2 .Site.Params.binariesLatest }}
   {{ range $latest := $versions }}
     {{ $releaseUrl    := printf "https://github.com/jaegertracing/jaeger/releases/tag/v%s" $latestV1 }}
-    {{ $srcZipUrl     := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $latestV1 }}
-    {{ $srcTarUrl     := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $latestV1 }}
+    {{ $srcZipUrl     := printf "https://download.jaegertracing.io/v%s.zip" $latestV1 }}
+    {{ $srcTarUrl     := printf "https://download.jaegertracing.io/v%s.tar.gz" $latestV1 }}
     <tr>
       <td>
         <strong>
@@ -35,9 +35,9 @@
           {{ $name        := $platform.name }}
           {{ $icon        := $platform.icon }}
           {{ $asset       := printf "jaeger-%s-%s-amd64.tar.gz" $latest $key }}
-          {{ $downloadUrl := printf "https://github.com/jaegertracing/jaeger/releases/download/v%s/%s" $latestV1 $asset }}
-          {{ $zipUrl      := printf "https://github.com/jaegertracing/jaeger/archive/v%s.zip" $latest }}
-          {{ $tarUrl      := printf "https://github.com/jaegertracing/jaeger/archive/v%s.tar.gz" $latest }}
+          {{ $downloadUrl := printf "https://download.jaegertracing.io/v%s/%s" $latestV1 $asset }}
+          {{ $zipUrl      := printf "https://download.jaegertracing.io/v%s.zip" $latest }}
+          {{ $tarUrl      := printf "https://download.jaegertracing.io/v%s.tar.gz" $latest }}
           <a class="button is-medium is-{{ $key }}" href="{{ $downloadUrl }}" download>
             <span class="icon">
               <i class="fab {{ $icon }}"></i>
