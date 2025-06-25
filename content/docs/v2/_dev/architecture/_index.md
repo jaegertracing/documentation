@@ -96,7 +96,7 @@ The Jaeger binary is build on top of the OpenTelemetry Collector framework and i
 
 #### Receivers
 
-* [OTLP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver)	- Accepts spans sent via OpenTelemetry Line Protocol (OTLP).
+* [OTLP](https://github.com/open-telemetry/opentelemetry-collector/tree/main/receiver/otlpreceiver)	- Accepts spans sent via OpenTelemetry Protocol (OTLP).
 
 * [Jaeger](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/jaegerreceiver) - Accepts Jaeger formatted traces transported via gRPC or Thrift protocols.
 
