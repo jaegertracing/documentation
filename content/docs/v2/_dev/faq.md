@@ -58,3 +58,9 @@ These are NOT the reasons to run multiple instances:
 Jaeger UI does not support any notion of accounts or roles, so there is no need to authenticate the users. If you need authentication in order to simply restrict who can access Jaeger UI, we recommend running a reverse proxy in front of it, such as HAProxy, NGINX, Keycloak, etc. The advantage of using standard reverse proxies is that they support a wide variety of integrations with various authentication and single sign-on services, something we would never be able to match in Jaeger UI.
 
 For example, refer to this blog post for an example of [protecting Jaeger UI with Keycloak](https://medium.com/jaegertracing/protecting-jaeger-ui-with-an-oauth-sidecar-proxy-34205cca4bb1).
+
+## Can I run only Jaeger UI if I am already storing data in Elasticsearch/ClickHouse?
+
+Q: I am already sending traces and metrics to my Elasticsearch cloud setup using sidecar containers and OpenTelemetry Collector (with index pattern: `traces-${date}`). I want to visualize them via the Jaeger UI. Can I run only the query service and the UI, without running Jaeger collector?
+
+A: No, we do not support that setup. Every exporter can choose a different way of storing traces in the database like Elasticsearch or ClickHouse. Jaeger has its own storage implementation used by both collector and query service which uses a database schema that is specific to Jaeger and may not be compatible with the schema used by other exporters.
