@@ -8,6 +8,11 @@ See also:
   * [For mentees](../mentorship-for-mentees/)
   * [For mentors](../mentorship-for-mentors/)
 
+## LFX Mentorship June-Aug 2025 (Term 2)
+
+* [Chahat Sagar](https://github.com/chahatsagarmain) -- [Jaeger demo on Kubernetes](https://github.com/jaegertracing/jaeger/issues/7115)
+* [Vishvamsinh Vaghela](https://github.com/vishvamsinh28) -- [Upgrade Jaeger-UI to React v19](https://github.com/jaegertracing/jaeger-ui/issues/2764)
+
 ## Google Summer of Code 2025
 
 * [Minh Nguyen](https://github.com/pipiland2612) -- [Native SPM support in Elasticsearch](https://github.com/jaegertracing/jaeger/issues/6641)

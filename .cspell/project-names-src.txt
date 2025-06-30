@@ -4,11 +4,12 @@ Pavol Loffay pavolloffay
 Joe Farro
 Juraci Paixão Kröhling
 
-# Prometheus
-Julius Volz
-
 # Other names (sometimes from github links)
 robbert
+
+## LFX Mentorship June-Aug 2025 (Term 2)
+Chahat Sagar
+Vishvamsinh Vaghela
 
 ## GSOC 2025
 Minh Nguyen
@@ -54,3 +55,6 @@ Prakriti Bansal
 
 ## Outreachy Dec'17 - Mar'18
 Kara de la Marck
+
+# Prometheus
+Julius Volz
