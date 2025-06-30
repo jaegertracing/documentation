@@ -4,9 +4,6 @@ Pavol Loffay pavolloffay
 Joe Farro
 Juraci Paixão Kröhling
 
-# Prometheus
-Julius Volz
-
 # Other names (sometimes from github links)
 robbert
 
@@ -58,3 +55,6 @@ Prakriti Bansal
 
 ## Outreachy Dec'17 - Mar'18
 Kara de la Marck
+
+# Prometheus
+Julius Volz
