@@ -10,6 +10,10 @@ Julius Volz
 # Other names (sometimes from github links)
 robbert
 
+## LFX Mentorship June-Aug 2025 (Term 2)
+Chahat Sagar
+Vishvamsinh Vaghela
+
 ## GSOC 2025
 Minh Nguyen
 
