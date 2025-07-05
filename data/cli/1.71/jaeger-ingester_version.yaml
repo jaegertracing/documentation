@@ -1,0 +1,11 @@
+name: jaeger-ingester version
+synopsis: Print the version.
+description: Print the version and build information.
+usage: jaeger-ingester version [flags]
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for version
+see_also:
+    - jaeger-ingester - Jaeger ingester consumes from Kafka and writes to storage.
