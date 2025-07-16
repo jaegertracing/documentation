@@ -144,7 +144,7 @@ extensions:
 extensions:
   jaeger_query:
     storage:
-      traces: elasticsearch_trace_storage # Must match a backend defined in jaeger_storage
+      traces: elasticsearch_trace_storage # Must match the backend defined in jaeger_storage extension
       metrics: elasticsearch_trace_storage # Use the same storage for metrics
 ```
 
@@ -152,7 +152,7 @@ extensions:
 extensions:
   jaeger_query:
     storage:
-      traces: opensearch_trace_storage # Must match a backend defined in jaeger_storage
+      traces: opensearch_trace_storage # Must match the backend defined in jaeger_storage extension
       metrics: opensearch_trace_storage # Use the same storage for metrics
 ```
 
@@ -162,10 +162,10 @@ extensions:
 
 There are two architectural approaches to generating RED metrics:
 
-1.  **PromQL-compatible Backend**: An OpenTelemetry Collector with the [SpanMetrics Connector][spanmetrics-conn] generates metrics from traces and exports them to a PromQL-compatible backend storage, which Jaeger queries.
-2.  **Directly from Trace Storage**: Jaeger Query computes RED metrics on-demand by directly querying the primary trace storage backend (Elasticsearch or OpenSearch). This simplifies the architecture by removing the need for a separate metrics pipeline and storage.
+1.  **Pre-computing metrics**: The [SpanMetrics Connector][spanmetrics-conn] pre-compute the metrics and store them in a PromQL-compatible backend storage, which Jaeger queries.
+2.  **Direct to storage**: Jaeger Query computes RED metrics at query time by directly querying the primary trace storage backend (Elasticsearch or OpenSearch). This simplifies the architecture by removing the need for a separate metrics pipeline and storage.
 
-### Option 1: PromQL-compatible backend
+### Option 1: Pre-computing metrics
 
 In addition to the standard Jaeger architecture, this approach requires:
 
@@ -175,7 +175,7 @@ In addition to the standard Jaeger architecture, this approach requires:
 - A configuration in the `jaeger_query` extension to reference the external metrics store.
 
 {{<mermaid align="center">}}
-graph
+graph LR
     OTLP_EXPORTER[OTLP Exporter] --> TRACE_RECEIVER
 
     subgraph Application
@@ -222,7 +222,7 @@ graph
 This approach computes metrics directly from trace data stored in Elasticsearch or OpenSearch, eliminating the need for a separate metrics storage backend like Prometheus. The OpenTelemetry Collector is still used to receive traces and forward them to Jaeger, but the SpanMetrics Connector is not required.
 
 {{<mermaid align="center">}}
-graph
+graph LR
     OTLP_EXPORTER[OTLP Exporter] --> TRACE_RECEIVER
 
     subgraph Application
