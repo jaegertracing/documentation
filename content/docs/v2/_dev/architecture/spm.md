@@ -162,7 +162,7 @@ extensions:
 
 There are two architectural approaches to generating RED metrics:
 
-1.  **Pre-computing metrics**: The [SpanMetrics Connector][spanmetrics-conn] pre-compute the metrics and store them in a PromQL-compatible backend storage, which Jaeger queries.
+1.  **Pre-computing metrics**: using the [SpanMetrics Connector][spanmetrics-conn] to compute the metrics from spans and store them in a PromQL-compatible backend storage, which Jaeger queries.
 2.  **Direct to storage**: Jaeger Query computes RED metrics at query time by directly querying the primary trace storage backend (Elasticsearch or OpenSearch). This simplifies the architecture by removing the need for a separate metrics pipeline and storage.
 
 ### Option 1: Pre-computing metrics
