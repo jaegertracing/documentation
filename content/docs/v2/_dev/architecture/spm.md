@@ -56,12 +56,14 @@ If generating traces manually is preferred, the [Sample App: HotROD](../../getti
 
 ## Configuration
 
+### Option 1: PromQL-compatible backend Configuration
+
 An example configuration is available in the Jaeger repository: [config-spm.yaml](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm.yaml). The following steps are required to enable the SPM feature:
 
 * Enable the [SpanMetrics Connector][spanmetrics-conn] in the pipeline:
 ```yaml
 # Declare an exporter for metrics produced by the connector.
-# For example, a Prometheus server may be configured to scrape 
+# For example, a Prometheus server may be configured to scrape
 # the metrics from this endpoint.
 exporters:
   prometheus:
@@ -73,7 +75,7 @@ connectors:
     # any connector configuration options
     ...
 
-# Enable the spanmetrics connector to bridge 
+# Enable the spanmetrics connector to bridge
 # the traces pipeline into the metrics pipeline.
 service:
   pipelines:
@@ -106,10 +108,66 @@ extensions:
 ```
 * Set the `monitor.menuEnabled=true` property in the [Jaeger UI configuration](../../deployment/frontend-ui/#monitor).
 
+### Option 2: Elasticsearch/OpenSearch Backend Configuration
+
+An example configuration is available in the Jaeger repository: [config-spm-elasticsearch.yaml](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm-elasticsearch.yaml).
+
+Configuration is simpler as it does not require the SpanMetrics Connector or a separate metrics pipeline.
+
+* Ensure your `jaeger_storage` extension is configured with an Elasticsearch or OpenSearch backend and metric_backends.
+
+```yaml
+extensions:
+  jaeger_storage:
+    backends:
+      elasticsearch_trace_storage: &elasticsearch_config
+        elasticsearch:
+          ...
+    metric_backends:
+      elasticsearch_trace_storage: *elasticsearch_config # This points the metric backend to the same Elasticsearch trace storage configuration
+```
+
+```yaml
+extensions:
+  jaeger_storage:
+    backends:
+      opensearch_trace_storage: &opensearch_config
+        opensearch:
+          ...
+    metric_backends:
+      opensearch_trace_storage: *opensearch_config # This points the metric backend to the same OpenSearch trace storage configuration
+```
+
+* In the `jaeger_query` extension, set both `traces` and `metrics` storage to use the same Elasticsearch or OpenSearch backend defined in `jaeger_storage`.
+
+```yaml
+extensions:
+  jaeger_query:
+    storage:
+      traces: elasticsearch_trace_storage # Must match the backend defined in jaeger_storage extension
+      metrics: elasticsearch_trace_storage # Use the same storage for metrics
+```
+
+```yaml
+extensions:
+  jaeger_query:
+    storage:
+      traces: opensearch_trace_storage # Must match the backend defined in jaeger_storage extension
+      metrics: opensearch_trace_storage # Use the same storage for metrics
+```
+
+* Set the `monitor.menuEnabled=true` property in the [Jaeger UI configuration](../../deployment/frontend-ui/#monitor).
+
 ## Architecture
 
-In addition to the standard Jaeger architecture, the SPM feature requires
-the following additional components:
+There are two architectural approaches to generating RED metrics:
+
+1.  **Pre-computing metrics**: using the [SpanMetrics Connector][spanmetrics-conn] to compute the metrics from spans and store them in a PromQL-compatible backend storage, which Jaeger queries.
+2.  **Direct to storage**: Jaeger Query computes RED metrics at query time by directly querying the primary trace storage backend (Elasticsearch or OpenSearch). This simplifies the architecture by removing the need for a separate metrics pipeline and storage.
+
+### Option 1: Pre-computing metrics
+
+In addition to the standard Jaeger architecture, this approach requires:
 
 - A [SpanMetrics Connector][spanmetrics-conn] is introduced in the pipeline that receives trace data (spans) and generates RED metrics.
 - The generated metrics are exported to a Prometheus-compatible metrics store. In the provided example this is achieved by defining a `prometheus` exporter that opens an HTTP endpoint, and configuring a Prometheus server to scape the metrics from that endpoint. An alternative approach could be a push-style exporter that writes to a remote metrics store.
@@ -117,7 +175,7 @@ the following additional components:
 - A configuration in the `jaeger_query` extension to reference the external metrics store.
 
 {{<mermaid align="center">}}
-graph
+graph LR
     OTLP_EXPORTER[OTLP Exporter] --> TRACE_RECEIVER
 
     subgraph Application
@@ -159,13 +217,53 @@ graph
     style QUERY fill:#9AEBFE,color:black
 {{< /mermaid >}}
 
+### Option 2: Elasticsearch/OpenSearch Backend
+
+This approach computes metrics directly from trace data stored in Elasticsearch or OpenSearch, eliminating the need for a separate metrics storage backend like Prometheus. The OpenTelemetry Collector is still used to receive traces and forward them to Jaeger, but the SpanMetrics Connector is not required.
+
+{{<mermaid align="center">}}
+graph LR
+    OTLP_EXPORTER[OTLP Exporter] --> TRACE_RECEIVER
+
+    subgraph Application
+        subgraph OpenTelemetry SDK
+            OTLP_EXPORTER
+        end
+    end
+
+    TRACE_RECEIVER[Trace Receiver] --> |spans| TRACE_EXPORTER[Trace Exporter]
+    TRACE_EXPORTER --> |spans| TRACE_STORAGE[(Elasticsearch / OpenSearch)]
+
+    TRACE_STORAGE -->|traces & metrics queries| QUERY[Jaeger Query]
+    QUERY --> UI[Jaeger UI]
+
+    subgraph Jaeger all-in-one
+        subgraph Pipeline
+            TRACE_RECEIVER
+            TRACE_EXPORTER
+            QUERY
+            UI
+        end
+    end
+
+    style Application fill:#DFDFDF,color:black
+    style TRACE_RECEIVER fill:#404CA8,color:white
+    style TRACE_EXPORTER fill:#404CA8,color:white
+    style UI fill:#9AEBFE,color:black
+    style QUERY fill:#9AEBFE,color:black
+{{< /mermaid >}}
+
 ### Metrics Storage
 
-Any PromQL-compatible backend is supported by Jaeger Query. A list of these have
-been compiled by Julius Volz in:
-https://promlabs.com/blog/2020/11/26/an-update-on-promql-compatibility-across-vendors
+When using the PromQL-compatible backend architecture, any PromQL-compatible backend is supported by Jaeger Query. A list of these have been compiled by Julius Volz in: [https://promlabs.com/blog/2020/11/26/an-update-on-promql-compatibility-across-vendors](https://promlabs.com/blog/2020/11/26/an-update-on-promql-compatibility-across-vendors)
+
+When using the direct querying architecture, **Elasticsearch** and **OpenSearch** are supported for both trace storage and metrics calculation.
 
 ### Derived Time Series
+
+{{< info >}}
+This section applies only to the **PromQL-compatible backend** architecture.
+{{< /info >}}
 
 It is worth understanding the additional metrics and time series that the
 [SpanMetrics Connector][spanmetrics-conn] will generate in metrics storage to help
@@ -246,7 +344,7 @@ service:
       address: 0.0.0.0:8888
 ```
 
-The `/metrics` endpoint on this port can be used to check if UI queries for SPM data are successful: 
+The `/metrics` endpoint on this port can be used to check if UI queries for SPM data are successful:
 
 ```shell
 curl -s http://jaeger:8888/metrics | grep jaeger_metricstore
@@ -321,7 +419,7 @@ service:
 
 Outputting logs that resemble the following (formatted for readability):
 ```
-2024-11-26T19:09:43.152Z debug metricsstore/reader.go:258 Prometheus query results	
+2024-11-26T19:09:43.152Z debug metricsstore/reader.go:258 Prometheus query results
 {
   "kind": "extension",
   "name": "jaeger_storage",
