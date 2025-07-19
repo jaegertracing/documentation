@@ -32,6 +32,7 @@ fluentd
 glvs
 gobin
 gopath
+goroutines
 Hashicorp
 hasparent
 healthcheck
