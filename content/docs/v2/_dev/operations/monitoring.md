@@ -114,33 +114,14 @@ Monitor Jaeger query service performance:
 
 ### Prometheus Alerts
 
-For Jaeger v1 deployments, the Jaeger repository includes a comprehensive set of Prometheus alerting rules in the [monitoring mixin](https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin). These production-tested alerts cover:
+The Jaeger repository includes a [sample set of Prometheus alerting rules](https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin). These production-tested alerts cover:
 
 - **Service availability**: Alerts for when Jaeger components are down
 - **Performance degradation**: Alerts for high latency and error rates
 - **Capacity issues**: Alerts for resource exhaustion and queue saturation
 - **Data loss**: Alerts for dropped spans and storage failures
 
-The monitoring mixin provides:
-- **Alert rules** (`alerts.libsonnet`) - Ready-to-use Prometheus alerting rules
-- **Grafana dashboards** - Pre-built dashboards for visualization
-- **Runbooks** - Documentation for responding to alerts
-
 For detailed setup instructions, see the [monitoring mixin documentation](https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin).
-
-### Custom Alerting Considerations
-
-For Jaeger v2 deployments or custom alerting needs, consider setting up alerts for:
-
-#### Critical Issues
-- Refused spans (`otelcol_receiver_refused_spans`) indicating data loss
-- Failed span exports (`otelcol_exporter_send_failed_spans`) indicating storage issues
-- Service unavailability
-
-#### Performance Issues
-- High resource usage (CPU, memory, disk)
-- Increased query response times
-- Goroutine count growth indicating potential leaks
 
 ### Monitoring Tools Integration
 
