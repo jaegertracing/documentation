@@ -112,9 +112,25 @@ Monitor Jaeger query service performance:
 #### Storage Backend
 - Monitor your specific storage backend (Elasticsearch, Cassandra, etc.) according to its documentation
 
-### Alerting Considerations
+### Prometheus Alerts
 
-Consider setting up alerts for:
+For Jaeger v1 deployments, the Jaeger repository includes a comprehensive set of Prometheus alerting rules in the [monitoring mixin](https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin). These production-tested alerts cover:
+
+- **Service availability**: Alerts for when Jaeger components are down
+- **Performance degradation**: Alerts for high latency and error rates
+- **Capacity issues**: Alerts for resource exhaustion and queue saturation
+- **Data loss**: Alerts for dropped spans and storage failures
+
+The monitoring mixin provides:
+- **Alert rules** (`alerts.libsonnet`) - Ready-to-use Prometheus alerting rules
+- **Grafana dashboards** - Pre-built dashboards for visualization
+- **Runbooks** - Documentation for responding to alerts
+
+For detailed setup instructions, see the [monitoring mixin documentation](https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin).
+
+### Custom Alerting Considerations
+
+For Jaeger v2 deployments or custom alerting needs, consider setting up alerts for:
 
 #### Critical Issues
 - Refused spans (`otelcol_receiver_refused_spans`) indicating data loss

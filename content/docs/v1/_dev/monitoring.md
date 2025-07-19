@@ -103,9 +103,25 @@ Monitor these Jaeger internal metrics for operational health:
 - **Query Latency**: Monitor UI and API query response times
 - **Query Volume**: Monitor query patterns and frequency
 
-### Alerting Considerations
+### Prometheus Alerts
 
-Consider setting up alerts for:
+The Jaeger repository includes a comprehensive set of Prometheus alerting rules in the [monitoring mixin](https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin). These production-tested alerts cover:
+
+- **Service availability**: Alerts for when Jaeger components are down
+- **Performance degradation**: Alerts for high latency and error rates
+- **Capacity issues**: Alerts for resource exhaustion and queue saturation
+- **Data loss**: Alerts for dropped spans and storage failures
+
+The monitoring mixin provides:
+- **Alert rules** (`alerts.libsonnet`) - Ready-to-use Prometheus alerting rules
+- **Grafana dashboards** - Pre-built dashboards for visualization
+- **Runbooks** - Documentation for responding to alerts
+
+For detailed setup instructions, see the [monitoring mixin documentation](https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin).
+
+### Custom Alerting Considerations
+
+For custom alerting needs beyond the monitoring mixin, consider setting up alerts for:
 
 #### Critical Issues
 - Dropped spans indicating data loss
