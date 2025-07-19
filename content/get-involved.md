@@ -48,13 +48,22 @@ Another label to look for is [help-wanted][], which we use to tag tickets that i
 
 Please refer to the [Contributing Guidelines](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md) on how to make code contributions. And make sure to follow the [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/master/code-of-conduct.md).
 
+### How do I know if an issue is still relevant?
+
+If the issue is open and labeled as `help-wanted` there is a very high probability it is still relevant. Only if it is very old (e.g. more than two years) it may no longer be needed and it's ok to comment on it and confirm.
+
 ### What if someone is already working on a issue?
 
-We have a [policy][not-assigning] of not explicitly assigning the issues to anyone. However, you may find that someone has already created a pull request (it will show in the comments section and/or right below the title of the issue). In such situation, the issue is typically in one of these three states:
-  * The PR has recent updates (within a week) from the author, meaning the author is actively working on it. In this case it is best to wait for the author to finish their work.
-  * The most recent comments on the PR are from the maintainers recommending some changes, and those comments are not addressed by the author such that the PR appears to be stale. In this case it's good to tag the author in the PR and ask if they are still working on it or if they would like to hand it over to someone else.
+We have a [policy][not-assigning] of not explicitly assigning the issues to anyone. It is always a good etiquette to verify if someone is already working on the issue:
+
+  * Check if there are any open PRs against the issue (see next section).
+  * If the PR has recent updates (within a week) from the author, the author is likely actively working on it. In this case it is best to wait for the author to finish their work.
+  * If the most recent comments on the PR are from the maintainers recommending some changes, and those comments are not addressed by the author (for two weeks or more), the PR may have stalled. In this case you can tag the author in the PR and ask if they are still working on it or if they would like to hand it over to someone else.
   * Sometimes things fall through the cracks and maintainers miss the recent changes on the PR. If these latest changes look good (e.g. the CI checks are all green) but the maintainers have not reviewed them it's good to ping the maintainers in the PR asking for a review. Even better if you can help with the review.
 
+### How do I know if there are open PRs against the issue?
+
+It's always a good idea to include the text `Resolves #{issue number}` in the PR so that GitHub can link it to the issue and to close the issue once the PR is merged. If this is done, you will be able to see the PR number and icon right under the issue description. Alternatively, you can look through the issue comment history and you will also find the links to the PRs that mention the issue (although they may not necessarily be solving that issue, so look deeper).
 
 ## Mentorship programs
 
