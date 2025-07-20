@@ -50,8 +50,8 @@ docker compose -f docker-compose-v2.yml up
 
 Once running, you can access:
 
-- **HotROD Application**: [http://localhost:8080](http://localhost:8080)
-- **Jaeger UI**: [http://localhost:16686](http://localhost:16686)
+- **HotROD Application**: `http://localhost:8080`
+- **Jaeger UI**: `http://localhost:16686`
 
 ## Guided Tutorial
 
