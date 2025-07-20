@@ -5,7 +5,8 @@
 {{ $cssDevOpts   := (dict "targetPath" $target "includePaths" $includePaths "enableSourceMap" true) }}
 {{ $cssProdOpts  := (dict "targetPath" $target "includePaths" $includePaths "outputStyle" "compressed") }}
 {{ $isDocs       := eq .Section "docs" }}
-{{ if $isDocs }}
+{{ $isLiveDemo   := eq .Type "live-demo" }}
+{{ if or $isDocs $isLiveDemo }}
 <link rel="stylesheet" href="/css/tocbot.css">
 {{ end }}
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">

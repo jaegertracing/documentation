@@ -1,0 +1,25 @@
+{{ define "main" }}
+<article class="article article--docs">
+  <div class="container is-fluid">
+    <div class="columns">
+      <div class="column is-10 is-full-touch">
+        <section class="content content--docs is-medium">
+          <header>
+            <p class="title is-1">
+              {{ .Title }}
+            </p>
+          </header>
+
+          <hr class="hr" />
+
+          {{ .Content }}
+        </section>
+      </div>
+
+      <div class="column is-2 is-hidden-touch">
+        {{ partial "docs/toc.html" . }}
+      </div>
+    </div>
+  </div>
+</article>
+{{ end }}
