@@ -21,6 +21,15 @@ OpenTelemetry SDKs can be configured to communicate directly with Jaeger Collect
 * {{< check_yes >}} Kafka - TLS with various authentication mechanisms supported (mTLS, Kerberos, plaintext).
 * {{< check_yes >}} Prometheus (for [SPM](../../architecture/spm/)) - TLS with mTLS (client cert authentication) supported, as long as you've [configured your Prometheus server](https://prometheus.io/docs/guides/tls-encryption/) correctly.
 
+| Storage | TLS | mTLS | Basic | Bearer Token | API Key | Kerberos |
+| ------- | --- | ---- | ------ | ------------ | ------- | -------- |
+| Cassandra | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} | {{< check_no >}} | {{< check_no >}} |
+| Elasticsearch | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} ([coming soon](https://github.com/jaegertracing/jaeger/issues/7225)) | {{< check_no >}} |
+| OpenSearch | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} | {{< check_no >}} |
+| Kafka | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} | {{< check_no >}} | {{< check_yes >}} |
+| Prometheus | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} | {{< check_no >}} | {{< check_no >}} |
+
+
 ## Browser to UI
 
 * {{< check_yes >}} HTTP - TLS and bearer token authentication (pass-through to storage).
