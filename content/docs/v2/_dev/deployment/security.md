@@ -24,7 +24,7 @@ OpenTelemetry SDKs can be configured to communicate directly with Jaeger Collect
 | Storage | TLS | mTLS | Basic | Bearer Token | API Key | Kerberos |
 | ------- | --- | ---- | ------ | ------------ | ------- | -------- |
 | Cassandra | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} | {{< check_no >}} | {{< check_no >}} |
-| Elasticsearch | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} ([coming soon](https://github.com/jaegertracing/jaeger/issues/7225)) | {{< check_no >}} |
+| Elasticsearch | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} |
 | OpenSearch | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} | {{< check_no >}} |
 | Kafka | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} | {{< check_no >}} | {{< check_yes >}} |
 | Prometheus | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} | {{< check_no >}} | {{< check_no >}} |
