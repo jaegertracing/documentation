@@ -5,32 +5,48 @@ aliases: [../monitoring]
 hasparent: true
 ---
 
-Jaeger itself is a distributed, microservices based system. If you run it in production, you will likely want to setup adequate monitoring for different components, e.g. to ensure that the backend is not saturated by too much tracing data.
+Jaeger v2 inherits comprehensive observability capabilities from the OpenTelemetry Collector. You can monitor Jaeger's internal operations through:
 
-Please refer to [OpenTelemetry Collector documentation](https://opentelemetry.io/docs/collector/internal-telemetry/) for details on configuring the internal telemetry.
+- **Debug Logging**: Detailed logging for troubleshooting storage and component issues
+- **Internal Tracing**: Trace Jaeger's own operations to understand performance bottlenecks
+- **Metrics**: Monitor key performance indicators and operational health
+- **Health Checks**: Automated health monitoring with the Health Check v2 extension
+
+Jaeger itself is a distributed, microservices-based system. If you run it in production, you will likely want to set up adequate monitoring for different components, e.g., to ensure that the backend is not saturated by too much tracing data.
+
+All configuration is done via the OpenTelemetry Collector configuration file. Please refer to [OpenTelemetry Collector documentation](https://opentelemetry.io/docs/collector/internal-telemetry/) for details on configuring the internal telemetry.
 
 ## Metrics
 
-Here's a sample `curl` call to obtain the metrics:
+Jaeger v2 exposes key metrics via the OpenTelemetry Collector. These metrics help you monitor ingestion, export, and component health.
 
-```
+**Sample curl call:**
+```bash
 curl -s http://jaeger-collector:8888/metrics
 ```
 
-The following metrics are of special interest:
-
+**Key metrics:**
 ```
 otelcol_receiver_accepted_spans
 otelcol_receiver_refused_spans
-
 otelcol_exporter_sent_spans
 otelcol_exporter_send_failed_spans
 ```
 
 The first two metrics describe how many spans are being received by Jaeger. The last two metrics indicate how many spans are being sent to the storage. Under normal conditions the `accepted` and `sent_spans` counters should be close to each other.
 
-The labels on the metrics allow to separate different receivers and exporters. For example, the first metric with all labels might look like this (formatted for readability):
+**Key metrics table:**
+| Metric | Description | Type |
+|--------|-------------|------|
+| `otelcol_receiver_accepted_spans` | Spans accepted by receiver | Counter |
+| `otelcol_receiver_refused_spans` | Spans refused by receiver | Counter |
+| `otelcol_processor_batch_batch_send_size` | Batch size when sent | Histogram |
+| `otelcol_exporter_sent_spans` | Spans sent by exporter | Counter |
+| `otelcol_exporter_send_failed_spans` | Failed span exports | Counter |
+| `otelcol_exporter_queue_size` | Export queue size | Gauge |
+| `otelcol_exporter_queue_capacity` | Export queue capacity | Gauge |
 
+**Metric labels example:**
 ```
 otelcol_receiver_accepted_spans{
     receiver="otlp",
@@ -41,146 +57,55 @@ otelcol_receiver_accepted_spans{
 } 44
 ```
 
-## Logging
+### Metrics Configuration
 
-Logs by default go to `stderr` in plain text format. For production deployment log verbosity of `info` or `warning` is recommended.
-
-## Traces
-
-Jaeger has the ability to trace some of its own components, namely the requests to the Query service. For example, if you start `all-in-one` as described in [Getting Started](../../getting-started/), and refresh the UI screen a few times, you will see `jaeger` populated in the Services dropdown.
-
-Self-tracing can be disabled by setting `OTEL_TRACES_SAMPLER=always_off` environment variable.
-
-## Monitoring Best Practices
-
-When running Jaeger in production, comprehensive monitoring is essential to ensure optimal performance and reliability. This section covers key metrics and monitoring strategies.
-
-### Process-Level Metrics
-
-Monitor these fundamental system metrics for all Jaeger components:
-
-#### System Resources
-- **CPU Usage**: Monitor CPU utilization to detect performance bottlenecks
-- **Memory Usage**: Track both RSS and virtual memory consumption
-- **File Descriptors**: Monitor open file descriptor count
-- **Network Usage**: Monitor network I/O for data ingestion and storage operations
-
-#### Disk I/O (for components with local storage)
-- **Disk Usage**: Monitor disk space utilization
-- **Disk I/O**: Track read/write operations per second and latency
-
-### Go Runtime Metrics
-
-Jaeger v2 components are built on OpenTelemetry Collector, which exposes standard Go runtime metrics:
-
-#### Garbage Collection
-- **GC Duration**: Monitor garbage collection pause times
-- **GC Frequency**: Track how often garbage collection occurs
-
-#### Goroutines
-- **Goroutine Count**: Monitor the number of active goroutines
-- **Goroutine Growth**: Watch for unexpected increases that may indicate leaks
-
-#### Memory Statistics
-- **Heap Usage**: Monitor Go heap memory usage
-- **Memory Allocations**: Track allocation patterns
-
-### OpenTelemetry Collector Metrics
-
-Jaeger v2 is built on OpenTelemetry Collector. The key metrics to monitor are:
-
-#### Span Processing
-- **Span Ingestion**: Monitor spans received
-  - `otelcol_receiver_accepted_spans`: Total spans accepted by receivers
-  - `otelcol_receiver_refused_spans`: Spans refused (indicates data loss)
-- **Span Export**: Monitor spans sent to storage
-  - `otelcol_exporter_sent_spans`: Successfully exported spans
-  - `otelcol_exporter_send_failed_spans`: Failed export attempts
-
-#### Component Health
-- **Receiver Health**: Monitor data ingestion components by receiver type
-- **Exporter Health**: Monitor storage export components by storage backend
-
-### Query Performance
-
-Monitor Jaeger query service performance:
-
-#### Response Times
-- **Query Latency**: Monitor UI and API query response times
-- **Query Volume**: Track query patterns and frequency
-
-#### Storage Backend
-- Monitor your specific storage backend (Elasticsearch, Cassandra, etc.) according to its documentation
-
-### Prometheus Alerts
-
-The Jaeger repository includes a [sample set of Prometheus alerting rules](https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin). These production-tested alerts cover:
-
-- **Service availability**: Alerts for when Jaeger components are down
-- **Performance degradation**: Alerts for high latency and error rates
-- **Capacity issues**: Alerts for resource exhaustion and queue saturation
-- **Data loss**: Alerts for dropped spans and storage failures
-
-For detailed setup instructions, see the [monitoring mixin documentation](https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin).
-
-### Monitoring Tools Integration
-
-#### Prometheus Configuration
-Example Prometheus scrape configuration for Jaeger v2:
+Configure metrics collection and export:
 
 ```yaml
-scrape_configs:
-  - job_name: 'jaeger-v2'
-    static_configs:
-      - targets: ['jaeger:8888']  # Internal telemetry port
-    scrape_interval: 15s
-    metrics_path: /metrics
+service:
+  telemetry:
+    metrics:
+      level: detailed
+      address: 0.0.0.0:8888
+
+exporters:
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+    namespace: jaeger
+    const_labels:
+      deployment: production
+      version: "2.0.0"
+  otlp/metrics:
+    endpoint: http://otel-collector:4317
+    tls:
+      insecure: true
 ```
 
-### Health Checks
+## Logging
 
-Implement health checks for:
-
-#### Application Health
-- Verify OpenTelemetry Collector pipeline health
-- Check storage connectivity
-- Validate receiver endpoint availability
-
-#### Dependency Health
-- Monitor storage backend health according to your storage system's documentation
-- Check network connectivity between components
-
-
-### Internal Observability in Jaeger v2
-
-Jaeger v2 inherits comprehensive observability capabilities from the OpenTelemetry Collector. You can monitor Jaeger's internal operations through:
-
-- **Debug Logging**: Detailed logging for troubleshooting storage and component issues
-- **Internal Tracing**: Trace Jaeger's own operations to understand performance bottlenecks
-- **Metrics**: Monitor key performance indicators and operational health
-- **Health Checks**: Automated health monitoring with the Health Check v2 extension
-
-All configuration is done via the OpenTelemetry Collector configuration file.
+Logs by default go to `stderr` in plain text format. For production deployment, log verbosity of `info` or `warning` is recommended. Debug logging can be enabled for troubleshooting.
 
 ### Debug Logging
 
 #### Storage Debug Logging
-Enable debug logging for Jaeger's storage operations by configuring the service telemetry in your OpenTelemetry Collector configuration:
+Enable debug logging for Jaeger's storage operations:
 
 ```yaml
 service:
   telemetry:
     logs:
       level: debug
+      development: true
+      encoding: console
+      disable_caller: false
+      disable_stacktrace: false
     resource:
       service.name: jaeger
       service.version: "2.0.0"
 ```
 
-> **Note**: Modern Collector configs use the service.telemetry.logs section with fields like level, development, and encoding. Per-processor log overrides are not part of the standard config schema and should be controlled by the global level instead.
-
 #### Component-Specific Debug Logging
-Enable debug logging for specific Jaeger components using the global telemetry configuration:
+Configure debug logging with processor settings:
 
 ```yaml
 service:
@@ -203,10 +128,8 @@ processors:
     check_interval: 5s
 ```
 
-> **Important**: In OpenTelemetry Collector, logging levels are controlled globally via `service.telemetry.logs.level`. Per-component log level overrides are not part of the standard configuration schema and should not be used. All components will respect the global logging configuration.
-
-#### Alternative: Environment Variable Override
-If you need different log levels for debugging specific deployments, you can use environment variables:
+#### Environment Variable Override
+Alternative log level configuration for deployments:
 
 ```yaml
 # Docker/Kubernetes deployment
@@ -222,16 +145,9 @@ spec:
           value: "debug"
 ```
 
-Or use command line flags when running the collector directly:
-
-```powershell
-./otelcol --config=config.yaml --log-level=debug
-```
-
 #### Storage Backend Specific Logging
-Configure debug logging for specific storage backends:
 
-**Elasticsearch Backend**
+**Elasticsearch:**
 ```yaml
 exporters:
   elasticsearch:
@@ -244,7 +160,7 @@ exporters:
       queue_size: 1000
 ```
 
-**OpenSearch Backend**
+**OpenSearch:**
 ```yaml
 exporters:
   opensearch:
@@ -255,7 +171,13 @@ exporters:
     dataset: traces
 ```
 
-### Internal Tracing
+## Traces
+
+Jaeger has the ability to trace some of its own components, namely the requests to the Query service. For example, if you start `all-in-one` as described in [Getting Started](../../getting-started/), and refresh the UI screen a few times, you will see `jaeger` populated in the Services dropdown.
+
+Self-tracing can be disabled by setting `OTEL_TRACES_SAMPLER=always_off` environment variable.
+
+### Internal Tracing Configuration
 
 #### Enable Self-Tracing
 Configure Jaeger to trace its own operations:
@@ -284,7 +206,7 @@ exporters:
 ```
 
 #### Trace Sampling for Internal Operations
-Control sampling for Jaeger's internal traces to avoid overwhelming your tracing backend:
+Control sampling for Jaeger's internal traces:
 
 ```yaml
 processors:
@@ -292,79 +214,25 @@ processors:
     sampling_percentage: 1
 ```
 
-### Metrics Configuration
+## Health Checks
 
-#### Enable Internal Metrics
-Configure metrics collection for Jaeger components:
+Jaeger v2 supports health monitoring through OpenTelemetry Collector health check extensions.
 
-```yaml
-service:
-  telemetry:
-    metrics:
-      level: detailed
-      address: 0.0.0.0:8888
-
-exporters:
-  prometheus:
-    endpoint: "0.0.0.0:8889"
-    namespace: jaeger
-    const_labels:
-      deployment: production
-      version: "2.0.0"
-```
-
-#### Key Jaeger v2 Metrics
-Monitor these essential metrics for Jaeger operations:
-
-| Metric | Description | Type |
-|--------|-------------|------|
-| `otelcol_receiver_accepted_spans` | Spans accepted by receiver | Counter |
-| `otelcol_receiver_refused_spans` | Spans refused by receiver | Counter |
-| `otelcol_processor_batch_batch_send_size` | Batch size when sent | Histogram |
-| `otelcol_exporter_sent_spans` | Spans sent by exporter | Counter |
-| `otelcol_exporter_send_failed_spans` | Failed span exports | Counter |
-| `otelcol_exporter_queue_size` | Export queue size | Gauge |
-| `otelcol_exporter_queue_capacity` | Export queue capacity | Gauge |
-
-#### Metrics Export Options
-Export metrics to various monitoring systems:
-
-```yaml
-exporters:
-  prometheus:
-    endpoint: "0.0.0.0:8889"
-    namespace: jaeger
-    enable_open_metrics: true
-  otlp/metrics:
-    endpoint: http://otel-collector:4317
-    tls:
-      insecure: true
-```
-
-### Health Checks
-
-Jaeger v2 supports health monitoring through OpenTelemetry Collector health check extensions. There are two options available:
-
-#### Health Check Extension (Standard)
-The standard health check extension provides basic health monitoring:
+### Health Check Extension (Standard)
+Basic health monitoring:
 
 ```yaml
 extensions:
   health_check:
     endpoint: 0.0.0.0:13133
-    tls:
-      ca_file: /etc/ssl/ca.crt
-      cert_file: /etc/ssl/server.crt
-      key_file: /etc/ssl/server.key
     path: "/health"
-    response_body: '{"status": "healthy"}'
 
 service:
   extensions: [health_check]
 ```
 
-#### Health Check v2 Extension (Advanced)
-For more advanced health monitoring with component-specific checks, use the Health Check v2 extension. This provides more granular component health monitoring and additional configuration options.
+### Health Check v2 Extension (Advanced)
+Advanced health monitoring with component-specific checks:
 
 ```yaml
 extensions:
@@ -380,18 +248,12 @@ service:
   extensions: [health_check/v2]
 ```
 
-> **Note**: The Health Check v2 extension provides more granular component health monitoring but may require additional configuration. Refer to the [Health Check v2 Extension documentation](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/healthcheckv2extension) for complete configuration options.
-
-#### Health Check Endpoints
-Both extensions provide these endpoints:
-
+**Health check endpoints:**
 | Endpoint | Description | Example |
 |----------|-------------|---------|
 | `GET /health` | Overall health status | `curl http://localhost:13133/health` |
 
-#### Health Check Response
-Typical health check response:
-
+**Typical health check response:**
 ```json
 {
   "status": "Server available",
@@ -400,44 +262,13 @@ Typical health check response:
 }
 ```
 
-#### Choosing Between Extensions
+**Choosing between extensions:**
 - **Standard Health Check**: Use for basic health monitoring needs with minimal configuration
-- **Health Check v2**: Use when you need:
-  - Component-specific health checks
-  - Advanced monitoring capabilities
-  - Custom health check intervals and thresholds
-  - More detailed health status reporting
+- **Health Check v2**: Use for component-specific checks, advanced monitoring, custom intervals/thresholds
 
-#### Kubernetes Health Probes
-Configure Kubernetes probes using the health check extension:
+## Complete Configuration Example
 
-```yaml
-apiVersion: v1
-kind: Pod
-spec:
-  containers:
-  - name: jaeger-collector
-    image: jaegertracing/jaeger-collector:2.0.0
-    ports:
-    - containerPort: 13133
-      name: health
-    livenessProbe:
-      httpGet:
-        path: /health
-        port: 13133
-      initialDelaySeconds: 30
-      periodSeconds: 10
-    readinessProbe:
-      httpGet:
-        path: /health
-        port: 13133
-      initialDelaySeconds: 5
-      periodSeconds: 5
-```
-
-### Complete Configuration Example
-
-Here's a comprehensive OpenTelemetry Collector configuration with all observability features enabled:
+Here is a comprehensive OpenTelemetry Collector configuration with all observability features enabled:
 
 ```yaml
 extensions:
@@ -495,16 +326,71 @@ service:
       service.version: "2.0.0"
 ```
 
-### Monitoring Setup
+## Monitoring Best Practices
 
-#### Prometheus Configuration
-Configure Prometheus to scrape Jaeger metrics:
+### Process-Level Metrics
+Monitor these fundamental system metrics for all Jaeger components:
+
+#### System Resources
+- **CPU Usage**: Monitor CPU utilization to detect performance bottlenecks
+- **Memory Usage**: Track both RSS and virtual memory consumption
+- **File Descriptors**: Monitor open file descriptor count
+- **Network Usage**: Monitor network I/O for data ingestion and storage operations
+
+#### Disk I/O (for components with local storage)
+- **Disk Usage**: Monitor disk space utilization
+- **Disk I/O**: Track read/write operations per second and latency
+
+### Go Runtime Metrics
+Jaeger v2 components are built on OpenTelemetry Collector, which exposes standard Go runtime metrics:
+
+#### Garbage Collection
+- **GC Duration**: Monitor garbage collection pause times
+- **GC Frequency**: Track how often garbage collection occurs
+
+#### Goroutines
+- **Goroutine Count**: Monitor the number of active goroutines
+- **Goroutine Growth**: Watch for unexpected increases that may indicate leaks
+
+#### Memory Statistics
+- **Heap Usage**: Monitor Go heap memory usage
+- **Memory Allocations**: Track allocation patterns
+
+### OpenTelemetry Collector Metrics
+Key metrics to monitor for Jaeger v2:
+
+#### Span Processing
+- **Span Ingestion**: Monitor spans received
+  - `otelcol_receiver_accepted_spans`: Total spans accepted by receivers
+  - `otelcol_receiver_refused_spans`: Spans refused (indicates data loss)
+- **Span Export**: Monitor spans sent to storage
+  - `otelcol_exporter_sent_spans`: Successfully exported spans
+  - `otelcol_exporter_send_failed_spans`: Failed export attempts
+
+#### Component Health
+- **Receiver Health**: Monitor data ingestion components by receiver type
+- **Exporter Health**: Monitor storage export components by storage backend
+
+### Query Performance
+Monitor Jaeger query service performance:
+
+#### Response Times
+- **Query Latency**: Monitor UI and API query response times
+- **Query Volume**: Track query patterns and frequency
+
+#### Storage Backend
+Monitor your specific storage backend (Elasticsearch, Cassandra, etc.) according to its documentation
+
+## Integration & Setup
+
+### Prometheus Configuration
+Example scrape config for Jaeger v2:
 
 ```yaml
 scrape_configs:
-  - job_name: 'jaeger-collector-metrics'
+  - job_name: 'jaeger-v2'
     static_configs:
-      - targets: ['jaeger-collector:8889']
+      - targets: ['jaeger:8888']  # Internal telemetry port
     scrape_interval: 15s
     metrics_path: /metrics
   - job_name: 'jaeger-health-check'
@@ -524,7 +410,18 @@ Set up alerts and dashboards for these critical Jaeger metrics:
 | `otelcol_exporter_queue_size` | > 80% capacity | Export queue filling up |
 | `up{job="jaeger-health-check"}` | == 0 | Health check failing |
 
-#### Sample Grafana Dashboard Queries
+### Prometheus Alerts
+The Jaeger repository includes a [sample set of Prometheus alerting rules](https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin). These production-tested alerts cover:
+
+- **Service availability**: Alerts for when Jaeger components are down
+- **Performance degradation**: Alerts for high latency and error rates
+- **Capacity issues**: Alerts for resource exhaustion and queue saturation
+- **Data loss**: Alerts for dropped spans and storage failures
+
+For detailed setup instructions, see the [monitoring mixin documentation](https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin).
+
+### Grafana Dashboards
+Sample PromQL queries:
 
 ```promql
 # Span ingestion rate
@@ -537,10 +434,36 @@ rate(otelcol_exporter_send_failed_spans[5m]) / rate(otelcol_exporter_sent_spans[
 otelcol_exporter_queue_size / otelcol_exporter_queue_capacity * 100
 ```
 
-### Troubleshooting
+### Kubernetes Health Probes
+Configure probes using the health check extension:
 
-Common scenarios to investigate:
+```yaml
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: jaeger-collector
+    image: jaegertracing/jaeger-collector:2.0.0
+    ports:
+    - containerPort: 13133
+      name: health
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 13133
+      initialDelaySeconds: 30
+      periodSeconds: 10
+    readinessProbe:
+      httpGet:
+        path: /health
+        port: 13133
+      initialDelaySeconds: 5
+      periodSeconds: 5
+```
 
+## Troubleshooting
+
+### Common Issues
 | Issue | Symptoms | Solution |
 |-------|----------|----------|
 | High memory usage | OOM errors, slow performance | Tune `memory_limiter` processor |
@@ -548,9 +471,8 @@ Common scenarios to investigate:
 | Missing traces | Gaps in trace data | Verify receiver configuration |
 | High CPU usage | Slow processing | Optimize batch processor settings |
 
-#### Debug Commands
-
-```powershell
+### Debug Commands
+```bash
 # Check health status
 curl http://localhost:13133/health
 
