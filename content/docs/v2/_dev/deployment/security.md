@@ -25,7 +25,7 @@ OpenTelemetry SDKs can be configured to communicate directly with Jaeger Collect
 | ------- | --- | ---- | ------ | ------------ | ------- | -------- |
 | Cassandra | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} | {{< check_no >}} | {{< check_no >}} |
 | Elasticsearch | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} |
-| OpenSearch | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} | {{< check_no >}} |
+| OpenSearch | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} |
 | Kafka | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} | {{< check_no >}} | {{< check_yes >}} |
 | Prometheus | {{< check_yes >}} | {{< check_yes >}} | {{< check_yes >}} | {{< check_no >}} | {{< check_no >}} | {{< check_no >}} |
 
