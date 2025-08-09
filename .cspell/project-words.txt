@@ -44,8 +44,8 @@ htmltest
 htpasswd
 hugo
 ingester
-ingester's
 ingesters
+ingester's
 istio
 istio's
 jaegertracing
@@ -98,6 +98,7 @@ pprof
 procs
 prometheus
 prometheusexporter
+promql
 promscale
 proto
 protobuf
