@@ -44,8 +44,8 @@ htmltest
 htpasswd
 hugo
 ingester
-ingester's
 ingesters
+ingester's
 istio
 istio's
 jaegertracing
