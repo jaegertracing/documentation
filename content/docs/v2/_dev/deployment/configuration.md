@@ -13,6 +13,10 @@ We are currently working on expanding this section with more details. [Examples 
 
 Jaeger can be configured via a YAML configuration file that uses the same format as the [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/configuration/). The configuration defines the main ingestion pipeline as a collection of **receivers**, **processors**, **connectors**, and **exporters**. Jaeger implements many of these components, but also a number of **extensions** that provide Jaeger's unique capabilities.
 
+```shell
+jaeger --config config.yaml
+```
+
 ### Configuration Examples
 
 [Examples of working configuration files](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger) are available in the Jaeger GitHub repository:
