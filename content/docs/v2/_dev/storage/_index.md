@@ -43,7 +43,7 @@ Known remote storage backends:
 
 ## Archive Storage
 
-Jaeger supports two kinds of trace storage: `primary` and `archive`. The primary storage is used as the main storage for all ingested traces, so it requires a highly scalable backend and is typically used with short TTL on trace data (e.g. two weeks) to save storage costs. However, occasionally it may be useful to save certain traces for a longer period of time, e.g. when linked to an incident or a future performance improvement task. The archive storage is used for this purpose. It can be configured with much longer retention period (even infinite) because no traces are automatically saved into archive storage, a save operation must be manually initiated by the user from Jaeger UI. In Jaeger v2 it is possible to mix and match different backends for primary and archive storage roles.
+Jaeger supports two kinds of trace storage: `primary` and `archive`. The primary storage is used as the main storage for all ingested traces, so it requires a highly scalable backend and is typically used with short TTL on trace data (e.g. two weeks) to save storage costs. However, occasionally it may be useful to save certain traces for a longer period of time, e.g. when linked to an incident or a future performance improvement task. The archive storage is used for this purpose. It can be configured with much longer retention period (even infinite) because no traces are automatically saved into archive storage, a save operation must be manually initiated by the user from Jaeger UI.
 
 To configure an archive storage:
 
