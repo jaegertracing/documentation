@@ -43,8 +43,30 @@ Known remote storage backends:
 
 ## Archive Storage
 
-Jaeger supports two kinds of trace storage: `primary` and `archive`. The primary storage is used as the main storage for all ingested traces, so it requires a highly scalable backend and is typically used with short TTL on trace data (e.g. two weeks) to save storage costs. However, occasionally it may be useful to save certain traces for a longer period of time, e.g. when linked to an incident or a future performance improvement task. The archive storage is used for this purpose. It can be configured with much longer retention period (even infinite) because no traces are automatically saved into archive storage, a save operation must be manually initiated by the user from Jaeger UI. In Jaeger v2 it is possible to mix and match different backends for primary and archive storage roles.
+Jaeger supports two kinds of trace storage: `primary` and `archive`. The primary storage is used as the main storage for all ingested traces, so it requires a highly scalable backend and is typically used with short TTL on trace data (e.g. two weeks) to save storage costs. However, occasionally it may be useful to save certain traces for a longer period of time, e.g. when linked to an incident or a future performance improvement task. The archive storage is used for this purpose. It can be configured with much longer retention period (even infinite) because _no traces are automatically saved_ into archive storage, a save operation must be _manually initiated by the user_ from Jaeger UI.
 
 To configure an archive storage:
-  * define a storage backend configuration as you see fit
-  * reference the backend name in the `traces_archive:` property of the `jaeger_storage` extension.
+
+(1) define a second storage backend configuration. For example, `another_store` in the following example:
+
+```yaml
+  jaeger_storage:
+    backends:
+      some_store:
+        memory:
+          max_traces: 100000
+      another_store:
+        memory:
+          max_traces: 100000
+```
+
+Note that the archive storage does not have to be of the same type as the primary storage.
+
+(2) reference that new backend name in `jaeger_query::storage::traces_archive`, for example:
+
+```yaml
+  jaeger_query:
+    storage:
+      traces: some_store
+      traces_archive: another_store
+```
