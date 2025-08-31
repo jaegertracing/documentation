@@ -7,6 +7,9 @@ Juraci Paixão Kröhling
 # Other names (sometimes from github links)
 robbert
 
+## LFX Mentorship Sep-Dec 2025 (Term 3)
+Saiddiqui
+
 ## LFX Mentorship June-Aug 2025 (Term 2)
 Chahat Sagar
 Vishvamsinh Vaghela
