@@ -8,6 +8,10 @@ See also:
   * [For mentees](../mentorship-for-mentees/)
   * [For mentors](../mentorship-for-mentors/)
 
+## LFX Mentorship September-November 2025 (Term 3)
+
+* [Danish Saiddiqui](https://github.com/danish9039) -- [Next-Generation Jaeger Demo with OpenTelemetry and OpenSearch](https://github.com/jaegertracing/jaeger/issues/7326)
+
 ## LFX Mentorship June-Aug 2025 (Term 2)
 
 * [Chahat Sagar](https://github.com/chahatsagarmain) -- [Jaeger demo on Kubernetes](https://github.com/jaegertracing/jaeger/issues/7115)
