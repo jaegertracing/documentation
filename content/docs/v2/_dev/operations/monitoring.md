@@ -24,7 +24,7 @@ For Jaeger project background and v2 architecture, see the [Jaeger repository RE
 
 This section focuses on how to configure Jaeger v2’s internal telemetry. For the full schema, see the [OpenTelemetry Collector docs](https://opentelemetry.io/docs/collector/internal-telemetry/).
 
-### Logging (debug and production)
+### Logging (debug and production) {#logging}
 
 Logs by default go to `stderr`. Use `info` or `warn` in production; switch to `debug` during incident analysis.
 
@@ -83,7 +83,7 @@ containers:
 
 Note: exact flags and env names depend on the storage backend/distribution; consult the plugin’s documentation. Return to `info`/`warn` after resolution.
 
-### Metrics (collection and export)
+### Metrics (collection and export) {#metrics}
 
 Use the new `readers` model to expose internal metrics. Prometheus pull (recommended):
 
@@ -253,7 +253,7 @@ This section lists key signals to track in production. See also the sample alert
 - Goroutine count and unexpected growth
 - Heap usage and allocation churn
 
-Note: metric names can vary by Collector version and distribution. For canonical names and details, refer to the OpenTelemetry Collector internal telemetry docs: https://opentelemetry.io/docs/collector/internal-telemetry/
+Note: metric names can vary by Collector version and distribution. For canonical names and details, refer to the OpenTelemetry Collector internal telemetry docs: https://opentelemetry.io/docs/collector/internal-telemetry/.
 
 ### OpenTelemetry Collector metrics
 
