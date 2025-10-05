@@ -5,8 +5,6 @@ title: Jaeger
 disableKinds: [taxonomy]
 theme: [basetheme, jaeger-docs]
 disableAliases: true # We do redirects via Netlify's _redirects file
-pygmentsCodeFences: true
-pygmentsUseClasses: true
 
 #
 # Language settings
@@ -33,6 +31,10 @@ outputFormats:
 
 outputs:
   home: [HTML, JSON, REDIRECTS]
+
+markup:
+  highlight:
+    noClasses: false
 
 params:
   tagline: Monitor and troubleshoot workflows in complex distributed systems
