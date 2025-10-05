@@ -33,23 +33,23 @@
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve": "npm run _serve --",
     "test": "npm run check:format && npm run check:links:all",
-    "update:pkgs": "npx npm-check-updates -u --dep 'prod,dev,optional,peer' '!bulma*'"
+    "update:packages": "npx npm-check-updates -u --dep 'prod,dev,optional,peer' '!bulma*'"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
-    "cspell": "^9.1.1",
-    "docsy": "github:google/docsy#v0.12.0",
+    "cspell": "^9.2.1",
+    "docsy": "github:google/docsy#4c5c15b6ff19487f3644c6efb5bf4cd8e0cf3fa6",
     "postcss-cli": "^11.0.1",
-    "prettier": "^3.5.3"
+    "prettier": "^3.6.2"
   },
   "optionalDependencies": {
     "bulma": "0.7.1",
     "bulma-tooltip": "2.0.2"
   },
   "peerDependencies": {
-    "hugo-extended": "0.147.8",
-    "netlify-cli": "^22.1.3 || ^23.0.0",
-    "npm-check-updates": "^18.0.1 || ^19.0.0"
+    "hugo-extended": "0.150.1",
+    "netlify-cli": "^23.9.1",
+    "npm-check-updates": "^19.0.0"
   },
   "enginesComment": "Ensure that engines.node value stays consistent with the project's .nvmrc",
   "engines": {
@@ -61,5 +61,5 @@
     "proseWrap": "always",
     "singleQuote": true
   },
-  "spelling": "cSpell:ignore docsy hugo HTMLTEST pkgs netlify precheck postbuild WKSP -"
+  "spelling": "cSpell:ignore docsy hugo HTMLTEST netlify precheck postbuild WKSP -"
 }
