@@ -99,6 +99,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:48:48.804083-04:00"
   },
+  "https://cdn-images-1.medium.com/max/512/0*IXeSzyr8UjxDY0yU": {
+    "StatusCode": 200,
+    "LastSeen": "2025-10-05T08:06:25.874394-04:00"
+  },
   "https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:16.450811-04:00"
@@ -135,6 +139,14 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:48:44.632643-04:00"
   },
+  "https://demo.jaegertracing.io/hotrod": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:24.610891-04:00"
+  },
+  "https://demo.jaegertracing.io/jaeger/": {
+    "StatusCode": 200,
+    "LastSeen": "2025-10-05T08:06:24.886393-04:00"
+  },
   "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:51.397464-04:00"
@@ -162,6 +174,38 @@
   "https://docs.openshift.com/container-platform/4.2/logging/config/cluster-logging-elasticsearch.html": {
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:50:21.769709-04:00"
+  },
+  "https://download.jaegertracing.io/v1.74.0.tar.gz": {
+    "StatusCode": 200,
+    "LastSeen": "2025-10-05T08:06:31.459948-04:00"
+  },
+  "https://download.jaegertracing.io/v1.74.0.zip": {
+    "StatusCode": 200,
+    "LastSeen": "2025-10-05T08:06:31.07423-04:00"
+  },
+  "https://download.jaegertracing.io/v1.74.0/jaeger-1.74.0-darwin-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:31.712497-04:00"
+  },
+  "https://download.jaegertracing.io/v1.74.0/jaeger-1.74.0-linux-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:32.017586-04:00"
+  },
+  "https://download.jaegertracing.io/v1.74.0/jaeger-1.74.0-windows-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:32.266951-04:00"
+  },
+  "https://download.jaegertracing.io/v1.74.0/jaeger-2.11.0-darwin-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:30.105044-04:00"
+  },
+  "https://download.jaegertracing.io/v1.74.0/jaeger-2.11.0-linux-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:30.44546-04:00"
+  },
+  "https://download.jaegertracing.io/v1.74.0/jaeger-2.11.0-windows-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:30.693368-04:00"
   },
   "https://en.wikipedia.org/wiki/Clock_skew": {
     "StatusCode": 200,
@@ -223,6 +267,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:54.789927-04:00"
   },
+  "https://github.com/chahatsagarmain": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:33.524768-04:00"
+  },
   "https://github.com/cncf/artwork/tree/master/projects/jaeger": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:48:42.18698-04:00"
@@ -238,6 +286,10 @@
   "https://github.com/cncf/toc/blob/main/projects/jaeger/jaeger-graduation-proposal.md": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:27.396517-04:00"
+  },
+  "https://github.com/danish9039": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:32.475633-04:00"
   },
   "https://github.com/dgraph-io/badger": {
     "StatusCode": 206,
@@ -446,6 +498,10 @@
   "https://github.com/jaegertracing/jaeger-ui/issues/197": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:44.230785-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger-ui/issues/2764": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:35.621368-04:00"
   },
   "https://github.com/jaegertracing/jaeger-ui/issues/998": {
     "StatusCode": 206,
@@ -671,9 +727,17 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:45.145981-04:00"
   },
+  "https://github.com/jaegertracing/jaeger/issues/7115": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:34.311458-04:00"
+  },
   "https://github.com/jaegertracing/jaeger/issues/729": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:08.661115-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/issues/7326": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:33.092233-04:00"
   },
   "https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244": {
     "StatusCode": 206,
@@ -755,6 +819,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-06-16T13:43:54.49413-04:00"
   },
+  "https://github.com/jaegertracing/jaeger/releases/tag/v1.74.0": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:29.410499-04:00"
+  },
   "https://github.com/jaegertracing/jaeger/security/advisories": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:48:43.328403-04:00"
@@ -762,6 +830,10 @@
   "https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:59.588821-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm-elasticsearch.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:28.282872-04:00"
   },
   "https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm.yaml": {
     "StatusCode": 206,
@@ -1087,6 +1159,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:33.34759-04:00"
   },
+  "https://github.com/vishvamsinh28": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:34.808164-04:00"
+  },
   "https://github.com/w3c/distributed-tracing": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:03.481447-04:00"
@@ -1338,6 +1414,10 @@
   "https://medium.com/jaegertracing/jaeger-and-opentelemetry-1846f701d9f2": {
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:49:50.674049-04:00"
+  },
+  "https://medium.com/jaegertracing/jaeger-at-10-forged-in-community-reborn-in-opentelemetry-621d4eabdeda": {
+    "StatusCode": 200,
+    "LastSeen": "2025-10-05T08:06:25.523557-04:00"
   },
   "https://medium.com/jaegertracing/jaeger-tracing-a-friendly-guide-for-beginners-7b53a4a568ca": {
     "StatusCode": 200,
@@ -1674,6 +1754,10 @@
   "https://www.outreachy.org/": {
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:50:42.905443-04:00"
+  },
+  "https://www.scarf.sh/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-05T08:06:26.585898-04:00"
   },
   "https://www.shkuro.com/talks/2018-01-16-introducing-jaeger-1.0/": {
     "StatusCode": 206,
