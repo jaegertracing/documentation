@@ -47,7 +47,7 @@
     "bulma-tooltip": "2.0.2"
   },
   "peerDependencies": {
-    "hugo-extended": "0.150.1",
+    "hugo-extended": "0.151.0",
     "netlify-cli": "^23.9.1",
     "npm-check-updates": "^19.0.0"
   },
