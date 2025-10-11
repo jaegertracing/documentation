@@ -52,7 +52,7 @@ Jaeger provides useful debugging information when the log level is set to `debug
 
 ## Check the /metrics endpoint
 
-For the cases where it's not possible or desirable to increase the logging verbosity, the `/metrics` endpoint can be used to check how trace data is being received and processed by Jaeger. See [Monitoring](../monitoring/#logging) for more details on configuring metrics production. Here's a sample `curl` call to obtain the metrics:
+For the cases where it's not possible or desirable to increase the logging verbosity, the `/metrics` endpoint can be used to check how trace data is being received and processed by Jaeger. See [Monitoring](../monitoring/#metrics) for more details on configuring metrics production. Here's a sample `curl` call to obtain the metrics:
 
 ```
 curl -s http://jaeger-collector:8888/metrics
