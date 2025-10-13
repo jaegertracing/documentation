@@ -1,4 +1,4 @@
-# Development config - only build latest versions
+# Development config - build only next and latest versions
 
 ignoreFiles:
   # Ignore all v1 versions except 1.74 and _dev
