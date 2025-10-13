@@ -1,0 +1,9 @@
+# Development config - build only next and latest versions
+
+ignoreFiles:
+  # Ignore all v1 versions except 1.74 and _dev
+  - 'content/docs/v1/1\.([6-9]|[1-6]\d|7[0-3])/'
+
+  # Ignore all v2 versions except 2.11 and _dev
+  - 'content/docs/v2/2\.(\d|10)/'
+
