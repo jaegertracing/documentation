@@ -11,9 +11,11 @@
     "_filename-error": "echo 'ERROR: the following files violate naming conventions; fix using: `npm run fix:filenames`'; echo; npm run -s _ls-bad-filenames; exit 1",
     "_filenames-to-kebab-case": "find assets content -name '*_*' ! -name '[_.]*' -exec sh -c 'mv \"$1\" \"${1//_/-}\"' _ {} \\;",
     "_hugo-dev": "npm run _hugo -- -e dev -DFE --logLevel info",
+    "_hugo-dev-test": "npm run _hugo-dev -- --templateMetrics --templateMetricsHints",
     "_hugo": "set -x; hugo --cleanDestinationDir --config hugo.yaml,hugo.${WKSP-pre-docsy}.yaml",
     "_ls-bad-filenames": "find assets content -name '*_*' ! -name '[_.]*'",
     "_serve": "npm run _hugo-dev -- serve --minify --disableFastRender --renderToMemory",
+    "build:docsy": "WKSP=\"dev.yaml,hugo.docsy\" npm run _hugo-dev",
     "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
     "build:production": "npm run _hugo -- --minify",
     "build": "npm run _build --",
@@ -38,7 +40,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "cspell": "^9.2.1",
-    "docsy": "github:google/docsy#4c5c15b6ff19487f3644c6efb5bf4cd8e0cf3fa6",
+    "docsy": "github:google/docsy#d57e6a8d4e03e870be8e451e9a6c88d04b0f5513",
     "postcss-cli": "^11.0.1",
     "prettier": "^3.6.2"
   },
@@ -47,7 +49,7 @@
     "bulma-tooltip": "2.0.2"
   },
   "peerDependencies": {
-    "hugo-extended": "0.150.1",
+    "hugo-extended": "0.151.0",
     "netlify-cli": "^23.9.1",
     "npm-check-updates": "^19.0.0"
   },
