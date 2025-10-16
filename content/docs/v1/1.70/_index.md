@@ -1,6 +1,6 @@
 ---
 title: Introduction
-linkTitle: 1.70
+linkTitle: '1.70'
 weight: -170
 children:
 - title: Features
