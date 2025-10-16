@@ -2,6 +2,7 @@
 title: Introduction
 linkTitle: '1.12'
 weight: -112
+sidebar_root_for: self
 ---
 
 Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.

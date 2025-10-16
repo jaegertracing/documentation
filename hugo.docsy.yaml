@@ -20,6 +20,7 @@ params:
     sidebar_menu_compact: true
     sidebar_menu_foldable: true
     sidebar_search_disable: true
+    sidebar_root_enabled: true
 
 menu:
   main:
