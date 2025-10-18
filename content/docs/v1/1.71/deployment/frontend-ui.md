@@ -186,6 +186,12 @@ Arguments:
 
 Example: `#{startTime | add 1000000}`
 
+## Tag Search Behavior
+
+Jaeger UI indexes and allows searching for tags/attributes only if their values are strings. If a tag is set as an array (e.g., `["value"]`), it will not be searchable in the UI. This is important for users who want to search for specific tags, such as request IDs, in the Jaeger UI.
+
+When instrumenting your application, ensure that important tags (such as request IDs) are set as string values, not arrays. For example, when using OpenTelemetry SDKs, avoid configurations that result in array values for tags you wish to search. This behavior is discussed in [issue #7333](https://github.com/jaegertracing/jaeger/issues/7333).
+
 ## Embedded Mode
 
 Starting with version 1.9, Jaeger UI provides an "embedded" layout mode which is intended to support integrating Jaeger UI into other applications. Currently (as of `v0`), the approach taken is to remove various UI elements from the page to make the UI better suited for space-constrained layouts.
