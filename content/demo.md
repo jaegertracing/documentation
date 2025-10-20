@@ -12,5 +12,5 @@ Next-Generation Live Jaeger Demo with OpenTelemetry and OpenSearch
 
    * Astronomy shop: https://shop.demo.jaegertracing.io   
    * Jaeger UI: https://jaeger.demo.jaegertracing.io
-   * Hotrod app: https://hotrod.demo.jaegertracing.io      
+   * HotROD app: https://hotrod.demo.jaegertracing.io      
    * OpenSearch Dashboard: https://opensearch.demo.jaegertracing.io    
