@@ -1187,6 +1187,10 @@
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:48:43.856238-04:00"
   },
+  "https://hotrod.demo.jaegertracing.io": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-20T13:07:59.836333686+05:30"
+  },
   "https://hub.docker.com/_/cassandra": {
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:49:42.385234-04:00"
@@ -1286,6 +1290,10 @@
   "https://istio.io/latest/docs/tasks/observability/distributed-tracing/jaeger/": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:06.528241-04:00"
+  },
+  "https://jaeger.demo.jaegertracing.io": {
+    "StatusCode": 200,
+    "LastSeen": "2025-10-20T13:07:58.836759265+05:30"
   },
   "https://jbrandhorst.com/post/gogoproto/#reflection": {
     "StatusCode": 206,
@@ -1499,6 +1507,10 @@
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:49:45.03709-04:00"
   },
+  "https://opensearch.demo.jaegertracing.io": {
+    "StatusCode": 206,
+    "LastSeen": "2025-10-20T13:08:01.184174298+05:30"
+  },
   "https://opensearch.org/docs/latest/api-reference/index-apis/rollover/": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:29.473393-04:00"
@@ -1626,6 +1638,10 @@
   "https://shkuro.com/books/2019-mastering-distributed-tracing/": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:21.542942-04:00"
+  },
+  "https://shop.demo.jaegertracing.io": {
+    "StatusCode": 200,
+    "LastSeen": "2025-10-20T13:07:57.173251944+05:30"
   },
   "https://siliconangle.com/2017/09/13/ride-sharing-firms-lyft-uber-donate-microservices-tech-open-source-community/": {
     "StatusCode": 206,
