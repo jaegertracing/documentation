@@ -57,7 +57,7 @@
   },
   "enginesComment": "Ensure that engines.node value stays consistent with the project's .nvmrc",
   "engines": {
-    "node": "22.x"
+    "node": "24.x"
   },
   "gitHubActionCacheKey": "2024-07-02 - change this key to force cache refresh",
   "private": true,

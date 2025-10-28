@@ -21,7 +21,7 @@
     "@types/jest": "^30.0.0",
     "@types/js-yaml": "^4.0.9",
     "@types/mdast": "^4.0.4",
-    "@types/node": "^22.15.29",
+    "@types/node": "^24.0.0",
     "jest": "^30.0.0",
     "memfs": "^4.17.2",
     "ts-jest": "^29.3.4",
