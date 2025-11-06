@@ -1,17 +1,49 @@
 # Docsy config
-# cSpell:ignore basetheme docsy github
+# cSpell:ignore basetheme docsy github goldmark linkify
 
-theme: [docsy, basetheme, jaeger-docs]
+enableGitInfo: true
+
+theme: [docsy, basetheme] # jaeger-docs
+
+outputs:
+  section: [HTML]
+
+#
+# Markup and imaging
+#
+
+markup:
+  goldmark:
+    extensions:
+      linkify: false
+    parser:
+      attribute:
+        block: true
+      wrapStandAloneImageWithinParagraph: false
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false # Required for dark-mode
+  tableOfContents: { endLevel: 4 }
+
+imaging:
+  resampleFilter: CatmullRom # cspell:disable-line
+  quality: 75
+  anchor: smart
 
 params:
   copyright:
     authors: >-
-      OpenTelemetry Authors | Docs [CC BY
+      Jaeger Authors | Docs [CC BY
       4.0](https://creativecommons.org/licenses/by/4.0)
-    from_year: 2019
+    from_year: 2017
 
   github_repo: https://github.com/jaegertracing/documentation
-  github_branch: main
+  # github_branch: main
+  version_menu: Versions
+  # TODO: Lunr config
+
+  privacy_policy: https://www.linuxfoundation.org/legal/privacy-policy
 
   ui:
     navbar_logo: true
@@ -21,6 +53,22 @@ params:
     sidebar_menu_foldable: true
     sidebar_search_disable: true
     sidebar_root_enabled: true
+
+  # links: # CUSTOMIZE
+  #   user:
+  #     - name: User mailing list
+  #       url: https://groups.google.com/forum/#!forum/docsy-users
+  #       icon: fa-solid fa-envelope
+  #       desc: Sign up for Docsy announcements
+  #     - name: Stack Overflow
+  #       url: https://stackoverflow.com/questions/tagged/docsy
+  #       icon: fa-brands fa-stack-overflow
+  #       desc: Practical questions and curated answers
+  #   developer:
+  #     - name: GitHub
+  #       url: https://github.com/chalin/docsy-starter
+  #       icon: fa-brands fa-github
+  #       desc: GitHub repository for this starter
 
 menu:
   main:
@@ -34,5 +82,34 @@ menu:
 
 module:
   mounts:
-    - source: content
+
+  # Content
+    - excludeFiles: docs/v?
+      source: content
       target: content
+
+    - # excludeFiles: _*
+      source: content/docs/v1
+      target: content/docs/v1
+    # - source: content/docs/v1/_dev
+    #   target: content/docs/next-release
+
+    - excludeFiles: _*
+      source: content/docs/v2
+      target: content/docs
+    - source: content/docs/v2/_dev
+      target: content/docs/next-release-v2
+
+    # Assets, static, and images
+
+    - source: assets
+      target: assets
+    - source: static
+      target: static
+
+    # So Docsy can find the images
+    # TODO(Docsy): move files once pre-docsy.yaml is removed
+    - source: static/img/jaeger-vector.svg
+      target: assets/icons/logo.svg
+    - source: static/img/hero-background.jpg
+      target: content/hero-background.jpg

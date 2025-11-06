@@ -1,0 +1,91 @@
+@import 'td/code-dark';
+
+$navbar-brand-size: 52px;
+$navbar-brand-base: 38px;
+$navbar-margin-top: -($navbar-brand-size - $navbar-brand-base) / 2;
+
+.td-navbar {
+  .navbar-brand {
+    svg {
+      height: $navbar-brand-size;
+      width: $navbar-brand-size;
+      margin-top: $navbar-margin-top;
+      margin-bottom: $navbar-margin-top;
+    }
+  }
+}
+.td-home {
+
+  .h1-for-simple-section {
+    @extend .text-center;
+    @extend .mb-4;
+  }
+
+  .simple-section {
+    h1 {
+      @extend .h1-for-simple-section;
+    }
+
+    p {
+      @extend .fs-5;
+      @extend .mx-auto;
+      @extend .text-center;
+    }
+  }
+
+  .articles-section {
+    h1 {
+      @extend .h1-for-simple-section;
+    }
+  }
+
+  .cncf {
+    text-align: center;
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 0;
+    }
+
+    img {
+      width: 80%;
+      padding-top: 1rem;
+      max-width: 30rem;
+    }
+  }
+}
+
+
+// ==============================================
+// Docsy changes to upstream
+// ==============================================
+
+// Support for N `blocks/feature` elements per row.
+//
+// Usage example: {{% blocks/section type="row features-N" %}}
+// where N, a factor of 12, is the number of features per row.
+// This approach extends Bootstrap's existing column classes.
+// Bootstrap grid: 12 columns, so col-size = 12 / feature-count
+
+// List of supported feature counts (must divide evenly into 12)
+$feature-counts: (2, 3, 4, 6);
+
+@each $count in $feature-counts {
+  $col-size: (12 / $count);
+
+  .features-#{$count} {
+    // TODO in Docsy: define a class name that is specific to `blocks/feature`
+    // and use it to select the child divs instead of `col-lg-`.
+    > div[class*='col-lg-'] {
+      @extend .col-lg-#{$col-size};
+    }
+  }
+}
+
+// ==============================================
+// Extra styles for Jaeger project
+// ==============================================
+
+.td-home .features-4 i {
+  color: $secondary;
+}
