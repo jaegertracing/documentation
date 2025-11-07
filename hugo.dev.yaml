@@ -6,4 +6,3 @@ ignoreFiles:
 
   # Ignore all v2 versions except for 2.10, 2.11, and _dev
   - 'content/docs/v2/2\.(\d)/'
-

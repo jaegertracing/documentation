@@ -1,0 +1,67 @@
+{{/* cSpell:ignore plainify submatch */ -}}
+{{ $rss := resources.Get "data/medium.xml" | transform.Unmarshal -}}
+{{ $channel := dict -}}
+
+{{ if not $rss -}}
+  {{ warnf "Medium feed is nil or failed to load." -}}
+  {{ $channel = dict "title" "No data" "item" (slice) -}}
+{{ else if not ($rss.channel) -}}
+  {{ warnf "Medium feed found but missing 'channel'" -}}
+  {{ $channel = dict "title" "No data" "item" (slice) -}}
+{{ else -}}
+  {{ $channel = $rss.channel -}}
+  {{ warnf "Loaded Medium feed for: %v" $channel.title -}}
+{{ end -}}
+
+{{ $defaultImgLink := "/img/jaeger-icon-color.png" -}}
+{{ warnf "Loaded RSS feed for: %v" $rss.channel.title -}}
+{{ $posts := first 3 $rss.channel.item -}}
+{{ $imgLinks := slice -}}
+
+{{ range $k, $v := $posts -}}
+  {{ $imgLink := $defaultImgLink -}}
+  {{ $content := index $v "encoded" -}}
+  {{ with strings.FindRESubmatch "<img[^>]+src=\"([^\">]+)\"" $content 1 -}}
+    {{ if . -}} {{/* If image found in post */}}
+      {{ $findMatch := index . 0 -}} {{/* Choose the first image */}}
+      {{ with $findMatch -}}
+        {{ $findGroup := index . 1 -}}
+        {{ if . -}} {{/* If src link found */}}
+          {{ $imgLink = $findGroup -}}
+        {{ end -}}
+      {{ end -}}
+    {{ end -}}
+  {{ end -}}
+  {{ $imgLinks = $imgLinks | append $imgLink -}}
+  {{ warnf "Post: %v" $v.title -}}
+{{ end -}}
+
+<div class="article-list">
+
+{{- range $idx, $val := $posts }}
+{{ $link    := .link -}}
+{{ $img     := (index $imgLinks $idx) -}}
+{{ $title   := .title | plainify -}}
+{{ $author  := .creator -}}
+{{ $dateRaw := .pubDate -}}
+{{ $date    := dateFormat "January 2, 2006" $dateRaw -}}
+{{ $summary := .encoded | plainify | truncate 150 -}}
+
+<div class="article-card card">
+<img src="{{ $img }}" class="card-img-top" alt="{{ $title }}">
+  <div class="card-body">
+    <div class="h5 card-title">
+      <a href="{{ $link }}" class="stretched-link" target="_blank" rel="noopener noreferrer">
+        {{- $title -}}
+      </a>
+    </div>
+    <p class="card-text">{{ $summary }}</p>
+  </div>
+  <div class="card-footer text-body-secondary">
+    {{ $author }}
+    <span class="float-end small">{{ $date }}</span>
+  </div>
+</div>
+{{ end -}}
+
+</div>

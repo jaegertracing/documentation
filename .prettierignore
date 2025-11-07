@@ -1,4 +1,12 @@
-**
-!/content
-/content/**
+/.github
+/CONTRIBUTING.md
+/README.md
+/RELEASE.md
+/content
 !/content/_index.md
+/data
+/hugo.yaml
+/layouts
+# TODO: tempoary, remove /scripts
+/scripts
+/themes
