@@ -73,10 +73,13 @@ params:
 menu:
   main:
     - name: Docs
-      url: /docs/ # Eventually /docs/latest/
+      url: /docs/2.11/ # TODO: eventually /docs/{{% param latestV2 %}}/ or /docs/latest/
       weight: -10
     - name: Blog
       url: https://medium.com/jaegertracing/latest
+      post:
+        <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
+        aria-hidden="true"></i></sup>
     - name: Download
       pageRef: /download/
 
