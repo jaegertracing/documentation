@@ -16,6 +16,17 @@ $jaeger-beige: rgb(223, 201, 162);
 $jaeger-black: rgb(35, 31, 32);
 $jaeger-teal: #1f94aa;
 
+// Colors adjusted for better contrast
+$jaeger-teal-original: $jaeger-teal;
+$jaeger-blue-original: $jaeger-blue;
+
+// Redefine theme colors for better contrast
+$jaeger-blue: lighten($jaeger-blue, 10%);
+$jaeger-teal: darken($jaeger-teal, 10%);
+
+// Darker blue for navbar and footer
+$jaeger-blue-dark: #1a4767;
+
+// Theme colors
 $primary: $jaeger-teal;
 $secondary: $jaeger-blue;
-

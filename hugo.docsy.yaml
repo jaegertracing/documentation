@@ -47,7 +47,7 @@ params:
 
   ui:
     navbar_logo: true
-    navbar_translucent_over_cover_disable: true
+    # navbar_translucent_over_cover_disable: true
     showLightDarkModeMenu: true
     sidebar_menu_compact: true
     sidebar_menu_foldable: true
@@ -82,8 +82,7 @@ menu:
 
 module:
   mounts:
-
-  # Content
+    # Content
     - excludeFiles: docs/v?
       source: content
       target: content
