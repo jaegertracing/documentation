@@ -1,0 +1,21 @@
+/* Docsy-delta full file override: we're not tracking changes to the Docsy file of the same name. */
+
+$td-enable-google-fonts: true;
+$td-google-font-name: 'Pontano+Sans';
+$td-google-font-family: 'Pontano+Sans:300,300i,400,400i,700,700i';
+
+// ----------------------------------------------
+// Jaeger theme-specific variables copied from
+// themes/jaeger-docs/assets/sass/variables.sass
+// ----------------------------------------------
+
+/* Jaeger theme-specific colors */
+$jaeger-blue: rgb(102, 207, 227);
+$jaeger-green: rgb(100, 139, 26);
+$jaeger-beige: rgb(223, 201, 162);
+$jaeger-black: rgb(35, 31, 32);
+$jaeger-teal: #1f94aa;
+
+$primary: $jaeger-teal;
+$secondary: $jaeger-blue;
+
