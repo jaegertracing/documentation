@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
-    "cspell": "^9.2.1",
+    "cspell": "^9.3.0",
     "docsy": "github:google/docsy#cf3a3d75e0ef3e0d40b96b4f0d8a3adb4bddc618",
     "postcss-cli": "^11.0.1",
     "prettier": "^3.6.2"
@@ -51,13 +51,13 @@
     "bulma-tooltip": "2.0.2"
   },
   "peerDependencies": {
-    "hugo-extended": "0.151.0",
-    "netlify-cli": "^23.9.1",
-    "npm-check-updates": "^19.0.0"
+    "hugo-extended": "0.152.2",
+    "netlify-cli": "^23.10.0",
+    "npm-check-updates": "^19.1.2"
   },
   "enginesComment": "Ensure that engines.node value stays consistent with the project's .nvmrc",
   "engines": {
-    "node": "22.x"
+    "node": "24.x"
   },
   "gitHubActionCacheKey": "2024-07-02 - change this key to force cache refresh",
   "private": true,
