@@ -1,5 +1,7 @@
 ---
 title: Mentorship - For Mentors
+linkTitle: For Mentors
+aliases: [/mentorship-for-mentors]
 ---
 
 ## Retrospective

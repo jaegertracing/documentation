@@ -30,13 +30,15 @@
     "diff:check": "npm run _diff:check || (echo; echo 'WARNING: the files above have not been committed'; echo)",
     "fix:filenames": "npm run _filenames-to-kebab-case",
     "fix:format": "npm run _check:format -- --write",
+    "fix": "npm run fix:format && npm run fix:filenames",
     "make:public": "git init public",
     "precheck:links:all": "npm run build",
     "precheck:links": "npm run build",
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve:docsy": "WKSP=\"dev.yaml,hugo.docsy\" npm run _serve --",
     "serve": "npm run _serve --",
-    "test": "npm run check:format && npm run check:links:all",
+    "test:only": "npm run check:format && npm run check:links:all",
+    "test": "echo 'RUNNING fix AND test ...'; npm run fix && npm run test:only",
     "update:packages": "npx npm-check-updates -u --dep 'prod,dev,optional,peer' '!bulma*'"
   },
   "devDependencies": {

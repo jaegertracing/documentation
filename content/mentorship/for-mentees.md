@@ -1,5 +1,7 @@
 ---
 title: Mentorship - For Mentees
+linkTitle: For Mentees
+aliases: [/mentorship-for-mentees]
 ---
 
 ## Application process
@@ -32,7 +34,7 @@ If you need to ask specific questions / clarifications about the project, please
 
 ### Bootcamp
 
-In order to understand the project better and come up with reasonable solutions, it's always helpful to become familiar with Jaeger and its code base. We strongly recommend going through the [Bootcamp](../get-involved/#bootcamp).
+In order to understand the project better and come up with reasonable solutions, it's always helpful to become familiar with Jaeger and its code base. We strongly recommend going through the [Bootcamp](../../get-involved/#bootcamp).
 
 ### Evaluation criteria
 
@@ -109,7 +111,7 @@ Why the log is important:
   your approach will work in the end. A basic proof of concept provides assurance of the final outcome,
   can help highlight the sub-problems to tackle individually, while also giving you a chance
   to explore the various alternative solutions and identify the best option.
-- You are welcome to join the [monthly Jaeger video calls](../get-in-touch/).
+- You are welcome to join the [monthly Jaeger video calls](../../get-in-touch/).
 - Write unit tests and, if applicable, run live integration tests locally. Tests give assurance
   to yourself that what you’ve written works, documents the expected behavior to readers of the code,
   and prevents regressions from future contributions.
