@@ -1,4 +1,7 @@
 {{ $versionFromPath := index (split .Page.RelPermalink "/") 2 }}
+{{ if hasSuffix $versionFromPath "dev" -}}
+  {{ $versionFromPath = "next-release" -}}
+{{ end -}}
 {{ $isNextRelease := eq $versionFromPath "next-release" }}
 {{ $version := cond ($isNextRelease) site.Params.latest $versionFromPath }}
 {{ $data    := index site.Data.cli $version }}
