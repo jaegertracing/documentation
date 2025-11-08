@@ -1,5 +1,6 @@
 ---
 title: Migration to OpenTelemetry SDK
+linkTitle: Migration to OTel SDK
 ---
 
 ## Jaeger clients/SDKs are no longer supported

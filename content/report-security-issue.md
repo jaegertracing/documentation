@@ -1,5 +1,6 @@
 ---
 title: Report a security issue
+weight: 80
 ---
 
 If you find something suspicious and want to report it, we'd really appreciate!

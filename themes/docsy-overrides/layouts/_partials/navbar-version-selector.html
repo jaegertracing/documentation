@@ -25,11 +25,13 @@
       {{ end -}}
     {{ end -}}
 
+    {{ $dot := . -}}
     {{ range $versions := (slice
         (.Site.Params.versionsV2 | append "2.dev")
         (.Site.Params.versions | append "1.dev")
       ) -}}
       {{ template "navbar-version-list" (dict
+            "dot" $dot
             "versions" $versions
             "path" $path
             "relPermalink" $relPermalink)
@@ -39,14 +41,20 @@
 </div>
 
 {{- define "navbar-version-list" -}}
+  {{ $dot := .dot -}}
   {{ $path := .path -}}
   {{ $relPermalink := .relPermalink -}}
   {{ range $i, $version := .versions -}}
   {{ $isLatest := eq $i 0 -}}
-  {{ $href := printf "/docs/%s/%s" $version $path -}}
+  {{ $_href := printf "/docs/%s/%s" $version $path -}}
+  {{ $href := partial "docs/lookup-page" (slice $dot $_href) -}}
   <li> {{- /**/ -}}
-    <a class="dropdown-item{{ if eq $href $relPermalink }} disabled{{ end }}"
-      href="{{ $href }}">
+    <a class="dropdown-item
+        {{- if eq $href $relPermalink }} active{{ end -}}
+        {{- if not $href }} disabled{{ end -}}
+        "
+      {{ with $href }} href="{{ . }}" {{- end -}}
+      >
       {{- $version -}}{{ if $isLatest }} (latest){{ end -}}
     </a>
     {{- /**/ -}}

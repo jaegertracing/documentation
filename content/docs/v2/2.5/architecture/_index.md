@@ -15,7 +15,7 @@ children:
 Jaeger v2 is designed to be a versatile and flexible tracing platform. It can be deployed as a single binary that can be configured to perform different **roles** within the Jaeger architecture, such as:
   * **collector**: Receives incoming trace data from applications and writes it into a storage backend.
   * **query**: Serves the APIs and the user interface for querying and visualizing traces.
-  * **ingester**: Ingests spans from Kafka and writes them into a storage backend; useful when running in a [split collector-Kafka-ingester configuration](./#via-kafka).
+  * **ingester**: Ingests spans from Kafka and writes them into a storage backend; useful when running in a [split collector-Kafka-ingester configuration](#via-kafka).
   * **all-in-one**: Collector and query roles in a single process.
   * **agent**: A host agent or a sidecar that runs next to the application and forwards trace data to the collector. While Jaeger can be configured for this role, we recommend using the standard [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) instead because you may likely need it to process other types of telemetry (metrics & logs).
 

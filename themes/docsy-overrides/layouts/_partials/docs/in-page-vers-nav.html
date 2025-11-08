@@ -1,0 +1,67 @@
+{{ $page := . -}}
+{{ $path     := "" }}
+{{ with .File }}
+  {{ $path = .Path }}
+{{ else }}
+  {{ $path = .Path }}
+{{ end }}
+{{ $latestV1      := site.Params.latest }}
+{{ $latestV2      := site.Params.latestV2 }}
+{{ $version       := index (split $path "/") 1 }}
+{{ $vMajor        := index (split $version ".") 0 }}
+{{ $isNextRelease := false }}
+{{ if eq $version "next-release" }}
+  {{ $vMajor = "1" }}
+  {{ $isNextRelease = true }}
+{{ else if eq $version "next-release-v2" }}
+  {{ $vMajor = "2" }}
+  {{ $isNextRelease = true }}
+{{ end }}
+
+{{ $isLatest      := or (eq $version $latestV1) (eq $version $latestV2) }}
+{{ $latestUrlV1   := .RelPermalink | replaceRE $version $latestV1 }}
+{{ $latestUrlV2   := .RelPermalink | replaceRE $version $latestV2 }}
+
+{{ $latestUrl := "" }}
+{{ if eq $vMajor "1" }}
+  {{ $latestUrl = .RelPermalink | replaceRE $version $latestV1 }}
+{{ else if eq $vMajor "2" }}
+  {{ $latestUrl = .RelPermalink | replaceRE $version $latestV2 }}
+{{ else if eq $vMajor "docs" }}
+  {{ $latestUrl = .RelPermalink | replaceRE $version $latestV2 }}
+  {{ $vMajor    = "2" }}
+{{ end }}
+
+{{ $latestUrl = partial "docs/lookup-page" (slice . $latestUrl) -}}
+{{ $latestUrlV1 = partial "docs/lookup-page" (slice . $latestUrlV1) -}}
+{{ $latestUrlV2 = partial "docs/lookup-page" (slice . $latestUrlV2) -}}
+
+{{ if and (hasPrefix $path "docs/") (ne $path "docs/_index.md") }}
+<div class="mb-1">
+  <div class="btn-group">
+    <span class="btn btn-sm btn-outline-primary disabled">
+      Version&nbsp;&nbsp;<strong>{{ $version }}</strong>
+    </span>
+    {{ if $isNextRelease }}
+    <span class="btn btn-sm btn-outline-info">Preview</span>
+    {{ end }}
+    {{ if $isLatest }}
+    <span class="btn btn-sm btn-success">Latest</span>
+    {{ else if $latestUrl }}
+    <a class="btn btn-sm btn-warning" href="{{ $latestUrl }}">
+      Go to the latest {{ $vMajor }}.x version
+    </a>
+    {{ end }}
+    {{ if and (eq $vMajor "1") $latestUrlV2 }}
+    <a class="btn btn-sm btn-outline-primary" href="{{ $latestUrlV2 }}">
+      Go to the latest 2.x version
+    </a>
+    {{ else if and (eq $vMajor "2") $latestUrlV1 }}
+    <a class="btn btn-sm btn-outline-primary" href="{{ $latestUrlV1 }}">
+      Go to the latest 1.x version
+    </a>
+    {{ end }}
+    </div>
+</div>
+<hr>
+{{ end }}

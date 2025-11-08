@@ -1,5 +1,6 @@
 ---
 title: Roadmap
+weight: 70
 ---
 
 The following is a summary of the major features we plan to implement.
@@ -15,7 +16,7 @@ For more information see the [issue description](https://github.com/jaegertracin
 
 ## [Feature] Support ClickHouse as a core storage backend
 
-Build first-class support for [ClickHouse ](https://github.com/ClickHouse/ClickHouse) as an official Jaeger backend. ClickHouse is an open-source column-oriented database for OLAP use cases. It is highly efficient and performant for high volumes of ingestion and search making it a good database for tracing and logging data specifically. It can also do aggregates very quickly which will come in handy for several features in Jaeger. 
+Build first-class support for [ClickHouse ](https://github.com/ClickHouse/ClickHouse) as an official Jaeger backend. ClickHouse is an open-source column-oriented database for OLAP use cases. It is highly efficient and performant for high volumes of ingestion and search making it a good database for tracing and logging data specifically. It can also do aggregates very quickly which will come in handy for several features in Jaeger.
 
 Benefits to the users:
 
