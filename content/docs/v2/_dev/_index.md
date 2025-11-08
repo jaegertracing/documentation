@@ -1,6 +1,6 @@
 ---
 title: Introduction
-linkTitle: 2.DEV
+linkTitle: 2.dev
 weight: -200 # == -200 - MINOR
 children:
 - title: Getting Started
@@ -8,6 +8,7 @@ children:
 - title: Features
   url: features
 sidebar_root_for: self
+aliases: [next-release-v2]
 ---
 
 Welcome to Jaeger's documentation! Below, you'll find information for beginners and experienced Jaeger users. If you cannot find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch/).

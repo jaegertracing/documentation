@@ -1,0 +1,55 @@
+{{/* Docsy override
+
+  When called from a page at `/docs/2.11/some/path/`, then this creations a
+  version menu. Each entry X.YY in the versions menu will link to
+  `/docs/X.YY/some/path/`.
+
+  This partial is customized to read Jaeger's versions and versionsV2 params.
+
+  */ -}}
+
+<div class="dropdown">
+  <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{- .Params.version_menu -}}
+  </a>
+  <ul class="dropdown-menu">
+    {{ $relPermalink := .Page.RelPermalink -}}
+    {{ $vers := "" -}}
+    {{ $path := "" -}}
+    {{ if .Site.Params.version_menu_pagelinks -}}
+      {{ $matches := findRESubmatch "^/docs/([^/]+)/?(.*)$" $relPermalink -}}
+      {{ if gt (len $matches) 0 -}}
+        {{ $match := index $matches 0 -}}
+        {{ $vers = index $match 1 -}}
+        {{ $path = index $match 2 -}}
+      {{ end -}}
+    {{ end -}}
+
+    {{ range $versions := (slice
+        (.Site.Params.versionsV2 | append "2.dev")
+        (.Site.Params.versions | append "1.dev")
+      ) -}}
+      {{ template "navbar-version-list" (dict
+            "versions" $versions
+            "path" $path
+            "relPermalink" $relPermalink)
+      -}}
+    {{ end -}}
+  </ul>
+</div>
+
+{{- define "navbar-version-list" -}}
+  {{ $path := .path -}}
+  {{ $relPermalink := .relPermalink -}}
+  {{ range $i, $version := .versions -}}
+  {{ $isLatest := eq $i 0 -}}
+  {{ $href := printf "/docs/%s/%s" $version $path -}}
+  <li> {{- /**/ -}}
+    <a class="dropdown-item{{ if eq $href $relPermalink }} disabled{{ end }}"
+      href="{{ $href }}">
+      {{- $version -}}{{ if $isLatest }} (latest){{ end -}}
+    </a>
+    {{- /**/ -}}
+  </li>
+  {{ end -}}
+{{ end -}}

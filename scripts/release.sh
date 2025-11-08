@@ -4,7 +4,8 @@
 # SPDX-License-Identifier: Apache-2.0
 
 # Prepares a pull request for the next release.
-# Set environment variable DRY_RUN=true to skip committing the changes.
+# Set environment variable DRY_RUN=true to skip committing the changes,
+# or set DRY_RUN=no-cli-docs to also skip generating the CLI docs.
 
 set -euf -o errexit -o pipefail
 
@@ -41,7 +42,7 @@ safe_checkout_main() {
   # But we also want to make sure that we build and release exactly the tagged version, so we verify that the remote
   # branch is where our tag is.
   local checkoutBranch=main
-  if [[ "$DRY_RUN" = "true" ]]; then
+  if [[ "$DRY_RUN" != "false" ]]; then
     echo "Skipping branch validation"
     return
   fi
@@ -63,11 +64,14 @@ update_links() {
   versionMajor=$(echo "${versionMajorMinor}" | ${SED} 's/\.[[:digit:]]*$//')
   versionMinor=$(echo "${versionMajorMinor}" | ${SED} 's/[[:digit:]]\.//')
   weight=$(printf "%d%02d\n" "$versionMajor" "$versionMinor")
+  # Remove "(latest)" from the linkTitle of current versions
+  find ./content/docs/v${versionMajor}/ -name "_index.md" -type f \
+    -exec ${SED} -i -e "s|^\(linkTitle: [12]\.[0-9]*\) (latest)$|\1|g" {} \;
   # loop over a collection of string patterns
   for pattern in \
     "s|https://github.com/jaegertracing/jaeger/tree/main|https://github.com/jaegertracing/jaeger/tree/${versionTag}|g" \
     "s|https://github.com/jaegertracing/jaeger/blob/main|https://github.com/jaegertracing/jaeger/blob/${versionTag}|g" \
-    "s|^linkTitle: [12].DEV.*$|linkTitle: ${versionMajorMinor}|g" \
+    "s|^linkTitle: [12].dev.*$|linkTitle: ${versionMajorMinor} (latest)|g" \
     "s|^weight: -[12]00.*$|weight: -${weight}|g"
   do
     find ./content/docs/v${versionMajor}/${versionMajorMinor} -type f -exec ${SED} -i -e "${pattern}" {} \;
@@ -82,7 +86,9 @@ gen_cli_docs_v1() {
   mkdir -p ${cliDocsTempDir}/data/cli
   cp -r ./data/cli/next-release/ ${cliDocsTempDir}/data/cli/${versionMajorMinor}
   chmod -R a+w ${cliDocsTempDir}
-  python3 ./scripts/gen-cli-data.py ${versionMajorMinor} ${cliDocsTempDir}
+  if [[ "$DRY_RUN" != "no-cli-docs" ]]; then
+    python3 ./scripts/gen-cli-data.py ${versionMajorMinor} ${cliDocsTempDir}
+  fi
   rm -f ${cliDocsTempDir}/data/cli/${versionMajorMinor}/*_completion_*.yaml
   mv ${cliDocsTempDir}/data/cli/${versionMajorMinor} ./data/cli/
 }
@@ -115,7 +121,7 @@ for version in "${version_v1}" "${version_v2}"; do
   ${SED} -i -e "s/versions${var_suffix} *: *\[/versions${var_suffix}: \[\"${versionMajorMinor}\"\,/" "${config_file}"
 done
 
-if [[ "$DRY_RUN" = "true" ]]; then
+if [[ "$DRY_RUN" != "false" ]]; then
   echo "Not committing changes because DRY_RUN=$DRY_RUN"
   exit 0
 fi
