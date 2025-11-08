@@ -1,0 +1,13 @@
+{{ $dest := .Destination -}}
+{{ $isExternal := hasPrefix $dest "http" -}}
+
+<a href="{{ $dest | safeURL }}"
+  {{- with .Title}} title="{{ . }}"{{ end -}}
+  {{- if $isExternal }} target="_blank" rel="noopener"
+    {{- $noExternalIcon := in .Text "hk-no-external-icon" -}}
+    {{ if not $noExternalIcon }} class="external-link"{{ end -}}
+  {{ end -}}
+>
+  {{- .Text | safeHTML -}}
+</a>
+{{- /**/ -}}
