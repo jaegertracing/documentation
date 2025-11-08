@@ -4,3 +4,8 @@ command = "npm run build:preview"
 
 [context.production]
 command = "npm run build:production"
+
+[context.docsy.environment]
+WKSP = "dev.yaml,hugo.docsy"
+
+# cSpell:ignore docsy WKSP

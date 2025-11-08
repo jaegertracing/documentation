@@ -1,5 +1,6 @@
 ---
 title: Getting in touch
+weight: 20
 ---
 
 ## Via chat

@@ -1,5 +1,6 @@
 ---
 title: News
+weight: 60
 ---
 
 ## Announcing Jaeger v2.0

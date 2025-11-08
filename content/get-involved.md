@@ -1,5 +1,6 @@
 ---
 title: Get Involved
+weight: 10
 ---
 
 Jaeger is an open source project with [open governance](https://github.com/jaegertracing/jaeger/blob/main/GOVERNANCE.md). We welcome contributions from the community, and we'd love your help to improve and extend the project. Below you will find some ideas for how to get involved with the project. Some of them don't even require any coding. There is also a good
@@ -14,7 +15,7 @@ In order to understand the project better and come up with reasonable solutions,
 * Review the [Jaeger architecture](/docs/latest/architecture/) and understand the components.
 * Fork and clone the respective repositories to be able to [build and run the project locally](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING.md#getting-started).
 * Learn about contributing with the best practices, including how to [sign your code and contribute](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md#creating-a-pull-request).
-* Try to solve some of the [simple open issues](./#help-with-coding) that you can find across Jaeger repositories.
+* Try to solve some of the [simple open issues](#help-with-coding) that you can find across Jaeger repositories.
 
 ## No-coding involvement
 

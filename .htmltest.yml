@@ -1,11 +1,15 @@
+# cSpell:ignore github
 CacheExpires: 13300h # ~ 18 months
 DirectoryPath: public
 IgnoreAltMissing: true
+IgnoreInternalEmptyHash: true # FIXME
 IgnoreDirs:
   - docs/1.*
 IgnoreURLs:
   - /livereload.js # cSpell:disable-line
   - ^https://www.jaegertracing.io/js/lunr
+  # Ignore Docsy-generated GitHub links for now
+  - ^https?://github\.com/.*?/.*?/(new|edit)/ # view-page, edit-source etc
   # Valid URL, whether canonical (before reorg) or not (and handled via a redirect)
   - ^/docs/1.[6-9]\d/sampling/
   - ^/docs/latest/architecture/
