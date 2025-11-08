@@ -1,11 +1,12 @@
 ---
 title: Introduction
-linkTitle: 1.DEV
+linkTitle: 1.dev
 weight: -100 # == -100 - MINOR
 children:
 - title: Features
   url: features
 sidebar_root_for: self
+aliases: [next-release]
 ---
 
 Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.

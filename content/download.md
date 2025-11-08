@@ -1,6 +1,7 @@
 ---
 title: Download
 aliases: [/docs/download]
+menu: {main: { weight: 30 }}
 ---
 
 Jaeger components can be downloaded in two ways:
