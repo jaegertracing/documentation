@@ -1,6 +1,7 @@
 DirectoryPath: public
 CheckExternal: false
 IgnoreAltMissing: true
+IgnoreInternalEmptyHash: true
 IgnoreURLs:
   - /livereload.js # cSpell:disable-line
   - ^/docs/latest/ # ignore redirect of latest
