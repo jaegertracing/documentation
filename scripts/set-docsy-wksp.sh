@@ -10,29 +10,18 @@
 
 : "${RPROMPT:=}" # This seems necessary when sourcing this script from zsh
 
-pr_branch="${PULL_REQUEST_BRANCH:-}"
-branch="${BRANCH:-}"
-if [ -z "$branch" ]; then
-  branch="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)"
-fi
-base="${PULL_REQUEST_BASE_BRANCH:-${PULL_REQUEST_BASE:-}}"
+# For Netlify docs on meta vars, see
+# https://docs.netlify.com/build/configure-builds/environment-variables/#git-metadata
+
+branch="${HEAD:-$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)}"
 
 echo "set-docsy-wksp:"
-echo "  > pr_branch: $pr_branch"
 echo "  > branch: $branch"
-echo "  > base: $base"
 
 is_docsy_workspace=false
-
-case "$pr_branch" in
-  docsy*) is_docsy_workspace=true ;;
-esac
+WKSP_FOR_DOCSY="dev.yaml,hugo.docsy"
 
 case "$branch" in
-  docsy*) is_docsy_workspace=true ;;
-esac
-
-case "$base" in
   docsy*) is_docsy_workspace=true ;;
 esac
 
@@ -44,12 +33,12 @@ if [ "$is_docsy_workspace" = true ]; then
         echo "  WKSP already set to ${WKSP}; skipping."
         ;;
       *)
-        export WKSP="dev.yaml,hugo.docsy"
+        export WKSP="${WKSP_FOR_DOCSY}"
         echo "  Setting WKSP to ${WKSP}"
         ;;
     esac
   else
-    export WKSP="dev.yaml,hugo.docsy"
+    export WKSP="${WKSP_FOR_DOCSY}"
     echo "  Setting WKSP to ${WKSP}"
   fi
 else
