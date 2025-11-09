@@ -1,0 +1,16 @@
+// General dark-mode tuning and overrides. Other style files might also include
+// dark-mode adjustments, search for [data-bs-theme='dark'].
+
+[data-bs-theme='dark'] {
+  // ---------------------------------------------------------------------------
+  // $primary has poor contrast in dark mode. Tweak it.
+  // ---------------------------------------------------------------------------
+
+  --bs-primary: #{$primary-dark};
+
+  // NOTE (@chalin): I don't think we're using btn-outline styles at the moment,
+  // but I'm leaving this here as an example of how to adjust the color.
+  .btn-outline-primary {
+    --bs-btn-color: #{$primary-dark};
+  }
+}

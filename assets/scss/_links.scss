@@ -1,4 +1,25 @@
-// This is a copy of the external-link icon from OTel.io:
+// Link decoration
+
+// Default $link-decoration is 'underline'
+$link-decoration-opposite: none !default;
+
+@mixin set-elt-hover-and-focus($element, $color: null, $decoration: null) {
+  // $element: 'a' | '&'
+  //
+  // Include `!important` for $color and $decoration to override the defaults.
+
+  #{$element}:hover,
+  #{$element}:focus {
+    @if $color {
+      color: $color;
+    }
+    @if $decoration {
+      text-decoration: $decoration;
+    }
+  }
+}
+
+// Included below is a copy of the external-link icon from OTel.io from:
 // https://github.com/chalin/opentelemetry.io/blob/cce8d540c134889f08703c464b79c54924a2e90f/assets/scss/_external_link.scss
 //
 // External-link icon after an external link

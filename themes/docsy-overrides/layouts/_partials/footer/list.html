@@ -1,0 +1,7 @@
+<ul class="td-footer__list">
+  {{ range . }}
+  <li class="td-footer__list-item">
+    <a href="{{ .url }}">{{ .name }}</a>
+  </li>
+  {{ end -}}
+</ul>

@@ -1,5 +1,11 @@
 .td-home {
+  @include set-elt-hover-and-focus(
+    $element: 'a',
+    $decoration: $link-decoration-opposite
+  );
+
   .td-navbar {
+    // cSpell:ignore onscroll
     &.navbar-bg-onscroll {
       background-color: $jaeger-blue-dark !important;
     }
@@ -57,6 +63,10 @@
       padding-top: 1rem;
       max-width: 30rem;
     }
+
+    a.external-link:after {
+      display: none;
+    }
   }
 
   .article-list {
@@ -85,11 +95,23 @@
     }
 
     a {
-      text-decoration: none;
+      text-decoration: $link-decoration-opposite;
+      @include set-elt-hover-and-focus(
+        $element: '&',
+        $decoration: $link-decoration !important
+      );
     }
   }
 
   .td-box--white a {
     color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+  }
+}
+
+// Dark-mode tuning
+[data-bs-theme='dark'] .td-home .td-box--200 {
+  // Keep the light link color in 200 boxes since the background stays light.
+  h1 a {
+    color: $link-color;
   }
 }

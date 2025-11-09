@@ -10,7 +10,9 @@
 {{ $version       := index (split $path "/") 1 }}
 {{ $vMajor        := index (split $version ".") 0 }}
 {{ $isNextRelease := false }}
-{{ if eq $version "next-release" }}
+{{ if hasSuffix $version "dev" }}
+  {{ $isNextRelease = true }}
+{{ else if eq $version "next-release" }}
   {{ $vMajor = "1" }}
   {{ $isNextRelease = true }}
 {{ else if eq $version "next-release-v2" }}
@@ -35,32 +37,44 @@
 {{ $latestUrl = partial "docs/lookup-page" (slice . $latestUrl) -}}
 {{ $latestUrlV1 = partial "docs/lookup-page" (slice . $latestUrlV1) -}}
 {{ $latestUrlV2 = partial "docs/lookup-page" (slice . $latestUrlV2) -}}
+{{ $btnKind :=
+    cond $isNextRelease "secondary"
+      (cond $isLatest "success" "warning") -}}
+{{ $versionQualifier :=
+    cond $isNextRelease "preview"
+      (cond $isLatest "latest" "outdated") -}}
 
 {{ if and (hasPrefix $path "docs/") (ne $path "docs/_index.md") }}
 <div class="mb-1">
-  <div class="btn-group">
-    <span class="btn btn-sm btn-outline-primary disabled">
-      Version&nbsp;&nbsp;<strong>{{ $version }}</strong>
+  <div class="btn-group border border-dark-subtle">
+
+    <span class="btn btn-sm btn-{{ $btnKind }} pe-none" {{/**/ -}}
+      title="This is the current version">
+      <span class="fw-bold pe-2">Version</span>
+      {{- /**/ -}}
+      <span class="fw-bold">{{ $version }}</span>
+      {{ with $versionQualifier }} ({{ . }}) {{- end -}}
     </span>
-    {{ if $isNextRelease }}
-    <span class="btn btn-sm btn-outline-info">Preview</span>
-    {{ end }}
-    {{ if $isLatest }}
-    <span class="btn btn-sm btn-success">Latest</span>
-    {{ else if $latestUrl }}
-    <a class="btn btn-sm btn-warning" href="{{ $latestUrl }}">
-      Go to the latest {{ $vMajor }}.x version
+
+    {{ if and $latestUrlV2 (or (ne $vMajor "2") (not $isLatest)) }}
+    <a class="btn btn-sm btn-light border-0 border-start border-dark-subtle" {{/**/ -}}
+        title="Go to the latest 2.x version" {{/**/ -}}
+        href="{{ $latestUrlV2 }}">
+      <i class="fa-solid fa-circle-play"></i>
+      {{ .Site.Params.latestV2 }}
+      <span class="text-success">(latest)</span>
     </a>
-    {{ end }}
-    {{ if and (eq $vMajor "1") $latestUrlV2 }}
-    <a class="btn btn-sm btn-outline-primary" href="{{ $latestUrlV2 }}">
-      Go to the latest 2.x version
+    {{ end -}}
+
+    {{ if and $latestUrlV1 (or (ne $vMajor "1") (not $isLatest)) }}
+    <a class="btn btn-sm btn-light border-0 border-start border-dark-subtle" {{/**/ -}}
+        title="Go to the latest 1.x version" {{/**/ -}}
+        href="{{ $latestUrlV1 }}">
+      <i class="fa-regular fa-circle-play"></i>
+      {{ .Site.Params.latest }}
+      <span class="text-black-50">(latest)</span>
     </a>
-    {{ else if and (eq $vMajor "2") $latestUrlV1 }}
-    <a class="btn btn-sm btn-outline-primary" href="{{ $latestUrlV1 }}">
-      Go to the latest 1.x version
-    </a>
-    {{ end }}
+    {{ end -}}
     </div>
 </div>
 <hr>

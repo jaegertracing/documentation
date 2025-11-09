@@ -1,32 +1,17 @@
+@import 'links';
+
 @import 'download';
-@import 'external_link';
+@import 'footer';
 @import 'home';
 @import 'td/code-dark';
+@import 'dark';
+@import 'navbar';
 
-$navbar-brand-size: 52px;
-$navbar-brand-base: 38px;
-$navbar-margin-top: -($navbar-brand-size - $navbar-brand-base) / 2;
-
-.td-navbar {
-  background-color: $jaeger-blue-dark;
-
-  .navbar-brand {
-    svg {
-      height: $navbar-brand-size;
-      width: $navbar-brand-size;
-      margin-top: $navbar-margin-top;
-      margin-bottom: $navbar-margin-top;
-    }
-  }
-
-  .nav-link {
-    color: white;
-
-    &:hover,
-    &:focus {
-      text-decoration: underline;
-    }
-  }
+.td-content {
+  @include set-elt-hover-and-focus(
+    $element: 'a',
+    $decoration: $link-decoration-opposite !important
+  );
 }
 
 .td-footer {
