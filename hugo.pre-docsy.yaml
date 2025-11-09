@@ -2,6 +2,9 @@
 
 module:
   mounts:
+    - source: pre-docsy-content/_index.md
+      target: content/_index.md
+
     - excludeFiles: docs/v?
       source: content
       target: content
