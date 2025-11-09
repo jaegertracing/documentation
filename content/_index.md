@@ -37,8 +37,6 @@ cSpell:ignore: Dosu
 
 # Why Jaeger? {.heading-as-display}
 
-<div>
-
 Distributed tracing observability platforms, such as Jaeger, are essential for
 modern software applications that are architected as microservices. Jaeger maps
 the flow of requests and data as they traverse a distributed system. These
@@ -47,8 +45,6 @@ delays or errors. Jaeger connects the dots between these disparate components,
 helping to identify performance bottlenecks, troubleshoot errors, and improve
 overall application reliability. Jaeger is 100% open source, cloud native, and
 infinitely scalable.
-
-</div>
 
 {{% /blocks/lead %}}
 

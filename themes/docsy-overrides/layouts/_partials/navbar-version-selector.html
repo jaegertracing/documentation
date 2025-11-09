@@ -9,11 +9,17 @@
   cSpell:ignore pagelinks
   */ -}}
 
-<div class="dropdown">
-  <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="td-version-menu dropdown">
+  <a class="nav-link dropdown-toggle"
+      id="td-version-menu-toggle"
+      role="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+      class="nav-link"
+    >
     {{- .Params.version_menu -}}
   </a>
-  <ul class="dropdown-menu">
+  <ul class="dropdown-menu" aria-labelledby="td-version-menu-toggle">
     {{ $relPermalink := .Page.RelPermalink -}}
     {{ $vers := "" -}}
     {{ $path := "" -}}

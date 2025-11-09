@@ -43,3 +43,10 @@ $feature-counts: (2, 3, 4, 6);
     }
   }
 }
+
+.td-version-menu {
+  position: unset !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
