@@ -1,0 +1,15 @@
+// cSpell:ignore linux
+
+.table--download {
+  .btn-platform-darwin {
+    @extend .btn-dark;
+  }
+
+  .btn-platform-linux {
+    @extend .btn-warning;
+  }
+
+  .btn-platform-windows {
+    @extend .btn-info;
+  }
+}
