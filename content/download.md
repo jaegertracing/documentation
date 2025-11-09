@@ -63,7 +63,7 @@ The signatures can be verified using the public key below.
 
 ### Import the key
 
-```
+```console
 $ gpg --import <<EOF
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
@@ -94,7 +94,7 @@ From the release page (TODO: provide link and fix versions):
 
 Use `gpg --verify {signature-file} file`, e.g.:
 
-```
+```console
 $ gpg --verify jaeger-1.39.4-darwin-amd64.tar.gz.asc jaeger-1.39.4-darwin-amd64.tar.gz
 gpg: Signature made Wed Nov  9 13:34:17 2022 EST
 gpg:                using EDDSA key BD0B026014C725261C947887B42D1DB0F079690F

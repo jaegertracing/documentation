@@ -48,11 +48,11 @@ Jaeger can receive trace data in multiple formats on different ports.
 
 ### OpenTelemetry Protocol (stable)
 
-Jaeger can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. The OTLP data is accepted in these formats: 
+Jaeger can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. The OTLP data is accepted in these formats:
   * binary gRPC
   * Protobuf over HTTP
   * JSON over HTTP
-  
+
 Only tracing data is accepted, since Jaeger does not store other telemetry types. For more details on the OTLP receiver see the [official documentation][otlp-rcvr].
 
 [otlp-rcvr]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
@@ -66,7 +66,7 @@ Jaeger's legacy Protobuf format is defined in [collector.proto] IDL file. Suppor
 
 Jaeger's legacy Thrift format is defined in [jaeger.thrift] IDL file, and is only maintained for backwards compatibility. The Thrift payload can be submitted in an HTTP POST request to the  `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
 
-```
+```http
 Content-Type: application/vnd.apache.thrift.binary
 ```
 

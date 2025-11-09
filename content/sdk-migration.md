@@ -31,7 +31,7 @@ If you find inaccuracies or have information that can be added, please open an i
 
 We encourage OpenTelemetry SDK authors to copy relevant pieces of the Jaeger clients instead of depending on Jaeger modules directly. This is why we use a liberal APL2 license. When copying code, the correct way to respect the license requirements is to keep the copyright notices. For example, Jaeger authors did the same with the code originally written at Uber:
 
-```
+```go
 // Copyright (c) 2019 The Jaeger Authors.
 // Copyright (c) 2017 Uber Technologies, Inc.
 // ... <rest of Apache notice> ...
@@ -137,14 +137,14 @@ e.g. `my-baggage-key-1`.
 
 Example: the following code sequence:
 
-```
+```go
 span.SetBaggageItem("key1", "value1")
 span.SetBaggageItem("key2", "value2")
 ```
 
 will result in the following HTTP headers:
 
-```
+```properties
 uberctx-key1: value1
 uberctx-key2: value2
 ```
@@ -155,13 +155,13 @@ OpenTracing defines two formats for plain text headers: `HTTP_HEADERS` and `TEXT
 
 Example: when using the `HTTP_HEADERS` propagation format, the following code sequence:
 
-```
+```go
 span.SetBaggageItem("key1", "value 1 / blah")
 ```
 
 will result in the following HTTP header:
 
-```
+```properties
 uberctx-key1: value%201%20%2F%20blah
 ```
 

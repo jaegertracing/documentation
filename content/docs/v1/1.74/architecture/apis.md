@@ -44,7 +44,7 @@ Since Jaeger v1.11, the official protocol between user applications and **jaeger
 
 The payload in [jaeger.thrift] format can be submitted in an HTTP POST request to the  `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
 
-```
+```http
 Content-Type: application/vnd.apache.thrift.binary
 ```
 

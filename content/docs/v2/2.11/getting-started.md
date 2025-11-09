@@ -10,7 +10,7 @@ If you are new to distributed tracing, please check the [Introduction](../) page
 
 The easiest way to run Jaeger is by starting it in a container:
 
-```
+```sh
 docker run --rm --name jaeger \
   -p 16686:16686 \
   -p 4317:4317 \
@@ -24,7 +24,7 @@ This runs the **all-in-one** configuration of Jaeger ([see Architecture](../arch
 
 In order to run Jaeger in other roles ([see Architecture](../architecture/)), an explicit configuration file ([see Configuration](../deployment/configuration/)) must be provided via the `--config` command line argument. When running in a container, the path to the config file must be mapped into the container file system (the `-v ...` mapping below):
 
-```
+```sh
 docker run --rm --name jaeger \
   -p 16686:16686 \
   -p 4317:4317 \

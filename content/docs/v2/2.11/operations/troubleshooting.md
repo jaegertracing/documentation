@@ -29,9 +29,9 @@ If you suspect the remote sampling is not working correctly, try these steps:
 
 1. Make sure that the SDK is actually configured to use remote sampling, points to the correct sampling service address (see [APIs](../../architecture/apis/#remote-sampling-configuration)), and that address is reachable from your application's [networking namespace](#network-connectivity).
 1. Verify that the server is returning the appropriate sampling strategy for your service:
-```
-    $ curl "jaeger-collector:14268/api/sampling?service=foobar"
-    {"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":0.001}}
+```console
+$ curl "jaeger-collector:14268/api/sampling?service=foobar"
+{"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":0.001}}
 ```
 
 ## Bypass intermediate collectors
@@ -54,7 +54,7 @@ Jaeger provides useful debugging information when the log level is set to `debug
 
 For the cases where it's not possible or desirable to increase the logging verbosity, the `/metrics` endpoint can be used to check how trace data is being received and processed by Jaeger. See [Monitoring](../monitoring/#logging) for more details on configuring metrics production. Here's a sample `curl` call to obtain the metrics:
 
-```
+```sh
 curl -s http://jaeger-collector:8888/metrics
 ```
 

@@ -13,13 +13,13 @@ Please refer to [OpenTelemetry Collector documentation](https://opentelemetry.io
 
 Here's a sample `curl` call to obtain the metrics:
 
-```
+```sh
 curl -s http://jaeger-collector:8888/metrics
 ```
 
 The following metrics are of special interest:
 
-```
+```ini
 otelcol_receiver_accepted_spans
 otelcol_receiver_refused_spans
 
@@ -31,7 +31,7 @@ The first two metrics describe how many spans are being received by Jaeger. The 
 
 The labels on the metrics allow to separate different receivers and exporters. For example, the first metric with all labels might look like this (formatted for readability):
 
-```
+```ini
 otelcol_receiver_accepted_spans{
     receiver="otlp",
     service_instance_id="f91d66c2-0445-42bf-a062-32aaed09facf",

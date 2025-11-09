@@ -293,7 +293,7 @@ docker run \
 The schema tool also supports TLS. You need to make a custom cqlshrc file like
 so:
 
-```
+```ini
 # Creating schema in a cassandra cluster requiring client TLS certificates.
 #
 # Create a volume for the schema docker container containing four files:
@@ -460,11 +460,13 @@ For example:
   }
   EOF
   ```
+
 * Run elasticsearch initializer with `ES_USE_ILM=true`:
 
   ```shell
   docker run -it --rm --net=host -e ES_USE_ILM=true jaegertracing/jaeger-es-rollover:latest init http://localhost:9200 # <1>
   ```
+
   <1> If you need to initialize archive storage, add `-e ARCHIVE=true`.
 
   {{< info >}}
@@ -617,6 +619,7 @@ https://promlabs.com/blog/2020/11/26/an-update-on-promql-compatibility-across-ve
 #### Configuration
 
 ##### Minimal
+
 ```sh
 docker run \
   -e METRICS_STORAGE_TYPE=prometheus \
@@ -624,13 +627,16 @@ docker run \
 ```
 
 ##### All options
+
 To view the full list of configuration options, you can run the following command:
+
 ```sh
 docker run \
   -e METRICS_STORAGE_TYPE=prometheus \
   jaegertracing/jaeger-query:{{< currentVersion >}} \
   --help
 ```
+
 #### TLS support
 
 Jaeger supports TLS client to Prometheus server connections as long as you've [configured

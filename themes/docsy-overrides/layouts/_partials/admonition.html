@@ -1,0 +1,19 @@
+{{/* TODO: consider making this a .md partial and drop the markdownify. */ -}}
+
+<div class="alert alert-{{ .type }}" role="alert">
+<div class="d-flex align-items-start">
+  <span class="me-3">
+    <i class="fa-solid fa-{{ .icon }} fa-lg"></i>
+  </span>
+  <div>
+    {{ if ne .title nil -}}
+    <div class="h4 alert-heading">
+      {{- .title | markdownify -}}
+    </div>
+    {{ end -}}
+    <div>
+      {{ .content | markdownify }}
+    </div>
+  </div>
+</div>
+</div>

@@ -141,7 +141,8 @@ Two metric names will be created:
       `le >= span duration` will be incremented for each span.
 
 The following formula aims to provide some guidance on the number of new time series created:
-```
+
+```go
 num_status_codes * num_span_kinds * (1 + num_latency_buckets) * num_operations
 
 Where:
@@ -151,7 +152,8 @@ Where:
 ```
 
 Plugging those numbers in, assuming default configuration:
-```
+
+```go
 max = 324 * num_operations
 typical = 72 * num_operations
 ```
@@ -321,9 +323,11 @@ If there are error spans appearing in Jaeger, but no corresponding error metrics
   the `status.code` label in the metric that the span should belong to.
 - If there are no `status.code` labels, check the OpenTelemetry Collector
   configuration file, particularly for the presence of the following configuration:
+
   ```yaml
   exclude_dimensions: ['status.code']
   ```
+
   This label is used by Jaeger to determine if a request is erroneous.
 
 ### Inspect the OpenTelemetry Collector

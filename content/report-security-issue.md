@@ -38,7 +38,7 @@ gpg -ea -r C043A4D2B3F2AC31 message.txt
 
 ### Our public key
 
-```
+```text
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 mQINBFn7N4QBEAC4Vl68Fdcom/U1kb/6zlUeSLh4Vwyr2wvaLd610AUwmrfQC0eh
 e6vRtt//bYr48gHg1wwnbaQgyg+ZvIfjUa6Olhqi3J1itkagy50pQDWk8nfDdbHO

@@ -53,11 +53,11 @@ Jaeger can receive trace data in multiple formats on different ports.
 
 **Status**: Stable
 
-Jaeger can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. The OTLP data is accepted in these formats: 
+Jaeger can receive trace data from the OpenTelemetry SDKs in their native [OpenTelemetry Protocol (OTLP)][otlp]. The OTLP data is accepted in these formats:
   * [Protobuf via gRPC][otlp.grpc]
   * [Protobuf over HTTP][otlp.http]
   * [JSON over HTTP][otlp.http]
-  
+
 Only tracing data is accepted, since Jaeger does not store other telemetry types. For more details on the OTLP receiver see the [official documentation][otlp-rcvr].
 
 [otlp-rcvr]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
@@ -75,7 +75,7 @@ Jaeger's legacy Protobuf format is defined in [collector.proto] IDL file. Suppor
 
 Jaeger's legacy Thrift format is defined in [jaeger.thrift] IDL file, and is only maintained for backwards compatibility. The Thrift payload can be submitted in an HTTP POST request to the  `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
 
-```
+```http
 Content-Type: application/vnd.apache.thrift.binary
 ```
 
@@ -129,11 +129,11 @@ the gRPC Remote Storage API.
 To use a remote storage backend, you must deploy a gRPC server that implements
 the following services:
 
-* **[TraceReader](https://github.com/jaegertracing/jaeger-idl/tree/main/proto/storage/v2/trace_storage.proto)**  
+* **[TraceReader](https://github.com/jaegertracing/jaeger-idl/tree/main/proto/storage/v2/trace_storage.proto)**
   Enables Jaeger to read traces from the storage backend.
-* **[DependencyReader](https://github.com/jaegertracing/jaeger-idl/tree/main/proto/storage/v2/dependency_storage.proto)**  
+* **[DependencyReader](https://github.com/jaegertracing/jaeger-idl/tree/main/proto/storage/v2/dependency_storage.proto)**
   Used to load service dependency graphs from storage.
-* **[TraceService](https://github.com/open-telemetry/opentelemetry-proto/blob/main/opentelemetry/proto/collector/trace/v1/trace_service.proto)**  
+* **[TraceService](https://github.com/open-telemetry/opentelemetry-proto/blob/main/opentelemetry/proto/collector/trace/v1/trace_service.proto)**
   Allows trace data to be pushed to the storage. This service can run on a separate port if needed.
 
 For more information, please refer to

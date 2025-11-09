@@ -194,7 +194,7 @@ The embedded mode is induced and configured via URL query parameters.
 
 To enter embedded mode, the `uiEmbed=v0` query parameter and value must be added to the URL. For example, the following URL will show the trace with ID `abc123` in embedded mode:
 
-```
+```text
 http://localhost:16686/trace/abc123?uiEmbed=v0
 ```
 
@@ -213,7 +213,7 @@ To integrate the Search Trace Page to our application we have to indicate to the
 
 For example:
 
-```
+```text
 http://localhost:16686/search?
     service=my-service&
     start=1543917759557000&
@@ -233,7 +233,7 @@ The following query parameter can be used to configure the layout of the search 
 
 * `uiSearchHideGraph=1` - disables the display of the scatter plot above the search results
 
-```
+```text
 http://localhost:16686/search?
     service=my-service&
     start=1543917759557000&
@@ -258,6 +258,7 @@ For example:
 ```sh
 http://localhost:16686/trace/{trace-id}?uiEmbed=v0
 ```
+
 [![Embed Trace view](/img/frontend-ui/embed-trace-view.png)](/img/frontend-ui/embed-trace-view.png)
 
 If we have navigated to this view from the search traces page we'll have a button to go back to the results page.
@@ -270,36 +271,40 @@ The following query parameters can be used to configure the layout of the trace 
 
 * `uiTimelineCollapseTitle=1` causes the trace header to start out collapsed, which hides the summary and the minimap.
 
-```
+```text
 http://localhost:16686/trace/{trace-id}?
     uiEmbed=v0&
     uiTimelineCollapseTitle=1
 ```
+
 [![Embed Trace view](/img/frontend-ui/embed-trace-view-with-collapse.png)](/img/frontend-ui/embed-trace-view-with-collapse.png)
 
 * `uiTimelineHideMinimap=1` removes the minimap, entirely, regardless of whether the trace header is expanded or not.
 
-```
+```text
 http://localhost:16686/trace/{trace-id}?
     uiEmbed=v0&
     uiTimelineHideMinimap=1
 ```
+
 [![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-minimap.png)](/img/frontend-ui/embed-trace-view-with-hide-minimap.png)
 
 * `uiTimelineHideSummary=1` - removes the trace summary information (number of services, etc.) entirely, regardless of whether the trace header is expanded or not.
 
-```
+```text
 http://localhost:16686/trace/{trace-id}?
     uiEmbed=v0&
     uiTimelineHideSummary=1
 ```
+
 [![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-summary.png)](/img/frontend-ui/embed-trace-view-with-hide-summary.png)
 
 We can also combine the options:
-```
+```text
 http://localhost:16686/trace/{trace-id}?
     uiEmbed=v0&
     uiTimelineHideMinimap=1&
     uiTimelineHideSummary=1
 ```
+
 [![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-details-and-hide-minimap.png)](/img/frontend-ui/embed-trace-view-with-hide-details-and-hide-minimap.png)

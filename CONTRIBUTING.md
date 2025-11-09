@@ -49,7 +49,7 @@ of the [Apache License](LICENSE).
 If you are adding a new file it should have a header like below.  The easiest
 way to add such header is to run `make fmt`.
 
-```
+```go
 // Copyright (c) 2018 The Jaeger Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -73,7 +73,7 @@ pass it on as an open-source patch.  The rules are pretty simple: if you
 can certify the below (from
 [developercertificate.org](http://developercertificate.org/)):
 
-```
+```text
 Developer Certificate of Origin
 Version 1.1
 
@@ -127,7 +127,7 @@ git config --global user.email "MY_NAME@example.com"
 
 If you want signing to be automatic you can set up some aliases:
 
-```
+```shell
 git config --add alias.amend "commit -s --amend"
 git config --add alias.c "commit -s"
 ```

@@ -47,7 +47,7 @@ Sometimes these adjustments themselves make the trace hard to understand. For ex
 
 The `jaeger_query` extension supports a configuration property that controls how much clock skew adjustment should be allowed.
 
-```
+```yaml
 extensions:
   jaeger_query:
     max_clock_skew_adjust: 30s
@@ -59,7 +59,7 @@ extensions:
 
 The base path for all `jaeger_query` extension HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running Jaeger behind a reverse proxy. Here is example code to set the base path.
 
-```
+```yaml
 extensions:
   jaeger_query:
     base_path: /

@@ -24,7 +24,7 @@ OpenTelemetry SDKs can be configured with an exporter that prints recorded spans
 
 If you are using one of the Jaeger SDKs, they default to a probabilistic sampling strategy with `1-in-1000` chance that the trace will be recorded. The strategy can be changed by setting these environment variables:
 
-```
+```sh
 JAEGER_SAMPLER_TYPE=const
 JAEGER_SAMPLER_PARAM=1
 ```
@@ -41,9 +41,9 @@ If you suspect the remote sampling is not working correctly, try these steps:
 
 1. Make sure that the SDK is actually configured to use remote sampling, points to the correct sampling service address (see [APIs](../architecture/apis/#remote-sampling-configuration-stable)), and that address is reachable from your application's [networking namespace](#networking-namespace).
 1. Verify that the server is returning the appropriate sampling strategy for your service:
-```
-    $ curl "jaeger-collector:14268/api/sampling?service=foobar"
-    {"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":0.001}}
+```console
+$ curl "jaeger-collector:14268/api/sampling?service=foobar"
+{"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":0.001}}
 ```
 
 ## Networking Namespace
