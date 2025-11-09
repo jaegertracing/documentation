@@ -35,41 +35,44 @@ Jaeger can be customized via configuration YAML file (see [Configuration](./conf
 **jaeger** is stateless and thus many instances of **jaeger** can be run in parallel. **jaeger** instances require almost no configuration, except for storage location, such as:
 
 Cassandra:
-```
-  jaeger_storage:
-    backends:
-      some_storage:
-        cassandra:
-          schema:
-            keyspace: "jaeger_v1_dc1"
-          connection:
-            auth:
-              basic:
-                username: "cassandra"
-                password: "cassandra"
-            tls:
-              insecure: true
+
+```yaml
+jaeger_storage:
+  backends:
+    some_storage:
+      cassandra:
+        schema:
+          keyspace: "jaeger_v1_dc1"
+        connection:
+          auth:
+            basic:
+              username: "cassandra"
+              password: "cassandra"
+          tls:
+            insecure: true
 ```
 
 OpenSearch:
-```
-  jaeger_storage:
-    backends:
-      some_storage:
-        opensearch:
-          index_prefix: "jaeger-main"
+
+```yaml
+jaeger_storage:
+  backends:
+    some_storage:
+      opensearch:
+        index_prefix: "jaeger-main"
 ```
 
 ElasticSearch:
-```
-  jaeger_storage:
-    backends:
-      some_storage:
-        elasticsearch:
-          index_prefix: "jaeger-main"
-      another_storage:
-        elasticsearch:
-          index_prefix: "jaeger-archive"
+
+```yaml
+jaeger_storage:
+  backends:
+    some_storage:
+      elasticsearch:
+        index_prefix: "jaeger-main"
+    another_storage:
+      elasticsearch:
+        index_prefix: "jaeger-archive"
 ```
 
 ## Query Configuration
@@ -84,7 +87,7 @@ Sometimes these adjustments themselves make the trace hard to understand. For ex
 
 **jaeger** query extension supports configuration in the config file
 
-```
+```yaml
 query:
   max_clock_skew_adjust: 30s
 ```
@@ -95,7 +98,7 @@ query:
 
 The base path for all **jaeger** query extension HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running **jaeger** behind a reverse proxy. Here is example code to set the base path.
 
-```
+```yaml
 query:
   base_path: /
   static-files: /go/bin/jaeger-ui-build/build

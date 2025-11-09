@@ -8,7 +8,7 @@ weight: 1
 
 The easiest way to run Jaeger is by starting a Docker container:
 
-```
+```sh
 docker run --rm --name jaeger \
   -p 5778:5778 \
   -p 16686:16686 \
@@ -41,7 +41,7 @@ Using this application you can:
 - Find sources of latency and lack of concurrency.
 - Explore highly contextualized logging.
 - Use baggage propagation to diagnose inter-request contention (queueing) and time spent in a service.
-- Use open source libraries from `opentelemetry-contrib` to get vendor-neutral instrumentation 
+- Use open source libraries from `opentelemetry-contrib` to get vendor-neutral instrumentation
 for free.
 
 ### Running

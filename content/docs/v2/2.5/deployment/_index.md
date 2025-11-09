@@ -16,7 +16,7 @@ children:
 
 Jaeger backend is released as a single binary or container image (see [Downloads](../../../download/)). Despite that, it can be configured to operate in different **roles**, such as all-in-one, collector, query, and ingester (see [Architecture](../architecture/)). An explicit configuration file can be provided via the `--config` command line argument. When running in a container, the path to the config file must be mapped into the container file system (the `-v ...` mapping below):
 
-```
+```sh
 docker run --rm --name jaeger \
   -p 16686:16686 \
   -p 4317:4317 \
@@ -59,7 +59,7 @@ Sometimes these adjustments themselves make the trace hard to understand. For ex
 
 The `jaeger_query` extension supports a configuration property that controls how much clock skew adjustment should be allowed.
 
-```
+```yaml
 extensions:
   jaeger_query:
     max_clock_skew_adjust: 30s
@@ -71,7 +71,7 @@ extensions:
 
 The base path for all `jaeger_query` extension HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running Jaeger behind a reverse proxy. Here is example code to set the base path.
 
-```
+```yaml
 extensions:
   jaeger_query:
     base_path: /

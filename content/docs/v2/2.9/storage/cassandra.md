@@ -72,7 +72,7 @@ your Cassandra cluster correctly. You can specify paths to the TLS certificates 
 The schema tool also supports TLS. You need to make a custom cqlshrc file like
 so:
 
-```
+```ini
 # Creating schema in a cassandra cluster requiring client TLS certificates.
 #
 # Create a volume for the schema docker container containing four files:

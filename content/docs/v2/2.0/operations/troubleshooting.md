@@ -40,9 +40,9 @@ If you suspect the remote sampling is not working correctly, try these steps:
 1. Make sure that the SDK is actually configured to use remote sampling, points to the correct sampling service address (see [APIs](../../architecture/apis/#remote-sampling-configuration-stable)), and that address is reachable from your application's [networking namespace](#networking-namespace).
 1. Look at the root span of the traces that are captured in Jaeger. If you are using Jaeger SDKs, the root span will contain the tags `sampler.type` and `sampler.param`, which indicate which strategy was used. (TBD - do OpenTelemetry SDKs record that?)
 1. Verify that the server is returning the appropriate sampling strategy for your service:
-```
-    $ curl "jaeger-collector:14268/api/sampling?service=foobar"
-    {"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":0.001}}
+```console
+$ curl "jaeger-collector:14268/api/sampling?service=foobar"
+{"strategyType":"PROBABILISTIC","probabilisticSampling":{"samplingRate":0.001}}
 ```
 
 ## Bypass intermediate collectors

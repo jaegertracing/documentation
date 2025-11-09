@@ -61,7 +61,7 @@ An example configuration is available in the Jaeger repository: [config-spm.yaml
 * Enable the [SpanMetrics Connector][spanmetrics-conn] in the pipeline:
 ```yaml
 # Declare an exporter for metrics produced by the connector.
-# For example, a Prometheus server may be configured to scrape 
+# For example, a Prometheus server may be configured to scrape
 # the metrics from this endpoint.
 exporters:
   prometheus:
@@ -73,7 +73,7 @@ connectors:
     # any connector configuration options
     ...
 
-# Enable the spanmetrics connector to bridge 
+# Enable the spanmetrics connector to bridge
 # the traces pipeline into the metrics pipeline.
 service:
   pipelines:
@@ -85,6 +85,7 @@ service:
       receivers: [spanmetrics]
       exporters: [prometheus]
 ```
+
 * Define a remote PromQL-compatible storage under `metric_backends:` in the `jaeger_storage` extension:
 ```yaml
 extensions:
@@ -97,6 +98,7 @@ extensions:
         prometheus:
           endpoint: http://prometheus:9090
 ```
+
 * Reference this metrics store in the `jaeger_query` extension:
 ```yaml
 extensions:
@@ -104,6 +106,7 @@ extensions:
     traces: some_trace_storage
     metrics_storage: some_metrics_storage
 ```
+
 * Set the `monitor.menuEnabled=true` property in the [Jaeger UI configuration](../../deployment/frontend-ui/#monitor).
 
 ## Architecture
@@ -194,7 +197,8 @@ Two metric names will be created:
       `le >= span duration` will be incremented for each span.
 
 The following formula aims to provide some guidance on the number of new time series created:
-```
+
+```go
 num_status_codes * num_span_kinds * (1 + num_latency_buckets) * num_operations
 
 Where:
@@ -204,7 +208,8 @@ Where:
 ```
 
 Plugging those numbers in, assuming default configuration:
-```
+
+```go
 max = 324 * num_operations
 typical = 72 * num_operations
 ```
@@ -246,7 +251,7 @@ service:
       address: 0.0.0.0:8888
 ```
 
-The `/metrics` endpoint on this port can be used to check if UI queries for SPM data are successful: 
+The `/metrics` endpoint on this port can be used to check if UI queries for SPM data are successful:
 
 ```shell
 curl -s http://jaeger:8888/metrics | grep jaeger_metricstore
@@ -320,8 +325,9 @@ service:
 ```
 
 Outputting logs that resemble the following (formatted for readability):
-```
-2024-11-26T19:09:43.152Z debug metricsstore/reader.go:258 Prometheus query results	
+
+```json
+2024-11-26T19:09:43.152Z debug metricsstore/reader.go:258 Prometheus query results
 {
   "kind": "extension",
   "name": "jaeger_storage",
@@ -367,9 +373,11 @@ If there are error spans appearing in Jaeger, but no corresponding error metrics
   the `status.code` label in the metric that the span should belong to.
 - If there are no `status.code` labels, check the OpenTelemetry Collector
   configuration file, particularly for the presence of the following configuration:
+
   ```yaml
   exclude_dimensions: ['status.code']
   ```
+
   This label is used by Jaeger to determine if a request is erroneous.
 
 ### Inspect the OpenTelemetry Collector

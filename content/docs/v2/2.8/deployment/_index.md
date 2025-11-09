@@ -20,7 +20,7 @@ Jaeger backend is released as a single binary or container image (see [Downloads
 
 An explicit YAML configuration file must be provided via the `--config` command line argument (see [Configuration](./configuration/)). When running in a container, the path to the config file must be mapped into the container file system (the `-v ...` mapping below):
 
-```
+```sh
 docker run --rm --name jaeger \
   -p 16686:16686 \
   -p 4317:4317 \

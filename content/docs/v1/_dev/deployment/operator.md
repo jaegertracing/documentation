@@ -76,6 +76,7 @@ To install the operator, run:
 kubectl create namespace observability # <1>
 kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/download/v{{< currentVersion >}}/jaeger-operator.yaml -n observability # <2>
 ```
+
 <1> This creates the namespace used by default in the deployment files. If you want to install the Jaeger operator in a different namespace, you must edit the deployment files to change `observability` to the desired namespace value.
 
 <2> This installs the "Custom Resource Definition" for the `apiVersion: jaegertracing.io/v1`
@@ -105,6 +106,7 @@ oc login -u <privileged user>
 oc new-project observability # <1>
 oc create -f https://github.com/jaegertracing/jaeger-operator/releases/download/v{{< currentVersion >}}/jaeger-operator.yaml -n observability # <2>
 ```
+
 <1> This creates the namespace used by default in the deployment files. If you want to install the Jaeger operator in a different namespace, you must edit the deployment files to change `observability` to the desired namespace value.
 
 <2> This installs the "Custom Resource Definition" for the `apiVersion: jaegertracing.io/v1`
@@ -340,6 +342,7 @@ spec:
       es:
         server-urls: http://elasticsearch:9200
 ```
+
 <1> Identifies the Kafka configuration used by **jaeger-collector** to produce the messages, and by **jaeger-ingester** to consume them.
 
 <2> The deadlock interval is disabled by default (set to 0), to prevent **jaeger-ingester** from being terminated when no messages arrive. It can be configured to specify the number of minutes to wait for a message before terminating.
@@ -459,6 +462,7 @@ spec:
     cassandraCreateSchema:
       enabled: false # <1>
 ```
+
 <1> Defaults to `true`
 
 Further aspects of the batch job can be configured as well. An example with all the possible options is shown below:
@@ -480,6 +484,7 @@ spec:
       datacenter: "datacenter3"
       mode: "test"
 ```
+
 <1> The same works for `production` and `streaming`.
 
 <2> These options are for the regular Jaeger components, like `collector` and `query`.
@@ -575,6 +580,7 @@ spec:
           memory: 4Gi
       redundancyPolicy: ZeroRedundancy # <4>
 ```
+
 <1> Number of Elasticsearch nodes. For high availability use at least 3 nodes. Do not use 2 nodes as "split brain" problem can happen.
 
 <2> Persistent storage configuration. In this case AWS `gp2` with `5Gi` size. When omitted `emptyDir` is used. Elasticsearch operator provisions `PersistentVolumeClaim` and `PersistentVolume` which are not removed with Jaeger instance. The same volumes can be mounted if Jaeger with the same name and namespace is crated. Some storages might fail in `default` namespace because of OpenShift SCC policy.
@@ -782,6 +788,7 @@ spec:
       - name: myapp
         image: acme/myapp:myversion
 ```
+
 <1> Either `"true"` (as string) or the Jaeger instance name.
 
 A complete sample deployment is available at [`deploy/examples/business-application-injected-sidecar.yaml`](https://github.com/jaegertracing/jaeger-operator/blob/main/examples/business-application-injected-sidecar.yaml).
@@ -906,6 +913,7 @@ oc create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/mai
 oc adm policy add-scc-to-user daemonset-with-hostport -z jaeger-agent-daemonset # <3>
 oc apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/main/examples/openshift/agent-as-daemonset.yaml # <4>
 ```
+
 <1> The `SecurityContextConstraints` with the `allowHostPorts` policy
 
 <2> The `ServiceAccount` to be used by **jaeger-agent**
@@ -1427,7 +1435,7 @@ spec:
 
 The Jaeger Operator starts a Prometheus-compatible endpoint on `0.0.0.0:8383/metrics` with internal metrics that can be used to monitor the process. Interesting metrics to watch are:
 
-```
+```ini
 # Total number of reconciliations and their outcomes (cumulative)
 controller_runtime_reconcile_total{controller="jaeger-controller",result="error"}
 controller_runtime_reconcile_total{controller="jaeger-controller",result="success"}

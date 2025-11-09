@@ -10,7 +10,7 @@ If you are new to distributed tracing, please check the [Introduction](../) page
 
 The easiest way to run Jaeger is by starting it in a container:
 
-```
+```sh
 docker run --rm --name jaeger \
   -p 16686:16686 \
   -p 4317:4317 \
@@ -37,7 +37,7 @@ Using this application you can:
 - Find sources of latency and lack of concurrency.
 - Explore highly contextualized logging.
 - Use baggage propagation to diagnose inter-request contention (queueing) and time spent in a service.
-- Use open source libraries from `opentelemetry-contrib` to get vendor-neutral instrumentation 
+- Use open source libraries from `opentelemetry-contrib` to get vendor-neutral instrumentation
 for free.
 
 We recommend running Jaeger and HotROD together via `docker compose`:

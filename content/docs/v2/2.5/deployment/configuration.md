@@ -32,7 +32,8 @@ One category of environment variables that Jaeger v2 does recognize automaticall
 ### Config Overrides
 
 Another way to override certain config values is by passing them via `--set` command line flags:
-```
+
+```sh
 --set=receivers.otlp.protocols.grpc.endpoint=0.0.0.0:4317
 ```
 

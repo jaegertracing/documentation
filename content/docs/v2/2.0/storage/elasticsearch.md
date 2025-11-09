@@ -145,11 +145,13 @@ To enable ILM support:
   }
   EOF
   ```
+
 * Run elasticsearch initializer with `ES_USE_ILM=true`:
 
   ```shell
   docker run -it --rm --net=host -e ES_USE_ILM=true jaegertracing/jaeger-es-rollover:latest init http://localhost:9200 # <1>
   ```
+
   <1> If you need to initialize archive storage, add `-e ARCHIVE=true`.
 
   {{< info >}}
