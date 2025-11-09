@@ -1,7 +1,7 @@
 {{ $dockerImages := site.Data.download.docker }}
 {{ $latestV1       := site.Params.binariesLatest }}
 {{ $latestV2       := site.Params.binariesLatestV2 }}
-<table>
+<table class="align-middle mw-100">
   <thead>
     <tr>
       <th>Image</th>
@@ -23,24 +23,25 @@
     <tr>
       <td>
         <a href="{{ $link }}">
-          {{ $image }}
+          {{- $image -}}
         </a>
       </td>
       <td>
-        {{ $major }}
+        {{ $bg_kind := cond (eq $major "v2") "primary" "secondary" -}}
+        <span class="badge bg-{{ $bg_kind }}">{{ $major }}</span>
       </td>
       <td>
         {{ if .until }}
-          <p>Deprecated 💀💤❌. Latest available version is {{ $latestImg }}.</p>
+          <p class="text-danger fw-semibold mb-2">
+            Deprecated 💀💤❌. Latest available version is {{ $latestImg }}.
+          </p>
         {{ end }}
-        <p>{{ .description | markdownify }}</p>
+        <div class="mb-2">
+          {{ .description | markdownify }}
+        </div>
         {{ if not .external }}
-        <div>
-          <code><span class="is-dollar">$</span> docker run cr.jaegertracing.io/{{ $fullImage }}:{{ $latestImg }} --help</code>
-        </div>
-        <div>
-          <code><span class="is-dollar">$</span> podman run cr.jaegertracing.io/{{ $fullImage }}:{{ $latestImg }} --help</code>
-        </div>
+        <code class="d-block mb-1">$ docker run cr.jaegertracing.io/{{ $fullImage }}:{{ $latestImg }} --help</code>
+        <code class="d-block">$ podman run cr.jaegertracing.io/{{ $fullImage }}:{{ $latestImg }} --help</code>
         {{ end }}
       </td>
       <td>
