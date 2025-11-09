@@ -1,0 +1,22 @@
+{{/* Docsy override. TODO: upstream (most of) these changes to Docsy. */ -}}
+
+<footer class="td-footer row d-print-none">
+  <div class="td-footer-parts-wrapper container-fluid">
+    <div class="row mx-md-2">
+      <div class="td-footer__left col-6 col-sm-4 order-1">
+        {{ partial "footer/left.html"  . }}
+      </div>
+      {{- /* Trim WS */ -}}
+      <div class="td-footer__center col-12 col-sm-4 pt-3 order-3 order-sm-2">
+        {{ partial "footer/center.html"  . }}
+      </div>
+      {{- /* Trim WS */ -}}
+      <div class="td-footer__right col-6 col-sm-4 order-2">
+        {{ partial "footer/right.html"  . }}
+      </div>
+    </div>
+  </div>
+  <div class="td-footer__copyright-wrapper">
+    {{ partial "footer/copyright.html" . }}
+  </div>
+</footer>

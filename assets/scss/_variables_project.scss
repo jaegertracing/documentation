@@ -1,5 +1,7 @@
 /* Docsy-delta full file override: we're not tracking changes to the Docsy file of the same name. */
 
+@import 'variables_forward_project';
+
 $td-enable-google-fonts: true;
 $td-google-font-name: 'Pontano+Sans';
 $td-google-font-family: 'Pontano+Sans:300,300i,400,400i,700,700i';
@@ -30,3 +32,16 @@ $jaeger-blue-dark: #1a4767;
 // Theme colors
 $primary: $jaeger-teal;
 $secondary: $jaeger-blue;
+
+$primary-dark: lighten($primary, 22%);
+
+// BS overrides
+
+// Dark-mode support - improve contrast
+
+// TODO: see if we can increase $min-contrast-ratio from the 4.5 default without
+// getting SCSS errors.
+//
+// $min-contrast-ratio: 4.7;
+
+$link-color-dark: tint-color($primary-dark, $link-shade-percentage);

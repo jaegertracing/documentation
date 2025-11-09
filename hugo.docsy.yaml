@@ -31,12 +31,16 @@ imaging:
   quality: 75
   anchor: smart
 
+# cSpell:ignore nbsp pagelinks
 params:
   copyright:
     authors: >-
-      Jaeger Authors | Docs [CC BY
-      4.0](https://creativecommons.org/licenses/by/4.0)
+      Jaeger Authors | Docs
+      [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0) |
+      [Privacy](https://www.linuxfoundation.org/legal/privacy-policy) |
+      [Trademark](https://www.linuxfoundation.org/trademark-usage)
     from_year: 2017
+    to_year: present
 
   github_repo: https://github.com/jaegertracing/documentation
   # github_branch: main
@@ -55,21 +59,33 @@ params:
     sidebar_search_disable: true
     sidebar_root_enabled: true
 
-  # links: # CUSTOMIZE
-  #   user:
-  #     - name: User mailing list
-  #       url: https://groups.google.com/forum/#!forum/docsy-users
-  #       icon: fa-solid fa-envelope
-  #       desc: Sign up for Docsy announcements
-  #     - name: Stack Overflow
-  #       url: https://stackoverflow.com/questions/tagged/docsy
-  #       icon: fa-brands fa-stack-overflow
-  #       desc: Practical questions and curated answers
-  #   developer:
-  #     - name: GitHub
-  #       url: https://github.com/chalin/docsy-starter
-  #       icon: fa-brands fa-github
-  #       desc: GitHub repository for this starter
+  links:
+    user:
+      - name: GitHub
+        url: https://github.com/jaegertracing
+        icon: fa-brands fa-github
+        desc: Follow Jaeger on GitHub
+      - name: X (Twitter)
+        url: https://twitter.com/JaegerTracing
+        icon: fa-brands fa-x-twitter
+        desc: Latest Jaeger news and updates
+      - name: Community Slack
+        url: https://cloud-native.slack.com/archives/CGG7NFUJ3
+        icon: fa-brands fa-slack
+        desc: Chat with the Jaeger community
+      - name: Medium
+        url: https://medium.com/jaegertracing
+        icon: fa-brands fa-medium
+        desc: Articles and release announcements
+    developer:
+      - name: Via chat
+        url: /get-in-touch/#via-chat
+      - name: Project video meetings
+        url: /get-in-touch/#project-video-meetings
+      - name: Report issues on GitHub
+        url: /get-in-touch/#open-issue-or-discussion-on-github
+      - name: Report a security issue
+        url: /report-security-issue/
 
 menu:
   main:
