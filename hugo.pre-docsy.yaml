@@ -2,10 +2,9 @@
 
 module:
   mounts:
-    - source: pre-docsy-content/_index.md
-      target: content/_index.md
-
-    - excludeFiles: docs/v?
+    - excludeFiles:
+        - docs/v?
+        - _index.md
       source: content
       target: content
 
@@ -20,3 +19,6 @@ module:
       target: content/docs
     - source: content/docs/v2/_dev
       target: content/docs/next-release-v2
+
+    - source: pre-docsy-content/_index.md
+      target: content/_index.md

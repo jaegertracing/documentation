@@ -1,4 +1,5 @@
 {{/* cSpell:ignore plainify submatch */ -}}
+
 {{ $rss := resources.Get "data/medium.xml" | transform.Unmarshal -}}
 {{ $channel := dict -}}
 
@@ -18,15 +19,15 @@
 {{ $posts := first 3 $rss.channel.item -}}
 {{ $imgLinks := slice -}}
 
-{{ range $k, $v := $posts -}}
+{{- range $k, $v := $posts -}}
   {{ $imgLink := $defaultImgLink -}}
   {{ $content := index $v "encoded" -}}
   {{ with strings.FindRESubmatch "<img[^>]+src=\"([^\">]+)\"" $content 1 -}}
-    {{ if . -}} {{/* If image found in post */}}
-      {{ $findMatch := index . 0 -}} {{/* Choose the first image */}}
+    {{ if . -}} {{/* If image found in post */ -}}
+      {{ $findMatch := index . 0 -}} {{/* Choose the first image */ -}}
       {{ with $findMatch -}}
         {{ $findGroup := index . 1 -}}
-        {{ if . -}} {{/* If src link found */}}
+        {{ if . -}} {{/* If src link found */ -}}
           {{ $imgLink = $findGroup -}}
         {{ end -}}
       {{ end -}}
@@ -38,7 +39,7 @@
 
 <div class="article-list">
 
-{{- range $idx, $val := $posts }}
+{{- range $idx, $val := $posts -}}
 {{ $link    := .link -}}
 {{ $img     := (index $imgLinks $idx) -}}
 {{ $title   := .title | plainify -}}
@@ -58,10 +59,12 @@
     <p class="card-text">{{ $summary }}</p>
   </div>
   <div class="card-footer text-body-secondary">
-    {{ $author }}
+    {{- $author -}}
     <span class="float-end small">{{ $date }}</span>
   </div>
 </div>
 {{ end -}}
 
 </div>
+
+{{- /**/ -}}
