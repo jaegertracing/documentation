@@ -4,9 +4,18 @@
     $decoration: $link-decoration-opposite
   );
 
+  .heading-as-display {
+    @extend .display-4;
+    @extend .mb-5;
+    @extend .text-center;
+  }
+
   .td-navbar {
-    // cSpell:ignore onscroll
+    &:not(.navbar-bg-onscroll) {
+      backdrop-filter: blur(8px);
+    }
     &.navbar-bg-onscroll {
+      // cSpell:ignore onscroll
       background-color: $jaeger-blue-dark !important;
     }
   }
@@ -44,9 +53,20 @@
     }
   }
 
+  .features-4 i {
+    color: $primary;
+    @at-root [data-bs-theme='dark'] & {
+      color: $secondary;
+    }
+  }
+
   .articles-section {
     h1 {
       @extend .h1-for-simple-section;
+
+      a {
+        text-decoration: $link-decoration-opposite;
+      }
     }
   }
 
@@ -106,12 +126,18 @@
   .td-box--white a {
     color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
   }
-}
 
-// Dark-mode tuning
-[data-bs-theme='dark'] .td-home .td-box--200 {
-  // Keep the light link color in 200 boxes since the background stays light.
-  h1 a {
-    color: $link-color;
+  .td-heading-self-link {
+    display: none;
+  }
+
+  // Dark-mode tuning
+  @at-root [data-bs-theme='dark'] & {
+    .td-box--200 {
+      // Keep the light link color in td 200 boxes since the background stays light.
+      h1 a {
+        color: $link-color;
+      }
+    }
   }
 }

@@ -124,7 +124,7 @@ module:
 
     # So Docsy can find the images
     # TODO(Docsy): move files once pre-docsy.yaml is removed
-    - source: static/img/jaeger-vector.svg
+    - source: static/img/jaeger-icon-reverse-color.svg
       target: assets/icons/logo.svg
     - source: static/img/hero-background.jpg
       target: content/hero-background.jpg
