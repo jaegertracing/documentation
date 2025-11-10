@@ -6,7 +6,7 @@ hasparent: true
 
 ## Introduction
 
-* Supported OpenSearch versions: 1.x, 2.x
+* Supported OpenSearch versions: 1.x, 2.x, 3.x
 
 OpenSearch maintains API compatibility between versions and remains compatible primarily with Elasticsearch v7.10.2 this version compatibility is automatically retrieved from root/ping endpoint. Based on this version Jaeger uses compatible index mappings and OpenSearch REST API.
 
