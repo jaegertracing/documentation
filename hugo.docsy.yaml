@@ -43,10 +43,10 @@ params:
     to_year: present
 
   github_repo: https://github.com/jaegertracing/documentation
-  # github_branch: main
-  # version_menu: Versions
-  version_menu_pagelinks: true
   # TODO: Lunr config
+  # Version menu: note some param are set via cascade
+  version_menu_pagelinks: true
+  version_menu_max_versions: 5
 
   privacy_policy: https://www.linuxfoundation.org/legal/privacy-policy
 

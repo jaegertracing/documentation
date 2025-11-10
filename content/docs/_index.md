@@ -8,7 +8,7 @@ cascade:
   params:
     version_menu: Versions
   target:
-    path: '/docs/**'
+    path: '/docs**'
 ---
 
 {{% doc_versions %}}
