@@ -36,10 +36,17 @@ __docsy_wksp_helper() {
   esac
 
   echo "${script_name}:"
+  echo "  > NETLIFY: '${NETLIFY}'"
+  echo "  > WKSP: '${WKSP}' - current value"
 
   if [ -n "${WKSP:-}" ] && [ "$force_override" = false ]; then
-    echo "  > WKSP is already set to '${WKSP}', skipping."
-    return 0
+    if [ -n "${NETLIFY:-}" ]; then
+      echo "  > WARNING: WKSP is set to '${WKSP}' in NETLIFY environment. Ignoring current value."
+      unset WKSP
+    else
+      echo "  > WKSP is set to '${WKSP}' in non-NETLIFY environment. Using current value."
+      return 0
+    fi
   fi
 
   branch="${HEAD:-$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)}"
@@ -72,6 +79,8 @@ __docsy_wksp_helper() {
       fi
       ;;
   esac
+
+  echo "  > WKSP: ${WKSP}"
 }
 
 # Store caller positional parameters so we can restore them after sourcing.
