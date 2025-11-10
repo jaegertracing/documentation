@@ -27,8 +27,8 @@
         </a>
       </td>
       <td>
-        {{ $bg_kind := cond (eq $major "v2") "primary" "secondary" -}}
-        <span class="badge bg-{{ $bg_kind }}">{{ $major }}</span>
+        {{ $bg_kind := cond (eq $major "v2") "success" "secondary" -}}
+        <span class="badge fs-6 bg-{{ $bg_kind }} text-bg-{{ $bg_kind }}">{{ $major }}</span>
       </td>
       <td>
         {{ if .until }}

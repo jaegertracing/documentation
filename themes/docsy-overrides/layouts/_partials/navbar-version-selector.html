@@ -63,7 +63,7 @@
   {{ $_href := printf "/docs/%s/%s" $version $path -}}
   {{ $href := partial "docs/lookup-page" (slice $dot $_href) -}}
   {{ $title := "" -}}
-  {{ with site.GetPage $href -}}
+  {{ with and $href (site.GetPage $href) -}}
     {{ $title = .Params.linkTitle -}}
   {{ end -}}
   <li> {{- /**/ -}}

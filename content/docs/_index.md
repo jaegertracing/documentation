@@ -9,6 +9,7 @@ cascade:
     version_menu: Versions
   target:
     path: '/docs**'
+body_class: td-no-left-sidebar
 ---
 
 {{% doc_versions %}}
