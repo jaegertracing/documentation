@@ -1,0 +1,11 @@
+{{ if .Page.Params.show_banner -}}
+  {{ $announcements := site.GetPage "announcements" -}}
+  {{ if $announcements -}}
+    <div class="jaeger-banner-list">
+      {{ range $announcements.RegularPages -}}
+      {{ $bodyClass := .Page.Params.body_class -}}
+      <div class="jaeger-banner {{ $bodyClass }}">{{ .Content }}</div>
+      {{ end -}}
+    </div>
+  {{ end -}}
+{{ end -}}

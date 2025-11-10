@@ -1,11 +1,12 @@
 @import 'links';
 
+@import 'banner';
+@import 'dark';
 @import 'download';
 @import 'footer';
 @import 'home';
-@import 'td/code-dark';
-@import 'dark';
 @import 'navbar';
+@import 'td/code-dark';
 
 .td-content {
   @include set-elt-hover-and-focus(
