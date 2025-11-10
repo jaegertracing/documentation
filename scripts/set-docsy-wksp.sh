@@ -46,7 +46,13 @@ __docsy_wksp_helper() {
 
   echo "  > branch: $branch"
 
-  WKSP_FOR_DOCSY="dev.yaml,hugo.docsy"
+  WKSP_FOR_DOCSY_ONLY="docsy"
+  WKSP_FOR_DOCSY_DEV="dev.yaml,hugo.docsy"
+
+  WKSP_FOR_DOCSY="${WKSP_FOR_DOCSY_ONLY}"
+  if [ -z "${NETLIFY:-}" ]; then
+    WKSP_FOR_DOCSY="${WKSP_FOR_DOCSY_DEV}"
+  fi
 
   case "$branch" in
     docsy*)

@@ -33,9 +33,10 @@
     {{ end -}}
 
     {{ $dot := . -}}
+    {{ $maxVersPerMajorVers := sub (.Site.Params.version_menu_max_versions | default 99999) 1 -}}
     {{ range $versions := (slice
-        (.Site.Params.versionsV2 | append "2.dev")
-        (.Site.Params.versions | append "1.dev")
+        ((first $maxVersPerMajorVers .Site.Params.versionsV2) | append "2.dev")
+        ((first $maxVersPerMajorVers .Site.Params.versions) | append "1.dev")
       ) -}}
       {{ template "navbar-version-list" (dict
             "dot" $dot
@@ -43,7 +44,13 @@
             "path" $path
             "relPermalink" $relPermalink)
       -}}
-    {{ end -}}
+      <li><hr class="dropdown-divider"></li>
+      {{ end -}}
+    <li>
+      <a class="dropdown-item" href="/docs/">
+        All versions
+      </a>
+    </li>
   </ul>
 </div>
 
@@ -55,6 +62,10 @@
   {{ $isLatest := eq $i 0 -}}
   {{ $_href := printf "/docs/%s/%s" $version $path -}}
   {{ $href := partial "docs/lookup-page" (slice $dot $_href) -}}
+  {{ $title := "" -}}
+  {{ with site.GetPage $href -}}
+    {{ $title = .Params.linkTitle -}}
+  {{ end -}}
   <li> {{- /**/ -}}
     <a class="dropdown-item
         {{- if eq $href $relPermalink }} active{{ end -}}
@@ -62,7 +73,7 @@
         "
       {{ with $href }} href="{{ . }}" {{- end -}}
       >
-      {{- $version -}}{{ if $isLatest }} (latest){{ end -}}
+      {{- $title | default $version -}}
     </a>
     {{- /**/ -}}
   </li>
