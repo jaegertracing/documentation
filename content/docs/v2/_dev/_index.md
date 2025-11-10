@@ -1,6 +1,6 @@
 ---
 title: Introduction
-linkTitle: 2.dev
+linkTitle: 2.dev (preview)
 weight: -200 # == -200 - MINOR
 children:
 - title: Getting Started
