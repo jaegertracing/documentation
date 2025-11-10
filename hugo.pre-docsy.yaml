@@ -1,10 +1,14 @@
-# Pre-Docsy config
+# cSpell:ignore docsy
 
 module:
   mounts:
+    - source: content/_index-pre-docsy.md
+      target: content/_index.md
+
     - excludeFiles:
-        - docs/v?
         - _index.md
+        - _index-pre-docsy.md
+        - docs/v?
       source: content
       target: content
 
@@ -19,6 +23,3 @@ module:
       target: content/docs
     - source: content/docs/v2/_dev
       target: content/docs/next-release-v2
-
-    - source: pre-docsy-content/_index.md
-      target: content/_index.md
