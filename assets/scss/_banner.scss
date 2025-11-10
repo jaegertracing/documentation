@@ -47,9 +47,12 @@
 
 // Custom banner styles below this point
 
+// cSpell:ignore ukraine
 .ukraine-banner {
-  // cSpell:ignore ukraine
-  @extend .bg-info-subtle;
+  // Color banner background, not the announcement page itself
+  &.jaeger-banner {
+    @extend .bg-info-subtle;
+  }
 
   img {
     // display: inline !important;
