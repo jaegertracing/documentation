@@ -99,7 +99,9 @@ menu:
 module:
   mounts:
     # Content
-    - excludeFiles: docs/v?
+    - excludeFiles:
+        - docs/v?
+        - _index-pre-docsy.md
       source: content
       target: content
 
