@@ -9,44 +9,64 @@
 # https://docs.netlify.com/build/configure-builds/environment-variables/#git-metadata
 
 __docsy_wksp_helper() {
-  local script_name="set-docsy-wksp"
-  local force_override=false
+  __sdw_local_force_override=false
 
   __usage() {
-    echo "Usage: ${script_name} [-f|--force]"
+    echo "Usage: ${__sdw_local_script_name} [-f|--force]"
     echo "  -f|--force: force override of WKSP"
     echo "  -h|--help: show this help message"
   }
 
-  case "${1:-}" in
+  __sdw_local_first_arg="${1:-}"
+
+  if [ "$#" -gt 1 ]; then
+    shift
+    echo "WARNING: ignoring additional arguments: $*"
+  fi
+
+  case "$__sdw_local_first_arg" in
     '') ;;
     -f|--force)
-      force_override=true
-      shift
+      __sdw_local_force_override=true
       ;;
     -h|--help)
       __usage
+      unset __sdw_local_force_override __sdw_local_first_arg
       return 0
       ;;
     *)
-      echo "ERROR: unexpected argument: '$1'"
+      echo "ERROR: unexpected argument: '$__sdw_local_first_arg'"
       __usage
+      unset __sdw_local_force_override __sdw_local_first_arg
       return 1
       ;;
   esac
 
-  echo "${script_name}:"
+  echo "set-docsy-wksp.sh:"
+  echo "  > NETLIFY: '${NETLIFY}'"
+  echo "  > WKSP: '${WKSP}' - current value"
 
-  if [ -n "${WKSP:-}" ] && [ "$force_override" = false ]; then
-    echo "  > WKSP is already set to '${WKSP}', skipping."
-    return 0
+  if [ -n "${WKSP:-}" ] && [ "$__sdw_local_force_override" = false ]; then
+    if [ -n "${NETLIFY:-}" ]; then
+      echo "  > WARNING: WKSP is set to '${WKSP}' in NETLIFY environment. Ignoring current value."
+      unset WKSP
+    else
+      echo "  > WKSP is set to '${WKSP}' in non-NETLIFY environment. Using current value."
+      return 0
+    fi
   fi
 
   branch="${HEAD:-$(git rev-parse --abbrev-ref HEAD 2>/dev/null || true)}"
 
   echo "  > branch: $branch"
 
-  WKSP_FOR_DOCSY="dev.yaml,hugo.docsy"
+  WKSP_FOR_DOCSY_ONLY="docsy"
+  WKSP_FOR_DOCSY_DEV="dev.yaml,hugo.docsy"
+
+  WKSP_FOR_DOCSY="${WKSP_FOR_DOCSY_ONLY}"
+  if [ -z "${NETLIFY:-}" ]; then
+    WKSP_FOR_DOCSY="${WKSP_FOR_DOCSY_DEV}"
+  fi
 
   case "$branch" in
     docsy*)
@@ -57,7 +77,7 @@ __docsy_wksp_helper() {
     *)
       echo "  Main workspace identified."
       if [ -n "${WKSP:-}" ]; then
-        if [ "$force_override" = true ]; then
+        if [ "$__sdw_local_force_override" = true ]; then
           echo "  Clearing WKSP for main workspace (forced)."
         else
           echo "  WARNING: WKSP was preset to ${WKSP}; resetting for main workspace."
@@ -66,6 +86,10 @@ __docsy_wksp_helper() {
       fi
       ;;
   esac
+
+  echo "  > WKSP: ${WKSP}"
+
+  unset __sdw_local_script_name __sdw_local_force_override __sdw_local_first_arg
 }
 
 # Store caller positional parameters so we can restore them after sourcing.

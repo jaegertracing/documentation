@@ -343,6 +343,22 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-07T21:30:01.591123-05:00"
   },
+  "https://github.com/jaegertracing/documentation/tree/main/content/_index-pre-docsy.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-10T11:03:10.990258-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/announcements/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-10T09:22:45.456314-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/announcements/kubecon-na.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-10T09:22:46.151914-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/announcements/ukraine.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-10T09:22:45.741348-05:00"
+  },
   "https://github.com/jaegertracing/documentation/tree/main/content/demo.md": {
     "StatusCode": 206,
     "LastSeen": "2025-11-07T21:30:01.335347-05:00"
@@ -3094,6 +3110,10 @@
   "https://opentelemetry.io/": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:48:57.375102-04:00"
+  },
+  "https://opentelemetry.io/blog/2025/kubecon-na/": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-10T09:26:16.649673-05:00"
   },
   "https://opentelemetry.io/docs/collector/": {
     "StatusCode": 206,
