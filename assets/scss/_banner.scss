@@ -1,0 +1,63 @@
+.jaeger-banner-list {
+  $margin-x-offset: -15px;
+
+  background: var(--td-pre-bg);
+  color: var(--bs-body-color);
+  text-align: center;
+
+  // Undo td-content padding-left
+  margin-left: $margin-x-offset;
+  margin-right: $margin-x-offset;
+
+  @include media-breakpoint-up(md) {
+    position: fixed;
+    width: calc(100% - 2 * #{$margin-x-offset});
+    z-index: 31;
+    top: 4rem;
+  }
+
+  & p {
+    padding: 0.5rem;
+    margin-bottom: initial;
+  }
+}
+
+// Banner styles (none at the moment)
+// .jaeger-banner {
+// }
+
+// Banner-clone ghost styles
+.banner-ghost {
+  display: none; // Ghost is hidden by default
+
+  @include media-breakpoint-up(md) {
+    // Render ghost (so it takes up space) when navbar is not position:fixed
+    display: block !important;
+    opacity: 0; // To debug, set to value > 0, like 0.2
+  }
+
+  .jaeger-banner-list {
+    position: static;
+    > * {
+      // Useful to tell clone from original when debugging
+      background-color: red !important;
+    }
+  }
+}
+
+// Custom banner styles below this point
+
+.ukraine-banner {
+  // cSpell:ignore ukraine
+  @extend .bg-info-subtle;
+
+  img {
+    // display: inline !important;
+    width: 30px;
+    // margin-right: 16px;
+    // border-style: none;
+    // vertical-align: middle;
+    margin-top: -0.3rem;
+    margin-right: 0.5rem;
+  }
+}

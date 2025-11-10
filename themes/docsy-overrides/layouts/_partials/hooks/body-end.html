@@ -1,3 +1,47 @@
 {{ if .IsHome -}}
   <div class="built-timestamp d-none">Built: {{ now.Format "2006-01-02 15:04 MST" }}</div>
 {{ end -}}
+
+<script>
+(() => {
+  const cloneIntoTarget = ({ targetSelector, sourceSelector, ghostClass = 'element-ghost', position = 'first' }) => {
+    const target = document.querySelector(targetSelector);
+    const source = document.querySelector(sourceSelector);
+    if (!target || !source) return;
+
+    const existing = target.querySelector(`.${ghostClass}`);
+    if (existing) {
+      existing.remove();
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.className = ghostClass;
+    wrapper.appendChild(source.cloneNode(true));
+
+    if (position === 'last') {
+      target.appendChild(wrapper);
+    } else {
+      target.insertBefore(wrapper, target.firstChild);
+    }
+  };
+
+  const scheduleClone = (options) => {
+    const run = () => cloneIntoTarget(options);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run, { once: true });
+    } else {
+      run();
+    }
+  };
+
+  // Export the function for external use (which we don't need for now)
+  // window.scheduleClone = scheduleClone;
+
+  scheduleClone({
+    targetSelector: '#td-cover-block-0',
+    sourceSelector: '.jaeger-banner-list',
+    ghostClass: 'banner-ghost',
+  });
+})();
+</script>
+

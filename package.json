@@ -11,7 +11,7 @@
     "_docsy-dev": "WKSP=\"dev.yaml,hugo.docsy\" npm run ",
     "_filename-error": "echo 'ERROR: the following files violate naming conventions; fix using: `npm run fix:filenames`'; echo; npm run -s _ls-bad-filenames; exit 1",
     "_filenames-to-kebab-case": "find assets content -name '*_*' ! -name '[_.]*' -exec sh -c 'mv \"$1\" \"${1//_/-}\"' _ {} \\;",
-    "_hugo-dev": ". ./scripts/set-docsy-wksp.sh && npm run _hugo -- -e dev -DFE --logLevel info",
+    "_hugo-dev": ". ./scripts/set-docsy-wksp.sh && npm run _hugo -- -e dev -DF --logLevel info",
     "_hugo-dev-test": "npm run _hugo-dev -- --templateMetrics --templateMetricsHints",
     "_hugo": "set -x; hugo --cleanDestinationDir --config hugo.yaml,hugo.${WKSP-pre-docsy}.yaml",
     "_ls-bad-filenames": "find assets content -name '*_*' ! -name '[_.]*'",
