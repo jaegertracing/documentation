@@ -1,5 +1,6 @@
 ---
 title: Getting in touch
+type: docs
 weight: 20
 ---
 
