@@ -1,5 +1,6 @@
 ---
 title: Get Involved
+type: docs
 weight: 10
 ---
 
