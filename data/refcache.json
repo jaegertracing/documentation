@@ -1915,6 +1915,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-07T21:30:03.741064-05:00"
   },
+  "https://github.com/jaegertracing/documentation/tree/main/content/search.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-11T13:50:02.003821-05:00"
+  },
   "https://github.com/jaegertracing/helm-charts/tree/v2": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:45.676975-04:00"
