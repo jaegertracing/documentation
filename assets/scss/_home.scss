@@ -25,7 +25,12 @@
     @extend .justify-content-center;
     @extend .flex-wrap;
     gap: 1rem;
-    margin-top: 1.5rem;
+    margin-top: map-get($spacers, 5);
+
+    @include media-breakpoint-up(lg) {
+      margin-top: map-get($spacers, 6);
+      margin-bottom: map-get($spacers, 5);
+    }
 
     .btn-lg {
       min-width: 12rem;

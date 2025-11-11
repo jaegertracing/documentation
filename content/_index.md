@@ -16,7 +16,7 @@ cSpell:ignore: Dosu
 
 <div class="display-6">{{% param tagline %}}</div>
 
-<div class="hero-cta mt-5">
+<div class="hero-cta">
   <a class="btn btn-lg btn-secondary" href="docs/{{% param latestV2 %}}/getting-started/">
     <i class="fas fa-play-circle"></i>
     Get started
