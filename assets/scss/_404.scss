@@ -1,0 +1,26 @@
+.jaeger-404-logo {
+  display: inline-block;
+  max-width: 14rem;
+
+  .logo-dark {
+    display: none;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  @include media-breakpoint-up(md) {
+    max-width: 16rem;
+  }
+
+  @at-root [data-bs-theme='dark'] & {
+    .logo-light {
+      display: none;
+    }
+
+    .logo-dark {
+      display: initial;
+    }
+  }
+}
