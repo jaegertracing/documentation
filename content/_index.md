@@ -120,4 +120,6 @@ contributions of software and infrastructure from [1Password], [Codecov.io],
 [oci]: https://www.oracle.com/cloud
 [scarf]: https://www.scarf.sh/
 
+<div class="built-timestamp d-none">Built: {{ now.Format "2006-01-02 15:04 MST" }}.</div>
+
 {{% /blocks/section %}}
