@@ -45,7 +45,7 @@ params:
   github_repo: https://github.com/jaegertracing/documentation
   gcs_engine_id: c196bdeb585f04a00
 
-  # TODO: Lunr config
+  robots: true
   # Version menu: note some param are set via cascade
   version_menu_pagelinks: true
   version_menu_max_versions: 5
