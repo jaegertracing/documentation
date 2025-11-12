@@ -1,9 +1,11 @@
 #!/bin/sh
 #
 # Helper script to set the WKSP environment variable based on the current
-# branch. Any branch name starting with "docsy" is considered a Docsy workspace.
+# branch. Any branch is considered a Docsy workspace, unless is starts with
+# "legacy", "bulma", or "pre-docsy", in which case the workspace is set to
+# "pre-docsy".
 #
-# cSpell:ignore docsy wksp RPROMPT
+# cSpell:ignore docsy wksp bulma
 
 # For Netlify docs on meta vars, see
 # https://docs.netlify.com/build/configure-builds/environment-variables/#git-metadata
@@ -69,21 +71,34 @@ __docsy_wksp_helper() {
   fi
 
   case "$branch" in
+    legacy*|bulma*|pre-docsy*)
+      echo "  Legacy workspace identified."
+      if [ -n "${WKSP:-}" ]; then
+        if [ "$__sdw_local_force_override" = true ]; then
+          echo "  Clearing WKSP for legacy workspace (forced)."
+        else
+          echo "  Clearing WKSP for legacy workspace."
+        fi
+      fi
+      unset WKSP
+      ;;
     docsy*)
       echo "  Docsy workspace identified."
       export WKSP="${WKSP_FOR_DOCSY}"
-      echo "  Setting WKSP to ${WKSP}"
+      echo "  WKSP=${WKSP}"
       ;;
     *)
-      echo "  Main workspace identified."
+      echo "  Defaulting to Docsy workspace."
       if [ -n "${WKSP:-}" ]; then
         if [ "$__sdw_local_force_override" = true ]; then
           echo "  Clearing WKSP for main workspace (forced)."
         else
-          echo "  WARNING: WKSP was preset to ${WKSP}; resetting for main workspace."
+          echo "  WARNING: WKSP was preset to ${WKSP}; resetting for default workspace."
         fi
         unset WKSP
       fi
+      export WKSP="${WKSP_FOR_DOCSY}"
+      echo "  WKSP=${WKSP}"
       ;;
   esac
 
