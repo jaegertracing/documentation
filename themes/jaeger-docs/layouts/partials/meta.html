@@ -14,6 +14,13 @@
 {{ end }}
 {{ hugo.Generator }}
 
+{{ $isProduction := or true hugo.IsProduction -}}
+{{ if and $isProduction (ne (.Param "robots") false) -}}
+<meta name="robots" content="index, follow">
+{{ else -}}
+<meta name="robots" content="noindex, nofollow">
+{{ end -}}
+
 <!-- OpenGraph metadata -->
 <meta property="og:title" content="{{ .Title }}" />
 <meta property="og:url" content="{{ .Permalink }}" data-proofer-ignore>

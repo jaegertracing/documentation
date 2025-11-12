@@ -5,7 +5,8 @@ cSpell:ignore: ukraine
 body_class: ukraine-banner
 ---
 
-![Ukraine flag][] We stand with our friends and colleagues in Ukraine. Consider [supporting Ukraine][].
+![Ukraine flag][] We stand with our friends and colleagues in Ukraine. To assist
+in their time of need, visit [Support Ukraine][].
 
 [Ukraine flag]: /img/ukraine_flag.svg
-[supporting Ukraine]: https://war.ukraine.ua/support-ukraine/
+[Support Ukraine]: https://war.ukraine.ua/support-ukraine/

@@ -2,6 +2,7 @@
 title: Download
 aliases: [/docs/download]
 menu: {main: { weight: 30 }}
+type: docs
 body_class: td-no-left-sidebar
 ---
 

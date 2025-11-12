@@ -1,0 +1,8 @@
+$spacers: map-merge(
+  $spacers,
+  (
+    6: $spacer * 4.5,
+    7: $spacer * 6,
+    8: $spacer * 7.5,
+  )
+);

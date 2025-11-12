@@ -1,0 +1,22 @@
+{{ define "main" -}}
+<div class="td-content py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <div class="jaeger-404-logo mb-4">
+          <img src="{{ "img/jaeger-icon-color.png" | relURL }}" class="img-fluid logo-light" alt="Jaeger logo">
+          <img src="{{ "img/jaeger-icon-reverse-color.svg" | relURL }}" class="img-fluid logo-dark" alt="Jaeger logo">
+        </div>
+        <h1 class="display-5 mb-3">We couldn’t <span class="fst-italic">trace</span> that page!</h1>
+        <p class="lead mb-4">
+          Get it? The URL you followed doesn’t exist. Try the following instead.
+        </p>
+        <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+          <a class="btn btn-primary btn-lg px-4" href="{{ "/" | relURL }}">Home</a>
+          <a class="btn btn-outline-primary btn-lg px-4" href="{{ "/docs/" | relURL }}">Docs</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{- end }}
