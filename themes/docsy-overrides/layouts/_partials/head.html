@@ -41,8 +41,7 @@
 {{ end -}}
 
 {{ $outputFormat := partial "outputformat.html" . -}}
-{{/* TEMPORARY: Enable index,follow for non-production builds */ -}}
-{{ $isProduction := or true hugo.IsProduction -}}
+{{ $isProduction := hugo.IsProduction -}}
 {{ if and $isProduction (ne $outputFormat "print") (ne (.Param "robots") false) -}}
 <meta name="robots" content="index, follow">
 {{ else -}}
