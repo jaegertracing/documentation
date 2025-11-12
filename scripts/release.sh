@@ -64,9 +64,13 @@ update_links() {
   versionMajor=$(echo "${versionMajorMinor}" | ${SED} 's/\.[[:digit:]]*$//')
   versionMinor=$(echo "${versionMajorMinor}" | ${SED} 's/[[:digit:]]\.//')
   weight=$(printf "%d%02d\n" "$versionMajor" "$versionMinor")
-  # Remove "(latest)" from the linkTitle of current versions
-  find ./content/docs/v${versionMajor}/ -name "_index.md" -type f \
-    -exec ${SED} -i -e "s|^\(linkTitle: [12]\.[0-9]*\) (latest)$|\1|g" {} \;
+  # For the _index.md of the current versions, edit the front matter to:
+  # - Set 'robots' to `false` in the cascade
+  # - Remove "(latest)" from the linkTitle
+  find ./content/docs/v${versionMajor}/ \
+    -name "_index.md" -not -path "*/_dev/*" -not -path "*/${versionMajorMinor}/*" \
+    -type f -exec ${SED} -i \
+      -e "s|^\(cascade:\s*{\s*robots:\s*\)true\(.*\)$|\1false\2|g; s|^\(linkTitle: [12]\.[0-9]*\) (latest)$|\1|g" {} \;
   # loop over a collection of string patterns
   for pattern in \
     "s|https://github.com/jaegertracing/jaeger/tree/main|https://github.com/jaegertracing/jaeger/tree/${versionTag}|g" \
