@@ -3,11 +3,13 @@ use strict;
 use warnings;
 use Getopt::Long;
 
-my $pr = 1021;
-GetOptions( 'pr=i' => \$pr ) or die "Usage: $0 [--pr NUM] [path ...]\n";
+my $baseURL = 'https://www.jaegertracing.io';
+# Another example:'https://deploy-preview-1021--jaegertracing.netlify.app';
+
+GetOptions( 'url=s' => \$baseURL ) or die "Usage: $0 [--url URL] [path ...]\n";
 
 my @inputs = @ARGV ? @ARGV : ('/');
-my $base = sprintf 'https://deploy-preview-%d--jaegertracing.netlify.app', $pr;
+my $base = $baseURL;
 
 for my $input (@inputs) {
     my $url = $input =~ m{^https?://}i ? $input
