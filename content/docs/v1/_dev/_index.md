@@ -7,6 +7,7 @@ children:
   url: features
 sidebar_root_for: self
 aliases: [next-release]
+cascade: { robots: true }
 ---
 
 Welcome to Jaeger's documentation portal! Below, you'll find information for beginners and experienced Jaeger users.
