@@ -42,7 +42,7 @@ params:
   twitterhandle: JaegerTracing
   mediumhandle: jaegertracing
   opengraphimage: img/jaeger-icon-color.png
-  robots: true
+  robots: false
 
   latest: "1.74"
   binariesLatest: "1.74.0"
