@@ -4,10 +4,7 @@ linkTitle: Jaeger
 description: Monitor and troubleshoot workflows in complex distributed systems
 show_banner: true
 cascade:
-  type: docs # Only when using Docsy theme
-  params:
-    versions: false
-type: home
+  versions: false
 cSpell:ignore: Dosu
 ---
 
@@ -16,7 +13,7 @@ cSpell:ignore: Dosu
 
 <div class="display-6">{{% param tagline %}}</div>
 
-<div class="hero-cta mt-5">
+<div class="hero-cta">
   <a class="btn btn-lg btn-secondary" href="docs/{{% param latestV2 %}}/getting-started/">
     <i class="fas fa-play-circle"></i>
     Get started
@@ -122,5 +119,7 @@ contributions of software and infrastructure from [1Password], [Codecov.io],
 [netlify]: https://www.netlify.com/
 [oci]: https://www.oracle.com/cloud
 [scarf]: https://www.scarf.sh/
+
+<div class="built-timestamp d-none">Built: {{ now.Format "2006-01-02 15:04 MST" }}.</div>
 
 {{% /blocks/section %}}

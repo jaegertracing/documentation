@@ -3,10 +3,11 @@
 
 [data-bs-theme='dark'] {
   // ---------------------------------------------------------------------------
-  // $primary has poor contrast in dark mode. Tweak it.
+  // Adjust theme colors that have poor contrast in dark mode.
   // ---------------------------------------------------------------------------
 
   --bs-primary: #{$primary-dark};
+  --bs-success: #{lighten($success, 16%)};
 
   // NOTE (@chalin): I don't think we're using btn-outline styles at the moment,
   // but I'm leaving this here as an example of how to adjust the color.

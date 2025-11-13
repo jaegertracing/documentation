@@ -16,7 +16,7 @@
 
 {{ $defaultImgLink := "/img/jaeger-icon-color.png" -}}
 {{ warnf "Loaded RSS feed for: %v" $rss.channel.title -}}
-{{ $posts := first 3 $rss.channel.item -}}
+{{ $posts := first 10 $rss.channel.item -}}
 {{ $imgLinks := slice -}}
 
 {{- range $k, $v := $posts -}}

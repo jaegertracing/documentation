@@ -1,5 +1,5 @@
 # Docsy config
-# cSpell:ignore basetheme docsy github goldmark linkify
+# cSpell:ignore basetheme docsy favicons github goldmark linkify
 
 enableGitInfo: true
 
@@ -43,7 +43,9 @@ params:
     to_year: present
 
   github_repo: https://github.com/jaegertracing/documentation
-  # TODO: Lunr config
+  gcs_engine_id: c196bdeb585f04a00
+
+  robots: true
   # Version menu: note some param are set via cascade
   version_menu_pagelinks: true
   version_menu_max_versions: 5

@@ -20,5 +20,8 @@
       {{ partial "footer.html" . }}
     </div>
     {{ partialCached "scripts.html" . }}
+    {{ if .IsHome -}}
+      <div class="built-timestamp d-none">Built: {{ now.Format "2006-01-02 15:04 MST" }}</div>
+    {{- end }}
   </body>
 </html>
