@@ -1,7 +1,7 @@
 ---
 title: Mentorships
 cascade:
-  type: docs
+  # type: docs
 weight: 30
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Getting in touch
-type: docs
+# type: docs
 weight: 20
 ---
 

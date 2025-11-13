@@ -1,6 +1,6 @@
 ---
 title: Roadmap
-type: docs
+# type: docs
 weight: 70
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Report a security issue
-type: docs
+# type: docs
 weight: 80
 ---
 

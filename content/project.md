@@ -2,7 +2,7 @@
 title: Project
 toc_hide: true
 menu: {main: { weight: 50 }}
-type: docs
+# type: docs
 ---
 
 Welcome to the Jaeger project! Below you will find information about the project

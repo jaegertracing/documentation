@@ -1,6 +1,6 @@
 ---
 title: News
-type: docs
+# type: docs
 weight: 60
 ---
 

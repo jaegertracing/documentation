@@ -2,7 +2,7 @@
 title: Live Demo
 linkTitle: Demo
 menu: {main: { weight: 20 }}
-type: docs
+# type: docs
 ---
 
 Jaeger Live Demo consists of:
