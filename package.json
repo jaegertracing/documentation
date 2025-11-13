@@ -8,12 +8,12 @@
     "_check:links": "make --keep-going check-links",
     "_commit:public": "HASH=$(git rev-parse --short main); cd public && git add -A && git commit -m \"Site at $HASH\"",
     "_diff:check": "git diff --name-only --exit-code",
-    "_docsy-dev": "WKSP=\"dev.yaml,hugo.docsy\" npm run ",
+    "_docsy-dev": "WKSP=\"hugo.dev.yaml\" npm run ",
     "_filename-error": "echo 'ERROR: the following files violate naming conventions; fix using: `npm run fix:filenames`'; echo; npm run -s _ls-bad-filenames; exit 1",
     "_filenames-to-kebab-case": "find assets content -name '*_*' ! -name '[_.]*' -exec sh -c 'mv \"$1\" \"${1//_/-}\"' _ {} \\;",
     "_hugo-dev": "npm run _hugo -- -e dev -DF --logLevel info",
     "_hugo-dev-test": "npm run _hugo-dev -- --templateMetrics --templateMetricsHints",
-    "_hugo": ". ./scripts/set-docsy-wksp.sh && hugo --cleanDestinationDir --config hugo.yaml,hugo.${WKSP-pre-docsy}.yaml",
+    "_hugo": ". ./scripts/set-wksp.sh && hugo --cleanDestinationDir --config hugo.yaml${WKSP:+,${WKSP}}",
     "_ls-bad-filenames": "find assets content -name '*_*' ! -name '[_.]*'",
     "_serve": "npm run _hugo-dev -- serve --minify --disableFastRender --renderToMemory",
     "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
@@ -38,18 +38,14 @@
     "serve": "npm run _serve --",
     "test:only": "npm run check:format && npm run check:links:all",
     "test": "echo 'RUNNING fix AND test ...'; npm run fix && npm run test:only",
-    "update:packages": "npx npm-check-updates -u --dep 'prod,dev,optional,peer' '!bulma*'"
+    "update:packages": "npx npm-check-updates -u"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "cspell": "^9.3.0",
+    "autoprefixer": "^10.4.22",
+    "cspell": "^9.3.1",
     "docsy": "github:google/docsy#0e2ad1805410641c8c6200ded66af5d7b69bc847",
     "postcss-cli": "^11.0.1",
     "prettier": "^3.6.2"
-  },
-  "optionalDependencies": {
-    "bulma": "0.7.1",
-    "bulma-tooltip": "2.0.2"
   },
   "peerDependencies": {
     "hugo-extended": "0.152.2",
@@ -58,7 +54,7 @@
   },
   "enginesComment": "Ensure that engines.node value stays consistent with the project's .nvmrc",
   "engines": {
-    "node": "24.x"
+    "node": ">= 22"
   },
   "gitHubActionCacheKey": "2024-07-02 - change this key to force cache refresh",
   "private": true,
