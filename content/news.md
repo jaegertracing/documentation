@@ -61,4 +61,4 @@ a public beta. Try it out by running the complete backend along with a sample
 application, to generate interesting traces.
 
 We hope that other organizations find Jaeger to be a useful tool, and we welcome contributions.
-Keep up to date by subscribing to our [mailing list](https://groups.google.com/forum/#!forum/jaeger-tracing).
+Keep up to date by subscribing to our [mailing list](https://groups.google.com/g/jaeger-tracing).

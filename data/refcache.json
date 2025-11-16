@@ -2771,9 +2771,9 @@
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:49:35.026101-04:00"
   },
-  "https://groups.google.com/forum/#!forum/jaeger-tracing": {
+  "https://groups.google.com/g/jaeger-tracing": {
     "StatusCode": 200,
-    "LastSeen": "2025-05-31T11:48:43.856238-04:00"
+    "LastSeen": "2025-11-16T11:41:08.105959-05:00"
   },
   "https://hotrod.demo.jaegertracing.io": {
     "StatusCode": 206,

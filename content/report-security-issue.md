@@ -93,5 +93,5 @@ oF+qZY4uEvqFvYo8
 -----END PGP PUBLIC KEY BLOCK-----
 ```
 
-[mailing-list]: https://groups.google.com/forum/#!forum/jaeger-tracing
+[mailing-list]: https://groups.google.com/g/jaeger-tracing
 [slack-room]: https://cloud-native.slack.com/archives/CGG7NFUJ3
