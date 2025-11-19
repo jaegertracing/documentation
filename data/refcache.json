@@ -211,6 +211,38 @@
     "StatusCode": 206,
     "LastSeen": "2025-10-05T08:06:30.693368-04:00"
   },
+  "https://download.jaegertracing.io/v1.75.0.tar.gz": {
+    "StatusCode": 200,
+    "LastSeen": "2025-11-19T10:36:21.616508-05:00"
+  },
+  "https://download.jaegertracing.io/v1.75.0.zip": {
+    "StatusCode": 200,
+    "LastSeen": "2025-11-19T10:36:21.230188-05:00"
+  },
+  "https://download.jaegertracing.io/v1.75.0/jaeger-1.75.0-darwin-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:21.826058-05:00"
+  },
+  "https://download.jaegertracing.io/v1.75.0/jaeger-1.75.0-linux-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:22.075173-05:00"
+  },
+  "https://download.jaegertracing.io/v1.75.0/jaeger-1.75.0-windows-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:22.327812-05:00"
+  },
+  "https://download.jaegertracing.io/v1.75.0/jaeger-2.12.0-darwin-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:20.393539-05:00"
+  },
+  "https://download.jaegertracing.io/v1.75.0/jaeger-2.12.0-linux-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:20.629758-05:00"
+  },
+  "https://download.jaegertracing.io/v1.75.0/jaeger-2.12.0-windows-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:20.846876-05:00"
+  },
   "https://en.wikipedia.org/wiki/Clock_skew": {
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:49:42.955992-04:00"
@@ -826,6 +858,122 @@
   "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.11/storage/opensearch.md": {
     "StatusCode": 206,
     "LastSeen": "2025-11-07T21:30:28.134019-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:04.475046-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/architecture/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:14.517622-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/architecture/apis.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:14.069697-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/architecture/sampling.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:15.52016-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/architecture/spm.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:13.612487-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/architecture/terminology.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:14.962819-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/deployment/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:17.104984-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/deployment/configuration.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:16.632221-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/deployment/frontend-ui.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:17.786126-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/deployment/kubernetes.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:19.209838-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/deployment/security.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:18.316261-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/deployment/windows.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:18.768546-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/external-guides/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:12.509252-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/external-guides/migration.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:13.074756-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/faq.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:04.965778-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/features.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:05.599952-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/getting-started.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:16.102006-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/operations/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:06.639178-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/operations/monitoring.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:08.255812-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/operations/performance-tuning.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:07.228201-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/operations/tools.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:06.107581-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/operations/troubleshooting.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:07.749501-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/storage/_index.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:08.843288-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/storage/badger.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:12.057983-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/storage/cassandra.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:11.025662-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/storage/elasticsearch.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:11.483583-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/storage/kafka.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:10.465782-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/storage/memory.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:09.32388-05:00"
+  },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.12/storage/opensearch.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:09.79812-05:00"
   },
   "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.2/_index.md": {
     "StatusCode": 206,
@@ -2410,6 +2558,10 @@
   "https://github.com/jaegertracing/jaeger/releases/tag/v1.74.0": {
     "StatusCode": 206,
     "LastSeen": "2025-10-05T08:06:29.410499-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/releases/tag/v1.75.0": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T10:36:19.603645-05:00"
   },
   "https://github.com/jaegertracing/jaeger/security/advisories": {
     "StatusCode": 206,
