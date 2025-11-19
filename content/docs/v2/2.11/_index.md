@@ -8,8 +8,6 @@ children:
 - title: Features
   url: features
 sidebar_root_for: self
-# Only for latest version
-menu: {main: { name: Docs, weight: 10 }}
 cascade: { robots: false }
 ---
 

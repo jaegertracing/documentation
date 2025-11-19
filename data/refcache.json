@@ -399,6 +399,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-07T21:30:22.866125-05:00"
   },
+  "https://github.com/jaegertracing/documentation/tree/main/content/docs/latest.md": {
+    "StatusCode": 206,
+    "LastSeen": "2025-11-19T11:46:41.347932-05:00"
+  },
   "https://github.com/jaegertracing/documentation/tree/main/content/docs/v2/2.0/_index.md": {
     "StatusCode": 206,
     "LastSeen": "2025-11-08T13:50:13.531606-05:00"

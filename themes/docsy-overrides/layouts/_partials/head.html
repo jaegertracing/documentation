@@ -47,6 +47,9 @@
 {{ else -}}
 <meta name="robots" content="noindex, nofollow">
 {{ end -}}
+{{ if and (not $isProduction) .Params.metaRefreshToLatest -}}
+<meta http-equiv="refresh" content="0; url=/docs/{{ site.Params.latestV2 }}/">
+{{ end -}}
 
 {{ partialCached "favicons.html" . }}
 <title>
