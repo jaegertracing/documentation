@@ -1,16 +1,15 @@
 ---
 title: Introduction
-linkTitle: 2.11
-weight: -211
+linkTitle: 2.12 (latest)
+weight: -212
 children:
 - title: Getting Started
   url: getting-started
 - title: Features
   url: features
 sidebar_root_for: self
-# Only for latest version
-menu: {main: { name: Docs, weight: 10 }}
-cascade: { robots: false }
+aliases: [next-release-v2]
+cascade: { robots: true }
 ---
 
 Welcome to Jaeger's documentation! Below, you'll find information for beginners and experienced Jaeger users. If you cannot find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch/).
