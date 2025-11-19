@@ -5,15 +5,15 @@
 {{ $latestV2 := site.Params.latestv2 -}}
 {{ $latest   := $latestV2 -}}
 
-/docs/latest     /docs/{{ $latest }}
-/docs/latest/*   /docs/{{ $latest }}/:splat
+/docs/latest     /docs/{{ $latest }}  !302
+/docs/latest/*   /docs/{{ $latest }}/:splat  !302
 
 {{ range (slice "get-in-touch" "roadmap" "news" "report-security-issue") }}
 /docs/{{ . }}     /{{ . }}
 {{ end -}}
 
 {{ range (slice "cli" "operator") }}
-/docs/{{ . }}     /docs/{{ $latestV1 }}/{{ . }}
+/docs/{{ . }}     /docs/{{ $latestV1 }}/{{ . }}  !302
 {{ end -}}
 
 {{/* Get all sections and pages directly under v2/_dev */}}
@@ -29,7 +29,7 @@
 {{ $pages = $pages | uniq | sort -}}
 
 {{ range $pages }}
-/docs/{{ . }}     /docs/{{ $latest }}/{{ . }}
+/docs/{{ . }}     /docs/{{ $latest }}/{{ . }}  !302
 {{ end -}}
 
 {{/* Generic redirect rule generation */ -}}
