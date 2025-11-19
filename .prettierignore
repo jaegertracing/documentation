@@ -2,11 +2,12 @@
 /CONTRIBUTING.md
 /README.md
 /RELEASE.md
-/content
+/content/**/*.*
 !/content/_index.md
+!/content/docs/latest.md
 /data
 /hugo.yaml
 /layouts
-# TODO: tempoary, remove /scripts
+# TODO: temporary, remove /scripts
 /scripts
 /themes
