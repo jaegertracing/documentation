@@ -1,0 +1,50 @@
+{
+    "tools": [
+        "jaeger-all-in-one",
+        "jaeger-collector",
+        "jaeger-ingester",
+        "jaeger-query"
+    ],
+    "jaeger-all-in-one": {
+        "storage": [
+            "cassandra",
+            "elasticsearch",
+            "memory",
+            "badger"
+        ],
+        "sampling": [],
+        "metrics-storage": [
+          "prometheus"
+        ]
+    },
+    "jaeger-collector": {
+        "storage": [
+            "cassandra",
+            "elasticsearch",
+            "kafka"
+        ],
+        "sampling": [
+            "adaptive",
+            "file"
+        ],
+        "metrics-storage": []
+    },
+    "jaeger-ingester": {
+        "storage": [
+            "cassandra",
+            "elasticsearch"
+        ],
+        "sampling": [],
+        "metrics-storage": []
+    },
+    "jaeger-query": {
+        "storage": [
+            "cassandra",
+            "elasticsearch"
+        ],
+        "sampling": [],
+        "metrics-storage": [
+            "prometheus"
+        ]
+    }
+}
