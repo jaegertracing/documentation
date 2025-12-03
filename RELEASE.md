@@ -15,6 +15,7 @@ To create a new release:
   - Manually trigger the [Release](https://github.com/jaegertracing/documentation/actions/workflows/ci-release.yml) workflow on GitHub. It will ask for v1 and v2 version numbers (same versions as in the main Jaeger repo), and create a [pull request](https://github.com/jaegertracing/documentation/pulls) with the documentation changes.
   - Approve and merge that pull request.
   - Because the site is statically generated, the release is completed after the merge.
+  - The workflow is using a bot token which expires every year, see https://github.com/jaegertracing/documentation/issues/1037.
 
 <!-- END_CHECKLIST -->
 
