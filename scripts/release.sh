@@ -129,5 +129,9 @@ if [[ "$DRY_RUN" != "false" ]]; then
   echo "Not committing changes because DRY_RUN=$DRY_RUN"
   exit 0
 fi
+
+BRANCH="gen-release-${version_v2}/${version_v1}"
+git checkout -b "$BRANCH" # branch is needed for GH CLI
 git add ${config_file} ./content/docs/ ./data/cli/
-git commit -m "Release ${version_v2}/${version_v1}" -s
+git commit -s -m "Release ${version_v2}/${version_v1}"
+git push origin HEAD:"$BRANCH" # branch has to be on remote before PR is opened
