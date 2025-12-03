@@ -27,7 +27,7 @@ jobs:
       with:
         submodules: true
         # Use the bot's PAT instead of the default GITHUB_TOKEN
-        token: ${{ secrets.JAEGERTRACINGBOT_GITHUB_TOKEN }}
+        token: ${{ secrets.JAEGERTRACINGBOT_PAT }}
         ref: main
 
     - uses: actions/setup-python@v6
@@ -47,4 +47,4 @@ jobs:
         export TAG="${{ inputs.version_v2 }}/${{ inputs.version_v1 }}"
         gh pr create --base main --title "Release ${TAG}" --body "Release ${TAG}. This PR is created from CI and is part of the release process."
       env:
-        GH_TOKEN: ${{ secrets.JAEGERTRACINGBOT_GITHUB_TOKEN }}
+        GH_TOKEN: ${{ secrets.JAEGERTRACINGBOT_PAT }}
