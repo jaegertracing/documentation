@@ -1,0 +1,16 @@
+name: jaeger-collector completion
+synopsis: Generate the autocompletion script for the specified shell
+description: |
+    Generate the autocompletion script for jaeger-collector for the specified shell.
+    See each sub-command's help for details on how to use the generated script.
+options:
+    - name: help
+      shorthand: h
+      default_value: "false"
+      usage: help for completion
+see_also:
+    - jaeger-collector - Jaeger collector receives and stores traces
+    - jaeger-collector completion bash - Generate the autocompletion script for bash
+    - jaeger-collector completion fish - Generate the autocompletion script for fish
+    - jaeger-collector completion powershell - Generate the autocompletion script for powershell
+    - jaeger-collector completion zsh - Generate the autocompletion script for zsh
