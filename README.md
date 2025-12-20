@@ -1,4 +1,4 @@
-[![Netlify Status][netifly-img]][netifly]
+[![Netlify Status][netlify-img]][netlify]
 
 # Jaeger website
 
@@ -130,6 +130,6 @@ This converts the XML into structured data at build time, allowing full control 
 [Apache 2.0 License](./LICENSE).
 
 [slides]: https://docs.google.com/presentation/d/1JuurkQn03z0BbOEAViJBEE_WWMj6JQUML-uJm7zizvI/
-[netifly-img]: https://api.netlify.com/api/v1/badges/d2b1a1ea-f454-4ba8-990c-cc469c959556/deploy-status
-[netifly]: https://app.netlify.com/sites/jaegertracing/deploys
+[netlify-img]: https://api.netlify.com/api/v1/badges/d2b1a1ea-f454-4ba8-990c-cc469c959556/deploy-status
+[netlify]: https://app.netlify.com/sites/jaegertracing/deploys
 [htmltest]: https://github.com/wjdp/htmltest

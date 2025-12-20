@@ -108,6 +108,7 @@ ratelimiting
 rawhtml
 readyz
 rebalance
+refcache
 reindex
 reindexing
 rolebinding
