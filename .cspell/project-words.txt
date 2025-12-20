@@ -1,3 +1,4 @@
+agentic
 alertmanager
 autoscale
 autoscaler
