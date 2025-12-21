@@ -205,6 +205,14 @@ Field | Description
 
 This will display trace IDs like: `1a2b3c4d5e6f` (instead of the full 32-character ID or default 7-character).
 
+## Tag Search Behavior
+
+Jaeger UI indexes and allows searching for tags (attributes) whose values are strings. If a tag is set as an array (for example, `["value"]`), it may be indexed as a JSON string (e.g., `'["value"]'`). In such cases, you would need to search for the exact JSON string representation in the UI. This can be confusing, as searching for just `value` will not match an array-valued tag; you must search for the full JSON string (e.g., `'["value"]'`).
+
+For best results, ensure that important tags (such as request IDs) are set as strings, not arrays, when instrumenting your applications. This will make them directly searchable in the Jaeger UI.
+
+> See also: [GitHub issue #7333](https://github.com/jaegertracing/jaeger/issues/7333) for more context on this behavior.
+
 ## Embedded Mode
 
 Starting with version 1.9, Jaeger UI provides an "embedded" layout mode which is intended to support integrating Jaeger UI into other applications. Currently (as of `v0`), the approach taken is to remove various UI elements from the page to make the UI better suited for space-constrained layouts.
