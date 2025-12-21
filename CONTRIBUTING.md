@@ -1,136 +1,154 @@
-# How to Contribute to Jaeger
+# How to Contribute to Jaeger Documentation
 
 We'd love your help!
 
-Jaeger is [Apache 2.0 licensed](LICENSE) and accepts contributions via GitHub
-pull requests. This document outlines some of the conventions on development
-workflow, commit message formatting, contact points and other resources to make
-it easier to get your contribution accepted.
+General contributing guidelines are described in [Contributing Guidelines](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md).
 
-We gratefully welcome improvements to documentation as well as to code.
+This document provides documentation-specific guidance to complement the general guidelines.
 
-# Certificate of Origin
+## Setup
 
-By contributing to this project you agree to the [Developer Certificate of
-Origin](https://developercertificate.org/) (DCO). This document was created
-by the Linux Kernel community and is a simple statement that you, as a
-contributor, have the legal right to make the contribution. See the [DCO](DCO)
-file for details.
+Install the active LTS version of Node.js, then run the following command from the directory of this repo's clone:
 
-## Making A Change
-
-*Before making any significant changes, please [open an
-issue](https://github.com/jaegertracing/documentation/issues).* Discussing your proposed
-changes ahead of time will make the contribution process smooth for everyone.
-
-Once we've discussed your changes and you've made your updates, then open your PR. Your
-pull request is most likely to be accepted if it:
-
-* Has a [good commit message](https://chris.beams.io/posts/git-commit/):
-    * Separate subject from body with a blank line
-    * Limit the subject line to 50 characters
-    * Capitalize the subject line
-    * Do not end the subject line with a period
-    * Use the imperative mood in the subject line
-    * Wrap the body at 72 characters
-    * Use the body to explain _what_ and _why_ instead of _how_
-* Uses the active voice (vs. [passive voice](https://www.grammarly.com/blog/a-scary-easy-way-to-help-you-find-passive-voice/)) to make it clear when the user has to perform an action and when actions happen automatically.
-* Has been spellchecked and uses proper [grammar](https://www.grammarly.com/).
-* Has been written in plain language and avoids jargon. Remember, the people reading the documentation know much less about the project than you do.
-* Each commit must be signed by the author ([see below](#sign-your-work)).
-
-Once the PR is approved and merged, [readthedocs][project] will automatically rebuild the docs.
-
-## License
-
-By contributing your code, you agree to license your contribution under the terms
-of the [Apache License](LICENSE).
-
-If you are adding a new file it should have a header like below.  The easiest
-way to add such header is to run `make fmt`.
-
-```go
-// Copyright (c) 2018 The Jaeger Authors.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+```bash
+npm install
 ```
 
-## Sign your work
+This will also install the required version of Hugo.
 
-The sign-off is a simple line at the end of the explanation for the
-patch, which certifies that you wrote it or otherwise have the right to
-pass it on as an open-source patch.  The rules are pretty simple: if you
-can certify the below (from
-[developercertificate.org](http://developercertificate.org/)):
+## Running the site locally
 
-```text
-Developer Certificate of Origin
-Version 1.1
+If you want to develop the site locally, you can run a single command (assuming that you've run the [setup](#setup)):
 
-Copyright (C) 2004, 2006 The Linux Foundation and its contributors.
-660 York Street, Suite 102,
-San Francisco, CA 94110 USA
-
-Everyone is permitted to copy and distribute verbatim copies of this
-license document, but changing it is not allowed.
-
-
-Developer's Certificate of Origin 1.1
-
-By making a contribution to this project, I certify that:
-
-(a) The contribution was created in whole or in part by me and I
-    have the right to submit it under the open source license
-    indicated in the file; or
-
-(b) The contribution is based upon previous work that, to the best
-    of my knowledge, is covered under an appropriate open source
-    license and I have the right under that license to submit that
-    work with modifications, whether created in whole or in part
-    by me, under the same open source license (unless I am
-    permitted to submit under a different license), as indicated
-    in the file; or
-
-(c) The contribution was provided directly to me by some other
-    person who certified (a), (b) or (c) and I have not modified
-    it.
-
-(d) I understand and agree that this project and the contribution
-    are public and that a record of the contribution (including all
-    personal information I submit with it, including my sign-off) is
-    maintained indefinitely and may be redistributed consistent with
-    this project or the open source license(s) involved.
+```bash
+make develop
 ```
 
-then you just add a line to every git commit message:
+Alternatively, you can run `npm run serve`.
 
-    Signed-off-by: Joe Smith <joe@gmail.com>
+These commands will start up a local server on [localhost:1313](http://localhost:1313). When you make changes to either the content of the website (in [`content`](content)) *or* to the Sass and JavaScript assets of the page (in [`themes/jaeger-docs/assets`](themes/jaeger-docs/assets)), the browser will automatically update to reflect those changes (usually in under one second).
 
-using your real name (sorry, no pseudonyms or anonymous contributions.)
+## Building the site
 
-You can add the sign off when creating the git commit via `git commit -s`. Make sure that your name and email are correctly configured in your local git and match those on your GitHub account:
+Build the site:
 
-```shell
-git config --global user.name "FIRST_NAME LAST_NAME"
-git config --global user.email "MY_NAME@example.com"
+```bash
+npm run build
+# or for production
+npm run build:production
 ```
 
-If you want signing to be automatic you can set up some aliases:
+## Code Quality Checks
 
-```shell
-git config --add alias.amend "commit -s --amend"
-git config --add alias.c "commit -s"
+Before committing changes, run:
+
+- **Format check**: `npm run check:format`
+- **Format fix**: `npm run fix:format`
+- **Spell check**: `npm run check:spelling`
+- **Link check (internal)**: `npm run check:links:internal`
+- **Link check (all)**: `npm run check:links:all`
+- **Filename conventions**: `npm run check:filenames`
+
+## Content Guidelines
+
+### File Naming
+
+- Use kebab-case (hyphen-separated) for all content and asset files
+- Avoid underscores in filenames (except for files starting with `_` or `.`)
+- Fix naming violations with: `npm run fix:filenames`
+
+### Documentation Style
+
+When contributing to the Jaeger documentation, please ensure your changes:
+
+* Use the active voice (vs. [passive voice](https://www.grammarly.com/blog/a-scary-easy-way-to-help-you-find-passive-voice/)) to make it clear when the user has to perform an action and when actions happen automatically.
+* Have been spellchecked and use proper [grammar](https://www.grammarly.com/).
+* Are written in plain language and avoid jargon. Remember, the people reading the documentation know much less about the project than you do.
+
+### Admonitions
+
+There are five admonition types available for the Jaeger docs:
+
+Admonition type | Color
+:---------------|:-----
+`info` | blue
+`success` | green
+`danger` | red
+`warning` | yellow
+`requirement` | purple
+
+Here's an example:
+
+```markdown
+{{< danger >}}
+We do not recommend that you do this!
+{{< /danger >}}
 ```
 
-[project]: https://readthedocs.org/projects/jaeger/
+You can also add titles:
+
+```markdown
+{{< success title="New feature" >}}
+Jaeger now supports a new thing that you definitely want.
+{{< /success >}}
+```
+
+## Making Documentation Changes
+
+*Before making any significant changes, please [open an issue](https://github.com/jaegertracing/documentation/issues).* Discussing your proposed changes ahead of time will make the contribution process smooth for everyone.
+
+### Versioning
+
+The most recent versions of the documentation files are under `content/docs/v2/_dev/`. When a new release is published, the files are copied to `content/docs/v2/<version>/` as a snapthot, and any version-specific references are updated, for example by using a concrete version in the commands like `docker run cr.jaegertracing.io/jaegertracing/jaeger:2.13.0`.
+
+When making new documentation changes, they should be made in the `_dev` directory, for the next release. If some fixes require backporting to docs for existing versions, they can be updated as well. Usually it is a good practice to apply the change to at least `_dev` and the most recent version, such that the live website is updated right away, without waiting for the new release.
+
+### Adding New Pages
+
+When adding new documentation pages:
+
+1. Create the content file in the appropriate directory under `content/`
+2. Add a corresponding redirect entry to `themes/jaeger-docs/layouts/index.redirects`
+3. Test locally to ensure the page renders correctly
+
+### Updating Diagrams
+
+Diagrams included in the documentation are created in a shared [Google Slides document](https://docs.google.com/presentation/d/1JuurkQn03z0BbOEAViJBEE_WWMj6JQUML-uJm7zizvI/):
+
+1. Copy the diagram to a new slide deck
+2. Export as SVG
+3. Include both the SVG and a link to your slide deck in the PR
+4. Maintainers will update the main deck upon merge
+
+### Updating Blog Feed
+
+The homepage displays the latest blog posts from the [Jaeger Medium blog](https://medium.com/jaegertracing). To avoid network calls during builds and to ensure fast, reliable local development, the Medium RSS feed is downloaded and stored as a static XML file `assets/data/medium.xml`. The Hugo site reads and parses this file using `resources.Get` and `transform.Unmarshal`. This converts the XML into structured data at build time, allowing full control over the content without relying on live network requests.
+
+To update the feed:
+
+```bash
+make fetch-blog-feed
+```
+
+Ensure you have [`curl`](https://curl.se/) installed on your system to download the RSS feed.
+
+After updating the feed, commit the changes:
+```bash
+git add assets/data/medium.xml
+git commit -m "chore: update Medium blog feed"
+```
+
+### Generating Roadmap
+
+To update the roadmap page `content/roadmap.md`:
+
+```bash
+make fetch-roadmap
+```
+
+This script fetches issues from the [GitHub project board](https://github.com/orgs/jaegertracing/projects/4/views/1?layout=table), extracts the required information, and generates the roadmap document. Requires `GITHUB_TOKEN` environment variable or `~/.github_token` file. Personal tokens can be created at https://github.com/settings/tokens/.
+
+## Publishing
+
+Once the PR is approved and merged, [Netlify](https://www.netlify.com/) will automatically rebuild and deploy the documentation site.
 
