@@ -68,9 +68,26 @@ Jaeger all-in-one is a special distribution that combines three Jaeger component
 
 All-in-one listens to the same ports as the components it contains (described below), with the exception of the admin port.
 
+### Management Port
+
 Port  | Protocol | Function
 ----- | -------  | ---
 14269 | HTTP     | admin port: health check at `/` and metrics at `/metrics`
+
+### Service Ports
+
+Port  | Protocol | Component       | Primary Function
+----- | -------- | --------------- | ---
+16686 | HTTP     | Query / UI      | Accessing the Web Dashboard
+4317  | gRPC     | OTLP Receiver   | Modern trace ingestion (High performance)
+4318  | HTTP     | OTLP Receiver   | Modern trace ingestion (Web/Firewall friendly)
+9411  | HTTP     | Zipkin Receiver | Legacy Zipkin trace ingestion
+14268 | HTTP     | Jaeger Receiver | Accept `jaeger.thrift` directly from clients
+14250 | gRPC     | Jaeger Receiver | Accept `model.proto` Protobuf format
+5778  | HTTP     | Remote Sampling | Serving sampling strategies to clients (HTTP)
+5779  | gRPC     | Remote Sampling | Serving sampling strategies to clients (gRPC)
+6831  | UDP      | Jaeger Receiver | Accept Jaeger Thrift Compact protocol (legacy)
+6832  | UDP      | Jaeger Receiver | Accept Jaeger Thrift Binary protocol (legacy)
 
 ```bash
 ## make sure to expose only the ports you use in your deployment scenario!
