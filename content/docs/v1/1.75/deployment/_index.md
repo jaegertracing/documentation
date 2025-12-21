@@ -76,18 +76,18 @@ Port  | Protocol | Function
 
 ### Service Ports
 
-Port  | Protocol | Component       | Primary Function
+Port  | Protocol | Component       | Function
 ----- | -------- | --------------- | ---
-16686 | HTTP     | Query / UI      | Accessing the Web Dashboard
-4317  | gRPC     | OTLP Receiver   | Modern trace ingestion (High performance)
-4318  | HTTP     | OTLP Receiver   | Modern trace ingestion (Web/Firewall friendly)
-9411  | HTTP     | Zipkin Receiver | Legacy Zipkin trace ingestion
-14268 | HTTP     | Jaeger Receiver | Accept `jaeger.thrift` directly from clients
-14250 | gRPC     | Jaeger Receiver | Accept `model.proto` Protobuf format
-5778  | HTTP     | Remote Sampling | Serving sampling strategies to clients (HTTP)
-5779  | gRPC     | Remote Sampling | Serving sampling strategies to clients (gRPC)
-6831  | UDP      | Jaeger Receiver | Accept Jaeger Thrift Compact protocol (legacy)
-6832  | UDP      | Jaeger Receiver | Accept Jaeger Thrift Binary protocol (legacy)
+16686 | HTTP     | Query / UI      | Serves the Jaeger UI and API endpoints
+4317  | gRPC     | OTLP Receiver   | Accepts traces in OpenTelemetry OTLP format (Protobuf)
+4318  | HTTP     | OTLP Receiver   | Accepts traces in OpenTelemetry OTLP format (Protobuf and JSON)
+9411  | HTTP     | Zipkin Receiver | Accepts Zipkin spans in Thrift, JSON and Proto
+14268 | HTTP     | Jaeger Receiver | Accepts spans in `jaeger.thrift` format
+14250 | gRPC     | Jaeger Receiver | Accepts spans in `model.proto` format
+5778  | HTTP     | Remote Sampling | Serves sampling strategies
+5779  | gRPC     | Remote Sampling | Serves sampling strategies
+6831  | UDP      | Jaeger Receiver | Accepts spans in Jaeger Thrift compact protocol (legacy)
+6832  | UDP      | Jaeger Receiver | Accepts spans in Jaeger Thrift binary protocol (legacy)
 
 ```bash
 ## make sure to expose only the ports you use in your deployment scenario!
