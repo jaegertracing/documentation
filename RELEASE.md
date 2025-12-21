@@ -1,9 +1,6 @@
 # Release instructions
 
-
-Each Jaeger version is documented in a separate directory e.g. [content/docs/1.8/](./content/docs/1.8/). A special directory [content/docs/next-release/](./content/docs/next-release/) is reserved for the changes to be published as the next version. If you are adding documentation for features that are not yet released in the main Jaeger repository, add your changes to the `next-release` directory. If you're adding documentation for already released features, you may need to make the same change twice, i.e. in the most recent release (e.g. `1.8`) and in the `next-release` directories.
-
-Jaeger v2 next-release documentation is in the `next-release-v2` directory.
+Each Jaeger version is documented in a separate directory e.g. [content/docs/v2/2.13/](./content/docs/v2/2.13/). A special directory [content/docs/v2/_dev/](./content/docs/v2/_dev/) is reserved for the changes to be published as the next version. If you are adding documentation for features that are not yet released in the main Jaeger repository, add your changes to the `_dev_` directory. If you're adding documentation for already released features, you may need to make the same change twice, i.e. in the most recent release (e.g. `1.8`) and in the `_dev/` directories.
 
 <!-- BEGIN_CHECKLIST -->
 Before creating a new release:
