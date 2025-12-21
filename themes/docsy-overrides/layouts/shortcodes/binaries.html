@@ -1,5 +1,4 @@
 {{/* The releases on GitHub are currently tagged with v1xx tag, so we use $latestV1 in the base URLs */}}
-{{ $latestV1      := .Site.Params.binariesLatest }}
 {{ $latestV2      := .Site.Params.binariesLatestV2 }}
 {{ $binaries      := .Site.Data.download.binaries }}
 {{ $platforms     := $binaries.platforms }}
@@ -15,8 +14,7 @@
     </tr>
   </thead>
   <tbody>
-  {{ $versions := slice .Site.Params.binariesLatestV2 }}
-  {{ range $latest := $versions }}
+    {{ $latest := slice .Site.Params.binariesLatestV2 }}
     {{ $releaseUrl    := printf "https://github.com/jaegertracing/jaeger/releases/tag/v%s" $latestV2 }}
     {{ $srcZipUrl     := printf "https://download.jaegertracing.io/v%s.zip" $latestV2 }}
     {{ $srcTarUrl     := printf "https://download.jaegertracing.io/v%s.tar.gz" $latestV2 }}
@@ -53,6 +51,5 @@
         </div>
       </td>
     </tr>
-  {{ end }}
   </tbody>
 </table>
