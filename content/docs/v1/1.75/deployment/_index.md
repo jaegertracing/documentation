@@ -88,6 +88,7 @@ Port  | Protocol | Component       | Function
 5779  | gRPC     | Remote Sampling | Serves sampling strategies
 6831  | UDP      | Jaeger Receiver | Accepts spans in Jaeger Thrift compact protocol (legacy)
 6832  | UDP      | Jaeger Receiver | Accepts spans in Jaeger Thrift binary protocol (legacy)
+5775  | UDP      | Zipkin Receiver | Accepts Zipkin spans in Thrift compact protocol (deprecated)
 
 ```bash
 ## make sure to expose only the ports you use in your deployment scenario!
