@@ -55,7 +55,24 @@ Port  | Protocol | Endpoint   | Function
 13133 | HTTP     | `/status`  | Healthcheck port via the `healthcheckv2` extension
 27777 | HTTP     | `/`        | expvar port for process level metrics per the Go standards
 
-See [APIs](../architecture/apis/) for the list of all API ports.
+## Service Ports
+
+The following service-oriented ports are exposed by default (can be changed via configuration):
+
+Port  | Protocol | Component       | Function
+----- | -------- | --------------- | ---
+16686 | HTTP     | Query / UI      | Serves the Jaeger UI and API endpoints
+4317  | gRPC     | OTLP Receiver   | Accepts traces in OpenTelemetry OTLP format (Protobuf)
+4318  | HTTP     | OTLP Receiver   | Accepts traces in OpenTelemetry OTLP format (Protobuf and JSON)
+9411  | HTTP     | Zipkin Receiver | Accepts Zipkin spans in JSON and Protobuf
+5778  | HTTP     | Remote Sampling | Serves sampling strategies
+5779  | gRPC     | Remote Sampling | Serves sampling strategies
+6831  | UDP      | OTLP Receiver   | Accepts traces in Thrift compact protocol (legacy)
+6832  | UDP      | OTLP Receiver   | Accepts traces in Thrift binary protocol (legacy)
+14250 | gRPC     | OTLP Receiver   | Accepts traces in Jaeger Protobuf format (legacy)
+14268 | HTTP     | OTLP Receiver   | Accepts traces in Jaeger Thrift format (legacy)
+
+See [APIs](../architecture/apis/) for more details on all API ports and formats.
 
 ## SPM
 
