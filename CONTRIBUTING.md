@@ -97,6 +97,12 @@ Jaeger now supports a new thing that you definitely want.
 
 *Before making any significant changes, please [open an issue](https://github.com/jaegertracing/documentation/issues).* Discussing your proposed changes ahead of time will make the contribution process smooth for everyone.
 
+### Versioning
+
+The most recent versions of the documentation files are under `content/docs/v2/_dev/`. When a new release is published, the files are copied to `content/docs/v2/<version>/` as a snapthot, and any version-specific references are updated, for example by using a concrete version in the commands like `docker run cr.jaegertracing.io/jaegertracing/jaeger:2.13.0`.
+
+When making new documentation changes, they should be made in the `_dev` directory, for the next release. If some fixes require backporting to docs for existing versions, they can be updated as well. Usually it is a good practice to apply the change to at least `_dev` and the most recent version, such that the live website is updated right away, without waiting for the new release.
+
 ### Adding New Pages
 
 When adding new documentation pages:
@@ -107,7 +113,7 @@ When adding new documentation pages:
 
 ### Updating Diagrams
 
-Diagrams are created in a shared [Google Slides document](https://docs.google.com/presentation/d/1JuurkQn03z0BbOEAViJBEE_WWMj6JQUML-uJm7zizvI/):
+Diagrams included in the documentation are created in a shared [Google Slides document](https://docs.google.com/presentation/d/1JuurkQn03z0BbOEAViJBEE_WWMj6JQUML-uJm7zizvI/):
 
 1. Copy the diagram to a new slide deck
 2. Export as SVG
@@ -116,21 +122,31 @@ Diagrams are created in a shared [Google Slides document](https://docs.google.co
 
 ### Updating Blog Feed
 
-The homepage displays posts from the [Jaeger Medium blog](https://medium.com/jaegertracing):
+The homepage displays the latest blog posts from the [Jaeger Medium blog](https://medium.com/jaegertracing). To avoid network calls during builds and to ensure fast, reliable local development, the Medium RSS feed is downloaded and stored as a static XML file `assets/data/medium.xml`. The Hugo site reads and parses this file using `resources.Get` and `transform.Unmarshal`. This converts the XML into structured data at build time, allowing full control over the content without relying on live network requests.
+
+To update the feed:
 
 ```bash
 make fetch-blog-feed
 ```
 
+Ensure you have [`curl`](https://curl.se/) installed on your system to download the RSS feed.
+
+After updating the feed, commit the changes:
+```bash
+git add assets/data/medium.xml
+git commit -m "chore: update Medium blog feed"
+```
+
 ### Generating Roadmap
 
-To update the roadmap page:
+To update the roadmap page `content/roadmap.md`:
 
 ```bash
 make fetch-roadmap
 ```
 
-Requires `GITHUB_TOKEN` environment variable or `~/.github_token` file.
+This script fetches issues from the [GitHub project board](https://github.com/orgs/jaegertracing/projects/4/views/1?layout=table), extracts the required information, and generates the roadmap document. Requires `GITHUB_TOKEN` environment variable or `~/.github_token` file. Personal tokens can be created at https://github.com/settings/tokens/.
 
 ## Publishing
 
