@@ -3,11 +3,6 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
-      version_v1:
-        required: true
-        type: string
-        description: "Version number for v1 docs, in #.#.# format"
-
       version_v2:
         required: true
         type: string
@@ -40,11 +35,11 @@ jobs:
         git config user.name "jaegertracingbot"
         git config user.email "jaegertracingbot+jaeger-tracing@googlegroups.com"
         export DRY_RUN=${{ inputs.dry_run }}
-        ./scripts/release.sh ${{ inputs.version_v1 }} ${{ inputs.version_v2 }}
+        ./scripts/release.sh ${{ inputs.version_v2 }}
 
     - name: GH CLI create PR
       run: |
-        export TAG="${{ inputs.version_v2 }}/${{ inputs.version_v1 }}"
+        export TAG="${{ inputs.version_v2 }}"
         gh pr create --base main --title "Release ${TAG}" --body "Release ${TAG}. This PR is created from CI and is part of the release process."
       env:
         GH_TOKEN: ${{ secrets.JAEGERTRACINGBOT_PAT }}

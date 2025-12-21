@@ -4,8 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 # Prepares a pull request for the next release.
-# Set environment variable DRY_RUN=true to skip committing the changes,
-# or set DRY_RUN=no-cli-docs to also skip generating the CLI docs.
+# Set environment variable DRY_RUN=true to skip committing the changes.
 
 set -euf -o errexit -o pipefail
 
@@ -14,25 +13,19 @@ SED=${SED:-sed}
 config_file=hugo.yaml
 
 print_usage() {
-  echo "Usage: $0 <version_v1> <version_v2>"
-  echo "  Both versions must be in #.#.# format (major, minor, patch)"
+  echo "Usage: $0 <version_v2>"
+  echo "  Version must be in #.#.# format (major, minor, patch)"
   exit 1
 }
 
-if [ "$#" -ne 2 ]; then
+if [ "$#" -ne 1 ]; then
   print_usage
 fi
 
 if [[ "$1" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-  version_v1="$1"
+  version_v2="$1"
 else
   echo "🔴 ERROR: Version $1 is not in a major.minor.patch format."
-  print_usage
-fi
-if [[ "$2" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
-  version_v2="$2"
-else
-  echo "🔴 ERROR: Version $2 is not in a major.minor.patch format."
   print_usage
 fi
 
@@ -82,56 +75,34 @@ update_links() {
   done
 }
 
-gen_cli_docs_v1() {
-  local versionMajorMinor=$1
-  # we set this as a temp dir with write permissions to everyone to overcome #441
-  # we then set the permissions back to sane levels once we are done
-  cliDocsTempDir=$(mktemp -d -t cli-docs-XXXXXXXX)
-  mkdir -p ${cliDocsTempDir}/data/cli
-  cp -r ./data/cli/next-release/ ${cliDocsTempDir}/data/cli/${versionMajorMinor}
-  chmod -R a+w ${cliDocsTempDir}
-  if [[ "$DRY_RUN" != "no-cli-docs" ]]; then
-    python3 ./scripts/gen-cli-data.py ${versionMajorMinor} ${cliDocsTempDir}
-  fi
-  rm -f ${cliDocsTempDir}/data/cli/${versionMajorMinor}/*_completion_*.yaml
-  mv ${cliDocsTempDir}/data/cli/${versionMajorMinor} ./data/cli/
-}
-
 set -x
 safe_checkout_main
 
-for version in "${version_v1}" "${version_v2}"; do
-  versionMajorMinor=$(echo "${version}" | ${SED} 's/\.[[:digit:]]$//')
-  echo "Creating new documentation for ${version} (${versionMajorMinor})"
-  var_suffix=""
-  if [[ "${versionMajorMinor}" == 2* ]]; then
-    cp -r ./content/docs/v2/_dev/ ./content/docs/v2/${versionMajorMinor}
-    var_suffix="V2"
-  else
-    cp -r ./content/docs/v1/_dev/ ./content/docs/v1/${versionMajorMinor}
-    gen_cli_docs_v1 ${versionMajorMinor}
-  fi
+version="${version_v2}"
+versionMajorMinor=$(echo "${version}" | ${SED} 's/\.[[:digit:]]$//')
+echo "Creating new documentation for ${version} (${versionMajorMinor})"
 
-  update_links "${versionMajorMinor}" "${version}"
+cp -r ./content/docs/v2/_dev/ ./content/docs/v2/${versionMajorMinor}
 
-  versions=$(grep -E "versions${var_suffix} *:" "${config_file}")
-  if [[ "$versions" == *"$versionMajorMinor"* ]]; then
-    echo "🔴 ERROR: Version ${versionMajorMinor} is already included in the versions list."
-    exit 1
-  fi
+update_links "${versionMajorMinor}" "${version}"
 
-  ${SED} -i -e "s/latest${var_suffix} *:.*$/latest${var_suffix}: \"${versionMajorMinor}\"/" "${config_file}"
-  ${SED} -i -e "s/binariesLatest${var_suffix} *:.*$/binariesLatest${var_suffix}: \"${version}\"/" "${config_file}"
-  ${SED} -i -e "s/versions${var_suffix} *: *\[/versions${var_suffix}: \[\"${versionMajorMinor}\"\,/" "${config_file}"
-done
+versions=$(grep -E "versionsV2 *:" "${config_file}")
+if [[ "$versions" == *"$versionMajorMinor"* ]]; then
+  echo "🔴 ERROR: Version ${versionMajorMinor} is already included in the versions list."
+  exit 1
+fi
+
+${SED} -i -e "s/latestV2 *:.*$/latestV2: \"${versionMajorMinor}\"/" "${config_file}"
+${SED} -i -e "s/binariesLatestV2 *:.*$/binariesLatestV2: \"${version}\"/" "${config_file}"
+${SED} -i -e "s/versionsV2 *: *\[/versionsV2: \[\"${versionMajorMinor}\"\,/" "${config_file}"
 
 if [[ "$DRY_RUN" != "false" ]]; then
   echo "Not committing changes because DRY_RUN=$DRY_RUN"
   exit 0
 fi
 
-BRANCH="gen-release-${version_v2}/${version_v1}"
+BRANCH="gen-release-${version_v2}"
 git checkout -b "$BRANCH" # branch is needed for GH CLI
-git add ${config_file} ./content/docs/ ./data/cli/
-git commit -s -m "Release ${version_v2}/${version_v1}"
+git add ${config_file} ./content/docs/
+git commit -s -m "Release ${version_v2}"
 git push origin HEAD:"$BRANCH" # branch has to be on remote before PR is opened
