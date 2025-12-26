@@ -86,7 +86,7 @@ An example configuration file (see [complete schema here](https://github.com/jae
 }
 ```
 
-### Themes (Lignt/Dark Mode)
+### Themes (Light/Dark Mode)
 
 Users can toggle between light and dark themes using a button in the top navigation. The selected theme is persisted in the browser's local storage. If no theme is stored, the UI respects the user's system preference (`prefers-color-scheme`).
 
