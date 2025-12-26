@@ -273,7 +273,7 @@ This will display trace IDs like: `1a2b3c4d5e6f` (instead of the full 32-charact
 
 ### Trace Graph
 
-`traceGraph.layoutManagerMemory` controls the total memory available for the GraphViz Emscripten module instance used to render trace graphs. The value should be a power of two. The default of 16MB should be sufficient for most cases — only consider using a larger number if you run into the error "Cannot enlarge memory arrays".
+`traceGraph.layoutManagerMemory` controls the total memory available for the GraphViz module instance used to render trace graphs. The value should be a power of two. The default of 16MB should be sufficient for most cases — only consider using a larger number if you run into the error "Cannot enlarge memory arrays".
 
 ```json
 {
