@@ -10,11 +10,15 @@ weight: 7
 
 Several aspects of the UI can be configured:
 
+  * Themes can be enabled to allow switching between light and dark modes
   * The Dependencies section can be enabled / configured
   * The [Monitor tab (aka: Service Performance Monitoring)](../../architecture/spm/) can be enabled / configured
   * App analytics tracking can be enabled / configured (via Google Analytics or custom plugin)
   * Additional menu options can be added to the global nav
   * Search input limits can be configured
+  * Critical path visualization can be enabled
+  * Tag display priorities can be configured
+  * Various UI controls can be disabled for embedding scenarios
 
 These options can be configured by a JSON configuration file. The `--query.ui-config` command line parameter of the query service must then be set to the path to the JSON file when the query service is started.
 
@@ -28,6 +32,9 @@ An example configuration file (see [complete schema here](https://github.com/jae
   },
   "monitor": {
     "menuEnabled": true
+  },
+  "themes": {
+    "enabled": true
   },
   "archiveEnabled": true,
   "tracking": {
@@ -73,9 +80,27 @@ An example configuration file (see [complete schema here](https://github.com/jae
     "url": "https://my-logs.server?from=#{startTime | add -60000000 | epoch_micros_to_date_iso}&to=#{endTime | add 60000000 | epoch_micros_to_date_iso}'",
     "text": "Redirect to kibana to view log with formatted dates"
   }],
-  "traceIdDisplayLength": 20
+  "traceIdDisplayLength": 20,
+  "criticalPathEnabled": true,
+  "topTagPrefixes": ["http.", "db."]
 }
 ```
+
+### Themes (Dark Mode)
+
+Enable the theme toggle button in the navigation bar to allow users to switch between light and dark modes:
+
+```json
+{
+  "themes": {
+    "enabled": true
+  }
+}
+```
+
+When enabled, users can toggle between light and dark themes using a button in the top navigation. The selected theme is persisted in the browser's local storage. If no theme is stored, the UI respects the user's system preference (`prefers-color-scheme`).
+
+`themes.enabled` enables (`true`) or disables (`false`) the theme toggle button. Default: `false`.
 
 ### Dependencies
 
@@ -86,6 +111,29 @@ An example configuration file (see [complete schema here](https://github.com/jae
 ### Monitor
 
 `monitor.menuEnabled` enables (`true`) or disables (`false`) the Monitor menu button. Default: `false`.
+
+`monitor.docsLink` specifies a URL to documentation about Service Performance Monitoring. When set, a help link is displayed in the Monitor tab.
+
+`monitor.emptyState` allows customizing the empty state display when no monitoring data is available:
+
+```json
+{
+  "monitor": {
+    "menuEnabled": true,
+    "docsLink": "https://www.jaegertracing.io/docs/latest/spm/",
+    "emptyState": {
+      "mainTitle": "Get started with Service Performance Monitoring",
+      "subTitle": "No data available",
+      "description": "Configure your services to emit RED metrics.",
+      "info": "Additional information text",
+      "alert": {
+        "message": "SPM requires metrics storage backend",
+        "type": "info"
+      }
+    }
+  }
+}
+```
 
 ### Archive Support
 
@@ -204,6 +252,56 @@ Field | Description
 ```
 
 This will display trace IDs like: `1a2b3c4d5e6f` (instead of the full 32-character ID or default 7-character).
+
+### Critical Path
+
+`criticalPathEnabled` enables (`true`) or disables (`false`) the critical path visualization in the trace view. When enabled, the critical path of each span is highlighted, showing which operations are on the critical path of the overall trace duration. Default: `false`.
+
+```json
+{
+  "criticalPathEnabled": true
+}
+```
+
+### Top Tag Prefixes
+
+`topTagPrefixes` defines a set of prefixes for span tag names that are considered "important" and cause the matching tags to appear higher in the list of tags. For example, setting `topTagPrefixes` to `["http."]` would cause all span tags that begin with "http." to be shown above all other tags.
+
+```json
+{
+  "topTagPrefixes": ["http.", "db.", "rpc."]
+}
+```
+
+### Trace Graph
+
+`traceGraph.layoutManagerMemory` controls the total memory available for the GraphViz Emscripten module instance used to render trace graphs. The value should be a power of two. The default of 16MB should be sufficient for most cases — only consider using a larger number if you run into the error "Cannot enlarge memory arrays".
+
+```json
+{
+  "traceGraph": {
+    "layoutManagerMemory": 33554432
+  }
+}
+```
+
+### UI Controls
+
+Several options allow disabling specific UI controls, which is useful for embedding scenarios or restricting functionality:
+
+`disableFileUploadControl` disables (`true`) or enables (`false`) the file upload control for loading trace JSON files. Default: `false`.
+
+`disableJsonView` disables (`true`) or enables (`false`) the JSON view option in the trace view. Default: `false`.
+
+`forbidNewPage` when set to `true`, alters all link targets to prevent opening new browser tabs/windows. This is useful when embedding the UI in another application. Default: `false`.
+
+```json
+{
+  "disableFileUploadControl": true,
+  "disableJsonView": true,
+  "forbidNewPage": true
+}
+```
 
 ## Embedded Mode
 

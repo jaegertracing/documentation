@@ -23,6 +23,7 @@ downsampling
 dropwizard
 dsoie
 eddsa
+Emscripten
 emsgsize
 errorf
 expvar
