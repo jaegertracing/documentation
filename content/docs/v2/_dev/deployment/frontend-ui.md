@@ -86,9 +86,9 @@ An example configuration file (see [complete schema here](https://github.com/jae
 }
 ```
 
-### Themes (Dark Mode)
+### Themes (Lignt/Dark Mode)
 
-Enable the theme toggle button in the navigation bar to allow users to switch between light and dark modes:
+Users can toggle between light and dark themes using a button in the top navigation. The selected theme is persisted in the browser's local storage. If no theme is stored, the UI respects the user's system preference (`prefers-color-scheme`).
 
 ```json
 {
@@ -98,9 +98,7 @@ Enable the theme toggle button in the navigation bar to allow users to switch be
 }
 ```
 
-When enabled, users can toggle between light and dark themes using a button in the top navigation. The selected theme is persisted in the browser's local storage. If no theme is stored, the UI respects the user's system preference (`prefers-color-scheme`).
-
-`themes.enabled` enables (`true`) or disables (`false`) the theme toggle button. Default: `false`.
+`themes.enabled` enables (`true`) or disables (`false`) the theme toggle button. Default: `false`. If theme toggle is disabled the UI always uses the light theme.
 
 ### Dependencies
 
@@ -255,7 +253,7 @@ This will display trace IDs like: `1a2b3c4d5e6f` (instead of the full 32-charact
 
 ### Critical Path
 
-`criticalPathEnabled` enables (`true`) or disables (`false`) the critical path visualization in the trace view. When enabled, the critical path of each span is highlighted, showing which operations are on the critical path of the overall trace duration. Default: `false`.
+`criticalPathEnabled` enables (`true`) or disables (`false`) the critical path visualization in the trace view. When enabled, the critical path of each span is highlighted, showing which operations are on the critical path of the overall trace duration. Default: `true`.
 
 ```json
 {
@@ -265,7 +263,7 @@ This will display trace IDs like: `1a2b3c4d5e6f` (instead of the full 32-charact
 
 ### Top Tag Prefixes
 
-`topTagPrefixes` defines a set of prefixes for span tag names that are considered "important" and cause the matching tags to appear higher in the list of tags. For example, setting `topTagPrefixes` to `["http."]` would cause all span tags that begin with "http." to be shown above all other tags.
+`topTagPrefixes` defines a set of prefixes for span tag names that are considered "important" and cause the matching tags to appear higher in the list of span tags in span details. For example, setting `topTagPrefixes` to `["http."]` would cause all span tags that begin with "http." to be shown above all other tags.
 
 ```json
 {
