@@ -68,7 +68,6 @@ params:
   robots: true
 
   latest: "1.76"
-  # binariesLatest: "1.76.0"
   versions: ["1.76"]
 
   latestV2: "2.14"
