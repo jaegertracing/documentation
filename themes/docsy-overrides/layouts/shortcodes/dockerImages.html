@@ -21,19 +21,19 @@
     {{ $latest    := cond (eq $major "v2") $latestV2 $latestV1}}
     {{ $latestImg := .until | default $latest }}
     <tr>
-      <td>
+      <td style="vertical-align: top;">
         <a href="{{ $link }}">
           {{- $image -}}
         </a>
       </td>
-      <td>
+      <td style="vertical-align: top;">
         {{ $bg_kind := cond (eq $major "v2") "success" "secondary" -}}
         <span class="badge fs-6 bg-{{ $bg_kind }} text-bg-{{ $bg_kind }}">{{ $major }}</span>
       </td>
-      <td>
+      <td style="vertical-align: top;">
         {{ if .until }}
           <p class="text-danger fw-semibold mb-2">
-            Deprecated 💀💤❌. Latest available version is {{ $latestImg }}.
+            ❌ Deprecated 💀💤. Latest available version is {{ $latestImg }}.
           </p>
         {{ end }}
         <div class="mb-2">
@@ -44,7 +44,7 @@
         <code class="d-block">$ podman run cr.jaegertracing.io/{{ $fullImage }}:{{ $latestImg }} --help</code>
         {{ end }}
       </td>
-      <td>
+      <td style="vertical-align: top;">
         {{ $since }}
       </td>
     </tr>

@@ -1,5 +1,5 @@
 {{/* The releases on GitHub are currently tagged with v1xx tag, so we use $latestV1 in the base URLs */}}
-{{ $latestV1      := .Site.Params.binariesLatest }}
+{{ $latest        := .Site.Params.binariesLatestV2 }}
 {{ $binaries      := .Site.Data.download.binaries }}
 {{ $platforms     := $binaries.platforms }}
 <table class="table table--download td-initial align-middle mw-100">
@@ -14,11 +14,9 @@
     </tr>
   </thead>
   <tbody>
-  {{ $versions := slice .Site.Params.binariesLatestV2 .Site.Params.binariesLatest }}
-  {{ range $latest := $versions }}
-    {{ $releaseUrl    := printf "https://github.com/jaegertracing/jaeger/releases/tag/v%s" $latestV1 }}
-    {{ $srcZipUrl     := printf "https://download.jaegertracing.io/v%s.zip" $latestV1 }}
-    {{ $srcTarUrl     := printf "https://download.jaegertracing.io/v%s.tar.gz" $latestV1 }}
+    {{ $releaseUrl    := printf "https://github.com/jaegertracing/jaeger/releases/tag/v%s" $latest }}
+    {{ $srcZipUrl     := printf "https://download.jaegertracing.io/v%s.zip" $latest }}
+    {{ $srcTarUrl     := printf "https://download.jaegertracing.io/v%s.tar.gz" $latest }}
     <tr>
       <td>
         <strong>
@@ -33,7 +31,7 @@
           {{ $name        := $platform.name }}
           {{ $icon        := $platform.icon }}
           {{ $asset       := printf "jaeger-%s-%s-amd64.tar.gz" $latest $key }}
-          {{ $downloadUrl := printf "https://download.jaegertracing.io/v%s/%s" $latestV1 $asset }}
+          {{ $downloadUrl := printf "https://download.jaegertracing.io/v%s/%s" $latest $asset }}
           {{ $zipUrl      := printf "https://download.jaegertracing.io/v%s.zip" $latest }}
           {{ $tarUrl      := printf "https://download.jaegertracing.io/v%s.tar.gz" $latest }}
           <a class="btn btn-lg btn-platform-{{ $key }}" href="{{ $downloadUrl }}" download>
@@ -52,6 +50,5 @@
         </div>
       </td>
     </tr>
-  {{ end }}
   </tbody>
 </table>
