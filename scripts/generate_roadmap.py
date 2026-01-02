@@ -60,19 +60,42 @@ def fetch_issues():
     }
     data = json.dumps({"query": QUERY}).encode("utf-8")
     req = urllib.request.Request(url, data=data, headers=headers)
-    with urllib.request.urlopen(req) as response:
-        result = json.loads(response.read().decode("utf-8"))
-        issues = result["data"]["organization"]["projectV2"]["items"]["nodes"]
-        return [
-            {
-                "title": issue["content"]["title"],
-                "state": issue["content"]["state"],
-                "url": issue["content"]["url"],
-                "body": issue["content"]["body"],
-            }
-            for issue in issues
-            if issue["type"] == "ISSUE"
-        ]
+    try:
+        with urllib.request.urlopen(req) as response:
+            res_body = response.read().decode("utf-8")
+            result = json.loads(res_body)
+            if "errors" in result:
+                for error in result["errors"]:
+                    logger.error(f"GitHub API error: {error.get('message', 'Unknown error')}")
+                    if error.get("type") == "INSUFFICIENT_SCOPES":
+                        logger.error("Please ensure your GITHUB_TOKEN has 'read:project' scope.")
+
+            if "data" not in result or not result["data"]:
+                raise ValueError("GitHub API response missing 'data' field or it is null.")
+
+            organization = result["data"].get("organization")
+            if not organization:
+                raise ValueError("GitHub API response missing 'organization' data.")
+
+            project = organization.get("projectV2")
+            if not project:
+                raise ValueError("GitHub API response missing 'projectV2' data. Ensure project number is correct.")
+
+            issues = project["items"]["nodes"]
+            return [
+                {
+                    "title": issue["content"]["title"],
+                    "state": issue["content"]["state"],
+                    "url": issue["content"]["url"],
+                    "body": issue["content"]["body"],
+                }
+                for issue in issues
+                if issue["type"] == "ISSUE"
+            ]
+    except urllib.error.HTTPError as e:
+        logger.error(f"HTTP Error: {e.code} {e.reason}")
+        logger.error(f"Response body: {e.read().decode('utf-8')}")
+        raise
 
 
 def extract_summary(body):
@@ -90,6 +113,8 @@ def extract_summary(body):
 def generate_roadmap(issues):
     roadmap_content = "---\n"
     roadmap_content += "title: Roadmap\n"
+    roadmap_content += "type: docs\n"
+    roadmap_content += "weight: 70\n"
     roadmap_content += "---\n\n"
     roadmap_content += (
         "The following is a summary of the major features we plan to implement.\n"

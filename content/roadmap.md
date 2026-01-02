@@ -27,6 +27,21 @@ Benefits to the users:
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/5058).
 
+## [Feature]:  GenAI integration with Jaeger
+
+GenAI can provide powerful capabilities for automatic analysis of tracing data.
+
+There can be multiple product functions, with increasing order of complexity:
+  1. Free form question about a single trace. Easiest, needs chat infra in the UI.
+    - Ability to use user-provided skills (nice to have). Requires agentic loop.
+  1. Automated analysis of a trace. Needs agentic loop & prompt tuning on our side
+  1. Free form search query. Needs ability act on the UI elements from agentic loop, and prompt tuning.
+  1. Free form investigation. Ultimate, investigation agent, needs lots of prompting.
+
+Everything beyond (1) involves prompt engineering and the only non-anecdotal way to evaluate the prompts is with benchmarks.
+
+For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/7827).
+
 ## [Feature]: Support Elasticsearch data stream
 
 Data streams are the new hotness in Elasticsearch & OpenSearch to store append-only observability data. Data streams are well-suited for logs, events, metrics, and other continuously generated data.
