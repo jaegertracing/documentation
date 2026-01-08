@@ -5,15 +5,17 @@ the Jaeger documentation repository.
 
 ## Repository Overview
 
-This repository contains the Jaeger documentation website, https://jaegertracing.io,
-built with [Hugo](https://gohugo.io/) and hosted on [Netlify](https://www.netlify.com/).
-For general information about the repository, see [README.md](README.md).
+This repository contains the Jaeger documentation website,
+https://jaegertracing.io, built with [Hugo](https://gohugo.io/) and hosted on
+[Netlify](https://www.netlify.com/). For general information about the
+repository, see [README.md](README.md).
 
 ## Contributing Guidelines
 
 Before making changes, familiarize yourself with:
 
-1. General Jaeger contributing guidelines: [Contributing Guidelines](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md)
+1. General Jaeger contributing guidelines:
+   [Contributing Guidelines](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md)
 2. Documentation-specific guidelines: [CONTRIBUTING.md](CONTRIBUTING.md)
 
 The CONTRIBUTING.md file contains all necessary information for setting up,
