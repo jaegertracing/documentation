@@ -19,6 +19,7 @@ const tests = [
   { input: '/docs/1.65/', expectedRedirect: '/docs/1.76/' },
   { input: '/docs/1.13/faq/', expectedRedirect: '/docs/1.76/faq/' },
   { input: '/docs/1.50/deployment/cli/', expectedRedirect: '/docs/1.76/deployment/cli/' },
+  { input: '/docs/1.18/client-libraries/', expectedRedirect: '/docs/1.76/client-libraries/' },
   // Last v1, no redirect
   { input: '/docs/1.76/', expectedRedirect: null },
   { input: '/docs/1.76/faq/', expectedRedirect: null },
