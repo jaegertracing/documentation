@@ -48,7 +48,7 @@
     "prettier": "^3.6.2"
   },
   "peerDependencies": {
-    "hugo-extended": "0.152.2",
+    "hugo-extended": "0.154.5",
     "netlify-cli": "^23.13.3",
     "npm-check-updates": "^19.1.2"
   },
