@@ -8,7 +8,6 @@ children:
 - title: Features
   url: features
 sidebar_root_for: self
-aliases: [next-release-v2]
 cascade: { robots: false }
 ---
 

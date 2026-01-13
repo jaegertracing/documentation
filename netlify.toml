@@ -4,3 +4,8 @@ command = "npm run build:preview"
 
 [context.production]
 command = "npm run build:production"
+
+# Edge function to redirect all /docs/1.X/* to /docs/1.76/*
+[[edge_functions]]
+  path = "/docs/1.(.*)"
+  function = "docs-1x-redirect"

@@ -20,7 +20,8 @@
   {{ $isNextRelease = true }}
 {{ end }}
 
-{{ $isLatest      := or (eq $version $latestV1) (eq $version $latestV2) }}
+{{ $isArchive     := eq $version $latestV1 }}
+{{ $isLatest      := eq $version $latestV2 }}
 {{ $latestUrlV1   := .RelPermalink | replaceRE $version $latestV1 }}
 {{ $latestUrlV2   := .RelPermalink | replaceRE $version $latestV2 }}
 
@@ -42,7 +43,10 @@
       (cond $isLatest "success" "warning") -}}
 {{ $versionQualifier :=
     cond $isNextRelease "preview"
-      (cond $isLatest "latest" "outdated") -}}
+      (cond $isLatest "latest"
+      (cond $isArchive "archive" "outdated")
+    )
+-}}
 
 {{ if and (hasPrefix $path "docs/") (ne $path "docs/_index.md") }}
 <div class="mb-1">
@@ -72,7 +76,7 @@
         href="{{ $latestUrlV1 }}">
       <i class="fa-regular fa-circle-play"></i>
       {{ .Site.Params.latest }}
-      <span class="text-black-50">(latest)</span>
+      <span class="text-black-50">(archive)</span>
     </a>
     {{ end -}}
     </div>
