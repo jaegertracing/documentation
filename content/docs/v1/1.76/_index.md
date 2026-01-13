@@ -1,6 +1,6 @@
 ---
 title: Introduction
-linkTitle: 1.76 (latest)
+linkTitle: 1.76 (archive)
 weight: -176
 children:
 - title: Features
