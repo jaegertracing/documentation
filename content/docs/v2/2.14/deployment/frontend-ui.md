@@ -20,9 +20,16 @@ Several aspects of the UI can be configured:
   * Tag display priorities can be configured
   * Various UI controls can be disabled for embedding scenarios
 
-These options can be configured by a JSON configuration file. The `--query.ui-config` command line parameter of the query service must then be set to the path to the JSON file when the query service is started.
+These options can be configured by a JSON configuration file given to query extension:
 
-An example configuration file (see [complete schema here](https://github.com/jaegertracing/jaeger-ui/blob/main/packages/jaeger-ui/src/types/config.tsx)):
+```yaml
+extensions:
+  jaeger_query:
+    ui:
+      config_file: /path/to/config-ui.json
+```
+
+An example configuration file (see [complete schema here](https://github.com/jaegertracing/jaeger-ui/blob/main/packages/jaeger-ui/src/types/config.ts)):
 
 ```json
 {
