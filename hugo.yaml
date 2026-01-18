@@ -67,8 +67,8 @@ params:
   opengraphimage: img/jaeger-icon-color.png
   robots: true
 
-  latest: "1.76"
-  versions: ["1.76"]
+  latest: '1.76'
+  versions: ['1.76']
 
   latestV2: "2.14"
   binariesLatestV2: "2.14.1"
@@ -119,26 +119,27 @@ menu:
   main:
     - name: Blog
       url: https://medium.com/jaegertracing/latest
-      post:
-        <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs" aria-hidden="true"></i></sup>
+      post: >-
+        <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
+        aria-hidden="true"></i></sup>
       weight: 40
 
 module:
   mounts:
     # Content
-    - excludeFiles:
-        - docs/v?
-        - _index-pre-docsy.md
+    - files:
+        - '! docs/v?'
+        - '! _index-pre-docsy.md'
       source: content
       target: content
 
-    - excludeFiles: _*
+    - files: '! _*'
       source: content/docs/v2
       target: content/docs
     - source: content/docs/v2/_dev
       target: content/docs/2.dev
 
-    - excludeFiles: _*
+    - files: '! _*'
       source: content/docs/v1
       target: content/docs
     - source: content/docs/v1/_dev
