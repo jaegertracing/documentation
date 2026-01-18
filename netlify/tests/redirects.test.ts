@@ -5,8 +5,12 @@
 const baseUrl = Deno.args[0];
 
 if (!baseUrl) {
-  console.error('Usage: deno run --allow-net tests/redirects.test.ts <base-url>');
-  console.error('Example: deno run --allow-net tests/redirects.test.ts https://jaegertracing.io');
+  console.error(
+    'Usage: deno run --allow-net tests/redirects.test.ts <base-url>',
+  );
+  console.error(
+    'Example: deno run --allow-net tests/redirects.test.ts https://jaegertracing.io',
+  );
   Deno.exit(1);
 }
 
@@ -18,13 +22,22 @@ const tests = [
   { input: '/docs/1.57', expectedRedirect: '/docs/1.76' },
   { input: '/docs/1.65/', expectedRedirect: '/docs/1.76/' },
   { input: '/docs/1.13/faq/', expectedRedirect: '/docs/1.76/faq/' },
-  { input: '/docs/1.50/deployment/cli/', expectedRedirect: '/docs/1.76/deployment/cli/' },
-  { input: '/docs/1.18/client-libraries/', expectedRedirect: '/docs/1.76/client-libraries/' },
+  {
+    input: '/docs/1.50/deployment/cli/',
+    expectedRedirect: '/docs/1.76/deployment/cli/',
+  },
+  {
+    input: '/docs/1.18/client-libraries/',
+    expectedRedirect: '/docs/1.76/client-libraries/',
+  },
   // Last v1, no redirect
   { input: '/docs/1.76/', expectedRedirect: null },
   { input: '/docs/1.76/faq/', expectedRedirect: null },
   // Last v2, no redirect
-  { input: '/docs/2.1/apis/', expectedRedirect: '/docs/2.1/architecture/apis/' },
+  {
+    input: '/docs/2.1/apis/',
+    expectedRedirect: '/docs/2.1/architecture/apis/',
+  },
   { input: '/docs/2.14/architecture/', expectedRedirect: null },
 ];
 
@@ -48,13 +61,19 @@ for (const { input, expectedRedirect } of tests) {
     if (expectedRedirect === null) {
       // Expect no redirect
       ok = !isRedirect;
-      result = ok ? `${response.status} (no redirect)` : `${response.status} → ${location}`;
+      result = ok
+        ? `${response.status} (no redirect)`
+        : `${response.status} → ${location}`;
     } else {
       // Expect redirect to specific path
       const expectedLocation = `${base}${expectedRedirect}`;
       // Also check for relative redirects
-      ok = isRedirect && (location === expectedLocation || location === expectedRedirect);
-      result = isRedirect ? `${response.status} → ${location}` : `${response.status} (no redirect)`;
+      ok =
+        isRedirect &&
+        (location === expectedLocation || location === expectedRedirect);
+      result = isRedirect
+        ? `${response.status} → ${location}`
+        : `${response.status} (no redirect)`;
     }
 
     const status = ok ? '✓' : '✗';
