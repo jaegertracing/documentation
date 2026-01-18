@@ -6,11 +6,15 @@ type: docs
 body_class: td-no-left-sidebar
 ---
 
-{{< warning >}}
-🎉 **Jaeger v2** is a new major release based on the OpenTelemetry Collector framework. Read [the blog post](https://medium.com/jaegertracing/jaeger-v2-released-09a6033d1b10) for more details.
-
-🌆 **Jaeger v1** has reached [end-of-life](https://github.com/jaegertracing/jaeger/issues/6321) on **December 31, 2025** and will no longer receive updates.
-{{< /warning >}}
+> [!WARNING]
+>
+> 🎉 **Jaeger v2** is a new major release based on the OpenTelemetry Collector
+> framework. For details, read [the blog
+> post](https://medium.com/jaegertracing/jaeger-v2-released-09a6033d1b10).
+>
+> 🌆 **Jaeger v1** reached
+> [end-of-life](https://github.com/jaegertracing/jaeger/issues/6321) on
+> **December 31, 2025** and will no longer receive updates.
 
 Jaeger v2 components can be downloaded in two ways:
 
