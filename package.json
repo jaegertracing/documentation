@@ -43,7 +43,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.23",
     "cspell": "^9.6.0",
-    "docsy": "github:google/docsy#semver:0.13.0",
+    "docsy": "github:google/docsy#a600e534909f5fc09b1a48cef649d1e554af4bd2",
     "postcss-cli": "^11.0.1",
     "prettier": "^3.8.0"
   },
