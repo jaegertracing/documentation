@@ -2467,6 +2467,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:23.871931-04:00"
   },
+  "https://github.com/jaegertracing/jaeger-ui/blob/main/packages/jaeger-ui/src/types/config.ts": {
+    "StatusCode": 206,
+    "LastSeen": "2026-01-18T03:31:32.568128-05:00"
+  },
   "https://github.com/jaegertracing/jaeger-ui/blob/main/packages/jaeger-ui/src/types/config.tsx": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:23.040133-04:00"
