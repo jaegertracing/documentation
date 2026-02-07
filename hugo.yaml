@@ -70,9 +70,9 @@ params:
   latest: '1.76'
   versions: ['1.76']
 
-  latestV2: "2.14"
-  binariesLatestV2: "2.14.1"
-  versionsV2: ["2.14","2.13","2.12","2.11","2.10","2.9","2.8","2.7","2.6","2.5","2.4","2.3","2.2","2.1","2.0"]
+  latestV2: "2.15"
+  binariesLatestV2: "2.15.0"
+  versionsV2: ["2.15","2.14","2.13","2.12","2.11","2.10","2.9","2.8","2.7","2.6","2.5","2.4","2.3","2.2","2.1","2.0"]
 
   gcs_engine_id: c196bdeb585f04a00
   privacy_policy: https://www.linuxfoundation.org/legal/privacy-policy
