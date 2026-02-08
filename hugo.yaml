@@ -156,3 +156,13 @@ module:
       target: assets/icons/logo.svg
     - source: static/img/hero-background.jpg
       target: content/hero-background.jpg
+
+security:
+  funcs:
+    getenv:
+      # Defaults
+      - ^HUGO_
+      - ^CI$
+      # Whitelist for PR link checking
+      - ^GITHUB_SHA$
+      - ^HEAD$
