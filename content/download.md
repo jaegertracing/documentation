@@ -23,11 +23,9 @@ Jaeger v2 components can be downloaded in two ways:
 
 ## Binaries
 
-Jaeger binaries are available for macOS, Linux, and Windows. The table below lists the available binaries:
+Jaeger binaries (including tools/utilities) are available for macOS, Linux, and Windows on the [GitHub releases page](https://github.com/jaegertracing/jaeger/releases/).
 
 {{< binaries >}}
-
-You can find the binaries for previous versions on the [GitHub releases page](https://github.com/jaegertracing/jaeger/releases/).
 
 ## Container images
 
