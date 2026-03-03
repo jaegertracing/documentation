@@ -38,10 +38,13 @@ page/section relative version lists. */ -}}
         {{ else -}}
           {{ $href = .URL | relLangURL -}}
         {{ end -}}
-        {{ $isExternal := ne $baseURL.Host (urls.Parse .URL).Host -}}
+        {{ $parsedURL := urls.Parse .URL -}}
+        {{ $isExternal := and $parsedURL.Host (ne $baseURL.Host $parsedURL.Host) -}}
         {{ if .HasChildren -}}
+        {{ $dropdownID := printf "nav-dropdown-%s" (.Identifier | default (.Name | urlize)) -}}
         <a {{/**/ -}}
           class="nav-link dropdown-toggle{{- if $active }} active{{- end }}" {{/**/ -}}
+          id="{{ $dropdownID }}"
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
@@ -50,12 +53,13 @@ page/section relative version lists. */ -}}
             <span>{{ .Name }}</span>
             {{- .Post -}}
         </a>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu" aria-labelledby="{{ $dropdownID }}">
           {{ range .Children -}}
           {{ $childActive := $p.IsMenuCurrent "main" . -}}
           {{ $childHref := .URL | relLangURL -}}
           {{ with .Page -}}{{ $childHref = .RelPermalink -}}{{ end -}}
-          {{ $childIsExternal := ne $baseURL.Host (urls.Parse .URL).Host -}}
+          {{ $childParsedURL := urls.Parse .URL -}}
+          {{ $childIsExternal := and $childParsedURL.Host (ne $baseURL.Host $childParsedURL.Host) -}}
           {{ if .Params.divider_before -}}<li><hr class="dropdown-divider"></li>{{ end -}}
           <li>
             <a class="dropdown-item{{- if $childActive }} active{{- end }}"
