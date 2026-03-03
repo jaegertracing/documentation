@@ -47,7 +47,7 @@ markup:
 imaging:
   resampleFilter: CatmullRom # cspell:disable-line
   quality: 75
-  anchor: smart
+  anchor: Smart
 
 # cSpell:ignore nbsp pagelinks
 params:
@@ -123,6 +123,56 @@ menu:
         <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
         aria-hidden="true"></i></sup>
       weight: 40
+    - name: Project
+      identifier: project
+      weight: 50
+    - name: Get Involved
+      url: /get-involved/
+      parent: project
+      weight: 1
+    - name: Getting in Touch
+      url: /get-in-touch/
+      parent: project
+      weight: 2
+    - name: Mentorships
+      url: /mentorship/
+      parent: project
+      weight: 3
+    - name: For Mentees
+      url: /mentorship/for-mentees/
+      parent: project
+      pre: '&nbsp;&nbsp;&nbsp;&nbsp;⏺&nbsp;'
+      weight: 4
+    - name: For Mentors
+      url: /mentorship/for-mentors/
+      parent: project
+      pre: '&nbsp;&nbsp;&nbsp;&nbsp;⏺&nbsp;'
+      weight: 5
+    - name: News
+      url: /news/
+      parent: project
+      weight: 6
+    - name: Roadmap
+      url: /roadmap/
+      parent: project
+      weight: 7
+    - name: Report a Security Issue
+      url: /report-security-issue/
+      parent: project
+      params: {divider_before: true}
+      weight: 8
+    - name: Branding
+      url: https://github.com/cncf/artwork/tree/master/projects/jaeger
+      parent: project
+      weight: 9
+    - name: Main GitHub repo
+      url: https://github.com/jaegertracing/jaeger
+      parent: project
+      weight: 10
+    - name: Docs GitHub repo
+      url: https://github.com/jaegertracing/documentation
+      parent: project
+      weight: 11
 
 module:
   mounts:
