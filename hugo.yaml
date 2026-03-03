@@ -47,7 +47,7 @@ markup:
 imaging:
   resampleFilter: CatmullRom # cspell:disable-line
   quality: 75
-  anchor: smart
+  anchor: Smart
 
 # cSpell:ignore nbsp pagelinks
 params:
@@ -117,15 +117,15 @@ params:
 
 menu:
   main:
-    - name: Project
-      identifier: project
-      weight: 50
     - name: Blog
       url: https://medium.com/jaegertracing/latest
       post: >-
         <sup><i class="ps-1 fa-solid fa-up-right-from-square fa-xs"
         aria-hidden="true"></i></sup>
       weight: 40
+    - name: Project
+      identifier: project
+      weight: 50
     - name: Get Involved
       url: /get-involved/
       parent: project
