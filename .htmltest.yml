@@ -11,6 +11,7 @@ IgnoreURLs:
   - ^https://www.jaegertracing.io/js/lunr
   # Ignore Docsy-generated GitHub links for now
   - ^https?://github\.com/.*?/.*?/(new|edit)/ # view-page, edit-source etc
+  - ^https://github\.com/jaegertracing/documentation/tree/main/content/docs/v2/_dev/operations/metrics-reference\.md
   # Valid URL, whether canonical (before reorg) or not (and handled via a redirect)
   - ^/docs/1.[6-9]\d/sampling/
   # Valid URLs, but servers yield 403 or similar errors
