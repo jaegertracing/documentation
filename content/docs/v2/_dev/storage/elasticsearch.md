@@ -46,6 +46,12 @@ To learn more about rollover index management in Jaeger refer to this
 
 For automated rollover, please refer to [Elasticsearch ILM support](#ilm-support).
 
+{{< info >}}
+The examples for `jaeger-es-rollover` and `jaeger-es-index-cleaner` tools below are shown using
+Docker invocations, but they are also available as standalone binaries on the
+[Jaeger GitHub releases page](https://github.com/jaegertracing/jaeger/releases).
+{{< /info >}}
+
 ### Initialize
 
 The following command prepares Elasticsearch for rollover deployment by creating index aliases, indices, and index templates:
@@ -55,13 +61,6 @@ docker run -it --rm --net=host \
   jaegertracing/jaeger-es-rollover:latest \
   init http://localhost:9200 # <1>
 ```
-
-{{< info >}}
-The `jaeger-es-rollover` and `jaeger-es-index-cleaner` tools are also
-available as standalone binaries on the
-[Jaeger GitHub releases page](https://github.com/jaegertracing/jaeger/releases),
-and do not have to be run via Docker.
-{{< /info >}}
 
 If you need to initialize archive storage, add `-e ARCHIVE=true`.
 
