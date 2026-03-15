@@ -46,6 +46,12 @@ To learn more about rollover index management in Jaeger refer to this
 
 For automated rollover, please refer to [Elasticsearch ILM support](#ilm-support).
 
+{{< info >}}
+The examples for `jaeger-es-rollover` and `jaeger-es-index-cleaner` tools below are shown using
+Docker invocations, but they are also available as standalone binaries on the
+[Jaeger GitHub releases page](https://github.com/jaegertracing/jaeger/releases).
+{{< /info >}}
+
 ### Initialize
 
 The following command prepares Elasticsearch for rollover deployment by creating index aliases, indices, and index templates:
@@ -101,6 +107,11 @@ docker run -it --rm --net=host \
 ## ILM support
 
 [Elasticsearch ILM](https://www.elastic.co/guide/en/elasticsearch/reference/current/index-lifecycle-management.html) automatically manages indices according to performance, resiliency, and retention requirements.
+
+ILM support is an alternative to the manual rollover + lookback +
+index-cleaner workflow described above. When ILM is enabled,
+Elasticsearch manages rollover and retention automatically
+according to the configured policy.
 
 For example:
 * Rollover to a new index by size (bytes or number of documents) or age, archiving previous indices
