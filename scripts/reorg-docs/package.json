@@ -25,7 +25,7 @@
     "jest": "^30.0.0",
     "memfs": "^4.17.2",
     "ts-jest": "^29.3.4",
-    "typescript": "^5.8.3"
+    "typescript": "^6.0.0"
   },
   "jest": {
     "preset": "ts-jest/presets/default-esm",
