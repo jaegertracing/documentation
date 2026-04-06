@@ -35,9 +35,9 @@ These storage backends can be deployed as a remote gRPC server.
 To use a remote storage as Jaeger storage backend, use `grpc` as the storage type
 and specify the remote gRPC server address. For more information,
 please refer to
-[jaeger/internal/storage/v2/grpc](https://github.com/jaegertracing/jaeger/tree/v2.17.0/internal/storage/v2/grpc).
+[jaeger/internal/storage/v2/grpc](https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/grpc).
 
-Example config for remote storage [can be found here](https://github.com/jaegertracing/jaeger/blob/v2.17.0/cmd/jaeger/config-remote-storage.yaml).
+Example config for remote storage [can be found here](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-remote-storage.yaml).
 
 Known remote storage backends:
 
