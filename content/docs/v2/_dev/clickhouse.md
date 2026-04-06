@@ -8,7 +8,7 @@ hasparent: true
 ClickHouse storage is **experimental** and must be explicitly enabled via the `storage.clickhouse` feature gate. The schema is subject to breaking changes in future releases.
 {{< /warning >}}
 
-* Supported ClickHouse versions: 25.x, 26.x
+* Supported ClickHouse versions: 25.x
 
 [ClickHouse](https://clickhouse.com/) is a column-oriented analytical database optimized for high-throughput ingestion and fast queries over large datasets.
 
