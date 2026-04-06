@@ -8,6 +8,8 @@ children:
   url: badger
 - title: Cassandra
   url: cassandra
+- title: ClickHouse
+  url: clickhouse
 - title: ElasticSearch
   url: elasticsearch
 - title: Kafka
@@ -18,7 +20,7 @@ children:
 
 ## Introduction
 
-Jaeger requires a persistent storage backend. Cassandra, Elasticsearch, and OpenSearch are the primary supported distributed storage backends. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
+Jaeger requires a persistent storage backend. Cassandra, Elasticsearch, and OpenSearch are the primary supported distributed storage backends. [ClickHouse](clickhouse/) is available as an experimental backend. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
 Please refer to [Configuration](../deployment/configuration/) page for details on configuring storage backends for Jaeger.
 
@@ -33,9 +35,9 @@ These storage backends can be deployed as a remote gRPC server.
 To use a remote storage as Jaeger storage backend, use `grpc` as the storage type
 and specify the remote gRPC server address. For more information,
 please refer to
-[jaeger/internal/storage/v2/grpc](https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/grpc).
+[jaeger/internal/storage/v2/grpc](https://github.com/jaegertracing/jaeger/tree/v2.17.0/internal/storage/v2/grpc).
 
-Example config for remote storage [can be found here](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-remote-storage.yaml).
+Example config for remote storage [can be found here](https://github.com/jaegertracing/jaeger/blob/v2.17.0/cmd/jaeger/config-remote-storage.yaml).
 
 Known remote storage backends:
 
