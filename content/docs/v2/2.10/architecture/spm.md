@@ -106,7 +106,7 @@ extensions:
 extensions:
   jaeger_query:
     traces: some_trace_storage
-    metrics_storage: some_metrics_storage
+    metrics: some_metrics_storage
 ```
 
 * Set the `monitor.menuEnabled=true` property in the [Jaeger UI configuration](../../deployment/frontend-ui/#monitor).
