@@ -10,7 +10,11 @@ ClickHouse storage is **experimental** and must be explicitly enabled via the `s
 
 * Supported ClickHouse versions: 25.x
 
-[ClickHouse](https://clickhouse.com/) is a column-oriented analytical database optimized for high-throughput ingestion and fast queries over large datasets.
+[ClickHouse](https://clickhouse.com/) is a column-oriented analytical database optimized for high-throughput ingestion and fast queries over large datasets. Its columnar storage, data compression, and vectorized query execution make it well-suited for storing and analyzing trace data at scale.
+
+ClickHouse also has the following officially supported resources available from the community:
+- [Docker container](https://hub.docker.com/r/clickhouse/clickhouse-server) from ClickHouse for getting a single node up quickly
+- [Helm chart](https://clickhouse.com/docs/use-cases/observability/clickstack/deployment/helm) from ClickHouse
 
 ## Configuration
 

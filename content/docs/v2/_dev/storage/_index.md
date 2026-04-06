@@ -20,7 +20,7 @@ children:
 
 ## Introduction
 
-Jaeger requires a persistent storage backend. Cassandra, Elasticsearch, and OpenSearch are the primary supported distributed storage backends. [ClickHouse](clickhouse/) is available as an experimental backend. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
+Jaeger requires a persistent storage backend. Cassandra, Elasticsearch, and OpenSearch are the primary supported distributed storage backends. [ClickHouse](clickhouse/) is supported as an experimental backend behind a feature gate. Additional backends are [discussed here](https://github.com/jaegertracing/jaeger/issues/638).
 
 Please refer to [Configuration](../deployment/configuration/) page for details on configuring storage backends for Jaeger.
 
