@@ -5,7 +5,7 @@ hasparent: true
 ---
 
 {{< warning >}}
-ClickHouse storage is **experimental** and must be explicitly enabled via the `storage.clickhouse` feature gate. The schema is subject to breaking changes in future releases.
+ClickHouse storage is **experimental** and must be explicitly enabled via the `storage.clickhouse` [feature gate](https://github.com/open-telemetry/opentelemetry-collector/blob/main/featuregate/README.md). The schema is subject to breaking changes in future releases.
 {{< /warning >}}
 
 * Supported ClickHouse versions: 25.x
