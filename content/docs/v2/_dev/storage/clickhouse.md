@@ -30,8 +30,28 @@ All tables are automatically created on startup when `create_schema: true` is se
 
 From the [Jaeger repository](https://github.com/jaegertracing/jaeger) root:
 
+### 1. Start ClickHouse
+
 ```bash
-docker compose -f docker-compose/clickhouse/docker-compose.yml --profile quickstart up
+docker compose -f docker-compose/clickhouse/docker-compose.yml up -d
 ```
 
-This starts ClickHouse, Jaeger (with automatic schema creation), and a trace generator. Once running, open the Jaeger UI at http://localhost:16686.
+This starts a ClickHouse server on ports `9000` (native) and `8123` (HTTP) with database `jaeger`.
+
+### 2. Run Jaeger
+
+```bash
+go run ./cmd/jaeger --config cmd/jaeger/config-clickhouse.yaml --feature-gates=storage.clickhouse
+```
+
+The config enables automatic schema creation (`create_schema: true`), so tables and materialized views are created on startup.
+
+### 3. Generate Test Data
+
+In a separate terminal:
+
+```bash
+go run ./cmd/tracegen -duration 10s -workers 3 -pause 250ms
+```
+
+Then open the Jaeger UI at http://localhost:16686.
