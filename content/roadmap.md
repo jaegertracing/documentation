@@ -46,7 +46,7 @@ Jaeger will evolve beyond traditional distributed tracing to become the observab
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/8416).
 
-## Support Elasticsearch/OpenSesrch data stream
+## Support Elasticsearch/OpenSearch data stream
 
 Data streams are the new hotness in Elasticsearch & OpenSearch to store append-only observability data. Data streams are well-suited for logs, events, metrics, and other continuously generated data.
 
