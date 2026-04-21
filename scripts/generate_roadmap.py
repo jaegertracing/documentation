@@ -8,11 +8,12 @@
 import json
 import logging
 import os
+import re
 import subprocess
 import urllib.request
 
 # Set up logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
 
 # Try to get token from gh CLI first, then env var, then file
@@ -148,13 +149,13 @@ def generate_roadmap(issues):
     )
     roadmap_content += "For more details, see the [Roadmap on GitHub](https://github.com/orgs/jaegertracing/projects/4/views/1?layout=table).\n\n"
     for issue in issues:
-        logger.info(issue["title"])
-        roadmap_content += f"## {issue['title']}\n\n"
+        title = re.sub(r"^\[Feature\]:?\s*", "", issue["title"]).strip()
+        logger.info("  💡 %s", title)
+        roadmap_content += f"## {title}\n\n"
         summary = extract_summary(issue["body"])
-        if summary:
-            roadmap_content += f"{summary}\n\n"
-        else:
-            roadmap_content += f"{issue['body']}\n\n"
+        text = (summary or issue["body"])
+        lines = "\n".join(line.rstrip() for line in text.splitlines())
+        roadmap_content += f"{lines}\n\n"
         roadmap_content += (
             f"For more information see the [issue description]({issue['url']}).\n\n"
         )

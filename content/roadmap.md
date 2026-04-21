@@ -15,9 +15,9 @@ As part of #5079, Jaeger has introduced the more efficient **[v2 Storage API](ht
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/6458).
 
-## [Feature] Support ClickHouse as a core storage backend
+## Support ClickHouse as a core storage backend
 
-Build first-class support for [ClickHouse ](https://github.com/ClickHouse/ClickHouse) as an official Jaeger backend. ClickHouse is an open-source column-oriented database for OLAP use cases. It is highly efficient and performant for high volumes of ingestion and search making it a good database for tracing and logging data specifically. It can also do aggregates very quickly which will come in handy for several features in Jaeger. 
+Build first-class support for [ClickHouse ](https://github.com/ClickHouse/ClickHouse) as an official Jaeger backend. ClickHouse is an open-source column-oriented database for OLAP use cases. It is highly efficient and performant for high volumes of ingestion and search making it a good database for tracing and logging data specifically. It can also do aggregates very quickly which will come in handy for several features in Jaeger.
 
 Benefits to the users:
 
@@ -27,12 +27,12 @@ Benefits to the users:
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/5058).
 
-## [Feature]:  GenAI integration with Jaeger
+## GenAI integration with Jaeger
 
 GenAI can provide powerful capabilities for automatic analysis of tracing data.
 
 There can be multiple product functions, with increasing order of complexity:
-  1. Free form question about a single trace. Easiest, needs chat infra in the UI. 
+  1. Free form question about a single trace. Easiest, needs chat infra in the UI.
     - Ability to use user-provided skills (nice to have). Requires agentic loop.
   1. Automated analysis of a trace. Needs agentic loop & prompt tuning on our side
   1. Free form search query. Needs ability act on the UI elements from agentic loop, and prompt tuning.
@@ -40,13 +40,13 @@ There can be multiple product functions, with increasing order of complexity:
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/7827).
 
-## [Feature]: GenAI Observability
+## GenAI Observability
 
 Jaeger will evolve beyond traditional distributed tracing to become the observability backbone for GenAI applications. This means natively handling large, multi-modal payloads with tiered storage and PII sanitization; serving as a registry for evaluation outcomes so quality metrics are traceable to specific agentic steps; enabling dataset curation and prompt/model version analytics directly from trace data; extending the query language to filter on quality scores and user feedback; and optimizing the UI for non-linear agentic workflows with DAG rendering and A/B trace comparison.
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/8416).
 
-## [Feature]: Support Elasticsearch/OpenSesrch data stream
+## Support Elasticsearch/OpenSesrch data stream
 
 Data streams are the new hotness in Elasticsearch & OpenSearch to store append-only observability data. Data streams are well-suited for logs, events, metrics, and other continuously generated data.
 
