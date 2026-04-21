@@ -15,7 +15,7 @@ As part of #5079, Jaeger has introduced the more efficient **[v2 Storage API](ht
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/6458).
 
-## [Feature] Support ClickHouse as a core storage backend
+## Support ClickHouse as a core storage backend
 
 Build first-class support for [ClickHouse ](https://github.com/ClickHouse/ClickHouse) as an official Jaeger backend. ClickHouse is an open-source column-oriented database for OLAP use cases. It is highly efficient and performant for high volumes of ingestion and search making it a good database for tracing and logging data specifically. It can also do aggregates very quickly which will come in handy for several features in Jaeger.
 
@@ -27,7 +27,7 @@ Benefits to the users:
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/5058).
 
-## [Feature]:  GenAI integration with Jaeger
+## GenAI integration with Jaeger
 
 GenAI can provide powerful capabilities for automatic analysis of tracing data.
 
@@ -38,11 +38,15 @@ There can be multiple product functions, with increasing order of complexity:
   1. Free form search query. Needs ability act on the UI elements from agentic loop, and prompt tuning.
   1. Free form investigation. Ultimate, investigation agent, needs lots of prompting.
 
-Everything beyond (1) involves prompt engineering and the only non-anecdotal way to evaluate the prompts is with benchmarks.
-
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/7827).
 
-## [Feature]: Support Elasticsearch data stream
+## GenAI Observability
+
+Jaeger will evolve beyond traditional distributed tracing to become the observability backbone for GenAI applications. This means natively handling large, multi-modal payloads with tiered storage and PII sanitization; serving as a registry for evaluation outcomes so quality metrics are traceable to specific agentic steps; enabling dataset curation and prompt/model version analytics directly from trace data; extending the query language to filter on quality scores and user feedback; and optimizing the UI for non-linear agentic workflows with DAG rendering and A/B trace comparison.
+
+For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/8416).
+
+## Support Elasticsearch/OpenSearch data stream
 
 Data streams are the new hotness in Elasticsearch & OpenSearch to store append-only observability data. Data streams are well-suited for logs, events, metrics, and other continuously generated data.
 
@@ -61,16 +65,6 @@ Allow clients to export partial spans, to support two use cases:
   * Enrich existing span with information from other sources, e.g. to record log events not captured via tracing SDK
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/729).
-
-## AI/ML platform for Jaeger
-
-At the moment doing ML/AI analysis with Jaeger is hard. There is no direct integration with ML/AI platforms and we do not have much knowledge on what models we could build.
-
-* Create Community/SIG for doing ML/AI with tracing/telemetry data.
-* Build ML/AI integration with Jaeger to make it easy for data scientists write and evaluate models (e.g Jupyter notebooks).
-* Create a registry of models/post-processing pipelines which derive useful information out of tracing data.
-
-For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/1639).
 
 ## Dynamic configuration support
 
