@@ -17,19 +17,17 @@ logger = logging.getLogger(__name__)
 
 # Try to get token from gh CLI first, then env var, then file
 GITHUB_TOKEN = None
-_GH_AVAILABLE = False
-logger.info("Checking gh CLI availability...")
+logger.info("Looking for GitHub token...")
 try:
     result = subprocess.run(
         ["gh", "auth", "token"], capture_output=True, text=True, check=True, timeout=5
     )
     GITHUB_TOKEN = result.stdout.strip()
-    _GH_AVAILABLE = True
     logger.info("Using token from gh CLI")
 except subprocess.TimeoutExpired:
-    logger.warning("gh auth token timed out, falling back to token auth")
+    logger.warning("gh auth token timed out, trying other sources")
 except FileNotFoundError:
-    logger.warning("gh CLI not found, falling back to token auth")
+    logger.warning("gh CLI not found, trying other sources")
 except subprocess.CalledProcessError as e:
     logger.warning("gh auth token failed (exit %d): %s", e.returncode, e.stderr.strip())
 
@@ -44,7 +42,7 @@ if not GITHUB_TOKEN:
         logger.info("Using token from ~/.github_token")
     except FileNotFoundError:
         logger.error(
-            "'gh auth token' failed, GITHUB_TOKEN env var not set, and ~/.github_token not found"
+            "No GitHub token found: gh auth token failed, GITHUB_TOKEN env var not set, and ~/.github_token not found"
         )
         exit(1)
 
