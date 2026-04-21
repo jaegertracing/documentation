@@ -38,10 +38,6 @@ There can be multiple product functions, with increasing order of complexity:
   1. Free form search query. Needs ability act on the UI elements from agentic loop, and prompt tuning.
   1. Free form investigation. Ultimate, investigation agent, needs lots of prompting.
 
-Everything beyond (1) involves prompt engineering and the only non-anecdotal way to evaluate the prompts is with benchmarks.
-
-[Directional design - "bring your own agent"](https://docs.google.com/document/d/1qD0OpyRfq-JbO6MCB5gmVxsdPcpPhxz1R_pPnKDdYOg/edit?tab=t.0#heading=h.qgr5ifum0a9m).
-
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/7827).
 
 ## [Feature]: GenAI Observability
