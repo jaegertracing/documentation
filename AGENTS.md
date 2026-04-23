@@ -43,6 +43,35 @@ efficiently:
 - **Deployment**: Netlify automatically deploys from the `main` branch
 - **Preview**: Netlify creates preview deployments for PRs
 
+### Verifying Changes
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for full setup, build, and check
+commands. Before submitting a PR, at minimum run:
+
+```bash
+npm run build              # Ensure the site builds
+npm run check:spelling     # Run spellcheck
+npm run check:links:internal  # Check internal links
+npm run check:format       # Check code formatting
+```
+
+Use `npm run fix:format` and `npm run fix:filenames` to auto-fix common issues.
+
+### Spellchecking
+
+The repository uses [cspell](https://cspell.org/) for spellchecking, configured
+in `.cspell.yml` with custom dictionaries in `.cspell/`.
+
+If the spellchecker flags a legitimate word:
+
+1. **General technical terms**: add to `.cspell/project-words.txt`
+2. **People's names**: add to `.cspell/project-names-src.txt`
+
+Rules for `.cspell/project-words.txt`:
+
+- One word per line, sorted alphabetically (case-insensitive)
+- Verify sorting: `sort -c --ignore-case .cspell/project-words.txt`
+
 ### Troubleshooting
 
 #### Link Checker Issues
@@ -63,11 +92,7 @@ Common issues:
 
 #### Filename Violations
 
-If CI complains about filename conventions:
-
-```bash
-npm run fix:filenames
-```
+Run `npm run fix:filenames` to auto-fix.
 
 ### Additional Resources
 
