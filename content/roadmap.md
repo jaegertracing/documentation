@@ -15,18 +15,6 @@ As part of #5079, Jaeger has introduced the more efficient **[v2 Storage API](ht
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/6458).
 
-## Support ClickHouse as a core storage backend
-
-Build first-class support for [ClickHouse ](https://github.com/ClickHouse/ClickHouse) as an official Jaeger backend. ClickHouse is an open-source column-oriented database for OLAP use cases. It is highly efficient and performant for high volumes of ingestion and search making it a good database for tracing and logging data specifically. It can also do aggregates very quickly which will come in handy for several features in Jaeger.
-
-Benefits to the users:
-
-* Efficient backend
-* Powerful search
-* Analytics capability, e.g. the possibility to support the APM function (Monitoring tab in Jaeger) directly from ClickHouse
-
-For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/5058).
-
 ## GenAI integration with Jaeger
 
 GenAI can provide powerful capabilities for automatic analysis of tracing data.
@@ -76,4 +64,3 @@ We need a dynamic configuration solution that comes in handy in various scenario
   * etc.
 
 For more information see the [issue description](https://github.com/jaegertracing/jaeger/issues/355).
-
