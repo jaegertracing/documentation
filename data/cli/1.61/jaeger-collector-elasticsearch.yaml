@@ -315,13 +315,13 @@ options:
     - name: es-archive.password-file
       usage: |
         Path to a file containing password. This file is watched for changes.
-    - name: es-archive.prioirity-dependencies-template
+    - name: es-archive.priority-dependencies-template
       default_value: "0"
       usage: Priority of jaeger-dependecies index template (ESv8 only)
-    - name: es-archive.prioirity-service-template
+    - name: es-archive.priority-service-template
       default_value: "0"
       usage: Priority of jaeger-service index template (ESv8 only)
-    - name: es-archive.prioirity-span-template
+    - name: es-archive.priority-span-template
       default_value: "0"
       usage: Priority of jaeger-span index template (ESv8 only)
     - name: es-archive.remote-read-clusters
@@ -463,13 +463,13 @@ options:
     - name: es.password-file
       usage: |
         Path to a file containing password. This file is watched for changes.
-    - name: es.prioirity-dependencies-template
+    - name: es.priority-dependencies-template
       default_value: "0"
       usage: Priority of jaeger-dependecies index template (ESv8 only)
-    - name: es.prioirity-service-template
+    - name: es.priority-service-template
       default_value: "0"
       usage: Priority of jaeger-service index template (ESv8 only)
-    - name: es.prioirity-span-template
+    - name: es.priority-span-template
       default_value: "0"
       usage: Priority of jaeger-span index template (ESv8 only)
     - name: es.remote-read-clusters
