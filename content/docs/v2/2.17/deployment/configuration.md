@@ -121,20 +121,7 @@ extensions:
 
 #### UI Base Path
 
-The `base_path` setting controls the HTTP route prefix for all `jaeger_query` extension endpoints. For example, setting it to `/jaeger` causes all UI HTTP routes to be registered under `/jaeger`. This can be useful when running Jaeger behind a reverse proxy.
-
-{{< info title="UI Base Path Auto-Detection" >}}
-Starting with Jaeger v2.18, the UI automatically detects the correct base path from the browser URL. Previously, `base_path` controlled both HTTP route registration and the `<base href>` tag injected into the HTML. With [ADR-009](https://github.com/jaegertracing/jaeger/blob/main/docs/adr/009-ui-base-path-auto-detection.md), the `<base href>` is now determined client-side by the UI via `window.location.pathname`.
-
-This means:
-- A single Jaeger instance can serve its UI under multiple external prefixes without configuration (e.g., `/` and `/alt/`).
-- Reverse proxies can rewrite the external prefix to a different internal prefix and the UI will still work correctly.
-- The `base_path` setting remains available for explicit HTTP route registration, but is no longer required for the UI to function behind a reverse proxy.
-
-See [jaeger#8568](https://github.com/jaegertracing/jaeger/pull/8568) for implementation details.
-{{< /info >}}
-
-Here is example code to set the base path:
+The base path for all `jaeger_query` extension HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running Jaeger behind a reverse proxy. Here is example code to set the base path.
 
 ```yaml
 extensions:

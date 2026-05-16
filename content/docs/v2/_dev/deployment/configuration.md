@@ -121,30 +121,28 @@ extensions:
 
 #### UI Base Path
 
-The `base_path` setting controls the HTTP route prefix for all `jaeger_query` extension endpoints. For example, setting it to `/jaeger` causes all UI HTTP routes to be registered under `/jaeger`. This can be useful when running Jaeger behind a reverse proxy.
+Jaeger UI is normally served at the root of a host, e.g. `https://jaeger.example.com/`. In many deployments it is convenient to expose it under a URL prefix instead, e.g. `https://example.com/jaeger/`, so Jaeger can share a hostname with other services routed through a reverse proxy or ingress controller.
 
-{{< info title="UI Base Path Auto-Detection" >}}
-Starting with Jaeger v2.18, the UI automatically detects the correct base path from the browser URL. Previously, `base_path` controlled both HTTP route registration and the `<base href>` tag injected into the HTML. With [ADR-009](https://github.com/jaegertracing/jaeger/blob/main/docs/adr/009-ui-base-path-auto-detection.md), the `<base href>` is now determined client-side by the UI via `window.location.pathname`.
+There are two independent prefixes involved:
 
-This means:
-- A single Jaeger instance can serve its UI under multiple external prefixes without configuration (e.g., `/` and `/alt/`).
-- Reverse proxies can rewrite the external prefix to a different internal prefix and the UI will still work correctly.
-- The `base_path` setting remains available for explicit HTTP route registration, but is no longer required for the UI to function behind a reverse proxy.
+* **External prefix**: what the browser sees in its address bar. There may be more than one - a single Jaeger instance can be exposed under several external prefixes simultaneously. This is configured at the proxy and Jaeger does not need to know about it: since v2.18.0 the UI detects the prefix from the browser's URL on each page load.
+* **Internal prefix**: the path Jaeger itself registers its HTTP routes under (HTML page, static assets, REST API). Configured by the `base_path` setting. Default: `/`.
 
-See [jaeger#8568](https://github.com/jaegertracing/jaeger/pull/8568) for implementation details.
-{{< /info >}}
+The proxy is responsible for reconciling the two: it may forward the path unchanged, strip the external prefix entirely, or rewrite it to a different internal value. Whatever it does, `base_path` describes the path **Jaeger sees**, not the path the browser sees. Set it to match the prefix the proxy actually forwards to Jaeger, and leave it at the default if Jaeger receives requests at the root.
 
-Here is example code to set the base path:
+The `base_path` setting must start with `/` and contain no `..` or duplicate slashes. A trailing `/` is allowed but stripped.
 
 ```yaml
 extensions:
   jaeger_query:
-    base_path: /
-    ui:
-      config_file: /etc/jaeger/ui-config.json
-    grpc:
-    http:
+    base_path: /jaeger
 ```
+
+**Note**: The routing scenario where the proxy is rewriting the external prefix to a different internal one was previously impossible (issue [#5157](https://github.com/jaegertracing/jaeger/issues/5157)) and is now supported because the external prefix is no longer a backend concern.
+
+**Example**: A working Docker Compose setup covering forward / strip / rewrite proxy routings ships in the repository at [`examples/reverse-proxy/`](https://github.com/jaegertracing/jaeger/tree/main/examples/reverse-proxy), with Apache httpd configs for each.
+
+For background on the design, see [ADR-009](https://github.com/jaegertracing/jaeger/blob/main/docs/adr/009-ui-base-path-auto-detection.md).
 
 #### UI Customization
 
