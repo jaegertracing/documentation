@@ -121,17 +121,28 @@ extensions:
 
 #### UI Base Path
 
-The base path for all `jaeger_query` extension HTTP routes can be set to a non-root value, e.g. `/jaeger` would cause all UI URLs to start with `/jaeger`. This can be useful when running Jaeger behind a reverse proxy. Here is example code to set the base path.
+Jaeger UI is normally served at the root of a host, e.g. `https://jaeger.example.com/`. In many deployments it is convenient to expose it under a URL prefix instead, e.g. `https://example.com/jaeger/`, so Jaeger can share a hostname with other services routed through a reverse proxy or ingress controller.
+
+There are two independent prefixes involved:
+
+* **External prefix**: what the browser sees in its address bar. There may be more than one - a single Jaeger instance can be exposed under several external prefixes simultaneously. This is configured at the proxy and Jaeger does not need to know about it: since v2.18.0 the UI detects the prefix from the browser's URL on each page load.
+* **Internal prefix**: the path Jaeger itself registers its HTTP routes under (HTML page, static assets, REST API). Configured by the `base_path` setting. Default: `/`.
+
+The proxy is responsible for reconciling the two: it may forward the path unchanged, strip the external prefix entirely, or rewrite it to a different internal value. Whatever it does, `base_path` describes the path **Jaeger sees**, not the path the browser sees. Set it to match the prefix the proxy actually forwards to Jaeger, and leave it at the default if Jaeger receives requests at the root.
+
+The `base_path` setting must start with `/` and contain no `..` or duplicate slashes. A trailing `/` is allowed but stripped.
 
 ```yaml
 extensions:
   jaeger_query:
-    base_path: /
-    ui:
-      config_file: /etc/jaeger/ui-config.json
-    grpc:
-    http:
+    base_path: /jaeger
 ```
+
+**Note**: The routing scenario where the proxy is rewriting the external prefix to a different internal one was previously impossible (issue [#5157](https://github.com/jaegertracing/jaeger/issues/5157)) and is now supported because the external prefix is no longer a backend concern.
+
+**Example**: A working Docker Compose setup covering forward / strip / rewrite proxy routings ships in the repository at [`examples/reverse-proxy/`](https://github.com/jaegertracing/jaeger/tree/main/examples/reverse-proxy), with Apache httpd configs for each.
+
+For background on the design, see [ADR-009](https://github.com/jaegertracing/jaeger/blob/main/docs/adr/009-ui-base-path-auto-detection.md).
 
 #### UI Customization
 
