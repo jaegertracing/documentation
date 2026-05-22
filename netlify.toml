@@ -5,6 +5,16 @@ command = "npm run build:preview"
 [context.production]
 command = "npm run build:production"
 
+[[headers]]
+  for = "/*"
+
+  [headers.values]
+    Strict-Transport-Security = "max-age=31536000"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), geolocation=(), microphone=()"
+
 # Edge function to redirect all /docs/1.X/* to /docs/1.76/*
 [[edge_functions]]
   path = "/docs/1.(.*)"
