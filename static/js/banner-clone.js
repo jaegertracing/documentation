@@ -1,0 +1,42 @@
+(() => {
+  const cloneIntoTarget = ({
+    targetSelector,
+    sourceSelector,
+    ghostClass = 'element-ghost',
+    position = 'first',
+  }) => {
+    const target = document.querySelector(targetSelector);
+    const source = document.querySelector(sourceSelector);
+    if (!target || !source) return;
+
+    const existing = target.querySelector(`.${ghostClass}`);
+    if (existing) {
+      existing.remove();
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.className = ghostClass;
+    wrapper.appendChild(source.cloneNode(true));
+
+    if (position === 'last') {
+      target.appendChild(wrapper);
+    } else {
+      target.insertBefore(wrapper, target.firstChild);
+    }
+  };
+
+  const scheduleClone = (options) => {
+    const run = () => cloneIntoTarget(options);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', run, { once: true });
+    } else {
+      run();
+    }
+  };
+
+  scheduleClone({
+    targetSelector: '#td-cover-block-0',
+    sourceSelector: '.jaeger-banner-list',
+    ghostClass: 'banner-ghost',
+  });
+})();
