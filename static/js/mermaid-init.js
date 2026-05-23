@@ -11,5 +11,9 @@
     themeCSS: '.label foreignObject { font-size: 90%; overflow: visible; }',
   };
 
-  mermaid.initialize(config);
+  if (!window.mermaid) {
+    return;
+  }
+
+  window.mermaid.initialize(config);
 })();

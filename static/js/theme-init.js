@@ -1,16 +1,18 @@
 (function () {
   const themeKey = 'td-color-theme';
-  const storedTheme = localStorage.getItem(themeKey);
-  let theme =
-    storedTheme ||
-    (window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let storedTheme;
+
+  try {
+    storedTheme = localStorage.getItem(themeKey);
+  } catch (_) {
+    storedTheme = null;
+  }
+
+  let theme = storedTheme || (prefersDark ? 'dark' : 'light');
 
   if (theme === 'auto') {
-    theme = window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
+    theme = prefersDark ? 'dark' : 'light';
   }
 
   document.documentElement.setAttribute('data-bs-theme', theme);
