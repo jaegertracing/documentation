@@ -75,6 +75,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:48:53.775158-04:00"
   },
+  "https://cdn-images-1.medium.com/max/1024/1*ToFHZl5D5VZZS1YUtlgN4g.jpeg": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:41.670355-04:00"
+  },
   "https://cdn-images-1.medium.com/max/1024/1*b-RsMFPGcTtpxKaL2oRMEg.png": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:48:52.044907-04:00"
@@ -114,6 +118,18 @@
   "https://cert-manager.io/v1.6-docs/installation/#default-static-install": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:16.736629-04:00"
+  },
+  "https://clickhouse.com/": {
+    "StatusCode": 200,
+    "LastSeen": "2026-05-25T18:47:43.571328-04:00"
+  },
+  "https://clickhouse.com/docs/materialized-view": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:45.315328-04:00"
+  },
+  "https://clickhouse.com/docs/use-cases/observability/clickstack/deployment/helm": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:44.212429-04:00"
   },
   "https://cloud-native.slack.com/archives/CGG7NFUJ3": {
     "StatusCode": 200,
@@ -263,6 +279,26 @@
     "StatusCode": 206,
     "LastSeen": "2026-01-07T13:11:40.46482-05:00"
   },
+  "https://download.jaegertracing.io/v2.18.0.tar.gz": {
+    "StatusCode": 200,
+    "LastSeen": "2026-05-25T18:47:52.948713-04:00"
+  },
+  "https://download.jaegertracing.io/v2.18.0.zip": {
+    "StatusCode": 200,
+    "LastSeen": "2026-05-25T18:47:52.611628-04:00"
+  },
+  "https://download.jaegertracing.io/v2.18.0/jaeger-2.18.0-darwin-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:51.740513-04:00"
+  },
+  "https://download.jaegertracing.io/v2.18.0/jaeger-2.18.0-linux-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:51.987963-04:00"
+  },
+  "https://download.jaegertracing.io/v2.18.0/jaeger-2.18.0-windows-amd64.tar.gz": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:52.243988-04:00"
+  },
   "https://en.wikipedia.org/wiki/Clock_skew": {
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:49:42.955992-04:00"
@@ -298,6 +334,10 @@
   "https://github.com/MarckK": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:51:02.359911-04:00"
+  },
+  "https://github.com/Nabil-Salah": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:53.280839-04:00"
   },
   "https://github.com/PikBot": {
     "StatusCode": 206,
@@ -2323,6 +2363,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-11-11T13:50:02.003821-05:00"
   },
+  "https://github.com/jaegertracing/helm-charts/tree/main/charts/jaeger": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:49.357529-04:00"
+  },
   "https://github.com/jaegertracing/helm-charts/tree/v2": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:45.676975-04:00"
@@ -2499,6 +2543,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-10-05T08:06:35.621368-04:00"
   },
+  "https://github.com/jaegertracing/jaeger-ui/issues/3313": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:55.571243-04:00"
+  },
   "https://github.com/jaegertracing/jaeger-ui/issues/998": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:55.651471-04:00"
@@ -2567,6 +2615,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:04.258827-04:00"
   },
+  "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-clickhouse.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:44.757098-04:00"
+  },
   "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-elasticsearch.yaml": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:04.604994-04:00"
@@ -2606,6 +2658,10 @@
   "https://github.com/jaegertracing/jaeger/blob/main/docker-compose/scylladb/README.md": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:14.61138-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/main/docs/adr/009-ui-base-path-auto-detection.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:48.02486-04:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/examples/hotrod/README.md": {
     "StatusCode": 206,
@@ -2679,6 +2735,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:53.887226-04:00"
   },
+  "https://github.com/jaegertracing/jaeger/issues/5157": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:47.062192-04:00"
+  },
   "https://github.com/jaegertracing/jaeger/issues/5632": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:51.430141-04:00"
@@ -2739,6 +2799,14 @@
     "StatusCode": 206,
     "LastSeen": "2026-01-07T13:10:57.306075-05:00"
   },
+  "https://github.com/jaegertracing/jaeger/issues/7832": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:54.216172-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/issues/8416": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:42.825565-04:00"
+  },
   "https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:43.581447-04:00"
@@ -2750,6 +2818,10 @@
   "https://github.com/jaegertracing/jaeger/labels/help%20wanted": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:13.517411-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/releases": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:46.15676-04:00"
   },
   "https://github.com/jaegertracing/jaeger/releases/": {
     "StatusCode": 206,
@@ -2831,6 +2903,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-01-07T13:11:39.24818-05:00"
   },
+  "https://github.com/jaegertracing/jaeger/releases/tag/v2.18.0": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:51.168847-04:00"
+  },
   "https://github.com/jaegertracing/jaeger/security/advisories": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:48:43.328403-04:00"
@@ -2874,6 +2950,10 @@
   "https://github.com/jaegertracing/jaeger/tree/main/examples/hotrod": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:39.409933-04:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/main/examples/reverse-proxy": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:47.443472-04:00"
   },
   "https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin": {
     "StatusCode": 206,
@@ -2983,6 +3063,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:56.941923-04:00"
   },
+  "https://github.com/open-telemetry/opentelemetry-collector/blob/main/featuregate/README.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:43.361309-04:00"
+  },
   "https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:19.571224-04:00"
@@ -3067,6 +3151,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:48:59.889551-04:00"
   },
+  "https://github.com/open-telemetry/opentelemetry-operator": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:48.919118-04:00"
+  },
   "https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:49:19.311372-04:00"
@@ -3143,6 +3231,10 @@
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:48:47.078003-04:00"
   },
+  "https://github.com/parshipcy": {
+    "StatusCode": 206,
+    "LastSeen": "2026-05-25T18:47:54.554635-04:00"
+  },
   "https://github.com/pipiland2612": {
     "StatusCode": 206,
     "LastSeen": "2025-05-31T11:50:44.583632-04:00"
@@ -3210,6 +3302,10 @@
   "https://hub.docker.com/r/apache/kafka": {
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:49:41.634308-04:00"
+  },
+  "https://hub.docker.com/r/clickhouse/clickhouse-server": {
+    "StatusCode": 200,
+    "LastSeen": "2026-05-25T18:47:43.945908-04:00"
   },
   "https://hub.docker.com/r/jaegertracing": {
     "StatusCode": 200,
@@ -3418,6 +3514,14 @@
   "https://medium.com/jaegertracing/how-to-maximize-span-ingestion-while-limiting-writes-per-second-to-scylla-with-jaeger-3bcda5608841": {
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:49:40.558313-04:00"
+  },
+  "https://medium.com/jaegertracing/introducing-native-clickhouse-support-in-jaeger-3341e8208720": {
+    "StatusCode": 200,
+    "LastSeen": "2026-05-25T18:47:41.79384-04:00"
+  },
+  "https://medium.com/jaegertracing/introducing-native-clickhouse-support-in-jaeger-3341e8208720?source=rss----99735986d50---4": {
+    "StatusCode": 200,
+    "LastSeen": "2026-05-25T00:00:00Z"
   },
   "https://medium.com/jaegertracing/introducing-native-support-for-opentelemetry-in-jaeger-eb661be8183c": {
     "StatusCode": 200,
