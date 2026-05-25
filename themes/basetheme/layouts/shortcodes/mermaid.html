@@ -1,18 +1,8 @@
-<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>
-  var config = {
-    startOnLoad: true,
-
-    // useMaxWidth:true ensures the SVG scales with the main panel as it's resized
-    // and prevents the image from overlapping with menu panels.
-    flowchart: { useMaxWidth: true, htmlLabels: false },
-
-    // See: https://github.com/mermaid-js/mermaid/issues/790#issuecomment-478860052
-    // Prevents text in labels from getting cut off at the end.
-    themeCSS: ".label foreignObject { font-size: 90%; overflow: visible; }"
-  };
-  mermaid.initialize(config);
-</script>
+<script
+  src="https://cdn.jsdelivr.net/npm/mermaid@11.15.0/dist/mermaid.min.js"
+  integrity="sha384-yQ4mmBBT+vhTAwjFH0toJXNYJ6O4usWnt6EPIdWwrRvx2V/n5lXuDZQwQFeSFydF"
+  crossorigin="anonymous"></script>
+<script src="{{ "js/mermaid-init.js" | relURL }}"></script>
 <div class="mermaid">
   {{ .Inner }}
 </div>

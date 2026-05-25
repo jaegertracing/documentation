@@ -6,7 +6,7 @@ $navbar-margin-top: -($navbar-brand-size - $navbar-brand-base) / 2;
   background-color: $jaeger-blue-dark;
 
   .navbar-brand {
-    svg {
+    .navbar-logo__image {
       height: $navbar-brand-size;
       width: $navbar-brand-size;
       margin-top: $navbar-margin-top;

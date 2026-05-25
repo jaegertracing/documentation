@@ -9,6 +9,7 @@ command = "npm run build:production"
   for = "/*"
 
   [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' https://code.jquery.com https://cdn.jsdelivr.net https://unpkg.com https://cse.google.com https://www.google.com; style-src 'self' https://cdn.jsdelivr.net; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://cse.google.com https://www.google.com; frame-src https://www.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests"
     Strict-Transport-Security = "max-age=31536000"
     X-Content-Type-Options = "nosniff"
     X-Frame-Options = "DENY"

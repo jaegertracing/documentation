@@ -11,6 +11,61 @@
 @import 'td/code-dark';
 @import 'gcs_search';
 
+html {
+  background: Canvas;
+  color: CanvasText;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background: #0b0d12;
+    color: #e6e6e6;
+  }
+}
+
+html[data-theme-init] * {
+  transition: none !important;
+}
+
+.td-cover-block {
+  overflow: hidden;
+
+  &::after,
+  &__media {
+    z-index: 0;
+  }
+
+  &__media {
+    position: absolute;
+    inset: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    &--anchor-top img {
+      object-position: top;
+    }
+  }
+
+  > .byline {
+    z-index: 1;
+  }
+}
+
+.options-table-usage {
+  padding-left: 50px;
+}
+
+.embed-open-icon {
+  display: inline;
+  width: 20px;
+  height: 20px;
+}
+
 .td-content {
   @include set-elt-hover-and-focus(
     $element: 'a',
