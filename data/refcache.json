@@ -3810,5 +3810,9 @@
   "https://youtu.be/s7IrYt1igSM": {
     "StatusCode": 200,
     "LastSeen": "2025-05-31T11:49:11.130704-04:00"
+  },
+  "https://medium.com/jaegertracing/introducing-native-clickhouse-support-in-jaeger-3341e8208720?source=rss----99735986d50---4": {
+    "StatusCode": 200,
+    "LastSeen": "2026-05-25T00:00:00Z"
   }
 }
