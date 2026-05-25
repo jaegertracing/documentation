@@ -14,7 +14,7 @@ See also:
 ## LFX Mentorship March-May 2026 (Term 1)
 
 * [Nabil Salah](https://github.com/Nabil-Salah) -- [AI-Powered Trace Analysis with Bring-Your-Own-Agent](https://github.com/jaegertracing/jaeger/issues/7832)
-* [Parship Chowdhury](https://github.com/Parship12) -- [Modernizing Jaeger-UI routing and state management](https://github.com/jaegertracing/jaeger-ui/issues/3313)
+* [Parship Chowdhury](https://github.com/parshipcy) -- [Modernizing Jaeger-UI routing and state management](https://github.com/jaegertracing/jaeger-ui/issues/3313)
 
 ## LFX Mentorship September-November 2025 (Term 3)
 
