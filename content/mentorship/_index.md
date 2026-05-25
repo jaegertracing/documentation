@@ -11,6 +11,11 @@ See also:
   * [For mentees](for-mentees/)
   * [For mentors](for-mentors/)
 
+## LFX Mentorship March-May 2026 (Term 1)
+
+* [Nabil Salah](https://github.com/Nabil-Salah) -- [AI-Powered Trace Analysis with Bring-Your-Own-Agent](https://github.com/jaegertracing/jaeger/issues/7832)
+* [Parship Chowdhury](https://github.com/parshipcy) -- [Modernizing Jaeger-UI routing and state management](https://github.com/jaegertracing/jaeger-ui/issues/3313)
+
 ## LFX Mentorship September-November 2025 (Term 3)
 
 * [Danish Saiddiqui](https://github.com/danish9039) -- [Next-Generation Jaeger Demo with OpenTelemetry and OpenSearch](https://github.com/jaegertracing/jaeger/issues/7326)
