@@ -10,6 +10,10 @@ https://jaegertracing.io, built with [Hugo](https://gohugo.io/) and hosted on
 [Netlify](https://www.netlify.com/). For general information about the
 repository, see [README.md](README.md).
 
+## Commit Requirements
+
+All commits must include a sign-off (`git commit -s`).
+
 ## Contributing Guidelines
 
 Before making changes, familiarize yourself with:
