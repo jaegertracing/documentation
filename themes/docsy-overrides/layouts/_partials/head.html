@@ -8,18 +8,6 @@
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)"  content="#000000">
 
-{{/* Styles to set canvas colors and avoid transitions */ -}}
-<style>
-  {{/* Set system colors as default */ -}}
-  html { background: Canvas; color: CanvasText; }
-  {{/* Define reasonable dark defaults */ -}}
-  @media (prefers-color-scheme: dark) {
-    html { background: #0b0d12; color: #e6e6e6; }
-  }
-  {{/* Avoid transitions until theme CSS is loaded */ -}}
-  html[data-theme-init] * { transition: none !important; }
-</style>
-
 {{/* Set theme attribute before CSS loads to prevent flash */ -}}
 <script src="{{ "js/theme-init.js" | relURL }}"></script>
 {{ end -}}
