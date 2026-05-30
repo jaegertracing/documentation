@@ -6,6 +6,7 @@ Juraci Paixão Kröhling
 
 # Other names (sometimes from github links)
 robbert
+Jonah Kowall jkowall
 
 ## LFX Mentorship March-May 2026 (Term 1)
 Nabil Salah
