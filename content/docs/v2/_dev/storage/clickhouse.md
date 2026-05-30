@@ -8,7 +8,7 @@ hasparent: true
 ClickHouse storage is **experimental** and must be explicitly enabled via the `storage.clickhouse` [feature gate](https://github.com/open-telemetry/opentelemetry-collector/blob/main/featuregate/README.md). The schema is subject to breaking changes in future releases.
 {{< /warning >}}
 
-* Supported ClickHouse versions: 25.x
+* Supported ClickHouse versions: 26.x
 
 [ClickHouse](https://clickhouse.com/) is a column-oriented analytical database optimized for high-throughput ingestion and fast queries over large datasets. Its columnar storage, data compression, and vectorized query execution make it well-suited for storing and analyzing trace data at scale.
 
