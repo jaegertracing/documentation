@@ -17,7 +17,7 @@ Congratulations on being selected as a Jaeger Mentee! It can be daunting when st
   with all past and new mentees and mentors together.
 - Join the [#jaeger](https://cloud-native.slack.com/archives/CGG7NFUJ3) public channel.
   This is where you can get help from the Jaeger community.
-- Say "hello" to your mentors, fellow mentees, and jaeger community; and if
+- Say "hello" to your mentors, fellow mentees, and Jaeger community; and if
   you're comfortable with it, introduce yourself with a few sentences.
 - Read our contributing guides ([#1](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING.md),
   [#2](https://github.com/jaegertracing/jaeger/blob/main/CONTRIBUTING_GUIDELINES.md)),
