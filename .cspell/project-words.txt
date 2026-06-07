@@ -4,6 +4,7 @@ autoscale
 autoscaler
 bitnami
 bootcamp
+BYOA
 cassandra
 certfile
 clickhouse
@@ -83,6 +84,7 @@ nginx
 nssm
 nvmrc
 olap
+Ollama
 openpgp
 opensearch
 openshift
