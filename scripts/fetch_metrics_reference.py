@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 
-# Copyright (c) 2024 The Jaeger Authors.
+# Copyright (c) 2026 The Jaeger Authors.
 # SPDX-License-Identifier: Apache-2.0
 
-# This script fetches the auto-generated metrics reports from the jaegertracing/jaeger
+# This script fetches the v1-to-v2 metrics mapping tables from the jaegertracing/jaeger
 # repository and publishes a reference page of current Jaeger v2 metrics.
 # It is intended to be run as part of the RELEASE PROCESS so that the committed
 # metrics-reference.md always reflects the state of a specific release tag.
 # The purpose is to track BACKWARDS COMPATIBILITY of metrics across Jaeger v2 releases.
+#
+# NOTE: The source files under cmd/jaeger/docs/migration/ are v1-to-v2 mapping tables.
+# Pin JAEGER_METRICS_REF to a specific release tag for reproducible, up-to-date output.
 
 import logging
 import os
@@ -21,10 +24,10 @@ from pathlib import Path
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Base URL template for the v2 metrics reference docs stored in the jaeger repository
-# under cmd/jaeger/docs/migration/. Note: these are committed markdown files, not CI artifacts;
+# Base URL template for the v1-to-v2 metrics mapping tables stored in the jaeger repository
+# under cmd/jaeger/docs/migration/. These are committed markdown files.
 # Set the JAEGER_METRICS_REF environment variable to a specific release tag/branch
-# if you need reproducible output; it defaults to "main".
+# (e.g. export JAEGER_METRICS_REF=v2.1.0) for reproducible output; it defaults to "main".
 BASE_RAW_URL_TEMPLATE = "https://raw.githubusercontent.com/jaegertracing/jaeger/{ref}/cmd/jaeger/docs/migration/"
 JAEGER_METRICS_REF = os.environ.get("JAEGER_METRICS_REF", "main")
 
@@ -89,6 +92,19 @@ def extract_v2_metrics_table(raw_md):
         elif in_table and stripped == "":
             in_table = False
             output_lines.append("")
+        elif in_table and not stripped.startswith("|"):
+            # A non-pipe, non-empty line ends the table even without a blank separator.
+            # Exit table mode and fall through to heading/content processing below.
+            in_table = False
+            output_lines.append("")
+            heading_match = re.match(r'^(#{1,6})\s+(.*)', stripped)
+            if heading_match:
+                hashes, text = heading_match.groups()
+                level = len(hashes)
+                if level == 1:
+                    output_lines.append("### " + text.strip())
+                else:
+                    output_lines.append(stripped)
         elif not in_table:
             # Carry over subsection headings, but downgrade H1 to H3 to avoid multiple page H1s.
             # Preserve H2-H6 headings as-is to keep section boundaries clear.
