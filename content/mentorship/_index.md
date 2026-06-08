@@ -12,6 +12,11 @@ See also:
   * [For mentees](for-mentees/)
   * [For mentors](for-mentors/)
 
+## LFX Mentorship June-August 2026 (Term 2)
+
+* [Soumya Raikwar](https://github.com/SoumyaRaikwar) -- [AI-Powered Trace Analysis Phase 2 - Skills Framework](https://github.com/jaegertracing/jaeger/issues/8440)
+* [Swetalin Rout](https://github.com/swetalin-10) -- [Jaeger for GenAI Observability: Specialized Trace Visualization](https://github.com/jaegertracing/jaeger/issues/8401)
+
 ## LFX Mentorship March-May 2026 (Term 1)
 
 * [Nabil Salah](https://github.com/Nabil-Salah) -- [AI-Powered Trace Analysis with Bring-Your-Own-Agent](https://github.com/jaegertracing/jaeger/issues/7832)
