@@ -33,7 +33,7 @@ Jaeger supports three index management strategies, each with increasing operatio
 
 | Strategy | How indices are created | Rollover trigger | Retention cleanup | External tooling required |
 |----------|------------------------|------------------|-------------------|---------------------------|
-| **Daily indices** (default) | Jaeger creates time-based indices (e.g., `jaeger-span-2024-06-18`) | Automatic (new day) | `jaeger-es-index-cleaner` cron job | None |
+| **Time-based indices** (default) | Jaeger creates time-based indices (e.g., `jaeger-span-2024-06-18`) | Automatic (new time period) | `jaeger-es-index-cleaner` cron job | None |
 | **Rollover** | Numbered indices (e.g., `jaeger-span-000001`) via aliases | `jaeger-es-rollover rollover` cron job | `jaeger-es-rollover lookback` + `jaeger-es-index-cleaner` cron jobs | `jaeger-es-rollover init` (one-time) |
 | **Rollover with ILM** | Same as above, but Elasticsearch manages the rollover | Elasticsearch ILM policy | Elasticsearch ILM policy | `jaeger-es-rollover init` (one-time) + ILM policy |
 
@@ -41,7 +41,8 @@ The relevant configuration options are:
 
 | Config property | Default | Description |
 |-----------------|---------|-------------|
-| `use_aliases` | `false` | Use read/write aliases instead of daily indices (enables rollover mode) |
+| `date_layout` | `2006-01-02` | Date format for time-based index names (e.g., `2006-01-02-15` for hourly indices) |
+| `use_aliases` | `false` | Use read/write aliases instead of time-based indices (enables rollover mode) |
 | `use_ilm` | `false` | Delegate rollover and retention to Elasticsearch ILM (requires `use_aliases: true`) |
 | `create_mappings` | `true` | Create index templates at Jaeger startup. Must be `false` when `use_ilm: true` (templates are created by the initializer instead) |
 
