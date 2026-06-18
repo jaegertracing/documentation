@@ -15,7 +15,7 @@ Follow the [official instructions](https://opentelemetry.io/docs/collector/exten
 
 ## Builder Manifest
 
-The `ocb` tool takes a YAML manifest file (commonly named `builder.yaml`) that declares which components to include in the binary. Jaeger provides a [reference manifest](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/builder.yaml) that reproduces the default distribution.
+The `ocb` tool takes a YAML manifest file (commonly named `builder.yaml`) that declares which components to include in the binary. Jaeger provides a [reference manifest](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/builder.yaml) that reproduces the default distribution. Note that the reference manifest uses `v0.0.0` with a `replaces` directive for in-repo builds — when building outside the Jaeger repository, use a real release version as shown in the example below.
 
 Here is a minimal example that builds a Jaeger binary with just the core components:
 
@@ -68,6 +68,7 @@ To add a component that is not part of the default Jaeger distribution, append i
 processors:
   # ... existing processors ...
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourcedetectionprocessor v0.123.0
+    import: github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourcedetectionprocessor
 ```
 
 {{< warning >}}
