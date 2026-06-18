@@ -185,7 +185,7 @@ To enable ILM support:
   EOF
   ```
 
-* Run elasticsearch initializer with `ES_USE_ILM=true`:
+* Run rollover initializer with `ES_USE_ILM=true`:
 
   ```shell
   docker run -it --rm --net=host\
