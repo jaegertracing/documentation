@@ -33,7 +33,7 @@ Jaeger supports three index management strategies, each with increasing operatio
 
 | | **Time-based indices** (default) | **Manual rollover** | **Rollover with ILM** |
 |--|----------------------------------|--------------|------------------------|
-| How indices are created | Jaeger creates daily or hourly indices (e.g., `jaeger-span-2024-06-18`) | Operator runs `jaeger-es-rollover init` to create the first numbered index (e.g., `jaeger-span-000001`); cron job creates subsequent ones | Same as Manual rollover, but Elasticsearch creates subsequent indices |
+| How indices are created | Jaeger creates daily or hourly indices (e.g., `jaeger-span-2024-06-18`) | Operator runs `jaeger-es-rollover init` to create the first numbered index (e.g., `jaeger-span-000001`); cron job creates subsequent ones | Operator runs `jaeger-es-rollover init` to create the first index; Elasticsearch creates subsequent ones |
 | Rollover trigger | Automatic (new time period) | `jaeger-es-rollover rollover` cron job | Elasticsearch ILM policy |
 | Retention cleanup | `jaeger-es-index-cleaner` cron job | `jaeger-es-rollover lookback` + `jaeger-es-index-cleaner` cron jobs | Elasticsearch ILM policy |
 | External tooling required | None | `jaeger-es-rollover init` (one-time) | `jaeger-es-rollover init` (one-time) + ILM policy |
