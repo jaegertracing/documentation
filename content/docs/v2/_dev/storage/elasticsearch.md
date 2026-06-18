@@ -31,11 +31,12 @@ more information about choosing how many shards should be chosen for optimizatio
 
 Jaeger supports three index management strategies, each with increasing operational complexity:
 
-| Strategy | How indices are created | Rollover trigger | Retention cleanup | External tooling required |
-|----------|------------------------|------------------|-------------------|---------------------------|
-| **Time-based indices** (default) | Jaeger creates time-based indices (e.g., `jaeger-span-2024-06-18`) | Automatic (new time period) | `jaeger-es-index-cleaner` cron job | None |
-| **Rollover** | Numbered indices (e.g., `jaeger-span-000001`) via aliases | `jaeger-es-rollover rollover` cron job | `jaeger-es-rollover lookback` + `jaeger-es-index-cleaner` cron jobs | `jaeger-es-rollover init` (one-time) |
-| **Rollover with ILM** | Same as above, but Elasticsearch manages the rollover | Elasticsearch ILM policy | Elasticsearch ILM policy | `jaeger-es-rollover init` (one-time) + ILM policy |
+| | **Time-based indices** (default) | **Rollover** | **Rollover with ILM** |
+|--|----------------------------------|--------------|------------------------|
+| How indices are created | Jaeger creates daily or hourly indices (e.g., `jaeger-span-2024-06-18`) | Numbered indices via aliases (e.g., `jaeger-span-000001`) | Same as Rollover |
+| Rollover trigger | Automatic (new time period) | `jaeger-es-rollover rollover` cron job | Elasticsearch ILM policy |
+| Retention cleanup | `jaeger-es-index-cleaner` cron job | `jaeger-es-rollover lookback` + `jaeger-es-index-cleaner` cron jobs | Elasticsearch ILM policy |
+| External tooling required | None | `jaeger-es-rollover init` (one-time) | `jaeger-es-rollover init` (one-time) + ILM policy |
 
 The relevant configuration options are:
 
