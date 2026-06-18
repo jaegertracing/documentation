@@ -9,20 +9,6 @@ This is useful when you want to:
   * Remove unused components to reduce binary size and attack surface.
   * Pin specific versions of dependencies for compliance or reproducibility.
 
-## Prerequisites
-
-Install the OpenTelemetry Collector Builder:
-
-```sh
-go install go.opentelemetry.io/collector/cmd/builder@latest
-```
-
-The installed binary will be named `builder`. Rename or alias it to `ocb` if you prefer:
-
-```sh
-mv $(go env GOPATH)/bin/builder $(go env GOPATH)/bin/ocb
-```
-
 ## Builder Manifest
 
 The `ocb` tool takes a YAML manifest file (commonly named `builder.yaml`) that declares which components to include in the binary. Jaeger provides a [reference manifest](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/builder.yaml) that reproduces the default distribution.
