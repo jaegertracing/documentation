@@ -33,6 +33,7 @@ flink
 fluentd
 glvs
 gobin
+gomod
 gopath
 goroutines
 Hashicorp
