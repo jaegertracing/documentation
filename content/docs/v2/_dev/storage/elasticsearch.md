@@ -32,7 +32,7 @@ more information about choosing how many shards should be chosen for optimizatio
 Jaeger supports three index management strategies, each with increasing operational complexity:
 
 | | **Time-based indices** (default) | **Manual rollover** | **Rollover with ILM** (recommended) |
-|--|----------------------------------|--------------|------------------------|
+|---|----------------------------------|--------------|------------------------|
 | How indices are created | Jaeger creates daily or hourly indices (e.g., `jaeger-span-2024-06-18`) | Operator runs `jaeger-es-rollover init` to create the first numbered index (e.g., `jaeger-span-000001`); cron job creates subsequent ones | Operator runs `jaeger-es-rollover init` to create the first index; Elasticsearch creates subsequent ones |
 | Rollover trigger | Automatic (new time period) | `jaeger-es-rollover rollover` cron job | Elasticsearch ILM policy |
 | Retention cleanup | `jaeger-es-index-cleaner` cron job | `jaeger-es-rollover lookback` + `jaeger-es-index-cleaner` cron jobs | Elasticsearch ILM policy |
@@ -94,7 +94,7 @@ The initializer performs the following steps for each index type (spans, service
 2. **Creates the first rollover index** (e.g., `jaeger-span-000001`). Subsequent rollovers increment this number.
 3. **Creates read and write aliases** (e.g., `jaeger-span-read` and `jaeger-span-write`) pointing to the initial index. Jaeger queries via the read alias and writes via the write alias.
 
-After the initialization Jaeger can be deployed with `use_aliases: true`.
+After the initialization, Jaeger can be deployed with `use_aliases: true`.
 
 ### Roll over
 
@@ -208,7 +208,7 @@ To enable ILM support:
   * Embeds `lifecycle.name` and `lifecycle.rollover_alias` in the index templates, so Elasticsearch automatically applies the ILM policy to every new rollover index.
   * Sets `is_write_index: true` on the write aliases, which is required for Elasticsearch to perform ILM-triggered rollovers.
 
-  With ILM enabled, Elasticsearch manages rollovers automatically — you no longer need the `rollover` and `lookback` cron jobs described above.
+  With ILM enabled, Elasticsearch manages rollovers and retention automatically — you no longer need the `rollover`, `lookback`, or `index-cleaner` cron jobs described above.
 
   After the initialization, deploy Jaeger with `use_ilm: true` and `use_aliases: true`.
 
