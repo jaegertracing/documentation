@@ -3,10 +3,11 @@ Yuri Shkuro yurishkuro
 Pavol Loffay pavolloffay
 Joe Farro
 Juraci Paixão Kröhling
+Jonah Kowall jkowall
+Mahad Zaryab mahadzaryab1
 
 # Other names (sometimes from github links)
 robbert
-Jonah Kowall jkowall
 
 ## LFX Mentorship March-May 2026 (Term 1)
 Nabil Salah
