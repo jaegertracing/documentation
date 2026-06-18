@@ -29,7 +29,7 @@ more information about choosing how many shards should be chosen for optimizatio
 
 ## Index Management Strategies
 
-Jaeger supports three index management strategies, each with increasing operational complexity:
+Jaeger supports three index management strategies:
 
 | | **Time-based indices** (default) | **Manual rollover** | **Rollover with ILM** (recommended) |
 |---|----------------------------------|--------------|------------------------|
