@@ -35,7 +35,7 @@ Jaeger supports three index management strategies:
 |---|----------------------------------|--------------|------------------------|
 | How indices are created | Jaeger creates daily or hourly indices (e.g., `jaeger-span-2024-06-18`) | Operator runs `jaeger-es-rollover init` to create the first numbered index (e.g., `jaeger-span-000001`); cron job creates subsequent ones | Operator runs `jaeger-es-rollover init` to create the first index; Elasticsearch creates subsequent ones |
 | Rollover trigger | Automatic (new time period) | `jaeger-es-rollover rollover` cron job | Elasticsearch ILM policy |
-| Retention cleanup | `jaeger-es-index-cleaner` cron job | `jaeger-es-rollover lookback` + `jaeger-es-index-cleaner` cron jobs | Elasticsearch ILM policy |
+| Retention cleanup | `jaeger-es-index-cleaner` cron job | `jaeger-es-rollover lookback` (optional) + `jaeger-es-index-cleaner` cron jobs | Elasticsearch ILM policy |
 | External tooling required | None | `jaeger-es-rollover init` (one-time) | `jaeger-es-rollover init` (one-time) + ILM policy |
 
 The relevant configuration options are:
@@ -63,7 +63,7 @@ Rollover lets you configure when to roll over to a new index based on one or mor
 * `max_docs` - the maximum documents in the index.
 * `max_size` - the maximum estimated size of primary shards (since Elasticsearch 6.x). It uses [byte size units](https://www.elastic.co/guide/en/elasticsearch/reference/master/common-options.html#byte-units) `tb`, `gb`, `mb`.
 
-Rollover index management strategy is more complex than using the default daily indices and it requires an initialization job to prepare the storage and two cron jobs to manage indices.
+Rollover index management strategy is more complex than using the default daily indices and it requires an initialization job to prepare the storage and cron jobs to manage indices.
 
 To learn more about rollover index management in Jaeger refer to this
 [article](https://medium.com/jaegertracing/using-elasticsearch-rollover-to-manage-indices-8b3d0c77915d).
@@ -205,7 +205,7 @@ To enable ILM support:
   The initializer performs the same steps as [described above](#initialize) (creates index templates, seed indices, and aliases), with the following ILM-specific additions:
 
   * Validates that the ILM policy (`jaeger-ilm-policy`) exists in Elasticsearch.
-  * Embeds `lifecycle.name` and `lifecycle.rollover_alias` in the index templates, so Elasticsearch automatically applies the ILM policy to every new rollover index.
+  * Embeds `index.lifecycle.name` and `index.lifecycle.rollover_alias` in the index templates, so Elasticsearch automatically applies the ILM policy to every new rollover index.
   * Sets `is_write_index: true` on the write aliases, which is required for Elasticsearch to perform ILM-triggered rollovers.
 
   With ILM enabled, Elasticsearch manages rollovers and retention automatically — you no longer need the `rollover`, `lookback`, or `index-cleaner` cron jobs described above.
