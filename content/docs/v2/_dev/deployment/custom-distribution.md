@@ -80,6 +80,10 @@ processors:
   - gomod: github.com/open-telemetry/opentelemetry-collector-contrib/processor/resourcedetectionprocessor v0.123.0
 ```
 
+{{< warning >}}
+When adding components from `opentelemetry-collector-contrib` or other OTel modules, use the same version of OpenTelemetry that Jaeger is built with. Mixing different OTel versions may cause API incompatibilities and build failures. Check Jaeger's [`go.mod`](https://github.com/jaegertracing/jaeger/blob/main/go.mod) for the exact versions used in each release.
+{{< /warning >}}
+
 ## Building
 
 Run the builder:
