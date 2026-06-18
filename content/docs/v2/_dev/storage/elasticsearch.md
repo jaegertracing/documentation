@@ -27,6 +27,28 @@ Shards and replicas are some configuration values to take special attention to, 
 index creation. [This article](https://www.elastic.co/blog/how-many-shards-should-i-have-in-my-elasticsearch-cluster) goes into
 more information about choosing how many shards should be chosen for optimization.
 
+## Index Management Strategies
+
+Jaeger supports three index management strategies, each with increasing operational complexity:
+
+| Strategy | How indices are created | Rollover trigger | Retention cleanup | External tooling required |
+|----------|------------------------|------------------|-------------------|---------------------------|
+| **Daily indices** (default) | Jaeger creates time-based indices (e.g., `jaeger-span-2024-06-18`) | Automatic (new day) | `jaeger-es-index-cleaner` cron job | None |
+| **Rollover** | Numbered indices (e.g., `jaeger-span-000001`) via aliases | `jaeger-es-rollover rollover` cron job | `jaeger-es-rollover lookback` + `jaeger-es-index-cleaner` cron jobs | `jaeger-es-rollover init` (one-time) |
+| **Rollover with ILM** | Same as above, but Elasticsearch manages the rollover | Elasticsearch ILM policy | Elasticsearch ILM policy | `jaeger-es-rollover init` (one-time) + ILM policy |
+
+The relevant configuration options are:
+
+| Config property | Default | Description |
+|-----------------|---------|-------------|
+| `use_aliases` | `false` | Use read/write aliases instead of daily indices (enables rollover mode) |
+| `use_ilm` | `false` | Delegate rollover and retention to Elasticsearch ILM (requires `use_aliases: true`) |
+| `create_mappings` | `true` | Create index templates at Jaeger startup. Must be `false` when `use_ilm: true` (templates are created by the initializer instead) |
+
+{{< info >}}
+The `create_mappings` option is orthogonal to the index management strategy. In any mode, you can set it to `false` if you prefer to manage index templates externally (e.g., via the initializer or your own automation). When using ILM, it **must** be `false` because the initializer creates templates with ILM lifecycle settings that Jaeger itself does not add.
+{{< /info >}}
+
 ## Index Rollover
 
 [Elasticsearch rollover](https://www.elastic.co/guide/en/elasticsearch/reference/master/indices-rollover-index.html) is an index management strategy that optimizes use of resources allocated to indices.
