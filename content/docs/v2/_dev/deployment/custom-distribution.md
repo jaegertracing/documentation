@@ -90,7 +90,7 @@ ocb --config builder.yaml --skip-strict-versioning
 
 The `--skip-strict-versioning` flag is recommended because Jaeger's component packages use the same module version as the main Jaeger module, which may not match the versions of upstream OpenTelemetry dependencies. Without this flag, `ocb` would reject the build due to version mismatches between the declared `gomod` versions and the transitively resolved ones.
 
-The resulting binary will be placed in the `output_path` directory specified in the manifest. You can then run it with a standard Jaeger configuration file:
+The resulting binary will be placed in the `output_path` directory specified in the manifest. You will need to provide a configuration file that references the components included in your custom build:
 
 ```sh
 ./build/jaeger --config config.yaml
