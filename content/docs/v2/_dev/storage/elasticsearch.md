@@ -54,7 +54,7 @@ Docker invocations, but they are also available as standalone binaries on the
 
 ### Initialize
 
-The following command prepares Elasticsearch for rollover deployment by creating index aliases, indices, and index templates:
+The following command prepares Elasticsearch for rollover deployment:
 
 ```sh
 docker run -it --rm --net=host \
@@ -62,9 +62,15 @@ docker run -it --rm --net=host \
   init http://localhost:9200 # <1>
 ```
 
-If you need to initialize archive storage, add `-e ARCHIVE=true`.
+<1> If you need to initialize archive storage, add `-e ARCHIVE=true`.
 
-After the initialization Jaeger can be deployed with `use-aliases: true`.
+The initializer performs the following steps for each index type (spans, services, dependencies):
+
+1. **Creates index templates** that define field mappings, shard/replica settings, and index patterns (e.g., `jaeger-span-*`). All future rollover indices inherit their schema from these templates.
+2. **Creates the first rollover index** (e.g., `jaeger-span-000001`). Subsequent rollovers increment this number.
+3. **Creates read and write aliases** (e.g., `jaeger-span-read` and `jaeger-span-write`) pointing to the initial index. Jaeger queries via the read alias and writes via the write alias.
+
+After the initialization Jaeger can be deployed with `use_aliases: true`.
 
 ### Roll over
 
@@ -171,6 +177,14 @@ To enable ILM support:
 
   "ILM policy jaeger-ilm-policy doesn't exist in Elasticsearch. Please create it and rerun init"
   {{< /info >}}
+
+  The initializer performs the same steps as [described above](#initialize) (creates index templates, seed indices, and aliases), with the following ILM-specific additions:
+
+  * Validates that the ILM policy (`jaeger-ilm-policy`) exists in Elasticsearch.
+  * Embeds `lifecycle.name` and `lifecycle.rollover_alias` in the index templates, so Elasticsearch automatically applies the ILM policy to every new rollover index.
+  * Sets `is_write_index: true` on the write aliases, which is required for Elasticsearch to perform ILM-triggered rollovers.
+
+  With ILM enabled, Elasticsearch manages rollovers automatically — you no longer need the `rollover` and `lookback` cron jobs described above.
 
   After the initialization, deploy Jaeger with `use_ilm: true` and `use_aliases: true`.
 
