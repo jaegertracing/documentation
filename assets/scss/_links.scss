@@ -45,6 +45,8 @@ $nbsp: \00A0;
 .td-sidebar-nav a[target='_blank']:after,
 a.external-link:after {
   @include external-link-icon();
+  display: inline-block;
+  text-decoration: none;
 }
 
 .td-footer a.external-link:after {
