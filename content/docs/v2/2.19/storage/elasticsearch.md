@@ -45,10 +45,10 @@ The relevant configuration options are:
 | `date_layout` | `2006-01-02` | Time-based | Date format for index names (e.g., `2006-01-02-15` for hourly indices) |
 | `use_aliases` | `false` | Manual rollover, ILM | Use read/write aliases instead of time-based indices (enables rollover mode) |
 | `use_ilm` | `false` | ILM | Delegate rollover and retention to Elasticsearch ILM (requires `use_aliases: true`) |
-| `create_mappings` | `true` | All | Create index templates at Jaeger startup. Must be `false` when `use_ilm: true` (templates are created by `jaeger-es-rollover init` instead) |
+| `create_mappings` | `true` | All | Create index templates at Jaeger startup. Must be `false` when `use_ilm: true` |
 
 {{< info >}}
-The `create_mappings` option is orthogonal to the index management strategy. In any mode, you can set it to `false` if you prefer to manage index templates externally (e.g., via the initializer or your own automation). When using ILM, it **must** be `false` because the initializer creates templates with ILM lifecycle settings that Jaeger itself does not add.
+The `create_mappings` option is orthogonal to the index management strategy. In any mode, you can set it to `false` if you prefer to manage index templates externally (e.g., via `jaeger-es-rollover init` or your own automation). When using ILM, it **must** be `false` because `jaeger-es-rollover init` already creates the templates as part of index initialization.
 {{< /info >}}
 
 ## Index Rollover
