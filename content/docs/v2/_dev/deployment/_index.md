@@ -12,6 +12,8 @@ children:
   url: windows
 - title: Security
   url: security
+- title: Custom Distribution
+  url: custom-distribution
 ---
 
 Jaeger backend is released as a single binary or container image (see [Downloads](../../../download/)). Despite that, it can be configured to operate in different **roles**, such as **all-in-one**, **collector**, **query**, and **ingester** (see [Architecture](../architecture/)).
