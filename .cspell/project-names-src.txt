@@ -3,6 +3,8 @@ Yuri Shkuro yurishkuro
 Pavol Loffay pavolloffay
 Joe Farro
 Juraci Paixão Kröhling
+Jonah Kowall jkowall
+Mahad Zaryab mahadzaryab1
 
 # Other names (sometimes from github links)
 robbert
