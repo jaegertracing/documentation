@@ -31,7 +31,7 @@ more information about choosing how many shards should be chosen for optimizatio
 
 Jaeger supports three index management strategies, each with increasing operational complexity:
 
-| | **Time-based indices** (default) | **Rollover** | **Rollover with ILM** |
+| | **Time-based indices** (default) | **Manual rollover** | **Rollover with ILM** |
 |--|----------------------------------|--------------|------------------------|
 | How indices are created | Jaeger creates daily or hourly indices (e.g., `jaeger-span-2024-06-18`) | Numbered indices via aliases (e.g., `jaeger-span-000001`) | Same as Rollover |
 | Rollover trigger | Automatic (new time period) | `jaeger-es-rollover rollover` cron job | Elasticsearch ILM policy |
