@@ -78,7 +78,7 @@ The Jaeger binary is built on top of the OpenTelemetry Collector framework and i
   * Upstream components from `opentelemetry-collector-contrib`, such as Kafka Exporter and Receiver, Tail Sampling Processor, etc.
   * Jaeger own components, such as Jaeger Storage Exporter, Jaeger Query Extension, etc.
 
-You can build a [custom Jaeger distribution](../deployment/custom-distribution/) with additional or fewer components using the [OpenTelemetry Collector Builder (`ocb`)](https://github.com/open-telemetry/opentelemetry-collector/tree/main/cmd/builder).
+You can build a [custom Jaeger distribution](../deployment/custom-distribution/) with additional or fewer components using the [OpenTelemetry Collector Builder (`ocb`)](https://opentelemetry.io/docs/collector/extend/ocb/).
 
 [![Architecture](/img/architecture-v2-binary.png)](/img/architecture-v2-binary.png)
 
