@@ -44,7 +44,7 @@ Under the hood, at the data model level, the Jaeger trace IDs are a sequence of 
 
 ## Do I need to run multiple instances?
 
-> Does having high availability of the **jaeger** binary improve the overall system performance like decreasing the dropped span count and having less outage for trace collection? Is it recommended? If yes, why?
+> Does having high availability of the **jaeger** binary improve the overall system performance like decreasing the dropped span count and having fewer outages for trace collection? Is it recommended? If yes, why?
 
 These are the reasons to run multiple instances:
   * Your clients send so much data that a single **jaeger** instance is not able to accept it fast enough.
@@ -61,6 +61,6 @@ For example, refer to this blog post for an example of [protecting Jaeger UI wit
 
 ## Can I run only Jaeger UI if I am already storing data in Elasticsearch/ClickHouse?
 
-Q: I am already sending traces and metrics to my Elasticsearch cloud setup using sidecar containers and OpenTelemetry Collector (with index pattern: `traces-${date}`). I want to visualize them via the Jaeger UI. Can I run only the query service and the UI, without running the rest of the **jaeger** binary's pipeline?
+Q: I am already sending traces and metrics to my Elasticsearch cloud setup using sidecar containers and OpenTelemetry Collector (with index pattern: `traces-${date}`). I want to visualize them via the Jaeger UI. Can I run only the query service and the UI, without running Jaeger's ingestion pipeline?
 
 A: No, we do not support that setup. Every exporter can choose a different way of storing traces in the database like Elasticsearch or ClickHouse. Jaeger has its own storage implementation used by both the ingestion pipeline and query service, which uses a database schema that is specific to Jaeger and may not be compatible with the schema used by other exporters.
