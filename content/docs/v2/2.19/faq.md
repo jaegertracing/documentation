@@ -42,16 +42,16 @@ Under the hood, at the data model level, the Jaeger trace IDs are a sequence of 
 [trace-id-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/05fe64e9c305526901f70ff692030b388787e388/thrift/jaeger.thrift#L53
 [trace-id-proto]: https://github.com/jaegertracing/jaeger-idl/blob/05fe64e9c305526901f70ff692030b388787e388/proto/api_v2/model.proto#L97
 
-## Do I need to run multiple collectors?
+## Do I need to run multiple instances?
 
-> Does having high availability of **jaeger-collector** improve the overall system performance like decreasing the dropped span count and having the less outage for trace collection? Is it recommended? If yes, why?
+> Does having high availability of the **jaeger** binary improve the overall system performance like decreasing the dropped span count and having less outage for trace collection? Is it recommended? If yes, why?
 
 These are the reasons to run multiple instances:
-  * Your clients send so much data that a single **jaeger-collector** is not able to accept it fast enough.
-  * You want higher availability, e.g., when you do rolling restarts of **jaeger-collector**s for upgrade, to have some instances still running and able to process inbound data.
+  * Your clients send so much data that a single **jaeger** instance is not able to accept it fast enough.
+  * You want higher availability, e.g., when you do rolling restarts of **jaeger** instances for upgrade, to have some instances still running and able to process inbound data.
 
 These are NOT the reasons to run multiple instances:
-  * To avoid data loss. Jaeger drops data when the backend storage is not able to save it fast enough. Increasing the number of **jaeger-collector** instances, with more memory allocated to their internal queues, could provide a small, temporary relief, but does not remove the bottleneck of the storage backend.
+  * To avoid data loss. Jaeger drops data when the backend storage is not able to save it fast enough. Increasing the number of **jaeger** instances, with more memory allocated to their internal queues, could provide a small, temporary relief, but does not remove the bottleneck of the storage backend.
 
 ## How do I configure authentication for Jaeger UI
 
@@ -61,6 +61,6 @@ For example, refer to this blog post for an example of [protecting Jaeger UI wit
 
 ## Can I run only Jaeger UI if I am already storing data in Elasticsearch/ClickHouse?
 
-Q: I am already sending traces and metrics to my Elasticsearch cloud setup using sidecar containers and OpenTelemetry Collector (with index pattern: `traces-${date}`). I want to visualize them via the Jaeger UI. Can I run only the query service and the UI, without running Jaeger collector?
+Q: I am already sending traces and metrics to my Elasticsearch cloud setup using sidecar containers and OpenTelemetry Collector (with index pattern: `traces-${date}`). I want to visualize them via the Jaeger UI. Can I run only the query service and the UI, without running the rest of the **jaeger** binary's pipeline?
 
-A: No, we do not support that setup. Every exporter can choose a different way of storing traces in the database like Elasticsearch or ClickHouse. Jaeger has its own storage implementation used by both collector and query service which uses a database schema that is specific to Jaeger and may not be compatible with the schema used by other exporters.
+A: No, we do not support that setup. Every exporter can choose a different way of storing traces in the database like Elasticsearch or ClickHouse. Jaeger has its own storage implementation used by both the ingestion pipeline and query service, which uses a database schema that is specific to Jaeger and may not be compatible with the schema used by other exporters.
