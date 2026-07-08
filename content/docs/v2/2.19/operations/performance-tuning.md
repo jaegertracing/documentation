@@ -8,7 +8,7 @@ hasparent: true
 Jaeger was built to be able to ingest huge amounts of data in a resilient way. To better utilize resources that might cause delays, such as storage or network communications, Jaeger buffers and batches data. When more spans are generated than Jaeger is able to safely process, spans might get dropped. However, the defaults might not fit all scenarios.
 Since Jaeger v2 is based on the OpenTelemetry Collector, most of the advice in the [Scaling the Collector documentation](https://opentelemetry.io/docs/collector/scaling/) applies to Jaeger as well.
 Although performance tuning the individual components is important, the way Jaeger is deployed can be decisive in obtaining optimal performance.
-## Scale the Collector up and down
+## Scale up and down
 Use the auto-scaling capabilities of your platform: the unified **jaeger** binary is nearly horizontally scalable so that more instances can be added and removed on-demand.
 Adding **jaeger** instances is recommended when your platform provides auto-scaling capabilities, or when it's easier to start/stop **jaeger** instances than changing existing, running instances. Scaling horizontally is also indicated when the CPU usage should be spread across nodes.
 ## Make sure the storage can keep up
