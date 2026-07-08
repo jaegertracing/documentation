@@ -44,7 +44,7 @@ Under the hood, at the data model level, the Jaeger trace IDs are a sequence of 
 
 ## Do I need to run multiple instances?
 
-> Does having high availability of the **jaeger** binary improve the overall system performance like decreasing the dropped span count and having less outage for trace collection? Is it recommended? If yes, why?
+> Does having high availability of the **jaeger** binary improve the overall system performance like decreasing the dropped span count and having fewer outages for trace collection? Is it recommended? If yes, why?
 
 These are the reasons to run multiple instances:
   * Your clients send so much data that a single **jaeger** instance is not able to accept it fast enough.
