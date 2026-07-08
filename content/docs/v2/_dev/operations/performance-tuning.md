@@ -12,11 +12,11 @@ Since Jaeger v2 is based on the OpenTelemetry Collector, most of the advice in t
 
 Although performance tuning the individual components is important, the way Jaeger is deployed can be decisive in obtaining optimal performance.
 
-## Scale the Collector up and down
+## Scale up and down
 
-Use the auto-scaling capabilities of your platform: **jaeger-collector** is nearly horizontally scalable so that more instances can be added and removed on-demand.
+Jaeger v2 is distributed as a single `jaeger` binary. The collector functionality is one of the pipelines configured within it. Use the auto-scaling capabilities of your platform to run multiple instances of the binary horizontally.
 
-Adding **jaeger-collector** instances is recommended when your platform provides auto-scaling capabilities, or when it's easier to start/stop **jaeger-collector** instances than changing existing, running instances. Scaling horizontally is also indicated when the CPU usage should be spread across nodes.
+Running additional instances is recommended when your platform provides auto-scaling capabilities, or when it's easier to start/stop instances than changing existing, running ones. Scaling horizontally is also indicated when the CPU usage should be spread across nodes.
 
 ## Make sure the storage can keep up
 
@@ -25,14 +25,15 @@ Adding **jaeger-collector** instances is recommended when your platform provides
 The metric `jaeger_collector_save_latency_bucket` mentioned below is not yet available in Jaeger v2.
 {{< /danger >}}
 
-Each span is written to the storage by **jaeger-collector** using one worker, blocking it until the span has been stored. When the storage is too slow, the number of workers blocked by the storage might be too high, causing spans to be dropped. To help diagnose this situation, the histogram `jaeger_collector_save_latency_bucket` can be analyzed. Ideally, the latency should remain the same over time. When the histogram shows that most spans are taking longer and longer over time, it’s a good indication that your storage might need some attention.
+Each span is written to storage by the collector pipeline using one worker, blocking it until the span has been stored. When the storage is too slow, the number of workers blocked by the storage might be too high, causing spans to be dropped. To help diagnose this situation, the histogram `jaeger_collector_save_latency_bucket` can be analyzed. Ideally, the latency should remain the same over time. When the histogram shows that most spans are taking longer and longer over time, it's a good indication that your storage might need some attention.
 
 ## Consider using Kafka as intermediate buffer
 
-Jaeger [can use Apache Kafka](../../architecture/) as a buffer between **jaeger-collector** and the actual backing storage (Elasticsearch, Apache Cassandra). This is ideal for cases where the traffic spikes are relatively frequent (prime time traffic) but the storage can eventually catch up once the traffic normalizes. Please refer to the [Kafka page](../../storage/kafka/) for details on configuring this deployment.
+Jaeger [can use Apache Kafka](../../architecture/) as a buffer between the collector pipeline and the actual backing storage (Elasticsearch, Apache Cassandra). This is ideal for cases where the traffic spikes are relatively frequent (prime time traffic) but the storage can eventually catch up once the traffic normalizes. Please refer to the [Kafka page](../../storage/kafka/) for details on configuring this deployment.
 
 In addition to the performance aspects, having spans written to Kafka is useful for building real time data pipeline for aggregations and feature extraction from traces.
 
-**jaeger-collector**s can still be scaled in the same way as when writing to storage directly. The trace IDs are used as sharding keys for Kafka partitions, such that all spans for a given trace end up in the same partition of the Kafka topic. Each **jaeger-collector** can write to any partition.
+Instances writing to Kafka can be scaled the same way as when writing to storage directly. The trace IDs are used as sharding keys for Kafka partitions, such that all spans for a given trace end up in the same partition of the Kafka topic. Each instance can write to any partition.
 
-**jaeger-ingester**s can also be scaled as needed to sustain the throughput. They will automatically negotiate and rebalance Kafka partitions among them. However, it does not make sense to run more **jaeger-ingester**s than there are partitions in the Kafka topic, as in this case some of **jaeger-ingester**s will be idle.
+Instances consuming from Kafka (the ingester pipeline) can also be scaled as needed to sustain the throughput. They will automatically negotiate and rebalance Kafka partitions among them. However, it does not make sense to run more consumer instances than there are partitions in the Kafka topic, as in that case some instances will be idle.
+
