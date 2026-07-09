@@ -129,49 +129,58 @@ menu:
     - name: Get Involved
       url: /get-involved/
       parent: project
+      pre: '<i class="fa-solid fa-handshake pe-1" aria-hidden="true"></i>'
       weight: 1
     - name: Getting in Touch
       url: /get-in-touch/
       parent: project
+      pre: '<i class="fa-solid fa-comments pe-1" aria-hidden="true"></i>'
       weight: 2
     - name: Mentorships
       url: /mentorship/
       parent: project
+      pre: '<i class="fa-solid fa-user-graduate pe-1" aria-hidden="true"></i>'
       weight: 3
     - name: For Mentees
       url: /mentorship/for-mentees/
       parent: project
-      pre: '&nbsp;&nbsp;&nbsp;&nbsp;⏺&nbsp;'
+      pre: '&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;'
       weight: 4
     - name: For Mentors
       url: /mentorship/for-mentors/
       parent: project
-      pre: '&nbsp;&nbsp;&nbsp;&nbsp;⏺&nbsp;'
+      pre: '&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;'
       weight: 5
     - name: News
       url: /news/
       parent: project
+      pre: '<i class="fa-solid fa-newspaper pe-1" aria-hidden="true"></i>'
       weight: 6
     - name: Roadmap
       url: /roadmap/
       parent: project
+      pre: '<i class="fa-solid fa-route pe-1" aria-hidden="true"></i>'
       weight: 7
     - name: Report a Security Issue
       url: /report-security-issue/
       parent: project
+      pre: '<i class="fa-solid fa-shield-halved pe-1" aria-hidden="true"></i>'
       params: {divider_before: true}
       weight: 8
     - name: Branding
       url: https://github.com/cncf/artwork/tree/master/projects/jaeger
       parent: project
+      pre: '<i class="fa-solid fa-palette pe-1" aria-hidden="true"></i>'
       weight: 9
     - name: Main GitHub repo
       url: https://github.com/jaegertracing/jaeger
       parent: project
+      pre: '<i class="fa-brands fa-github pe-1" aria-hidden="true"></i>'
       weight: 10
     - name: Docs GitHub repo
       url: https://github.com/jaegertracing/documentation
       parent: project
+      pre: '<i class="fa-brands fa-github pe-1" aria-hidden="true"></i>'
       weight: 11
 
 module:
