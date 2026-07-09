@@ -47,7 +47,7 @@ page/section relative version lists. */ -}}
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-            {{- with .Params.icon }}<i class="{{ . }} pe-1 opacity-50" aria-hidden="true"></i>{{ end -}}
+            {{- with .Params.icon }}<i class="{{ . }} nav-icon pe-1 opacity-50" aria-hidden="true"></i>{{ end -}}
             {{- .Pre -}}
             <span>{{ .Name }}</span>
             {{- .Post -}}
@@ -65,7 +65,7 @@ page/section relative version lists. */ -}}
               href="{{ $childHref }}"
               {{- if $childIsExternal }} target="_blank" rel="noopener" {{- end -}}
             >
-              {{- with .Params.icon }}<i class="{{ . }} pe-1 opacity-50" aria-hidden="true"></i>{{ end -}}
+              {{- with .Params.icon }}<i class="{{ . }} nav-icon pe-1 opacity-50" aria-hidden="true"></i>{{ end -}}
               {{- .Pre -}}
               <span>{{ .Name }}</span>
               {{- .Post -}}
@@ -79,7 +79,7 @@ page/section relative version lists. */ -}}
           href="{{ $href }}"
           {{- if $isExternal }} target="_blank" rel="noopener" {{- end -}}
         >
-            {{- with .Params.icon }}<i class="{{ . }} pe-1 opacity-50" aria-hidden="true"></i>{{ end -}}
+            {{- with .Params.icon }}<i class="{{ . }} nav-icon pe-1 opacity-50" aria-hidden="true"></i>{{ end -}}
             {{- .Pre -}}
             <span>{{ .Name }}</span>
             {{- .Post -}}

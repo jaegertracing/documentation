@@ -22,4 +22,15 @@ $navbar-margin-top: -($navbar-brand-size - $navbar-brand-base) / 2;
       $decoration: $link-decoration
     );
   }
+
+  // Font Awesome's own .fa-fw assumes a ~1.25em glyph width, but some free
+  // icons (e.g. fa-handshake, fa-comments) use a wider viewBox and overflow
+  // it, eating into the following text's spacing. Use a wider box and clip
+  // it so every icon lines up regardless of its native aspect ratio.
+  .nav-icon {
+    display: inline-block;
+    overflow: hidden;
+    width: 1.75em;
+    text-align: center;
+  }
 }
