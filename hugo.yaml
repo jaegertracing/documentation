@@ -108,12 +108,16 @@ params:
     developer:
       - name: Via chat
         url: /get-in-touch/#via-chat
+        icon: fa-solid fa-comments
       - name: Project video meetings
         url: /get-in-touch/#project-video-meetings
+        icon: fa-solid fa-video
       - name: Report issues on GitHub
         url: /get-in-touch/#open-issue-or-discussion-on-github
+        icon: fa-brands fa-github
       - name: Report a security issue
         url: /report-security-issue/
+        icon: fa-solid fa-shield-halved
 
 menu:
   main:
