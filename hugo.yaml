@@ -133,17 +133,20 @@ menu:
     - name: Get Involved
       url: /get-involved/
       parent: project
-      params: {icon: fa-solid fa-handshake}
+      params:
+        icon: fa-solid fa-handshake
       weight: 1
     - name: Getting in Touch
       url: /get-in-touch/
       parent: project
-      params: {icon: fa-solid fa-comments}
+      params:
+        icon: fa-solid fa-comments
       weight: 2
     - name: Mentorships
       url: /mentorship/
       parent: project
-      params: {icon: fa-solid fa-user-graduate}
+      params:
+        icon: fa-solid fa-user-graduate
       weight: 3
     - name: For Mentees
       url: /mentorship/for-mentees/
@@ -158,32 +161,39 @@ menu:
     - name: News
       url: /news/
       parent: project
-      params: {icon: fa-solid fa-newspaper}
+      params:
+        icon: fa-solid fa-newspaper
       weight: 6
     - name: Roadmap
       url: /roadmap/
       parent: project
-      params: {icon: fa-solid fa-route}
+      params:
+        icon: fa-solid fa-route
       weight: 7
     - name: Report a Security Issue
       url: /report-security-issue/
       parent: project
-      params: {icon: fa-solid fa-shield-halved, divider_before: true}
+      params:
+        icon: fa-solid fa-shield-halved
+        divider_before: true
       weight: 8
     - name: Branding
       url: https://github.com/cncf/artwork/tree/master/projects/jaeger
       parent: project
-      params: {icon: fa-solid fa-palette}
+      params:
+        icon: fa-solid fa-palette
       weight: 9
     - name: Main GitHub repo
       url: https://github.com/jaegertracing/jaeger
       parent: project
-      params: {icon: fa-brands fa-github}
+      params:
+        icon: fa-brands fa-github
       weight: 10
     - name: Docs GitHub repo
       url: https://github.com/jaegertracing/documentation
       parent: project
-      params: {icon: fa-brands fa-github}
+      params:
+        icon: fa-brands fa-github
       weight: 11
 
 module:
