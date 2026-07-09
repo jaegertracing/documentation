@@ -133,58 +133,57 @@ menu:
     - name: Get Involved
       url: /get-involved/
       parent: project
-      pre: '<i class="fa-solid fa-handshake pe-1" aria-hidden="true"></i>'
+      params: {icon: fa-solid fa-handshake}
       weight: 1
     - name: Getting in Touch
       url: /get-in-touch/
       parent: project
-      pre: '<i class="fa-solid fa-comments pe-1" aria-hidden="true"></i>'
+      params: {icon: fa-solid fa-comments}
       weight: 2
     - name: Mentorships
       url: /mentorship/
       parent: project
-      pre: '<i class="fa-solid fa-user-graduate pe-1" aria-hidden="true"></i>'
+      params: {icon: fa-solid fa-user-graduate}
       weight: 3
     - name: For Mentees
       url: /mentorship/for-mentees/
       parent: project
-      pre: '&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;'
+      pre: '&nbsp;&nbsp;&nbsp;&nbsp;<span class="opacity-50">—</span>&nbsp;'
       weight: 4
     - name: For Mentors
       url: /mentorship/for-mentors/
       parent: project
-      pre: '&nbsp;&nbsp;&nbsp;&nbsp;•&nbsp;'
+      pre: '&nbsp;&nbsp;&nbsp;&nbsp;<span class="opacity-50">—</span>&nbsp;'
       weight: 5
     - name: News
       url: /news/
       parent: project
-      pre: '<i class="fa-solid fa-newspaper pe-1" aria-hidden="true"></i>'
+      params: {icon: fa-solid fa-newspaper}
       weight: 6
     - name: Roadmap
       url: /roadmap/
       parent: project
-      pre: '<i class="fa-solid fa-route pe-1" aria-hidden="true"></i>'
+      params: {icon: fa-solid fa-route}
       weight: 7
     - name: Report a Security Issue
       url: /report-security-issue/
       parent: project
-      pre: '<i class="fa-solid fa-shield-halved pe-1" aria-hidden="true"></i>'
-      params: {divider_before: true}
+      params: {icon: fa-solid fa-shield-halved, divider_before: true}
       weight: 8
     - name: Branding
       url: https://github.com/cncf/artwork/tree/master/projects/jaeger
       parent: project
-      pre: '<i class="fa-solid fa-palette pe-1" aria-hidden="true"></i>'
+      params: {icon: fa-solid fa-palette}
       weight: 9
     - name: Main GitHub repo
       url: https://github.com/jaegertracing/jaeger
       parent: project
-      pre: '<i class="fa-brands fa-github pe-1" aria-hidden="true"></i>'
+      params: {icon: fa-brands fa-github}
       weight: 10
     - name: Docs GitHub repo
       url: https://github.com/jaegertracing/documentation
       parent: project
-      pre: '<i class="fa-brands fa-github pe-1" aria-hidden="true"></i>'
+      params: {icon: fa-brands fa-github}
       weight: 11
 
 module:
