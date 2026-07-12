@@ -15,7 +15,7 @@
     "start": "node dist/cli.js"
   },
   "dependencies": {
-    "js-yaml": "^4.1.0"
+    "js-yaml": "^5.0.0"
   },
   "devDependencies": {
     "@types/jest": "^30.0.0",
