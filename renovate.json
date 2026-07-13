@@ -13,6 +13,13 @@
       "matchManagers": ["github-actions", "npm"],
       "matchUpdateTypes": ["patch", "digest"],
       "enabled": false
+    },
+    {
+      "description": "Keep js-yaml on v4 because v5 requires an unnecessary ESM and schema migration",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["js-yaml"],
+      "matchFileNames": ["scripts/reorg-docs/package.json"],
+      "allowedVersions": "<5"
     }
   ]
 }
