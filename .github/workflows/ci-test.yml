@@ -29,6 +29,19 @@ jobs:
     - run: npm install
     - run: npm run check:spelling
 
+  test-reorg-docs:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: scripts/reorg-docs
+    steps:
+    - uses: actions/checkout@v7
+    - uses: actions/setup-node@v6
+      with: { node-version-file: .nvmrc }
+    - run: npm install
+    - run: npm run build
+    - run: npm test -- --runInBand
+
   block-pr-from-main-branch:
     runs-on: ubuntu-latest
     steps:

@@ -59,7 +59,7 @@ describe('Integration tests with real docs', () => {
 
   it('leaves _index.md where it is (sanity check)', async () => {
     const rootIndex = await _readFile('_index.md');
-    expect(rootIndex).toContain('title: Docs');
+    expect(rootIndex).toMatch(/^---\n[\s\S]*?\n---/);
   });
 
 

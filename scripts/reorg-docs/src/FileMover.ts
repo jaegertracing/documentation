@@ -1,5 +1,5 @@
 import path from 'path';
-import yaml from 'js-yaml';
+import { dump, load } from 'js-yaml';
 import type { FileSystem } from './types.js';
 import { LinkFixer } from './LinkFixer.js';
 import { FileWalker } from './FileWalker.js';
@@ -93,7 +93,7 @@ export class FileMover {
       const matches = content.match(/^---\n([\s\S]*?)\n---/);
       if (!matches) return false; // No front matter
 
-      const frontMatter = yaml.load(matches[1]) as FrontMatter;
+      const frontMatter = load(matches[1]) as FrontMatter;
       return Boolean(frontMatter?.children?.length);
     } catch (error) {
       if (error instanceof Error && 'code' in error && error.code !== 'ENOENT') {
@@ -112,7 +112,7 @@ export class FileMover {
       const matches = content.match(/^---\n([\s\S]*?)\n---/);
       if (!matches) return []; // No front matter
 
-      const frontMatter = yaml.load(matches[1]) as FrontMatter;
+      const frontMatter = load(matches[1]) as FrontMatter;
       return frontMatter?.children?.map(child => child.url) ?? [];
     } catch (error) {
       if (error instanceof Error && 'code' in error && error.code !== 'ENOENT') {
@@ -218,7 +218,7 @@ export class FileMover {
     const matches = content.match(/^---\n([\s\S]*?)\n---/);
     if (!matches) return content;
 
-    const frontMatter = yaml.load(matches[1]) as FrontMatter;
+    const frontMatter = load(matches[1]) as FrontMatter;
     const orderedFrontMatter: Record<string, any> = {};
 
     // Track if we've added the aliases field
@@ -246,7 +246,7 @@ export class FileMover {
       orderedFrontMatter.aliases = [alias];
     }
 
-    const newFrontMatter = yaml.dump(orderedFrontMatter, {
+    const newFrontMatter = dump(orderedFrontMatter, {
       flowLevel: 1  // Force flow style (array syntax) for arrays
     });
     return content.replace(matches[0], `---\n${newFrontMatter}---`);
