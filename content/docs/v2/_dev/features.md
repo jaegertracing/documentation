@@ -10,7 +10,7 @@ Jaeger backend is designed to have no single points of failure and to scale with
 
 ## Cloud Native
 
-Jaeger backend is distributed as a container image or a raw binary, available for multiple platforms. The behavior of the binary can be customized via YAML configuration file. Deployment to Kubernetes clusters is assisted by a [Kubernetes operator](https://github.com/jaegertracing/jaeger-operator) and a [Helm chart](https://github.com/kubernetes/charts/tree/master/incubator/jaeger).
+Jaeger backend is distributed as a container image or a raw binary, available for multiple platforms. The behavior of the binary can be customized via YAML configuration file. Deployment to Kubernetes clusters is assisted by a [Kubernetes operator](https://github.com/jaegertracing/jaeger-operator) and a [Helm chart](https://github.com/jaegertracing/helm-charts).
 
 ##  OpenTelemetry
 

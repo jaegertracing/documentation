@@ -152,7 +152,7 @@ Users can toggle between light and dark themes using a button in the top navigat
 
 `tracking.trackErrors` enables (`true`) or disables (`false`) error tracking. Errors can only be tracked if a valid analytics tracker is configured. Default: `true`.
 
-For additional details on app analytics see the [tracking README](https://github.com/jaegertracing/jaeger-ui/blob/master/packages/jaeger-ui/src/utils/tracking/README.md) in the UI repo.
+For additional details on app analytics see the [tracking README](https://github.com/jaegertracing/jaeger-ui/blob/main/packages/jaeger-ui/src/utils/tracking/README.md) in the UI repo.
 
 ### Custom Menu Items
 
