@@ -25,7 +25,7 @@ jobs:
         token: ${{ secrets.JAEGERTRACINGBOT_PAT }}
         ref: main
 
-    - uses: actions/setup-python@v6
+    - uses: actions/setup-python@v7
       with:
         python-version: 3.14
 
