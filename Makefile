@@ -65,6 +65,9 @@ fetch-blog-feed:
 fetch-roadmap:
 	python3 scripts/generate_roadmap.py
 
+fetch-metrics:
+	python3 scripts/fetch_metrics_reference.py
+
 # only x.y.0 semver values are valid for kicking off a new release.
 SEMVER_REGEX := ^([0-9]+\.){2}0$$
 VALID_VERSION := $(shell echo "$(VERSION)" | grep -E "$(SEMVER_REGEX)")
