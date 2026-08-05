@@ -110,7 +110,7 @@ The recommended way for programmatically retrieving traces and other data is via
 
 **Status**: Stable
 
-This is a JSON/HTTP version (see [Swagger][query.swagger] file) of [api_v3/query_service.proto][query.proto] above.
+This is a JSON/HTTP version (see [OpenAPI][query.openapi] file) of [api_v3/query_service.proto][query.proto] above.
 
 ### Internal HTTP JSON
 
@@ -167,7 +167,7 @@ grpc_cli ls localhost:16685
 [otlp.http]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlphttp
 [jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift
 [query.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v3/query_service.proto
-[query.swagger]: https://github.com/jaegertracing/jaeger-idl/blob/main/swagger/api_v3/query_service.swagger.json
+[query.openapi]: https://github.com/jaegertracing/jaeger-idl/blob/main/swagger/api_v3/query_service.openapi.yaml
 [collector.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/collector.proto
 [sampling.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/sampling.proto
 [grpc-reflection]: https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#enable-server-reflection
