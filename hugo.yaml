@@ -26,7 +26,9 @@ outputFormats:
     notAlternative: true
 
 outputs:
-  home: [HTML, JSON, REDIRECTS]
+  # No JSON output: nothing consumes /index.json and no layout renders it, so
+  # listing JSON only made the home page advertise an alternate link that 404s.
+  home: [HTML, REDIRECTS]
   section: [HTML]
 
 markup:

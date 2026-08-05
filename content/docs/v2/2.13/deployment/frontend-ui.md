@@ -18,7 +18,7 @@ Several aspects of the UI can be configured:
 
 These options can be configured by a JSON configuration file. The `--query.ui-config` command line parameter of the query service must then be set to the path to the JSON file when the query service is started.
 
-An example configuration file (see [complete schema here](https://github.com/jaegertracing/jaeger-ui/blob/main/packages/jaeger-ui/src/types/config.tsx)):
+An example configuration file (see [complete schema here](https://github.com/jaegertracing/jaeger-ui/blob/main/packages/jaeger-ui/src/types/config.ts)):
 
 ```json
 {
