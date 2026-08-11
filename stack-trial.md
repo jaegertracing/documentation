@@ -5,3 +5,7 @@ This file is a throwaway used to test GitHub stacked pull requests. It will be d
 ## Layer 2
 
 The middle of the stack adds this section. A reviewer of this PR sees only this diff.
+
+## Layer 3
+
+The top of the stack adds this section. It cannot merge before the two below it.
