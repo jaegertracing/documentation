@@ -1,0 +1,59 @@
+{{/*
+  Shortcode: metrics
+
+  Renders a reference table of all Jaeger metrics for a given documentation
+  version, sourced from data/metrics/{version}/metrics.yaml.
+
+  Mirrors the pattern used by the CLI flags shortcode.
+
+  Usage in a content .md file:
+    {{< metrics >}}
+
+  The version is inferred from the page's path (e.g. /docs/v2/2.17/... → "2.17").
+  Falls back to "next-release" when no version can be determined.
+*/}}
+
+{{- $version := "next-release" -}}
+{{- $pathParts := split .Page.RelPermalink "/" -}}
+{{- range $i, $p := $pathParts -}}
+  {{- if and (eq $p "v2") (gt (len $pathParts) (add $i 1)) -}}
+    {{- $version = index $pathParts (add $i 1) -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $data := index site.Data.metrics $version -}}
+{{- if not $data -}}
+  {{- $data = index site.Data.metrics "next-release" -}}
+{{- end -}}
+
+{{- if and $data $data.metrics (gt (len $data.metrics) 0) -}}
+<p>The following metrics are produced by Jaeger {{ if ne $version "next-release" }}v{{ $version }}{{ else }}(next release){{ end }}.
+They can be scraped from the <code>/metrics</code> endpoint (default port <code>8888</code>).
+See <a href="https://opentelemetry.io/docs/collector/internal-telemetry/">OpenTelemetry Collector internal telemetry</a> for configuration details.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Metric name</th>
+      <th>Labels</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{- range $data.metrics }}
+    <tr>
+      <td><code>{{ .name }}</code></td>
+      <td>
+        {{- if .labels -}}
+          {{- range $i, $l := .labels -}}
+            {{- if gt $i 0 }}, {{ end -}}
+            <code>{{ $l }}</code>
+          {{- end -}}
+        {{- end -}}
+      </td>
+    </tr>
+    {{- end }}
+  </tbody>
+</table>
+{{- else -}}
+<p><em>Metrics reference not yet available for this version.</em></p>
+{{- end -}}
