@@ -14,8 +14,8 @@ See also:
 
 ## LFX Mentorship June-August 2026 (Term 2)
 
-* [Soumya Raikwar](https://github.com/SoumyaRaikwar) -- [AI-Powered Trace Analysis Phase 2 - Skills Framework](https://github.com/jaegertracing/jaeger/issues/8440) -- [blog post](https://www.linkedin.com/posts/soumya-raikwar-5660772a3_jaeger-opentelemetry-cncf-ugcPost-7498828820322349057-lifI/)
-* [Swetalin Rout](https://github.com/swetalin-10) -- [Jaeger for GenAI Observability: Specialized Trace Visualization](https://github.com/jaegertracing/jaeger/issues/8401) -- [blog post](https://www.linkedin.com/posts/swetalin-rout-995763361_my-lfx-mentorship-on-jaeger-ugcPost-7501361532673617920-ecfZ/)
+* [Soumya Raikwar](https://github.com/SoumyaRaikwar) -- [AI-Powered Trace Analysis Phase 2 - Skills Framework](https://github.com/jaegertracing/jaeger/issues/8440) -- [blog post](https://www.linkedin.com/pulse/my-lfx-mentorship-jaeger-soumya-raikwar-ebouc/)
+* [Swetalin Rout](https://github.com/swetalin-10) -- [Jaeger for GenAI Observability: Specialized Trace Visualization](https://github.com/jaegertracing/jaeger/issues/8401) -- [blog post](https://www.linkedin.com/pulse/three-months-inside-trace-viewer-swetalin-rout-xjv8f/)
 
 ## LFX Mentorship March-May 2026 (Term 1)
 
