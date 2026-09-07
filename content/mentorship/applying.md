@@ -10,7 +10,7 @@ Applications are submitted via respective program websites, such as [Google Summ
 
 ### Proposal
 
-Jaeger mentorship projects are getting a lot of applications (up to 150 per project), therefore we require applicants to submit a **proposal** for the project, which allows us to identify the most suitable candidates. The LFX Mentorship and GSoC applications support uploading the proposal document directly. Even if a specific program's guidelines do not require submitting a proposal, please include it in the other application documents, such as a **cover letter**. Do not provide a link to another location like a Google Doc; the submitted proposal must be directly attached to the application as an immutable document (PDFs are preferred).
+Jaeger mentorship projects are getting a lot of applications (up to 150 per project); therefore, we require applicants to submit a **proposal** for the project, which allows us to identify the most suitable candidates. The LFX Mentorship and GSoC applications support uploading the proposal document directly. Even if a specific program's guidelines do not require submitting a proposal, please include it in the other application documents, such as a **cover letter**. Do not provide a link to another location like a Google Doc; the submitted proposal must be directly attached to the application as an immutable document (PDFs are preferred).
 
 We are looking for the following topics to be covered by the proposal:
 
@@ -47,14 +47,14 @@ If you need to ask specific questions / clarifications about the project, please
 
 ### Bootcamp
 
-In order to understand the project better and come up with reasonable solutions, it's always helpful to become familiar with Jaeger and its code base. We strongly recommend going through the [Bootcamp](../../get-involved/#bootcamp).
+In order to understand the project better and come up with reasonable solutions, it's always helpful to become familiar with Jaeger and its codebase. We strongly recommend going through the [Bootcamp](../../get-involved/#bootcamp).
 
 ### Evaluation criteria
 
 We do not have an exact checklist that we use for evaluation, but the following criteria have a high impact:
 
 * Candidates have several PRs merged into Jaeger, which demonstrate:
-  * their understanding of the code base,
+  * their understanding of the codebase,
   * their understanding of our development workflow,
   * their coding and problem solving skills.
 * High quality proposal that demonstrates:
