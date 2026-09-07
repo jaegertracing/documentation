@@ -10,7 +10,7 @@ Applications are submitted via respective program websites, such as [Google Summ
 
 ### Proposal
 
-Jaeger mentorship projects are getting a lot of applications (up to 150 per project), therefore we require applicants to submit a **proposal** for the project, which allows us to identify the most suitable candidates. The LFX Mentorship and GSoC applications support uploading the proosal document directly. Even if a specific program's guidelines do not require submitting a proposal, please include it in the other application documents, such as a **cover letter**. Do not provide a link to another location like a Google Doc; the submitted proposal must be directly attached to the application as an immutable document (PDFs are preferred).
+Jaeger mentorship projects are getting a lot of applications (up to 150 per project), therefore we require applicants to submit a **proposal** for the project, which allows us to identify the most suitable candidates. The LFX Mentorship and GSoC applications support uploading the proposal document directly. Even if a specific program's guidelines do not require submitting a proposal, please include it in the other application documents, such as a **cover letter**. Do not provide a link to another location like a Google Doc; the submitted proposal must be directly attached to the application as an immutable document (PDFs are preferred).
 
 We are looking for the following topics to be covered by the proposal:
 
@@ -24,7 +24,20 @@ We are looking for the following topics to be covered by the proposal:
   * What kind of technical challenges do you foresee and how do you suggest to address them?
   * How do you plan to approach the project (roadmap, milestones, schedule)?
 
-It does not mean that the longer the proposal the better. It's about the quality and demonstrating which candidate better understands the problem and has a handle on how to solve it. You do not need to explain what Jaeger does and how. Instead, focus on the specific problem of the project, and think about the challenges and the solutions.
+The project description may request additional material, such as a small experiment, an analysis of competing approaches, or examples of a proposed design. Follow those project-specific instructions in addition to these general guidelines.
+
+A strong proposal should:
+
+* Demonstrate technical due diligence. Read the linked issues, RFCs, ADRs, relevant code, and active pull requests. When practical, run the software or perform a small experiment and report what you observed.
+* Present your own technical approach. Make concrete choices, explain your reasoning and the trade-offs, and state what evidence might cause you to reconsider. A reasoned choice that mentors later refine is more useful than a list of options with no recommendation.
+* Be specific to the project. Identify relevant components or areas of the codebase, work already in progress, dependencies between tasks, and existing code or behavior that your work would change or remove.
+* Explain how you will demonstrate success. Describe concrete testing, validation, compatibility, performance, or measurement criteria relevant to the project instead of saying only that the implementation will be thoroughly tested.
+* Provide a realistic timeline. Include an initial research and setup phase, ordered and demonstrable milestones, time for testing and documentation, key risks, and fallback or scope-reduction options.
+* Account for collaboration. Explain how your plan relates to open issues and pull requests, and allow time to review and coordinate with other contributors.
+* Support claims about your experience with links to representative code, pull requests, designs, or other work, and briefly describe your contribution.
+* Verify every technical claim, citation, link, and description of the existing code. Do not invent details to make the proposal appear more specific.
+
+Longer proposals are not necessarily better. Your proposal should add analysis beyond what is already in the project description. Repeating the requirements, listing technologies, or providing generic implementation phases does not demonstrate understanding. We value concrete evidence, sound reasoning, and an honest discussion of uncertainty more than length, polish, or agreement with a particular solution. You do not need to explain what Jaeger does. Focus on the project's specific problems, challenges, and possible solutions.
 
 #### Level playing field
 
