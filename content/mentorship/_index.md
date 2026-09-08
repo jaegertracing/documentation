@@ -12,6 +12,11 @@ See also:
   * [For mentees](for-mentees/)
   * [For mentors](for-mentors/)
 
+## LFX Mentorship September-November 2026 (Term 3)
+
+* [Roshan Singh](https://github.com/lopster568) -- [Evaluating and Optimizing the Jaeger AI Assistant: MCP Tools + Skills](https://github.com/jaegertracing/jaeger/issues/9135)
+* [Shashank Singh](https://github.com/sksingh2005) -- [OpenTelemetry-Native Query and State Layers Migration](https://github.com/jaegertracing/jaeger-ui/issues/4278)
+
 ## LFX Mentorship June-August 2026 (Term 2)
 
 * [Soumya Raikwar](https://github.com/SoumyaRaikwar) -- [AI-Powered Trace Analysis Phase 2 - Skills Framework](https://github.com/jaegertracing/jaeger/issues/8440) -- [blog post](https://www.linkedin.com/pulse/my-lfx-mentorship-jaeger-soumya-raikwar-ebouc/)
