@@ -1,16 +1,13 @@
-OK 1312
----tail---
-## Outreachy Dec'20 - Mar'21
-Ashmita Bohara
+# Maintainers (current and former)
+Yuri Shkuro yurishkuro
+Pavol Loffay pavolloffay
+Joe Farro
+Juraci Paixão Kröhling
+Jonah Kowall jkowall
+Mahad Zaryab mahadzaryab1
 
-## Outreachy Dec'18 - Mar'19
-Gaby Soria
-
-## Outreachy May'18 - Aug'18
-Prakriti Bansal
-
-## Outreachy Dec'17 - Mar'18
-Kara de la Marck
+# Other names (sometimes from github links)
+robbert
 
 ## LFX Mentorship September-November 2026 (Term 3)
 Roshan Singh
@@ -18,9 +15,11 @@ Shashank Singh
 lopster568
 sksingh2005
 
-# Prometheus
-Julius Volz
-(Term 1)
+## LFX Mentorship June-August 2026 (Term 2)
+Soumya Raikwar
+Swetalin Rout
+
+## LFX Mentorship March-May 2026 (Term 1)
 Nabil Salah
 Parship Chowdhury
 
@@ -75,12 +74,6 @@ Prakriti Bansal
 
 ## Outreachy Dec'17 - Mar'18
 Kara de la Marck
-
-## LFX Mentorship September-November 2026 (Term 3)
-Roshan Singh
-Shashank Singh
-lopster568
-sksingh2005
 
 # Prometheus
 Julius Volz
