@@ -22,7 +22,7 @@ Jaeger v2 is designed to be a versatile and flexible tracing platform. It can be
   * **all-in-one**: Collector and query roles in a single process.
   * **agent**: A host agent or a sidecar that runs next to the application and forwards trace data to the collector. While Jaeger can be configured for this role, we recommend using the standard [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) instead because you may likely need it to process other types of telemetry (metrics & logs).
 
-Choosing between the **all-in-one** and the **collector**/**query** configurations is a matter of preference. When using external storage backend, both configurations are horizontally scalable, but the **collector**/**query** configuration allows to separate the read and write traffic and to scale them independently, as well as to apply different access and security policies.
+Choosing between the **all-in-one** and the **collector**/**query** configurations is a matter of preference. When using external storage backend, both configurations are horizontally scalable, but the **collector**/**query** configuration allows you to separate the read and write traffic and to scale them independently, as well as to apply different access and security policies.
 
 The **all-in-one** configuration with in-memory storage is most suitable for development and testing, but it is not recommended for production since the data is lost on restarts. **all-in-one** with the [Badger](../storage/badger/) backend _can_ be used in production, but only for modest data volumes since it is limited to a single instance and cannot be scaled horizontally.
 
