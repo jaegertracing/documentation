@@ -119,6 +119,29 @@ Users can toggle between light and dark themes using a button in the top navigat
 
 `monitor.docsLink` specifies a URL to documentation about Service Performance Monitoring. When set, a help link is displayed in the Monitor tab.
 
+`monitor.tagAttributes` configures tag filtering dropdowns on the Monitor tab. Each entry maps a span attribute to a label shown in the UI. When set, the Monitor tab displays one dropdown per attribute, allowing the RED metrics to be filtered by the selected attribute values:
+
+```json
+{
+  "monitor": {
+    "menuEnabled": true,
+    "tagAttributes": [
+      { "name": "environment", "label": "Environment" },
+      { "name": "region", "label": "Region" }
+    ]
+  }
+}
+```
+
+Each `tagAttributes` entry has the following fields:
+
+Field | Description
+------|------------
+`name` | The span attribute key used to filter metrics (for example `environment` or `region`).
+`label` | The human-readable label shown above the dropdown in the UI.
+
+The available attribute values are fetched from the metrics backend via the `/api/metrics/attributes` endpoint. Selected values are sent to the metrics API and applied as tag filters. See [Service Performance Monitoring](../../architecture/spm/#tag-filtering) for backend configuration requirements.
+
 `monitor.emptyState` allows customizing the empty state display when no monitoring data is available:
 
 ```json
