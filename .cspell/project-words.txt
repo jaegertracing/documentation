@@ -1,3 +1,4 @@
+acks
 agentic
 alertmanager
 autoscale
@@ -96,6 +97,7 @@ operatorhub
 otel
 otelcol
 otlp
+otlphttp
 outreachy
 parentbased
 podman
@@ -128,6 +130,7 @@ tchannel
 thriftrw
 tolerations
 tracegen
+translog
 uber
 uberctx
 unmarshal

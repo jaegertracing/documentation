@@ -178,6 +178,29 @@ jaeger_storage_exporter:
     queue_size: 100
 ```
 
+A `queue` configured like this acknowledges spans as soon as they are enqueued, before the storage has written them. When the pipeline must not lose spans, the queue needs `wait_for_result: true` and the pipeline must not use the `batch` processor; see [Delivery Guarantees](../delivery-guarantees/).
+
+## Connectors
+
+### Jaeger storage
+
+`jaeger_storage_exporter` can also be declared under `connectors:`. The collector then builds it as a traces-to-traces connector that writes spans to the storage backend exactly as the exporter does, and re-emits the spans the storage rejected terminally onto its output pipeline, so that any standard exporter can serve as a dead-letter sink. It accepts the exporter's `trace_storage`, `queue`, and `retry_on_failure` settings; an enabled `queue` must set `wait_for_result: true`. See [Delivery Guarantees](../delivery-guarantees/#dead-letter-pipeline-for-rejected-spans) for the pipeline shape and the [connector README](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/exporters/storageexporter/README.md) for the configuration reference.
+
+```yaml
+connectors:
+  jaeger_storage_exporter:
+    trace_storage: some_trace_storage
+    queue:
+      wait_for_result: true
+      sizer: bytes
+      queue_size: 104857600
+      batch:
+        sizer: bytes
+        flush_timeout: 200ms
+        min_size: 1048576
+        max_size: 4194304
+```
+
 ## Processors
 
 ### Adaptive sampling
