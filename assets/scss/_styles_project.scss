@@ -110,11 +110,11 @@ $feature-counts: (2, 3, 4, 6);
   justify-content: center;
 }
 
-// Inline code renders the same everywhere in page content: in paragraphs, list
-// items, table cells, headings, and inside emphasis. Docsy styles only a few of
-// these positions and Bootstrap colors the rest pink, so one rule covers all of them.
+// Inline code renders the same in every position within the article body: in
+// paragraphs, list items, table cells, headings, and inside emphasis. Docsy
+// styles only a few of these positions and Bootstrap colors the rest pink, so
+// one rule covers all of them. Code inside a link keeps the link color.
 .td-content :not(pre) > code {
-  color: $jaeger-blue-dark;
   background-color: var(--td-pre-bg);
   padding: 0.2em 0.4em;
   font-size: 85%;
@@ -122,6 +122,10 @@ $feature-counts: (2, 3, 4, 6);
   border-radius: $border-radius;
 }
 
-[data-bs-theme='dark'] .td-content :not(pre) > code {
+.td-content :not(pre):not(a) > code {
+  color: $jaeger-blue-dark;
+}
+
+[data-bs-theme='dark'] .td-content :not(pre):not(a) > code {
   color: $jaeger-beige;
 }
