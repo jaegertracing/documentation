@@ -193,6 +193,7 @@ connectors:
     queue:
       wait_for_result: true
       sizer: bytes
+      num_consumers: 1
       queue_size: 104857600
       batch:
         sizer: bytes

@@ -78,6 +78,14 @@ exporters:
     queue:
       wait_for_result: true
       block_on_overflow: true # a full queue waits instead of failing the record
+      sizer: bytes
+      num_consumers: 1
+      queue_size: 104857600
+      batch:
+        sizer: bytes
+        flush_timeout: 200ms
+        min_size: 1048576
+        max_size: 4194304
 ```
 
 The storage must return an error when a write fails. Cassandra and ClickHouse always do; Elasticsearch and OpenSearch need [`write_mode: sync`](../elasticsearch/#write-modes), and should run with `poison_pill_handling: drop` or the [dead-letter pipeline](../../deployment/delivery-guarantees/#dead-letter-pipeline-for-rejected-spans) so that a document the backend rejects on every attempt cannot hold the offset forever.
