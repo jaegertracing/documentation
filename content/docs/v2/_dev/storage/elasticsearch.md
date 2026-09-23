@@ -27,6 +27,52 @@ Shards and replicas are some configuration values to take special attention to, 
 index creation. [This article](https://www.elastic.co/blog/how-many-shards-should-i-have-in-my-elasticsearch-cluster) goes into
 more information about choosing how many shards should be chosen for optimization.
 
+## Write Modes
+
+Jaeger writes spans to Elasticsearch with the `_bulk` API in one of two modes, selected by the `write_mode` property of the storage backend:
+
+```yaml
+elasticsearch:
+  write_mode: async           # async (default) | sync
+  poison_pill_handling: fail  # fail (default) | drop; only used in sync mode
+  bulk_processing:
+    max_bytes: 5000000        # per-request cap in both modes
+    flush_interval: 200ms     # async mode only
+    workers: 1                # async mode only
+```
+
+| | `async` (default) | `sync` |
+|---|---|---|
+| How a batch is written | Spans are appended to a client-side buffer that a background worker flushes to `_bulk` | Each batch the pipeline hands to the storage becomes one blocking `_bulk` request |
+| What the pipeline learns | The write returns before the data is durable. A failed flush is logged and counted, but the pipeline has already moved on | The write returns only after Elasticsearch acknowledged the request, and returns an error if any span was not persisted |
+| Trade-off | Highest throughput and lowest request latency, at the cost of write failures that nobody upstream ever hears about | A write failure is returned to the pipeline, at the cost of one `_bulk` round trip of latency per batch. Whether it reaches the sender depends on the pipeline, see [Delivery Guarantees](../../deployment/delivery-guarantees/) |
+| `bulk_processing` settings | All apply | Only `max_bytes` applies. A batch larger than it is split into several `_bulk` requests |
+
+Async mode is the default because it costs the least, not because it is the safer choice. Its weakness is that a write failure is invisible upstream: the sender has already been told the spans were accepted, so it has no reason to retry them and no signal to slow down. Sync mode returns the failure to the pipeline instead. What the pipeline has to do with it, for direct OTLP ingest and for the Kafka ingester alike, is described on the [Delivery Guarantees](../../deployment/delivery-guarantees/) page.
+
+### Idempotent writes
+
+Every span document has a deterministic `_id` derived from the content of the span, in both write modes. Writing the same span again overwrites the existing document instead of creating a duplicate, so a batch that is retried after a lost acknowledgement leaves exactly one copy of each span. Elasticsearch enforces `_id` uniqueness within one index, so a retry that lands after an alias or data stream rolled over writes a second copy into the new index. A span whose document cannot be JSON-encoded, for example an attribute holding NaN, is logged and skipped rather than written or reported. Client-supplied ids disable the auto-id fast path in Elasticsearch, which adds a small per-document indexing cost.
+
+### Durability versus searchability
+
+A successful `_bulk` response means the documents are durable, not that they are searchable yet. This holds under the default `index.translog.durability: request`; an index set to `durability: async` acknowledges before the translog is synced to disk, and a backend crash can then lose acknowledged documents. Search visibility is governed by the refresh interval of the index, one second by default, and Jaeger does not ask Elasticsearch to refresh on write because forced refreshes reduce indexing throughput without improving durability. In sync mode a span is therefore acknowledged up to one refresh interval before it appears in search results.
+
+### Poison pills
+
+A poison pill is a document that Elasticsearch rejects on every attempt, for example a span whose attribute conflicts with the type in the index mapping. The synchronous writer reads the per-item status in every `_bulk` response and separates transient failures, such as `429` back-pressure or an unavailable node, from terminal rejections that would fail identically on a retry. A transient failure makes the whole batch return an error so the pipeline retries it. What happens to a terminal rejection is chosen with `poison_pill_handling`:
+
+| Value | Behavior | Use when |
+|---|---|---|
+| `fail` (default) | The batch returns an error, so the pipeline retries it and the rejected span blocks everything behind it until the document or the mapping is fixed | No span may ever be lost and someone watches the pipeline |
+| `drop` | The rejected documents are discarded and logged, and the batch completes | Losing a rare malformed span is acceptable and the pipeline must never stall |
+
+A third disposition, forwarding the rejected spans to a dead-letter pipeline instead of dropping them, is selected by the pipeline topology rather than by this property. The storage stays in `fail` mode and `jaeger_storage_exporter` is declared under `connectors:` instead of `exporters:`, which gives it an output pipeline for the rejected spans; see [Dead-letter pipeline for rejected spans](../../deployment/delivery-guarantees/#dead-letter-pipeline-for-rejected-spans).
+
+Both dispositions act on documents Elasticsearch rejects individually inside an otherwise successful `_bulk` response. A document that makes the whole request fail, such as one larger than `http.max_content_length` (HTTP 413), is retried like any other request failure until an operator removes it or raises the limit.
+
+In async mode this setting has no effect: a rejected document is logged by the bulk buffer and not retried.
+
 ## Index Management Strategies
 
 Jaeger supports three index management strategies:
