@@ -90,7 +90,7 @@ exporters:
 
 The storage must return an error when a write fails. Cassandra and ClickHouse always do; Elasticsearch and OpenSearch need [`write_mode: sync`](../elasticsearch/#write-modes), and should run with `poison_pill_handling: drop` or the [dead-letter pipeline](../../deployment/delivery-guarantees/#dead-letter-pipeline-for-rejected-spans) so that a document the backend rejects on every attempt cannot hold the offset forever.
 
-The configurations the Kafka end-to-end tests run against are [config-kafka-ingester-sync.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-sync.yaml) and, with the dead-letter pipeline, [config-kafka-ingester-dead-letter.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-dead-letter.yaml). Both set `queue.batch.min_size: 0` and omit `block_on_overflow`, so they demonstrate the offset coupling rather than the recommended batching.
+The configurations the Kafka end-to-end tests run against are [config-kafka-ingester-sync.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-sync.yaml) and, with the dead-letter pipeline, [config-kafka-ingester-dead-letter.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-dead-letter.yaml). Both follow the recommended shape.
 
 ### Sizing
 
