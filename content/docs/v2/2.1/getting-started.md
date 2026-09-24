@@ -26,6 +26,10 @@ This runs the **all-in-one** configuration of Jaeger ([see Architecture](../arch
 Your applications must be instrumented before they can send tracing data to Jaeger. We recommend using the [OpenTelemetry](https://opentelemetry.io/) instrumentation and SDKs.
 {{< /warning >}}
 
+## Easypanel
+
+If you'd rather not run the Docker command yourself, [Easypanel](https://easypanel.io) is a self-hosted Docker deployment platform with a one-click Jaeger template: https://easypanel.io/templates/jaeger. It deploys the same all-in-one image described above.
+
 ## 🚗 HotROD Demo
 
 HotROD (Rides on Demand) is a demo application that consists of several microservices and illustrates the use of [OpenTelemetry][otel] and distributed tracing. A tutorial / walkthrough is available in the blog post: [Take Jaeger for a HotROD ride][hotrod-tutorial].
