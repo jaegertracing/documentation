@@ -94,7 +94,7 @@ The configurations the Kafka end-to-end tests run against are [config-kafka-inge
 
 ### Sizing
 
-With `wait_for_result` set, batch size is bounded by the number of partitions the ingester consumes. The receiver processes each partition serially and partitions concurrently, so at most one record per partition is waiting in the exporter's batcher at a time, and a topic with few partitions produces small storage writes. Add partitions to increase write throughput; raising `queue.batch.max_size` alone does not help. Adding ingester replicas adds processing capacity but does not enlarge batches: the replicas share the same partitions, so each one owns fewer of them and produces smaller batches.
+With `wait_for_result` set, batch size is bounded by the number of partitions the ingester consumes. The receiver processes each partition serially and partitions concurrently, so at most one record per partition is waiting in the exporter's batcher at a time, and a topic with few partitions produces small storage writes. Add partitions to increase write throughput; raising `queue.batch.max_size` alone does not help. Adding ingester replicas adds processing capacity, up to one replica per partition, but does not enlarge batches: the replicas share the same partitions, so each one owns fewer of them and produces smaller batches.
 
 The receiver's fetch settings (`max_fetch_size`, `max_partition_fetch_size`, `min_fetch_size`, `max_fetch_wait`) control how many bytes a broker returns per fetch and how long it waits to accumulate them, not how many records reach the exporter at once. The receiver makes one pipeline call per fetched record, so a larger fetch only fills the receiver's buffer and does not enlarge the storage write.
 
