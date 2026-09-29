@@ -94,6 +94,8 @@ The configurations the Kafka end-to-end tests run against are [config-kafka-inge
 
 ### Sizing
 
-Batch size is bounded by the number of partitions the ingester consumes. The receiver processes each partition serially and partitions concurrently, so at most one record per partition is waiting in the exporter's batcher at a time, and a topic with few partitions produces small storage writes. Add partitions or ingester replicas to increase write throughput; raising `queue.batch.max_size` alone does not help.
+Batch size is bounded by the number of partitions the ingester consumes. The receiver processes each partition serially and partitions concurrently, so at most one record per partition is waiting in the exporter's batcher at a time, and a topic with few partitions produces small storage writes. Add partitions to increase write throughput; raising `queue.batch.max_size` alone does not help. Adding ingester replicas does not help either: the replicas share the same partitions, so each one owns fewer of them and produces smaller batches.
+
+The receiver's fetch settings (`max_fetch_size`, `max_partition_fetch_size`, `min_fetch_size`, `max_fetch_wait`) bound how many bytes one poll pulls from a broker, not how many records reach the exporter at once. The receiver hands each fetched record to the pipeline in its own call, so a larger fetch only fills the receiver's buffer and does not enlarge the storage write.
 
 For Elasticsearch and OpenSearch, keep `queue.batch.max_size` well below the storage's `bulk_processing.max_bytes`. The collector measures a batch in OTLP protobuf bytes while the storage measures the encoded `_bulk` body, which is larger, so a batch at the limit is otherwise split across several `_bulk` requests. Both values must stay below the `http.max_content_length` limit of Elasticsearch, 100 MB by default.
