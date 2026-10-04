@@ -16,13 +16,9 @@ Several aspects of the UI can be configured:
   * Additional menu options can be added to the global nav
   * Search input limits can be configured
 
-These options can be configured by a configuration file. The `--query.ui-config` command line parameter of the query service must then be set to the path to the configuration file when the query service is started.
+These options can be configured by a JSON configuration file. The `--query.ui-config` command line parameter of the query service must then be set to the path to the JSON file when the query service is started.
 
-The UI configuration file can be formatted as either **JSON** (`.json`) or **JavaScript** (`.js`).
-
-### JSON Format
-
-When using JSON, the file directly contains the configuration object (see [complete schema here](https://github.com/jaegertracing/jaeger-ui/blob/main/packages/jaeger-ui/src/types/config.ts)):
+An example configuration file (see [complete schema here](https://github.com/jaegertracing/jaeger-ui/blob/main/packages/jaeger-ui/src/types/config.ts)):
 
 ```json
 {
@@ -48,8 +44,7 @@ When using JSON, the file directly contains the configuration object (see [compl
         },
         {
           "label": "Docs",
-          "url": "https://www.jaegertracing.io/docs/latest/",
-          "anchorTarget": "_blank"
+          "url": "https://www.jaegertracing.io/docs/latest/"
         }
       ]
     }
@@ -81,42 +76,6 @@ When using JSON, the file directly contains the configuration object (see [compl
 }
 ```
 
-### JavaScript Format
-
-When using a JavaScript configuration file (`.js`), the file **must** define a top-level function named `UIConfig()` that returns the configuration object:
-
-```javascript
-function UIConfig() {
-  return {
-    dependencies: {
-      dagMaxNumServices: 200,
-      menuEnabled: true,
-    },
-    archiveEnabled: true,
-    // JavaScript format supports comments and custom functions,
-    // such as a custom analytics tracking plugin:
-    tracking: {
-      customWebAnalytics: function (config, versionShort, versionLong) {
-        return {
-          init: function () {},
-          isEnabled: function () {
-            return true;
-          },
-          context: true,
-          trackPageView: function (pathname, search) {},
-          trackError: function (description) {},
-          trackEvent: function (category, action, labelOrValue, value) {},
-        };
-      },
-    },
-  };
-}
-```
-
-{{< warning >}}
-When using a JavaScript configuration file (`.js`), the file **must** define the top-level `UIConfig()` function. If this function is missing, the query service will fail to load the configuration at startup.
-{{< /warning >}}
-
 ### Dependencies
 
 `dependencies.dagMaxNumServices` defines the maximum number of services allowed before the DAG dependency view is disabled. Default: `200`.
@@ -145,21 +104,14 @@ For additional details on app analytics see the [tracking README](https://github
 
 `menu` allows additional links to be added to the global nav. The additional links are right-aligned.
 
-In the sample configuration above, the configured menu will have a dropdown labeled "About Jaeger" with sub-options for "GitHub" and "Docs". The format for a link in the top right menu is as follows:
+In the sample JSON config above, the configured menu will have a dropdown labeled "About Jaeger" with sub-options for "GitHub" and "Docs". The format for a link in the top right menu is as follows:
 
 ```json
 {
   "label": "Some text here",
-  "url": "https://example.com",
-  "anchorTarget": "_blank"
+  "url": "https://example.com"
 }
 ```
-
-Field | Description
-------|------------
-`label` | The text displayed for the menu item
-`url` | (Optional) The destination URL for the link
-`anchorTarget` | (Optional) The target attribute for the link: `_self`, `_blank`, `_parent`, or `_top`. For example, set to `_blank` to open the link in a new browser tab.
 
 Links can either be members of the `menu` Array, directly, or they can be grouped into a dropdown menu option. The format for a group of links is:
 
