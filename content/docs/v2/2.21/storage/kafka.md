@@ -57,3 +57,19 @@ Jaeger uses Kafka exporter and receiver from `opentelemetry-collector-contrib` r
 Unless your Kafka cluster is configured to automatically create topics, you will need to create it ahead of time. You can refer to [the Kafka quickstart documentation](https://kafka.apache.org/documentation/#quickstart_createtopic) to learn how.
 
 You can find more information about topics and partitions in general in the [official documentation](https://kafka.apache.org/documentation/#intro_topics). [This article](https://www.confluent.io/blog/how-to-choose-the-number-of-topicspartitions-in-a-kafka-cluster/) provide more details about how to choose the number of partitions.
+
+## Securing the topic
+
+The ingester writes whatever it reads from the topic into storage, so access to the topic is access to your trace data. A client that can produce to the topic can insert arbitrary spans without going through a collector, and can send record batches that are expensive to process, such as batches that are small on the wire but decompress to a very large size. The receiver's fetch settings limit compressed bytes, not the decompressed size.
+
+* Enable authentication and TLS on the brokers, and configure the matching `auth` and `tls` settings on both the Kafka exporter and the Kafka receiver.
+* Give the collectors' principal produce access to the span topic only, and the ingesters' principal consume access to that topic and their consumer group only. The receiver's consumer group is `otel-collector` unless `group_id` is set. With the Kafka ACL tool, for a topic named `jaeger-spans`:
+
+  ```sh
+  kafka-acls.sh --bootstrap-server <broker> --add \
+    --allow-principal User:jaeger-collector --producer --topic jaeger-spans
+  kafka-acls.sh --bootstrap-server <broker> --add \
+    --allow-principal User:jaeger-ingester --consumer --topic jaeger-spans --group otel-collector
+  ```
+
+* Do not let other applications produce to the span topic. A post-processing pipeline should consume from it, as in the diagram above, not write to it.

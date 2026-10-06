@@ -58,6 +58,22 @@ Unless your Kafka cluster is configured to automatically create topics, you will
 
 You can find more information about topics and partitions in general in the [official documentation](https://kafka.apache.org/documentation/#intro_topics). [This article](https://www.confluent.io/blog/how-to-choose-the-number-of-topicspartitions-in-a-kafka-cluster/) provide more details about how to choose the number of partitions.
 
+## Securing the topic
+
+The ingester writes whatever it reads from the topic into storage, so access to the topic is access to your trace data. A client that can produce to the topic can insert arbitrary spans without going through a collector, and can send record batches that are expensive to process, such as batches that are small on the wire but decompress to a very large size. The receiver's fetch settings limit compressed bytes, not the decompressed size.
+
+* Enable authentication and TLS on the brokers, and configure the matching `auth` and `tls` settings on both the Kafka exporter and the Kafka receiver.
+* Give the collectors' principal produce access to the span topic only, and the ingesters' principal consume access to that topic and their consumer group only. The receiver's consumer group is `otel-collector` unless `group_id` is set. With the Kafka ACL tool, for a topic named `jaeger-spans`:
+
+  ```sh
+  kafka-acls.sh --bootstrap-server <broker> --add \
+    --allow-principal User:jaeger-collector --producer --topic jaeger-spans
+  kafka-acls.sh --bootstrap-server <broker> --add \
+    --allow-principal User:jaeger-ingester --consumer --topic jaeger-spans --group otel-collector
+  ```
+
+* Do not let other applications produce to the span topic. A post-processing pipeline should consume from it, as in the diagram above, not write to it.
+
 ## At-least-once delivery
 
 With the default ingester configuration the Kafka receiver commits an offset as soon as the pipeline accepts the record, and the pipeline accepts it before the storage has written it, so a backend outage loses spans that Kafka considers delivered. The ingester can instead be configured so that an offset is committed only after the spans it covers are durable. The pipeline half of that configuration, no `batch` processor and an exporter queue with `wait_for_result: true`, is the same for every receiver and is described on the [Delivery Guarantees](../../deployment/delivery-guarantees/#kafka-ingester) page. The Kafka-specific half is:
@@ -99,3 +115,32 @@ With `wait_for_result` set, batch size is bounded by the number of partitions th
 The receiver's fetch settings (`max_fetch_size`, `max_partition_fetch_size`, `min_fetch_size`, `max_fetch_wait`) control how many bytes a broker returns per fetch and how long it waits to accumulate them, not how many records reach the exporter at once. The receiver makes one pipeline call per fetched record, so a larger fetch only fills the receiver's buffer and does not enlarge the storage write.
 
 For Elasticsearch and OpenSearch, keep `queue.batch.max_size` well below the storage's `bulk_processing.max_bytes`. The collector measures a batch in OTLP protobuf bytes while the storage measures the encoded `_bulk` body, which is larger, so a batch at the limit is otherwise split across several `_bulk` requests. Both values must stay below the `http.max_content_length` limit of Elasticsearch, 100 MB by default.
+
+## Recovering a stalled partition
+
+A partition can stop advancing while the others keep draining. This happens when the receiver cannot get past a record or a record batch:
+
+* With `message_marking.after: true`, as in the [at-least-once configuration](#at-least-once-delivery), a record that fails with a permanent error is not committed, and the partition stays at it. Running Elasticsearch or OpenSearch with `poison_pill_handling: drop` or the dead-letter pipeline, as described above, avoids the most common cause.
+* Recent versions of the Kafka client stop a partition when a record batch would decompress beyond the client's size limit. The error message names the offset to skip to.
+
+Restarting the ingester does not help, because it resumes from the committed offset and reads the same data again.
+
+The receiver stops reporting `otelcol_kafka_receiver_offset_lag` for a paused partition, so watch consumer-group lag from the broker side instead, or describe the group:
+
+```sh
+kafka-consumer-groups.sh --bootstrap-server <broker> --describe --group otel-collector
+```
+
+The ingester's error log names the topic, partition and offset. To skip past the data, stop every ingester in the consumer group, because Kafka resets offsets only for an inactive group. Then move the group's offset for that partition and start the ingesters again:
+
+```sh
+# skip one record
+kafka-consumer-groups.sh --bootstrap-server <broker> --group otel-collector \
+  --topic jaeger-spans:<partition> --reset-offsets --shift-by 1 --execute
+
+# skip to a given offset, such as the one named in a decompression error
+kafka-consumer-groups.sh --bootstrap-server <broker> --group otel-collector \
+  --topic jaeger-spans:<partition> --reset-offsets --to-offset <offset> --execute
+```
+
+Run the command with `--dry-run` in place of `--execute` first to check the new offset. Spans in the skipped data are not written to storage.
