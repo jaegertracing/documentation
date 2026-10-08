@@ -63,6 +63,7 @@ You can find more information about topics and partitions in general in the [off
 The ingester writes whatever it reads from the topic into storage, so access to the topic is access to your trace data. A client that can produce to the topic can insert arbitrary spans without going through a collector, and can send record batches that are expensive to process, such as batches that are small on the wire but decompress to a very large size. The receiver's fetch settings limit compressed bytes, not the decompressed size.
 
 * Enable authentication and TLS on the brokers, and configure the matching `auth` and `tls` settings on both the Kafka exporter and the Kafka receiver.
+* Enable an authorizer on the brokers, otherwise the ACLs below are not enforced: set `authorizer.class.name` to `org.apache.kafka.metadata.authorizer.StandardAuthorizer` on KRaft clusters, or to `kafka.security.authorizer.AclAuthorizer` on ZooKeeper-based clusters. Keep `allow.everyone.if.no.acl.found` at its default of `false`, so that a resource without any ACL is denied rather than open to everyone, and list the brokers' own principals in `super.users`.
 * Give the collectors' principal produce access to the span topic only, and the ingesters' principal consume access to that topic and their consumer group only. The receiver's consumer group is `otel-collector` unless `group_id` is set. With the Kafka ACL tool, for a topic named `jaeger-spans`:
 
   ```sh
@@ -118,10 +119,7 @@ For Elasticsearch and OpenSearch, keep `queue.batch.max_size` well below the sto
 
 ## Recovering a stalled partition
 
-A partition can stop advancing while the others keep draining. This happens when the receiver cannot get past a record or a record batch:
-
-* With `message_marking.after: true`, as in the [at-least-once configuration](#at-least-once-delivery), a record that fails with a permanent error is not committed, and the partition stays at it. Running Elasticsearch or OpenSearch with `poison_pill_handling: drop` or the dead-letter pipeline, as described above, avoids the most common cause.
-* Recent versions of the Kafka client stop a partition when a record batch would decompress beyond the client's size limit. The error message names the offset to skip to.
+A partition can stop advancing while the others keep draining. With `message_marking.after: true`, as in the [at-least-once configuration](#at-least-once-delivery), a record that fails with a permanent error is not committed, and its partition stays at that record. Running Elasticsearch or OpenSearch with `poison_pill_handling: drop` or the dead-letter pipeline, as described above, avoids the most common cause.
 
 Restarting the ingester does not help, because it resumes from the committed offset and reads the same data again.
 
@@ -138,7 +136,7 @@ The ingester's error log names the topic, partition and offset. To skip past the
 kafka-consumer-groups.sh --bootstrap-server <broker> --group otel-collector \
   --topic jaeger-spans:<partition> --reset-offsets --shift-by 1 --execute
 
-# skip to a given offset, such as the one named in a decompression error
+# skip several records: move to a given offset
 kafka-consumer-groups.sh --bootstrap-server <broker> --group otel-collector \
   --topic jaeger-spans:<partition> --reset-offsets --to-offset <offset> --execute
 ```
