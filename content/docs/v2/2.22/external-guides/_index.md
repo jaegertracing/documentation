@@ -12,6 +12,7 @@ children:
 
 * [Take Jaeger for a HotROD ride](https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2) by Yuri Shkuro
 * [Trace comparisons](https://medium.com/jaegertracing/trace-comparisons-arrive-in-jaeger-1-7-a97ad5e2d05d) by Joe Farro
+* [Jaeger v2 Tutorial: Find Why Requests Are Slow with Distributed Tracing](https://prepare.sh/tutorial/jaeger-v2-tutorial-find-why-requests-are-slow-with-distributed-tracing) by Prepare.sh
 
 ## Success stories
 
