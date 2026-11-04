@@ -48,31 +48,40 @@
     if (id !== generation) {
       return;
     }
-    window.mermaid.initialize({
-      ...baseConfig,
-      theme: isDark() ? 'dark' : 'default',
-    });
+    window.mermaid.initialize({ ...baseConfig, theme: renderedTheme });
     const nodes = Array.from(document.querySelectorAll('.mermaid'));
     for (const [index, node] of nodes.entries()) {
       if (node.dataset.source === undefined) {
         node.dataset.source = diagramSource(node);
       }
-      const { svg } = await window.mermaid.render(
-        `mermaid-${id}-${index}`,
-        node.dataset.source,
-      );
-      if (id !== generation) {
-        return;
+      try {
+        const { svg } = await window.mermaid.render(
+          `mermaid-${id}-${index}`,
+          node.dataset.source,
+          node,
+        );
+        if (id !== generation) {
+          return;
+        }
+        node.innerHTML = svg;
+      } catch (err) {
+        // Mermaid leaves its syntax-error picture inside the node.
+        console.error('mermaid render failed', err);
       }
-      node.innerHTML = svg;
       node.dataset.processed = 'true';
     }
   };
 
+  // Docsy writes the color-mode attribute more than once during page load,
+  // so only a change of value triggers a redraw.
+  let renderedTheme;
   const schedule = () => {
-    queue = render().catch((err) =>
-      console.error('mermaid render failed', err),
-    );
+    const theme = isDark() ? 'dark' : 'default';
+    if (theme === renderedTheme) {
+      return;
+    }
+    renderedTheme = theme;
+    queue = render();
   };
 
   new MutationObserver(schedule).observe(document.documentElement, {
