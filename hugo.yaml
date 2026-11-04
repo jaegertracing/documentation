@@ -12,7 +12,7 @@ defaultContentLanguageInSubdir: false
 
 languages:
   en:
-    languageName: English
+    label: English
     params:
       description: Open source, distributed tracing platform
 
@@ -48,7 +48,10 @@ markup:
 
 imaging:
   resampleFilter: CatmullRom # cspell:disable-line
-  quality: 75
+  jpeg:
+    quality: 75
+  webp:
+    quality: 75
   anchor: Smart
 
 # cSpell:ignore nbsp pagelinks
