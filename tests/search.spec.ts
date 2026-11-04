@@ -45,7 +45,9 @@ const KNOWN_VIOLATIONS: RegExp[] = [
 
 const UNAVAILABLE = /^(Search index not found|Search is unavailable)/;
 
-// Console warnings from the current test's page.
+// CSP violations and console warnings from every page the current test
+// loaded. Kept in the test process so navigations do not discard them.
+let violations: string[] = [];
 let warnings: string[] = [];
 
 test.beforeEach(async ({ page, baseURL }) => {
@@ -65,10 +67,15 @@ test.beforeEach(async ({ page, baseURL }) => {
       })
       .catch(() => {});
   });
+  violations = [];
+  await page.exposeFunction('__reportCspViolation', (violation: string) => {
+    violations.push(violation);
+  });
   await page.addInitScript(() => {
-    const store = ((window as any).__cspViolations = [] as string[]);
     document.addEventListener('securitypolicyviolation', (e) => {
-      store.push(`${e.effectiveDirective} ${e.blockedURI}`);
+      (window as any).__reportCspViolation(
+        `${e.effectiveDirective} ${e.blockedURI}`,
+      );
     });
   });
   warnings = [];
@@ -86,9 +93,6 @@ test.afterEach(async ({ page }) => {
   // Requests started at the very end of a test (such as the results page's
   // worker after a final navigation) must not fail the next one.
   await page.unrouteAll({ behavior: 'ignoreErrors' });
-  const violations: string[] = await page
-    .evaluate(() => (window as any).__cspViolations || [])
-    .catch(() => []);
   expect(
     violations.filter((v) => !KNOWN_VIOLATIONS.some((known) => known.test(v))),
     'CSP violations',
@@ -209,8 +213,40 @@ test('editing the query drops the highlighted result', async ({ page }) => {
   expect(
     await input.evaluate((node) => node.getAttribute('aria-activedescendant')),
   ).toBeNull();
+  // The old options stay listed until the new search renders, but arrow
+  // keys must not pick them.
+  await input.press('ArrowDown');
   await input.press('Enter');
   await page.waitForURL(/\/search\/\?q=samplings&v=2\.dev$/);
+});
+
+test('returning to the box restarts a search cut short by leaving it', async ({
+  page,
+}) => {
+  // Hold the WASM back so leaving the box cancels the search before results.
+  await page.route('**/pagefind/wasm.*', async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await route.fallback();
+  });
+  await page.goto('/');
+  const input = page.locator('.td-search__input').first();
+  const panel = page.locator('.td-search__results').first();
+  await input.fill(QUERY);
+  await input.blur();
+  await settle(page);
+  await expect(panel).toBeHidden();
+  await input.focus();
+  await expect(panel.locator('.td-search__option').first()).toBeVisible();
+});
+
+test('focusing a box the page filled in opens nothing', async ({ page }) => {
+  await page.goto(`/search/?q=${QUERY}`);
+  await expect(page.locator('#td-search-page-status')).toHaveText(
+    /results? for/,
+  );
+  await page.locator('.td-search__input').first().focus();
+  await settle(page);
+  await expect(page.locator('.td-search__results').first()).toBeHidden();
 });
 
 test('search page lists results scoped to the latest version', async ({

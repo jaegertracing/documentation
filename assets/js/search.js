@@ -213,6 +213,9 @@
     let active = -1;
     // Query the popup content belongs to; null when it is stale or an error.
     let shownQuery = null;
+    // Last query the reader typed here. Text set by the page (the results
+    // page prefills the box) does not count, so focusing it opens nothing.
+    let typedQuery = null;
     // Bumped by every keystroke and every close(): a search whose generation
     // is no longer current must not render or reopen the popup.
     let generation = 0;
@@ -228,6 +231,11 @@
       panel.hidden = true;
       input.setAttribute('aria-expanded', 'false');
       setActive(-1);
+    }
+
+    /** True when the listed options belong to the current input text. */
+    function fresh() {
+      return shownQuery !== null && shownQuery === input.value.trim();
     }
 
     /** Reopens the popup if it still matches the input; else searches again. */
@@ -324,6 +332,7 @@
       // The highlighted option belongs to the old text: Enter must not open it.
       setActive(-1);
       const query = input.value.trim();
+      typedQuery = query || null;
       if (!query) {
         close();
         return;
@@ -353,14 +362,20 @@
 
     input.addEventListener('input', run);
 
+    /**
+     * Back in the box: show the results for the typed text again, restarting
+     * the search if leaving the box cancelled it before results arrived.
+     */
+    function resume() {
+      if (input.value.trim() && input.value.trim() === typedQuery) reopen();
+    }
+
     input.addEventListener('focus', () => {
       boxScope().catch(() => {}); // warm up; errors surface on search
-      if (input.value.trim() && shownQuery === input.value.trim()) open();
+      resume();
     });
 
-    input.addEventListener('click', () => {
-      if (input.value.trim() && shownQuery === input.value.trim()) open();
-    });
+    input.addEventListener('click', resume);
 
     input.addEventListener('keydown', (e) => {
       if (e.isComposing) return; // IME composition owns Enter and arrows
@@ -375,7 +390,9 @@
             }
             return;
           }
-          if (!options.length) return;
+          // While a search for edited text is pending, the listed options
+          // belong to the old text and must not be selectable.
+          if (!options.length || !fresh()) return;
           e.preventDefault();
           if (e.key === 'ArrowDown') {
             setActive(active + 1 >= options.length ? 0 : active + 1);
@@ -386,7 +403,7 @@
         case 'Enter': {
           // Also stops the mobile sidebar's wrapping <form> from submitting.
           e.preventDefault();
-          if (isOpen && active >= 0) {
+          if (isOpen && active >= 0 && fresh()) {
             location.href = options[active].href;
             break;
           }
