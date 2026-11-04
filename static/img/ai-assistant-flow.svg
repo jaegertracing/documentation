@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="400" viewBox="0 0 960 400" font-family="Helvetica, Arial, sans-serif" font-size="14">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555"/>
+    </marker>
+  </defs>
+  <style>
+    .box { fill: #ffffff; stroke: #555; stroke-width: 1.5; rx: 6; }
+    .group { fill: #f4f6f8; stroke: #999; stroke-width: 1; stroke-dasharray: 6 4; rx: 8; }
+    .title { font-weight: bold; }
+    .label { fill: #333; font-size: 12px; }
+    .arrow { stroke: #555; stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
+    .muted { fill: #666; font-size: 12px; }
+  </style>
+
+  <!-- Clients -->
+  <rect class="box" x="30" y="60" width="200" height="70"/>
+  <text class="title" x="130" y="90" text-anchor="middle">Jaeger UI</text>
+  <text class="muted" x="130" y="112" text-anchor="middle">"Ask Jaeger" chat panel</text>
+
+  <rect class="box" x="30" y="250" width="200" height="70"/>
+  <text class="title" x="130" y="280" text-anchor="middle">Other AG-UI client</text>
+  <text class="muted" x="130" y="302" text-anchor="middle">no Jaeger UI involved</text>
+
+  <!-- Jaeger Query group -->
+  <rect class="group" x="320" y="20" width="320" height="360"/>
+  <text class="title" x="480" y="45" text-anchor="middle">jaeger_query</text>
+
+  <rect class="box" x="350" y="80" width="260" height="70"/>
+  <text class="title" x="480" y="108" text-anchor="middle">AI gateway</text>
+  <text class="muted" x="480" y="130" text-anchor="middle">POST /api/ai/chat</text>
+
+  <rect class="box" x="350" y="200" width="260" height="70"/>
+  <text class="title" x="480" y="228" text-anchor="middle">MCP endpoint</text>
+  <text class="muted" x="480" y="250" text-anchor="middle">/api/ai/mcp/ and /api/ai/mcp/&lt;id&gt;/</text>
+
+  <rect class="box" x="350" y="300" width="260" height="60"/>
+  <text class="title" x="480" y="325" text-anchor="middle">Query service</text>
+  <text class="muted" x="480" y="345" text-anchor="middle">trace storage</text>
+
+  <!-- Agent -->
+  <rect class="box" x="730" y="150" width="200" height="90"/>
+  <text class="title" x="830" y="182" text-anchor="middle">ACP agent</text>
+  <text class="muted" x="830" y="204" text-anchor="middle">run by the operator</text>
+  <text class="muted" x="830" y="222" text-anchor="middle">with its own model provider</text>
+
+  <!-- Clients to gateway -->
+  <path class="arrow" d="M230,95 L350,105"/>
+  <path class="arrow" d="M230,285 L350,135"/>
+  <text class="label" x="240" y="75">AG-UI request, SSE events</text>
+
+  <!-- Gateway to agent -->
+  <path class="arrow" d="M610,115 L730,175"/>
+  <text class="label" x="620" y="120">ACP over WebSocket</text>
+
+  <!-- Agent to MCP endpoint -->
+  <path class="arrow" d="M730,215 L610,235"/>
+  <text class="label" x="625" y="265">MCP tool calls</text>
+
+  <!-- MCP endpoint to query service -->
+  <path class="arrow" d="M480,270 L480,300"/>
+
+  <!-- Gateway to MCP endpoint (turn-scoped tools) -->
+  <path class="arrow" d="M400,150 L400,200"/>
+  <text class="label" x="355" y="180">UI tools for the turn</text>
+</svg>

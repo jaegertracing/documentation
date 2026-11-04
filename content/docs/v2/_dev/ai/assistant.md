@@ -19,6 +19,8 @@ endpoint directly, without the Jaeger UI involved.
 
 ## How it works
 
+[![AI Assistant request flow](/img/ai-assistant-flow.svg)](/img/ai-assistant-flow.svg)
+
 The operator runs an agent that serves ACP over WebSocket and points Jaeger at
 it. For each chat turn:
 
