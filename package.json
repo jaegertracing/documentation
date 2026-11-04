@@ -41,7 +41,8 @@
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve:search": "npm run build && npx --no-install pagefind --serve",
     "serve": "npm run _serve --",
-    "test:search": "npm run _build && npx playwright test",
+    "_build-for-browser-tests": "HUGO_SERVICES_GOOGLEANALYTICS_ID=G-PLACEHOLDER WKSP=hugo.dev.yaml npm run _hugo -- -DF",
+    "test:browser": "npm run _build-for-browser-tests && npx playwright test",
     "test:only": "npm run check:format && npm run check:links:all",
     "test": "echo 'RUNNING fix AND test ...'; npm run fix && npm run test:only",
     "update:packages": "npx npm-check-updates -u"

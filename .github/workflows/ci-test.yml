@@ -29,7 +29,7 @@ jobs:
     - run: npm install
     - run: npm run check:spelling
 
-  search:
+  browser-tests:
     runs-on: ubuntu-latest
     # This image ships Chromium with its system packages, so the job does not
     # run apt-get or download a browser. Its tag must match @playwright/test
@@ -41,7 +41,7 @@ jobs:
     # Hugo reads Git metadata for every page.
     - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
     - run: npm install
-    - run: npm run test:search
+    - run: npm run test:browser
 
   block-pr-from-main-branch:
     runs-on: ubuntu-latest
