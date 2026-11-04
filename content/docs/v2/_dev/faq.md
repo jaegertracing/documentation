@@ -2,7 +2,7 @@
 title: Frequently Asked Questions
 navtitle: FAQs
 description: Answers to some frequently asked questions about Jaeger.
-weight: 7
+weight: 8
 linkTitle: FAQ
 ---
 
