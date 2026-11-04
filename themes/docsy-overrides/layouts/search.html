@@ -1,11 +1,32 @@
+{{/* Search results page, rendered by assets/js/search.js from the Pagefind
+   index. URL contract: /search/?q=<query>&v=<version|all>. */ -}}
 {{ define "main" -}}
 <section class="row td-search-result">
-  <div class="col-12 col-md-8 offset-md-2">
-    <h2 class="ms-4">{{ .Title }}</h2>
-    {{ with .Site.Params.gcs_engine_id -}}
-      <script async src="https://cse.google.com/cse.js?cx={{ . }}"></script>
-      <gcse:searchresults-only></gcse:searchresults-only>
-    {{ end -}}
+  <div class="col-12 col-md-10 offset-md-1">
+    <h2>{{ .Title }}</h2>
+    <form id="td-search-page-form" class="td-search-page__form" action="{{ "search/" | relURL }}" method="get" role="search">
+      <input type="search" name="q" id="td-search-page-q" class="form-control"
+        placeholder="{{ T "ui_search" }}" aria-label="{{ T "ui_search" }}"
+        autocomplete="off" spellcheck="false">
+      <select name="v" id="td-search-page-v" class="form-select" aria-label="Documentation version">
+        <option value="">Latest ({{ site.Params.latestV2 }})</option>
+        {{ range site.Params.versionsV2 -}}
+          {{ if ne . site.Params.latestV2 -}}
+        <option value="{{ . }}">{{ . }}</option>
+          {{ end -}}
+        {{ end -}}
+        <option value="2.dev">2.dev (preview)</option>
+        {{ range site.Params.versions -}}
+        <option value="{{ . }}">{{ . }} (archive)</option>
+        {{ end -}}
+        <option value="all">All versions</option>
+      </select>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <p id="td-search-page-status" class="td-search-page__status" aria-live="polite"></p>
+    <ol id="td-search-page-results" class="td-search-page__results"></ol>
+    <button id="td-search-page-more" type="button" class="btn btn-outline-secondary" hidden>Show more results</button>
+    <noscript><p>Search requires JavaScript.</p></noscript>
   </div>
 </section>
 {{ end }}
