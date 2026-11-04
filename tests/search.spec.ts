@@ -50,11 +50,20 @@ let warnings: string[] = [];
 
 test.beforeEach(async ({ page, baseURL }) => {
   await page.route(`${baseURL}/**`, async (route) => {
-    const response = await route.fetch();
-    await route.fulfill({
-      response,
-      headers: { ...response.headers(), 'content-security-policy': CSP },
-    });
+    let response;
+    try {
+      response = await route.fetch();
+    } catch {
+      // The test (and its page) ended while this request was in flight, for
+      // example the worker fetch started by a final navigation.
+      return;
+    }
+    await route
+      .fulfill({
+        response,
+        headers: { ...response.headers(), 'content-security-policy': CSP },
+      })
+      .catch(() => {});
   });
   await page.addInitScript(() => {
     const store = ((window as any).__cspViolations = [] as string[]);
@@ -74,6 +83,9 @@ test.beforeEach(async ({ page, baseURL }) => {
 });
 
 test.afterEach(async ({ page }) => {
+  // Requests started at the very end of a test (such as the results page's
+  // worker after a final navigation) must not fail the next one.
+  await page.unrouteAll({ behavior: 'ignoreErrors' });
   const violations: string[] = await page
     .evaluate(() => (window as any).__cspViolations || [])
     .catch(() => []);
