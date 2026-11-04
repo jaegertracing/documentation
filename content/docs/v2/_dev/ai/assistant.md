@@ -20,7 +20,25 @@ endpoint directly, without the Jaeger UI involved.
 
 ## How it works
 
-[![AI Assistant request flow](/img/ai-assistant-flow.svg)](/img/ai-assistant-flow.svg)
+{{<mermaid align="center">}}
+graph LR
+    UI[Jaeger UI<br/>Ask Jaeger chat panel]
+    CLIENT[Other AG-UI client<br/>no Jaeger UI involved]
+    AGENT[ACP agent<br/>run by the operator<br/>with its own model provider]
+
+    subgraph jaeger_query
+        GATEWAY[AI gateway<br/>POST /api/ai/chat]
+        MCP[MCP endpoint<br/>/api/ai/mcp/ and /api/ai/mcp/#lt;id#gt;/]
+        QUERY[Query service<br/>trace storage]
+    end
+
+    UI --> |AG-UI request, SSE events| GATEWAY
+    CLIENT --> |AG-UI request, SSE events| GATEWAY
+    GATEWAY --> |ACP over WebSocket| AGENT
+    AGENT --> |MCP tool calls| MCP
+    GATEWAY --> |UI tools for the turn| MCP
+    MCP --> QUERY
+{{< /mermaid >}}
 
 The operator runs an agent that serves ACP over WebSocket and points Jaeger at
 it. For each chat turn:
