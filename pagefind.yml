@@ -1,0 +1,11 @@
+# cSpell:ignore docsy lastmod pagefind postbuild
+# Pagefind site search index, built from public/ by the postbuild* npm hooks.
+# Options: https://pagefind.app/docs/config-options/
+# Pages are indexed only inside elements marked data-pagefind-body (Docsy's
+# .td-content wrapper; see themes/docsy-overrides/layouts/_td-content.html).
+site: public
+force_language: en
+exclude_selectors:
+  - '.td-page-meta__lastmod' # "Last modified" footer
+  - '.section-index' # child-page list on section pages
+  - '.mermaid' # raw diagram source

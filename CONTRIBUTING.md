@@ -38,6 +38,21 @@ npm run build
 npm run build:production
 ```
 
+## Site search
+
+Site search uses [Pagefind](https://pagefind.app/), a static search index that
+is built from `public/` after each build by the `postbuild*` npm hooks (see
+[`pagefind.yml`](pagefind.yml)). No third-party service is involved.
+
+- `npm run serve` renders to memory, so it has no search index. To try search
+  locally, run `npm run serve:search` and open
+  [localhost:1414](http://localhost:1414).
+- Only page content inside Docsy's `.td-content` element is indexed. To keep a
+  page out of search results, add `exclude_search: true` to its front matter.
+- Every page is tagged with its docs version (for example `2.22` or `1.76`, or
+  `site` for non-docs pages). Search defaults to the version of the page the
+  reader is on, and the results page lets readers pick another version.
+
 ## Code Quality Checks
 
 Before committing changes, run:
