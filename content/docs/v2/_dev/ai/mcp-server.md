@@ -76,37 +76,8 @@ pattern. Agents reach skills through `read_skill`. They start at the root
 them, and follow its links, so a skill is read only when it looks relevant.
 
 Jaeger bundles its built-in skills into the binary. An operator can serve
-installation-specific skills without rebuilding Jaeger by pointing
-`ai.mcp.skills_dir` at a directory on the query server's disk:
-
-```yaml
-extensions:
-  jaeger_query:
-    ai:
-      mcp:
-        skills_dir: /etc/jaeger/skills
-```
-
-On the embedded all-in-one configuration, set the same field with
-`--set extensions.jaeger_query.ai.mcp.skills_dir=<path>`.
-
-The directory must contain a `SKILL.md`, which becomes the index of your skills.
-Jaeger serves its contents under the `custom/` prefix beside the built-in skills,
-so an agent that reads `custom/SKILL.md` gets your index. Links inside a skill
-are written relative to the skills root, for example
-`custom/your-skill/SKILL.md`, because an agent passes the link text straight
-back to `read_skill`. The directory is read live: an edit takes effect on the
-next `read_skill` call. Jaeger refuses to start when the directory or its
-`SKILL.md` cannot be read, and it caps each served file at 512 KiB.
-
-Anyone who can write to `skills_dir` can steer the behavior of an agent that
-already holds your telemetry tools. Treat the directory as part of the trusted
-configuration surface and review changes to it as you would review a
-configuration change.
-
-For how to write a skill that an agent will choose to read, see the
-[authoring guide](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/internal/mcptools/AUTHORING.md)
-in the Jaeger repository. The built-in skills are worked examples.
+installation-specific skills without rebuilding Jaeger, and
+[Custom Skills](../skills/) describes how to serve them and how to write one.
 
 ## Connecting a client
 

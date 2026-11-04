@@ -7,6 +7,8 @@ children:
   url: mcp-server
 - title: AI Assistant
   url: assistant
+- title: Custom Skills
+  url: skills
 ---
 
 Jaeger exposes trace data to AI agents in two ways, and lets an operator teach
@@ -31,7 +33,7 @@ configured.
   `read_skill` tool before it attempts a task, such as walking a failed trace to
   its first error. Jaeger ships built-in skills, and an operator can serve their
   own from a directory, so an installation can teach the assistant about its
-  domain without rebuilding Jaeger. See [Skills](./mcp-server/#skills).
+  domain without rebuilding Jaeger. See [Custom Skills](./skills/).
 
 Jaeger ships no agent and no model provider, and it holds no model API key. The
 MCP server works on its own. The assistant works only when an operator runs an
