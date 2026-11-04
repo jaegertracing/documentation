@@ -71,34 +71,9 @@ extensions:
 - `max_request_body_size` limits the size of a chat request. The default is
   1 MiB.
 - `auth` restricts the assistant and the MCP endpoint to an admitted group of
-  users. See [Gating the AI surfaces alone](../mcp-server/#gating-the-ai-surfaces-alone).
-
-### Forwarding the caller's identity
-
-An agent that acts on behalf of the person in the chat, for example to attribute
-its model usage to them, needs that person's identity rather than a credential
-of the gateway. The query extension's `header_forwarding` list names the request
-headers that Jaeger captures from each inbound request and forwards to the
-storage backend. The gateway copies the same captured headers onto the dial for
-each chat turn, so one list describes the caller's identity for every hop:
-
-```yaml
-extensions:
-  jaeger_query:
-    header_forwarding:
-      - http_name: X-Identity-Token
-    ai:
-      agent_url: ws://127.0.0.1:17000/acp
-```
-
-A listed header that a request does not carry is not sent. Each header arrives
-at the agent under its `http_outbound_name`, or its `http_name` when that is
-unset. A captured header with the same name as an `agent_headers` entry
-replaces the static value. The
-gateway copies the header as the request carried it, so it is only as
-trustworthy as the proxy in front of Jaeger that sets it and strips any copy the
-client supplied. The health probe has no request to copy from, so the agent must
-answer `initialize` without the forwarded header.
+  users, and `header_forwarding` passes the caller's identity to the agent. See
+  [AI Agents to Query](../../deployment/security/#ai-agents-to-query) on the
+  security page.
 
 ### Running the agent elsewhere
 

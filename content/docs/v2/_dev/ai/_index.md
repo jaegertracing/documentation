@@ -42,6 +42,7 @@ candidate traces, then maps a trace without span attributes, then inspects only
 the spans that look suspicious. A single trace can carry thousands of spans, so
 this shape keeps a whole trace out of the model's context window.
 
-Access to either surface is access to your trace data. [MCP Server](./mcp-server/)
-describes how to put authentication and TLS in front of them and how to limit
-the assistant to a group of users.
+Access to either surface is access to your trace data.
+[AI Agents to Query](../deployment/security/#ai-agents-to-query) on the security
+page describes how to put authentication and TLS in front of them and how to
+limit the assistant to a group of users.

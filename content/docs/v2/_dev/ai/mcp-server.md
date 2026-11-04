@@ -133,138 +133,15 @@ Against a deployment with TLS and basic authentication, add
 the endpoint, the same request returns HTTP 404 while the UI and the query API
 remain available.
 
-## Exposure and access to trace data
+## Securing the endpoint
 
 The tools use the same query service as the UI and the query API, and they
-return span attributes, events, and errors. Read-only access can still expose
-sensitive telemetry, so treat access to the MCP endpoint as access to your trace
-data. `read_skill` also exposes any installation-specific skills.
-
-The query HTTP listener defaults to all interfaces with no TLS and no
-authenticator. The endpoint shares that listener, so its reachability also
-depends on your firewall, container port publishing, and ingress configuration.
-
-### Production deployment
-
-Require authentication and TLS before making the endpoint reachable by remote
-agents. Apply the policy to the entire query HTTP surface, including
-`<base_path>/api/ai/mcp/` and every path below it, with either an authenticated reverse
-proxy or the query server's own authenticator.
-
-**Reverse proxy.** Terminate TLS and authenticate requests at the proxy, and
-restrict direct access to the query listener so clients cannot bypass it. For a
-proxy on the same host, bind `extensions.jaeger_query.http.endpoint` to
-`127.0.0.1:16686` and set the upstream `Host` header to `127.0.0.1` or
-`localhost`, because the MCP transport rejects a loopback request that carries a
-public `Host` header (see [Running behind a reverse proxy](#running-behind-a-reverse-proxy-or-sidecar)).
-Forward POST, GET, and DELETE requests, the `Mcp-Session-Id` and
-`MCP-Protocol-Version` headers, and SSE responses without buffering. The query
-gRPC listener on `:16685` also reads trace data and is not protected by an HTTP
-proxy, so bind it to a private address or configure gRPC authentication and TLS.
-
-**Query server authenticator.** Jaeger includes the collector's
-[`basicauth` server authenticator](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/basicauthextension).
-The following settings protect the UI, the query API, the gRPC API, and the MCP
-endpoint together. Merge them into your configuration and add `basicauth/query`
-to `service.extensions`:
-
-```yaml
-extensions:
-  basicauth/query:
-    htpasswd:
-      file: /etc/jaeger/query.htpasswd
-  jaeger_query:
-    http:
-      endpoint: 0.0.0.0:16686
-      auth:
-        authenticator: basicauth/query
-      tls:
-        cert_file: /etc/jaeger/tls/server.crt
-        key_file: /etc/jaeger/tls/server.key
-        min_version: "1.2"
-    grpc:
-      endpoint: 0.0.0.0:16685
-      auth:
-        authenticator: basicauth/query
-      tls:
-        cert_file: /etc/jaeger/tls/server.crt
-        key_file: /etc/jaeger/tls/server.key
-        min_version: "1.2"
-    ai:
-      mcp:
-        base_url: https://jaeger.example.com:16686
-
-service:
-  extensions: [basicauth/query, jaeger_storage, jaeger_query]
-```
-
-Basic authentication requires TLS to protect the credentials in transit.
-Configure the MCP client to trust the certificate's CA and to send the
-credentials on every request. With TLS on, Jaeger cannot infer the URL that an
-AI chat agent uses to reach the endpoint, so set `ai.mcp.base_url` to the scheme
-and authority the agent can reach; Jaeger appends `base_path` and the MCP path.
-The assistant's `ai.agent_headers` authenticate Jaeger's outbound dial to the
-agent; they do not authenticate the agent's requests back to this endpoint, so
-configure the agent's MCP client with the credentials and CA trust it needs.
-
-### Gating the AI surfaces alone
-
-The query server's `http.auth` setting applies to every request on the port, so
-it cannot admit everyone to the UI while admitting only some people to the AI
-features. The `ai.auth` block takes the same shape and applies it only to the
-MCP endpoint, the chat endpoint, and the flag that tells the UI to show the chat
-panel. Add the authenticator to `service.extensions` as well:
-
-```yaml
-extensions:
-  basicauth/ai:
-    htpasswd:
-      inline: |
-        alice:$2y$...
-  jaeger_query:
-    ai:
-      mcp: {}
-      auth:
-        authenticator: basicauth/ai
-
-service:
-  extensions: [basicauth/ai, jaeger_storage, jaeger_query]
-```
-
-The authenticator receives the request headers, plus any query parameters
-listed under `ai.auth.request_params`. A rejected MCP or chat request is answered with 401. A rejected page request is
-served the UI without the chat panel, so a person outside the admitted group
-sees Jaeger without the assistant rather than an assistant that fails. Any
-extension that implements the collector's `extensionauth.Server` interface
-works here, so a custom build can gate the features on a group lookup of its
-own. Jaeger fails to start when the named extension is not loaded.
-
-The 401 carries no `WWW-Authenticate` challenge, so a browser never offers basic
-credentials on a page load. The example above therefore gates MCP clients and
-hides the panel from every browser user. Showing the panel to admitted users
-takes an authenticator that reads what a browser sends on navigation, such as a
-session cookie or a header that a fronting proxy injects.
-
-The turn-scoped endpoint, `/api/ai/mcp/<id>/`, that the gateway hands to the
-chat agent is not covered. The chat request that created the turn was already
-admitted, and only that agent receives the route id.
-
-`ai.auth` requires Jaeger 2.23 or later.
-
-### Tenants and sessions
-
-The endpoint follows `extensions.jaeger_query.multi_tenancy`. When enabled,
-every MCP request must carry the configured tenant header, `x-tenant` by
-default; a missing header or a tenant outside the `tenants` allowlist receives
-HTTP 401, and an empty allowlist accepts any nonempty tenant. A tenant header
-selects a tenant and is not proof that the caller may
-access it, so enforce that authorization at the proxy.
-
-By default the transport is stateful, and a session keeps the tenant and
-identity of the request that created it. Use a separate session for each
-identity and tenant, and reconnect when either changes. An `Mcp-Session-Id` is
-not a credential; do not share one across users or tenants. Idle sessions
-expire after five minutes.
+return span attributes, events, and errors, so access to the MCP endpoint is
+access to your trace data. The endpoint shares the query HTTP listener, with no
+TLS and no authenticator by default. Before exposing it to remote agents, see
+[AI Agents to Query](../../deployment/security/#ai-agents-to-query) on the
+security page for authentication and TLS, for restricting the AI surfaces to a
+group of users with `ai.auth`, and for tenant and session behavior.
 
 ## Transport options
 
