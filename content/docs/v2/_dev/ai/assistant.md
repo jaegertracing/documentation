@@ -46,7 +46,7 @@ advertises the capability to the UI.
 extensions:
   jaeger_query:
     ai:
-      agent_url: ws://127.0.0.1:16688/acp
+      agent_url: ws://127.0.0.1:17000/acp
       agent_headers:
         Authorization: Bearer ${env:MY_AGENT_TOKEN}
       mcp: {}
@@ -88,7 +88,7 @@ extensions:
     header_forwarding:
       - http_name: X-Identity-Token
     ai:
-      agent_url: ws://127.0.0.1:16688/acp
+      agent_url: ws://127.0.0.1:17000/acp
 ```
 
 A listed header that a request does not carry is not sent. Each header arrives
@@ -138,7 +138,7 @@ meets the [agent contract](#agent-contract) works the same way; only
 
    ```sh
    export GOOSE_SERVER__SECRET_KEY=$(openssl rand -hex 16)
-   goose serve --host 127.0.0.1 --port 16688
+   goose serve --host 127.0.0.1 --port 17000
    ```
 
 3. Point Jaeger at it, with the same variable set in Jaeger's environment:
@@ -147,7 +147,7 @@ meets the [agent contract](#agent-contract) works the same way; only
    extensions:
      jaeger_query:
        ai:
-         agent_url: ws://127.0.0.1:16688/acp
+         agent_url: ws://127.0.0.1:17000/acp
          agent_headers:
            X-Secret-Key: ${env:GOOSE_SERVER__SECRET_KEY}
          mcp: {}
