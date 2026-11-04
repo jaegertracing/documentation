@@ -1,5 +1,6 @@
 ---
 title: Securing Jaeger Installation
+linkTitle: Securing Jaeger
 aliases: [../security]
 hasparent: true
 ---
