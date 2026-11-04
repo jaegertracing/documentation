@@ -1,14 +1,17 @@
 // Browser tests for the Pagefind site search in assets/js/search.js.
-// They run against the built site in public/, so `npm run build` (which also
-// builds the search index) must run first; `npm run test:search` does both.
+// They run against the Hugo output in public/, so a build must run first;
+// `npm run test:search` does both.
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   testDir: 'tests',
+  forbidOnly: !!process.env.CI,
   use: { baseURL: 'http://localhost:1414' },
   webServer: {
-    // Pagefind serves the site directory from pagefind.yml on port 1414.
-    command: 'npx --no-install pagefind --serve',
+    // Pagefind indexes the site directory from pagefind.yml, then serves it
+    // on port 1414. The index is built here, so the postbuild hook is skipped
+    // by running _build instead of build.
+    command: 'npm run _pagefind -- --serve',
     url: 'http://localhost:1414/',
     reuseExistingServer: !process.env.CI,
   },

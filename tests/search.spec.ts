@@ -6,6 +6,17 @@ import { expect, test } from '@playwright/test';
 // A term that appears throughout the docs, so every indexed version matches.
 const QUERY = 'sampling';
 
+function escapeRegExp(text: string) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/** Matches the status line "<n> result(s) for “<query>” in <scope>." */
+function statusFor(scope: string) {
+  return new RegExp(
+    `^\\d+ results? for “${escapeRegExp(QUERY)}” in ${escapeRegExp(scope)}\\.$`,
+  );
+}
+
 test('navbar search shows results for a docs query', async ({ page }) => {
   await page.goto('/');
   const input = page.locator('.td-search__input').first();
@@ -13,12 +24,13 @@ test('navbar search shows results for a docs query', async ({ page }) => {
   const options = page.locator('.td-search__option');
   await expect(options.first()).toBeVisible();
   await expect(options.first().locator('.td-search__title')).not.toBeEmpty();
-  await expect(options.first()).toHaveAttribute('href', /\//);
+  // Result links are site-relative, so they resolve wherever the site is hosted.
+  await expect(options.first()).toHaveAttribute('href', /^\//);
   await expect(page.locator('.td-search__more').last()).toHaveText(
     'Search all versions',
   );
   await expect(page.locator('.td-search__status').first()).toHaveText(
-    /\d+ results? in /,
+    /^\d+ results? in \S+ docs$/,
   );
 });
 
@@ -26,13 +38,23 @@ test('search page lists results scoped to the latest version', async ({
   page,
 }) => {
   await page.goto(`/search/?q=${QUERY}`);
-  const status = page.locator('#td-search-page-status');
-  await expect(status).toHaveText(/\d+ results? for “sampling” in \S+ docs\./);
+  // The version selector's default option reads "Latest (<version>)".
+  const label = await page
+    .locator('#td-search-page-v option[value=""]')
+    .textContent();
+  const latest = /\((\S+)\)/.exec(label ?? '')?.[1];
+  expect(latest).toBeTruthy();
+  await expect(page.locator('#td-search-page-status')).toHaveText(
+    statusFor(`${latest} docs`),
+  );
   const results = page.locator('#td-search-page-results > li');
   await expect(results.first()).toBeVisible();
   await expect(
     results.first().locator('.td-search-page__title'),
   ).not.toBeEmpty();
+  await expect(results.first().locator('.td-search__badge')).toHaveText(
+    latest!,
+  );
 });
 
 test('search page scopes results to the requested version', async ({
@@ -40,7 +62,7 @@ test('search page scopes results to the requested version', async ({
 }) => {
   await page.goto(`/search/?q=${QUERY}&v=2.dev`);
   await expect(page.locator('#td-search-page-status')).toHaveText(
-    /^\d+ results? for “sampling” in 2\.dev docs\.$/,
+    statusFor('2.dev docs'),
   );
   const results = page.locator('#td-search-page-results > li');
   await expect(results.first()).toBeVisible();

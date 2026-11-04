@@ -41,7 +41,7 @@
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
     "serve:search": "npm run build && npx --no-install pagefind --serve",
     "serve": "npm run _serve --",
-    "test:search": "npm run build && npx playwright test",
+    "test:search": "npm run _build && npx playwright test",
     "test:only": "npm run check:format && npm run check:links:all",
     "test": "echo 'RUNNING fix AND test ...'; npm run fix && npm run test:only",
     "update:packages": "npx npm-check-updates -u"
