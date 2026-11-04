@@ -12,7 +12,11 @@ import { readFileSync } from 'node:fs';
 function productionCsp(): string {
   const toml = readFileSync('netlify.toml', 'utf8');
   const match = /^\s*Content-Security-Policy\s*=\s*"([^"]*)"/m.exec(toml);
-  if (!match) throw new Error('netlify.toml has no Content-Security-Policy');
+  // A policy that the regex read only in part would make the test pass for
+  // the wrong reason, so the value must at least carry its default directive.
+  if (!match?.[1].includes('default-src')) {
+    throw new Error('netlify.toml has no readable Content-Security-Policy');
+  }
   return match[1];
 }
 
@@ -27,10 +31,13 @@ function latestV2(): string {
 
 // Together these pages load every kind of resource the site uses: fonts,
 // analytics, the Mermaid bundle on the SPM architecture page, and Pagefind.
+// The `ready` selector is an element that appears only once the page's
+// scripts have finished, so a blocked script fails the test even when the
+// browser fires no violation event the document can see.
 const pages = [
-  '/',
-  `/docs/${latestV2()}/architecture/spm/`,
-  '/search/?q=sampling',
+  { path: '/', ready: 'footer' },
+  { path: `/docs/${latestV2()}/architecture/spm/`, ready: '.mermaid svg' },
+  { path: '/search/?q=sampling', ready: '#td-search-page-results > li' },
 ];
 
 declare global {
@@ -39,15 +46,14 @@ declare global {
   }
 }
 
-for (const path of pages) {
+for (const { path, ready } of pages) {
   test(`${path} loads without CSP violations`, async ({ page }) => {
     const csp = productionCsp();
     // The static server sends no headers, so the policy is added to every
-    // HTML response the way Netlify adds it.
+    // response the way Netlify adds it. Workers take their policy from their
+    // own script's response, so HTML responses alone would not be enough.
     await page.route('**/*', async (route) => {
       const response = await route.fetch();
-      const type = response.headers()['content-type'] ?? '';
-      if (!type.includes('text/html')) return route.fulfill({ response });
       const headers = { ...response.headers(), 'content-security-policy': csp };
       return route.fulfill({ response, headers });
     });
@@ -62,9 +68,7 @@ for (const path of pages) {
       });
     });
     await page.goto(path, { waitUntil: 'networkidle' });
-    // Mermaid renders after load, and a blocked worker or font shows up
-    // only once the page has settled.
-    await page.waitForTimeout(500);
+    await expect(page.locator(ready).first()).toBeVisible();
     const violations = await page.evaluate(() => window.cspViolations);
     expect(violations).toEqual([]);
   });
