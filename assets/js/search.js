@@ -56,6 +56,9 @@
 
   /** Docs version of the current page (e.g. "2.22", "2.dev", "1.76"), or "". */
   function pageVersion() {
+    if (location.pathname === new URL(SEARCH_PAGE, location.href).pathname) {
+      return new URLSearchParams(location.search).get('v') || '';
+    }
     const match = location.pathname.match(/^\/docs\/([^/]+)\//);
     return match ? match[1] : '';
   }
@@ -67,10 +70,10 @@
    * scope fell back to the latest version.
    */
   async function resolveScope(pf, requested) {
-    if (requested === ALL) return { version: ALL };
+    const wanted = requested || pageVersion() || LATEST;
+    if (wanted === ALL) return { version: ALL };
     const filters = await pf.filters();
     const indexed = Object.keys((filters && filters.version) || {});
-    const wanted = requested || pageVersion() || LATEST;
     if (indexed.includes(wanted)) return { version: wanted };
     const fallback = indexed.includes(LATEST) ? LATEST : ALL;
     return { version: fallback, missing: wanted };
