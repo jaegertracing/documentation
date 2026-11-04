@@ -46,24 +46,26 @@ jaeger --set extensions.jaeger_query.ai.enabled=false
 
 ## Tools
 
-The tools wrap the same query service that the UI uses. They are shaped for a
-drill-down: the first tools return small summaries, and only the last two return
-full span data.
+The tools wrap the same query service that the UI uses, and they are shaped for
+a drill-down in three tiers:
 
-| Tool | Returns |
-| --- | --- |
-| `get_services` | The service names in storage. |
-| `get_span_names` | The span names of one service. |
-| `search_traces` | Trace summaries matching a structured query or one SQL statement, without span details. |
-| `get_trace_topology` | Every span of a trace as a flat list with its ancestry path, without attributes or events. |
-| `get_critical_path` | The ordered spans on the blocking execution path of a trace, with self time. |
-| `get_service_dependencies` | The service dependency graph for a time range. |
-| `get_trace_errors` | Full data of the spans in a trace that carry an error. |
-| `get_span_details` | Full data of named spans: attributes, events, and links. |
-| `read_skill` | A skill playbook, starting from the root `SKILL.md`. |
+- **Discovery** tools return small summaries: the services and span names in
+  storage, trace summaries matching a search without span details, and the
+  service dependency graph.
+- **Structure** tools describe one trace without its payload: every span as a
+  flat list with its ancestry path, and the ordered spans on the critical path
+  with their self time.
+- **Detail** tools return full span data, attributes, events, and links, for a
+  small number of spans already identified as suspicious, either by name or
+  because they carry an error. An agent is meant to call these last.
 
-Each tool's description and JSON schema are served by `tools/list`, so an MCP
-client needs no configuration beyond the endpoint URL.
+A fourth tool, `read_skill`, serves the [skills](#skills).
+
+The server's `tools/list` response is the authoritative catalog, with each
+tool's description and JSON schema, so an MCP client needs no configuration
+beyond the endpoint URL. The
+[tool implementations](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerquery/internal/mcptools)
+are in the Jaeger repository.
 
 ## Skills
 
