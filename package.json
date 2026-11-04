@@ -49,7 +49,7 @@
     "autoprefixer": "^10.4.23",
     "cspell": "^10.0.0",
     "docsy": "github:google/docsy#a600e534909f5fc09b1a48cef649d1e554af4bd2",
-    "pagefind": "1.5.2",
+    "pagefind": "1.6.0",
     "postcss-cli": "^12.0.0",
     "prettier": "^3.8.0"
   },
