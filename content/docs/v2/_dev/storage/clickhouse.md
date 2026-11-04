@@ -5,7 +5,7 @@ hasparent: true
 ---
 
 {{< warning >}}
-ClickHouse storage is **experimental** and must be explicitly enabled via the `storage.clickhouse` [feature gate](https://github.com/open-telemetry/opentelemetry-collector/blob/main/featuregate/README.md). The schema is subject to breaking changes in future releases.
+ClickHouse storage is **experimental**. The schema is subject to breaking changes in future releases.
 {{< /warning >}}
 
 * Supported ClickHouse versions: 26.x
@@ -41,7 +41,7 @@ This starts a ClickHouse server on ports `9000` (native) and `8123` (HTTP) with 
 ### 2. Run Jaeger
 
 ```bash
-go run ./cmd/jaeger --config cmd/jaeger/config-clickhouse.yaml --feature-gates=storage.clickhouse
+go run ./cmd/jaeger --config cmd/jaeger/config-clickhouse.yaml
 ```
 
 The config enables automatic schema creation (`create_schema: true`), so tables and materialized views are created on startup.
