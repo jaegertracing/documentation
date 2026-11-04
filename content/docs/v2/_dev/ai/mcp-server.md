@@ -65,9 +65,7 @@ A fourth tool, `read_skill`, serves the [skills](#skills).
 
 The server's `tools/list` response is the authoritative catalog, with each
 tool's description and JSON schema, so an MCP client needs no configuration
-beyond the endpoint URL. The
-[tool implementations](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerquery/internal/mcptools)
-are in the Jaeger repository.
+beyond the endpoint URL.
 
 ## Skills
 
