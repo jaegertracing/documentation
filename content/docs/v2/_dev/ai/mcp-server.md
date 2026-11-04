@@ -10,8 +10,9 @@ and the query API. It has no port of its own.
 
 ## Enabling the endpoint
 
-The presence of the `ai.mcp` block enables the endpoint, and an empty block is
-enough:
+The `ai` block of the `jaeger_query` extension configures both AI surfaces: the
+MCP endpoint and the [AI Assistant](../assistant/). The presence of the `mcp`
+block enables the MCP endpoint, and an empty block is enough:
 
 ```yaml
 extensions:
@@ -23,9 +24,10 @@ extensions:
 The endpoint serves at `<base_path>/api/ai/mcp/` on the query port, `:16686` by
 default. The embedded all-in-one configuration enables it.
 
-Any `ai` block also registers the [AI Assistant](../assistant/)'s chat endpoint
-and starts its health probe, because `agent_url` has a default. To serve MCP
-without the assistant, set it to an empty string:
+The AI Assistant is configured by `agent_url`, the address of the chat agent.
+That setting has a default, so the block above also enables the assistant's
+chat endpoint and starts a health probe against the default agent address. To
+serve MCP without the assistant, set `agent_url` to an empty string:
 
 ```yaml
 extensions:
@@ -35,10 +37,10 @@ extensions:
       mcp: {}
 ```
 
-To disable it, remove the `ai.mcp` block. If AI chat is not needed either, or
-`agent_url` is set to an empty string, remove the whole `ai` block, because an
-`ai` block requires chat or MCP. The embedded all-in-one configuration has no
-file to edit, so disable both there with a command-line override:
+To disable the MCP endpoint, remove the `mcp` block. If the assistant is not
+needed either, remove the whole `ai` block, because an `ai` block requires at
+least one of the two. The embedded all-in-one configuration has no file to
+edit, so disable both there with a command-line override:
 
 ```sh
 jaeger --set extensions.jaeger_query.ai.enabled=false
