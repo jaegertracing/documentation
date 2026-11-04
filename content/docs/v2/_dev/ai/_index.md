@@ -3,10 +3,10 @@ title: AI Assistant and MCP Server
 linkTitle: AI
 weight: 7
 children:
-- title: MCP Server
-  url: mcp-server
 - title: AI Assistant
   url: assistant
+- title: MCP Server
+  url: mcp-server
 - title: Custom Skills
   url: skills
 ---

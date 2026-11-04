@@ -1,6 +1,7 @@
 ---
 title: Custom Skills
 hasparent: true
+weight: 3
 ---
 
 A skill is a markdown playbook that an agent reads before it attempts a trace

@@ -1,6 +1,7 @@
 ---
 title: AI Assistant
 hasparent: true
+weight: 1
 ---
 
 The AI Assistant is a bring-your-own-agent framework in Jaeger. The

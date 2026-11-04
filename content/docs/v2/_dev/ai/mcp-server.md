@@ -1,6 +1,7 @@
 ---
 title: MCP Server
 hasparent: true
+weight: 2
 ---
 
 The `jaeger_query` extension can serve Jaeger's telemetry tools over the
