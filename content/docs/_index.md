@@ -3,6 +3,7 @@ title: Documentation
 linkTitle: Docs
 no_list: true
 toc_hide: true
+exclude_search: true
 layout: default
 cascade:
   params:

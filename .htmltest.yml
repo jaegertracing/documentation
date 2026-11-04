@@ -1,4 +1,4 @@
-# cSpell:ignore cse github
+# cSpell:ignore github
 CacheExpires: 2190h # ~ 3 months
 DirectoryPath: public
 IgnoreAltMissing: true
@@ -8,8 +8,6 @@ IgnoreDirs:
 IgnoreURLs:
   - ^/docs/latest(/?|/architecture/)$
   - /livereload.js # cSpell:disable-line
-  - ^https://www.jaegertracing.io/js/lunr
-  - ^https://cse.google.com/cse.js
   # Ignore Docsy-generated GitHub links (view-page, edit-source, create-child)
   - ^https?://github\.com/jaegertracing/documentation/(tree|edit|new)/
   # Valid URL, whether canonical (before reorg) or not (and handled via a redirect)
