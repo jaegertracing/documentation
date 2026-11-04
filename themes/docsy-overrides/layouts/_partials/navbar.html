@@ -26,8 +26,12 @@ page/section relative version lists. */ -}}
   <div class="td-navbar-nav-scroll ms-md-auto" id="main_navbar">
     <ul class="navbar-nav">
       {{ if site.Params.search.pagefind -}}
+      {{ $searchURL := "search/" | relURL -}}
+      {{ with findRESubmatch `^/docs/([^/]+)/` .RelPermalink 1 -}}
+        {{ $searchURL = printf "%s?v=%s" $searchURL (index (index . 0) 1 | urlquery) -}}
+      {{ end -}}
       <li class="nav-item d-lg-none">
-        <a class="nav-link" href="{{ "search/" | relURL }}" aria-label="{{ T "ui_search" }}">
+        <a class="nav-link" href="{{ $searchURL }}" aria-label="{{ T "ui_search" }}">
           {{- /**/ -}}<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>{{- /**/ -}}
         </a>
       </li>
