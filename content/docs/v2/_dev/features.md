@@ -70,7 +70,7 @@ See [Service Performance Monitoring (SPM)](../architecture/spm/) for more detail
 
 ## AI Assistant and MCP Server
 
-Jaeger serves its trace query capabilities to AI agents over the Model Context Protocol, as a set of tools shaped so that an agent narrows down to the suspicious spans without loading a whole trace into its context. On top of those tools, the AI Assistant is a bring-your-own-agent framework: a gateway that accepts chat turns over AG-UI and relays them to an agent the operator runs, which answers with the same tools. The Jaeger UI's chat panel is one client of that gateway and lets the agent open the views it finds; any other AG-UI client can use the gateway directly. Jaeger ships no agent and no model provider.
+Jaeger supports AI capabilities in two ways. It exposes an [MCP](https://modelcontextprotocol.io/) server to external AI agents, with a set of tools shaped so that an agent narrows down to the suspicious spans without loading a whole trace into its context. And it accepts AI chat clients over the [AG-UI](https://docs.ag-ui.com/) protocol, relaying each conversation to an agent that the operator runs, which answers with the same tools. The built-in AI Assistant chat interface in the Jaeger UI is one such client. Jaeger ships no agent and no model provider.
 
 See [AI Assistant and MCP Server](../ai/) for more details.
 
