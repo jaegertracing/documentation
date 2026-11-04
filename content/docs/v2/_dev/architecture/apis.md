@@ -164,6 +164,13 @@ For programmatic access to the service graph, the recommended API is gRPC/Protob
 
 Please refer to the [SPM Documentation](../spm/#api)
 
+## AI APIs
+
+Both endpoints are served on the query HTTP port and are off until the `ai` block of the `jaeger_query` extension is configured. See [AI Assistant and MCP Server](../../ai/).
+
+* `/api/ai/mcp/` serves Jaeger's telemetry tools over the [Model Context Protocol](https://modelcontextprotocol.io/) with the Streamable HTTP transport.
+* `/api/ai/chat` accepts a chat turn as an [AG-UI](https://docs.ag-ui.com/) request and streams the agent's answer back as server-sent events. The Jaeger UI's chat panel is one client; any AG-UI client can call it.
+
 ## gRPC Server Introspection
 
 Service ports that serve gRPC endpoints enable [gRPC reflection][grpc-reflection]. Unfortunately, the internally used `gogo/protobuf` has a [compatibility issue][gogo-reflection] with the official `golang/protobuf`, and as a result only the `list` reflection command is currently working properly, for example:

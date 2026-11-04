@@ -41,4 +41,8 @@ OpenTelemetry SDKs can be configured to communicate directly with Jaeger Collect
 * {{< check_yes >}} HTTP - TLS with mTLS (client cert authentication) supported.
 * {{< check_yes >}} gRPC - TLS with mTLS (client cert authentication) supported.
 
+## AI Agents to Query
+
+The MCP endpoint and the AI chat endpoint share the query HTTP listener and its TLS and authentication settings. The `ai.auth` setting can additionally restrict the AI endpoints, and the chat panel in the UI, to a group of users while the rest of the UI stays open. See [MCP Server](../../ai/mcp-server/#exposure-and-access-to-trace-data).
+
 [issue-1718]: https://github.com/jaegertracing/jaeger/issues/1718
