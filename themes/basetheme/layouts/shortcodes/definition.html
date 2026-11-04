@@ -1,3 +1,3 @@
 {{ $term := .Get 0 }}
-{{ $definition := index site.Data.definitions $term }}
+{{ $definition := index hugo.Data.definitions $term }}
 <p>{{ $definition | markdownify }}</p>

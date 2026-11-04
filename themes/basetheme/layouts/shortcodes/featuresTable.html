@@ -1,5 +1,5 @@
-{{ $clients := site.Data.clients.clients }}
-{{ $featureGroups := site.Data.clients.featureGroups }}
+{{ $clients := hugo.Data.clients.clients }}
+{{ $featureGroups := hugo.Data.clients.featureGroups }}
 <table>
   <tbody>
     {{ range $featureGroups }}
