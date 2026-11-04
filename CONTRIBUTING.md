@@ -52,6 +52,10 @@ is built from `public/` after each build by the `postbuild*` npm hooks (see
 - Every page is tagged with its docs version (for example `2.22` or `1.76`, or
   `site` for non-docs pages). Search defaults to the version of the page the
   reader is on, and the results page lets readers pick another version.
+- `npm run test:search` builds the site and runs the browser tests in
+  [`tests/search.spec.ts`](tests/search.spec.ts) against it with
+  [Playwright](https://playwright.dev/). The first run needs
+  `npx playwright install chromium`.
 
 ## Code Quality Checks
 
