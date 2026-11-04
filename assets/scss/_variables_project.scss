@@ -3,8 +3,8 @@
 @import 'variables_forward_project';
 
 // Pontano Sans is self-hosted (see _fonts.scss) rather than loaded from Google
-// Fonts, so the Content-Security-Policy can keep style-src and font-src to
-// 'self'.
+// Fonts, so the Content-Security-Policy needs no Google origin in style-src or
+// font-src.
 $td-enable-google-fonts: false;
 $font-family-sans-serif: join('Pontano Sans Variable', $td-fonts-serif);
 
