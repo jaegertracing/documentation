@@ -409,14 +409,20 @@
 
     let shown = 0;
     async function showMore() {
-      const batch = search.results.slice(shown, shown + PAGE_SIZE);
-      const results = await Promise.all(batch.map((r) => r.data()));
-      list.append(...results.map(renderPageResult));
-      shown += batch.length;
-      more.hidden = shown >= total;
+      more.disabled = true;
+      try {
+        const batch = search.results.slice(shown, shown + PAGE_SIZE);
+        const results = await Promise.all(batch.map((r) => r.data()));
+        list.append(...results.map(renderPageResult));
+        shown += batch.length;
+        more.hidden = shown >= total;
+      } finally {
+        more.disabled = false;
+      }
     }
 
     more.addEventListener('click', async () => {
+      if (more.disabled) return;
       const first = shown;
       await showMore();
       const next = list.children[first];
