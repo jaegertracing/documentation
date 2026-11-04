@@ -24,6 +24,15 @@
     themeCSS: '.label foreignObject { font-size: 90%; overflow: visible; }',
   };
 
+  // The shortcode leaves the diagram as HTML, so <br/> is an element and
+  // textContent would drop it. The source is taken as markup, like Mermaid's
+  // own loader does, and the entities that Hugo escaped are decoded.
+  const decoder = document.createElement('textarea');
+  const diagramSource = (node) => {
+    decoder.innerHTML = node.innerHTML;
+    return decoder.value;
+  };
+
   const isDark = () =>
     document.documentElement.getAttribute('data-bs-theme') === 'dark';
 
@@ -46,7 +55,7 @@
     const nodes = Array.from(document.querySelectorAll('.mermaid'));
     for (const [index, node] of nodes.entries()) {
       if (node.dataset.source === undefined) {
-        node.dataset.source = node.textContent;
+        node.dataset.source = diagramSource(node);
       }
       const { svg } = await window.mermaid.render(
         `mermaid-${id}-${index}`,
