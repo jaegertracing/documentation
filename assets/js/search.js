@@ -145,6 +145,7 @@
 
     let options = [];
     let active = -1;
+    let requestToken = 0;
 
     function open() {
       syncTheme(panel);
@@ -153,6 +154,7 @@
     }
 
     function close() {
+      requestToken++;
       panel.hidden = true;
       input.setAttribute('aria-expanded', 'false');
       setActive(-1);
@@ -229,6 +231,7 @@
     }
 
     async function run() {
+      const token = ++requestToken;
       const query = input.value.trim();
       if (!query) {
         close();
@@ -238,7 +241,7 @@
       try {
         pf = await loadPagefind();
       } catch (err) {
-        showMessage(unavailableMessage());
+        if (token === requestToken) showMessage(unavailableMessage());
         return;
       }
       const scope = await resolveScope(pf, '');
@@ -248,11 +251,11 @@
         200,
       );
       // null means a newer keystroke superseded this search.
-      if (search === null || query !== input.value.trim()) return;
+      if (search === null || token !== requestToken) return;
       const results = await Promise.all(
         search.results.slice(0, DROPDOWN_MAX).map((r) => r.data()),
       );
-      if (query !== input.value.trim()) return;
+      if (token !== requestToken) return;
       render(query, scope, search, results);
     }
 
@@ -288,10 +291,8 @@
           break;
         }
         case 'Escape':
-          if (isOpen) {
-            e.preventDefault();
-            close();
-          }
+          if (isOpen) e.preventDefault();
+          close();
           break;
       }
     });
