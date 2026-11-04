@@ -183,7 +183,7 @@ Users can toggle between light and dark themes using a button in the top navigat
 
 ### AI Assistant
 
-The "Ask Jaeger" chat panel has no UI configuration. The query service advertises it to the UI while its health probe reaches the configured AI agent, so enabling the panel is a matter of configuring the `jaeger_query` extension. See [AI Assistant](../../ai/assistant/).
+The "Ask Jaeger" chat panel has no UI configuration. It is enabled when the Jaeger backend advertises the AI capability to the UI, which is configured in the `jaeger_query` extension. See [AI Assistant](../../ai/assistant/).
 
 ### Archive Support
 
