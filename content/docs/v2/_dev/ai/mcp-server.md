@@ -75,7 +75,7 @@ pattern. Agents reach skills through `read_skill`. They start at the root
 `SKILL.md`, which lists the available skills with one line each on when to use
 them, and follow its links, so a skill is read only when it looks relevant.
 
-Jaeger compiles its built-in skills into the binary. An operator can serve
+Jaeger bundles its built-in skills into the binary. An operator can serve
 installation-specific skills without rebuilding Jaeger by pointing
 `ai.mcp.skills_dir` at a directory on the query server's disk:
 
