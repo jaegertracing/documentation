@@ -1,10 +1,20 @@
 #!/usr/bin/env perl
+#
+# This script prints the <meta name="robots"> tag of one or more pages on the
+# published site, so that a maintainer can confirm which pages search engines
+# may index. Only the latest docs version is meant to be indexed: hugo.yaml
+# enables the tag, and the _index.md of every other version cascades
+# `robots: false` to its pages. Nothing in CI runs this script.
+#
+# Usage: ./check-robots.pl [--url BASE_URL] [path-or-url ...]
+#   ./check-robots.pl /docs/latest/ /docs/2.10/
+#   ./check-robots.pl --url https://deploy-preview-1021--jaegertracing.netlify.app /docs/latest/
+#
 use strict;
 use warnings;
 use Getopt::Long;
 
 my $baseURL = 'https://www.jaegertracing.io';
-# Another example:'https://deploy-preview-1021--jaegertracing.netlify.app';
 
 GetOptions( 'url=s' => \$baseURL ) or die "Usage: $0 [--url URL] [path ...]\n";
 
