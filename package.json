@@ -48,7 +48,7 @@
     "prettier": "^3.8.0"
   },
   "peerDependencies": {
-    "hugo-extended": "0.166.0"
+    "hugo-extended": "0.169.0"
   },
   "enginesComment": "Ensure that engines.node value stays consistent with the project's .nvmrc",
   "engines": {
