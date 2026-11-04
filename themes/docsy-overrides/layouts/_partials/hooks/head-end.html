@@ -1,10 +1,7 @@
 {{/* Pagefind site search: tag every page with the docs version it belongs to
    (2.22, 2.dev, 1.76, ...) or "site" for non-docs pages. Search defaults to the
    reader's version. See https://pagefind.app/docs/filtering/ */ -}}
-{{ $ver := "site" -}}
-{{ with findRESubmatch `^/docs/([^/]+)/` .RelPermalink 1 -}}
-  {{ $ver = index (index . 0) 1 -}}
-{{ end -}}
+{{ $ver := partial "docs-version.html" . | default "site" -}}
 <meta name="docs-version" content="{{ $ver }}" data-pagefind-filter="version[content]" data-pagefind-meta="version[content]">
 {{ if eq .Layout "search" -}}
 <link rel="modulepreload" href="{{ "pagefind/pagefind.js" | relURL }}">

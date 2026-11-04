@@ -26,8 +26,13 @@ page/section relative version lists. */ -}}
   <div class="td-navbar-nav-scroll ms-md-auto" id="main_navbar">
     <ul class="navbar-nav">
       {{ if site.Params.search.pagefind -}}
+      {{/* Carry the reader's docs version, as the search box's Enter does. */ -}}
+      {{ $searchHref := "search/" | relURL -}}
+      {{ with partial "docs-version.html" . -}}
+        {{ if ne . "latest" -}}{{ $searchHref = printf "%s?v=%s" $searchHref (. | urlquery) -}}{{ end -}}
+      {{ end -}}
       <li class="nav-item d-lg-none">
-        <a class="nav-link" href="{{ "search/" | relURL }}" aria-label="{{ T "ui_search" }}">
+        <a class="nav-link" href="{{ $searchHref }}" aria-label="{{ T "ui_search" }}">
           {{- /**/ -}}<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>{{- /**/ -}}
         </a>
       </li>

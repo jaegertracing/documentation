@@ -28,21 +28,50 @@
   // Pagefind loading and version scoping
 
   let pagefindPromise;
+  let scopePromise;
+  let loadAttempt = 0;
 
-  /** Loads and initializes the Pagefind bundle once, on first use. */
+  /**
+   * Loads and initializes the Pagefind bundle once, on first use. A failed
+   * load is not cached: forgetPagefind() lets the next search retry.
+   *
+   * Note that pf.init() resolves before the index, metadata and WASM have
+   * loaded; failures there surface later, from filters() or search().
+   */
   function loadPagefind() {
     if (!pagefindPromise) {
-      pagefindPromise = import(BUNDLE + 'pagefind.js').then(async (pf) => {
-        await pf.options({
-          basePath: BUNDLE,
-          baseUrl: BASE_URL,
-          excerptLength: 24,
-        });
-        await pf.init();
-        return pf;
+      // Browsers may cache a failed module fetch, so retries use a new URL.
+      const retry = loadAttempt++ ? `?retry=${loadAttempt}` : '';
+      const promise = import(BUNDLE + 'pagefind.js' + retry).then(
+        async (pf) => {
+          await pf.options({
+            basePath: BUNDLE,
+            baseUrl: BASE_URL,
+            excerptLength: 24,
+          });
+          await pf.init();
+          return pf;
+        },
+      );
+      pagefindPromise = promise;
+      promise.catch(() => {
+        if (pagefindPromise === promise) forgetPagefind();
       });
     }
     return pagefindPromise;
+  }
+
+  /**
+   * Drops the loaded Pagefind instance after a failure, so that the next
+   * search starts over instead of failing on a cached error.
+   */
+  function forgetPagefind() {
+    const loaded = pagefindPromise;
+    pagefindPromise = undefined;
+    scopePromise = undefined;
+    if (loaded) {
+      loaded.then((pf) => pf.destroy()).catch(() => {});
+    }
   }
 
   function unavailableMessage() {
@@ -60,6 +89,22 @@
     return match ? match[1] : '';
   }
 
+  function isResultsPage() {
+    return !!document.getElementById('td-search-page-results');
+  }
+
+  /**
+   * Version scope requested for the search box: the version shown on the
+   * results page (its `v` parameter), otherwise the current page's docs
+   * version. "" means the latest version.
+   */
+  function boxVersion() {
+    if (isResultsPage()) {
+      return new URLSearchParams(location.search).get('v') || '';
+    }
+    return pageVersion();
+  }
+
   /**
    * Resolves the requested version scope against the versions in the index.
    * Returns {version, missing}: `missing` is set when the requested version is
@@ -74,6 +119,24 @@
     if (indexed.includes(wanted)) return { version: wanted };
     const fallback = indexed.includes(LATEST) ? LATEST : ALL;
     return { version: fallback, missing: wanted };
+  }
+
+  /**
+   * Pagefind and the search box's scope, resolved once per page. Sharing one
+   * promise also keeps concurrent keystrokes in order while the index loads.
+   */
+  function boxScope() {
+    if (!scopePromise) {
+      const promise = loadPagefind().then(async (pf) => ({
+        pf,
+        scope: await resolveScope(pf, boxVersion()),
+      }));
+      scopePromise = promise;
+      promise.catch(() => {
+        if (scopePromise === promise) forgetPagefind();
+      });
+    }
+    return scopePromise;
   }
 
   /** Pagefind filters for a scope: that docs version plus non-docs pages. */
@@ -139,12 +202,20 @@
     const status = panel.querySelector('.td-search__status');
     const list = panel.querySelector('.td-search__list');
     const footer = panel.querySelector('.td-search__footer');
+    // Lives outside the popup: a live region inside a hidden element is not
+    // announced when it changes.
+    const live = root.querySelector('.td-search__live');
     const id = `td-search-${++instances}`;
     list.id = `${id}-list`;
     input.setAttribute('aria-controls', list.id);
 
     let options = [];
     let active = -1;
+    // Query the popup content belongs to; null when it is stale or an error.
+    let shownQuery = null;
+    // Bumped by every keystroke and every close(): a search whose generation
+    // is no longer current must not render or reopen the popup.
+    let generation = 0;
 
     function open() {
       syncTheme(panel);
@@ -153,9 +224,17 @@
     }
 
     function close() {
+      generation++;
       panel.hidden = true;
       input.setAttribute('aria-expanded', 'false');
       setActive(-1);
+    }
+
+    /** Reopens the popup if it still matches the input; else searches again. */
+    function reopen() {
+      if (!panel.hidden || !input.value.trim()) return;
+      if (shownQuery === input.value.trim()) open();
+      else run();
     }
 
     function setActive(index) {
@@ -172,20 +251,29 @@
       }
     }
 
+    function setStatus(text) {
+      status.textContent = text;
+      if (live) live.textContent = text;
+    }
+
     function showMessage(text) {
       list.replaceChildren();
       footer.replaceChildren();
       options = [];
-      status.textContent = text;
+      active = -1;
+      input.removeAttribute('aria-activedescendant');
+      shownQuery = null;
+      setStatus(text);
       open();
     }
 
     function render(query, scope, search, results) {
       const total = search.results.length;
-      status.textContent =
+      setStatus(
         total === 0
           ? `No results in ${scopeLabel(scope.version)}.`
-          : `${total} result${total === 1 ? '' : 's'} in ${scopeLabel(scope.version)}`;
+          : `${total} result${total === 1 ? '' : 's'} in ${scopeLabel(scope.version)}`,
+      );
 
       options = results.map((data, i) => {
         const option = el('a', 'td-search__option');
@@ -209,9 +297,10 @@
 
       footer.replaceChildren();
       if (total > 0) {
+        // Same scope as Enter, so "latest" stays unpinned in the URL.
         footer.append(
           link(
-            searchUrl(query, scope.version),
+            searchUrl(query, boxVersion()),
             `See all ${total} result${total === 1 ? '' : 's'}`,
           ),
         );
@@ -219,6 +308,7 @@
       if (scope.version !== ALL) {
         footer.append(link(searchUrl(query, ALL), 'Search all versions'));
       }
+      shownQuery = query;
       open();
     }
 
@@ -229,46 +319,63 @@
     }
 
     async function run() {
+      const mine = ++generation;
+      const current = () => mine === generation;
+      // The highlighted option belongs to the old text: Enter must not open it.
+      setActive(-1);
       const query = input.value.trim();
       if (!query) {
         close();
         return;
       }
-      let pf;
       try {
-        pf = await loadPagefind();
+        const { pf, scope } = await boxScope();
+        if (!current()) return;
+        const search = await pf.debouncedSearch(
+          query,
+          { filters: filtersFor(scope.version) },
+          200,
+        );
+        // null means a newer search superseded this one.
+        if (search === null || !current()) return;
+        const results = await Promise.all(
+          search.results.slice(0, DROPDOWN_MAX).map((r) => r.data()),
+        );
+        if (!current()) return;
+        render(query, scope, search, results);
       } catch (err) {
+        // A newer search handles its own errors; don't drop its instance.
+        if (!current()) return;
+        forgetPagefind();
         showMessage(unavailableMessage());
-        return;
       }
-      const scope = await resolveScope(pf, '');
-      const search = await pf.debouncedSearch(
-        query,
-        { filters: filtersFor(scope.version) },
-        200,
-      );
-      // null means a newer keystroke superseded this search.
-      if (search === null || query !== input.value.trim()) return;
-      const results = await Promise.all(
-        search.results.slice(0, DROPDOWN_MAX).map((r) => r.data()),
-      );
-      if (query !== input.value.trim()) return;
-      render(query, scope, search, results);
     }
 
     input.addEventListener('input', run);
 
     input.addEventListener('focus', () => {
-      loadPagefind().catch(() => {}); // warm up; errors surface on search
-      if (input.value.trim() && list.childElementCount) open();
+      boxScope().catch(() => {}); // warm up; errors surface on search
+      if (input.value.trim() && shownQuery === input.value.trim()) open();
+    });
+
+    input.addEventListener('click', () => {
+      if (input.value.trim() && shownQuery === input.value.trim()) open();
     });
 
     input.addEventListener('keydown', (e) => {
+      if (e.isComposing) return; // IME composition owns Enter and arrows
       const isOpen = !panel.hidden;
       switch (e.key) {
         case 'ArrowDown':
         case 'ArrowUp':
-          if (!isOpen || !options.length) return;
+          if (!isOpen) {
+            if (e.key === 'ArrowDown' && input.value.trim()) {
+              e.preventDefault();
+              reopen();
+            }
+            return;
+          }
+          if (!options.length) return;
           e.preventDefault();
           if (e.key === 'ArrowDown') {
             setActive(active + 1 >= options.length ? 0 : active + 1);
@@ -284,14 +391,13 @@
             break;
           }
           const query = input.value.trim();
-          if (query) location.href = searchUrl(query, pageVersion());
+          if (query) location.href = searchUrl(query, boxVersion());
           break;
         }
         case 'Escape':
-          if (isOpen) {
-            e.preventDefault();
-            close();
-          }
+          // Always cancel a pending search, even before the popup has opened.
+          if (isOpen) e.preventDefault();
+          close();
           break;
       }
     });
@@ -349,7 +455,6 @@
     const list = document.getElementById('td-search-page-results');
     if (!list) return;
 
-    const form = document.getElementById('td-search-page-form');
     const queryInput = document.getElementById('td-search-page-q');
     const versionSelect = document.getElementById('td-search-page-v');
     const status = document.getElementById('td-search-page-status');
@@ -366,9 +471,8 @@
     if ([...versionSelect.options].some((o) => o.value === requested)) {
       versionSelect.value = requested;
     }
-    versionSelect.addEventListener('change', () => {
-      if (queryInput.value.trim()) form.submit();
-    });
+    // The version applies when the form is submitted. Submitting on change
+    // would reload the page on every arrow key in the select (WCAG 3.2.2).
 
     if (!query) {
       status.textContent = 'Enter a search term.';
@@ -376,23 +480,67 @@
       return;
     }
 
-    status.textContent = 'Searching…';
-    let pf;
-    try {
-      pf = await loadPagefind();
-    } catch (err) {
+    function fail() {
+      forgetPagefind();
       status.textContent = unavailableMessage();
-      return;
+      more.hidden = true;
     }
 
-    const scope = await resolveScope(pf, requested);
+    status.textContent = 'Searching…';
+    let scope;
+    let search;
+    try {
+      const pf = await loadPagefind();
+      scope = await resolveScope(pf, requested);
+      search = await pf.search(query, { filters: filtersFor(scope.version) });
+    } catch (err) {
+      fail();
+      return;
+    }
     // Show the scope actually searched (after any fallback) in the selector.
     if (scope.version === ALL) versionSelect.value = ALL;
     else if (scope.missing) versionSelect.value = '';
-    const search = await pf.search(query, {
-      filters: filtersFor(scope.version),
-    });
     const total = search.results.length;
+
+    let shown = 0;
+    let loading = false;
+
+    /** Appends the next page of results; one batch at a time. */
+    async function showMore() {
+      if (loading) return false;
+      loading = true;
+      more.setAttribute('aria-disabled', 'true');
+      try {
+        const batch = search.results.slice(shown, shown + PAGE_SIZE);
+        const results = await Promise.all(batch.map((r) => r.data()));
+        list.append(...results.map(renderPageResult));
+        shown += batch.length;
+        more.hidden = shown >= total;
+        return true;
+      } finally {
+        loading = false;
+        more.removeAttribute('aria-disabled');
+      }
+    }
+
+    more.addEventListener('click', async () => {
+      const first = shown;
+      try {
+        if (!(await showMore())) return;
+      } catch (err) {
+        fail();
+        return;
+      }
+      const next = list.children[first];
+      if (next) next.querySelector('a').focus();
+    });
+
+    try {
+      await showMore();
+    } catch (err) {
+      fail();
+      return;
+    }
 
     status.textContent = `${total} result${total === 1 ? '' : 's'} for “${query}” in ${scopeLabel(scope.version)}.`;
     if (scope.missing) {
@@ -405,31 +553,13 @@
       all.href = searchUrl(query, ALL);
       status.append(' ', all);
     }
-
-    let shown = 0;
-    async function showMore() {
-      const batch = search.results.slice(shown, shown + PAGE_SIZE);
-      const results = await Promise.all(batch.map((r) => r.data()));
-      list.append(...results.map(renderPageResult));
-      shown += batch.length;
-      more.hidden = shown >= total;
-    }
-
-    more.addEventListener('click', async () => {
-      const first = shown;
-      await showMore();
-      const next = list.children[first];
-      if (next) next.querySelector('a').focus();
-    });
-
-    await showMore();
   }
 
   // ---------------------------------------------------------------------------
 
   function init() {
     document.querySelectorAll('.td-search').forEach(initSearchBox);
-    initResultsPage();
+    initResultsPage().catch(() => {});
   }
 
   if (document.readyState === 'loading') {

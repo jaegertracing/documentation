@@ -9,8 +9,11 @@
     placeholder="{{ T "ui_search" }}" aria-label="{{ T "ui_search" }}"
     autocomplete="off" spellcheck="false" role="combobox"
     aria-autocomplete="list" aria-expanded="false">
+  {{/* Announces result counts. Outside the popup, because a live region inside
+     a hidden element is not announced. */ -}}
+  <p class="td-search__live visually-hidden" aria-live="polite" aria-atomic="true"></p>
   <div class="td-search__results" hidden>
-    <p class="td-search__status" aria-live="polite"></p>
+    <p class="td-search__status"></p>
     <ul class="td-search__list" role="listbox" aria-label="{{ T "ui_search" }}"></ul>
     <div class="td-search__footer"></div>
   </div>
