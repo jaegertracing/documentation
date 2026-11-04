@@ -52,6 +52,8 @@ imaging:
     quality: 75
   webp:
     quality: 75
+  avif:
+    quality: 75
   anchor: Smart
 
 # cSpell:ignore nbsp pagelinks
