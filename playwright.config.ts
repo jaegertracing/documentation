@@ -15,5 +15,6 @@ export default defineConfig({
     url: 'http://localhost:1414/',
     reuseExistingServer: !process.env.CI,
   },
-  reporter: process.env.CI ? 'github' : 'list',
+  // The github reporter only annotates failures; list prints every test.
+  reporter: process.env.CI ? [['list'], ['github']] : 'list',
 });
