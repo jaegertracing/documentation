@@ -4,8 +4,8 @@ hasparent: true
 ---
 
 The AI Assistant is a bring-your-own-agent framework in Jaeger. The
-`jaeger_query` extension contains a gateway that accepts chat turns over
-[AG-UI](https://docs.ag-ui.com/), the protocol that agent user interfaces
+`jaeger_query` extension contains a gateway that accepts chat turns over the
+[AG-UI protocol](https://docs.ag-ui.com/) that agent user interfaces
 speak, relays each turn to an AI agent of the operator's choice over the
 [Agent Client Protocol](https://agentclientprotocol.com/) (ACP), and gives that
 agent Jaeger's [MCP tools](../mcp-server/) to answer with. Jaeger ships no agent

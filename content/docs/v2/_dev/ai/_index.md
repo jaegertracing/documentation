@@ -20,10 +20,11 @@ configured.
   to search traces, map a trace's structure, compute its critical path, and
   inspect individual spans. See [MCP Server](./mcp-server/).
 - The **AI Assistant** is a bring-your-own-agent framework. A gateway in
-  `jaeger_query` accepts chat turns over [AG-UI](https://docs.ag-ui.com/) at
-  `/api/ai/chat`, relays them to an agent of the operator's choice over the
-  [Agent Client Protocol](https://agentclientprotocol.com/), and gives the agent
-  the same MCP tools to answer with. The Jaeger UI's chat panel is one AG-UI
+  `jaeger_query` accepts chat turns over the
+  [AG-UI protocol](https://docs.ag-ui.com/) at `/api/ai/chat`, relays them to
+  an agent of the operator's choice over the
+  [Agent Client Protocol (ACP)](https://agentclientprotocol.com/), and gives the
+  agent the same MCP tools to answer with. The Jaeger UI's chat panel is one AG-UI
   client of that gateway; any other AG-UI client can use it directly. See
   [AI Assistant](./assistant/).
 - **Skills** are markdown playbooks that an agent reads through the
