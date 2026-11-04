@@ -2,13 +2,19 @@
 #
 # This script prints the <meta name="robots"> tag of one or more pages on the
 # published site, so that a maintainer can confirm which pages search engines
-# may index. Only the latest docs version is meant to be indexed: hugo.yaml
-# enables the tag, and the _index.md of every other version cascades
-# `robots: false` to its pages. Nothing in CI runs this script.
+# may index. The head.html partial in themes/docsy-overrides emits the tag on
+# every page: "index, follow" when the page's `robots` param is not false,
+# which hugo.yaml sets as the site default, and "noindex, nofollow" otherwise.
+# The _index.md of each docs version sets the param through `cascade`, so
+# that search engines index only the current v1 and v2 docs and the dev docs.
+# Nothing in CI runs this script.
+#
+# The check is only meaningful against the production site. A Netlify preview
+# is built in the dev environment, where head.html emits "noindex, nofollow"
+# for every page regardless of the front matter.
 #
 # Usage: ./check-robots.pl [--url BASE_URL] [path-or-url ...]
 #   ./check-robots.pl /docs/latest/ /docs/2.10/
-#   ./check-robots.pl --url https://deploy-preview-1021--jaegertracing.netlify.app /docs/latest/
 #
 use strict;
 use warnings;
