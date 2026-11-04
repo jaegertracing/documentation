@@ -230,6 +230,11 @@ module:
       target: assets
     - source: static
       target: static
+    # The Pontano Sans font files come from the Fontsource package, so that
+    # Renovate updates them like every other dependency; _fonts.scss declares
+    # the faces.
+    - source: node_modules/@fontsource-variable/pontano-sans/files
+      target: static/fonts/pontano-sans
 
     # So Docsy can find the images
     - source: static/img/jaeger-icon-reverse-color.svg

@@ -47,6 +47,7 @@
     "update:packages": "npx npm-check-updates -u"
   },
   "devDependencies": {
+    "@fontsource-variable/pontano-sans": "5.3.0",
     "@playwright/test": "1.64.1",
     "autoprefixer": "^10.4.23",
     "cspell": "^10.0.0",

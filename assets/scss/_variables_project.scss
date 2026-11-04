@@ -6,7 +6,7 @@
 // Fonts, so the Content-Security-Policy can keep style-src and font-src to
 // 'self'.
 $td-enable-google-fonts: false;
-$font-family-sans-serif: join('Pontano Sans', $td-fonts-serif);
+$font-family-sans-serif: join('Pontano Sans Variable', $td-fonts-serif);
 
 // ----------------------------------------------
 // Jaeger theme-specific variables copied from

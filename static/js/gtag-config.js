@@ -1,8 +1,12 @@
-// Google Analytics 4 configuration. This is the snippet that Hugo's built-in
-// google_analytics.html partial writes inline, moved to a file so that the
-// Content-Security-Policy does not need 'unsafe-inline' in script-src. The
-// measurement ID and the Do Not Track setting come from data attributes on the
-// script element; see layouts/_partials/google_analytics.html.
+// Google Analytics 4 configuration. This is Google's gtag.js bootstrap, as
+// documented at https://developers.google.com/tag-platform/gtagjs/install,
+// plus the Do Not Track check that Hugo's built-in google_analytics.html
+// partial adds around it. It lives in a file because the Content-Security-
+// Policy forbids inline scripts, and it replaces Hugo's partial for good: the
+// gtag API is what this file depends on, not Hugo's template, so nothing here
+// needs to track Hugo upgrades. The measurement ID and the Do Not Track
+// setting come from data attributes on the script element; see
+// layouts/_partials/google_analytics.html.
 (function () {
   var script = document.currentScript;
   var id = script && script.dataset.gaId;
