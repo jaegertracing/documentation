@@ -500,7 +500,6 @@ The reason for defaulting to `server` span kinds is to avoid double-counting
 both ingress and egress spans in the `server` and `client` span kinds, respectively.
 
 [spm-demo]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor
-[opentelemetry-collector]: https://opentelemetry.io/docs/collector/
 [spanmetrics-conn]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/README.md
 [prom-metric-labels]: https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels
 [http-api-readme]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api

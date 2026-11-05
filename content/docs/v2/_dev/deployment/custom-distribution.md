@@ -103,4 +103,3 @@ Replace the version placeholder (`v2.19.0` in the examples above) with the Jaege
 
 [builder.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/builder.yaml
 [components]: https://github.com/jaegertracing/jaeger/tree/main/components
-[go.mod]: https://github.com/jaegertracing/jaeger/blob/main/go.mod

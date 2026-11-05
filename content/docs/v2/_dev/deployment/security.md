@@ -231,4 +231,3 @@ trustworthy as the proxy in front of Jaeger that sets it and strips any copy the
 client supplied. The health probe has no request to copy from, so the agent must
 answer `initialize` without the forwarded header.
 
-[issue-1718]: https://github.com/jaegertracing/jaeger/issues/1718
