@@ -121,6 +121,7 @@ refcache
 reindex
 reindexing
 rolebinding
+scylladb
 shortcode
 spanmetrics
 stackoverflow

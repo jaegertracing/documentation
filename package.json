@@ -20,6 +20,7 @@
     "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
     "build:production": "npm run _hugo -- --minify",
     "build": "npm run _build --",
+    "check:dev-links": "python3 scripts/check-dev-links.py",
     "check:filenames": "test -z \"$(npm run -s _ls-bad-filenames)\" || npm run -s _filename-error",
     "check:format": "npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
     "check:links:all": "npm run _check:links:all",

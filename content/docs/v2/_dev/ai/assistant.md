@@ -219,7 +219,7 @@ Any ACP agent that meets these requirements works with the gateway.
 
 The gateway implementation is the reference for any detail this page leaves
 out; see the
-[gateway README](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/internal/jaegerai/README.md).
+[gateway README][jaegerai-readme].
 
 ## Verifying an integration
 
@@ -273,3 +273,5 @@ Confirm the `mcp` block is present; without it the gateway announces no MCP
 endpoint. If Jaeger runs with TLS or the agent is not on the same host, confirm
 `ai.mcp.base_url` is set, because the gateway announces no endpoint it cannot
 infer.
+
+[jaegerai-readme]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/internal/jaegerai/README.md

@@ -18,11 +18,11 @@ ClickHouse also has the following officially supported resources available from 
 
 ## Configuration
 
-A sample configuration for Jaeger with ClickHouse backend is available in the Jaeger repository: [config-clickhouse.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-clickhouse.yaml). In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go](https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v2/clickhouse/config.go) as the authoritative source.
+A sample configuration for Jaeger with ClickHouse backend is available in the Jaeger repository: [config-clickhouse.yaml]. In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go][clickhouse-config.go] as the authoritative source.
 
 ## Schema
 
-All SQL definitions are available in the [sql/ directory](https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/clickhouse/sql) in the Jaeger repository.
+All SQL definitions are available in the [sql/ directory][sql] in the Jaeger repository.
 
 All tables are automatically created on startup when `create_schema: true` is set. Auxiliary tables are populated via [materialized views](https://clickhouse.com/docs/materialized-view) that transform and insert data whenever new spans arrive.
 
@@ -55,3 +55,7 @@ go run ./cmd/tracegen -duration 10s -workers 3 -pause 250ms
 ```
 
 Then open the Jaeger UI at http://localhost:16686.
+
+[config-clickhouse.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-clickhouse.yaml
+[clickhouse-config.go]: https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v2/clickhouse/config.go
+[sql]: https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/clickhouse/sql

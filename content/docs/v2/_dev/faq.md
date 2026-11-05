@@ -27,8 +27,6 @@ The Jaeger team recommends Elasticsearch or OpenSearch as the storage backend ov
 
 One benefit of Cassandra backend is simplified maintenance due to its native support for data TTL. In OpenSearch the data expiration is managed through index rotation, which requires additional setup (see [Elasticsearch Rollover](../storage/elasticsearch/#index-rollover)).
 
-[issue-166]: https://github.com/jaegertracing/jaeger/issues/166
-
 ## Why do Jaeger trace IDs look differently in Kafka and in the UI?
 
 Under the hood, at the data model level, the Jaeger trace IDs are a sequence of 16 bytes. However, these 16 bytes can be represented in many different ways:
@@ -37,10 +35,6 @@ Under the hood, at the data model level, the Jaeger trace IDs are a sequence of 
   * in the [domain model][trace-id-domain] in the Jaeger backend code, we represent trace ID as a pair of unsigned 64-bit integers using big-endian encoding. This was done for efficiency because a byte slice in Go requires an extra memory allocation.
   * in the original [Thrift model][trace-id-thrift] we also represented them as a pair of unsigned 64-bit integers
   * in the [Protobuf model][trace-id-proto], the ID is represented as a byte sequence. When Protobuf is serialized as a binary payload, these bytes are transmitted as is. However, Protobuf also supports a JSON encoding, where byte sequences are serialized using base64 encoding. So if you configure collector-Kafka-ingester pipeline to use the JSON encoding, you will see trace IDs that look like `fpDA7KInhOx+kMDsoieE7A==`. These can be converted to hex-encoded IDs that are recognized by the UI using online tools like https://base64.guru/converter/encode/hex.
-
-[trace-id-domain]: https://github.com/jaegertracing/jaeger/blob/7872d1b07439c3f2d316065b1fd53e885b26a66f/model/ids.go#L82
-[trace-id-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/05fe64e9c305526901f70ff692030b388787e388/thrift/jaeger.thrift#L53
-[trace-id-proto]: https://github.com/jaegertracing/jaeger-idl/blob/05fe64e9c305526901f70ff692030b388787e388/proto/api_v2/model.proto#L97
 
 ## Do I need to run multiple collectors?
 
@@ -64,3 +58,8 @@ For example, refer to this blog post for an example of [protecting Jaeger UI wit
 Q: I am already sending traces and metrics to my Elasticsearch cloud setup using sidecar containers and OpenTelemetry Collector (with index pattern: `traces-${date}`). I want to visualize them via the Jaeger UI. Can I run only the query service and the UI, without running Jaeger collector?
 
 A: No, we do not support that setup. Every exporter can choose a different way of storing traces in the database like Elasticsearch or ClickHouse. Jaeger has its own storage implementation used by both collector and query service which uses a database schema that is specific to Jaeger and may not be compatible with the schema used by other exporters.
+
+[issue-166]: https://github.com/jaegertracing/jaeger/issues/166
+[trace-id-domain]: https://github.com/jaegertracing/jaeger/blob/7872d1b07439c3f2d316065b1fd53e885b26a66f/model/ids.go#L82
+[trace-id-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/05fe64e9c305526901f70ff692030b388787e388/thrift/jaeger.thrift#L53
+[trace-id-proto]: https://github.com/jaegertracing/jaeger-idl/blob/05fe64e9c305526901f70ff692030b388787e388/proto/api_v2/model.proto#L97

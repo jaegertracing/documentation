@@ -64,7 +64,7 @@ docker compose up
 # press Ctrl-C to exit
 ```
 
-Then navigate to `http://localhost:8080`. See the [README](https://github.com/jaegertracing/jaeger/blob/main/examples/hotrod/README.md) for other ways to run the demo.
+Then navigate to `http://localhost:8080`. See the [README][hotrod-readme] for other ways to run the demo.
 
 ## SPM
 
@@ -72,3 +72,4 @@ The Service Performance Monitoring (SPM) page has its own [Quick Start](../archi
 
 [hotrod-tutorial]: https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2
 [otel]: https://opentelemetry.io
+[hotrod-readme]: https://github.com/jaegertracing/jaeger/blob/main/examples/hotrod/README.md
