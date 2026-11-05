@@ -52,6 +52,11 @@ is built from `public/` after each build by the `postbuild*` npm hooks (see
 - Every page is tagged with its docs version (for example `2.22` or `1.76`, or
   `site` for non-docs pages). Search defaults to the version of the page the
   reader is on, and the results page lets readers pick another version.
+- `npm run test:browser` builds the site and runs the browser tests in
+  [`tests/`](tests/) against it with [Playwright](https://playwright.dev/):
+  the search tests in `search.spec.ts` and the Content-Security-Policy check
+  in `csp.spec.ts`, which fails when a page loads a resource that the policy in
+  `netlify.toml` blocks. The first run needs `npx playwright install chromium`.
 
 ## Code Quality Checks
 

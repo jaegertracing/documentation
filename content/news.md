@@ -35,7 +35,7 @@ Today we reached a milestone and released v1.0 of Jaeger backend. Details are in
 
 **2017-09-25**
 
-At the [Open Source Summit NA](http://events.linuxfoundation.org/events/open-source-summit-north-america) in Los Angeles,
+At the Open Source Summit NA in Los Angeles,
 the Cloud Native Computing Foundation ([CNCF](http://cncf.io)) announced that it had accepted Jaeger as its 12th hosted project.
 Jaeger joins the respected company of other major modern foundational projects like Kubernetes, Prometheus, gRPC, and OpenTracing.
 
