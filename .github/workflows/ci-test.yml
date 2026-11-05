@@ -28,6 +28,7 @@ jobs:
       with: { node-version-file: .nvmrc }
     - run: npm install
     - run: npm run check:spelling
+    - run: npm run check:dev-links
 
   browser-tests:
     runs-on: ubuntu-latest

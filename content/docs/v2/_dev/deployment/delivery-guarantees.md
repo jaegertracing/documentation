@@ -3,7 +3,7 @@ title: Delivery Guarantees
 hasparent: true
 ---
 
-This page explains when Jaeger can lose spans between a receiver and the storage backend, and how to configure a pipeline so that it does not. The guarantee is a property of the whole pipeline: the storage must return a truthful result for every write, and every component between the receiver and the storage must wait for that result before it acknowledges the spans. Either half alone is not enough. [ADR-014][014-synchronous-elasticsearch-writes.md] records the collector behavior behind this page and the reasoning for its recommendations.
+This page explains when Jaeger can lose spans between a receiver and the storage backend, and how to configure a pipeline so that it does not. The guarantee is a property of the whole pipeline: the storage must return a truthful result for every write, and every component between the receiver and the storage must wait for that result before it acknowledges the spans. Either half alone is not enough. [ADR-014][adr-014-synchronous-elasticsearch-writes.md] records the collector behavior behind this page and the reasoning for its recommendations.
 
 ## The storage must report failures
 
@@ -150,7 +150,7 @@ The dead-letter pipeline can end in any standard exporter, such as `kafka` writi
 
 Each span forwarded to the dead-letter pipeline is a copy of the original with the attribute `jaeger.storage.rejection_reason` holding the reason the storage gave. The connector logs one warning per distinct rejected trace id and span id pair, with the reason, and counts them in the `jaeger_storage_exporter_dead_letter_spans` metric. A steady trickle on that metric is a few malformed spans, and a sudden rise usually means a mapping change that rejects a whole class of spans. The ingester configuration the Kafka end-to-end tests run against is [config-kafka-ingester-dead-letter.yaml]; it ends in an `otlphttp` sink. The configuration reference is the [connector README][storageexporter-readme].
 
-[014-synchronous-elasticsearch-writes.md]: https://github.com/jaegertracing/jaeger/blob/main/docs/adr/014-synchronous-elasticsearch-writes.md
+[adr-014-synchronous-elasticsearch-writes.md]: https://github.com/jaegertracing/jaeger/blob/main/docs/adr/014-synchronous-elasticsearch-writes.md
 [config-kafka-ingester-sync.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-sync.yaml
 [config-kafka-ingester-dead-letter.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-dead-letter.yaml
 [storageexporter-readme]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/exporters/storageexporter/README.md

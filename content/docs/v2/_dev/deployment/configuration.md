@@ -142,7 +142,7 @@ extensions:
 
 **Example**: A working Docker Compose setup covering forward / strip / rewrite proxy routings ships in the repository at [`examples/reverse-proxy/`][reverse-proxy], with Apache httpd configs for each.
 
-For background on the design, see [ADR-009][009-ui-base-path-auto-detection.md].
+For background on the design, see [ADR-009][adr-009-ui-base-path-auto-detection.md].
 
 #### UI Customization
 
@@ -212,5 +212,5 @@ connectors:
 [jaegerquery-config.go]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/config.go
 [clockskew.go]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/internal/adjuster/clockskew.go
 [reverse-proxy]: https://github.com/jaegertracing/jaeger/tree/main/examples/reverse-proxy
-[009-ui-base-path-auto-detection.md]: https://github.com/jaegertracing/jaeger/blob/main/docs/adr/009-ui-base-path-auto-detection.md
+[adr-009-ui-base-path-auto-detection.md]: https://github.com/jaegertracing/jaeger/blob/main/docs/adr/009-ui-base-path-auto-detection.md
 [storageexporter-readme]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/exporters/storageexporter/README.md
