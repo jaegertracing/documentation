@@ -40,7 +40,9 @@ file under any name; one directory per skill is a convention, not a rule.
 
 The directory is read live, so an edit takes effect on the next `read_skill`
 call. Jaeger refuses to start when the directory or its `SKILL.md` cannot be
-read, and it caps each served file at 512 KiB.
+read, and it caps each served file at 512 KiB. That check runs once, at
+startup, so a directory that breaks later is reported when an agent reads a
+skill, not by refusing to serve.
 
 {{% alert title="Warning" color="warning" %}}
 Anyone who can write to `skills_dir` can steer the behavior of an agent that
