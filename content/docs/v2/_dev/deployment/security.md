@@ -67,7 +67,8 @@ restrict direct access to the query listener so clients cannot bypass it. For a
 proxy on the same host, bind `extensions.jaeger_query.http.endpoint` to
 `127.0.0.1:16686` and set the upstream `Host` header to `127.0.0.1` or
 `localhost`, because the MCP transport rejects a loopback request that carries a
-public `Host` header (see [Running behind a reverse proxy](../../ai/mcp-server/#running-behind-a-reverse-proxy-or-sidecar)).
+public `Host` header; the [MCP Server](../../ai/mcp-server/) page explains the
+guard and how to turn it off.
 Forward POST, GET, and DELETE requests, the `Mcp-Session-Id` and
 `MCP-Protocol-Version` headers, and SSE responses without buffering. The query
 gRPC listener on `:16685` also reads trace data and is not protected by an HTTP
@@ -156,9 +157,35 @@ hides the panel from every browser user. Showing the panel to admitted users
 takes an authenticator that reads what a browser sends on navigation, such as a
 session cookie or a header that a fronting proxy injects.
 
-The turn-scoped endpoint, `/api/ai/mcp/<id>/`, that the gateway hands to the
-chat agent is not covered. The chat request that created the turn was already
-admitted, and only that agent receives the route id.
+The deployment pattern that provides such a header is an identity-aware proxy:
+
+1. **The proxy authenticates the person.** A single-sign-on proxy, an ingress
+   with OIDC, or a service mesh terminates the user's session for every request
+   to the UI, the REST API, the chat endpoint and the MCP endpoint alike, and
+   injects the result as request headers, a signed identity token or a plain
+   username header. A tool that bypasses the browser, such as an MCP client or
+   `curl`, obtains the same token and sends it in a header up front.
+2. **Jaeger trusts those headers only from the proxy.** The query port is
+   reachable only through the proxy, by network policy or by mutual TLS, so a
+   header that names a user is trustworthy because of where the request came
+   from. A deployment that exposes the port directly must not trust a username
+   header at all, and should verify a signed token instead.
+3. **An authenticator extension turns the headers into a caller.** It verifies
+   the token or reads the trusted header and returns the caller, or an error
+   that Jaeger answers with 401. The same extension can consult a group
+   directory and reject a caller outside a rollout group, which is how a feature
+   is opened to a few people first. An installation builds this extension into
+   its own Jaeger binary.
+
+The authenticator sees headers and the listed query parameters, never the URL
+path, which is why the per-route grain is the `ai.auth` setting rather than a
+decision the extension makes. Who may see which spans is a question about the
+data rather than the route, and belongs in a `query_interceptors` extension,
+which runs around every trace query whether it came from the UI, the REST API or
+an MCP tool.
+
+The turn-scoped endpoint that the gateway hands to the chat agent is not covered
+by `ai.auth`; the [AI Assistant](../../ai/assistant/) page describes it.
 
 `ai.auth` requires Jaeger 2.23 or later.
 
