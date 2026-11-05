@@ -235,6 +235,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:04:49.567392-05:00"
   },
+  "https://github.com/aaif-goose/goose/releases": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:42.314945-05:00"
+  },
   "https://github.com/afzal442": {
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:08:10.246959-05:00"
@@ -539,9 +543,17 @@
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:04:54.977958-05:00"
   },
+  "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/internal/adjuster/clockskew.go": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:43.189792-05:00"
+  },
   "https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/internal/jaegerai/README.md": {
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:04:50.162986-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/main/docker-compose/scylladb/README.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:40.24877-05:00"
   },
   "https://github.com/jaegertracing/jaeger/blob/main/docs/adr/009-ui-base-path-auto-detection.md": {
     "StatusCode": 206,
@@ -558,6 +570,150 @@
   "https://github.com/jaegertracing/jaeger/blob/main/go.mod": {
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:05:16.147805-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/main/internal/storage/cassandra/config/config.go": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:38.700606-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/main/internal/storage/elasticsearch/config/config.go#L86": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:40.737385-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/api/spanstore/interface.go": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:36.199483-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/badger/docs/storage-file-non-root-permission.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:41.222693-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/cassandra/schema/README.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:39.652632-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/cassandra/schema/create.sh": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:39.135626-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v2/clickhouse/config.go": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:37.358846-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/builder.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:06.386237-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-badger.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:54.809474-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-cassandra.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:50.907923-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-clickhouse.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:45.868649-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-elasticsearch.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:53.687392-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-kafka-collector.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:49.08982-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-kafka-ingester-dead-letter.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:50.413917-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-kafka-ingester-sync.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:49.982628-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-kafka-ingester.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:49.542983-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-opensearch.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:48.589912-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-remote-storage.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:48.139606-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-tail-sampling-always-sample.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:59.853272-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-tail-sampling-service-name-policy.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:00.285401-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:00.753194-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/internal/exporters/storageexporter/README.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:05.876857-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/internal/extension/jaegerquery/config.go#L16": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:02.679128-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/internal/extension/jaegerquery/internal/adjuster/clockskew.go": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:03.254099-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/internal/extension/jaegerquery/internal/jaegerai/README.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:01.77405-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/docker-compose/scylladb/README.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:53.122395-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/docs/adr/009-ui-base-path-auto-detection.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:05.233715-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/docs/adr/014-synchronous-elasticsearch-writes.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:07.744397-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/examples/hotrod/README.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:01.179365-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/go.mod": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:07.228293-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/internal/storage/cassandra/config/config.go": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:51.427443-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/internal/storage/elasticsearch/config/config.go#L86": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:54.361351-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/internal/storage/v1/badger/docs/storage-file-non-root-permission.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:55.357017-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/internal/storage/v1/cassandra/schema/README.md": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:52.49911-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/internal/storage/v1/cassandra/schema/create.sh": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:52.002217-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/blob/v2.23.0/internal/storage/v2/clickhouse/config.go": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:46.547845-05:00"
   },
   "https://github.com/jaegertracing/jaeger/issues": {
     "StatusCode": 206,
@@ -763,9 +919,77 @@
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:04:58.367404-05:00"
   },
+  "https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/api/tracestore": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:36.808939-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/clickhouse/sql": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:37.744441-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/grpc": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:38.135363-05:00"
+  },
   "https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin": {
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:03:58.07729-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/cmd/jaeger": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:02.230355-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/cmd/jaeger/config-spm-elasticsearch.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:57.299676-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/cmd/jaeger/config-spm.yaml": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:56.718629-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/cmd/jaeger/internal/extension/jaegerquery": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:58.389959-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/cmd/jaeger/internal/extension/jaegerstorage": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:57.917357-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/cmd/jaeger/internal/extension/remotesampling": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:59.382457-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/cmd/jaeger/internal/processors/adaptivesampling": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:58.82562-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/components": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:06.791545-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/docker-compose/monitor": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:56.008074-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/docker-compose/monitor#http-api": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:57.415832-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/examples/reverse-proxy": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:35:04.649534-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/internal/storage/v2/clickhouse/sql": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:47.075388-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/internal/storage/v2/grpc": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:47.611244-05:00"
+  },
+  "https://github.com/jaegertracing/jaeger/tree/v2.23.0/monitoring/jaeger-mixin": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:45.416319-05:00"
   },
   "https://github.com/jaegertracing/spark-dependencies": {
     "StatusCode": 206,
@@ -1166,6 +1390,10 @@
   "https://nssm.cc/usage": {
     "StatusCode": 200,
     "LastSeen": "2026-11-05T12:05:13.442222-05:00"
+  },
+  "https://openrouter.ai": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-05T14:34:42.504017-05:00"
   },
   "https://opensearch.org/downloads.html": {
     "StatusCode": 200,
