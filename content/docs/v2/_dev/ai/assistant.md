@@ -118,10 +118,15 @@ so it works as the agent with no Jaeger-specific code. Any other agent that
 meets the [agent contract](#agent-contract) works the same way; only
 `agent_url`, the header name, and the launch command change.
 
-1. Install Goose v1.55.0 or later, the release that propagates the chat
-   request's trace context into its MCP tool calls, and configure a model
-   provider in its environment. The model must support tool calling, or the
-   agent answers from prior knowledge and never queries telemetry.
+1. Install Goose v1.55.0 or later from
+   [Goose releases](https://github.com/aaif-goose/goose/releases), the release
+   that propagates the chat request's trace context into its MCP tool calls.
+
+2. Configure a model provider in Goose's environment. Goose reads the provider
+   settings from environment variables, not from `~/.config/goose/config.yaml`;
+   a key set only in the config file leaves Goose reporting `Provider not set`.
+   The model must support tool calling, or the agent answers from prior
+   knowledge and never queries telemetry.
 
    ```sh
    export GOOSE_PROVIDER=openrouter
@@ -129,15 +134,27 @@ meets the [agent contract](#agent-contract) works the same way; only
    export OPENROUTER_API_KEY=...
    ```
 
-2. Start Goose with authentication on. It then requires the secret as an
+   [OpenRouter](https://openrouter.ai)'s free tier is a zero-cost way to try
+   this. This command lists its free models that support tool calling:
+
+   ```sh
+   curl -s https://openrouter.ai/api/v1/models \
+     -H "Authorization: Bearer $OPENROUTER_API_KEY" |
+     jq -r '.data[] | select(.supported_parameters | index("tools"))
+            | select((.pricing.prompt|tonumber) == 0) | .id'
+   ```
+
+3. Start Goose with authentication on. It then requires the secret as an
    `X-Secret-Key` header on the WebSocket upgrade and serves ACP at `/acp`.
+   Goose also accepts `--dangerously-unauthenticated`, which disables that
+   check; do not use it, because Jaeger can send the header.
 
    ```sh
    export GOOSE_SERVER__SECRET_KEY=$(openssl rand -hex 16)
    goose serve --host 127.0.0.1 --port 17000
    ```
 
-3. Point Jaeger at it, with the same variable set in Jaeger's environment:
+4. Point Jaeger at it, with the same variable set in Jaeger's environment:
 
    ```yaml
    extensions:
@@ -149,7 +166,7 @@ meets the [agent contract](#agent-contract) works the same way; only
          mcp: {}
    ```
 
-4. Open the Jaeger UI. The "Ask Jaeger" box appears once the health probe
+5. Open the Jaeger UI. The "Ask Jaeger" box appears once the health probe
    reaches the agent. Ask something that needs telemetry, such as "list the
    services you can see". The streamed tool calls carry a `jaeger:` prefix when
    they come from Jaeger's MCP endpoint rather than from a tool the agent
