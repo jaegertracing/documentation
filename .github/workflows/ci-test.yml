@@ -35,7 +35,7 @@ jobs:
     # This image ships Chromium with its system packages, so the job does not
     # run apt-get or download a browser. Its tag must match @playwright/test
     # in package.json; renovate.json groups the two updates.
-    container: mcr.microsoft.com/playwright:v1.64.1-noble
+    container: mcr.microsoft.com/playwright:v1.65.0-noble
     steps:
     - uses: actions/checkout@v7
     # The checkout is owned by the runner's user, not the container's, and
