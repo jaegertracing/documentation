@@ -139,7 +139,7 @@ the following services:
   Allows trace data to be pushed to the storage. This service can run on a separate port if needed.
 
 For more information, please refer to
-[jaeger/internal/storage/v2/grpc][grpc].
+[jaeger/internal/storage/v2/grpc][grpc_v2].
 
 ## Remote Sampling Configuration
 
@@ -196,4 +196,4 @@ grpc_cli ls localhost:16685
 [sampling.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/sampling.proto
 [grpc-reflection]: https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#enable-server-reflection
 [gogo-reflection]: https://jbrandhorst.com/post/gogoproto/#reflection
-[grpc]: https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/grpc
+[grpc_v2]: https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/grpc
