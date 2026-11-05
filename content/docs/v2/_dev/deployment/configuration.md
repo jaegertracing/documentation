@@ -19,7 +19,7 @@ jaeger --config config.yaml
 
 ### Configuration Examples
 
-[Examples of working configuration files][jaeger] are available in the Jaeger GitHub repository:
+[Examples of working configuration files][cmd-jaeger] are available in the Jaeger GitHub repository:
   * `config-{storage}.yaml` are examples of running Jaeger as `collector` role with different storage backends.
   * `config-query.yaml` is an example of running Jaeger in a standalone `query` role (with UI).
   * `cmd/jaeger/internal/all-in-one.yaml` is bundled in the Jaeger binary for `all-in-one` role.
@@ -82,7 +82,7 @@ In this example:
 
 ### Jaeger query
 
-`jaeger_query` extension is responsible for running HTTP and gRPC servers that expose trace query APIs and the UI frontend. In the future the configuration documentation will be [auto-generated](https://github.com/jaegertracing/jaeger/issues/6628) from the schema. Meanwhile, please refer to [config.go] as the authoritative source.
+`jaeger_query` extension is responsible for running HTTP and gRPC servers that expose trace query APIs and the UI frontend. In the future the configuration documentation will be [auto-generated](https://github.com/jaegertracing/jaeger/issues/6628) from the schema. Meanwhile, please refer to [config.go][jaegerquery-config.go] as the authoritative source.
 
 Here's an example of how to configure the extension:
 
@@ -184,7 +184,7 @@ A `queue` configured like this acknowledges spans as soon as they are enqueued, 
 
 ### Jaeger storage
 
-`jaeger_storage_exporter` can also be declared under `connectors:`. The collector then builds it as a traces-to-traces connector that writes spans to the storage backend exactly as the exporter does, and re-emits the spans the storage rejected terminally onto its output pipeline, so that any standard exporter can serve as a dead-letter sink. It accepts the exporter's `trace_storage`, `queue`, and `retry_on_failure` settings; an enabled `queue` must set `wait_for_result: true`. See [Delivery Guarantees](../delivery-guarantees/#dead-letter-pipeline-for-rejected-spans) for the pipeline shape and the [connector README][README.md] for the configuration reference.
+`jaeger_storage_exporter` can also be declared under `connectors:`. The collector then builds it as a traces-to-traces connector that writes spans to the storage backend exactly as the exporter does, and re-emits the spans the storage rejected terminally onto its output pipeline, so that any standard exporter can serve as a dead-letter sink. It accepts the exporter's `trace_storage`, `queue`, and `retry_on_failure` settings; an enabled `queue` must set `wait_for_result: true`. See [Delivery Guarantees](../delivery-guarantees/#dead-letter-pipeline-for-rejected-spans) for the pipeline shape and the [connector README][storageexporter-readme] for the configuration reference.
 
 ```yaml
 connectors:
@@ -208,9 +208,9 @@ connectors:
 
 `adaptive_sampling` processor observes all the traces collected by Jaeger and dynamically calculates sampling probabilities for different services and endpoints in order to satisfy certain throughput targets (number of traces per second).
 
-[jaeger]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger
-[config.go]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/config.go
+[cmd-jaeger]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger
+[jaegerquery-config.go]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/config.go
 [clockskew.go]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/internal/adjuster/clockskew.go
 [reverse-proxy]: https://github.com/jaegertracing/jaeger/tree/main/examples/reverse-proxy
 [009-ui-base-path-auto-detection.md]: https://github.com/jaegertracing/jaeger/blob/main/docs/adr/009-ui-base-path-auto-detection.md
-[README.md]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/exporters/storageexporter/README.md
+[storageexporter-readme]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/exporters/storageexporter/README.md

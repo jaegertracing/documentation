@@ -15,7 +15,7 @@ Cassandra also has the following officially supported resources available from t
 
 ## Configuration
 
-A sample configuration for Jaeger with Cassandra backend is available in the Jaeger repository: [config-cassandra.yaml]. In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go] as the authoritative source.
+A sample configuration for Jaeger with Cassandra backend is available in the Jaeger repository: [config-cassandra.yaml]. In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go][cassandra-config.go] as the authoritative source.
 
 ## Initializing Schema
 
@@ -60,7 +60,7 @@ where `{datacenter}` is the name used in the Cassandra configuration / network t
 The script also allows overriding TTL, keyspace name, replication factor, etc.
 Run the script without arguments to see the full list of recognized parameters.
 
-See [this README][README.md] for more details on Cassandra schema management.
+See [this README][cassandra-schema-readme] for more details on Cassandra schema management.
 
 ## TLS support
 
@@ -95,11 +95,11 @@ usercert = ~/.cassandra/client-cert
 
 ## Compatible Backends
 
-* ScyllaDB [can be used][scylladb/README.md] as a drop-in replacement for Cassandra since it uses the same data model and query language.
+* ScyllaDB [can be used][scylladb-readme] as a drop-in replacement for Cassandra since it uses the same data model and query language.
 
 [cqlsh]: https://cassandra.apache.org/doc/latest/cassandra/managing/tools/cqlsh.html
 [config-cassandra.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-cassandra.yaml
-[config.go]: https://github.com/jaegertracing/jaeger/blob/main/internal/storage/cassandra/config/config.go
+[cassandra-config.go]: https://github.com/jaegertracing/jaeger/blob/main/internal/storage/cassandra/config/config.go
 [create.sh]: https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/cassandra/schema/create.sh
-[README.md]: https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/cassandra/schema/README.md
-[scylladb/README.md]: https://github.com/jaegertracing/jaeger/blob/main/docker-compose/scylladb/README.md
+[cassandra-schema-readme]: https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/cassandra/schema/README.md
+[scylladb-readme]: https://github.com/jaegertracing/jaeger/blob/main/docker-compose/scylladb/README.md

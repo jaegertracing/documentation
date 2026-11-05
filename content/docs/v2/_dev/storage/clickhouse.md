@@ -18,7 +18,7 @@ ClickHouse also has the following officially supported resources available from 
 
 ## Configuration
 
-A sample configuration for Jaeger with ClickHouse backend is available in the Jaeger repository: [config-clickhouse.yaml]. In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go] as the authoritative source.
+A sample configuration for Jaeger with ClickHouse backend is available in the Jaeger repository: [config-clickhouse.yaml]. In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go][clickhouse-config.go] as the authoritative source.
 
 ## Schema
 
@@ -57,5 +57,5 @@ go run ./cmd/tracegen -duration 10s -workers 3 -pause 250ms
 Then open the Jaeger UI at http://localhost:16686.
 
 [config-clickhouse.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-clickhouse.yaml
-[config.go]: https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v2/clickhouse/config.go
+[clickhouse-config.go]: https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v2/clickhouse/config.go
 [sql]: https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/clickhouse/sql
