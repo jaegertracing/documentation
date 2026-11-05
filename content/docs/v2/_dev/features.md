@@ -68,6 +68,12 @@ SPM allows monitoring and investigating trends in the performance of the service
 
 See [Service Performance Monitoring (SPM)](../architecture/spm/) for more details.
 
+## AI Assistant and MCP Server
+
+Jaeger supports AI capabilities in two ways. It exposes an [MCP](https://modelcontextprotocol.io/) server to external AI agents, with a set of tools shaped so that an agent narrows down to the suspicious spans without loading a whole trace into its context. And it accepts AI chat clients over the [AG-UI](https://docs.ag-ui.com/) protocol, relaying each conversation to an agent that the operator runs, which answers with the same tools. The built-in AI Assistant chat interface in the Jaeger UI is one such client. Jaeger ships no agent and no model provider.
+
+See [AI Assistant and MCP Server](../ai/) for more details.
+
 ## Zipkin Compatibility
 
 Although we recommend instrumenting applications with OpenTelemetry, if your organization has already invested in the instrumentation using Zipkin libraries, you do not have to rewrite all that code. Jaeger provides backwards compatibility with Zipkin by accepting spans in Zipkin formats (Thrift, JSON v1/v2 and Protobuf) over HTTP. Switching from a Zipkin backend is just a matter of routing the traffic from Zipkin libraries to the Jaeger backend.

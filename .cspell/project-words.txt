@@ -3,6 +3,7 @@ agentic
 alertmanager
 autoscale
 autoscaler
+basicauth
 bitnami
 bootcamp
 BYOA
@@ -28,6 +29,7 @@ eddsa
 emsgsize
 errorf
 expvar
+extensionauth
 fargate
 findRESubmatch
 flink
@@ -123,6 +125,7 @@ shortcode
 spanmetrics
 stackoverflow
 statefulset
+streamable
 strimzi
 strimzi's
 struct
@@ -131,6 +134,7 @@ tchannel
 thriftrw
 tolerations
 tracegen
+tracestate
 translog
 uber
 uberctx

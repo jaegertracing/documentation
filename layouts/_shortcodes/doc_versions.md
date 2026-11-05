@@ -4,5 +4,5 @@ Available versions:
 
 {{ range $versions -}}
 {{ if not .IsSection }}{{ continue }}{{ end -}}
-- [{{ .Params.linkTitle }}]({{ .RelPermalink }})
+- [{{ .LinkTitle }}]({{ .RelPermalink }})
 {{ end -}}

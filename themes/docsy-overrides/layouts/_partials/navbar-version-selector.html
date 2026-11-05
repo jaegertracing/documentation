@@ -64,7 +64,9 @@
   {{ $href := partial "docs/lookup-page" (slice $dot $_href) -}}
   {{ $title := "" -}}
   {{ with and $href (site.GetPage $href) -}}
-    {{ $title = .Params.linkTitle -}}
+    {{/* .LinkTitle falls back to .Title; only a linkTitle set in front matter
+       (the version sections' "2.22 (latest)") should replace the version. */ -}}
+    {{ if ne .LinkTitle .Title }}{{ $title = .LinkTitle }}{{ end -}}
   {{ end -}}
   <li> {{- /**/ -}}
     <a class="dropdown-item

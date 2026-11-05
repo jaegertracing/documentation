@@ -56,8 +56,6 @@ We encourage OpenTelemetry SDK authors to copy relevant pieces of the Jaeger cli
 * OpenTelemetry SDK: https://github.com/open-telemetry/opentelemetry-js
   * Remote sampling: ?
   * Internal SDK metrics: n/a
-* OpenTracing Bridge: [opentelemetry-shim-opentracing](https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-shim-opentracing)
-  * Migration Guide: available in the shim's README and the corresponding readthedocs
 
 #### Go
 * OpenTelemetry SDK: https://github.com/open-telemetry/opentelemetry-go
