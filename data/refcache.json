@@ -3,10 +3,6 @@
     "StatusCode": 200,
     "LastSeen": "2026-11-05T12:07:13.1044-05:00"
   },
-  "http://events.linuxfoundation.org/events/open-source-summit-north-america": {
-    "StatusCode": 404,
-    "LastSeen": "2026-11-05T12:07:12.895987-05:00"
-  },
   "http://uber.github.io": {
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:03:43.834336-05:00"
@@ -111,10 +107,6 @@
     "StatusCode": 200,
     "LastSeen": "2026-11-05T12:03:59.344128-05:00"
   },
-  "https://cloud-native.slack.com/archives/CGG7NFUJ3": {
-    "StatusCode": 403,
-    "LastSeen": "2026-11-05T12:08:15.699793-05:00"
-  },
   "https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing": {
     "StatusCode": 200,
     "LastSeen": "2026-11-05T12:04:51.205664-05:00"
@@ -155,10 +147,6 @@
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:04:24.527699-05:00"
   },
-  "https://devops.com/cncf-advances-jaeger-distributed-tracing-project/": {
-    "StatusCode": 403,
-    "LastSeen": "2026-11-05T12:07:09.751056-05:00"
-  },
   "https://docs.ag-ui.com/": {
     "StatusCode": 200,
     "LastSeen": "2026-11-05T12:03:54.624409-05:00"
@@ -174,26 +162,6 @@
   "https://docs.google.com/document/d/1z4QrNtB9dMgT5SHNx-7Vc38XPLqnjmM2jFIupvkAEHo/view": {
     "StatusCode": 200,
     "LastSeen": "2026-11-05T12:04:18.356953-05:00"
-  },
-  "https://download.jaegertracing.io/v2.20.0.tar.gz": {
-    "StatusCode": 200,
-    "LastSeen": "2026-08-05T19:15:55.670787-04:00"
-  },
-  "https://download.jaegertracing.io/v2.20.0.zip": {
-    "StatusCode": 200,
-    "LastSeen": "2026-08-05T19:15:55.08329-04:00"
-  },
-  "https://download.jaegertracing.io/v2.20.0/jaeger-2.20.0-darwin-amd64.tar.gz": {
-    "StatusCode": 206,
-    "LastSeen": "2026-08-05T19:15:54.126997-04:00"
-  },
-  "https://download.jaegertracing.io/v2.20.0/jaeger-2.20.0-linux-amd64.tar.gz": {
-    "StatusCode": 206,
-    "LastSeen": "2026-08-05T19:15:54.427878-04:00"
-  },
-  "https://download.jaegertracing.io/v2.20.0/jaeger-2.20.0-windows-amd64.tar.gz": {
-    "StatusCode": 206,
-    "LastSeen": "2026-08-05T19:15:54.723918-04:00"
   },
   "https://download.jaegertracing.io/v2.23.0.tar.gz": {
     "StatusCode": 200,
@@ -739,10 +707,6 @@
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:07:33.753929-05:00"
   },
-  "https://github.com/jaegertracing/jaeger/releases/tag/v2.20.0": {
-    "StatusCode": 206,
-    "LastSeen": "2026-08-05T19:15:53.430224-04:00"
-  },
   "https://github.com/jaegertracing/jaeger/releases/tag/v2.23.0": {
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:07:24.383483-05:00"
@@ -974,10 +938,6 @@
   "https://github.com/open-telemetry/opentelemetry-java/tree/main/sdk-extensions/jaeger-remote-sampler": {
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:03:21.690559-05:00"
-  },
-  "https://github.com/open-telemetry/opentelemetry-js/tree/main/packages/opentelemetry-shim-opentracing": {
-    "StatusCode": 404,
-    "LastSeen": "2026-11-05T12:03:23.038223-05:00"
   },
   "https://github.com/open-telemetry/opentelemetry-operator": {
     "StatusCode": 206,
