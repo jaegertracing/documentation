@@ -1,0 +1,34 @@
+name: Link cache
+# cSpell:ignore refcache
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Monday 06:00 UTC
+    - cron: '0 6 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  check-links:
+    if: ${{ github.repository == 'jaegertracing/documentation' }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        # The bot's PAT, so that the refresh PR gets its own CI run.
+        token: ${{ secrets.JAEGERTRACINGBOT_PAT }}
+
+    - uses: actions/setup-node@v7
+      with: { node-version-file: .nvmrc }
+    - run: npm install
+
+    - name: Check links and renew the refcache when it is about to expire
+      run: |
+        git config user.name "jaegertracingbot"
+        git config user.email "jaegertracingbot+jaeger-tracing@googlegroups.com"
+        ./scripts/check-link-cache.sh
+      env:
+        GH_TOKEN: ${{ secrets.JAEGERTRACINGBOT_PAT }}
+        RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
