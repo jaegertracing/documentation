@@ -9,7 +9,7 @@ Before creating a new release:
   - Make sure the actual Jaeger release is done and Docker images for the new version are published.
 
 To create a new release:
-  - Manually trigger the [Release](https://github.com/jaegertracing/documentation/actions/workflows/ci-release.yml) workflow on GitHub. It will ask for v2 version number (same version as in the main Jaeger repo), and create a [pull request](https://github.com/jaegertracing/documentation/pulls) with the documentation changes. The workflow is using a bot token which [expires every year](https://github.com/jaegertracing/documentation/issues/1037).
+  - Run `scripts/pre-release.sh <version>` with the v2 version number (same version as in the main Jaeger repo). It checks that every link from `_dev` into the Jaeger repository still resolves at the release tag; if any file moved, fix the links in `_dev` with a normal pull request and run the script again. When all links resolve, it offers to trigger the [Release](https://github.com/jaegertracing/documentation/actions/workflows/ci-release.yml) workflow, which can also be triggered manually on GitHub with the same version number. The workflow creates a [pull request](https://github.com/jaegertracing/documentation/pulls) with the documentation changes. The workflow is using a bot token which [expires every year](https://github.com/jaegertracing/documentation/issues/1037).
   - Approve and merge that pull request. The site will be rebuilt automatically.
   - Verify that [jaegertracing.io](https://www.jaegertracing.io/docs/latest) redirects to the new documentation release version URL.
 
