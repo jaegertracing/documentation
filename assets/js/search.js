@@ -425,7 +425,6 @@
     }
 
     more.addEventListener('click', async () => {
-      if (more.disabled) return;
       const first = shown;
       await showMore();
       const next = list.children[first];
