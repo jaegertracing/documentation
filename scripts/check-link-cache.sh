@@ -37,17 +37,18 @@ failures() {
     sed -E 's/^[[:space:]]*//; s/ --- / /; s/ --> / /' | sort -u || true
 }
 
-# Reads the expiry from .htmltest.yml, in hours, and prints the cutoff date:
-# an entry last seen before it expires within RENEW_WITHIN_DAYS.
-renewal_cutoff() {
+# Reads the expiry from .htmltest.yml, in hours, and prints the day the
+# entry last seen on the given date expires and the day RENEW_WITHIN_DAYS
+# before it, on which renewal is due.
+expiry_dates() {
   local hours
   hours=$(sed -nE 's/^CacheExpires:[[:space:]]*([0-9]+)h.*/\1/p' .htmltest.yml)
   [ -n "$hours" ] || { echo "CacheExpires not found in .htmltest.yml" >&2; exit 1; }
   python3 -c "
 import datetime, sys
-hours, within = int(sys.argv[1]), int(sys.argv[2])
-cutoff = datetime.date.today() - datetime.timedelta(hours=hours) + datetime.timedelta(days=within)
-print(cutoff.isoformat())" "$hours" "$RENEW_WITHIN_DAYS"
+seen, hours, within = datetime.date.fromisoformat(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3])
+expires = seen + datetime.timedelta(hours=hours)
+print(expires.isoformat(), (expires - datetime.timedelta(days=within)).isoformat())" "$1" "$hours" "$RENEW_WITHIN_DAYS"
 }
 
 oldest_entry() {
@@ -101,10 +102,16 @@ if [ -n "$(failures)" ]; then
 fi
 git checkout -q -- "$CACHE"
 
-cutoff=$(renewal_cutoff)
 oldest=$(oldest_entry)
-echo "== Oldest cache entry: ${oldest:-none}; renewal cutoff: $cutoff"
-if [ -n "$oldest" ] && [[ "$oldest" < "$cutoff" ]]; then
+if [ -z "$oldest" ]; then
+  echo "== The cache is empty; nothing to renew."
+  exit 0
+fi
+read -r expires renew_on < <(expiry_dates "$oldest")
+today=$(date -u +%F)
+echo "== Oldest cache entry was checked on $oldest and expires on $expires."
+echo "== The cache is renewed once fewer than $RENEW_WITHIN_DAYS days remain, so renewal is due on $renew_on."
+if [[ "$today" > "$renew_on" ]] || [[ "$today" == "$renew_on" ]]; then
   echo "== Re-verifying every external link"
   echo '{}' > "$CACHE"
   run_check || true
