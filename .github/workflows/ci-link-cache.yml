@@ -1,5 +1,16 @@
-name: Link cache
+# This workflow keeps the external-link check in the PR CI green without
+# running it against the live sites on every PR. The PR check reads the
+# refcache (data/refcache.json), which records when each external URL was
+# last seen to be reachable; an entry is trusted until it is 91 days old.
+# This job checks every link in the built site once a week and, when a
+# link is broken, opens or updates a single issue with the list of failed
+# links. When the oldest cache entry is within 14 days of expiry, the job
+# also rechecks every link with an empty cache and opens a PR that refreshes
+# the whole cache, so that all entries never expire together inside a PR
+# run. In the common case nothing is broken and the cache is fresh, and the
+# job changes nothing.
 # cSpell:ignore refcache
+name: Link cache
 
 on:
   workflow_dispatch:
