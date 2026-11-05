@@ -161,6 +161,69 @@ extensions:
 
 * Set the `monitor.menuEnabled=true` property in the [Jaeger UI configuration](../../deployment/frontend-ui/#monitor).
 
+## Tag Filtering
+
+The Monitor tab can be configured to display tag based filtering dropdowns that
+narrow the RED metrics to spans matching the selected attribute values. This is
+useful for comparing the behavior of a service across environments, regions, or
+any other span attribute.
+
+Tag filtering is opt-in. It requires:
+
+1. The span attributes you want to filter on to be available as dimensions in
+   the metrics backend.
+2. The Monitor tab to be configured with the `monitor.tagAttributes` UI option
+   (see [Frontend/UI Configuration](../../deployment/frontend-ui/#monitor)).
+
+### PromQL-compatible backend
+
+For the PromQL-compatible backend, the [SpanMetrics Connector][spanmetrics-conn]
+only emits its default dimensions unless additional ones are configured. To make
+a span attribute available for filtering, add it to the connector's `dimensions`
+list:
+
+```yaml
+connectors:
+  spanmetrics:
+    dimensions:
+      - name: environment
+      - name: region
+```
+
+The connector looks up each `name` in the span attributes (or resource
+attributes) and emits the value as a Prometheus label. Dots in the attribute
+name are converted to underscores in the label name.
+
+When the UI sends a tag filter, Jaeger Query appends a PromQL label matcher to
+the metrics query. For example, selecting `environment=production` produces a
+filter like `environment="production"` in the generated PromQL.
+
+### Elasticsearch/OpenSearch backend
+
+For the direct-to-storage backend, tag filters are applied by adding term
+queries to the Elasticsearch/OpenSearch metrics query. No additional
+configuration is required beyond enabling the UI dropdowns, since span
+attributes are stored alongside the trace data.
+
+### Attribute values API
+
+The Monitor tab populates the dropdown options by querying:
+
+```
+GET /api/metrics/attributes?key=<attributeName>&service=<serviceName>
+```
+
+The `service` parameter is optional and, when present, limits the returned
+values to those observed for the specified service. The response is a
+structured list:
+
+```json
+{
+  "data": ["production", "staging"],
+  "total": 2
+}
+```
+
 ## Architecture
 
 There are two architectural approaches to generating RED metrics:
@@ -315,7 +378,8 @@ typical = 72 * num_operations
 Note:
 - Custom [duration buckets][spanmetrics-config-duration] or [dimensions][spanmetrics-config-dimensions]
   configured in the spanmetrics connector will alter the calculation above.
-- Querying custom dimensions are not supported by SPM and will be aggregated over.
+- Custom dimensions can be used for [tag filtering](#tag-filtering); when not used
+  as tag filters they are aggregated over.
 
 ## API
 
@@ -329,6 +393,27 @@ Used internally by the Monitor tab of Jaeger UI to populate the metrics for its 
 
 Refer to [this README file][http-api-readme] for a detailed specification of
 the HTTP API.
+
+#### Tag filtering parameters
+
+Metrics queries (`/api/metrics/latencies`, `/api/metrics/calls`, and
+`/api/metrics/errors`) accept two optional parameters for filtering by span
+attributes:
+
+- `tag=key:value` — a single tag filter. This parameter may be repeated.
+- `tags=<json>` — a JSON-encoded object of tag keys and values, for example
+  `tags={"environment":"production","region":"us-east-1"}`.
+
+When both parameters are present, the resulting filters are merged. Multiple
+filters are applied together, and the metrics are restricted to spans matching
+all of the specified values.
+
+For example, to fetch call rates for the `customer` service filtered to the
+`production` environment:
+
+```bash
+curl "http://localhost:16686/api/metrics/calls?service=customer&tags=%7B%22environment%22%3A%22production%22%7D" | jq .
+```
 
 ## Troubleshooting
 
