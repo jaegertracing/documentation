@@ -62,23 +62,12 @@ a drill-down in three tiers:
   small number of spans already identified as suspicious, either by name or
   because they carry an error. An agent is meant to call these last.
 
-A fourth tool, `read_skill`, serves the [skills](#skills).
+A fourth tool, `read_skill`, serves skills, the markdown playbooks that
+[Custom Skills](../skills/) describes.
 
 The server's `tools/list` response is the authoritative catalog, with each
 tool's description and JSON schema, so an MCP client needs no configuration
 beyond the endpoint URL.
-
-## Skills
-
-A skill is a markdown playbook that an agent reads before it attempts a task,
-such as walking a failed trace to its first error or detecting an N+1 query
-pattern. Agents reach skills through `read_skill`. They start at the root
-`SKILL.md`, which lists the available skills with one line each on when to use
-them, and follow its links, so a skill is read only when it looks relevant.
-
-Jaeger bundles its built-in skills into the binary. An operator can serve
-installation-specific skills without rebuilding Jaeger, and
-[Custom Skills](../skills/) describes how to serve them and how to write one.
 
 ## Connecting a client
 
@@ -107,13 +96,10 @@ remain available.
 
 ## Securing the endpoint
 
-The tools use the same query service as the UI and the query API, and they
-return span attributes, events, and errors, so access to the MCP endpoint is
-access to your trace data. The endpoint shares the query HTTP listener, with no
-TLS and no authenticator by default. Before exposing it to remote agents, see
-[AI Agents to Query](../../deployment/security/#ai-agents-to-query) on the
-security page for authentication and TLS, for restricting the AI surfaces to a
-group of users with `ai.auth`, and for tenant and session behavior.
+Access to the MCP endpoint is access to your trace data, and the endpoint has
+no TLS and no authenticator by default. Before exposing it to remote agents, see
+the [security page](../../deployment/security/), which covers authentication and
+TLS, limiting the AI surfaces to a group of users, and tenants and sessions.
 
 ## Transport options
 
@@ -164,10 +150,7 @@ stateless endpoint answers 405 to the GET that a client sends to open a stream
 for server-initiated messages, which Jaeger never sends.
 
 This covers external clients on the shared endpoint. The turn-scoped endpoint
-that the AI Assistant's gateway hands to a chat agent is held in the memory of
-the process that is streaming that chat, so an agent that is not co-located with
-`jaeger-query` must reach that replica. See
-[Running the agent elsewhere](../assistant/#running-the-agent-elsewhere).
+of the [AI Assistant](../assistant/) has its own routing rule, described there.
 
 ### Answering with plain JSON
 
