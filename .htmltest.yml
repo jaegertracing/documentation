@@ -34,9 +34,3 @@ IgnoreURLs:
   # The OpenSearch Dashboard of the live demo answers 500; the other demo
   # endpoints in content/demo.md are healthy, so this is a deployment issue.
   - ^https://opensearch.demo.jaegertracing.io
-  # The docs of releases up to 2.22 link to source files at paths that moved
-  # before those releases were tagged, so the links were dead when the docs were
-  # cut (https://github.com/jaegertracing/documentation/issues/889). The pages
-  # of those releases are frozen, so the links are not checked. Later releases
-  # and _dev carry corrected links and are checked.
-  - ^https://github.com/jaegertracing/jaeger/(blob|tree)/v2\.([0-9]|1[0-9]|2[0-2])\.[0-9]+/
