@@ -499,13 +499,6 @@ data quality issue, and the instrumentation should set the span kind.
 The reason for defaulting to `server` span kinds is to avoid double-counting
 both ingress and egress spans in the `server` and `client` span kinds, respectively.
 
-[spm-demo]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor
-[spanmetrics-conn]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/README.md
-[prom-metric-labels]: https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels
-[http-api-readme]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api
-[spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L23
-[spanmetrics-config-duration]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L14
-
 ### 403 when executing metrics query
 
 If logs contain the error resembling: `failed executing metrics query: client_error: client error: 403`,
@@ -525,5 +518,11 @@ extensions:
           token_override_from_context: true
 ```
 
+[spm-demo]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor
+[spanmetrics-conn]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/README.md
+[prom-metric-labels]: https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels
+[http-api-readme]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api
+[spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L23
+[spanmetrics-config-duration]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L14
 [config-spm.yaml]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm.yaml
 [config-spm-elasticsearch.yaml]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm-elasticsearch.yaml

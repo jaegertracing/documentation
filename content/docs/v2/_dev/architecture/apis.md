@@ -60,9 +60,6 @@ Jaeger can receive trace data from the OpenTelemetry SDKs in their native [OpenT
 
 Only tracing data is accepted, since Jaeger does not store other telemetry types. For more details on the OTLP receiver see the [official documentation][otlp-rcvr].
 
-[otlp-rcvr]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
-[otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md
-
 ### Legacy Protobuf via gRPC
 
 **Status**: Stable, Deprecated
@@ -187,6 +184,8 @@ grpc_cli ls localhost:16685
   jaeger.api_v3.QueryService
 ```
 
+[otlp-rcvr]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
+[otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md
 [otlp.grpc]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlpgrpc
 [otlp.http]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlphttp
 [jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift

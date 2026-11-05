@@ -12,7 +12,6 @@ Jaeger supports multiple types of sampling strategies.
 
 Head based sampling is when the sampling decision is made at the beginning of a trace. The support for head based sampling is built into the OpenTelemetry SDKs. The topic is covered in the [OpenTelemetry documentation on head based sampling](https://opentelemetry.io/docs/concepts/sampling/#head-sampling).
 
-
 ## Tail Based Sampling
 
 Tail based sampling allows for the sampling decisions to be made after the trace is complete and all spans have been collected. This provides more granular control over which traces and kept and which are discarded. The downsides to this are (a) the runtime overhead on the application that must record and export all traces, and (b) the higher memory and processing costs for the Jaeger backend. You can learn more about tail based sampling in the [OpenTelemetry documentation](https://opentelemetry.io/docs/concepts/sampling/#tail-sampling).
@@ -31,8 +30,6 @@ These are two basic types of head samplers that are used by the remote sampling:
 
 * **Probabilistic** sampler makes a random sampling decision with a pre-configured probability. For example, with `probability=0.1` approximately 1 in 10 traces will be sampled.
 * **Rate Limiting** sampler uses a leaky bucket rate limiter to ensure that traces are sampled with a certain constant rate. For example, when `rate=2.0` it will sample requests with the rate of 2 traces per second.
-
-[remote-sampling-api]: ../apis/#remote-sampling-configuration
 
 ### File-based Sampling Configuration
 
@@ -109,6 +106,7 @@ Adaptive sampling requires a `sampling_store` storage backend to store the obser
 
 Read [this blog post](https://medium.com/jaegertracing/adaptive-sampling-in-jaeger-50f336f4334) for more details on adaptive sampling engine.
 
+[remote-sampling-api]: ../apis/#remote-sampling-configuration
 [config-tail-sampling-always-sample.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-tail-sampling-always-sample.yaml
 [config-tail-sampling-service-name-policy.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-tail-sampling-service-name-policy.yaml
 [config.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config.yaml
