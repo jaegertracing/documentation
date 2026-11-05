@@ -20,6 +20,11 @@ IgnoreURLs:
   # which is not blocked, so those are generated rather than typed by hand.
   # Article images on cdn-images-1.medium.com are still checked.
   - ^https://medium.com/
+  # Slack serves channel archive pages only to a signed-in browser and answers
+  # a checker with 403 or 429, from CI and from a laptop alike.
+  - ^https://cloud-native.slack.com/archives/
+  # devops.com answers every automated request with 403.
+  - ^https://devops.com/
   - ^https://calendar.google.com/
   - ^https://eng.uber.com/(distributed-tracing/)?
   - ^https://war.ukraine.ua/support-ukraine/
