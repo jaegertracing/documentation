@@ -114,14 +114,14 @@ Monitor Jaeger query service performance:
 
 ### Prometheus Alerts
 
-The Jaeger repository includes a [sample set of Prometheus alerting rules](https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin). These production-tested alerts cover:
+The Jaeger repository includes a [sample set of Prometheus alerting rules][jaeger-mixin]. These production-tested alerts cover:
 
 - **Service availability**: Alerts for when Jaeger components are down
 - **Performance degradation**: Alerts for high latency and error rates
 - **Capacity issues**: Alerts for resource exhaustion and queue saturation
 - **Data loss**: Alerts for dropped spans and storage failures
 
-For detailed setup instructions, see the [monitoring mixin documentation](https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin).
+For detailed setup instructions, see the [monitoring mixin documentation][jaeger-mixin].
 
 ### Monitoring Tools Integration
 
@@ -167,3 +167,5 @@ Common scenarios to investigate:
 - Monitor storage backend performance
 - Check for resource contention
 - Review query patterns
+
+[jaeger-mixin]: https://github.com/jaegertracing/jaeger/tree/main/monitoring/jaeger-mixin

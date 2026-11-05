@@ -46,8 +46,8 @@ Kafka also has the following officially supported resources available from the c
 ## Configuration
 
 Please refer to these sample configuration files:
-  * **collector**: [config-kafka-collector.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-collector.yaml)
-  * **ingester**: [config-kafka-ingester.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester.yaml)
+  * **collector**: [config-kafka-collector.yaml]
+  * **ingester**: [config-kafka-ingester.yaml]
 
 Jaeger uses Kafka exporter and receiver from `opentelemetry-collector-contrib` repository. Please refer to their respective README's for configuration details.
   * [Kafka exporter](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/kafkaexporter/README.md)
@@ -90,7 +90,7 @@ exporters:
 
 The storage must return an error when a write fails. Cassandra and ClickHouse always do; Elasticsearch and OpenSearch need [`write_mode: sync`](../elasticsearch/#write-modes), and should run with `poison_pill_handling: drop` or the [dead-letter pipeline](../../deployment/delivery-guarantees/#dead-letter-pipeline-for-rejected-spans) so that a document the backend rejects on every attempt cannot hold the offset forever.
 
-The configurations the Kafka end-to-end tests run against are [config-kafka-ingester-sync.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-sync.yaml) and, with the dead-letter pipeline, [config-kafka-ingester-dead-letter.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-dead-letter.yaml). Both follow the recommended shape.
+The configurations the Kafka end-to-end tests run against are [config-kafka-ingester-sync.yaml] and, with the dead-letter pipeline, [config-kafka-ingester-dead-letter.yaml]. Both follow the recommended shape.
 
 ### Sizing
 
@@ -99,3 +99,8 @@ With `wait_for_result` set, batch size is bounded by the number of partitions th
 The receiver's fetch settings (`max_fetch_size`, `max_partition_fetch_size`, `min_fetch_size`, `max_fetch_wait`) control how many bytes a broker returns per fetch and how long it waits to accumulate them, not how many records reach the exporter at once. The receiver makes one pipeline call per fetched record, so a larger fetch only fills the receiver's buffer and does not enlarge the storage write.
 
 For Elasticsearch and OpenSearch, keep `queue.batch.max_size` well below the storage's `bulk_processing.max_bytes`. The collector measures a batch in OTLP protobuf bytes while the storage measures the encoded `_bulk` body, which is larger, so a batch at the limit is otherwise split across several `_bulk` requests. Both values must stay below the `http.max_content_length` limit of Elasticsearch, 100 MB by default.
+
+[config-kafka-collector.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-collector.yaml
+[config-kafka-ingester.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester.yaml
+[config-kafka-ingester-sync.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-sync.yaml
+[config-kafka-ingester-dead-letter.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-dead-letter.yaml

@@ -58,7 +58,7 @@ If generating traces manually is preferred, the [Sample App: HotROD](../../getti
 
 ### Option 1: PromQL-compatible backend Configuration
 
-An example configuration is available in the Jaeger repository: [config-spm.yaml](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm.yaml). The following steps are required to enable the SPM feature:
+An example configuration is available in the Jaeger repository: [config-spm.yaml]. The following steps are required to enable the SPM feature:
 
 * Enable the [SpanMetrics Connector][spanmetrics-conn] in the pipeline:
 ```yaml
@@ -113,7 +113,7 @@ extensions:
 
 ### Option 2: Elasticsearch/OpenSearch Backend Configuration
 
-An example configuration is available in the Jaeger repository: [config-spm-elasticsearch.yaml](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm-elasticsearch.yaml).
+An example configuration is available in the Jaeger repository: [config-spm-elasticsearch.yaml].
 
 Configuration is simpler as it does not require the SpanMetrics Connector or a separate metrics pipeline.
 
@@ -525,3 +525,6 @@ extensions:
           token_file_path: /path/to/token/file
           token_override_from_context: true
 ```
+
+[config-spm.yaml]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm.yaml
+[config-spm-elasticsearch.yaml]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm-elasticsearch.yaml

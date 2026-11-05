@@ -15,7 +15,7 @@ Follow the [official instructions](https://opentelemetry.io/docs/collector/exten
 
 ## Builder Manifest
 
-The `ocb` tool takes a YAML manifest file (commonly named `builder.yaml`) that declares which components to include in the binary. Jaeger provides a [reference manifest](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/builder.yaml) that reproduces the default distribution. Note that the reference manifest uses `v0.0.0` with a `replaces` directive for in-repo builds — when building outside the Jaeger repository, use a real release version as shown in the example below.
+The `ocb` tool takes a YAML manifest file (commonly named `builder.yaml`) that declares which components to include in the binary. Jaeger provides a [reference manifest][builder.yaml] that reproduces the default distribution. Note that the reference manifest uses `v0.0.0` with a `replaces` directive for in-repo builds — when building outside the Jaeger repository, use a real release version as shown in the example below.
 
 Here is a minimal example that builds a Jaeger binary with just the core components:
 
@@ -53,7 +53,7 @@ processors:
 
 ## Available Components
 
-Jaeger exposes its components as public Go packages under [`components/`](https://github.com/jaegertracing/jaeger/tree/main/components) in the Jaeger repository:
+Jaeger exposes its components as public Go packages under [`components/`][components] in the Jaeger repository:
 
   * **Jaeger-specific components** (`components/extension/`, `components/exporter/`, `components/processor/`) — these are Jaeger's own implementations such as the storage exporter, query extension, adaptive sampling processor, etc.
   * **Third-party OTel components** (`components/ext/`) — these are upstream OpenTelemetry Collector components (from core and contrib) re-exported through Jaeger's module. Using these ensures version consistency with the rest of the Jaeger distribution, as their actual versions are resolved transitively through Jaeger's `go.mod`.
@@ -100,3 +100,7 @@ GOOS=linux GOARCH=arm64 ocb --config builder.yaml
 ## Version Compatibility
 
 Replace the version placeholder (`v2.19.0` in the examples above) with the Jaeger release version you want to base your distribution on. All Jaeger component packages within a given release are versioned together, so you only need to track a single version number.
+
+[builder.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/builder.yaml
+[components]: https://github.com/jaegertracing/jaeger/tree/main/components
+[go.mod]: https://github.com/jaegertracing/jaeger/blob/main/go.mod
