@@ -78,18 +78,25 @@ unset or `/`. Add any credentials the deployment requires as headers in the
 client's MCP server configuration, because the endpoint sends no authentication
 challenge from which a client could discover an OAuth flow.
 
-To verify an endpoint without a client, send an `initialize` request:
+To verify an endpoint without a client, list its tools. The endpoint speaks
+MCP revision 2026-07-28, which has no handshake: a request names the revision
+in the `MCP-Protocol-Version` header and in `_meta`, repeats its method in the
+`Mcp-Method` header, and is served on its own.
 
 ```sh
 curl --include \
   --header 'Content-Type: application/json' \
   --header 'Accept: application/json, text/event-stream' \
-  --data '{"jsonrpc":"2.0","id":1,"method":"initialize","params":{"protocolVersion":"2025-03-26","capabilities":{},"clientInfo":{"name":"deployment-check","version":"1.0"}}}' \
+  --header 'MCP-Protocol-Version: 2026-07-28' \
+  --header 'Mcp-Method: tools/list' \
+  --data '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{"_meta":{"io.modelcontextprotocol/protocolVersion":"2026-07-28","io.modelcontextprotocol/clientCapabilities":{}}}}' \
   http://localhost:16686/api/ai/mcp/
 ```
 
-A successful initialization returns HTTP 200 and an `Mcp-Session-Id` header.
-Against a deployment with TLS and basic authentication, add
+A working endpoint returns HTTP 200 and the tool list, with no `Mcp-Session-Id`
+header. A client on an older revision may still send `initialize` first; the
+endpoint answers it without a session id and serves the next request on its
+own. Against a deployment with TLS and basic authentication, add
 `--cacert /path/to/ca.crt --user <username>` and use the `https` URL. After disabling
 the endpoint, the same request returns HTTP 404 while the UI and the query API
 remain available.
@@ -99,7 +106,7 @@ remain available.
 Access to the MCP endpoint is access to your trace data, and the endpoint has
 no TLS and no authenticator by default. Before exposing it to remote agents, see
 the [security page](../../deployment/security/), which covers authentication and
-TLS, limiting the AI surfaces to a group of users, and tenants and sessions.
+TLS, limiting the AI surfaces to a group of users, and tenants and identity.
 
 ## Transport options
 
@@ -128,26 +135,14 @@ extensions:
 
 ### Running several replicas behind a load balancer
 
-By default the endpoint keeps one session per client in the memory of the
-`jaeger-query` process that handled `initialize`. A load balancer without
-session affinity sends later requests to other replicas, which answer
-`404 session not found`; and when the client's `notifications/initialized` is
-the request that went astray, the replica that holds the session rejects the
-next `tools/list` with `method "tools/list" is invalid during session
-initialization`. Set `stateless` to make every request stand on its own:
-
-```yaml
-extensions:
-  jaeger_query:
-    ai:
-      mcp:
-        streamable_http:
-          stateless: true
-```
-
-Jaeger's tools keep no state between requests, so they behave the same. A
-stateless endpoint answers 405 to the GET that a client sends to open a stream
-for server-initiated messages, which Jaeger never sends.
+The endpoint keeps no session: every request is served from its own headers
+and body, and nothing is held in the memory of one `jaeger-query` process that
+a later request depends on. Any replica therefore serves any request, and a
+load balancer needs no session affinity for the endpoint. Jaeger's tools keep
+no state between requests either, so they behave the same on every replica.
+The endpoint answers 405 to the `GET` that a client on an older revision sends
+to open a stream for server-initiated messages, which Jaeger never sends, and
+to `DELETE`, which ended a session.
 
 This covers external clients on the shared endpoint. The turn-scoped endpoint
 of the [AI Assistant](../assistant/) has its own routing rule, described there.

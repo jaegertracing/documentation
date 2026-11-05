@@ -111,13 +111,18 @@ announces it to the agent. The endpoint has these properties:
 - It lives in the memory of the `jaeger-query` process that is streaming that
   chat to the browser. With several replicas, `base_url` must name the process
   that owns the turn, such as its pod address, or the load balancer must route
-  by the `<id>` path segment. The `stateless` transport option, which solves the
-  same problem for the shared endpoint, does not apply here.
-- `ai.auth` does not cover it. The chat request that created the turn was
-  already admitted, and only that agent receives the route id.
-- The agent dials it with no credentials, and the identity admitted on the chat
-  request is not carried onto its tool calls, so a query interceptor that
-  enforces per-user data policy sees an anonymous caller on them.
+  by the `<id>` path segment. The shared endpoint has no such rule, because
+  no request to it depends on an earlier one.
+- Each tool call carries the identity of the chat request. The gateway
+  announces the caller's `header_forwarding` headers and, with
+  `bearer_token_propagation` on, the caller's bearer token to the agent for
+  the turn, and the agent sends them on every tool call. A tool call that reads
+  trace data therefore runs through the same `query_interceptors` as a query
+  from the UI, with the same caller. `ai.auth` guards this endpoint as it
+  guards the chat endpoint, so the authenticator must read one of the announced
+  headers; a call without them is refused by `ai.auth` when it is set, and runs
+  as nobody otherwise. The [security page](../../deployment/security/) covers
+  what the agent holds as a result.
 
 ## Running Goose as the agent
 
@@ -199,9 +204,10 @@ Any ACP agent that meets these requirements works with the gateway.
   so the agent must not depend on either.
 - **Sessions.** Each chat turn is one `initialize`, one `session/new`, and one
   `session/prompt` on a fresh connection. `session/new` carries one Streamable
-  HTTP MCP server, the turn-scoped endpoint. The agent uses that URL for this
-  turn only and does not cache the tool list across turns, because the UI tools
-  differ per request.
+  HTTP MCP server, the turn-scoped endpoint, with the headers to send on every
+  request to it. The agent sends all of them on every request, uses that URL for
+  this turn only, and does not cache the tool list across turns, because the UI
+  tools differ per request.
 - **Tools.** Telemetry tools and UI tools arrive together in one `tools/list`.
   UI tools are namespaced `ui__<name>` so they cannot shadow a telemetry tool.
   A UI tool returns an acknowledgement, not data.
