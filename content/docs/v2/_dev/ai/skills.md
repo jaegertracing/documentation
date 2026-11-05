@@ -35,14 +35,36 @@ On the embedded all-in-one configuration, set the same field with
 The directory must contain a `SKILL.md`, which is the index of your skills.
 Jaeger serves the directory under the `custom/` prefix beside the built-in
 skills, and the built-in root index links to `custom/SKILL.md`, so an agent that
-follows the index reaches your skills. Below the index, a link may point at any
-file under any name; one directory per skill is a convention, not a rule.
+follows the index reaches your skills:
+
+```
+SKILL.md                       # built-in index
+detect-n-plus-one/SKILL.md     # built-in skill
+custom/SKILL.md                # your index,  <skills_dir>/SKILL.md
+custom/your-skill/SKILL.md     # your skill,  <skills_dir>/your-skill/SKILL.md
+```
+
+`custom/` is a prefix on the path an agent asks for, not a directory you create.
+Below the index, a link may point at any file under any name; one directory per
+skill is a convention, not a rule.
 
 The directory is read live, so an edit takes effect on the next `read_skill`
-call. Jaeger refuses to start when the directory or its `SKILL.md` cannot be
-read, and it caps each served file at 512 KiB. That check runs once, at
-startup, so a directory that breaks later is reported when an agent reads a
-skill, not by refusing to serve.
+call. Jaeger checks the directory once, at startup, and refuses to start rather
+than serve an incomplete skill set:
+
+| Startup error | Cause |
+| --- | --- |
+| `cannot open skills_dir "…"` | The path is missing, or is not a directory |
+| `cannot read SKILL.md in skills_dir "…"` | The directory opens, but has no readable index |
+
+A directory that breaks after startup is reported when an agent reads a skill,
+as `cannot read "<path>": …`, not by refusing to serve.
+
+Two limits apply to what is served. A path that leaves the directory through
+`..` or a symlink is refused by the operating system, not by a path check. A
+served file is cut at 512 KiB and ends with
+`file content truncated after 524288 bytes`; the cap is not configurable, and a
+skill anywhere near it is far too long to be useful to an agent.
 
 {{% alert title="Warning" color="warning" %}}
 Anyone who can write to `skills_dir` can steer the behavior of an agent that
