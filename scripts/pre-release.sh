@@ -7,18 +7,18 @@
 # the tag fails the link check on the release pull request. When every link
 # resolves, it offers to trigger the Release workflow with the same version.
 #
-#   scripts/pre-release.sh <major.minor.patch>
+#   scripts/pre-release.sh <major.minor.patch>   # a leading v is accepted
 #
 # It exits with status 1 and lists the links to fix in _dev when any is missing
 # at the tag.
 
 set -euo pipefail
 
-if [[ $# -ne 1 || ! "$1" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+if [[ $# -ne 1 || ! "$1" =~ ^v?[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
   echo "Usage: $0 <major.minor.patch>" >&2
   exit 1
 fi
-version=$1
+version=${1#v}
 tag="v$version"
 repo=https://github.com/jaegertracing/jaeger
 
