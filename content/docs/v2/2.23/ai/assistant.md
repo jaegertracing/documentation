@@ -119,8 +119,7 @@ meets the [agent contract](#agent-contract) works the same way; only
 `agent_url`, the header name, and the launch command change.
 
 1. Install Goose v1.55.0 or later from
-   [Goose releases](https://github.com/aaif-goose/goose/releases), the release
-   that propagates the chat request's trace context into its MCP tool calls.
+   [Goose releases](https://github.com/aaif-goose/goose/releases).
 
 2. Configure a model provider in Goose's environment. Goose reads the provider
    settings from environment variables, not from `~/.config/goose/config.yaml`;
