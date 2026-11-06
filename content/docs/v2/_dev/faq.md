@@ -1,6 +1,5 @@
 ---
 title: Frequently Asked Questions
-linkTitle: FAQs
 description: Answers to some frequently asked questions about Jaeger.
 weight: 8
 linkTitle: FAQ
