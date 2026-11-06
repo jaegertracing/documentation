@@ -30,13 +30,13 @@ To control the overhead on the applications and the storage costs, Jaeger suppor
 
 ## Modern Web UI
 
-{{< screenshot src="/img/frontend-ui/search-results.png" alt="Jaeger UI search results, with a scatter plot of trace durations above the list of matching traces" >}}
+{{< screenshot src="/img/frontend-ui/v2.23/search-results.png" alt="Jaeger UI search results, with a scatter plot of trace durations above the list of matching traces" >}}
 
 Jaeger Web UI is implemented in Javascript as a React application. Several performance improvements have been released in v1.0 to allow the UI to efficiently deal with large volumes of data and display traces with tens of thousands of spans (e.g. we tried a trace with 80,000 spans).
 
 ### Trace View
 
-{{< screenshot src="/img/frontend-ui/trace-timeline.png" alt="The trace timeline, with the attributes, resource and events of the selected span in a side panel" >}}
+{{< screenshot src="/img/frontend-ui/v2.23/trace-timeline.png" alt="The trace timeline, with the attributes, resource and events of the selected span in a side panel" >}}
 
 The trace view shows the spans of one trace as a Gantt chart. Selecting a span shows its details in a side panel. Other views of the same trace show it as a graph, a flame graph, a statistics table or JSON.
 
@@ -51,7 +51,7 @@ Jaeger UI supports two types of service graphs: **System Architecture** and **De
 
 ### System Architecture
 
-{{< screenshot src="/img/frontend-ui/system-architecture.png" alt="The System Architecture graph with the services of the HotROD demo application" >}}
+{{< screenshot src="/img/frontend-ui/v2.23/system-architecture.png" alt="The System Architecture graph with the services of the HotROD demo application" >}}
 
 The "classic" service dependency graph for all services observed in the architecture. The graph represents only one-hop dependencies between services, similar to what one could get from telemetry produced by service meshes. For example, a graph `A - B - C` means that there are some traces that contain network calls between `A` and `B`, and some traces with calls between `B` and `C`. However, it does not mean there are any traces that contain the full chain `A - B - C`, i.e. we cannot say that `A` depends on `C`.
 
@@ -61,7 +61,7 @@ The System Architecture graph can be built on the fly from in-memory storage, or
 
 ### Deep Dependency Graph
 
-{{< screenshot src="/img/frontend-ui/deep-dependency-graph.png" alt="The Deep Dependency Graph for the frontend service of the HotROD demo application" >}}
+{{< screenshot src="/img/frontend-ui/v2.23/deep-dependency-graph.png" alt="The Deep Dependency Graph for the frontend service of the HotROD demo application" >}}
 
 Also known as "Transitive Dependency Graph", where a chain `A -> B -> C` means that `A` has a transitive dependency on `C`. A single graph requires a "focal" service (shown in pink) and only displays the paths passing through that service. Typically, this type of graph does not represent the full architecture of the system, unless there is a service that is connected to everything, e.g. an API gateway, and it is selected as a focal service.
 
@@ -71,7 +71,7 @@ At this time the transitive graph can only be constructed from traces in the sea
 
 ## Service Performance Monitoring (SPM)
 
-{{< screenshot src="/img/frontend-ui/spm.png" alt="The Monitor tab, with request rate, error rate and latency charts for one service" >}}
+{{< screenshot src="/img/frontend-ui/v2.23/spm.png" alt="The Monitor tab, with request rate, error rate and latency charts for one service" >}}
 
 SPM allows monitoring and investigating trends in the performance of the services by computing aggregate metrics from traces and visualizing them as time series charts. It is a powerful tool to identify and investigate performance issues,
 
@@ -79,7 +79,7 @@ See [Service Performance Monitoring (SPM)](../architecture/spm/) for more detail
 
 ## AI Assistant and MCP Server
 
-{{< screenshot src="/img/frontend-ui/ai-assistant.png" alt="The Ask Jaeger panel open next to the search results, with the tools the agent called and its answer" >}}
+{{< screenshot src="/img/frontend-ui/v2.23/ai-assistant.png" alt="The Ask Jaeger panel open next to the search results, with the tools the agent called and its answer" >}}
 
 Jaeger supports AI capabilities in two ways. It exposes an [MCP](https://modelcontextprotocol.io/) server to external AI agents, with a set of tools shaped so that an agent narrows down to the suspicious spans without loading a whole trace into its context. And it accepts AI chat clients over the [AG-UI](https://docs.ag-ui.com/) protocol, relaying each conversation to an agent that the operator runs, which answers with the same tools. The built-in AI Assistant chat interface in the Jaeger UI is one such client. Jaeger ships no agent and no model provider.
 
@@ -87,13 +87,13 @@ See [AI Assistant and MCP Server](../ai/) for more details.
 
 ### GenAI Traces
 
-{{< screenshot src="/img/frontend-ui/genai-trace.png" alt="A trace of one AI Assistant turn in the GenAI view, with the arguments and result of a tool call in the span details" >}}
+{{< screenshot src="/img/frontend-ui/v2.23/genai-trace.png" alt="A trace of one AI Assistant turn in the GenAI view, with the arguments and result of a tool call in the span details" >}}
 
 Jaeger UI recognizes spans that follow the [OpenTelemetry semantic conventions for generative AI](https://opentelemetry.io/docs/specs/semconv/gen-ai/). Agent and tool-call spans get their own icons in the timeline, and the span details show the tool's arguments and result in a GenAI tab. The trace above is one AI Assistant turn: the chat request and the tool calls the agent made.
 
 ## Embedding and Grafana Plugin
 
-{{< screenshot src="/img/frontend-ui/grafana-embedded.png" alt="A Grafana dashboard with Jaeger UI in its panels, showing a trace without Jaeger's own navigation bar" >}}
+{{< screenshot src="/img/frontend-ui/v2.23/grafana-embedded.png" alt="A Grafana dashboard with Jaeger UI in its panels, showing a trace without Jaeger's own navigation bar" >}}
 
 Jaeger UI has an [embedded mode](../deployment/frontend-ui/#embedded-mode) that drops its navigation so that it fits inside another application. The [Jaeger plugin for Grafana](https://github.com/jaegertracing/grafana-plugin) uses it to show trace search and trace views in dashboard panels.
 

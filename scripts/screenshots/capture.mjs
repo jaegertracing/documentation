@@ -1,4 +1,4 @@
-// This script captures the Jaeger UI screenshots under static/img/frontend-ui/
+// This script captures the Jaeger UI screenshots under static/img/frontend-ui/v2.23/
 // in a light and a dark variant each, from Jaeger instances that run locally.
 // README.md in this directory says which stack serves which capture and how to
 // start it. Run it from the repository root, with the names of the captures
@@ -14,7 +14,7 @@ import { chromium } from '@playwright/test';
 
 const base = process.env.JAEGER_URL ?? 'http://localhost:16686';
 const grafana = process.env.GRAFANA_URL ?? 'http://localhost:3000';
-const outDir = 'static/img/frontend-ui';
+const outDir = 'static/img/frontend-ui/v2.23';
 const viewport = { width: 1600, height: 1000 };
 const resultsReady = 'text=/\\d+ traces? \\(in/';
 

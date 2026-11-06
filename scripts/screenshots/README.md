@@ -1,7 +1,11 @@
 # UI screenshots
 
-The screenshots under `static/img/frontend-ui/` show the Jaeger UI on the
-Features page and on a few other pages. Each view exists as a light capture
+The screenshots under `static/img/frontend-ui/v2.23/` show the Jaeger UI on the
+Features page and on a few other pages. The directory is named after the Jaeger
+version the captures were taken from. A new set for a later version goes into a
+sibling directory, so that the pages of older versions keep the images they
+were written against. The files directly under `static/img/frontend-ui/` are
+older captures that those pages still reference. Each view exists as a light capture
 (`<name>.png`) and a dark capture (`<name>-dark.png`); the `screenshot`
 shortcode in `layouts/_shortcodes/screenshot.html` emits both, and the
 stylesheet shows the one that matches the site's color mode.
