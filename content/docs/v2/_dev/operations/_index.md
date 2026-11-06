@@ -1,6 +1,7 @@
 ---
 title: Operations
 weight: 6
+no_list: false
 children:
 - title: Monitoring
   url: monitoring

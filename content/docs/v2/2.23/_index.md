@@ -9,7 +9,7 @@ children:
   url: features
 sidebar_root_for: self
 aliases: [next-release-v2]
-cascade: { robots: true }
+cascade: { robots: true, no_list: true }
 ---
 
 Welcome to Jaeger's documentation! Below, you'll find information for beginners and experienced Jaeger users. If you cannot find what you are looking for, or have an issue not covered here, we'd love to [hear from you](/get-in-touch/).
@@ -25,7 +25,7 @@ With Jaeger you can:
 * Track down root causes
 * Analyze service dependencies
 
-Jaeger v2, [released in November 2024](https://medium.com/jaegertracing/jaeger-v2-released-09a6033d1b10), is built on the OpenTelemetry Collector framework; the [migration guide](./external-guides/migration/) covers the move from Jaeger v1.
+Jaeger v2, [released in November 2024](https://medium.com/jaegertracing/jaeger-v2-released-09a6033d1b10), is built on the OpenTelemetry Collector framework. The [migration guide](./external-guides/migration/) covers the move from Jaeger v1.
 
 ### Where to Go Next
 
