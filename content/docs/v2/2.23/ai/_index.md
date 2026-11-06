@@ -1,6 +1,6 @@
 ---
 title: AI Assistant and MCP Server
-description: An agent that investigates traces for you in the UI, and an MCP server that gives your own agents the same tools.
+description: How Jaeger works with AI agents, inside the UI and from your own tools.
 linkTitle: AI
 weight: 7
 children:
