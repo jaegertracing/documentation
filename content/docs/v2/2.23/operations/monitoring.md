@@ -1,6 +1,6 @@
 ---
 title: Monitoring Jaeger
-navtitle: Monitoring
+linkTitle: Monitoring
 description: Metrics, logs and traces that Jaeger emits about itself
 aliases: [../monitoring]
 hasparent: true

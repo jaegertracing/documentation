@@ -1,6 +1,6 @@
 ---
 title: Frontend/UI Configuration
-navtitle: Frontend/UI
+linkTitle: Frontend/UI
 aliases: [../frontend-ui]
 hasparent: true
 weight: 7
