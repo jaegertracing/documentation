@@ -1,6 +1,6 @@
 ---
 title: AI Assistant
-description: The chat panel in the UI and the gateway that connects it to an agent of your choice.
+description: A bring-your-own-agent framework. Jaeger relays chat turns from the UI to the agent of your choice and hands it the MCP tools to investigate with.
 hasparent: true
 weight: 1
 ---
