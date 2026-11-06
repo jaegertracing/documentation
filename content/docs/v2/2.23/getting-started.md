@@ -58,7 +58,6 @@ for free.
 We recommend running Jaeger and HotROD together via `docker compose`:
 
 ```bash
-export JAEGER_VERSION={{< currentVersion >}}
 git clone https://github.com/jaegertracing/jaeger.git jaeger
 cd jaeger/examples/hotrod
 docker compose up
