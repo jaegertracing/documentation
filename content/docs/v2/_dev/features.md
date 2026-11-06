@@ -88,7 +88,7 @@ Jaeger supports AI capabilities in two ways. It exposes an [MCP](https://modelco
 
 See [AI Assistant and MCP Server](../ai/) for more details.
 
-### GenAI Traces
+### GenAI Trace View
 
 {{< screenshot src="/img/frontend-ui/genai-trace.png" alt="A trace of one AI Assistant turn in the GenAI view, with the arguments and result of a tool call in the span details" >}}
 
