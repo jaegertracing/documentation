@@ -60,7 +60,7 @@ See [Features](./features/) page for more details.
 
 The Jaeger and [OpenTelemetry](https://opentelemetry.io) projects have different goals. OpenTelemetry aims to provide APIs and SDKs in multiple languages to allow applications to export various telemetry data out of the process, to any number of metrics and tracing backends. The Jaeger project is primarily the tracing backend that receives tracing telemetry data and provides processing, aggregation, data mining, and visualizations of that data. For more information please refer to a blog post [Jaeger and OpenTelemetry](https://medium.com/jaegertracing/jaeger-and-opentelemetry-1846f701d9f2).
 
-Jaeger was originally designed to support the [OpenTracing standard](https://opentracing.io/specification/). Its concepts map directly to the OpenTelemetry data model of traces, and Jaeger UI uses the OpenTelemetry terms.
+Jaeger was originally designed to support the [OpenTracing standard](https://opentracing.io/specification/). Its concepts map directly to the OpenTelemetry data model of traces, and Jaeger UI uses the OpenTelemetry terms in the trace view.
 
 | Capability    | OpenTracing concept | OpenTelemetry concept |
 | ------------- | ------------------- | --------------------- |

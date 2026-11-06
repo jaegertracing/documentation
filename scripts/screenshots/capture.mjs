@@ -7,8 +7,9 @@
 //   node scripts/screenshots/capture.mjs search-results trace-timeline
 //
 // Environment: JAEGER_URL (default http://localhost:16686), TRACE_ID for the
-// trace-timeline capture, GENAI_TRACE_ID for the genai-trace capture,
-// GRAFANA_URL (default http://localhost:3000) for the grafana-embedded capture.
+// trace-timeline and grafana-embedded captures, GENAI_TRACE_ID for the
+// genai-trace capture, GRAFANA_URL (default http://localhost:3000) for the
+// grafana-embedded capture.
 import { chromium } from '@playwright/test';
 
 const base = process.env.JAEGER_URL ?? 'http://localhost:16686';

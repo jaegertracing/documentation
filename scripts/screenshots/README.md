@@ -22,9 +22,10 @@ node scripts/screenshots/capture.mjs <capture> [<capture> ...]
 
 ## Stacks and captures
 
-The captures use the HotROD demo application as the traced system, so the
-service names in the images are the familiar `frontend`, `customer`, `driver`,
-`route`, `mysql` and `redis-manual`.
+The Goose and Grafana stacks trace the HotROD demo application, so the
+service names in those images are the familiar `frontend`, `customer`,
+`driver`, `route`, `mysql` and `redis-manual`. The SPM stack traces microsim,
+whose topology imitates HotROD.
 
 ### Goose stack: search, trace, graphs, assistant
 

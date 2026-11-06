@@ -89,11 +89,11 @@ See [AI Assistant and MCP Server](../ai/) for more details.
 
 {{< screenshot src="/img/frontend-ui/genai-trace.png" alt="A trace of one AI Assistant turn in the GenAI view, with the arguments and result of a tool call in the span details" >}}
 
-Jaeger UI recognizes spans that follow the [OpenTelemetry semantic conventions for generative AI](https://opentelemetry.io/docs/specs/semconv/gen-ai/). Agent and tool-call spans get their own icons in the timeline, and the span details show the tool's arguments and result in a GenAI tab. The trace above is Jaeger's own trace of one AI Assistant turn.
+Jaeger UI recognizes spans that follow the [OpenTelemetry semantic conventions for generative AI](https://opentelemetry.io/docs/specs/semconv/gen-ai/). Agent and tool-call spans get their own icons in the timeline, and the span details show the tool's arguments and result in a GenAI tab. The trace above is one AI Assistant turn: the chat request and the tool calls the agent made.
 
 ## Embedding and Grafana Plugin
 
-{{< screenshot src="/img/frontend-ui/grafana-embedded.png" alt="A Grafana dashboard panel showing Jaeger UI in embedded mode, without its own navigation bar" >}}
+{{< screenshot src="/img/frontend-ui/grafana-embedded.png" alt="A Grafana dashboard with Jaeger UI in its panels, showing a trace without Jaeger's own navigation bar" >}}
 
 Jaeger UI has an [embedded mode](../deployment/frontend-ui/#embedded-mode) that drops its navigation so that it fits inside another application. The [Jaeger plugin for Grafana](https://github.com/jaegertracing/grafana-plugin) uses it to show trace search and trace views in dashboard panels.
 
