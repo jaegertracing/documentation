@@ -75,3 +75,5 @@ In order to display service dependency diagrams, production deployments need an 
 [model.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/model.proto
 [thriftrw]: https://www.npmjs.com/package/thriftrw
 [otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md
+
+## Where to Go Next

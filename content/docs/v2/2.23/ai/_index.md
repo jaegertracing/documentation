@@ -66,3 +66,5 @@ field is explained on the page that the row links to.
 
 The query extension's `header_forwarding` list, outside the `ai` block, also
 reaches the agent; the [security page](../deployment/security/) describes it.
+
+## Where to Go Next

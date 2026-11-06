@@ -149,3 +149,5 @@ You can build a [custom Jaeger distribution](../deployment/custom-distribution/)
 [jaegerquery]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerquery
 [adaptivesampling]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/processors/adaptivesampling
 [remotesampling]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/remotesampling
+
+## Where to Go Next

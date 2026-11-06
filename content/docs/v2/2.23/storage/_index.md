@@ -73,3 +73,5 @@ Note that the archive storage does not have to be of the same type as the primar
       traces: some_store
       traces_archive: another_store
 ```
+
+## Where to Go Next
