@@ -1,6 +1,6 @@
 ---
 title: AI Assistant and MCP Server
-description: Natural-language access to traces from the UI and from AI agents.
+description: An agent that investigates traces for you in the UI, and an MCP server that gives your own agents the same tools.
 linkTitle: AI
 weight: 7
 children:
