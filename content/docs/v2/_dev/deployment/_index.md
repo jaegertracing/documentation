@@ -11,7 +11,7 @@ children:
   url: kubernetes
 - title: On Windows
   url: windows
-- title: Delivery Guarantees
+- title: Span Durability
   url: delivery-guarantees
 - title: Security
   url: security

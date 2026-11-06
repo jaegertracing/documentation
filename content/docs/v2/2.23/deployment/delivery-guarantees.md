@@ -1,5 +1,5 @@
 ---
-title: Delivery Guarantees
+title: Span Durability
 hasparent: true
 ---
 
