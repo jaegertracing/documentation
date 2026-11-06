@@ -27,6 +27,10 @@ With Jaeger you can:
 
 Jaeger v2, [released in November 2024](https://medium.com/jaegertracing/jaeger-v2-released-09a6033d1b10), is built on the OpenTelemetry Collector framework. The [migration guide](./external-guides/migration/) covers the move from Jaeger v1.
 
+### Relationship with OpenTelemetry
+
+The Jaeger and [OpenTelemetry](https://opentelemetry.io) projects have different goals. OpenTelemetry provides APIs and SDKs in many languages that let applications export telemetry to any number of metrics and tracing backends. Jaeger is such a backend: it receives tracing telemetry and provides processing, aggregation, data mining and visualization of that data. The blog post [Jaeger and OpenTelemetry](https://medium.com/jaegertracing/jaeger-and-opentelemetry-1846f701d9f2) explains the relationship in more detail, and the [Features](./features/#opentelemetry) page describes how Jaeger works with OpenTelemetry data.
+
 ### Learn More
 
 If you are new to distributed tracing, we recommend the following external resources:
