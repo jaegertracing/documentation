@@ -5,10 +5,10 @@ aliases: [../terminology]
 hasparent: true
 ---
 
-Jaeger uses the [OpenTelemetry trace data model](https://opentelemetry.io/docs/concepts/signals/traces/): it receives spans over OTLP and the UI shows them with OpenTelemetry names. Jaeger's own formats, which predate OpenTelemetry, still appear in the [v1 query API](../apis/), the Thrift and Protobuf definitions in [jaeger-idl](https://github.com/jaegertracing/jaeger-idl) and the storage schemas, and they use different names for some of the same concepts:
+Jaeger uses the [OpenTelemetry trace data model](https://opentelemetry.io/docs/concepts/signals/traces/): it receives spans over OTLP and the UI shows them with OpenTelemetry names. Jaeger's own formats, which predate OpenTelemetry, still appear in the legacy `api_v2` gRPC [query service](../apis/#query-protobuf-via-grpc), in the Thrift and Protobuf definitions in [jaeger-idl](https://github.com/jaegertracing/jaeger-idl) and in the storage schemas, and they use different names for some of the same concepts:
 
-| OpenTelemetry   | Jaeger v1 API and storage | Notes |
-| --------------- | ------------------------- | ----- |
+| OpenTelemetry   | Legacy Jaeger formats | Notes |
+| --------------- | --------------------- | ----- |
 | Attributes      | Tags                      | Both support typed values, but nested tags are not supported in Jaeger. |
 | Span Events     | Span Logs                 | Point-in-time events on the span recorded in a structured form. |
 | Span Links      | Span References           | A Jaeger Span Reference has a required type, `child-of` or `follows-from`, and always points at an earlier span. An OpenTelemetry Span Link has no type but can carry attributes. |
