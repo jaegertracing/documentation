@@ -1,5 +1,6 @@
 ---
 title: Storage Backends
+description: The databases Jaeger can store traces in.
 weight: 5
 children:
 - title: Memory

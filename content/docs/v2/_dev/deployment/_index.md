@@ -1,5 +1,6 @@
 ---
 title: Deployment
+description: Configuring and running Jaeger in production.
 weight: 4
 children:
 - title: Configuration

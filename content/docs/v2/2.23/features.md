@@ -1,5 +1,6 @@
 ---
 title: Features
+description: What Jaeger does, with screenshots of the UI.
 hasparent: true
 weight: 2
 ---

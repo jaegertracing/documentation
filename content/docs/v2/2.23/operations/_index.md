@@ -1,5 +1,6 @@
 ---
 title: Operations
+description: Monitoring, tuning and troubleshooting a Jaeger installation.
 weight: 6
 no_list: false
 children:

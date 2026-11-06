@@ -9,6 +9,7 @@ children:
   url: features
 sidebar_root_for: self
 aliases: [next-release-v2]
+no_list: false
 cascade: { robots: true, no_list: true }
 ---
 
@@ -27,13 +28,6 @@ With Jaeger you can:
 
 Jaeger v2, [released in November 2024](https://medium.com/jaegertracing/jaeger-v2-released-09a6033d1b10), is built on the OpenTelemetry Collector framework. The [migration guide](./external-guides/migration/) covers the move from Jaeger v1.
 
-### Where to Go Next
-
-* [Getting Started](./getting-started/) runs Jaeger on your machine with a demo application.
-* [Features](./features/) shows what Jaeger does, with screenshots of the UI.
-* [Architecture](./architecture/) explains the components, the data model and sampling.
-* [Deployment](./deployment/) and [Storage Backends](./storage/) cover running Jaeger in production.
-
 ### Learn More
 
 If you are new to distributed tracing, we recommend the following external resources:
@@ -41,3 +35,5 @@ If you are new to distributed tracing, we recommend the following external resou
   * [Take Jaeger for a HotROD ride](https://medium.com/jaegertracing/take-jaeger-for-a-hotrod-ride-233cf43e46c2), a step-by-step tutorial that demonstrates how to use Jaeger to solve application performance problems.
   * [Introducing Jaeger](https://www.shkuro.com/talks/2018-01-16-introducing-jaeger-1.0/), an (old) webinar that introduces Jaeger and its capabilities.
   * [Evolving Distributed Tracing at Uber](https://eng.uber.com/distributed-tracing/), a blog post that explains the history and reasons for the architectural choices made in Jaeger.
+
+## Where to Go Next

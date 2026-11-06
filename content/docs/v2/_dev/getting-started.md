@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Run Jaeger on your machine with a demo application.
 hasparent: true
 weight: 1
 ---
