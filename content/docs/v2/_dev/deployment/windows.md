@@ -1,5 +1,6 @@
 ---
 title: Windows Service Deployment
+linkTitle: Run on Windows
 aliases: [../windows]
 hasparent: true
 widescreen: true
