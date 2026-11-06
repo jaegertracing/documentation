@@ -1,6 +1,6 @@
 ---
 title: AI Assistant
-description: A bring-your-own-agent framework. Jaeger relays chat turns from the UI to the agent of your choice and hands it the MCP tools to investigate with.
+description: A bring-your-own-agent framework that investigates traces from the Jaeger UI.
 hasparent: true
 weight: 1
 ---
