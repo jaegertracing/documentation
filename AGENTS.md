@@ -39,7 +39,8 @@ efficiently:
 - `layouts/` - Custom Hugo layouts
 - `data/` - Data files used by Hugo (including `refcache.json` for link
   checking)
-- `scripts/` - Utility scripts
+- `scripts/` - Utility scripts. `scripts/screenshots/README.md` says how the UI
+  screenshots under `static/img/frontend-ui/` are taken and refreshed.
 
 ### Build and Deployment
 
