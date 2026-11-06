@@ -14,12 +14,7 @@ Jaeger backend is distributed as a container image or a raw binary, available fo
 
 ##  OpenTelemetry
 
-Jaeger backend and Web UI have been designed from ground up to support the OpenTracing standard.
-
-* Represent traces as directed acyclic graphs (not just trees) via [span references](https://github.com/opentracing/specification/blob/master/specification.md#references-between-spans)
-* Support strongly typed span _tags_ and _structured logs_
-
-Jaeger can receive trace data in the standard [OpenTelemetry Protocol (OTLP)](https://opentelemetry.io/docs/specs/otel/protocol/). However, the internal data representation and the UI still follow the OpenTracing specification's model.
+Jaeger receives trace data in the standard [OpenTelemetry Protocol (OTLP)](https://opentelemetry.io/docs/specs/otel/protocol/), and the Web UI presents it in OpenTelemetry terms. Traces are directed acyclic graphs, not just trees, through [span links](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/api.md#span), and spans carry strongly typed _attributes_ and structured _events_.
 
 ## Multiple storage backends
 

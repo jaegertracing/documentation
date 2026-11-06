@@ -41,7 +41,6 @@ Please refer to [Migration guide](./external-guides/migration/) for details on m
 
 ## Features
 
-  * [OpenTracing](https://opentracing.io/)-inspired data model
   * [OpenTelemetry](https://opentelemetry.io/) compatible
   * Multiple built-in storage backends:
     * [Elasticsearch](./storage/elasticsearch/) and [OpenSearch](./storage/opensearch/)
