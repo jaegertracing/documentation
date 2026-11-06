@@ -36,7 +36,7 @@ Jaeger Web UI is implemented in Javascript as a React application. Several perfo
 
 ### Trace View
 
-{{< screenshot src="/img/frontend-ui/trace-timeline.png" alt="The trace timeline, with the tags, process and logs of the selected span in a side panel" >}}
+{{< screenshot src="/img/frontend-ui/trace-timeline.png" alt="The trace timeline, with the attributes, resource and events of the selected span in a side panel" >}}
 
 The trace view shows the spans of one trace as a Gantt chart. Selecting a span shows its details in a side panel. Other views of the same trace show it as a graph, a flame graph, a statistics table or JSON.
 

@@ -17,7 +17,7 @@ Jaeger on port 16686.
 ```bash
 npm install
 npx playwright install chromium
-node scripts/screenshots/capture.mjs <capture> [<capture> ...]   # all captures when no name is given
+node scripts/screenshots/capture.mjs <capture> [<capture> ...]
 ```
 
 ## Stacks and captures
@@ -29,13 +29,16 @@ service names in the images are the familiar `frontend`, `customer`, `driver`,
 ### Goose stack: search, trace, graphs, assistant
 
 `scripts/ai-sidecar/goose/run.sh` in the `jaeger` repository starts Jaeger
-built from that working tree, with the AI assistant backed by Goose and a model
-from OpenRouter (`OPENROUTER_API_KEY` or `SECRET_RESOLVER_CMD` must be set; see
-the script's header). It sends traces from microsim, whose traces all root at
+with the AI assistant backed by Goose and a model from OpenRouter
+(`OPENROUTER_API_KEY` or `SECRET_RESOLVER_CMD` must be set; see the script's
+header). With `--release` it runs the released Jaeger image, which is what the
+captures of the released UI should show; without it, it runs a build of that
+working tree, which the `genai-trace` capture needs, because the released image
+does not yet trace its own assistant turns. It sends traces from microsim, whose traces all root at
 `test-executor: runTest` and carry errors, so HotROD replaces it:
 
 ```bash
-./scripts/ai-sidecar/goose/run.sh                  # from the jaeger repository
+./scripts/ai-sidecar/goose/run.sh --release        # from the jaeger repository; without --release for genai-trace
 docker stop goose-microsim-1
 docker restart goose-jaeger-1                      # empties the in-memory store
 docker run -d --rm --name hotrod --network goose_default \

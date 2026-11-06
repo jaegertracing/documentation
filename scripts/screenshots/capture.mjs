@@ -2,7 +2,7 @@
 // in a light and a dark variant each, from Jaeger instances that run locally.
 // README.md in this directory says which stack serves which capture and how to
 // start it. Run it from the repository root, with the names of the captures
-// to take (all of them when none is given):
+// to take; the captures need different stacks, so there is no "all":
 //
 //   node scripts/screenshots/capture.mjs search-results trace-timeline
 //
@@ -154,10 +154,11 @@ async function capture(browser, name, theme) {
 }
 
 const names = process.argv.slice(2);
+if (!names.length) throw new Error(`name the captures to take: ${Object.keys(captures).join(', ')}`);
 const unknown = names.filter((n) => !captures[n]);
 if (unknown.length) throw new Error(`unknown captures: ${unknown.join(', ')}`);
 const browser = await chromium.launch();
-for (const name of names.length ? names : Object.keys(captures)) {
+for (const name of names) {
   for (const theme of ['light', 'dark']) await capture(browser, name, theme);
 }
 await browser.close();
