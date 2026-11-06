@@ -1,6 +1,6 @@
 ---
 title: Performance Tuning Guide
-navtitle: Perf Tuning
+linkTitle: Performance Tuning
 description: Tweaking your Jaeger instance to achieve a better performance
 aliases: [../performance-tuning]
 hasparent: true
