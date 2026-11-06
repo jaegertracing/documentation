@@ -1,5 +1,5 @@
 ---
-title: Windows Service Deployment
+title: Running Jaeger as a Windows Service
 linkTitle: Run on Windows
 aliases: [../windows]
 hasparent: true
