@@ -1,5 +1,6 @@
 ---
 title: Migration
+description: Moving a Jaeger v1 deployment to Jaeger v2.
 aliases: [../migration]
 hasparent: true
 ---

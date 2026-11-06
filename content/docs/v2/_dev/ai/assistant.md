@@ -1,5 +1,6 @@
 ---
 title: AI Assistant
+description: The chat panel in the UI and the gateway that connects it to an agent of your choice.
 hasparent: true
 weight: 1
 ---

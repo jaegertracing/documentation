@@ -1,5 +1,6 @@
 ---
 title: Data Durability
+description: When a span counts as stored, and how to configure the pipeline so that none are lost.
 hasparent: true
 ---
 

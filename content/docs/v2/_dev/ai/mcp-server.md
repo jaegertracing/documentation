@@ -1,5 +1,6 @@
 ---
 title: MCP Server
+description: Jaeger's trace analysis tools served over the Model Context Protocol for any MCP client.
 hasparent: true
 weight: 2
 ---

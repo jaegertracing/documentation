@@ -1,5 +1,6 @@
 ---
 title: Terminology
+description: The Jaeger data model and how its terms map to OpenTelemetry.
 aliases: [../terminology]
 hasparent: true
 ---

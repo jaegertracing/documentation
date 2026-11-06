@@ -1,5 +1,6 @@
 ---
 title: Deploying on Kubernetes
+description: Running Jaeger with the OpenTelemetry Operator or the Helm chart.
 linkTitle: Run on Kubernetes
 aliases: [../kubernetes]
 hasparent: true

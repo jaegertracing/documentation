@@ -1,5 +1,6 @@
 ---
 title: APIs
+description: The APIs for sending traces to Jaeger and reading them back, with their compatibility guarantees.
 aliases: [../apis]
 hasparent: true
 ---

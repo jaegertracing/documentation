@@ -1,5 +1,6 @@
 ---
 title: Running Jaeger as a Windows Service
+description: Hosting the Jaeger binaries as Windows services with nssm.
 linkTitle: Run on Windows
 aliases: [../windows]
 hasparent: true

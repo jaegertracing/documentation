@@ -1,5 +1,6 @@
 ---
 title: Configuration
+description: The YAML configuration file, its pipeline and the extensions it declares.
 aliases: [../configuration]
 hasparent: true
 weight: 1

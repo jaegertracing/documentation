@@ -1,5 +1,6 @@
 ---
 title: Frontend/UI Configuration
+description: UI options such as themes, menus, links from spans and the embedded mode.
 linkTitle: Frontend/UI
 aliases: [../frontend-ui]
 hasparent: true

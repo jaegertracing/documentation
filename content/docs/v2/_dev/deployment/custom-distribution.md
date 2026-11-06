@@ -1,5 +1,6 @@
 ---
 title: Custom Distribution
+description: Building a Jaeger binary with your own set of components using the OpenTelemetry Collector Builder.
 ---
 
 Since Jaeger v2 is built on the [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) framework, you can use the [OpenTelemetry Collector Builder (`ocb`)](https://opentelemetry.io/docs/collector/extend/ocb/) to create custom Jaeger distributions that include additional components or exclude unused ones.

@@ -145,9 +145,9 @@ You can build a [custom Jaeger distribution](../deployment/custom-distribution/)
 
 * [Performance Profiler (pprof)](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/pprofextension) - enables Go's `net/http/pprof` endpoint, typically used by developers to collect performance profiles and investigate issues with the collector.
 
+## Where to Go Next
+
 [jaegerstorage]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerstorage
 [jaegerquery]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerquery
 [adaptivesampling]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/processors/adaptivesampling
 [remotesampling]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/remotesampling
-
-## Where to Go Next

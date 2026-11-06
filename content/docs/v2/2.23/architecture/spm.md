@@ -1,5 +1,6 @@
 ---
 title: Service Performance Monitoring (SPM)
+description: Request rate, error rate and latency per service, computed from traces.
 aliases: [../spm]
 hasparent: true
 ---
