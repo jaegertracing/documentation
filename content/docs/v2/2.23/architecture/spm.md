@@ -23,6 +23,7 @@ Potential use cases include:
 ## UI Feature Overview
 
 {{< screenshot src="/img/frontend-ui/spm.png" alt="The Monitor tab, with request rate, error rate and latency charts for one service" >}}
+
 The "Monitor" tab provides a service-level aggregation, as well as an operation-level
 aggregation within the service, of Request rates, Error rates and Durations
 (P95, P75 and P50), also known as RED metrics.

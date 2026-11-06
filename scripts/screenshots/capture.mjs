@@ -54,11 +54,15 @@ const captures = {
       );
     await page.getByRole('button', { name: 'Send' }).click();
     // The Send button stays disabled while the input is empty, so the end of
-    // the answer shows as the panel text no longer changing.
+    // the answer shows as the panel text no longer changing. A turn that fails
+    // shows "Failed <tool>" instead of "Called <tool>" and is reported.
+    const deadline = Date.now() + 180_000;
     let last = '';
     for (let stable = 0; stable < 3; ) {
+      if (Date.now() > deadline) throw new Error('the assistant did not finish within 3 minutes');
       await page.waitForTimeout(2000);
       const text = await panelText(page);
+      if (/Failed jaeger/.test(text)) throw new Error(`a tool call failed:\n${text}`);
       if (text === last && /Called jaeger/.test(text) && text.length > 400) stable += 1;
       else stable = 0;
       last = text;
@@ -113,13 +117,11 @@ function required(name) {
 }
 
 // The side panel for span details is an option in the trace view settings
-// menu, so the menu is opened and the option is clicked unless it is already on.
+// menu. Each capture runs in a fresh browser context, so the option is off
+// and one click turns it on.
 async function enableSidePanel(page) {
   await page.getByRole('button', { name: 'Trace view settings' }).click();
-  const item = page.getByText('Show Span in Sidebar');
-  const row = item.locator('xpath=ancestor::li[1]');
-  if ((await row.innerHTML()).includes('checkmark')) await page.keyboard.press('Escape');
-  else await item.click();
+  await page.getByText('Show Span in Sidebar').click();
   await page.waitForTimeout(500);
 }
 
