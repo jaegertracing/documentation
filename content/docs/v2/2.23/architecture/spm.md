@@ -23,7 +23,7 @@ Potential use cases include:
 
 ## UI Feature Overview
 
-{{< screenshot src="/img/frontend-ui/spm.png" alt="The Monitor tab, with request rate, error rate and latency charts for one service" >}}
+{{< screenshot src="/img/frontend-ui/v2.23/spm.png" alt="The Monitor tab, with request rate, error rate and latency charts for one service" >}}
 
 The "Monitor" tab provides a service-level aggregation, as well as an operation-level
 aggregation within the service, of Request rates, Error rates and Durations

@@ -367,7 +367,7 @@ Starting with version 1.9, Jaeger UI provides an "embedded" layout mode which is
 
 The [Jaeger plugin for Grafana](https://github.com/jaegertracing/grafana-plugin) uses this mode to show Jaeger UI inside a dashboard panel:
 
-{{< screenshot src="/img/frontend-ui/grafana-embedded.png" alt="A Grafana dashboard with Jaeger UI in its panels, showing a trace without Jaeger's own navigation bar" >}}
+{{< screenshot src="/img/frontend-ui/v2.23/grafana-embedded.png" alt="A Grafana dashboard with Jaeger UI in its panels, showing a trace without Jaeger's own navigation bar" >}}
 
 The embedded mode is induced and configured via URL query parameters.
 
