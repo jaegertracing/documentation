@@ -35,6 +35,7 @@ findRESubmatch
 flink
 fluentd
 gantt
+genai
 glvs
 gobin
 gomod

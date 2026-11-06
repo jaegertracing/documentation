@@ -80,6 +80,18 @@ Jaeger supports AI capabilities in two ways. It exposes an [MCP](https://modelco
 
 See [AI Assistant and MCP Server](../ai/) for more details.
 
+### GenAI Traces
+
+{{< screenshot src="/img/frontend-ui/genai-trace.png" alt="A trace of one AI Assistant turn in the GenAI view, with the arguments and result of a tool call in the span details" >}}
+
+Jaeger UI recognizes spans that follow the [OpenTelemetry semantic conventions for generative AI](https://opentelemetry.io/docs/specs/semconv/gen-ai/). Agent and tool-call spans get their own icons in the timeline, and the span details show the tool's arguments and result in a GenAI tab. The trace above is Jaeger's own trace of one AI Assistant turn.
+
+## Embedding and Grafana Plugin
+
+{{< screenshot src="/img/frontend-ui/grafana-embedded.png" alt="A Grafana dashboard panel showing Jaeger UI in embedded mode, without its own navigation bar" >}}
+
+Jaeger UI has an [embedded mode](../deployment/frontend-ui/#embedded-mode) that drops its navigation so that it fits inside another application. The [Jaeger plugin for Grafana](https://github.com/jaegertracing/grafana-plugin) uses it to show trace search and trace views in dashboard panels.
+
 ## Zipkin Compatibility
 
 Although we recommend instrumenting applications with OpenTelemetry, if your organization has already invested in the instrumentation using Zipkin libraries, you do not have to rewrite all that code. Jaeger provides backwards compatibility with Zipkin by accepting spans in Zipkin formats (Thrift, JSON v1/v2 and Protobuf) over HTTP. Switching from a Zipkin backend is just a matter of routing the traffic from Zipkin libraries to the Jaeger backend.
