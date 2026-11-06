@@ -17,7 +17,7 @@ Jaeger backend is distributed as a container image or a raw binary, available fo
 
 The Jaeger and [OpenTelemetry](https://opentelemetry.io) projects have different goals. OpenTelemetry provides APIs and SDKs in many languages that let applications export telemetry to any number of metrics and tracing backends. Jaeger is such a backend: it receives tracing telemetry and provides processing, aggregation, data mining and visualization of that data. The blog post [Jaeger and OpenTelemetry](https://medium.com/jaegertracing/jaeger-and-opentelemetry-1846f701d9f2) explains the relationship in more detail.
 
-Jaeger receives trace data in the standard [OpenTelemetry Protocol (OTLP)](https://opentelemetry.io/docs/specs/otel/protocol/), and the Web UI presents it in OpenTelemetry terms. Traces are directed acyclic graphs, not just trees, through [span links](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/api.md#span), and spans carry strongly typed _attributes_ and structured _events_. The [Terminology](../architecture/terminology/) page maps Jaeger's original names for these concepts to the OpenTelemetry ones.
+Jaeger receives trace data in the standard [OpenTelemetry Protocol (OTLP)](https://opentelemetry.io/docs/specs/otel/protocol/), and the Web UI presents it in OpenTelemetry terms. Traces are directed acyclic graphs, not just trees, through [span links](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/api.md#span), and spans carry strongly typed _attributes_ and structured _events_. The [Terminology](../architecture/terminology/) page maps the OpenTelemetry names to the ones that Jaeger's own v1 API and storage formats use.
 
 ## Multiple storage backends
 
