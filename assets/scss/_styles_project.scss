@@ -67,6 +67,26 @@ html[data-theme-init] * {
   height: 20px;
 }
 
+// The screenshot shortcode emits one image per color mode, and the
+// data-bs-theme attribute that Docsy sets on <html> picks the visible one.
+.screenshot {
+  margin: 1rem 0;
+}
+
+.screenshot--dark {
+  display: none;
+}
+
+[data-bs-theme='dark'] {
+  .screenshot--light {
+    display: none;
+  }
+
+  .screenshot--dark {
+    display: inline;
+  }
+}
+
 .td-content {
   @include set-elt-hover-and-focus(
     $element: 'a',

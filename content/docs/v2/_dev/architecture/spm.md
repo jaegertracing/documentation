@@ -4,8 +4,6 @@ aliases: [../spm]
 hasparent: true
 ---
 
-[![Service Performance Monitoring](/img/frontend-ui/spm.png)](/img/frontend-ui/spm.png)
-
 Surfaced in Jaeger UI as the "Monitor" tab, the motivation for this feature is
 to help identify interesting traces (e.g. high QPS, slow or erroneous requests)
 without needing to know the service or operation names up-front.
@@ -24,6 +22,7 @@ Potential use cases include:
 
 ## UI Feature Overview
 
+{{< screenshot src="/img/frontend-ui/spm.png" alt="The Monitor tab, with request rate, error rate and latency charts for one service" >}}
 The "Monitor" tab provides a service-level aggregation, as well as an operation-level
 aggregation within the service, of Request rates, Error rates and Durations
 (P95, P75 and P50), also known as RED metrics.

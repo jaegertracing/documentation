@@ -1,0 +1,8 @@
+{{- /* This shortcode places a screenshot of the Jaeger UI that follows the site's color mode. It takes the light image in "src" and shows "<src>-dark.<ext>" instead when the page is in dark mode; the stylesheet picks the visible one by the data-bs-theme attribute. Each image links to itself at full size. The wrapping div keeps Markdown from folding the images into a paragraph. */ -}}
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" -}}
+{{- $dark := replaceRE `\.([a-z]+)$` "-dark.$1" $src -}}
+<div class="screenshot">
+<a class="screenshot--light" href="{{ $src }}"><img src="{{ $src }}" alt="{{ $alt }}"></a>
+<a class="screenshot--dark" href="{{ $dark }}"><img src="{{ $dark }}" alt="{{ $alt }}"></a>
+</div>

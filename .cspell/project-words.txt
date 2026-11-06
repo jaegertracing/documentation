@@ -34,11 +34,13 @@ fargate
 findRESubmatch
 flink
 fluentd
+gantt
 glvs
 gobin
 gomod
 gopath
 goroutines
+grafana
 Hashicorp
 hasparent
 healthcheck
