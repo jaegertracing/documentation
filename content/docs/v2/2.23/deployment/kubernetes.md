@@ -1,5 +1,6 @@
 ---
 title: Deploying on Kubernetes
+linkTitle: Run on Kubernetes
 aliases: [../kubernetes]
 hasparent: true
 ---
