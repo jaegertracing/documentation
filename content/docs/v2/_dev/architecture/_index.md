@@ -1,5 +1,6 @@
 ---
 title: Architecture
+description: The components, the data model and sampling.
 weight: 3
 children:
 - title: APIs
@@ -143,6 +144,8 @@ You can build a [custom Jaeger distribution](../deployment/custom-distribution/)
 * [zPages](https://github.com/open-telemetry/opentelemetry-collector/tree/main/extension/zpagesextension) - Exposes internal state of the collector for debugging.
 
 * [Performance Profiler (pprof)](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/pprofextension) - enables Go's `net/http/pprof` endpoint, typically used by developers to collect performance profiles and investigate issues with the collector.
+
+## Where to Go Next
 
 [jaegerstorage]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerstorage
 [jaegerquery]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerquery

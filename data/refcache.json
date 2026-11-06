@@ -319,6 +319,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:03:07.410377-05:00"
   },
+  "https://github.com/jaegertracing/grafana-plugin": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-06T17:14:44.477725-05:00"
+  },
   "https://github.com/jaegertracing/helm-charts/tree/main/charts/jaeger": {
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:03:50.656768-05:00"
@@ -2011,6 +2015,10 @@
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:07:39.237116-05:00"
   },
+  "https://github.com/jaegertracing/jaeger/issues/9155": {
+    "StatusCode": 206,
+    "LastSeen": "2026-11-06T17:14:45.357121-05:00"
+  },
   "https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244": {
     "StatusCode": 206,
     "LastSeen": "2026-11-05T12:04:56.145393-05:00"
@@ -3294,6 +3302,10 @@
   "https://opentelemetry.io/docs/specs/otel/protocol/": {
     "StatusCode": 200,
     "LastSeen": "2026-11-05T12:03:50.80756-05:00"
+  },
+  "https://opentelemetry.io/docs/specs/semconv/gen-ai/": {
+    "StatusCode": 200,
+    "LastSeen": "2026-11-06T17:14:44.001361-05:00"
   },
   "https://opentracing.io/": {
     "StatusCode": 206,

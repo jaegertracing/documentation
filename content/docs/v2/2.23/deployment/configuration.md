@@ -1,5 +1,6 @@
 ---
 title: Configuration
+description: The YAML configuration file, its pipeline and the extensions it declares.
 aliases: [../configuration]
 hasparent: true
 weight: 1
@@ -178,13 +179,13 @@ jaeger_storage_exporter:
     queue_size: 100
 ```
 
-A `queue` configured like this acknowledges spans as soon as they are enqueued, before the storage has written them. When the pipeline must not lose spans, the queue needs `wait_for_result: true` and the pipeline must not use the `batch` processor; see [Delivery Guarantees](../delivery-guarantees/).
+A `queue` configured like this acknowledges spans as soon as they are enqueued, before the storage has written them. When the pipeline must not lose spans, the queue needs `wait_for_result: true` and the pipeline must not use the `batch` processor; see [Data Durability](../delivery-guarantees/).
 
 ## Connectors
 
 ### Jaeger storage
 
-`jaeger_storage_exporter` can also be declared under `connectors:`. The collector then builds it as a traces-to-traces connector that writes spans to the storage backend exactly as the exporter does, and re-emits the spans the storage rejected terminally onto its output pipeline, so that any standard exporter can serve as a dead-letter sink. It accepts the exporter's `trace_storage`, `queue`, and `retry_on_failure` settings; an enabled `queue` must set `wait_for_result: true`. See [Delivery Guarantees](../delivery-guarantees/#dead-letter-pipeline-for-rejected-spans) for the pipeline shape and the [connector README](https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/internal/exporters/storageexporter/README.md) for the configuration reference.
+`jaeger_storage_exporter` can also be declared under `connectors:`. The collector then builds it as a traces-to-traces connector that writes spans to the storage backend exactly as the exporter does, and re-emits the spans the storage rejected terminally onto its output pipeline, so that any standard exporter can serve as a dead-letter sink. It accepts the exporter's `trace_storage`, `queue`, and `retry_on_failure` settings; an enabled `queue` must set `wait_for_result: true`. See [Data Durability](../delivery-guarantees/#dead-letter-pipeline-for-rejected-spans) for the pipeline shape and the [connector README](https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/internal/exporters/storageexporter/README.md) for the configuration reference.
 
 ```yaml
 connectors:

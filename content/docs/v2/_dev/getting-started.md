@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Run Jaeger on your machine with a demo application.
 hasparent: true
 weight: 1
 ---
@@ -57,7 +58,6 @@ for free.
 We recommend running Jaeger and HotROD together via `docker compose`:
 
 ```bash
-export JAEGER_VERSION=2.7.0 #Pick the newest version
 git clone https://github.com/jaegertracing/jaeger.git jaeger
 cd jaeger/examples/hotrod
 docker compose up

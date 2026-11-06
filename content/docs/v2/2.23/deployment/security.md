@@ -1,5 +1,6 @@
 ---
 title: Securing Jaeger Installation
+description: TLS and authentication for every connection between Jaeger components, clients and AI agents.
 linkTitle: Securing Jaeger
 aliases: [../security]
 hasparent: true

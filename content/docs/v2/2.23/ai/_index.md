@@ -1,5 +1,6 @@
 ---
 title: AI Assistant and MCP Server
+description: How Jaeger works with AI agents, inside the UI and from your own tools.
 linkTitle: AI
 weight: 7
 children:
@@ -65,3 +66,5 @@ field is explained on the page that the row links to.
 
 The query extension's `header_forwarding` list, outside the `ai` block, also
 reaches the agent; the [security page](../deployment/security/) describes it.
+
+## Where to Go Next

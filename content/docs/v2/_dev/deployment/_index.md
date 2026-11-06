@@ -1,5 +1,6 @@
 ---
 title: Deployment
+description: Configuring and running Jaeger in production.
 weight: 4
 children:
 - title: Configuration
@@ -10,7 +11,7 @@ children:
   url: kubernetes
 - title: On Windows
   url: windows
-- title: Delivery Guarantees
+- title: Data Durability
   url: delivery-guarantees
 - title: Security
   url: security
@@ -69,3 +70,5 @@ Service Performance Monitoring (SPM) requires a deployment of Prometheus-compati
 
 In order to display service dependency diagrams, production deployments need an external process that aggregates data and computes dependency links between services. Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives dependency links and writes them directly to the storage.
 
+
+## Where to Go Next

@@ -1,6 +1,5 @@
 ---
 title: Frequently Asked Questions
-navtitle: FAQs
 description: Answers to some frequently asked questions about Jaeger.
 weight: 8
 linkTitle: FAQ
@@ -49,9 +48,10 @@ These are NOT the reasons to run multiple instances:
 
 ## How do I configure authentication for Jaeger UI
 
-Jaeger UI does not support any notion of accounts or roles, so there is no need to authenticate the users. If you need authentication in order to simply restrict who can access Jaeger UI, we recommend running a reverse proxy in front of it, such as HAProxy, NGINX, Keycloak, etc. The advantage of using standard reverse proxies is that they support a wide variety of integrations with various authentication and single sign-on services, something we would never be able to match in Jaeger UI.
+Jaeger UI has no accounts or roles of its own, so authentication only restricts who can reach it. There are two ways to add it:
 
-For example, refer to this blog post for an example of [protecting Jaeger UI with Keycloak](https://medium.com/jaegertracing/protecting-jaeger-ui-with-an-oauth-sidecar-proxy-34205cca4bb1).
+* The query server can run one of the OpenTelemetry Collector server authenticators that Jaeger bundles, such as `basicauth` with an htpasswd file. The `auth` setting on the query HTTP and gRPC listeners protects the UI, the query APIs and the MCP endpoint together. The [Security](../deployment/security/#production-deployment) page shows the configuration, and the `ai.auth` block applies the same shape to the [AI features alone](../deployment/security/#gating-the-ai-surfaces-alone).
+* A reverse proxy in front of the UI, such as NGINX, HAProxy or an OAuth sidecar, integrates with single sign-on providers that Jaeger does not speak itself. The [Browser to UI](../deployment/security/#browser-to-ui) section links to worked examples.
 
 ## Can I run only Jaeger UI if I am already storing data in Elasticsearch/ClickHouse?
 

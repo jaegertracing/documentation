@@ -1,5 +1,6 @@
 ---
 title: Storage Backends
+description: The databases Jaeger can store traces in.
 weight: 5
 children:
 - title: Memory
@@ -72,6 +73,8 @@ Note that the archive storage does not have to be of the same type as the primar
       traces: some_store
       traces_archive: another_store
 ```
+
+## Where to Go Next
 
 [grpc_v2]: https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/grpc
 [config-remote-storage.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-remote-storage.yaml

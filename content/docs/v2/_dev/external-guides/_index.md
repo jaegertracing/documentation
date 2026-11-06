@@ -40,3 +40,5 @@ children:
 ## Troubleshooting
 
 * [Where did all my spans go? A guide to diagnosing dropped spans in Jaeger](https://medium.com/jaegertracing/where-did-all-my-spans-go-a-guide-to-diagnosing-dropped-spans-in-jaeger-10d9697f8182) by Joe Elliott
+
+## Where to Go Next

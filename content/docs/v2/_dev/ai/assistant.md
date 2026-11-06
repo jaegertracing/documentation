@@ -1,5 +1,6 @@
 ---
 title: AI Assistant
+description: A bring-your-own-agent framework that investigates traces from the Jaeger UI.
 hasparent: true
 weight: 1
 ---

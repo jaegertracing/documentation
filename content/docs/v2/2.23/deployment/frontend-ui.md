@@ -1,6 +1,7 @@
 ---
 title: Frontend/UI Configuration
-navtitle: Frontend/UI
+description: UI options such as themes, menus, links from spans and the embedded mode.
+linkTitle: Frontend/UI
 aliases: [../frontend-ui]
 hasparent: true
 weight: 7

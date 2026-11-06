@@ -1,5 +1,6 @@
 ---
 title: Features
+description: What Jaeger does, with screenshots of the UI.
 hasparent: true
 weight: 2
 ---
@@ -14,7 +15,7 @@ Jaeger backend is distributed as a container image or a raw binary, available fo
 
 ##  OpenTelemetry
 
-Jaeger receives trace data in the standard [OpenTelemetry Protocol (OTLP)](https://opentelemetry.io/docs/specs/otel/protocol/), and the Web UI presents it in OpenTelemetry terms. Traces are directed acyclic graphs, not just trees, through [span links](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/api.md#span), and spans carry strongly typed _attributes_ and structured _events_.
+Jaeger receives trace data in the standard [OpenTelemetry Protocol (OTLP)](https://opentelemetry.io/docs/specs/otel/protocol/), and the Web UI presents it in OpenTelemetry terms. Traces are directed acyclic graphs, not just trees, through [span links](https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/trace/api.md#span), and spans carry strongly typed _attributes_ and structured _events_. The [Terminology](../architecture/terminology/) page maps the OpenTelemetry names to the ones that Jaeger's legacy formats use.
 
 ## Multiple storage backends
 
@@ -85,7 +86,7 @@ Jaeger supports AI capabilities in two ways. It exposes an [MCP](https://modelco
 
 See [AI Assistant and MCP Server](../ai/) for more details.
 
-### GenAI Traces
+### GenAI Trace View
 
 {{< screenshot src="/img/frontend-ui/genai-trace.png" alt="A trace of one AI Assistant turn in the GenAI view, with the arguments and result of a tool call in the span details" >}}
 
