@@ -16,7 +16,7 @@ Welcome to Jaeger's documentation! Below, you'll find information for beginners 
 
 ## About
 
-Jaeger is a distributed tracing platform released as open source by [Uber Technologies](http://uber.github.io) in 2016 and donated to [Cloud Native Computing Foundation](https://cncf.io/) where it is a graduated project.
+Jaeger is a distributed tracing platform released as open source by [Uber Technologies](http://uber.github.io) in 2016 and donated to the [Cloud Native Computing Foundation (CNCF)](https://cncf.io/), where it became one of the first graduated projects.
 
 With Jaeger you can:
 
