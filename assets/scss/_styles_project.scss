@@ -69,8 +69,15 @@ html[data-theme-init] * {
 
 // The screenshot shortcode emits one image per color mode, and the
 // data-bs-theme attribute that Docsy sets on <html> picks the visible one.
+// Only the light capture gets a border: its white page blends into the
+// site's background, while the dark capture stands out on its own.
 .screenshot {
   margin: 1rem 0;
+}
+
+.screenshot--light img {
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.25rem;
 }
 
 .screenshot--dark {
