@@ -1,5 +1,5 @@
 ---
-title: Span Durability
+title: Data Durability
 hasparent: true
 ---
 

@@ -45,10 +45,10 @@ elasticsearch:
 |---|---|---|
 | How a batch is written | Spans are appended to a client-side buffer that a background worker flushes to `_bulk` | Each batch the pipeline hands to the storage becomes one blocking `_bulk` request |
 | What the pipeline learns | The write returns before the data is durable. A failed flush is logged and counted, but the pipeline has already moved on | The write returns only after Elasticsearch acknowledged the request, and returns an error if any span was not persisted |
-| Trade-off | Highest throughput and lowest request latency, at the cost of write failures that nobody upstream ever hears about | A write failure is returned to the pipeline, at the cost of one `_bulk` round trip of latency per batch. Whether it reaches the sender depends on the pipeline, see [Delivery Guarantees](../../deployment/delivery-guarantees/) |
+| Trade-off | Highest throughput and lowest request latency, at the cost of write failures that nobody upstream ever hears about | A write failure is returned to the pipeline, at the cost of one `_bulk` round trip of latency per batch. Whether it reaches the sender depends on the pipeline, see [Data Durability](../../deployment/delivery-guarantees/) |
 | `bulk_processing` settings | All apply | Only `max_bytes` applies. A batch larger than it is split into several `_bulk` requests |
 
-Async mode is the default because it costs the least, not because it is the safer choice. Its weakness is that a write failure is invisible upstream: the sender has already been told the spans were accepted, so it has no reason to retry them and no signal to slow down. Sync mode returns the failure to the pipeline instead. What the pipeline has to do with it, for direct OTLP ingest and for the Kafka ingester alike, is described on the [Delivery Guarantees](../../deployment/delivery-guarantees/) page.
+Async mode is the default because it costs the least, not because it is the safer choice. Its weakness is that a write failure is invisible upstream: the sender has already been told the spans were accepted, so it has no reason to retry them and no signal to slow down. Sync mode returns the failure to the pipeline instead. What the pipeline has to do with it, for direct OTLP ingest and for the Kafka ingester alike, is described on the [Data Durability](../../deployment/delivery-guarantees/) page.
 
 ### Idempotent writes
 

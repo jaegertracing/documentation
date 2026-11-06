@@ -60,7 +60,7 @@ You can find more information about topics and partitions in general in the [off
 
 ## At-least-once delivery
 
-With the default ingester configuration the Kafka receiver commits an offset as soon as the pipeline accepts the record, and the pipeline accepts it before the storage has written it, so a backend outage loses spans that Kafka considers delivered. The ingester can instead be configured so that an offset is committed only after the spans it covers are durable. The pipeline half of that configuration, no `batch` processor and an exporter queue with `wait_for_result: true`, is the same for every receiver and is described on the [Delivery Guarantees](../../deployment/delivery-guarantees/#kafka-ingester) page. The Kafka-specific half is:
+With the default ingester configuration the Kafka receiver commits an offset as soon as the pipeline accepts the record, and the pipeline accepts it before the storage has written it, so a backend outage loses spans that Kafka considers delivered. The ingester can instead be configured so that an offset is committed only after the spans it covers are durable. The pipeline half of that configuration, no `batch` processor and an exporter queue with `wait_for_result: true`, is the same for every receiver and is described on the [Data Durability](../../deployment/delivery-guarantees/#kafka-ingester) page. The Kafka-specific half is:
 
 ```yaml
 receivers:
