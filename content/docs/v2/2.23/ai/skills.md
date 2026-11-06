@@ -1,5 +1,6 @@
 ---
 title: Custom Skills
+description: Markdown playbooks that teach an agent how to analyze traces, and how Jaeger serves them.
 hasparent: true
 weight: 3
 ---
