@@ -1,0 +1,8 @@
+{{/* Returns the docs version a page belongs to (2.22, 2.dev, 1.76, ...), taken
+   from its /docs/<version>/ URL, or "" for pages outside the versioned docs.
+   assets/js/search.js (pageVersion) applies the same rule in the browser. */ -}}
+{{ $ver := "" -}}
+{{ with findRESubmatch `^/docs/([^/]+)/` .RelPermalink 1 -}}
+  {{ $ver = index (index . 0) 1 -}}
+{{ end -}}
+{{ return $ver -}}

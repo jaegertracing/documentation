@@ -61,6 +61,10 @@
 
   &.active {
     box-shadow: inset 3px 0 0 var(--bs-primary);
+    // Invisible normally; forced-colors mode (which drops box-shadow and
+    // backgrounds) paints it, so the active option stays visible.
+    outline: 2px solid transparent;
+    outline-offset: -2px;
   }
 }
 
@@ -78,6 +82,7 @@
 .td-search__excerpt {
   font-size: $font-size-sm;
   color: var(--bs-secondary-color);
+  overflow-wrap: anywhere; // long metric names, flag lists, URLs
 }
 
 .td-search__footer {
@@ -137,6 +142,7 @@
 
 .td-search-page__excerpt {
   margin-top: 0.25rem;
+  overflow-wrap: anywhere;
 }
 
 .td-search-page__subresults {
