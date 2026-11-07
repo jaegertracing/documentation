@@ -21,6 +21,7 @@ OpenTelemetry SDKs can be configured to communicate directly with Jaeger Collect
 * {{< check_yes >}} Cassandra - TLS with mTLS (client cert authentication) supported.
 * {{< check_yes >}} Elasticsearch - TLS with mTLS (client cert authentication) supported; bearer token propagation.
 * {{< check_yes >}} Kafka - TLS with various authentication mechanisms supported (mTLS, Kerberos, plaintext).
+  * The ingester writes whatever it reads from the topic into storage, so a client that can produce to the topic can write arbitrary spans into trace storage. Enable an [authorizer](https://kafka.apache.org/documentation/#security_authz) on the brokers and grant the collector's principal produce access to the span topic only, and the ingester's principal consume access to that topic and its consumer group only. The Kafka receiver's consumer group is `otel-collector` unless `group_id` is set. Nothing else should produce to the span topic; a post-processing pipeline consumes from it.
 * {{< check_yes >}} Prometheus (for [SPM](../../architecture/spm/)) - TLS with mTLS (client cert authentication) supported, as long as you've [configured your Prometheus server](https://prometheus.io/docs/guides/tls-encryption/) correctly.
 
 | Storage | TLS | mTLS | Basic | Bearer Token | API Key | Kerberos |
