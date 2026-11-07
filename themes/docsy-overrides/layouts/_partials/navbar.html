@@ -25,6 +25,13 @@ page/section relative version lists. */ -}}
   </a>
   <div class="td-navbar-nav-scroll ms-md-auto" id="main_navbar">
     <ul class="navbar-nav">
+      {{ if site.Params.search.pagefind -}}
+      <li class="nav-item d-lg-none">
+        <a class="nav-link" href="{{ "search/" | relURL }}" aria-label="{{ T "ui_search" }}">
+          {{- /**/ -}}<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>{{- /**/ -}}
+        </a>
+      </li>
+      {{ end -}}
       {{ $p := . -}}
       {{ range .Site.Menus.main -}}
       <li class="nav-item{{ if .HasChildren }} dropdown{{ end }}">

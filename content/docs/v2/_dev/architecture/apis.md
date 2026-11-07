@@ -1,5 +1,6 @@
 ---
 title: APIs
+description: The APIs for sending traces to Jaeger and reading them back, with their compatibility guarantees.
 aliases: [../apis]
 hasparent: true
 ---
@@ -60,9 +61,6 @@ Jaeger can receive trace data from the OpenTelemetry SDKs in their native [OpenT
 
 Only tracing data is accepted, since Jaeger does not store other telemetry types. For more details on the OTLP receiver see the [official documentation][otlp-rcvr].
 
-[otlp-rcvr]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
-[otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md
-
 ### Legacy Protobuf via gRPC
 
 **Status**: Stable, Deprecated
@@ -110,13 +108,15 @@ The recommended way for programmatically retrieving traces and other data is via
 
 **Status**: Stable
 
-This is a JSON/HTTP version (see [OpenAPI][query.openapi] file) of [api_v3/query_service.proto][query.proto] above.
+This is a JSON/HTTP version (see [OpenAPI][query.openapi] file) of [api_v3/query_service.proto][query.proto] above. For example, a trace can be retrieved via a GET request to `https://jaeger-query:16686/api/v3/traces/{trace-id-hex-string}`. Add `prettyPrint=true` to the query string to get indented JSON.
 
 ### Internal HTTP JSON
 
 **Status**: Internal
 
-Jaeger UI communicates with **jaeger-query** Service via JSON API. For example, a trace can be retrieved via a GET request to `https://jaeger-query:16686/api/traces/{trace-id-hex-string}`. This JSON API is intentionally undocumented and subject to change.
+Jaeger UI loads traces through the [API v3 JSON endpoints](#query-json-over-http) above. For other features, such as archiving traces, service dependencies, and performance monitoring, it uses internal JSON endpoints under `/api/`. These endpoints are intentionally undocumented and subject to change.
+
+Starting with Jaeger v2.24, the legacy `GET /api/traces/{trace-id}` and `POST /api/transform` endpoints are removed. Both remain available in v2.23, with no separate deprecation period. Use `GET /api/v3/traces/{trace-id}` to retrieve a trace in OTLP JSON format. Jaeger UI parses uploaded trace files in the browser and no longer needs a server-side conversion endpoint.
 
 ## Remote Storage API
 
@@ -137,7 +137,7 @@ the following services:
   Allows trace data to be pushed to the storage. This service can run on a separate port if needed.
 
 For more information, please refer to
-[jaeger/internal/storage/v2/grpc](https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/grpc).
+[jaeger/internal/storage/v2/grpc][grpc_v2].
 
 ## Remote Sampling Configuration
 
@@ -164,6 +164,13 @@ For programmatic access to the service graph, the recommended API is gRPC/Protob
 
 Please refer to the [SPM Documentation](../spm/#api)
 
+## AI APIs
+
+Both endpoints are served on the query HTTP port and are off until the `ai` block of the `jaeger_query` extension is configured. See [AI Assistant and MCP Server](../../ai/).
+
+* `/api/ai/mcp/` serves Jaeger's telemetry tools over the [Model Context Protocol](https://modelcontextprotocol.io/) with the Streamable HTTP transport.
+* `/api/ai/chat` accepts a chat turn as an [AG-UI](https://docs.ag-ui.com/) request and streams the agent's answer back as server-sent events. The Jaeger UI's chat panel is one client; any AG-UI client can call it.
+
 ## gRPC Server Introspection
 
 Service ports that serve gRPC endpoints enable [gRPC reflection][grpc-reflection]. Unfortunately, the internally used `gogo/protobuf` has a [compatibility issue][gogo-reflection] with the official `golang/protobuf`, and as a result only the `list` reflection command is currently working properly, for example:
@@ -178,6 +185,8 @@ grpc_cli ls localhost:16685
   jaeger.api_v3.QueryService
 ```
 
+[otlp-rcvr]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
+[otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md
 [otlp.grpc]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlpgrpc
 [otlp.http]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlphttp
 [jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift
@@ -187,3 +196,4 @@ grpc_cli ls localhost:16685
 [sampling.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/sampling.proto
 [grpc-reflection]: https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#enable-server-reflection
 [gogo-reflection]: https://jbrandhorst.com/post/gogoproto/#reflection
+[grpc_v2]: https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/grpc

@@ -1,6 +1,7 @@
 ---
 title: Frontend/UI Configuration
-navtitle: Frontend/UI
+description: UI options such as themes, menus, links from spans and the embedded mode.
+linkTitle: Frontend/UI
 aliases: [../frontend-ui]
 hasparent: true
 weight: 7
@@ -181,6 +182,10 @@ Users can toggle between light and dark themes using a button in the top navigat
 }
 ```
 
+### AI Assistant
+
+The "Ask Jaeger" chat panel has no UI configuration. It is enabled when the Jaeger backend advertises the AI capability to the UI, which is configured in the `jaeger_query` extension. See [AI Assistant](../../ai/assistant/).
+
 ### Archive Support
 
 `archiveEnabled` enables (`true`) or disables (`false`) the archive traces button. Default: `false`. It requires a configuration of an archive storage in Query service. Archived traces are only accessible directly by ID, they are not searchable.
@@ -360,6 +365,10 @@ Several options allow disabling specific UI controls, which is useful for embedd
 
 Starting with version 1.9, Jaeger UI provides an "embedded" layout mode which is intended to support integrating Jaeger UI into other applications. Currently (as of `v0`), the approach taken is to remove various UI elements from the page to make the UI better suited for space-constrained layouts.
 
+The [Jaeger plugin for Grafana](https://github.com/jaegertracing/grafana-plugin) uses this mode to show Jaeger UI inside a dashboard panel:
+
+{{< screenshot src="/img/frontend-ui/v2.23/grafana-embedded.png" alt="A Grafana dashboard with Jaeger UI in its panels, showing a trace without Jaeger's own navigation bar" >}}
+
 The embedded mode is induced and configured via URL query parameters.
 
 To enter embedded mode, the `uiEmbed=v0` query parameter and value must be added to the URL. For example, the following URL will show the trace with ID `abc123` in embedded mode:
@@ -395,8 +404,6 @@ http://localhost:16686/search?
     uiEmbed=v0
 ```
 
-[![Embed Search Traces](/img/frontend-ui/embed-search-traces.png)](/img/frontend-ui/embed-search-traces.png)
-
 #### Configuration options
 
 The following query parameter can be used to configure the layout of the search page :
@@ -416,10 +423,7 @@ http://localhost:16686/search?
     uiSearchHideGraph=1
 ```
 
-[![Embed Search Traces without Graph](/img/frontend-ui/embed-search-traces-hide-graph.png)](/img/frontend-ui/embed-search-traces-hide-graph.png)
-
 ### Trace Page
-
 
 To integrate the Trace Page to our application we have to indicate to the Jaeger UI that we want to use the embed mode with `uiEmbed=v0`.
 
@@ -429,11 +433,7 @@ For example:
 http://localhost:16686/trace/{trace-id}?uiEmbed=v0
 ```
 
-[![Embed Trace view](/img/frontend-ui/embed-trace-view.png)](/img/frontend-ui/embed-trace-view.png)
-
 If we have navigated to this view from the search traces page we'll have a button to go back to the results page.
-
-[![Embed Trace view](/img/frontend-ui/embed-trace-view-with-back-button.png)](/img/frontend-ui/embed-trace-view-with-back-button.png)
 
 #### Configuration options
 
@@ -447,8 +447,6 @@ http://localhost:16686/trace/{trace-id}?
     uiTimelineCollapseTitle=1
 ```
 
-[![Embed Trace view](/img/frontend-ui/embed-trace-view-with-collapse.png)](/img/frontend-ui/embed-trace-view-with-collapse.png)
-
 * `uiTimelineHideMinimap=1` removes the minimap, entirely, regardless of whether the trace header is expanded or not.
 
 ```text
@@ -456,8 +454,6 @@ http://localhost:16686/trace/{trace-id}?
     uiEmbed=v0&
     uiTimelineHideMinimap=1
 ```
-
-[![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-minimap.png)](/img/frontend-ui/embed-trace-view-with-hide-minimap.png)
 
 * `uiTimelineHideSummary=1` - removes the trace summary information (number of services, etc.) entirely, regardless of whether the trace header is expanded or not.
 
@@ -467,8 +463,6 @@ http://localhost:16686/trace/{trace-id}?
     uiTimelineHideSummary=1
 ```
 
-[![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-summary.png)](/img/frontend-ui/embed-trace-view-with-hide-summary.png)
-
 We can also combine the options:
 ```text
 http://localhost:16686/trace/{trace-id}?
@@ -477,4 +471,3 @@ http://localhost:16686/trace/{trace-id}?
     uiTimelineHideSummary=1
 ```
 
-[![Embed Trace view](/img/frontend-ui/embed-trace-view-with-hide-details-and-hide-minimap.png)](/img/frontend-ui/embed-trace-view-with-hide-details-and-hide-minimap.png)

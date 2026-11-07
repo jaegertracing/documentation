@@ -40,7 +40,7 @@ extensions:
 
 It is recommended to customize these values to match your needs, for example, for longer retention or higher replication factor.
 
-If `schema.create` is set to `false`, the schema must be initialized manually. There is a script in the [jaeger](https://github.com/jaegertracing/jaeger/blob/v2.3.0/plugin/storage/cassandra/schema/create.sh) repository that generates the initialization instruction that can be executed using Cassandra's interactive shell [cqlsh][cqlsh]:
+If `schema.create` is set to `false`, the schema must be initialized manually. There is a script in the [jaeger](https://github.com/jaegertracing/jaeger/blob/v2.3.0/internal/storage/v1/cassandra/schema/create.sh) repository that generates the initialization instruction that can be executed using Cassandra's interactive shell [cqlsh][cqlsh]:
 
 ```sh
 MODE=test sh ./plugin/storage/cassandra/schema/create.sh | cqlsh
@@ -60,7 +60,7 @@ where `{datacenter}` is the name used in the Cassandra configuration / network t
 The script also allows overriding TTL, keyspace name, replication factor, etc.
 Run the script without arguments to see the full list of recognized parameters.
 
-See [this README](https://github.com/jaegertracing/jaeger/blob/v2.3.0/plugin/storage/cassandra/schema/README.md) for more details on Cassandra schema management.
+See [this README](https://github.com/jaegertracing/jaeger/blob/v2.3.0/internal/storage/v1/cassandra/schema/README.md) for more details on Cassandra schema management.
 
 ## TLS support
 
@@ -95,6 +95,6 @@ usercert = ~/.cassandra/client-cert
 
 ## Compatible Backends
 
-* ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/v2.3.0/plugin/storage/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
+* ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/v2.3.0/docker-compose/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
 
 [cqlsh]: https://cassandra.apache.org/doc/latest/cassandra/managing/tools/cqlsh.html

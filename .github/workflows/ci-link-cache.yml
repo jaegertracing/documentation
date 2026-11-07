@@ -1,0 +1,45 @@
+# This workflow keeps the external-link check in the PR CI green without
+# running it against the live sites on every PR. The PR check reads the
+# refcache (data/refcache.json), which records when each external URL was
+# last seen to be reachable; an entry is trusted until it is 91 days old.
+# This job checks every link in the built site once a week and, when a
+# link is broken, opens or updates a single issue with the list of failed
+# links. When the oldest cache entry is within 14 days of expiry, the job
+# also rechecks every link with an empty cache and opens a PR that refreshes
+# the whole cache, so that all entries never expire together inside a PR
+# run. In the common case nothing is broken and the cache is fresh, and the
+# job changes nothing.
+# cSpell:ignore refcache
+name: Link cache
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Monday 06:00 UTC
+    - cron: '0 6 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  check-links:
+    if: ${{ github.repository == 'jaegertracing/documentation' }}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        # The bot's PAT, so that the refresh PR gets its own CI run.
+        token: ${{ secrets.JAEGERTRACINGBOT_PAT }}
+
+    - uses: actions/setup-node@v7
+      with: { node-version-file: .nvmrc }
+    - run: npm install
+
+    - name: Check links and renew the refcache when it is about to expire
+      run: |
+        git config user.name "jaegertracingbot"
+        git config user.email "jaegertracingbot+jaeger-tracing@googlegroups.com"
+        ./scripts/check-link-cache.sh
+      env:
+        GH_TOKEN: ${{ secrets.JAEGERTRACINGBOT_PAT }}
+        RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

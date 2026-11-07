@@ -18,3 +18,6 @@ bin/
 tmp/
 .idea
 .vscode/
+
+# Playwright
+/test-results

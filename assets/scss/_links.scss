@@ -45,12 +45,28 @@ $nbsp: \00A0;
 .td-sidebar-nav a[target='_blank']:after,
 a.external-link:after {
   @include external-link-icon();
-  display: inline-block;
-  text-decoration: none;
 }
 
 .td-footer a.external-link:after {
   display: none !important;
+}
+
+// In page content the underline belongs to the text span, not to the anchor,
+// so it stops before the icon. An inline pseudo-element cannot refuse the
+// underline of its parent, and an inline-block one would let the line break
+// in front of it.
+.td-content a.external-link {
+  text-decoration: none;
+
+  > .external-link__text {
+    text-decoration: underline;
+  }
+
+  // Content links drop their underline on hover and focus; see _styles_project.scss.
+  &:hover > .external-link__text,
+  &:focus > .external-link__text {
+    text-decoration: $link-decoration-opposite;
+  }
 }
 
 // Can't quite use this yet since (1) breadcrumbs currently use external links,

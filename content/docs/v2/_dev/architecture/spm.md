@@ -1,10 +1,9 @@
 ---
 title: Service Performance Monitoring (SPM)
+description: Request rate, error rate and latency per service, computed from traces.
 aliases: [../spm]
 hasparent: true
 ---
-
-[![Service Performance Monitoring](/img/frontend-ui/spm.png)](/img/frontend-ui/spm.png)
 
 Surfaced in Jaeger UI as the "Monitor" tab, the motivation for this feature is
 to help identify interesting traces (e.g. high QPS, slow or erroneous requests)
@@ -23,6 +22,8 @@ Potential use cases include:
 - Capacity planning.
 
 ## UI Feature Overview
+
+{{< screenshot src="/img/frontend-ui/v2.23/spm.png" alt="The Monitor tab, with request rate, error rate and latency charts for one service" >}}
 
 The "Monitor" tab provides a service-level aggregation, as well as an operation-level
 aggregation within the service, of Request rates, Error rates and Durations
@@ -58,7 +59,7 @@ If generating traces manually is preferred, the [Sample App: HotROD](../../getti
 
 ### Option 1: PromQL-compatible backend Configuration
 
-An example configuration is available in the Jaeger repository: [config-spm.yaml](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm.yaml). The following steps are required to enable the SPM feature:
+An example configuration is available in the Jaeger repository: [config-spm.yaml]. The following steps are required to enable the SPM feature:
 
 * Enable the [SpanMetrics Connector][spanmetrics-conn] in the pipeline:
 ```yaml
@@ -113,7 +114,7 @@ extensions:
 
 ### Option 2: Elasticsearch/OpenSearch Backend Configuration
 
-An example configuration is available in the Jaeger repository: [config-spm-elasticsearch.yaml](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm-elasticsearch.yaml).
+An example configuration is available in the Jaeger repository: [config-spm-elasticsearch.yaml].
 
 Configuration is simpler as it does not require the SpanMetrics Connector or a separate metrics pipeline.
 
@@ -319,10 +320,6 @@ Note:
 
 ## API
 
-### gRPC/Protobuf
-
-The recommended way to programmatically retrieve RED metrics is via `jaeger.api_v2.metrics.MetricsQueryService` gRPC endpoint defined in the [metricsquery.proto][metricsquery.proto] IDL file.
-
 ### HTTP JSON
 
 Used internally by the Monitor tab of Jaeger UI to populate the metrics for its visualizations.
@@ -503,16 +500,6 @@ data quality issue, and the instrumentation should set the span kind.
 The reason for defaulting to `server` span kinds is to avoid double-counting
 both ingress and egress spans in the `server` and `client` span kinds, respectively.
 
-[spm-demo]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor
-[metricsquery.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/metricsquery.proto
-[openmetrics.proto]: https://github.com/jaegertracing/jaeger/blob/main/model/proto/metrics/openmetrics.proto#L53
-[opentelemetry-collector]: https://opentelemetry.io/docs/collector/
-[spanmetrics-conn]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/README.md
-[prom-metric-labels]: https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels
-[http-api-readme]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api
-[spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L23
-[spanmetrics-config-duration]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L14
-
 ### 403 when executing metrics query
 
 If logs contain the error resembling: `failed executing metrics query: client_error: client error: 403`,
@@ -531,3 +518,12 @@ extensions:
           token_file_path: /path/to/token/file
           token_override_from_context: true
 ```
+
+[spm-demo]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor
+[spanmetrics-conn]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/README.md
+[prom-metric-labels]: https://prometheus.io/docs/concepts/data_model/#metric-names-and-labels
+[http-api-readme]: https://github.com/jaegertracing/jaeger/tree/main/docker-compose/monitor#http-api
+[spanmetrics-config-dimensions]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L23
+[spanmetrics-config-duration]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/testdata/config.yaml#L14
+[config-spm.yaml]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm.yaml
+[config-spm-elasticsearch.yaml]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/config-spm-elasticsearch.yaml

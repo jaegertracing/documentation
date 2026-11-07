@@ -2,9 +2,11 @@
 
 @import 'variables_forward_project';
 
-$td-enable-google-fonts: true;
-$td-google-font-name: 'Pontano+Sans';
-$td-google-font-family: 'Pontano+Sans:300,300i,400,400i,700,700i';
+// Pontano Sans is self-hosted (see _fonts.scss) rather than loaded from Google
+// Fonts, so the Content-Security-Policy needs no Google origin in style-src or
+// font-src.
+$td-enable-google-fonts: false;
+$font-family-sans-serif: join('Pontano Sans Variable', $td-fonts-serif);
 
 // ----------------------------------------------
 // Jaeger theme-specific variables copied from

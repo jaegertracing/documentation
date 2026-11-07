@@ -39,7 +39,8 @@ efficiently:
 - `layouts/` - Custom Hugo layouts
 - `data/` - Data files used by Hugo (including `refcache.json` for link
   checking)
-- `scripts/` - Utility scripts
+- `scripts/` - Utility scripts. `scripts/screenshots/README.md` says how the UI
+  screenshots under `static/img/frontend-ui/` are taken and refreshed.
 
 ### Build and Deployment
 
@@ -57,6 +58,7 @@ npm run build              # Ensure the site builds
 npm run check:spelling     # Run spellcheck
 npm run check:links:internal  # Check internal links
 npm run check:format       # Check code formatting
+npm run check:dev-links    # Check link conventions of the _dev pages
 ```
 
 Use `npm run fix:format` and `npm run fix:filenames` to auto-fix common issues.

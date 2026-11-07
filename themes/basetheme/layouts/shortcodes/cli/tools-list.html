@@ -4,8 +4,8 @@
 {{ end -}}
 {{ $isNextRelease := eq $versionFromPath "next-release" }}
 {{ $version := cond ($isNextRelease) site.Params.latest $versionFromPath }}
-{{ $data    := index site.Data.cli $version }}
-{{ $config  := index (index site.Data.cli $versionFromPath) "config" }}
+{{ $data    := index hugo.Data.cli $version }}
+{{ $config  := index (index hugo.Data.cli $versionFromPath) "config" }}
 
 {{ if $isNextRelease }}
   <p><b>NOTE: This page is generated for version {{ $version }}.</b></p>

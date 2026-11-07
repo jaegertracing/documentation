@@ -95,6 +95,6 @@ usercert = ~/.cassandra/client-cert
 
 ## Compatible Backends
 
-* ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/v2.4.0/internal/storage/v1/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
+* ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/v2.4.0/docker-compose/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
 
 [cqlsh]: https://cassandra.apache.org/doc/latest/cassandra/managing/tools/cqlsh.html

@@ -15,10 +15,12 @@
     "_hugo-dev-test": "npm run _hugo-dev -- --templateMetrics --templateMetricsHints",
     "_hugo": ". ./scripts/set-wksp.sh && hugo --cleanDestinationDir --config hugo.yaml${WKSP:+,${WKSP}}",
     "_ls-bad-filenames": "find assets content -name '*_*' ! -name '[_.]*'",
+    "_pagefind": "npx --no-install pagefind",
     "_serve": "npm run _hugo-dev -- serve --minify --disableFastRender --renderToMemory",
     "build:preview": "npm run _hugo-dev -- --minify --baseURL \"${DEPLOY_PRIME_URL:-http://localhost}\"",
     "build:production": "npm run _hugo -- --minify",
     "build": "npm run _build --",
+    "check:dev-links": "python3 scripts/check-dev-links.py",
     "check:filenames": "test -z \"$(npm run -s _ls-bad-filenames)\" || npm run -s _filename-error",
     "check:format": "npm run _check:format || (echo '[help] Run: npm run fix:format'; exit 1)",
     "check:links:all": "npm run _check:links:all",
@@ -31,26 +33,33 @@
     "fix:format": "npm run _check:format -- --write",
     "fix": "npm run fix:format && npm run fix:filenames",
     "make:public": "git init public",
+    "postbuild:preview": "npm run _pagefind",
+    "postbuild:production": "npm run _pagefind",
+    "postbuild": "npm run _pagefind",
     "precheck:links:all": "npm run build",
     "precheck:links": "npm run build",
     "postinstall": "npm rebuild docsy --loglevel verbose  --foreground-scripts",
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
+    "serve:search": "npm run build && npx --no-install pagefind --serve",
     "serve": "npm run _serve --",
+    "_build-for-browser-tests": "HUGO_SERVICES_GOOGLEANALYTICS_ID=G-PLACEHOLDER WKSP=hugo.dev.yaml npm run _hugo -- -DF",
+    "test:browser": "npm run _build-for-browser-tests && npx playwright test",
     "test:only": "npm run check:format && npm run check:links:all",
     "test": "echo 'RUNNING fix AND test ...'; npm run fix && npm run test:only",
     "update:packages": "npx npm-check-updates -u"
   },
   "devDependencies": {
+    "@fontsource-variable/pontano-sans": "5.3.0",
+    "@playwright/test": "1.65.0",
     "autoprefixer": "^10.4.23",
     "cspell": "^10.0.0",
     "docsy": "github:google/docsy#a600e534909f5fc09b1a48cef649d1e554af4bd2",
+    "pagefind": "1.6.0",
     "postcss-cli": "^12.0.0",
     "prettier": "^3.8.0"
   },
   "peerDependencies": {
-    "hugo-extended": "0.166.0",
-    "netlify-cli": "^23.13.4 || ^24.0.0 || ^26.0.0 || ^27.0.0",
-    "npm-check-updates": "^19.3.1 || ^20.0.0 || ^22.0.0 || ^23.0.0"
+    "hugo-extended": "0.169.0"
   },
   "enginesComment": "Ensure that engines.node value stays consistent with the project's .nvmrc",
   "engines": {
@@ -62,5 +71,5 @@
     "proseWrap": "always",
     "singleQuote": true
   },
-  "spelling": "cSpell:ignore docsy hugo HTMLTEST netlify precheck postbuild wksp -"
+  "spelling": "cSpell:ignore docsy hugo HTMLTEST netlify pagefind precheck postbuild wksp -"
 }

@@ -38,6 +38,26 @@ npm run build
 npm run build:production
 ```
 
+## Site search
+
+Site search uses [Pagefind](https://pagefind.app/), a static search index that
+is built from `public/` after each build by the `postbuild*` npm hooks (see
+[`pagefind.yml`](pagefind.yml)). No third-party service is involved.
+
+- `npm run serve` renders to memory, so it has no search index. To try search
+  locally, run `npm run serve:search` and open
+  [localhost:1414](http://localhost:1414).
+- Only page content inside Docsy's `.td-content` element is indexed. To keep a
+  page out of search results, add `exclude_search: true` to its front matter.
+- Every page is tagged with its docs version (for example `2.22` or `1.76`, or
+  `site` for non-docs pages). Search defaults to the version of the page the
+  reader is on, and the results page lets readers pick another version.
+- `npm run test:browser` builds the site and runs the browser tests in
+  [`tests/`](tests/) against it with [Playwright](https://playwright.dev/):
+  the search tests in `search.spec.ts` and the Content-Security-Policy check
+  in `csp.spec.ts`, which fails when a page loads a resource that the policy in
+  `netlify.toml` blocks. The first run needs `npx playwright install chromium`.
+
 ## Code Quality Checks
 
 Before committing changes, run:
@@ -48,6 +68,7 @@ Before committing changes, run:
 - **Link check (internal)**: `npm run check:links:internal`
 - **Link check (all)**: `npm run check:links:all`
 - **Filename conventions**: `npm run check:filenames`
+- **Link conventions of `_dev` pages**: `npm run check:dev-links`. Links to files in the jaeger repository are reference-style links defined at the end of the page, so that a moved file costs one line to fix.
 
 ## Content Guidelines
 

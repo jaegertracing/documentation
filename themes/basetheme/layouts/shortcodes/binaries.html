@@ -1,6 +1,6 @@
 {{/* The releases on GitHub are currently tagged with v1xx tag, so we use $latestV1 in the base URLs */}}
 {{ $latestV1      := .Site.Params.binariesLatest }}
-{{ $binaries      := .Site.Data.download.binaries }}
+{{ $binaries      := hugo.Data.download.binaries }}
 {{ $platforms     := $binaries.platforms }}
 <table class="table is-striped">
   <thead>
