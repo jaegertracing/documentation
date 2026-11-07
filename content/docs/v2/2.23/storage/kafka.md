@@ -58,6 +58,8 @@ Unless your Kafka cluster is configured to automatically create topics, you will
 
 You can find more information about topics and partitions in general in the [official documentation](https://kafka.apache.org/documentation/#intro_topics). [This article](https://www.confluent.io/blog/how-to-choose-the-number-of-topicspartitions-in-a-kafka-cluster/) provide more details about how to choose the number of partitions.
 
+Restrict who can produce to the topic, because the ingester stores every span it reads from it; the [Securing Jaeger](../../deployment/security/#collectoringesterquery-to-storage) page describes the broker ACLs.
+
 ## At-least-once delivery
 
 With the default ingester configuration the Kafka receiver commits an offset as soon as the pipeline accepts the record, and the pipeline accepts it before the storage has written it, so a backend outage loses spans that Kafka considers delivered. The ingester can instead be configured so that an offset is committed only after the spans it covers are durable. The pipeline half of that configuration, no `batch` processor and an exporter queue with `wait_for_result: true`, is the same for every receiver and is described on the [Data Durability](../../deployment/delivery-guarantees/#kafka-ingester) page. The Kafka-specific half is:
@@ -89,6 +91,8 @@ exporters:
 ```
 
 The storage must return an error when a write fails. Cassandra and ClickHouse always do; Elasticsearch and OpenSearch need [`write_mode: sync`](../elasticsearch/#write-modes), and should run with `poison_pill_handling: drop` or the [dead-letter pipeline](../../deployment/delivery-guarantees/#dead-letter-pipeline-for-rejected-spans) so that a document the backend rejects on every attempt cannot hold the offset forever.
+
+When a record does hold the offset, its partition stops advancing while the others keep draining, and restarting the ingester does not help, because it resumes from the committed offset. The receiver stops reporting `otelcol_kafka_receiver_offset_lag` for a paused partition, so watch consumer-group lag on the broker side. The ingester's error log names the topic, partition and offset; to skip the record, stop every ingester in the group and move the group's offset for that partition with Kafka's [`kafka-consumer-groups.sh --reset-offsets`](https://kafka.apache.org/documentation/#basic_ops_consumer_group) tool. The skipped spans are not written to storage.
 
 The configurations the Kafka end-to-end tests run against are [config-kafka-ingester-sync.yaml](https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-kafka-ingester-sync.yaml) and, with the dead-letter pipeline, [config-kafka-ingester-dead-letter.yaml](https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/config-kafka-ingester-dead-letter.yaml). Both follow the recommended shape.
 
