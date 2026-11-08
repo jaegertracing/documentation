@@ -1,5 +1,6 @@
 ---
 title: APIs
+description: The APIs for sending traces to Jaeger and reading them back, with their compatibility guarantees.
 aliases: [../apis]
 hasparent: true
 ---
@@ -59,9 +60,6 @@ Jaeger can receive trace data from the OpenTelemetry SDKs in their native [OpenT
   * [JSON over HTTP][otlp.http]
 
 Only tracing data is accepted, since Jaeger does not store other telemetry types. For more details on the OTLP receiver see the [official documentation][otlp-rcvr].
-
-[otlp-rcvr]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
-[otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md
 
 ### Legacy Protobuf via gRPC
 
@@ -139,7 +137,7 @@ the following services:
   Allows trace data to be pushed to the storage. This service can run on a separate port if needed.
 
 For more information, please refer to
-[jaeger/internal/storage/v2/grpc](https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/grpc).
+[jaeger/internal/storage/v2/grpc][grpc_v2].
 
 ## Remote Sampling Configuration
 
@@ -187,6 +185,8 @@ grpc_cli ls localhost:16685
   jaeger.api_v3.QueryService
 ```
 
+[otlp-rcvr]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/README.md
+[otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md
 [otlp.grpc]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlpgrpc
 [otlp.http]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md#otlphttp
 [jaeger.thrift]: https://github.com/jaegertracing/jaeger-idl/blob/main/thrift/jaeger.thrift
@@ -196,3 +196,4 @@ grpc_cli ls localhost:16685
 [sampling.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/sampling.proto
 [grpc-reflection]: https://github.com/grpc/grpc-go/blob/master/Documentation/server-reflection-tutorial.md#enable-server-reflection
 [gogo-reflection]: https://jbrandhorst.com/post/gogoproto/#reflection
+[grpc_v2]: https://github.com/jaegertracing/jaeger/tree/main/internal/storage/v2/grpc

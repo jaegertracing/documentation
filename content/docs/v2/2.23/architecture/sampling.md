@@ -1,5 +1,6 @@
 ---
 title: Sampling
+description: The sampling strategies Jaeger supports and how they reach the SDKs.
 aliases: [../sampling]
 hasparent: true
 ---

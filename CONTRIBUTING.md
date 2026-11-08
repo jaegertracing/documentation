@@ -68,6 +68,7 @@ Before committing changes, run:
 - **Link check (internal)**: `npm run check:links:internal`
 - **Link check (all)**: `npm run check:links:all`
 - **Filename conventions**: `npm run check:filenames`
+- **Link conventions of `_dev` pages**: `npm run check:dev-links`. Links to files in the jaeger repository are reference-style links defined at the end of the page, so that a moved file costs one line to fix.
 
 ## Content Guidelines
 

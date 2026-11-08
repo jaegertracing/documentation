@@ -21,6 +21,8 @@
 {{ with site.GetPage (printf "/docs/%s" $latest) -}}
   {{ $docDir := path.Dir .File.Path -}}
   {{ range (union .RegularPagesRecursive .Sections) -}}
+    {{/* A page that exists only as a sidebar entry has no output to redirect to. */ -}}
+    {{ if .Params.sidebar_only }}{{ continue }}{{ end -}}
     {{ $dir := strings.TrimPrefix (add $docDir "/") (path.Dir .File.Path) -}}
     {{ $entry := strings.TrimSuffix ".md" (path.Base .File.Path) -}}
     {{ $pages = $pages | append (cond (ne $entry "_index") $entry $dir) -}}

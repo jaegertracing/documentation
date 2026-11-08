@@ -1,5 +1,6 @@
 ---
 title: Getting Started
+description: Run Jaeger on your machine with a demo application.
 hasparent: true
 weight: 1
 ---
@@ -37,7 +38,7 @@ docker run --rm --name jaeger \
 ```
 
 {{< warning >}}
-Your applications must be instrumented before they can send tracing data to Jaeger. We recommend using the [OpenTelemetry](https://opentelemetry.io/) instrumentation and SDKs.
+Your applications must be instrumented before they can send tracing data to Jaeger. Use the [OpenTelemetry](https://opentelemetry.io/) instrumentation and SDKs for that.
 {{< /warning >}}
 
 ## 🚗 HotROD Demo
@@ -57,7 +58,6 @@ for free.
 We recommend running Jaeger and HotROD together via `docker compose`:
 
 ```bash
-export JAEGER_VERSION=2.7.0 #Pick the newest version
 git clone https://github.com/jaegertracing/jaeger.git jaeger
 cd jaeger/examples/hotrod
 docker compose up

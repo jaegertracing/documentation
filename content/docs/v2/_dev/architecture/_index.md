@@ -1,5 +1,6 @@
 ---
 title: Architecture
+description: The components, the data model and sampling.
 weight: 3
 children:
 - title: APIs
@@ -84,15 +85,15 @@ You can build a [custom Jaeger distribution](../deployment/custom-distribution/)
 
 ### Jaeger Components
 
-* [Jaeger Storage Extension](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerstorage) - Extensible hub for storage backends supported in Jaeger. It provides all other Jaeger components access to Jaeger storage implementations.
+* [Jaeger Storage Extension][jaegerstorage] - Extensible hub for storage backends supported in Jaeger. It provides all other Jaeger components access to Jaeger storage implementations.
 
-* [Jaeger Storage Exporter](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerstorage) - Writes spans to storage backend configured in the Jaeger Storage Extension.
+* [Jaeger Storage Exporter][jaegerstorage] - Writes spans to storage backend configured in the Jaeger Storage Extension.
 
-* [Jaeger Query Extension](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerquery) - Run the query APIs and the Jaeger UI.
+* [Jaeger Query Extension][jaegerquery] - Run the query APIs and the Jaeger UI.
 
-* [Adaptive Sampling Processor](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/processors/adaptivesampling) - Performs probabilities calculations for [adaptive sampling](./sampling/#adaptive-sampling).
+* [Adaptive Sampling Processor][adaptivesampling] - Performs probabilities calculations for [adaptive sampling](./sampling/#adaptive-sampling).
 
-* [Remote Sampling Extension](https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/remotesampling) - Serves the endpoints for [Remote Sampling](./sampling/#remote-sampling), based on static configuration file or [adaptive sampling](./sampling/#adaptive-sampling).
+* [Remote Sampling Extension][remotesampling] - Serves the endpoints for [Remote Sampling](./sampling/#remote-sampling), based on static configuration file or [adaptive sampling](./sampling/#adaptive-sampling).
 
 ### OpenTelemetry Components
 
@@ -143,3 +144,10 @@ You can build a [custom Jaeger distribution](../deployment/custom-distribution/)
 * [zPages](https://github.com/open-telemetry/opentelemetry-collector/tree/main/extension/zpagesextension) - Exposes internal state of the collector for debugging.
 
 * [Performance Profiler (pprof)](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/pprofextension) - enables Go's `net/http/pprof` endpoint, typically used by developers to collect performance profiles and investigate issues with the collector.
+
+## Where to Go Next
+
+[jaegerstorage]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerstorage
+[jaegerquery]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/jaegerquery
+[adaptivesampling]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/processors/adaptivesampling
+[remotesampling]: https://github.com/jaegertracing/jaeger/tree/main/cmd/jaeger/internal/extension/remotesampling

@@ -1,5 +1,6 @@
 ---
 title: Architecture
+description: The components, the data model and sampling.
 weight: 3
 children:
 - title: APIs

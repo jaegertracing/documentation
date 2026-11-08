@@ -1,5 +1,6 @@
 ---
 title: Configuration
+description: The YAML configuration file, its pipeline and the extensions it declares.
 aliases: [../configuration]
 hasparent: true
 weight: 1
@@ -105,7 +106,7 @@ Of note here is the `storage` section, which references by name the storage back
 
 #### Clock Skew Adjustment
 
-Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. `jaeger_query` extension implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/v2.23.0/model/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to their timestamps.
+Jaeger backend combines trace data from applications that are usually running on different hosts. The hardware clocks on the hosts often experience relative drift, known as the [clock skew effect](https://en.wikipedia.org/wiki/Clock_skew). Clock skew can make it difficult to reason about traces, for example, when a server span may appear to start earlier than the client span, which should not be possible. `jaeger_query` extension implements a clock skew adjustment algorithm ([code](https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/internal/extension/jaegerquery/internal/adjuster/clockskew.go)) to correct for clock drift, using the knowledge about causal relationships between spans. All adjusted spans have a warning displayed in the UI that provides the exact clock skew delta applied to their timestamps.
 
 Sometimes these adjustments themselves make the trace hard to understand. For example, when repositioning the server span within the bounds of its parent span, Jaeger does not know the exact relationship between the request and response latencies, so it assumes they are equal and places the child span in the middle of the parent span (see [issue #961](https://github.com/jaegertracing/jaeger/issues/961#issuecomment-453925244)).
 
@@ -178,13 +179,13 @@ jaeger_storage_exporter:
     queue_size: 100
 ```
 
-A `queue` configured like this acknowledges spans as soon as they are enqueued, before the storage has written them. When the pipeline must not lose spans, the queue needs `wait_for_result: true` and the pipeline must not use the `batch` processor; see [Delivery Guarantees](../delivery-guarantees/).
+A `queue` configured like this acknowledges spans as soon as they are enqueued, before the storage has written them. When the pipeline must not lose spans, the queue needs `wait_for_result: true` and the pipeline must not use the `batch` processor; see [Data Durability](../delivery-guarantees/).
 
 ## Connectors
 
 ### Jaeger storage
 
-`jaeger_storage_exporter` can also be declared under `connectors:`. The collector then builds it as a traces-to-traces connector that writes spans to the storage backend exactly as the exporter does, and re-emits the spans the storage rejected terminally onto its output pipeline, so that any standard exporter can serve as a dead-letter sink. It accepts the exporter's `trace_storage`, `queue`, and `retry_on_failure` settings; an enabled `queue` must set `wait_for_result: true`. See [Delivery Guarantees](../delivery-guarantees/#dead-letter-pipeline-for-rejected-spans) for the pipeline shape and the [connector README](https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/internal/exporters/storageexporter/README.md) for the configuration reference.
+`jaeger_storage_exporter` can also be declared under `connectors:`. The collector then builds it as a traces-to-traces connector that writes spans to the storage backend exactly as the exporter does, and re-emits the spans the storage rejected terminally onto its output pipeline, so that any standard exporter can serve as a dead-letter sink. It accepts the exporter's `trace_storage`, `queue`, and `retry_on_failure` settings; an enabled `queue` must set `wait_for_result: true`. See [Data Durability](../delivery-guarantees/#dead-letter-pipeline-for-rejected-spans) for the pipeline shape and the [connector README](https://github.com/jaegertracing/jaeger/blob/v2.23.0/cmd/jaeger/internal/exporters/storageexporter/README.md) for the configuration reference.
 
 ```yaml
 connectors:

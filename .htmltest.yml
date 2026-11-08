@@ -34,5 +34,3 @@ IgnoreURLs:
   # The OpenSearch Dashboard of the live demo answers 500; the other demo
   # endpoints in content/demo.md are healthy, so this is a deployment issue.
   - ^https://opensearch.demo.jaegertracing.io
-  # Temporary: as we work on https://github.com/jaegertracing/documentation/issues/889
-  - ^https://github.com/jaegertracing/jaeger/(blob|tree)/(v2|main/(internal|model|pkg))

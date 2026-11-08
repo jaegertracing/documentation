@@ -34,11 +34,14 @@ fargate
 findRESubmatch
 flink
 fluentd
+gantt
+genai
 glvs
 gobin
 gomod
 gopath
 goroutines
+grafana
 Hashicorp
 hasparent
 healthcheck
@@ -121,6 +124,7 @@ refcache
 reindex
 reindexing
 rolebinding
+scylladb
 shortcode
 spanmetrics
 stackoverflow
