@@ -1,6 +1,9 @@
-{{/* Copied from Docsy a600e53 (layouts/docs/list.html). Only change: data-pagefind-body
-   on the .td-content wrapper, which marks the article as the Pagefind index
-   root. Re-sync this file when bumping Docsy. */ -}}
+{{/* Copied from Docsy a600e53 (layouts/docs/list.html). Changes, to re-apply
+   when re-syncing this file on a Docsy bump:
+   1. data-pagefind-body on the .td-content wrapper, which marks the article as
+      the Pagefind index root.
+   2. .Description instead of .Params.description (Hugo 0.169 deprecation,
+      #1174). */ -}}
 {{ define "main" }}
 <div class="td-content"{{ if not (.Param "exclude_search") }} data-pagefind-body{{ end }}>
 	<h1>{{ .Title }}</h1>

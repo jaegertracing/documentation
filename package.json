@@ -40,7 +40,7 @@
     "precheck:links": "npm run build",
     "postinstall": "npm rebuild docsy --loglevel verbose  --foreground-scripts",
     "seq": "bash -c 'for cmd in \"$@\"; do npm run $cmd || exit 1; done' - ",
-    "serve:search": "npm run build && npx --no-install pagefind --serve",
+    "serve:search": "npm run _build && npm run _pagefind -- --serve",
     "serve": "npm run _serve --",
     "_build-for-browser-tests": "HUGO_SERVICES_GOOGLEANALYTICS_ID=G-PLACEHOLDER WKSP=hugo.dev.yaml npm run _hugo -- -DF",
     "test:browser": "npm run _build-for-browser-tests && npx playwright test",
