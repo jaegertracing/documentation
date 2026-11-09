@@ -12,8 +12,11 @@
 /docs/{{ . }}     /{{ . }}
 {{ end -}}
 
+{{/* These two pages exist only in the 1.x docs, so the shortcuts go away with the 1.x version list. */ -}}
+{{ with $latestV1 -}}
 {{ range (slice "cli" "operator") }}
 /docs/{{ . }}     /docs/{{ $latestV1 }}/{{ . }}  302
+{{ end -}}
 {{ end -}}
 
 {{/* Get all sections and pages directly under v2/_dev */}}

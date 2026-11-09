@@ -20,7 +20,7 @@
   {{ $isNextRelease = true }}
 {{ end }}
 
-{{ $isArchive     := eq $version $latestV1 }}
+{{ $isArchive     := eq $vMajor "1" }}
 {{ $isLatest      := eq $version $latestV2 }}
 {{ $latestUrlV1   := .RelPermalink | replaceRE $version $latestV1 }}
 {{ $latestUrlV2   := .RelPermalink | replaceRE $version $latestV2 }}
