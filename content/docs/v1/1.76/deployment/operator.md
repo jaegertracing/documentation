@@ -1109,7 +1109,7 @@ spec:
 
 This example defines a default sampling strategy that is probabilistic, with a 50% chance of the trace instances being sampled.
 
-Refer to the Jaeger documentation on [Sampling Configuration](</docs/{{% param latest %}}/sampling/>) to see how service and endpoint sampling can be configured. The JSON representation described in that documentation can be used in the operator by converting to YAML.
+Refer to the Jaeger documentation on [Sampling Configuration](</docs/1.76/sampling/>) to see how service and endpoint sampling can be configured. The JSON representation described in that documentation can be used in the operator by converting to YAML.
 
 ## Finer grained configuration
 

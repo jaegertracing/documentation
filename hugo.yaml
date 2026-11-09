@@ -74,8 +74,8 @@ params:
   opengraphimage: img/jaeger-icon-color.png
   robots: true
 
-  latest: '1.76'
-  versions: ['1.76']
+  latest: ''
+  versions: []
 
   latestV2: "2.23"
   binariesLatestV2: "2.23.0"
