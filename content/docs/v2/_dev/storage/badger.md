@@ -16,8 +16,11 @@ hasparent: true
 
 ## Configuration
 
-See [sample configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-badger.yaml).
+See [sample configuration][config-badger.yaml].
 
 ## Troubleshooting
 
-* [Badger file permissions as non-root service](https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/badger/docs/storage-file-non-root-permission.md)
+* [Badger file permissions as non-root service][storage-file-non-root-permission.md]
+
+[config-badger.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-badger.yaml
+[storage-file-non-root-permission.md]: https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/badger/docs/storage-file-non-root-permission.md

@@ -1,5 +1,6 @@
 ---
 title: Deployment
+description: Configuring and running Jaeger in production.
 weight: 4
 children:
 - title: Configuration
@@ -10,7 +11,7 @@ children:
   url: kubernetes
 - title: On Windows
   url: windows
-- title: Delivery Guarantees
+- title: Data Durability
   url: delivery-guarantees
 - title: Security
   url: security
@@ -69,9 +70,5 @@ Service Performance Monitoring (SPM) requires a deployment of Prometheus-compati
 
 In order to display service dependency diagrams, production deployments need an external process that aggregates data and computes dependency links between services. Project [spark-dependencies](https://github.com/jaegertracing/spark-dependencies) is a Spark job which derives dependency links and writes them directly to the storage.
 
-[zipkin-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/zipkincore.thrift
-[jaeger-thrift]: https://github.com/jaegertracing/jaeger-idl/blob/master/thrift/jaeger.thrift
-[model.proto]: https://github.com/jaegertracing/jaeger-idl/blob/main/proto/api_v2/model.proto
-[thriftrw]: https://www.npmjs.com/package/thriftrw
-[storage.proto]: https://github.com/jaegertracing/jaeger/blob/main/internal/storage/v1/grpc/proto/storage.proto
-[otlp]: https://github.com/open-telemetry/opentelemetry-proto/blob/main/docs/specification.md
+
+## Where to Go Next

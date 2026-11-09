@@ -15,7 +15,7 @@ Cassandra also has the following officially supported resources available from t
 
 ## Configuration
 
-A sample configuration for Jaeger with Cassandra backend is available in the Jaeger repository: [config-cassandra.yaml](https://github.com/jaegertracing/jaeger/blob/v2.19.0/cmd/jaeger/config-cassandra.yaml). In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go](https://github.com/jaegertracing/jaeger/blob/v2.19.0/pkg/cassandra/config/config.go#L21) as the authoritative source.
+A sample configuration for Jaeger with Cassandra backend is available in the Jaeger repository: [config-cassandra.yaml](https://github.com/jaegertracing/jaeger/blob/v2.19.0/cmd/jaeger/config-cassandra.yaml). In the future the configuration documentation will be auto-generated from the schema. Meanwhile, please refer to [config.go](https://github.com/jaegertracing/jaeger/blob/v2.19.0/internal/storage/cassandra/config/config.go) as the authoritative source.
 
 ## Initializing Schema
 
@@ -95,6 +95,6 @@ usercert = ~/.cassandra/client-cert
 
 ## Compatible Backends
 
-* ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/v2.19.0/internal/storage/v1/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
+* ScyllaDB [can be used](https://github.com/jaegertracing/jaeger/blob/v2.19.0/docker-compose/scylladb/README.md) as a drop-in replacement for Cassandra since it uses the same data model and query language.
 
 [cqlsh]: https://cassandra.apache.org/doc/latest/cassandra/managing/tools/cqlsh.html

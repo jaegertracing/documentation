@@ -1,7 +1,6 @@
 ---
-title: Tools
-navtitle: Tools
-description: Extra Jaeger utilities.
+title: Utilities
+description: Load generator, trace anonymizer, schema management scripts and the standalone remote storage service.
 aliases: [../tools]
 hasparent: true
 ---
@@ -28,6 +27,14 @@ docker run \
   --trace-id <TRACE_ID> \
   --query-host-port <JAEGER_QUERY_HOST_PORT>
 ```
+
+## Schema Management
+
+The storage backends that need their schema created or maintained outside Jaeger ship with their own scripts, distributed as binaries and container images on the [Download](/download/) page:
+
+* `jaeger-cassandra-schema` creates the Cassandra keyspace and tables. The [Cassandra](../../storage/cassandra/#initializing-schema) page explains when it is needed, since Jaeger can also create the schema on start-up.
+* `jaeger-es-index-cleaner` deletes Elasticsearch and OpenSearch indices older than a retention period, because those stores have no data TTL of their own.
+* `jaeger-es-rollover` initializes and rolls over aliased indices. The [Elasticsearch](../../storage/elasticsearch/#index-management-strategies) page compares the index management strategies and shows how both scripts are run.
 
 ## Remote Storage (component)
 

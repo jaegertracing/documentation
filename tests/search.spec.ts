@@ -37,11 +37,7 @@ const CSP = (() => {
 })();
 
 // CSP violations that are known and tracked separately; anything else fails.
-// The site still loads Pontano Sans from Google Fonts, which the CSP blocks;
-// remove this entry once the font is self-hosted.
-const KNOWN_VIOLATIONS: RegExp[] = [
-  /^style-src-elem https:\/\/fonts\.googleapis\.com\//,
-];
+const KNOWN_VIOLATIONS: RegExp[] = [];
 
 const UNAVAILABLE = /^(Search index not found|Search is unavailable)/;
 
@@ -287,6 +283,20 @@ test('search page scopes results to the requested version', async ({
   for (const badge of await badges.allTextContents()) {
     expect(badge).toBe('2.dev');
   }
+});
+
+test('search page shows an archived version that the menu does not list', async ({
+  page,
+}) => {
+  // The 1.x docs are built but not listed in the version menu.
+  await page.goto(`/search/?q=${QUERY}&v=1.76`);
+  await expect(page.locator('#td-search-page-status')).toHaveText(
+    statusFor('1.76 docs'),
+  );
+  await expect(page.locator('#td-search-page-v')).toHaveValue('1.76');
+  await expect(page.locator('#td-search-page-v option:checked')).toHaveText(
+    '1.76 (archive)',
+  );
 });
 
 test('rapid Show more clicks add each result once', async ({ page }) => {

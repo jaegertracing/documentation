@@ -1,13 +1,13 @@
 {{ $dest := .Destination -}}
 {{ $isExternal := hasPrefix $dest "http" -}}
+{{ $showIcon := and $isExternal (not (in .Text "hk-no-external-icon")) -}}
 
 <a href="{{ $dest | safeURL }}"
   {{- with .Title}} title="{{ . }}"{{ end -}}
-  {{- if $isExternal }} target="_blank" rel="noopener"
-    {{- $noExternalIcon := in .Text "hk-no-external-icon" -}}
-    {{ if not $noExternalIcon }} class="external-link"{{ end -}}
-  {{ end -}}
+  {{- if $isExternal }} target="_blank" rel="noopener"{{ end -}}
+  {{- if $showIcon }} class="external-link"{{ end -}}
 >
-  {{- .Text | safeHTML -}}
+  {{- /* The span carries the underline instead of the anchor, so that the underline stops before the icon that the stylesheet appends to the anchor. */ -}}
+  {{- if $showIcon }}<span class="external-link__text">{{ .Text | safeHTML }}</span>{{ else }}{{ .Text | safeHTML }}{{ end -}}
 </a>
 {{- /**/ -}}

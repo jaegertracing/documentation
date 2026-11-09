@@ -21,4 +21,6 @@ OpenSearch also has the following officially supported resources available from 
 
 ## Configuration
 
-Here is [example configuration](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-opensearch.yaml) for OpenSearch. Overall Jaeger uses the same implementation for OpenSearch as for Elasticsearch, so most of the discussion on the [Elasticsearch page](../elasticsearch/#configuration) applies. This includes the [write modes](../elasticsearch/#write-modes) and poison-pill handling that the [Delivery Guarantees](../../deployment/delivery-guarantees/) page builds on.
+Here is [example configuration][config-opensearch.yaml] for OpenSearch. Overall Jaeger uses the same implementation for OpenSearch as for Elasticsearch, so most of the discussion on the [Elasticsearch page](../elasticsearch/#configuration) applies. This includes the [write modes](../elasticsearch/#write-modes) and poison-pill handling that the [Data Durability](../../deployment/delivery-guarantees/) page builds on.
+
+[config-opensearch.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-opensearch.yaml

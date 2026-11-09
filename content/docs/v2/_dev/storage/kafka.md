@@ -46,8 +46,8 @@ Kafka also has the following officially supported resources available from the c
 ## Configuration
 
 Please refer to these sample configuration files:
-  * **collector**: [config-kafka-collector.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-collector.yaml)
-  * **ingester**: [config-kafka-ingester.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester.yaml)
+  * **collector**: [config-kafka-collector.yaml]
+  * **ingester**: [config-kafka-ingester.yaml]
 
 Jaeger uses Kafka exporter and receiver from `opentelemetry-collector-contrib` repository. Please refer to their respective README's for configuration details.
   * [Kafka exporter](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/kafkaexporter/README.md)
@@ -58,9 +58,11 @@ Unless your Kafka cluster is configured to automatically create topics, you will
 
 You can find more information about topics and partitions in general in the [official documentation](https://kafka.apache.org/documentation/#intro_topics). [This article](https://www.confluent.io/blog/how-to-choose-the-number-of-topicspartitions-in-a-kafka-cluster/) provide more details about how to choose the number of partitions.
 
+Restrict who can produce to the topic, because the ingester stores every span it reads from it; the [Securing Jaeger](../../deployment/security/#collectoringesterquery-to-storage) page describes the broker ACLs.
+
 ## At-least-once delivery
 
-With the default ingester configuration the Kafka receiver commits an offset as soon as the pipeline accepts the record, and the pipeline accepts it before the storage has written it, so a backend outage loses spans that Kafka considers delivered. The ingester can instead be configured so that an offset is committed only after the spans it covers are durable. The pipeline half of that configuration, no `batch` processor and an exporter queue with `wait_for_result: true`, is the same for every receiver and is described on the [Delivery Guarantees](../../deployment/delivery-guarantees/#kafka-ingester) page. The Kafka-specific half is:
+With the default ingester configuration the Kafka receiver commits an offset as soon as the pipeline accepts the record, and the pipeline accepts it before the storage has written it, so a backend outage loses spans that Kafka considers delivered. The ingester can instead be configured so that an offset is committed only after the spans it covers are durable. The pipeline half of that configuration, no `batch` processor and an exporter queue with `wait_for_result: true`, is the same for every receiver and is described on the [Data Durability](../../deployment/delivery-guarantees/#kafka-ingester) page. The Kafka-specific half is:
 
 ```yaml
 receivers:
@@ -88,9 +90,11 @@ exporters:
         max_size: 4194304
 ```
 
-The storage must return an error when a write fails. Cassandra and ClickHouse always do; Elasticsearch and OpenSearch need [`write_mode: sync`](../elasticsearch/#write-modes), and should run with `poison_pill_handling: drop` or the [dead-letter pipeline](../../deployment/delivery-guarantees/#dead-letter-pipeline-for-rejected-spans) so that a document the backend rejects on every attempt cannot hold the offset forever.
+The storage must return an error when a write fails. Cassandra and ClickHouse always do; Elasticsearch and OpenSearch need [`write_mode: sync`](../elasticsearch/#write-modes), and should run with `poison_pill_handling: drop` or the [dead-letter pipeline](../../deployment/delivery-guarantees/#dead-letter-pipeline-for-rejected-spans) so that a document the backend rejects on every attempt cannot block the offset forever.
 
-The configurations the Kafka end-to-end tests run against are [config-kafka-ingester-sync.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-sync.yaml) and, with the dead-letter pipeline, [config-kafka-ingester-dead-letter.yaml](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-dead-letter.yaml). Both follow the recommended shape.
+When a record does block the offset, its partition stops advancing while the others keep draining, and restarting the ingester does not help, because it resumes from the committed offset. The receiver stops reporting `otelcol_kafka_receiver_offset_lag` for a paused partition, so watch consumer-group lag on the broker side. The ingester's error log names the topic, partition and offset; to skip the record, stop every ingester in the group and move the group's offset for that partition with Kafka's [`kafka-consumer-groups.sh --reset-offsets`](https://kafka.apache.org/documentation/#basic_ops_consumer_group) tool. The skipped spans are not written to storage.
+
+The configurations the Kafka end-to-end tests run against are [config-kafka-ingester-sync.yaml] and, with the dead-letter pipeline, [config-kafka-ingester-dead-letter.yaml]. Both follow the recommended shape.
 
 ### Sizing
 
@@ -99,3 +103,8 @@ With `wait_for_result` set, batch size is bounded by the number of partitions th
 The receiver's fetch settings (`max_fetch_size`, `max_partition_fetch_size`, `min_fetch_size`, `max_fetch_wait`) control how many bytes a broker returns per fetch and how long it waits to accumulate them, not how many records reach the exporter at once. The receiver makes one pipeline call per fetched record, so a larger fetch only fills the receiver's buffer and does not enlarge the storage write.
 
 For Elasticsearch and OpenSearch, keep `queue.batch.max_size` well below the storage's `bulk_processing.max_bytes`. The collector measures a batch in OTLP protobuf bytes while the storage measures the encoded `_bulk` body, which is larger, so a batch at the limit is otherwise split across several `_bulk` requests. Both values must stay below the `http.max_content_length` limit of Elasticsearch, 100 MB by default.
+
+[config-kafka-collector.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-collector.yaml
+[config-kafka-ingester.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester.yaml
+[config-kafka-ingester-sync.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-sync.yaml
+[config-kafka-ingester-dead-letter.yaml]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/config-kafka-ingester-dead-letter.yaml

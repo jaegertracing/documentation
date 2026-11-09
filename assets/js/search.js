@@ -485,9 +485,19 @@
     document.querySelectorAll('.td-search__input').forEach((input) => {
       input.value = query;
     });
-    if ([...versionSelect.options].some((o) => o.value === requested)) {
-      versionSelect.value = requested;
+    const listed = [...versionSelect.options].some(
+      (o) => o.value === requested,
+    );
+    if (requested && !listed) {
+      // A version the menu no longer lists, such as a 1.x archive, gets an
+      // entry so the selector shows the scope that was searched.
+      const option = new Option(`${requested} (archive)`, requested);
+      versionSelect.add(
+        option,
+        versionSelect.options[versionSelect.options.length - 1],
+      );
     }
+    if (requested) versionSelect.value = requested;
     // The version applies when the form is submitted. Submitting on change
     // would reload the page on every arrow key in the select (WCAG 3.2.2).
 

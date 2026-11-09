@@ -1,6 +1,8 @@
-// Browser tests for the Pagefind site search in assets/js/search.js.
-// They run against the Hugo output in public/, so a build must run first;
-// `npm run test:search` does both.
+// Browser tests against the Hugo output in public/: the Pagefind site search
+// and the Content-Security-Policy check. A build must run first;
+// `npm run test:browser` does both. That build uses the production environment,
+// so the analytics markup that Hugo emits only in production is covered, and a
+// placeholder measurement ID, because the real one lives in Netlify's settings.
 import { defineConfig } from '@playwright/test';
 
 export default defineConfig({

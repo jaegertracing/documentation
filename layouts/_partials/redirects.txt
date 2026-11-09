@@ -1,7 +1,5 @@
 {{/* Jaeger website specific redirects */ -}}
 
-{{ $versions := site.Params.versions -}}
-{{ $latestV1 := site.Params.latest -}}
 {{ $latestV2 := site.Params.latestv2 -}}
 {{ $latest   := $latestV2 -}}
 
@@ -12,8 +10,10 @@
 /docs/{{ . }}     /{{ . }}
 {{ end -}}
 
+{{/* These two pages exist only in the 1.x docs, which are no longer listed in
+   hugo.yaml, so the shortcuts name the last 1.x version directly. */ -}}
 {{ range (slice "cli" "operator") }}
-/docs/{{ . }}     /docs/{{ $latestV1 }}/{{ . }}  302
+/docs/{{ . }}     /docs/1.76/{{ . }}  302
 {{ end -}}
 
 {{/* Get all sections and pages directly under v2/_dev */}}
@@ -21,6 +21,8 @@
 {{ with site.GetPage (printf "/docs/%s" $latest) -}}
   {{ $docDir := path.Dir .File.Path -}}
   {{ range (union .RegularPagesRecursive .Sections) -}}
+    {{/* A page that exists only as a sidebar entry has no output to redirect to. */ -}}
+    {{ if .Params.sidebar_only }}{{ continue }}{{ end -}}
     {{ $dir := strings.TrimPrefix (add $docDir "/") (path.Dir .File.Path) -}}
     {{ $entry := strings.TrimSuffix ".md" (path.Base .File.Path) -}}
     {{ $pages = $pages | append (cond (ne $entry "_index") $entry $dir) -}}

@@ -1,0 +1,12 @@
+{{/* Overrides Hugo's built-in google_analytics.html partial. The built-in one
+   writes the gtag configuration as an inline script, which the
+   Content-Security-Policy in netlify.toml blocks. This version loads the same
+   configuration from static/js/gtag-config.js. The measurement ID comes from
+   the site config (services.googleAnalytics.id), which Netlify sets for
+   production builds. */ -}}
+{{ if not site.Config.Privacy.GoogleAnalytics.Disable -}}
+{{ with site.Config.Services.GoogleAnalytics.ID -}}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+<script async src="{{ "js/gtag-config.js" | relURL }}" data-ga-id="{{ . }}" data-respect-dnt="{{ site.Config.Privacy.GoogleAnalytics.RespectDoNotTrack }}"></script>
+{{ end -}}
+{{ end -}}

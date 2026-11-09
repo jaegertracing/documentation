@@ -1,5 +1,6 @@
 ---
 title: AI Assistant
+description: A bring-your-own-agent framework that investigates traces from the Jaeger UI.
 hasparent: true
 weight: 1
 ---
@@ -74,27 +75,23 @@ extensions:
 ```
 
 - `agent_url` is the agent's WebSocket URL. The path and the port are whatever
-  the agent serves. The default is `ws://localhost:16688`, so any `ai` block,
-  including one that only enables MCP, registers the chat endpoint and starts
-  the health probe against that address. Set `agent_url: ""` to run the MCP
-  server without the assistant.
+  the agent serves. The default is `ws://localhost:16688`, so any `ai` block
+  registers the chat endpoint and starts the health probe against that address;
+  the [MCP Server](../mcp-server/) page shows how to serve MCP alone.
 - `agent_headers` are sent on every dial to the agent, for agents that require
   a credential on the WebSocket upgrade. The header name is the agent's choice.
   The values are redacted from logs and configuration dumps; prefer `${env:VAR}`
   over an inline secret.
 - `mcp: {}` enables the MCP tools the agent calls. Without it the agent runs
   every turn with no Jaeger tools and answers from its own knowledge.
-- `mcp.base_url` is the address at which the agent reaches Jaeger's MCP
-  endpoint. See [Running the agent elsewhere](#running-the-agent-elsewhere).
 - `health_check_interval` and `health_check_timeout` control the probe. The
   defaults are 30 seconds and 2 seconds. An interval of 0 disables the probe, and
   the UI then never shows the panel.
 - `max_request_body_size` limits the size of a chat request. The default is
   1 MiB.
-- `auth` restricts the assistant and the MCP endpoint to an admitted group of
-  users, and `header_forwarding` passes the caller's identity to the agent. See
-  [AI Agents to Query](../../deployment/security/#ai-agents-to-query) on the
-  security page.
+
+Restricting the assistant to a group of users and passing the caller's identity
+to the agent are covered on the [security page](../../deployment/security/).
 
 ### Running the agent elsewhere
 
@@ -106,10 +103,27 @@ query port, for example `https://jaeger.example.com:16686`. Jaeger appends
 behind a proxy, in another network namespace or container, and to any Jaeger
 with TLS on its query listener.
 
-The turn-scoped MCP endpoint lives in the memory of the `jaeger-query` process
-that is streaming that chat to the browser. With several replicas, `base_url`
-must name the process that owns the turn, such as its pod address, or the load
-balancer must route by the `<id>` path segment.
+### The turn-scoped MCP endpoint
+
+For each chat turn the gateway creates an MCP endpoint at `/api/ai/mcp/<id>/`
+that serves Jaeger's telemetry tools plus the UI tools of that turn, and
+announces it to the agent. The endpoint has these properties:
+
+- It lives in the memory of the `jaeger-query` process that is streaming that
+  chat to the browser. With several replicas, `base_url` must name the process
+  that owns the turn, such as its pod address, or the load balancer must route
+  by the `<id>` path segment. The shared endpoint has no such rule, because
+  no request to it depends on an earlier one.
+- Each tool call carries the identity of the chat request. The gateway
+  announces the caller's `header_forwarding` headers and, with
+  `bearer_token_propagation` on, the caller's bearer token to the agent for
+  the turn, and the agent sends them on every tool call. A tool call that reads
+  trace data therefore runs through the same `query_interceptors` as a query
+  from the UI, with the same caller. `ai.auth` guards this endpoint as it
+  guards the chat endpoint, so the authenticator must read one of the announced
+  headers; a call without them is refused by `ai.auth` when it is set, and runs
+  as nobody otherwise. The [security page](../../deployment/security/) covers
+  what the agent holds as a result.
 
 ## Running Goose as the agent
 
@@ -118,10 +132,14 @@ so it works as the agent with no Jaeger-specific code. Any other agent that
 meets the [agent contract](#agent-contract) works the same way; only
 `agent_url`, the header name, and the launch command change.
 
-1. Install Goose v1.55.0 or later, the release that propagates the chat
-   request's trace context into its MCP tool calls, and configure a model
-   provider in its environment. The model must support tool calling, or the
-   agent answers from prior knowledge and never queries telemetry.
+1. Install Goose v1.55.0 or later from
+   [Goose releases](https://github.com/aaif-goose/goose/releases).
+
+2. Configure a model provider in Goose's environment. Goose reads the provider
+   settings from environment variables, not from `~/.config/goose/config.yaml`;
+   a key set only in the config file leaves Goose reporting `Provider not set`.
+   The model must support tool calling, or the agent answers from prior
+   knowledge and never queries telemetry.
 
    ```sh
    export GOOSE_PROVIDER=openrouter
@@ -129,15 +147,27 @@ meets the [agent contract](#agent-contract) works the same way; only
    export OPENROUTER_API_KEY=...
    ```
 
-2. Start Goose with authentication on. It then requires the secret as an
+   [OpenRouter](https://openrouter.ai)'s free tier is a zero-cost way to try
+   this. This command lists its free models that support tool calling:
+
+   ```sh
+   curl -s https://openrouter.ai/api/v1/models \
+     -H "Authorization: Bearer $OPENROUTER_API_KEY" |
+     jq -r '.data[] | select(.supported_parameters | index("tools"))
+            | select((.pricing.prompt|tonumber) == 0) | .id'
+   ```
+
+3. Start Goose with authentication on. It then requires the secret as an
    `X-Secret-Key` header on the WebSocket upgrade and serves ACP at `/acp`.
+   Goose also accepts `--dangerously-unauthenticated`, which disables that
+   check; do not use it, because Jaeger can send the header.
 
    ```sh
    export GOOSE_SERVER__SECRET_KEY=$(openssl rand -hex 16)
    goose serve --host 127.0.0.1 --port 17000
    ```
 
-3. Point Jaeger at it, with the same variable set in Jaeger's environment:
+4. Point Jaeger at it, with the same variable set in Jaeger's environment:
 
    ```yaml
    extensions:
@@ -149,7 +179,7 @@ meets the [agent contract](#agent-contract) works the same way; only
          mcp: {}
    ```
 
-4. Open the Jaeger UI. The "Ask Jaeger" box appears once the health probe
+5. Open the Jaeger UI. The "Ask Jaeger" box appears once the health probe
    reaches the agent. Ask something that needs telemetry, such as "list the
    services you can see". The streamed tool calls carry a `jaeger:` prefix when
    they come from Jaeger's MCP endpoint rather than from a tool the agent
@@ -175,9 +205,10 @@ Any ACP agent that meets these requirements works with the gateway.
   so the agent must not depend on either.
 - **Sessions.** Each chat turn is one `initialize`, one `session/new`, and one
   `session/prompt` on a fresh connection. `session/new` carries one Streamable
-  HTTP MCP server, the turn-scoped endpoint. The agent uses that URL for this
-  turn only and does not cache the tool list across turns, because the UI tools
-  differ per request.
+  HTTP MCP server, the turn-scoped endpoint, with the headers to send on every
+  request to it. The agent sends all of them on every request, uses that URL for
+  this turn only, and does not cache the tool list across turns, because the UI
+  tools differ per request.
 - **Tools.** Telemetry tools and UI tools arrive together in one `tools/list`.
   UI tools are namespaced `ui__<name>` so they cannot shadow a telemetry tool.
   A UI tool returns an acknowledgement, not data.
@@ -195,7 +226,7 @@ Any ACP agent that meets these requirements works with the gateway.
 
 The gateway implementation is the reference for any detail this page leaves
 out; see the
-[gateway README](https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/internal/jaegerai/README.md).
+[gateway README][jaegerai-readme].
 
 ## Verifying an integration
 
@@ -249,3 +280,5 @@ Confirm the `mcp` block is present; without it the gateway announces no MCP
 endpoint. If Jaeger runs with TLS or the agent is not on the same host, confirm
 `ai.mcp.base_url` is set, because the gateway announces no endpoint it cannot
 infer.
+
+[jaegerai-readme]: https://github.com/jaegertracing/jaeger/blob/main/cmd/jaeger/internal/extension/jaegerquery/internal/jaegerai/README.md
