@@ -149,6 +149,7 @@
     let options = [];
     let active = -1;
     let requestToken = 0;
+    let renderedQuery = '';
 
     function open() {
       syncTheme(panel);
@@ -186,6 +187,7 @@
     }
 
     function render(query, scope, search, results) {
+      renderedQuery = query;
       const total = search.results.length;
       status.textContent =
         total === 0
@@ -266,7 +268,8 @@
 
     input.addEventListener('focus', () => {
       loadPagefind().catch(() => {}); // warm up; errors surface on search
-      if (input.value.trim() && list.childElementCount) open();
+      if (input.value.trim() === renderedQuery && list.childElementCount)
+        open();
     });
 
     input.addEventListener('keydown', (e) => {

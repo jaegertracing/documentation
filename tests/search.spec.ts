@@ -2,10 +2,25 @@
 // These tests load the built site in a browser and run real searches, so they
 // cover the Pagefind JS bundle and index format together with the UI code in
 // assets/js/search.js. The build-time index step alone does not exercise them.
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 
 // A term that appears throughout the docs, so every indexed version matches.
 const QUERY = 'sampling';
+
+/** Pause matching requests until the test releases them. */
+async function holdRequest(page: Page, pattern: string, abort = false) {
+  let release!: () => void;
+  let requested!: () => void;
+  const held = new Promise<void>((resolve) => (release = resolve));
+  const started = new Promise<void>((resolve) => (requested = resolve));
+  await page.route(pattern, async (route) => {
+    requested();
+    await held;
+    if (abort) await route.abort();
+    else await route.continue();
+  });
+  return { started, release };
+}
 
 function escapeRegExp(text: string) {
   return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -81,15 +96,10 @@ for (const dismiss of ['Escape', 'Tab', 'outside click']) {
   test(`pending navbar search stays closed after ${dismiss}`, async ({
     page,
   }) => {
-    let release!: () => void;
-    let requested!: () => void;
-    const held = new Promise<void>((resolve) => (release = resolve));
-    const started = new Promise<void>((resolve) => (requested = resolve));
-    await page.route('**/pagefind/wasm.*.pagefind', async (route) => {
-      requested();
-      await held;
-      await route.continue();
-    });
+    const { started, release } = await holdRequest(
+      page,
+      '**/pagefind/wasm.*.pagefind',
+    );
     await page.goto('/');
     const input = page.locator('.td-search__input').first();
     const panel = page.locator('.td-search__results').first();
@@ -113,15 +123,11 @@ for (const dismiss of ['Escape', 'Tab', 'outside click']) {
 test('a late bundle error does not reopen a dismissed popup', async ({
   page,
 }) => {
-  let release!: () => void;
-  let requested!: () => void;
-  const held = new Promise<void>((resolve) => (release = resolve));
-  const started = new Promise<void>((resolve) => (requested = resolve));
-  await page.route('**/pagefind/pagefind.js', async (route) => {
-    requested();
-    await held;
-    await route.abort();
-  });
+  const { started, release } = await holdRequest(
+    page,
+    '**/pagefind/pagefind.js',
+    true,
+  );
   await page.goto('/');
   const input = page.locator('.td-search__input').first();
   await input.fill(QUERY);
@@ -144,15 +150,10 @@ test('rapid Show more clicks do not duplicate or skip results', async ({
   const total = Number(/^\d+/.exec(status ?? '')?.[0]);
   expect(total).toBeGreaterThan(20);
 
-  let release!: () => void;
-  let requested!: () => void;
-  const held = new Promise<void>((resolve) => (release = resolve));
-  const started = new Promise<void>((resolve) => (requested = resolve));
-  await page.route('**/pagefind/fragment/**', async (route) => {
-    requested();
-    await held;
-    await route.continue();
-  });
+  const { started, release } = await holdRequest(
+    page,
+    '**/pagefind/fragment/**',
+  );
   // Native clicks in the same task reproduce the overlap without introducing
   // Playwright's automatic wait for the button to become enabled again.
   await more.evaluate((button: HTMLButtonElement) => {
@@ -219,15 +220,15 @@ test('Escape keeps the popup closed when pending result data arrives', async ({
   await input.fill(QUERY);
   await expect(panel.locator('.td-search__option').first()).toBeVisible();
 
-  let release!: () => void;
-  let requested!: () => void;
-  const held = new Promise<void>((resolve) => (release = resolve));
-  const started = new Promise<void>((resolve) => (requested = resolve));
-  await page.route('**/pagefind/fragment/**', async (route) => {
-    requested();
-    await held;
-    await route.continue();
-  });
+  const { started, release } = await holdRequest(
+    page,
+    '**/pagefind/fragment/**',
+  );
+  // Matching results should still reopen when focus returns.
+  await input.press('Tab');
+  await input.focus();
+  await expect(panel).toBeVisible();
+
   await input.fill('windows');
   await started;
   // The previous results are still visible. Escape must close them without
@@ -235,9 +236,20 @@ test('Escape keeps the popup closed when pending result data arrives', async ({
   await expect(panel).toBeVisible();
   await input.press('Escape');
   await expect(input).toHaveValue('windows');
+  await input.press('Tab');
+  await input.focus();
   await expect(panel).toBeHidden();
   release();
   await page.waitForLoadState('networkidle');
   await expect(panel).toBeHidden();
   await expect(input).toHaveAttribute('aria-expanded', 'false');
+  await input.press('Tab');
+  await input.focus();
+  await expect(panel).toBeHidden();
+  // A subsequent search renders fresh results that can reopen on focus.
+  await input.fill('collector');
+  await expect(panel.locator('.td-search__option').first()).toBeVisible();
+  await input.press('Tab');
+  await input.focus();
+  await expect(panel).toBeVisible();
 });
