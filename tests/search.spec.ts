@@ -253,3 +253,17 @@ test('Escape keeps the popup closed when pending result data arrives', async ({
   await input.focus();
   await expect(panel).toBeVisible();
 });
+
+test('search page shows an archived version that the menu does not list', async ({
+  page,
+}) => {
+  // The 1.x docs are built but not listed in the version menu.
+  await page.goto(`/search/?q=${QUERY}&v=1.76`);
+  await expect(page.locator('#td-search-page-status')).toHaveText(
+    statusFor('1.76 docs'),
+  );
+  await expect(page.locator('#td-search-page-v')).toHaveValue('1.76');
+  await expect(page.locator('#td-search-page-v option:checked')).toHaveText(
+    '1.76 (archive)',
+  );
+});

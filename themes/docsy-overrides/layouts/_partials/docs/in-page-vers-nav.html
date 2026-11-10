@@ -20,7 +20,7 @@
   {{ $isNextRelease = true }}
 {{ end }}
 
-{{ $isArchive     := eq $version $latestV1 }}
+{{ $isArchive     := eq $vMajor "1" }}
 {{ $isLatest      := eq $version $latestV2 }}
 {{ $latestUrlV1   := .RelPermalink | replaceRE $version $latestV1 }}
 {{ $latestUrlV2   := .RelPermalink | replaceRE $version $latestV2 }}
@@ -36,7 +36,7 @@
 {{ end }}
 
 {{ $latestUrl = partial "docs/lookup-page" (slice . $latestUrl) -}}
-{{ $latestUrlV1 = partial "docs/lookup-page" (slice . $latestUrlV1) -}}
+{{ with $latestV1 }}{{ $latestUrlV1 = partial "docs/lookup-page" (slice $page $latestUrlV1) }}{{ else }}{{ $latestUrlV1 = "" }}{{ end -}}
 {{ $latestUrlV2 = partial "docs/lookup-page" (slice . $latestUrlV2) -}}
 {{ $btnKind :=
     cond $isNextRelease "secondary"
@@ -70,7 +70,7 @@
     </a>
     {{ end -}}
 
-    {{ if and $latestUrlV1 (or (ne $vMajor "1") (not $isLatest)) }}
+    {{ if and $latestV1 $latestUrlV1 (or (ne $vMajor "1") (not $isLatest)) }}
     <a class="btn btn-sm btn-light border-0 border-start border-dark-subtle" {{/**/ -}}
         title="Go to the latest 1.x version" {{/**/ -}}
         href="{{ $latestUrlV1 }}">

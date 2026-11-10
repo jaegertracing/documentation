@@ -34,10 +34,12 @@
 
     {{ $dot := . -}}
     {{ $maxVersPerMajorVers := sub (.Site.Params.version_menu_max_versions | default 99999) 1 -}}
-    {{ range $versions := (slice
-        ((first $maxVersPerMajorVers .Site.Params.versionsV2) | append "2.dev")
-        ((first $maxVersPerMajorVers .Site.Params.versions) | append "1.dev")
-      ) -}}
+    {{/* The 1.x group is listed only while hugo.yaml still names 1.x versions. */ -}}
+    {{ $groups := slice ((first $maxVersPerMajorVers .Site.Params.versionsV2) | append "2.dev") -}}
+    {{ with .Site.Params.versions -}}
+      {{ $groups = $groups | append (slice ((first $maxVersPerMajorVers .) | append "1.dev")) -}}
+    {{ end -}}
+    {{ range $versions := $groups -}}
       {{ template "navbar-version-list" (dict
             "dot" $dot
             "versions" $versions
