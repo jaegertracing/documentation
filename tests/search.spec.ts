@@ -478,6 +478,27 @@ test('search page shows an archived version that the menu does not list', async 
   );
 });
 
+test('a failed navbar search leaves Show more working', async ({ page }) => {
+  await page.goto(`/search/?q=${QUERY}&v=all`);
+  const results = page.locator('#td-search-page-results > li');
+  await expect(results).toHaveCount(10);
+  // Fail the navbar search's result fragments. Pagefind does not cache a
+  // failed fragment, so once the route is gone the results page can load
+  // its next batch, unless the failure tore down the Pagefind instance its
+  // results still use.
+  await page.route('**/pagefind/fragment/**', (route) => route.abort());
+  await page.locator('.td-navbar .td-search__input').fill('collector');
+  await expect(page.locator('.td-navbar .td-search__status')).toHaveText(
+    UNAVAILABLE,
+  );
+  await page.unroute('**/pagefind/fragment/**');
+  await page.locator('#td-search-page-more').click();
+  await expect(results).toHaveCount(20);
+  await expect(page.locator('#td-search-page-status')).toHaveText(
+    statusFor('all versions'),
+  );
+});
+
 test('rapid Show more clicks add each result once', async ({ page }) => {
   await page.goto(`/search/?q=${QUERY}&v=all`);
   const results = page.locator('#td-search-page-results > li');

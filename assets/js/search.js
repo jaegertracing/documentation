@@ -30,6 +30,8 @@
   let pagefindPromise;
   let scopePromise;
   let loadAttempt = 0;
+  // The instance whose results the results page keeps for "Show more".
+  let pinnedPagefind;
 
   /**
    * Loads and initializes the Pagefind bundle once, on first use. A failed
@@ -64,13 +66,22 @@
   /**
    * Drops the loaded Pagefind instance after a failure, so that the next
    * search starts over instead of failing on a cached error.
+   *
+   * The next load imports the bundle under a new URL, so it gets a fresh
+   * instance. The old one is destroyed to stop its worker, except the
+   * instance the results page uses: its results keep a reference to it, and
+   * the page may still be paging through them when a navbar search fails.
    */
   function forgetPagefind() {
     const loaded = pagefindPromise;
     pagefindPromise = undefined;
     scopePromise = undefined;
     if (loaded) {
-      loaded.then((pf) => pf.destroy()).catch(() => {});
+      loaded
+        .then((pf) => {
+          if (pf !== pinnedPagefind) return pf.destroy();
+        })
+        .catch(() => {});
     }
   }
 
@@ -521,6 +532,7 @@
     let search;
     try {
       const pf = await loadPagefind();
+      pinnedPagefind = pf;
       scope = await resolveScope(pf, requested);
       search = await pf.search(query, { filters: filtersFor(scope.version) });
     } catch (err) {
