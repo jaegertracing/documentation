@@ -56,6 +56,9 @@
 
   /** Docs version of the current page (e.g. "2.22", "2.dev", "1.76"), or "". */
   function pageVersion() {
+    if (location.pathname === new URL(SEARCH_PAGE, location.href).pathname) {
+      return new URLSearchParams(location.search).get('v') || '';
+    }
     const match = location.pathname.match(/^\/docs\/([^/]+)\//);
     return match ? match[1] : '';
   }
@@ -67,10 +70,10 @@
    * scope fell back to the latest version.
    */
   async function resolveScope(pf, requested) {
-    if (requested === ALL) return { version: ALL };
+    const wanted = requested || pageVersion() || LATEST;
+    if (wanted === ALL) return { version: ALL };
     const filters = await pf.filters();
     const indexed = Object.keys((filters && filters.version) || {});
-    const wanted = requested || pageVersion() || LATEST;
     if (indexed.includes(wanted)) return { version: wanted };
     const fallback = indexed.includes(LATEST) ? LATEST : ALL;
     return { version: fallback, missing: wanted };
@@ -145,6 +148,8 @@
 
     let options = [];
     let active = -1;
+    let requestToken = 0;
+    let renderedQuery = '';
 
     function open() {
       syncTheme(panel);
@@ -153,6 +158,7 @@
     }
 
     function close() {
+      requestToken++;
       panel.hidden = true;
       input.setAttribute('aria-expanded', 'false');
       setActive(-1);
@@ -181,6 +187,7 @@
     }
 
     function render(query, scope, search, results) {
+      renderedQuery = query;
       const total = search.results.length;
       status.textContent =
         total === 0
@@ -229,6 +236,7 @@
     }
 
     async function run() {
+      const token = ++requestToken;
       const query = input.value.trim();
       if (!query) {
         close();
@@ -238,7 +246,7 @@
       try {
         pf = await loadPagefind();
       } catch (err) {
-        showMessage(unavailableMessage());
+        if (token === requestToken) showMessage(unavailableMessage());
         return;
       }
       const scope = await resolveScope(pf, '');
@@ -248,11 +256,11 @@
         200,
       );
       // null means a newer keystroke superseded this search.
-      if (search === null || query !== input.value.trim()) return;
+      if (search === null || token !== requestToken) return;
       const results = await Promise.all(
         search.results.slice(0, DROPDOWN_MAX).map((r) => r.data()),
       );
-      if (query !== input.value.trim()) return;
+      if (token !== requestToken) return;
       render(query, scope, search, results);
     }
 
@@ -260,7 +268,8 @@
 
     input.addEventListener('focus', () => {
       loadPagefind().catch(() => {}); // warm up; errors surface on search
-      if (input.value.trim() && list.childElementCount) open();
+      if (input.value.trim() === renderedQuery && list.childElementCount)
+        open();
     });
 
     input.addEventListener('keydown', (e) => {
@@ -288,10 +297,8 @@
           break;
         }
         case 'Escape':
-          if (isOpen) {
-            e.preventDefault();
-            close();
-          }
+          if (isOpen) e.preventDefault();
+          close();
           break;
       }
     });
@@ -418,11 +425,16 @@
 
     let shown = 0;
     async function showMore() {
-      const batch = search.results.slice(shown, shown + PAGE_SIZE);
-      const results = await Promise.all(batch.map((r) => r.data()));
-      list.append(...results.map(renderPageResult));
-      shown += batch.length;
-      more.hidden = shown >= total;
+      more.disabled = true;
+      try {
+        const batch = search.results.slice(shown, shown + PAGE_SIZE);
+        const results = await Promise.all(batch.map((r) => r.data()));
+        list.append(...results.map(renderPageResult));
+        shown += batch.length;
+        more.hidden = shown >= total;
+      } finally {
+        more.disabled = false;
+      }
     }
 
     more.addEventListener('click', async () => {
