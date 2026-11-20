@@ -413,7 +413,10 @@
         }
         case 'Escape':
           // Always cancel a pending search, even before the popup has opened.
+          // Escape dismisses on purpose, so unlike leaving the box, returning
+          // to it does not restart the search (ArrowDown still does).
           if (isOpen) e.preventDefault();
+          typedQuery = null;
           close();
           break;
       }
