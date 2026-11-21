@@ -44,7 +44,8 @@ Site search uses [Pagefind](https://pagefind.app/), a static search index that
 is built from `public/` after each build by the `postbuild*` npm hooks (see
 [`pagefind.yml`](pagefind.yml)). No third-party service is involved.
 
-- `npm run serve` renders to memory, so it has no search index. To try search
+- `npm run serve` renders to memory, so it has no search index and shows no
+  search box. To try search
   locally, run `npm run serve:search` and open
   [localhost:1414](http://localhost:1414).
 - Only page content inside Docsy's `.td-content` element is indexed. To keep a
@@ -52,6 +53,12 @@ is built from `public/` after each build by the `postbuild*` npm hooks (see
 - Every page is tagged with its docs version (for example `2.22` or `1.76`, or
   `site` for non-docs pages). Search defaults to the version of the page the
   reader is on, and the results page lets readers pick another version.
+- The search box, its popup and the results list are Pagefind's prebuilt
+  [Component UI](https://pagefind.app/docs/components/). `assets/js/search.js`
+  sets the version that a search covers, and keeps the popup's summary and the
+  results page's status line and address in step with the search.
+  `assets/scss/_site_search.scss` maps the components' colors to the site
+  theme.
 - `npm run test:browser` builds the site and runs the browser tests in
   [`tests/`](tests/) against it with [Playwright](https://playwright.dev/):
   the search tests in `search.spec.ts` and the Content-Security-Policy check

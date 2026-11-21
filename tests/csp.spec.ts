@@ -7,6 +7,7 @@
 // placeholder measurement ID, so the analytics markup is present too.
 import { expect, test } from '@playwright/test';
 import { readFileSync } from 'node:fs';
+import { latestV2 } from './site-params';
 
 /** The Content-Security-Policy value that netlify.toml sets for every page. */
 function productionCsp(): string {
@@ -20,15 +21,6 @@ function productionCsp(): string {
   return match[1];
 }
 
-/** The current v2 docs version, as hugo.yaml declares it. */
-function latestV2(): string {
-  const match = /^\s*latestV2:\s*["']?([\d.]+)/m.exec(
-    readFileSync('hugo.yaml', 'utf8'),
-  );
-  if (!match) throw new Error('hugo.yaml has no latestV2');
-  return match[1];
-}
-
 // Together these pages load every kind of resource the site uses: fonts,
 // analytics, the Mermaid bundle on the SPM architecture page, and Pagefind.
 // The `ready` selector is an element that appears only once the page's
@@ -37,7 +29,7 @@ function latestV2(): string {
 const pages = [
   { path: '/', ready: 'footer' },
   { path: `/docs/${latestV2()}/architecture/spm/`, ready: '.mermaid svg' },
-  { path: '/search/?q=sampling', ready: '#td-search-page-results > li' },
+  { path: '/search/?q=sampling', ready: 'pagefind-results a' },
 ];
 
 declare global {

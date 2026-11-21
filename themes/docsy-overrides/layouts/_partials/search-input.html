@@ -1,18 +1,16 @@
-{{/* Overrides Docsy's search-input.html: renders Docsy's .td-search markup for
-   Pagefind site search (params.search.pagefind). The input has no name because
-   Docsy's mobile sidebar wraps it in a form; assets/js/search.js handles Enter.
-   Element ids are assigned at runtime since a page can hold two instances. */ -}}
+{{/* Overrides Docsy's search-input.html with Pagefind's prebuilt search box
+   (params.search.pagefind). assets/js/search.js sets its version scope. The
+   result template is Pagefind's default without sub-results, plus the docs
+   version badge; it is a raw string because its syntax collides with Hugo's. */ -}}
 {{ if site.Params.search.pagefind -}}
-<div class="td-search">
-  <div class="td-search__icon"></div>
-  <input type="search" class="td-search__input form-control td-search-input"
-    placeholder="{{ T "ui_search" }}" aria-label="{{ T "ui_search" }}"
-    autocomplete="off" spellcheck="false" role="combobox"
-    aria-autocomplete="list" aria-expanded="false">
-  <div class="td-search__results" hidden>
-    <p class="td-search__status" aria-live="polite"></p>
-    <ul class="td-search__list" role="listbox" aria-label="{{ T "ui_search" }}"></ul>
-    <div class="td-search__footer"></div>
-  </div>
-</div>
+<pagefind-searchbox class="td-search" placeholder="{{ T "ui_search" }}" max-results="8" hide-shortcut>
+{{ `<script type="text/pagefind-template">
+<a class="pf-searchbox-result" id="{{ aria.result_id }}" href="{{ meta.url | default(url) | safeUrl }}" role="option" aria-selected="false" aria-labelledby="{{ aria.title_id }}"{{#if excerpt}} aria-describedby="{{ aria.excerpt_id }}"{{/if}}>
+  <p class="pf-searchbox-result-title" id="{{ aria.title_id }}">{{ meta.title | default("Untitled") }} <span class="badge text-bg-secondary td-search__badge" data-version="{{ meta.version }}">{{ meta.version }}</span></p>
+  {{#if excerpt}}
+  <p class="pf-searchbox-result-excerpt" id="{{ aria.excerpt_id }}">{{+ excerpt +}}</p>
+  {{/if}}
+</a>
+</script>` | safeHTML }}
+</pagefind-searchbox>
 {{- end -}}

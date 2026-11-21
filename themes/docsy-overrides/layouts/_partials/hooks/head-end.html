@@ -6,6 +6,7 @@
   {{ $ver = index (index . 0) 1 -}}
 {{ end -}}
 <meta name="docs-version" content="{{ $ver }}" data-pagefind-filter="version[content]" data-pagefind-meta="version[content]">
-{{ if eq .Layout "search" -}}
-<link rel="modulepreload" href="{{ "pagefind/pagefind.js" | relURL }}">
+{{ if site.Params.search.pagefind -}}
+<link rel="stylesheet" href="{{ "pagefind/pagefind-component-ui.css" | relURL }}">
+<script type="module" src="{{ "pagefind/pagefind-component-ui.js" | relURL }}"></script>
 {{ end -}}
