@@ -1,30 +1,68 @@
-// cSpell:ignore pagefind subresults zindex
-// Site search (Pagefind): result popup for the navbar and sidebar search boxes,
-// and the /search/ results page. See assets/js/search.js.
-//
-// Uses Bootstrap CSS variables only, so light and dark modes follow the
-// data-bs-theme attribute that search.js copies from <html> onto the popup.
+// cSpell:ignore pagefind searchbox
+// Site search (Pagefind Component UI). The components take their colors from
+// --pf-* variables only, so this file maps those to the site's theme and
+// overrides the few layout rules that differ from the components' defaults.
 
-.td-search__results {
-  position: absolute;
+// Pagefind's stylesheet raises its own specificity with the :is() prefix and
+// loads after this one, so an override needs the prefix plus the element name.
+$pagefind-override-prefix: ':is(*, #\\#):is(*, #\\#):is(*, #\\#) pagefind-searchbox';
+
+pagefind-searchbox,
+pagefind-input,
+pagefind-results {
+  --pf-text: var(--bs-body-color);
+  --pf-text-secondary: var(--bs-secondary-color);
+  --pf-text-muted: var(--bs-secondary-color);
+  --pf-background: var(--bs-body-bg);
+  --pf-border: var(--bs-border-color);
+  --pf-border-focus: var(--bs-primary);
+  --pf-hover: var(--bs-tertiary-bg);
+  --pf-mark: var(--bs-body-color);
+  --pf-skeleton: var(--bs-secondary-bg);
+  --pf-skeleton-shine: var(--bs-tertiary-bg);
+  --pf-font: var(--bs-body-font-family);
+  --pf-border-radius: var(--bs-border-radius);
+}
+
+// The navbar is always dark, so the Bootstrap variables inside it are the dark
+// ones. The popup must follow the page theme instead, which only the root
+// element carries, so its colors are set from the Sass values of each theme.
+.pf-searchbox-dropdown {
+  --pf-text: #{$body-color};
+  --pf-text-secondary: #{$body-secondary-color};
+  --pf-text-muted: #{$body-secondary-color};
+  --pf-background: #{$body-bg};
+  --pf-border: #{$border-color};
+  --pf-hover: #{$body-tertiary-bg};
+  --pf-mark: #{$body-color};
+  --pf-skeleton: #{$body-secondary-bg};
+  --pf-skeleton-shine: #{$body-tertiary-bg};
+  --td-search-link-color: #{$link-color};
+
+  @at-root :root[data-bs-theme='dark'] & {
+    --pf-text: #{$body-color-dark};
+    --pf-text-secondary: #{$body-secondary-color-dark};
+    --pf-text-muted: #{$body-secondary-color-dark};
+    --pf-background: #{$body-bg-dark};
+    --pf-border: #{$border-color-dark};
+    --pf-hover: #{$body-tertiary-bg-dark};
+    --pf-mark: #{$body-color-dark};
+    --pf-skeleton: #{$body-secondary-bg-dark};
+    --pf-skeleton-shine: #{$body-tertiary-bg-dark};
+    --td-search-link-color: #{$link-color-dark};
+  }
+}
+
+#{$pagefind-override-prefix} .pf-searchbox-dropdown {
   top: calc(100% + 0.25rem);
   right: 0;
-  z-index: $zindex-dropdown;
+  left: auto;
   width: 32rem;
   max-width: calc(100vw - 2rem);
-  max-height: 70vh;
-  overflow-y: auto;
-  padding: 0.5rem 0;
-  color: var(--bs-body-color);
-  text-align: left;
-  background-color: var(--bs-body-bg);
-  border: var(--bs-border-width) solid var(--bs-border-color-translucent);
+  border: var(--bs-border-width) solid var(--pf-border);
   border-radius: var(--bs-border-radius);
-  box-shadow: var(--bs-box-shadow);
-
-  &[hidden] {
-    display: none;
-  }
+  box-shadow: $box-shadow;
+  text-align: left;
 
   // In the mobile sidebar the box is at the left edge of a narrow column, so
   // open the popup rightward, over the main content.
@@ -34,79 +72,44 @@
   }
 }
 
-.td-search__status {
-  margin: 0;
-  padding: 0.25rem 1rem 0.5rem;
-  font-size: $font-size-sm;
-  color: var(--bs-secondary-color);
+#{$pagefind-override-prefix} .pf-searchbox.open .pf-searchbox-input {
+  border-radius: var(--bs-border-radius);
 }
 
-.td-search__list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.td-search__option {
-  display: block;
-  padding: 0.5rem 1rem;
-  color: var(--bs-body-color);
-  text-decoration: none;
-
-  &:hover,
-  &.active {
-    color: var(--bs-body-color);
-    background-color: var(--bs-tertiary-bg);
-  }
-
-  &.active {
-    box-shadow: inset 3px 0 0 var(--bs-primary);
-  }
-}
-
-.td-search__title {
-  display: block;
+#{$pagefind-override-prefix} .pf-searchbox-result-title {
+  font-size: $font-size-base;
   font-weight: $font-weight-bold;
-  color: var(--bs-link-color);
+  color: var(--td-search-link-color);
+}
+
+#{$pagefind-override-prefix} .pf-searchbox-result-excerpt {
+  font-size: $font-size-sm;
+  white-space: normal;
 }
 
 .td-search__badge {
   font-weight: $font-weight-normal;
   vertical-align: text-bottom;
-}
 
-.td-search__excerpt {
-  font-size: $font-size-sm;
-  color: var(--bs-secondary-color);
-}
-
-.td-search__footer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1rem;
-  padding: 0.5rem 1rem 0.25rem;
-  font-size: $font-size-sm;
-  border-top: var(--bs-border-width) solid var(--bs-border-color);
-
-  &:empty {
+  // Non-docs pages carry the version "site", which is not shown.
+  &[data-version='site'] {
     display: none;
   }
 }
 
-// Search results page
-
-.td-search-page__form {
+// assets/js/search.js adds this line at the top of the popup. It holds the
+// result count, the scope and the links to the results page.
+.td-search__summary {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
+  gap: 0.25rem 1rem;
+  padding: 0.5rem 1rem;
+  font-size: $font-size-sm;
+  color: var(--pf-text-secondary);
+  border-bottom: var(--bs-border-width) solid var(--pf-border);
 
-  .form-control {
-    flex: 1 1 16rem;
-  }
-
-  .form-select {
-    flex: 0 1 12rem;
+  a {
+    color: var(--td-search-link-color);
   }
 }
 
@@ -114,38 +117,26 @@
   color: var(--bs-secondary-color);
 }
 
-.td-search-page__results {
-  padding: 0;
-  list-style: none;
+// In the navbar the input is translucent over the navbar color.
+.td-navbar pagefind-searchbox {
+  --pf-text: #{$white};
+  --pf-text-muted: #{rgba($white, 0.75)};
+  --pf-background: #{rgba($white, 0.15)};
+  --pf-border: transparent;
+  --pf-searchbox-max-width: 20rem;
+  --pf-searchbox-dropdown-max-height: 70vh;
 }
 
-.td-search-page__result {
-  padding-block: 1rem;
-  border-bottom: var(--bs-border-width) solid var(--bs-border-color);
-}
+.td-search-page__controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 
-.td-search-page__title {
-  font-size: 1.15rem;
-  font-weight: $font-weight-bold;
-}
+  pagefind-input {
+    flex: 1;
+  }
 
-.td-search-page__url {
-  font-size: $font-size-sm;
-  color: var(--bs-secondary-color);
-  overflow-wrap: anywhere;
-}
-
-.td-search-page__excerpt {
-  margin-top: 0.25rem;
-}
-
-.td-search-page__subresults {
-  margin: 0.5rem 0 0;
-  padding-left: 1rem;
-  font-size: $font-size-sm;
-}
-
-.td-search__results mark,
-.td-search-result mark {
-  padding: 0 0.1em;
+  .form-select {
+    width: auto;
+  }
 }

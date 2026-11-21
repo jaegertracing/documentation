@@ -1,14 +1,16 @@
-{{/* Search results page, rendered by assets/js/search.js from the Pagefind
-   index. URL contract: /search/?q=<query>&v=<version|all>. */ -}}
+{{/* Search results page, rendered by Pagefind's prebuilt components.
+   assets/js/search.js applies the URL contract /search/?q=<query>&v=<version|all>;
+   an omitted v means the latest version.
+   The components use the "page" instance so that the navbar search box, which
+   uses the default instance, does not drive this page's results. The result
+   template is Pagefind's default without images, plus the docs version badge. */ -}}
 {{ define "main" -}}
 <section class="row td-search-result">
   <div class="col-12 col-md-10 offset-md-1">
     <h2>{{ .Title }}</h2>
-    <form id="td-search-page-form" class="td-search-page__form" action="{{ "search/" | relURL }}" method="get" role="search">
-      <input type="search" name="q" id="td-search-page-q" class="form-control"
-        placeholder="{{ T "ui_search" }}" aria-label="{{ T "ui_search" }}"
-        autocomplete="off" spellcheck="false">
-      <select name="v" id="td-search-page-v" class="form-select" aria-label="Documentation version">
+    <div class="td-search-page__controls">
+      <pagefind-input instance="page" placeholder="{{ T "ui_search" }}"></pagefind-input>
+      <select id="td-search-page-v" class="form-select" aria-label="Documentation version">
         <option value="">Latest ({{ site.Params.latestV2 }})</option>
         {{ range site.Params.versionsV2 -}}
           {{ if ne . site.Params.latestV2 -}}
@@ -21,11 +23,35 @@
         {{ end -}}
         <option value="all">All versions</option>
       </select>
-      <button type="submit" class="btn btn-primary">Search</button>
-    </form>
-    <p id="td-search-page-status" class="td-search-page__status" aria-live="polite"></p>
-    <ol id="td-search-page-results" class="td-search-page__results"></ol>
-    <button id="td-search-page-more" type="button" class="btn btn-outline-secondary" hidden>Show more results</button>
+    </div>
+    <p id="td-search-page-status" class="td-search-page__status"></p>
+    <pagefind-results instance="page">
+{{ `<script type="text/pagefind-template">
+<li class="pf-result">
+  <div class="pf-result-card">
+    <div class="pf-result-content">
+      <p class="pf-result-title">
+        <a class="pf-result-link" href="{{ meta.url | default(url) | safeUrl }}">{{ meta.title }}</a>
+        <span class="badge text-bg-secondary td-search__badge" data-version="{{ meta.version }}">{{ meta.version }}</span>
+      </p>
+      {{#if excerpt}}
+      <p class="pf-result-excerpt">{{+ excerpt +}}</p>
+      {{/if}}
+    </div>
+  </div>
+  {{#if sub_results}}
+  <ul class="pf-heading-chips">
+    {{#each sub_results as sub}}
+    <li class="pf-heading-chip">
+      <a class="pf-heading-link" href="{{ sub.url | safeUrl }}">{{ sub.title }}</a>
+      <p class="pf-heading-excerpt">{{+ sub.excerpt +}}</p>
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+</li>
+</script>` | safeHTML }}
+    </pagefind-results>
     <noscript><p>Search requires JavaScript.</p></noscript>
   </div>
 </section>
