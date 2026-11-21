@@ -19,13 +19,17 @@
   const ALL = 'all';
 
   /** Pagefind filters for a scope: that docs version plus non-docs pages. */
-  const filtersFor = (version) =>
-    version === ALL ? {} : { version: { any: [version, SITE] } };
+  function filtersFor(version) {
+    return version === ALL ? {} : { version: { any: [version, SITE] } };
+  }
 
-  const scopeLabel = (version) =>
-    version === ALL ? 'all versions' : `${version} docs`;
+  function scopeLabel(version) {
+    return version === ALL ? 'all versions' : `${version} docs`;
+  }
 
-  const countLabel = (total) => `${total} result${total === 1 ? '' : 's'}`;
+  function countLabel(total) {
+    return `${total} result${total === 1 ? '' : 's'}`;
+  }
 
   function searchUrl(query, version) {
     const url = new URL(SEARCH_PAGE, location.href);
