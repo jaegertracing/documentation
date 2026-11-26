@@ -11,7 +11,7 @@ The following labels are used to describe API compatibility guarantees.
 
 * **stable** - the API guarantees backwards compatibility. If breaking changes are going to be made in the future, they will result in a new API version, e.g. `/api/v2` URL prefix or a different namespace in the IDL.
 * **internal** - the APIs are intended for internal communications between Jaeger components and are not recommended for use by external components.
-* **legacy** - the API is kept for clients that cannot be moved to a newer API. It gets bug fixes and security fixes, and no new features. No removal is scheduled. If a removal is ever planned, the Jaeger release notes will announce it at least 12 months before the release that removes the API.
+* **legacy** - the API is kept for clients that cannot be moved to a newer API. It gets bug fixes and security fixes, and no new features. No removal is scheduled. If a removal is ever planned, the Jaeger release notes will announce it at least 6 months before the release that removes the API.
 
 ## Default Ports
 
