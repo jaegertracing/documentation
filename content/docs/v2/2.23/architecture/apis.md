@@ -11,7 +11,7 @@ The following labels are used to describe API compatibility guarantees.
 
 * **stable** - the API guarantees backwards compatibility. If breaking changes are going to be made in the future, they will result in a new API version, e.g. `/api/v2` URL prefix or a different namespace in the IDL.
 * **internal** - the APIs are intended for internal communications between Jaeger components and are not recommended for use by external components.
-* **deprecated** - the APIs that are only maintained for legacy reasons and will be phased out in the future.
+* **legacy** - the API is kept for clients that cannot be moved to a newer API. It gets bug fixes and security fixes, and no new features. No removal is scheduled. If a removal is ever planned, the Jaeger release notes will announce it at least 12 months before the release that removes the API.
 
 ## Default Ports
 
@@ -48,7 +48,7 @@ The following tables list the default ports used by Jaeger components. They can 
 
 ## Trace receiving APIs
 
-Jaeger can receive trace data in multiple formats on different ports.
+Jaeger can receive trace data in multiple formats on different ports. The default [configuration](../../deployment/configuration/) enables the `otlp`, `jaeger` and `zipkin` receivers in one pipeline, so one Jaeger instance accepts data from OpenTelemetry SDKs and from legacy Jaeger clients at the same time.
 
 ### OpenTelemetry Protocol
 
@@ -66,13 +66,13 @@ Only tracing data is accepted, since Jaeger does not store other telemetry types
 
 ### Legacy Protobuf via gRPC
 
-**Status**: Stable, Deprecated
+**Status**: Stable, Legacy
 
 Jaeger's legacy Protobuf format is defined in [collector.proto] IDL file. Support for this format has been removed from OpenTelemetry SDKs, it's only maintained for backwards compatibility.
 
 ### Legacy Thrift over HTTP
 
-**Status**: Stable, Deprecated
+**Status**: Stable, Legacy
 
 Jaeger's legacy Thrift format is defined in [jaeger.thrift] IDL file, and is only maintained for backwards compatibility. The Thrift payload can be submitted in an HTTP POST request to the  `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
 
@@ -82,7 +82,7 @@ Content-Type: application/vnd.apache.thrift.binary
 
 ### Legacy Thrift over UDP
 
-**Status**: Stable, Deprecated
+**Status**: Stable, Legacy
 
 This API is kept for backwards compatibility with legacy Jaeger clients.
 
