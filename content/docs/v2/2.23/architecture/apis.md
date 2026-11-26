@@ -11,7 +11,7 @@ The following labels are used to describe API compatibility guarantees.
 
 * **stable** - the API guarantees backwards compatibility. If breaking changes are going to be made in the future, they will result in a new API version, e.g. `/api/v2` URL prefix or a different namespace in the IDL.
 * **internal** - the APIs are intended for internal communications between Jaeger components and are not recommended for use by external components.
-* **legacy** - the API is kept for clients that cannot be moved to a newer API. It gets bug fixes and security fixes, and no new features. No removal is scheduled. If a removal is ever planned, the Jaeger release notes will announce it at least 6 months before the release that removes the API.
+* **deprecated** - the API is kept for clients that cannot be moved to a newer API, and new clients should not use it. It gets bug fixes and security fixes, and no new features. No removal is scheduled. If a removal is ever planned, the Jaeger release notes will announce it at least 6 months before the release that removes the API.
 
 ## Default Ports
 
@@ -66,13 +66,13 @@ Only tracing data is accepted, since Jaeger does not store other telemetry types
 
 ### Legacy Protobuf via gRPC
 
-**Status**: Stable, Legacy
+**Status**: Stable, Deprecated
 
 Jaeger's legacy Protobuf format is defined in [collector.proto] IDL file. Support for this format has been removed from OpenTelemetry SDKs, it's only maintained for backwards compatibility.
 
 ### Legacy Thrift over HTTP
 
-**Status**: Stable, Legacy
+**Status**: Stable, Deprecated
 
 Jaeger's legacy Thrift format is defined in [jaeger.thrift] IDL file, and is only maintained for backwards compatibility. The Thrift payload can be submitted in an HTTP POST request to the  `/api/traces` endpoint, for example, `https://jaeger-collector:14268/api/traces`. The `Batch` struct needs to be encoded using Thrift's `binary` encoding, and the HTTP request should specify the content type header:
 
@@ -82,7 +82,7 @@ Content-Type: application/vnd.apache.thrift.binary
 
 ### Legacy Thrift over UDP
 
-**Status**: Stable, Legacy
+**Status**: Stable, Deprecated
 
 This API is kept for backwards compatibility with legacy Jaeger clients.
 
