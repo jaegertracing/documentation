@@ -1,0 +1,5 @@
+# This file is a placeholder for the next release metrics.
+# It will be replaced by the jaeger release workflow when a new version is published.
+# See data/metrics/README.md for the format.
+version: "next-release"
+metrics: []
